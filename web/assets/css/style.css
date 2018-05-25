@@ -1,3 +1,8 @@
+/* Index.css summary
+Stylizing the page and typos
+- Responsive title and first background image
+`*/
+
 h1{
     font-size: 52px;
     text-transform: none;
@@ -42,5 +47,64 @@ h5{
     font-weight: 900;
     font-family:rajdhani sans-serif semi-bold;
 }
+/* Import Font */
 
+@font-face {
+    font-family:rajdhani sans-serif normal;
+    font-weight: 400;
+    text-transform: none;
+    font-style: normal;
+    color:#7a7a7a;
+}
 
+@font-face {
+    font-family:rajdhani sans-serif medium;
+    font-weight: 400;
+    text-transform: none;
+    font-style: normal;
+    color:#7a7a7a;
+}
+
+@font-face {
+    font-family:rajdhani sans-serif normal ;
+    font-weight: 400;
+    text-transform: none;
+    font-style: normal;
+    color:#7a7a7a;
+}
+/*color typo and page*/
+main-color{
+    color:rgba(43,109,175);
+}
+
+seconde-color{
+    color:rgba(41,117,181);
+}
+
+three-color{
+    color:rgba(32,127,188);
+}
+
+four-color{
+    color:rgba(22,138,196);
+}
+
+five-color{
+    color:rgba(13,149,203);
+}
+
+six-color{
+    color:rgba(14,160,204);
+}
+
+seven-color{
+    color:rgba(13,188,208);
+}
+
+eight-color{
+    color:rgba(55,195,203,);
+}
+
+nine-color{
+    color:rgba(91,199,194);
+}
