@@ -8,12 +8,12 @@ Galibelum is a web platform linking eSport organizations with different brands, 
 
 ## Contributors / gitlab profile
 
-Canis Julien : @CJulien1
-Claude Amandine : @Dine16
-Legrand Cannelle : @chasticot
-Lemaire Julien : @Jules59
-Petit Sebastien : @Orkall
-Serre Thibault : @Quelqun2k4
+    * Canis Julien : @CJulien1
+    * Claude Amandine : @Dine16
+    * Legrand Cannelle : @chasticot
+    * Lemaire Julien : @Jules59
+    * Petit Sebastien : @Orkall
+    * Serre Thibault : @Quelqun2k4
 
 ## Technos
 
