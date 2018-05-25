@@ -1,0 +1,47 @@
+/* Stylizing titles */
+h1{
+    font-size: 52px;
+    text-transform: none;
+    font-style: normal;
+    color: #30aae1;
+    font-weight: 900;
+    font-family:rajdhani sans-serif semi-bold;
+}
+
+h2{
+    font-size: 43px;
+    text-transform: none;
+    font-style: normal;
+    color: #30aae1;
+    font-weight: 900;
+    font-family:rajdhani sans-serif semi-bold;
+}
+
+h3{
+    font-size: 34px;
+    text-transform: none;
+    font-style: normal;
+    color: #30aae1;
+    font-weight: 900;
+    font-family:rajdhani sans-serif semi-bold;
+}
+
+h4{
+    font-size: 29px;
+    text-transform: none;
+    font-style: normal;
+    color: #30aae1;
+    font-weight: 900;
+    font-family:rajdhani sans-serif semi-bold;
+}
+
+h5{
+    font-size: 25px;
+    text-transform: none;
+    font-style: normal;
+    color: #30aae1;
+    font-weight: 900;
+    font-family:rajdhani sans-serif semi-bold;
+}
+
+
