@@ -32,7 +32,7 @@ Go to your working folder
 
     * Clone project -> git clone <url>
     * composer install / composer update (create parameters.yml with your default config.)
-    * bin/console d:s:u -force (in "galibelum" database.)
+    * bin/console d:s:u --force (in "galibelum" database.)
     * bin/console c:c
     * bin/console s:r
 
