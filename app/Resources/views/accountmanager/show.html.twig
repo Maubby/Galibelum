@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Accountmanager</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ accountManager.id }}</td>
+            </tr>
+            <tr>
+                <th>Firstname</th>
+                <td>{{ accountManager.firstName }}</td>
+            </tr>
+            <tr>
+                <th>Lastname</th>
+                <td>{{ accountManager.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Phonenumber</th>
+                <td>{{ accountManager.phoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ accountManager.email }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ accountManager.password }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('accountmanager_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
