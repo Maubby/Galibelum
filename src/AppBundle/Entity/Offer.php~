@@ -357,5 +357,52 @@ class Offer
     {
         return $this->signature;
     }
-}
 
+    /**
+     * Set managerOffer
+     *
+     * @param \AppBundle\Entity\AccountManager $managerOffer
+     *
+     * @return Offer
+     */
+    public function setManagerOffer(\AppBundle\Entity\AccountManager $managerOffer)
+    {
+        $this->managerOffer = $managerOffer;
+
+        return $this;
+    }
+
+    /**
+     * Get managerOffer
+     *
+     * @return \AppBundle\Entity\AccountManager
+     */
+    public function getManagerOffer()
+    {
+        return $this->managerOffer;
+    }
+
+    /**
+     * Set activity
+     *
+     * @param \AppBundle\Entity\Activity $activity
+     *
+     * @return Offer
+     */
+    public function setActivity(\AppBundle\Entity\Activity $activity)
+    {
+        $this->activity = $activity;
+
+        return $this;
+    }
+
+    /**
+     * Get activity
+     *
+     * @return \AppBundle\Entity\Activity
+     */
+    public function getActivity()
+    {
+        return $this->activity;
+    }
+}

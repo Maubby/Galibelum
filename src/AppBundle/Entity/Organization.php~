@@ -363,5 +363,93 @@ class Organization
     {
         return $this->isActive;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->organizationActivity = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Set managerOrganization
+     *
+     * @param \AppBundle\Entity\AccountManager $managerOrganization
+     *
+     * @return Organization
+     */
+    public function setManagerOrganization(\AppBundle\Entity\AccountManager $managerOrganization)
+    {
+        $this->managerOrganization = $managerOrganization;
+
+        return $this;
+    }
+
+    /**
+     * Get managerOrganization
+     *
+     * @return \AppBundle\Entity\AccountManager
+     */
+    public function getManagerOrganization()
+    {
+        return $this->managerOrganization;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Organization
+     */
+    public function setUser(\AppBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add organizationActivity
+     *
+     * @param \AppBundle\Entity\Activity $organizationActivity
+     *
+     * @return Organization
+     */
+    public function addOrganizationActivity(\AppBundle\Entity\Activity $organizationActivity)
+    {
+        $this->organizationActivity[] = $organizationActivity;
+
+        return $this;
+    }
+
+    /**
+     * Remove organizationActivity
+     *
+     * @param \AppBundle\Entity\Activity $organizationActivity
+     */
+    public function removeOrganizationActivity(\AppBundle\Entity\Activity $organizationActivity)
+    {
+        $this->organizationActivity->removeElement($organizationActivity);
+    }
+
+    /**
+     * Get organizationActivity
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrganizationActivity()
+    {
+        return $this->organizationActivity;
+    }
+}

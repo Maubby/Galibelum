@@ -202,5 +202,80 @@ class AccountManager
     {
         return $this->password;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->managerOffers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->managerOrganizations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add managerOffer
+     *
+     * @param \AppBundle\Entity\Offer $managerOffer
+     *
+     * @return AccountManager
+     */
+    public function addManagerOffer(\AppBundle\Entity\Offer $managerOffer)
+    {
+        $this->managerOffers[] = $managerOffer;
+
+        return $this;
+    }
+
+    /**
+     * Remove managerOffer
+     *
+     * @param \AppBundle\Entity\Offer $managerOffer
+     */
+    public function removeManagerOffer(\AppBundle\Entity\Offer $managerOffer)
+    {
+        $this->managerOffers->removeElement($managerOffer);
+    }
+
+    /**
+     * Get managerOffers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getManagerOffers()
+    {
+        return $this->managerOffers;
+    }
+
+    /**
+     * Add managerOrganization
+     *
+     * @param \AppBundle\Entity\Organization $managerOrganization
+     *
+     * @return AccountManager
+     */
+    public function addManagerOrganization(\AppBundle\Entity\Organization $managerOrganization)
+    {
+        $this->managerOrganizations[] = $managerOrganization;
+
+        return $this;
+    }
+
+    /**
+     * Remove managerOrganization
+     *
+     * @param \AppBundle\Entity\Organization $managerOrganization
+     */
+    public function removeManagerOrganization(\AppBundle\Entity\Organization $managerOrganization)
+    {
+        $this->managerOrganizations->removeElement($managerOrganization);
+    }
+
+    /**
+     * Get managerOrganizations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getManagerOrganizations()
+    {
+        return $this->managerOrganizations;
+    }
+}

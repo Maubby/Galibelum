@@ -357,5 +357,69 @@ class Activity
     {
         return $this->socialLink;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->activities = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add activity
+     *
+     * @param \AppBundle\Entity\Offer $activity
+     *
+     * @return Activity
+     */
+    public function addActivity(\AppBundle\Entity\Offer $activity)
+    {
+        $this->activities[] = $activity;
+
+        return $this;
+    }
+
+    /**
+     * Remove activity
+     *
+     * @param \AppBundle\Entity\Offer $activity
+     */
+    public function removeActivity(\AppBundle\Entity\Offer $activity)
+    {
+        $this->activities->removeElement($activity);
+    }
+
+    /**
+     * Get activities
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActivities()
+    {
+        return $this->activities;
+    }
+
+    /**
+     * Set organizationActivities
+     *
+     * @param \AppBundle\Entity\Organization $organizationActivities
+     *
+     * @return Activity
+     */
+    public function setOrganizationActivities(\AppBundle\Entity\Organization $organizationActivities)
+    {
+        $this->organizationActivities = $organizationActivities;
+
+        return $this;
+    }
+
+    /**
+     * Get organizationActivities
+     *
+     * @return \AppBundle\Entity\Organization
+     */
+    public function getOrganizationActivities()
+    {
+        return $this->organizationActivities;
+    }
+}
