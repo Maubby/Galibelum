@@ -374,7 +374,7 @@ class Activity
      *
      * @return Activity
      */
-    public function addActivity(\AppBundle\Entity\Offer $activity)
+    public function addActivity(Offer $activity)
     {
         $this->activities[] = $activity;
 
@@ -386,7 +386,7 @@ class Activity
      *
      * @param \AppBundle\Entity\Offer $activity
      */
-    public function removeActivity(\AppBundle\Entity\Offer $activity)
+    public function removeActivity(Offer $activity)
     {
         $this->activities->removeElement($activity);
     }
@@ -408,7 +408,7 @@ class Activity
      *
      * @return Activity
      */
-    public function setOrganizationActivities(\AppBundle\Entity\Organization $organizationActivities)
+    public function setOrganizationActivities(Organization $organizationActivities)
     {
         $this->organizationActivities = $organizationActivities;
 

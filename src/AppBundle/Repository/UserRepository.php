@@ -6,7 +6,7 @@
  *
  * @category UserRepository
  * @package  Repository
- * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
+ * @author   WildCodeSchool <gaetan@wildcodeschool.fr>
  */
 namespace AppBundle\Repository;
 
@@ -18,7 +18,7 @@ namespace AppBundle\Repository;
  *
  * @category Repository
  * @package  Repository
- * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
+ * @author   WildCodeSchool <gaetan@wildcodeschool.fr>
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {

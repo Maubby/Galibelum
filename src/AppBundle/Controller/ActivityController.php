@@ -6,7 +6,7 @@
  *
  * @category ActivityController
  * @package  Controller
- * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
+ * @author   WildCodeSchool <gaetan@wildcodeschool.fr>
  */
 namespace AppBundle\Controller;
 
@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @category Controller
  * @package  Controller
- * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
+ * @author   WildCodeSchool <gaetan@wildcodeschool.fr>
  */
 class ActivityController extends Controller
 {
@@ -171,7 +171,7 @@ class ActivityController extends Controller
      *
      * @param Activity $activity The activity entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return \Symfony\Component\Form\FormInterface
      */
     private function _createDeleteForm(Activity $activity)
     {

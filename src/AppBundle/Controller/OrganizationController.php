@@ -6,7 +6,7 @@
  *
  * @category OrganizationController
  * @package  Controller
- * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
+ * @author   WildCodeSchool <gaetan@wildcodeschool.fr>
  */
 namespace AppBundle\Controller;
 
@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @category Controller
  * @package  Controller
- * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
+ * @author   WildCodeSchool <gaetan@wildcodeschool.fr>
  */
 class OrganizationController extends Controller
 {
@@ -171,7 +171,7 @@ class OrganizationController extends Controller
      *
      * @param Organization $organization The organization entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return \Symfony\Component\Form\FormInterface
      */
     private function _createDeleteForm(Organization $organization)
     {

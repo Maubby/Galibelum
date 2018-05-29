@@ -380,7 +380,7 @@ class Organization
      *
      * @return Organization
      */
-    public function setManagerOrganization(\AppBundle\Entity\AccountManager $managerOrganization)
+    public function setManagerOrganization(AccountManager $managerOrganization)
     {
         $this->managerOrganization = $managerOrganization;
 
@@ -404,7 +404,7 @@ class Organization
      *
      * @return Organization
      */
-    public function setUser(\AppBundle\Entity\User $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
 
@@ -428,7 +428,7 @@ class Organization
      *
      * @return Organization
      */
-    public function addOrganizationActivity(\AppBundle\Entity\Activity $organizationActivity)
+    public function addOrganizationActivity(Activity $organizationActivity)
     {
         $this->organizationActivity[] = $organizationActivity;
 
@@ -440,7 +440,7 @@ class Organization
      *
      * @param \AppBundle\Entity\Activity $organizationActivity
      */
-    public function removeOrganizationActivity(\AppBundle\Entity\Activity $organizationActivity)
+    public function removeOrganizationActivity(Activity $organizationActivity)
     {
         $this->organizationActivity->removeElement($organizationActivity);
     }

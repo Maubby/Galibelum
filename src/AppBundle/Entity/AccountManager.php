@@ -220,7 +220,7 @@ class AccountManager
      *
      * @return AccountManager
      */
-    public function addManagerOffer(\AppBundle\Entity\Offer $managerOffer)
+    public function addManagerOffer(Offer $managerOffer)
     {
         $this->managerOffers[] = $managerOffer;
 
@@ -232,7 +232,7 @@ class AccountManager
      *
      * @param \AppBundle\Entity\Offer $managerOffer
      */
-    public function removeManagerOffer(\AppBundle\Entity\Offer $managerOffer)
+    public function removeManagerOffer(Offer $managerOffer)
     {
         $this->managerOffers->removeElement($managerOffer);
     }
@@ -254,7 +254,7 @@ class AccountManager
      *
      * @return AccountManager
      */
-    public function addManagerOrganization(\AppBundle\Entity\Organization $managerOrganization)
+    public function addManagerOrganization(Organization $managerOrganization)
     {
         $this->managerOrganizations[] = $managerOrganization;
 
@@ -266,7 +266,7 @@ class AccountManager
      *
      * @param \AppBundle\Entity\Organization $managerOrganization
      */
-    public function removeManagerOrganization(\AppBundle\Entity\Organization $managerOrganization)
+    public function removeManagerOrganization(Organization $managerOrganization)
     {
         $this->managerOrganizations->removeElement($managerOrganization);
     }

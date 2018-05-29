@@ -73,7 +73,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setOrganization(\AppBundle\Entity\Organization $organization)
+    public function setOrganization(Organization $organization)
     {
         $this->organization = $organization;
 

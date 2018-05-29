@@ -6,7 +6,7 @@
  *
  * @category RegistrationType
  * @package  Type
- * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
+ * @author   WildCodeSchool <gaetan@wildcodeschool.fr>
  */
 namespace AppBundle\Form;
 
@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  *
  * @category Controller
  * @package  Controller
- * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
+ * @author   WildCodeSchool <gaetan@wildcodeschool.fr>
  */
 class RegistrationType extends AbstractType
 {

@@ -6,7 +6,7 @@
  *
  * @category OfferController
  * @package  Controller
- * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
+ * @author   WildCodeSchool <gaetan@wildcodeschool.fr>
  */
 namespace AppBundle\Controller;
 
@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @category Controller
  * @package  Controller
- * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
+ * @author   WildCodeSchool <gaetan@wildcodeschool.fr>
  */
 class OfferController extends Controller
 {
@@ -165,7 +165,7 @@ class OfferController extends Controller
      *
      * @param Offer $offer The offer entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return \Symfony\Component\Form\FormInterface
      */
     private function _createDeleteForm(Offer $offer)
     {

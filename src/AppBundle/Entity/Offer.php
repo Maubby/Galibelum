@@ -367,7 +367,7 @@ class Offer
      *
      * @return Offer
      */
-    public function setManagerOffer(\AppBundle\Entity\AccountManager $managerOffer)
+    public function setManagerOffer(AccountManager $managerOffer)
     {
         $this->managerOffer = $managerOffer;
 
@@ -391,7 +391,7 @@ class Offer
      *
      * @return Offer
      */
-    public function setActivity(\AppBundle\Entity\Activity $activity)
+    public function setActivity(Activity $activity)
     {
         $this->activity = $activity;
 
