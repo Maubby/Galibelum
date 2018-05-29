@@ -6,7 +6,7 @@
  *
  * @category OfferController
  * @package  Controller
- * @author   WildCodeSchool <gaetan@wildcodeschool.fr>
+ * @author   WildCodeSchool <www.wildcodeschool.fr>
  */
 namespace AppBundle\Controller;
 
@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @category Controller
  * @package  Controller
- * @author   WildCodeSchool <gaetan@wildcodeschool.fr>
+ * @author   WildCodeSchool <www.wildcodeschool.fr>
  */
 class OfferController extends Controller
 {

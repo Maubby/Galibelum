@@ -6,7 +6,7 @@
  *
  * @category ActivityType
  * @package  Type
- * @author   WildCodeSchool <gaetan@wildcodeschool.fr>
+ * @author   WildCodeSchool <www.wildcodeschool.fr>
  */
 namespace AppBundle\Form;
 
@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @category Controller
  * @package  Controller
- * @author   WildCodeSchool <gaetan@wildcodeschool.fr>
+ * @author   WildCodeSchool <www.wildcodeschool.fr>
  */
 class ActivityType extends AbstractType
 {
