@@ -1,13 +1,4 @@
 <?php
-/**
- * OfferType File Doc Comment
- *
- * PHP version 7.1
- *
- * @category OfferType
- * @package  Type
- * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
- */
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -15,13 +6,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Offer type.
+ * Activity type.
  *
  * @category Controller
  * @package  Controller
  * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
  */
-class OfferType extends AbstractType
+class AccountManagerType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -34,12 +25,15 @@ class OfferType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('date')
-            ->add('amount')
-            ->add('partnershipNumber')
-            ->add('activity');
+            ->add('firstName')
+            ->add('lastName')
+            ->add('phoneNumber')
+            ->add('email')
+            ->add('password')
+            ->add('mainGame')
+            ->add('urlVideo')
+            ->add('achievement')
+            ->add('socialLink');
     }
 
     /**
@@ -47,13 +41,13 @@ class OfferType extends AbstractType
      *
      * @param OptionsResolver $resolver The optionResolver class
      *
-     * @return null
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
-            'data_class' => 'AppBundle\Entity\Offer'
+                'data_class' => 'AppBundle\Entity\AccountManager'
             )
         );
     }
@@ -65,7 +59,7 @@ class OfferType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_offer';
+        return 'appbundle_activity';
     }
 
 

@@ -29,7 +29,7 @@ class OrganizationType extends AbstractType
      * @param FormBuilderInterface $builder The formBuilderInterface form
      * @param array                $options The attribute array
      *
-     * @return null
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -49,7 +49,7 @@ class OrganizationType extends AbstractType
      *
      * @param OptionsResolver $resolver The optionResolver class
      *
-     * @return null
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver)
     {

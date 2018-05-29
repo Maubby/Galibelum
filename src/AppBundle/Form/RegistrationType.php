@@ -28,7 +28,7 @@ class RegistrationType extends AbstractType
      * @param FormBuilderInterface $builder The formBuilderInterface form
      * @param array                $options The attribute array
      *
-     * @return null
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

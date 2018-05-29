@@ -50,7 +50,7 @@ class ActivityType extends AbstractType
      *
      * @param OptionsResolver $resolver The optionResolver class
      *
-     * @return null
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver)
     {
