@@ -1,24 +1,40 @@
 <?php
-
+/**
+ * OfferController File Doc Comment
+ *
+ * PHP version 7.1
+ *
+ * @category OfferController
+ * @package  Controller
+ * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
+ */
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Offer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Offer controller.
  *
  * @Route("offer")
+ *
+ * @category Controller
+ * @package  Controller
+ * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
  */
 class OfferController extends Controller
 {
     /**
      * Lists all offer entities.
      *
-     * @Route("/", name="offer_index")
+     * @Route("/",    name="offer_index")
      * @Method("GET")
+     *
+     * @return Response A Response instance
      */
     public function indexAction()
     {
@@ -26,16 +42,22 @@ class OfferController extends Controller
 
         $offers = $em->getRepository('AppBundle:Offer')->findAll();
 
-        return $this->render('offer/index.html.twig', array(
+        return $this->render(
+            'offer/index.html.twig', array(
             'offers' => $offers,
-        ));
+            )
+        );
     }
 
     /**
      * Creates a new offer entity.
      *
-     * @Route("/new", name="offer_new")
+     * @param Request $request New posted info
+     *
+     * @Route("/new",  name="offer_new")
      * @Method({"GET", "POST"})
+     *
+     * @return Response A Response instance
      */
     public function newAction(Request $request)
     {
@@ -51,37 +73,50 @@ class OfferController extends Controller
             return $this->redirectToRoute('offer_show', array('id' => $offer->getId()));
         }
 
-        return $this->render('offer/new.html.twig', array(
+        return $this->render(
+            'offer/new.html.twig', array(
             'offer' => $offer,
             'form' => $form->createView(),
-        ));
+            )
+        );
     }
 
     /**
      * Finds and displays a offer entity.
      *
+     * @param Offer $offer The offer entity
+     *
      * @Route("/{id}", name="offer_show")
      * @Method("GET")
+     *
+     * @return Response A Response instance
      */
     public function showAction(Offer $offer)
     {
-        $deleteForm = $this->createDeleteForm($offer);
+        $deleteForm = $this->_createDeleteForm($offer);
 
-        return $this->render('offer/show.html.twig', array(
+        return $this->render(
+            'offer/show.html.twig', array(
             'offer' => $offer,
             'delete_form' => $deleteForm->createView(),
-        ));
+            )
+        );
     }
 
     /**
      * Displays a form to edit an existing offer entity.
      *
+     * @param Request $request Edit posted info
+     * @param Offer   $offer   The offer entity
+     *
      * @Route("/{id}/edit", name="offer_edit")
-     * @Method({"GET", "POST"})
+     * @Method({"GET",      "POST"})
+     *
+     * @return Response A Response instance
      */
     public function editAction(Request $request, Offer $offer)
     {
-        $deleteForm = $this->createDeleteForm($offer);
+        $deleteForm = $this->_createDeleteForm($offer);
         $editForm = $this->createForm('AppBundle\Form\OfferType', $offer);
         $editForm->handleRequest($request);
 
@@ -91,22 +126,29 @@ class OfferController extends Controller
             return $this->redirectToRoute('offer_edit', array('id' => $offer->getId()));
         }
 
-        return $this->render('offer/edit.html.twig', array(
+        return $this->render(
+            'offer/edit.html.twig', array(
             'offer' => $offer,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+            )
+        );
     }
 
     /**
      * Deletes a offer entity.
      *
-     * @Route("/{id}", name="offer_delete")
+     * @param Request $request Delete posted info
+     * @param Offer   $offer   The offer entity
+     *
+     * @Route("/{id}",   name="offer_delete")
      * @Method("DELETE")
+     *
+     * @return Response A Response instance
      */
     public function deleteAction(Request $request, Offer $offer)
     {
-        $form = $this->createDeleteForm($offer);
+        $form = $this->_createDeleteForm($offer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -125,12 +167,16 @@ class OfferController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Offer $offer)
+    private function _createDeleteForm(Offer $offer)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('offer_delete', array('id' => $offer->getId())))
+            ->setAction(
+                $this->generateUrl(
+                    'offer_delete',
+                    array('id' => $offer->getId())
+                )
+            )
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }
