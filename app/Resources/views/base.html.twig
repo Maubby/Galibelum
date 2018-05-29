@@ -1,13 +1,44 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<html lang="fr">
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <!-- maximum-scale=1.0 is now deprecated -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Wild Code School">
+    <meta name="description" content= "Galibelum est une plateforme web offrant des services pour l'eSport">
+    <meta name="keywords" content="Galibelum, eSport, Lille">
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+    <title>Galibelum - {% block title %}{% endblock %}</title>
+
+    <!-- CSS -->
+    {% block stylesheets %}
+        <!-- Latest compiled and minified Bootstrap CSS files -->
+        <link rel="stylesheet" href="{{ asset('assets/css/Bootstrap/bootstrap.min.css') }}">
+
+        <!-- Personal CSS -->
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    {% endblock %}
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+</head>
+<body>
+<header>
+    {% block header %}
+    {% endblock %}
+</header>
+{% block body %}
+{% endblock %}
+<footer>
+    {% block footer %}
+    {% endblock %}
+</footer>
+{% block javascripts %}
+    <!-- Latest compiled and minified Jquery/Bootstrap JS files -->
+    <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+{% endblock %}
+</body>
 </html>
