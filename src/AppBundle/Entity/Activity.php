@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Activity
@@ -34,6 +35,7 @@ class Activity
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
+     * @Assert\Type("integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -43,6 +45,14 @@ class Activity
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=32)
+     * @Assert\Type("string")
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 32,
+     *      minMessage = "Your name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $name;
 
@@ -57,6 +67,14 @@ class Activity
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=32)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 32,
+     *      minMessage = "The activity type must be at least {{ limit }} characters long",
+     *      maxMessage = "The activity type cannot be longer than {{ limit }} characters"
+     * )
      */
     private $type;
 
@@ -64,6 +82,14 @@ class Activity
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "The description is a little bit too short, it must be at least {{ limit }} characters long",
+     *      maxMessage = "The description cannot be longer than {{ limit }} characters"
+     * )
      */
     private $description;
 
@@ -71,6 +97,12 @@ class Activity
      * @var string
      *
      * @ORM\Column(name="date", type="string", length=16, nullable=true)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      max = 16,
+     *      maxMessage = "The date cannot be longer than {{ limit }} characters"
+     * )
      */
     private $date;
 
@@ -78,6 +110,14 @@ class Activity
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=32, nullable=true)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 32,
+     *      minMessage = "The address must be at least {{ limit }} characters long",
+     *      maxMessage = "The address cannot be longer than {{ limit }} characters"
+     * )
      */
     private $address;
 
@@ -85,6 +125,14 @@ class Activity
      * @var string
      *
      * @ORM\Column(name="mainGame", type="string", length=32, nullable=true)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 32,
+     *      minMessage = "The game's name must be at least {{ limit }} characters long",
+     *      maxMessage = "The game's name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $mainGame;
 
@@ -92,6 +140,18 @@ class Activity
      * @var string
      *
      * @ORM\Column(name="urlVideo", type="string", length=128, nullable=true)
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      max = 128,
+     *      maxMessage = "The url link cannot be longer than {{ limit }} characters"
+     * )
+     * @Assert\Url(
+     *     message = "The url '{{ value }}' is not a valid url",
+     *     protocols = {"http", "https", "ftp"},
+     *     checkDNS = "ANY",
+     *     dnsMessage = "The host '{{ value }}' could not be resolved."
+     * )
      */
     private $urlVideo;
 
@@ -99,6 +159,13 @@ class Activity
      * @var array
      *
      * @ORM\Column(name="achievement", type="array", nullable=true)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "The achievement description is a little bit too short, it must be at least {{ limit }} characters long",
+     *      maxMessage = "The achievement description cannot be longer than {{ limit }} characters"
+     * )
      */
     private $achievement;
 
@@ -106,6 +173,8 @@ class Activity
      * @var array
      *
      * @ORM\Column(name="socialLink", type="array")
+     *
+     * @Assert\NotBlank()
      */
     private $socialLink;
 
