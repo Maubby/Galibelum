@@ -1,13 +1,4 @@
 <?php
-/**
- * OrganizationType File Doc Comment
- *
- * PHP version 7.1
- *
- * @category OrganizationType
- * @package  Type
- * @author   WildCodeSchool <www.wildcodeschool.fr>
- */
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -15,13 +6,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Organization type.
+ * Activity type.
  *
  * @category Controller
  * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
  */
-class OrganizationType extends AbstractType
+class AccountManagerType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -34,14 +25,15 @@ class OrganizationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
+            ->add('firstName')
+            ->add('lastName')
             ->add('phoneNumber')
             ->add('email')
-            ->add('description')
-            ->add('userRole')
-            ->add('status')
-            ->add('address')
-            ->add('relationNumber');
+            ->add('password')
+            ->add('mainGame')
+            ->add('urlVideo')
+            ->add('achievement')
+            ->add('socialLink');
     }
 
     /**
@@ -55,7 +47,7 @@ class OrganizationType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-            'data_class' => 'AppBundle\Entity\Organization'
+                'data_class' => 'AppBundle\Entity\AccountManager'
             )
         );
     }
@@ -67,7 +59,7 @@ class OrganizationType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_organization';
+        return 'appbundle_activity';
     }
 
 
