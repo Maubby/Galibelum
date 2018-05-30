@@ -1,0 +1,5 @@
+$brand-primary: darken(#428bca, 20%);
+body{
+  color: $brand-primary;
+}
+@import '~bootstrap-sass/assets/stylesheets/bootstrap';
