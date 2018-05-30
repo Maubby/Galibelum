@@ -35,6 +35,7 @@ class Activity
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
+     * @Assert\Type("integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -44,7 +45,7 @@ class Activity
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=32)
-     *
+     * @Assert\Type("string")
      * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
@@ -84,7 +85,7 @@ class Activity
      *
      * @Assert\NotBlank()
      * @Assert\Length(
-     *      min = 8,
+     *      min = 2,
      *      max = 255,
      *      minMessage = "The description is a little bit too short, it must be at least {{ limit }} characters long",
      *      maxMessage = "The description cannot be longer than {{ limit }} characters"
@@ -158,10 +159,9 @@ class Activity
      * @var array
      *
      * @ORM\Column(name="achievement", type="array", nullable=true)
-     *
      * @Assert\NotBlank()
      * @Assert\Length(
-     *      min = 8,
+     *      min = 2,
      *      max = 255,
      *      minMessage = "The achievement description is a little bit too short, it must be at least {{ limit }} characters long",
      *      maxMessage = "The achievement description cannot be longer than {{ limit }} characters"
@@ -175,12 +175,6 @@ class Activity
      * @ORM\Column(name="socialLink", type="array")
      *
      * @Assert\NotBlank()
-     * @Assert\Length(
-     *      min = 8,
-     *      max = 255,
-     *      minMessage = "The achievement description is a little bit too short, it must be at least {{ limit }} characters long",
-     *      maxMessage = "The achievement description cannot be longer than {{ limit }} characters"
-     * )
      */
     private $socialLink;
 

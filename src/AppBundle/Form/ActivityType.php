@@ -11,6 +11,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -34,15 +35,15 @@ class ActivityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('type')
-            ->add('description')
-            ->add('date')
-            ->add('address')
-            ->add('mainGame')
-            ->add('urlVideo')
-            ->add('achievement')
-            ->add('socialLink');
+            ->add('name', TextareaType::class)
+            ->add('type', TextareaType::class)
+            ->add('description', TextareaType::class)
+            ->add('date', TextareaType::class)
+            ->add('address', TextareaType::class)
+            ->add('mainGame', TextareaType::class)
+            ->add('urlVideo', TextareaType::class)
+            ->add('achievement', TextareaType::class)
+            ->add('socialLink', TextareaType::class);
     }
 
     /**
