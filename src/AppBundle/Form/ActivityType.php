@@ -6,7 +6,7 @@
  *
  * @category ActivityType
  * @package  Type
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Form;
 
@@ -17,9 +17,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Activity type.
  *
- * @category Controller
- * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @category ActivityType
+ * @package  Type
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 class ActivityType extends AbstractType
 {
@@ -29,7 +29,7 @@ class ActivityType extends AbstractType
      * @param FormBuilderInterface $builder The formBuilderInterface form
      * @param array                $options The attribute array
      *
-     * @return null
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

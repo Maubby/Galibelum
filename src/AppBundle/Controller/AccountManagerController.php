@@ -6,7 +6,7 @@
  *
  * @category AccountManagerController
  * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Controller;
 
@@ -20,11 +20,11 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Accountmanager controller.
  *
- * @Route("accountmanager")
+ * @Route("accountManager")
  *
- * @category Controller
+ * @category AccountManagerController
  * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 class AccountManagerController extends Controller
 {
@@ -61,7 +61,7 @@ class AccountManagerController extends Controller
      */
     public function newAction(Request $request)
     {
-        $activity = new AccountManager();
+        $accountManager = new AccountManager();
         $form = $this->createForm('AppBundle\Form\AccountManagerType', $accountManager);
         $form->handleRequest($request);
 
@@ -107,7 +107,7 @@ class AccountManagerController extends Controller
     /**
      * Displays a form to edit an existing accountManager entity.
      *
-     * @param Request  $request  Delete posted info
+     * @param Request        $request        Delete posted info
      * @param AccountManager $accountManager The accountManager entity
      *
      * @Route("/{id}/edit", name="accountmanager_edit")
@@ -142,7 +142,7 @@ class AccountManagerController extends Controller
     /**
      * Deletes a accountManager entity.
      *
-     * @param Request  $request  Delete posted info
+     * @param Request        $request        Delete posted info
      * @param AccountManager $accountManager The accountManager entity
      *
      * @Route("/{id}",   name="accountmanager_delete")
@@ -169,7 +169,7 @@ class AccountManagerController extends Controller
      *
      * @param AccountManager $accountManager The accountManager entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return \Symfony\Component\Form\FormInterface
      */
     private function _createDeleteForm(AccountManager $accountManager)
     {

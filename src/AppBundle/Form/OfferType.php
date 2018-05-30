@@ -6,7 +6,7 @@
  *
  * @category OfferType
  * @package  Type
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Form;
 
@@ -17,9 +17,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Offer type.
  *
- * @category Controller
- * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @category OfferType
+ * @package  Type
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 class OfferType extends AbstractType
 {
@@ -47,7 +47,7 @@ class OfferType extends AbstractType
      *
      * @param OptionsResolver $resolver The optionResolver class
      *
-     * @return null
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver)
     {

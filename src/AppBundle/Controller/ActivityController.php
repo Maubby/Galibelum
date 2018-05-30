@@ -6,7 +6,7 @@
  *
  * @category ActivityController
  * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Controller;
 
@@ -22,9 +22,9 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @Route("activity")
  *
- * @category Controller
+ * @category ActivityController
  * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 class ActivityController extends Controller
 {

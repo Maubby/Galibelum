@@ -1,4 +1,13 @@
 <?php
+/**
+ * AcountManagerType File Doc Comment
+ *
+ * PHP version 7.1
+ *
+ * @category AccountManagerType
+ * @package  Type
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
+ */
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
@@ -8,9 +17,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Activity type.
  *
- * @category Controller
- * @package  Controller
- * @author   WildCodeSchool <gaetant@wildcodeschool.fr>
+ * @category AccountManagerType
+ * @package  Type
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 class AccountManagerType extends AbstractType
 {

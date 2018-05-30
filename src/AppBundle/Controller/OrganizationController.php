@@ -6,7 +6,7 @@
  *
  * @category OrganizationController
  * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Controller;
 
@@ -22,9 +22,9 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @Route("organization")
  *
- * @category Controller
+ * @category OrganizationController
  * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 class OrganizationController extends Controller
 {

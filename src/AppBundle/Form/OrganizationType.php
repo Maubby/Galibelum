@@ -6,7 +6,7 @@
  *
  * @category OrganizationType
  * @package  Type
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Form;
 
@@ -17,9 +17,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Organization type.
  *
- * @category Controller
- * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @category OrganizationType
+ * @package  Type
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 class OrganizationType extends AbstractType
 {
