@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * organization
@@ -49,6 +50,16 @@ class Organization
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=32)
+     *
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir un nom"
+     * )
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 32,
+     *     minMessage = "Votre nom doit contenir au mmoins {{ limit }} caractères",
+     *     maxMessage = "Votre nom ne peut pas contenir plus de {{ limit }} caractères"
+     * )
      */
     private $name;
 
@@ -63,6 +74,20 @@ class Organization
      * @var string
      *
      * @ORM\Column(name="phoneNumber", type="string", length=32)
+     *
+     * @Assert\Type("string")
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir un numéro de téléphone"
+     * )
+     * @Assert\Length(
+     *     min = 9,
+     *     max = 32,
+     *     exactMessage = "Veuillez saisir un numéro de téléphone valide"
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$/",
+     *     message = "Veuillez saisir un numéro de téléphone valide"
+     * )
      */
     private $phoneNumber;
 
@@ -70,6 +95,25 @@ class Organization
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=64)
+     *
+     * @Assert\Type("string")
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir une adresse mail"
+     * )
+     * @Assert\Length(
+     *     min = 5,
+     *     max = 64,
+     *     minMessage = "Votre adresse mail doit contenir au mmoins {{ limit }} caractères",
+     *     maxMessage = "Votre adresse mail ne peut pas contenir plus de {{ limit }} caractères"
+     * )
+     * @Assert\Email(
+     *     message = "l'email '{{ value }}' n'est pas valide.",
+     *     checkMX = true
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/",
+     *     message = "Veuillez saisir une adresse mail valide"
+     * )
      */
     private $email;
 
@@ -77,6 +121,15 @@ class Organization
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     *
+     * @Assert\Type("string")
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir une description"
+     * )
+     * @Assert\Length(
+     *     min = 32,
+     *     minMessage = "Votre description doit contenir au mmoins {{ limit }} caractères"
+     * )
      */
     private $description;
 
@@ -84,6 +137,17 @@ class Organization
      * @var string
      *
      * @ORM\Column(name="userRole", type="string", length=32)
+     *
+     * @Assert\Type("string")
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir votre poste occupé"
+     * )
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 32,
+     *     minMessage = "Votre saisie doit contenir au moins {{ limit }} caractères",
+     *     maxMessage = "Votre saisie ne peut pas contenir plus de {{ limit }} caractères"
+     * )
      */
     private $userRole;
 
@@ -91,6 +155,17 @@ class Organization
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=32)
+     *
+     * @Assert\Type("string")
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir la statut juridique"
+     * )
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 32,
+     *     minMessage = "Votre saisie doit contenir au mmoins {{ limit }} caractères",
+     *     maxMessage = "Votre saisie ne peut pas contenir plus de {{ limit }} caractères"
+     * )
      */
     private $status;
 
@@ -98,6 +173,17 @@ class Organization
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=32)
+     *
+     * @Assert\Type("string")
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir l'adresse"
+     * )
+     * @Assert\Length(
+     *     min = 5,
+     *     max = 32,
+     *     minMessage = "Votre adresse doit contenir au mmoins {{ limit }} caractères",
+     *     maxMessage = "Votre adresse ne peut pas contenir plus de {{ limit }} caractères"
+     * )
      */
     private $address;
 
@@ -105,6 +191,15 @@ class Organization
      * @var int
      *
      * @ORM\Column(name="relationNumber", type="integer")
+     *
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+     * @Assert\Range(
+     *     min = 1,
+     *     minMessage = "Veuillez saisir le nombre d'employés"
+     * )
      */
     private $relationNumber;
 
