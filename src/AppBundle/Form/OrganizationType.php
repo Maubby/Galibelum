@@ -67,7 +67,7 @@ class OrganizationType extends AbstractType
             )
             ->add(
                 'userRole', TextType::class, array(
-                'label' => "userRole :",
+                'label' => "Poste occupé :",
                 'attr' => array('class' => 'form-control')
                 )
             )
@@ -85,7 +85,7 @@ class OrganizationType extends AbstractType
             )
             ->add(
                 'relationNumber', IntegerType::class, array(
-                'label' => 'Nombre d\'emplyés :',
+                'label' => 'Nombre d\'employés :',
                 'attr' => array('min' => 1, 'class' => 'form-control')
                 )
             );
