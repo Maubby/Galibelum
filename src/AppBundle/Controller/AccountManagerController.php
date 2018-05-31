@@ -20,9 +20,9 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Accountmanager controller.
  *
- * @Route("accountManager")
+ * @Route("accountmanager")
  *
- * @category AccountManagerController
+ * @category OrganizationController
  * @package  Controller
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
@@ -50,9 +50,9 @@ class AccountManagerController extends Controller
     }
 
     /**
-     * Creates a new AccountManager entity.
+     * Creates a new accountManager entity.
      *
-     * @param Request $request Delete posted info
+     * @param Request $request New posted info
      *
      * @Route("/new",  name="accountmanager_new")
      * @Method({"GET", "POST"})
@@ -61,7 +61,7 @@ class AccountManagerController extends Controller
      */
     public function newAction(Request $request)
     {
-        $accountManager = new AccountManager();
+        $accountManager = new Accountmanager();
         $form = $this->createForm('AppBundle\Form\AccountManagerType', $accountManager);
         $form->handleRequest($request);
 
@@ -78,8 +78,8 @@ class AccountManagerController extends Controller
 
         return $this->render(
             'accountmanager/new.html.twig', array(
-                'accountManager' => $accountManager,
-                'form' => $form->createView(),
+            'accountManager' => $accountManager,
+            'form' => $form->createView(),
             )
         );
     }
@@ -96,10 +96,12 @@ class AccountManagerController extends Controller
      */
     public function showAction(AccountManager $accountManager)
     {
+        $deleteForm = $this->_createDeleteForm($accountManager);
 
         return $this->render(
             'accountmanager/show.html.twig', array(
             'accountManager' => $accountManager,
+            'delete_form' => $deleteForm->createView(),
             )
         );
     }
@@ -107,7 +109,7 @@ class AccountManagerController extends Controller
     /**
      * Displays a form to edit an existing accountManager entity.
      *
-     * @param Request        $request        Delete posted info
+     * @param Request        $request        Edit posted info
      * @param AccountManager $accountManager The accountManager entity
      *
      * @Route("/{id}/edit", name="accountmanager_edit")
@@ -117,8 +119,10 @@ class AccountManagerController extends Controller
      */
     public function editAction(Request $request, AccountManager $accountManager)
     {
-        $deleteForm = $this->_createDeleteForm($accountManager);
-        $editForm = $this->createForm('AppBundle\Form\AccountType', $accountManager);
+        $deleteForm
+            = $this->_createDeleteForm($accountManager);
+        $editForm
+            = $this->createForm('AppBundle\Form\AccountManagerType', $accountManager);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -132,9 +136,9 @@ class AccountManagerController extends Controller
 
         return $this->render(
             'accountmanager/edit.html.twig', array(
-                'accountManager' => $accountManager,
-                'edit_form' => $editForm->createView(),
-                'delete_form' => $deleteForm->createView(),
+            'accountManager' => $accountManager,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
             )
         );
     }
@@ -165,7 +169,7 @@ class AccountManagerController extends Controller
     }
 
     /**
-     * Creates a form to delete a activity entity.
+     * Creates a form to delete a accountManager entity.
      *
      * @param AccountManager $accountManager The accountManager entity
      *
@@ -173,7 +177,8 @@ class AccountManagerController extends Controller
      */
     private function _createDeleteForm(AccountManager $accountManager)
     {
-        return $this->createFormBuilder()
+        return $this
+            ->createFormBuilder()
             ->setAction(
                 $this->generateUrl(
                     'accountmanager_delete',

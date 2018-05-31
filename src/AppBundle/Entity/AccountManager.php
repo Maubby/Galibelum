@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * AccountManager
@@ -42,7 +43,17 @@ class AccountManager
     /**
      * @var string
      *
-     * @ORM\Column(name="firstName", type="string", length=64)
+     * @ORM\Column(name="firstName", type="string", length=32)
+     *
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir un prénom"
+     * )
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 32,
+     *     minMessage = "Votre nom doit contenir au mmoins {{ limit }} caractères",
+     *     maxMessage = "Votre nom ne peut pas contenir plus de {{ limit }} caractères"
+     * )
      */
     private $firstName;
 
@@ -50,6 +61,16 @@ class AccountManager
      * @var string
      *
      * @ORM\Column(name="lastName", type="string", length=32)
+     *
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir un nom"
+     * )
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 32,
+     *     minMessage = "Votre nom doit contenir au mmoins {{ limit }} caractères",
+     *     maxMessage = "Votre nom ne peut pas contenir plus de {{ limit }} caractères"
+     * )
      */
     private $lastName;
 
@@ -57,6 +78,20 @@ class AccountManager
      * @var string
      *
      * @ORM\Column(name="phoneNumber", type="string", length=32)
+     *
+     * @Assert\Type("string")
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir un numéro de téléphone"
+     * )
+     * @Assert\Length(
+     *     min = 9,
+     *     max = 32,
+     *     exactMessage = "Veuillez saisir un numéro de téléphone valide"
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$/",
+     *     message = "Veuillez saisir un numéro de téléphone valide"
+     * )
      */
     private $phoneNumber;
 
@@ -64,6 +99,25 @@ class AccountManager
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=64)
+     *
+     * @Assert\Type("string")
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir une adresse mail"
+     * )
+     * @Assert\Length(
+     *     min = 5,
+     *     max = 64,
+     *     minMessage = "Votre adresse mail doit contenir au mmoins {{ limit }} caractères",
+     *     maxMessage = "Votre adresse mail ne peut pas contenir plus de {{ limit }} caractères"
+     * )
+     * @Assert\Email(
+     *     message = "l'email '{{ value }}' n'est pas valide.",
+     *     checkMX = true
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/",
+     *     message = "Veuillez saisir une adresse mail valide"
+     * )
      */
     private $email;
 
@@ -71,6 +125,9 @@ class AccountManager
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=64)
+     *
+     * @Assert\Regex(pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/",
+     * message="Le mot de passe doit au moins contenir 6 caractères alphanumériques dont au moins un chiffre.")
      */
     private $password;
 
