@@ -16,3 +16,6 @@
 /vendor/
 /web/bundles/
 .idea
+*.php~
+.directory
+node_modules
