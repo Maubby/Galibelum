@@ -13,6 +13,9 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 /**
  * Offer type.
@@ -34,12 +37,39 @@ class OfferType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('date')
-            ->add('amount')
-            ->add('partnershipNumber')
-            ->add('activity');
+            ->add(
+                'name', TextareaType::class, array(
+                    'attr' => array(
+                        'minlength' => 2, 'maxlength' => 32,
+                        'label' => 'name',
+                        'class' => 'form-control'))
+            )
+            ->add(
+                'description', TextareaType::class, array(
+                    'attr' => array('maxlength' => 250,
+                        'label' => 'description',
+                        'class' => 'form-control'))
+            )
+            ->add('date', DateType::class, array('data' => new \DateTime('now')))
+            ->add(
+                'amount', IntegerType::class,
+                array('attr' => array('min' => 1,
+                        'label' => 'amount',
+                        'class' => 'form-control'))
+            )
+            ->add(
+                'partnershipNumber', IntegerType::class,
+                array('attr' => array(
+                        'min' => 0,
+                        'label' => 'partnershipNumber',
+                        'class' => 'form-control'))
+            )
+            ->add(
+                'activity', TextareaType::class, array(
+                    'label' => "activity :",
+                    'attr' => array('class' => 'form-control'))
+            );
+
     }
 
     /**
@@ -53,7 +83,7 @@ class OfferType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-            'data_class' => 'AppBundle\Entity\Offer'
+                'data_class' => 'AppBundle\Entity\Offer'
             )
         );
     }
@@ -67,6 +97,4 @@ class OfferType extends AbstractType
     {
         return 'appbundle_offer';
     }
-
-
 }
