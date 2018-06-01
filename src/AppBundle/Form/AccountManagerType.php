@@ -19,9 +19,9 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 /**
- * Organization type.
+ * AccountManager type.
  *
- * @category OrganizationType
+ * @category AccountManagerType
  * @package  Type
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
