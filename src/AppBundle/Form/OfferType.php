@@ -54,15 +54,15 @@ class OfferType extends AbstractType
             ->add(
                 'amount', IntegerType::class,
                 array('attr' => array('min' => 1,
-                        'label' => 'amount',
-                        'class' => 'form-control'))
+                    'label' => 'amount',
+                    'class' => 'form-control'))
             )
             ->add(
                 'partnershipNumber', IntegerType::class,
                 array('attr' => array(
-                        'min' => 0,
-                        'label' => 'partnershipNumber',
-                        'class' => 'form-control'))
+                    'min' => 0,
+                    'label' => 'partnershipNumber',
+                    'class' => 'form-control'))
             )
             ->add(
                 'activity', TextareaType::class, array(
