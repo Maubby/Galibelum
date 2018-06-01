@@ -12,12 +12,21 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Offer
 {
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->setStatus(0);
+    }
+
     /*
      * Relationship Mapping Metadata
      */
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\AccountManager", inversedBy="managerOffers")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $managerOffer;
 
