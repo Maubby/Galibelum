@@ -9,6 +9,6 @@ Encore
     .enableBuildNotifications()
     .enableSassLoader()
     .enableVersioning()
-    
+
 
 module.exports = Encore.getWebpackConfig();
