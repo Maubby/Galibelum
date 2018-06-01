@@ -62,11 +62,14 @@ class OrganizationController extends Controller
     public function newAction(Request $request)
     {
         $organization = new Organization();
+        $user = $this->getUser();
         $form = $this->createForm('AppBundle\Form\OrganizationType', $organization);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $organization->setUser($user);
+            $organization->setNameCanonical(strtolower($organization->getName()));
             $em->persist($organization);
             $em->flush();
 

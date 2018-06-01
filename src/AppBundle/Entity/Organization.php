@@ -18,7 +18,7 @@ class Organization
      */
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\AccountManager", inversedBy="managerOrganizations")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $managerOrganization;
 
@@ -466,6 +466,7 @@ class Organization
     public function __construct()
     {
         $this->organizationActivity = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setIsActive(0);
     }
 
     /**
