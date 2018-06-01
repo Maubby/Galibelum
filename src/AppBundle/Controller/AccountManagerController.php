@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @Route("accountmanager")
  *
- * @category OrganizationController
+ * @category AccountManagerController
  * @package  Controller
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
