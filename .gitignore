@@ -20,4 +20,4 @@
 .directory
 node_modules
 npm-debug.log
-/web/build/
+/web/
