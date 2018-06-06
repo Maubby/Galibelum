@@ -1,10 +1,10 @@
 <?php
 /**
- * RegistrationType File Doc Comment
+ * ProfileType File Doc Comment
  *
  * PHP version 7.1
  *
- * @category RegistrationType
+ * @category ProfileType
  * @package  Type
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
@@ -14,15 +14,17 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 /**
- * Registration type.
+ * Profile type.
  *
- * @category RegistrationType
+ * @category ProfileType
  * @package  Type
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
-class RegistrationType extends AbstractType
+class ProfileType extends AbstractType
 {
+
     /**
      * {@inheritdoc}
      *
@@ -36,13 +38,13 @@ class RegistrationType extends AbstractType
         $builder
             ->add(
                 'firstName', TextType::class, array(
-                'label' => 'Prénom * :',
-                'attr' => array('class' => 'form-control'))
+                    'label' => 'Prénom * :',
+                    'attr' => array('class' => 'form-control'))
             )
             ->add(
                 'lastName', TextType::class, array(
-                'label' => "Nom * :",
-                'attr' => array('class' => 'form-control'))
+                    'label' => "Nom * :",
+                    'attr' => array('class' => 'form-control'))
             )
             ->add(
                 'phoneNumber', TelType::class, array(
@@ -50,31 +52,37 @@ class RegistrationType extends AbstractType
                     'attr' => array('class' => 'form-control')
                 )
             )
-            ->remove('username'); //we use email as login
+            ->add(
+                'email', EmailType::class, array(
+                'label' => 'form.email', 'translation_domain' => 'FOSUserBundle')
+            )
+
+            ->remove('username') //we use email as login
+            ->remove('current_password');
     }
 
     /**
-     * GetParent registrationFormType.
+     * GetParent profileFormType.
      *
      * @return null|string
      */
     public function getParent()
     {
-        return 'FOS\UserBundle\Form\Type\RegistrationFormType';
+        return 'FOS\UserBundle\Form\Type\ProfileFormType';
     }
 
     /**
-     * GetBlockPrefix app_user_registration.
+     * GetBlockPrefix app_user_profile.
      *
      * @return null|string
      */
     public function getBlockPrefix()
     {
-        return 'app_user_registration';
+        return 'app_user_profile';
     }
 
     /**
-     * GetName registration type.
+     * GetName profile type.
      *
      * @return null|string
      */

@@ -27,5 +27,7 @@
     "sass-loader": "^7.0.2",
     "webpack-notifier": "^1.6.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack-notifier": "^1.6.0"
+  }
 }
