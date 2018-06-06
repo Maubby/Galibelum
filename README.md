@@ -25,6 +25,8 @@ PHP ^7.1 / Symfony 3.4.11 / Bootstrap 3.3.7 SASS / Doctrine - MYSQL.
     * MySql                         https://dev.mysql.com/downloads/installer/
     * Symfony Installer             https://github.com/symfony/symfony-installer
     * Composer                      https://getcomposer.org/download/
+    * npm 6.1.0                     https://www.npmjs.com/get-npm
+    * node 10.3.0                   https://www.npmjs.com/get-npm
 
 ## Download project
 
