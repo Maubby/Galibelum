@@ -12,6 +12,7 @@
 
     <title>Galibelum - {% block title %}{% endblock %}</title>
     <!-- CSS -->
+    <link rel="stylesheet" href="{{ asset('build/style.css') }}">
     {% block stylesheets %}
     {% endblock %}
     <!-- Favicons -->
@@ -24,7 +25,6 @@
 </header>
 {% block body %}
 {% endblock %}
-<script src="{{ asset('build/app.js') }}"></script>
 <footer>
     {% block footer %}
     {% endblock %}
