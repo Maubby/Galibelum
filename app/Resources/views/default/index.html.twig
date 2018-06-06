@@ -31,6 +31,9 @@
                         <li>
                             <a href="{{ path('fos_user_security_logout') }}">Se déconnecter</a>
                         </li>
+                        <li>
+                            <a href="{{ path('fos_user_profile_edit') }}">Modifier votre profil</a>
+                        </li>
                     {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
                         <li>
                             <a href="{{ path('fos_user_security_login') }}">Se connecter</a>
@@ -42,5 +45,5 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div>git a
 {% endblock %}
