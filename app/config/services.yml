@@ -41,3 +41,8 @@ services:
             class: AppBundle\Form\ProfileType
             tags:
                 - { name: form.type, alias: app_user_profile }
+    app.redirect_after_registration_subscriber:
+            class: AppBundle\EventListener\RedirectAfterRegistrationSubscriber
+            autowire: true
+            tags:
+                - { name: kernel.event_subscriber }
