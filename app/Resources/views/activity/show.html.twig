@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Activity</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ activity.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ activity.name }}</td>
+            </tr>
+            <tr>
+                <th>Namecanonical</th>
+                <td>{{ activity.nameCanonical }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ activity.type }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ activity.description }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ activity.date }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ activity.address }}</td>
+            </tr>
+            <tr>
+                <th>Maingame</th>
+                <td>{{ activity.mainGame }}</td>
+            </tr>
+            <tr>
+                <th>Urlvideo</th>
+                <td>{{ activity.urlVideo }}</td>
+            </tr>
+            <tr>
+                <th>Achievement</th>
+                <td>{% if activity.achievement %}{{ activity.achievement|join(', ') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Sociallink</th>
+                <td>{% if activity.socialLink %}{{ activity.socialLink|join(', ') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('activity_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('activity_edit', { 'id': activity.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

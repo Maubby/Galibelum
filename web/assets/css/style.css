@@ -1,0 +1,101 @@
+/* Stylizing titles */
+h1 {
+    font-size: 52px;
+    text-transform: none;
+    font-style: normal;
+    color: #30aae1;
+    font-weight: 900;
+    font-family:rajdhani sans-serif semi-bold;
+}
+
+h2 {
+    font-size: 43px;
+    text-transform: none;
+    font-style: normal;
+    color: #30aae1;
+    font-weight: 900;
+    font-family:rajdhani sans-serif semi-bold;
+}
+
+h3 {
+    font-size: 34px;
+    text-transform: none;
+    font-style: normal;
+    color: #30aae1;
+    font-weight: 900;
+    font-family:rajdhani sans-serif semi-bold;
+}
+
+h4 {
+    font-size: 29px;
+    text-transform: none;
+    font-style: normal;
+    color: #30aae1;
+    font-weight: 900;
+    font-family:rajdhani sans-serif semi-bold;
+}
+
+h5 {
+    font-size: 25px;
+    text-transform: none;
+    font-style: normal;
+    color: #30aae1;
+    font-weight: 900;
+    font-family:rajdhani sans-serif semi-bold;
+}
+
+/* Import Font */
+@font-face {
+    font-family:rajdhani sans-serif normal;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family:rajdhani sans-serif medium;
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family:rajdhani sans-serif normal ;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Color typo and page */
+main-color {
+    color: rgb(43,109,175);
+}
+
+seconde-color {
+    color: rgb(41,117,181);
+}
+
+three-color {
+    color: rgb(32,127,188);
+}
+
+four-color {
+    color: rgb(22,138,196);
+}
+
+five-color {
+    color: rgb(13,149,203);
+}
+
+six-color {
+    color: rgb(14,160,204);
+}
+
+seven-color {
+    color: rgb(13,188,208);
+}
+
+eight-color {
+    color: rgb(55,195,203);
+}
+
+nine-color {
+    color: rgb(91,199,194);
+}

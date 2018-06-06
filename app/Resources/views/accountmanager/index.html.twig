@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Accountmanagers list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Phonenumber</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for accountManager in accountManagers %}
+            <tr>
+                <td><a href="{{ path('accountmanager_show', { 'id': accountManager.id }) }}">{{ accountManager.id }}</a></td>
+                <td>{{ accountManager.firstName }}</td>
+                <td>{{ accountManager.lastName }}</td>
+                <td>{{ accountManager.phoneNumber }}</td>
+                <td>{{ accountManager.email }}</td>
+                <td>{{ accountManager.password }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('accountmanager_show', { 'id': accountManager.id }) }}">show</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}
