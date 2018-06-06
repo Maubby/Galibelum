@@ -1,10 +1,10 @@
 <?php
 /**
- * RegistrationType File Doc Comment
+ * ProfileType File Doc Comment
  *
  * PHP version 7.1
  *
- * @category RegistrationType
+ * @category ProfileType
  * @package  Type
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */

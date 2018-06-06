@@ -11,21 +11,36 @@
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 
     <title>Galibelum - {% block title %}{% endblock %}</title>
-
+    <link rel="stylesheet" href="{{ asset('build/style.css') }}">
     <!-- CSS -->
+
+    <link rel="stylesheet" href="{{ asset('build/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/style.css') }}" />
     {% block stylesheets %}
-        <!-- Latest compiled and minified Bootstrap CSS files -->
-        <link rel="stylesheet" href="{{ asset('assets/css/Bootstrap/bootstrap.min.css') }}">
-
-        <!-- Personal CSS -->
-        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     {% endblock %}
-
     <!-- Favicons -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 </head>
 <body>
 <header>
+    <nav class="navbar navbar-default text-center">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <img src="https://i0.wp.com/gallibellum.fr/wp-content/uploads/2018/04/cropped-cropped-cropped-Logo-Fond-carré-transparent-e1523974513774.png?resize=180%2C180&ssl=1 180w"/>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Recherche structure</a></li>
+                    <li><a href="#">Contractualisation</a></li>
+                    <li><a href="#">Paiements</a></li>
+                    <li><a href="#">Ma marque</a></li>
+                    <li><a href="#">Mon compte</a></li>
+                    <li><a href="#">Déconnexion</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
     {% block header %}
     {% endblock %}
 </header>
@@ -35,10 +50,11 @@
     {% block footer %}
     {% endblock %}
 </footer>
-{% block javascripts %}
-    <!-- Latest compiled and minified Jquery/Bootstrap JS files -->
-    <script src="{{ asset('assets/js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-{% endblock %}
+{% block javascripts %}{% endblock %}
 </body>
 </html>
+
+
+
+
+
