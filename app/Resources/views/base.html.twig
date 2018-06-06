@@ -11,6 +11,7 @@
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 
     <title>Galibelum - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('build/style.css') }}">
     <!-- CSS -->
     {% block stylesheets %}
     {% endblock %}
@@ -24,7 +25,6 @@
 </header>
 {% block body %}
 {% endblock %}
-<script src="{{ asset('build/app.js') }}"></script>
 <footer>
     {% block footer %}
     {% endblock %}
