@@ -1,6 +1,8 @@
 {
-  "build/style.js": "/build/style.546de35f.js",
-  "build/style.css": "/build/style.809c990e.css",
+  "build/style.js": "",
+  "build/style.css": "",
+  "build/bootstrap.js": "/build/bootstrap.106ccd54.js",
+  "build/bootstrap.css": "/build/bootstrap.379bc1f4.css",
   "build/fonts/glyphicons-halflings-regular.eot": "/build/fonts/glyphicons-halflings-regular.f4769f9b.eot",
   "build/images/glyphicons-halflings-regular.svg": "/build/images/glyphicons-halflings-regular.89889688.svg",
   "build/fonts/glyphicons-halflings-regular.ttf": "/build/fonts/glyphicons-halflings-regular.e18bbf61.ttf",
