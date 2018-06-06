@@ -11,13 +11,13 @@ group:
         deleted: 'Le groupe a été supprimé.'
 security:
     login:
-        username: 'Nom d\'utilisateur'
+        username: 'Nom d''utilisateur'
         password: 'Mot de passe'
         remember_me: 'Se souvenir de moi'
         submit: Connexion
 profile:
     show:
-        username: 'Nom d\'utilisateur'
+        username: 'Nom d''utilisateur'
         email: 'Adresse e-mail'
     edit:
         submit: 'Mettre à jour'
@@ -29,12 +29,12 @@ change_password:
         success: 'Le mot de passe a été modifié.'
 
 registration:
-    check_email: 'Un e-mail a été envoyé à l\'adresse %email%. Il contient un lien d\'activation sur lequel il vous faudra cliquer afin d\'activer votre compte.'
+    check_email: 'Un e-mail a été envoyé à l''adresse %email%. Il contient un lien d''activation sur lequel il vous faudra cliquer afin d''activer votre compte.'
     confirmed: 'Félicitations %username%, votre compte est maintenant activé.'
-    back: 'Retour à la page d\'origine.'
+    back: 'Retour à la page d''origine.'
     submit: 'Créer un compte'
     flash:
-        user_created: 'L\'utilisateur a été créé avec succès.'
+        user_created: 'L''utilisateur a été créé avec succès.'
     email:
         subject: 'Bienvenue %username% !'
         message: |
@@ -55,7 +55,7 @@ resetting:
         Si vous ne recevez pas un email, vérifiez votre dossier spam ou essayez à nouveau.
 
     request:
-        username: 'Nom d\'utilisateur ou adresse e-mail'
+        username: 'Nom d''utilisateur ou adresse e-mail'
         submit: 'Réinitialiser le mot de passe'
     reset:
         submit: 'Modifier le mot de passe'
@@ -78,7 +78,7 @@ layout:
     logged_in_as: 'Connecté en tant que %username%'
 form:
     group_name: 'Nom du groupe'
-    username: 'Nom d\'utilisateur'
+    username: 'Nom d''utilisateur'
     email: 'Adresse e-mail'
     current_password: 'Mot de passe actuel'
     password: 'Mot de passe'
