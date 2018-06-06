@@ -4,7 +4,7 @@ Encore
     .setOutputPath('web/build/')
     .setPublicPath('/build')
     .addEntry('bootstrap', './assets/scss/bootstrap.scss')
-    .addEntry('style', './assets/scss/main.scss')
+    .addEntry('style', './assets/scss/style.scss')
     .cleanupOutputBeforeBuild()
     .enableSourceMaps(!Encore.isProduction())
     .enableBuildNotifications()
