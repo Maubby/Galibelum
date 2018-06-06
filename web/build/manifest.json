@@ -1,11 +1,11 @@
 {
-  "web/style.js": "/web/style.js",
-  "web/style.css": "/web/style.css",
-  "web/bootstrap.js": "/web/bootstrap.js",
-  "web/bootstrap.css": "/web/bootstrap.css",
-  "web/fonts/glyphicons-halflings-regular.eot": "/web/fonts/glyphicons-halflings-regular.f4769f9b.eot",
-  "web/images/glyphicons-halflings-regular.svg": "/web/images/glyphicons-halflings-regular.89889688.svg",
-  "web/fonts/glyphicons-halflings-regular.ttf": "/web/fonts/glyphicons-halflings-regular.e18bbf61.ttf",
-  "web/fonts/glyphicons-halflings-regular.woff": "/web/fonts/glyphicons-halflings-regular.fa277232.woff",
-  "web/fonts/glyphicons-halflings-regular.woff2": "/web/fonts/glyphicons-halflings-regular.448c34a5.woff2"
+  "build/style.js": "/build/style.9e9f3052.js",
+  "build/style.css": "/build/style.9fc7742c.css",
+  "build/bootstrap.js": "/build/bootstrap.106ccd54.js",
+  "build/bootstrap.css": "/build/bootstrap.379bc1f4.css",
+  "build/fonts/glyphicons-halflings-regular.eot": "/build/fonts/glyphicons-halflings-regular.f4769f9b.eot",
+  "build/images/glyphicons-halflings-regular.svg": "/build/images/glyphicons-halflings-regular.89889688.svg",
+  "build/fonts/glyphicons-halflings-regular.ttf": "/build/fonts/glyphicons-halflings-regular.e18bbf61.ttf",
+  "build/fonts/glyphicons-halflings-regular.woff": "/build/fonts/glyphicons-halflings-regular.fa277232.woff",
+  "build/fonts/glyphicons-halflings-regular.woff2": "/build/fonts/glyphicons-halflings-regular.448c34a5.woff2"
 }
