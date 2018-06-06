@@ -6,19 +6,20 @@
  *
  * @category RegistrationType
  * @package  Type
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
-
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 /**
  * Registration type.
  *
- * @category Controller
- * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @category RegistrationType
+ * @package  Type
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 class RegistrationType extends AbstractType
 {
@@ -28,14 +29,28 @@ class RegistrationType extends AbstractType
      * @param FormBuilderInterface $builder The formBuilderInterface form
      * @param array                $options The attribute array
      *
-     * @return null
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName')
-            ->add('lastName')
-            ->add('phoneNumber');
+            ->add(
+                'firstName', TextType::class, array(
+                'label' => 'Prénom * :',
+                'attr' => array('class' => 'form-control'))
+            )
+            ->add(
+                'lastName', TextType::class, array(
+                'label' => "Nom * :",
+                'attr' => array('class' => 'form-control'))
+            )
+            ->add(
+                'phoneNumber', TelType::class, array(
+                    'label' => "Numéro de téléphone * :",
+                    'attr' => array('class' => 'form-control')
+                )
+            )
+            ->remove('username'); //we use email as login
     }
 
     /**

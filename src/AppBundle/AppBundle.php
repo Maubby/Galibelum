@@ -6,7 +6,7 @@
  *
  * @category AppBundle
  * @package  AppBundle
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 
 namespace AppBundle;
@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  *
  * @category AppBundle
  * @package  AppBundle
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 
 class AppBundle extends Bundle

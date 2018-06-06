@@ -6,7 +6,7 @@
  *
  * @category DefaultController
  * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Controller;
 
@@ -17,9 +17,9 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Default controller.
  *
- * @category Controller
+ * @category DefaultController
  * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 class DefaultController extends Controller
 {

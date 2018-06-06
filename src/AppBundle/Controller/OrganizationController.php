@@ -6,7 +6,7 @@
  *
  * @category OrganizationController
  * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Controller;
 
@@ -22,9 +22,9 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @Route("organization")
  *
- * @category Controller
+ * @category OrganizationController
  * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 class OrganizationController extends Controller
 {
@@ -62,11 +62,14 @@ class OrganizationController extends Controller
     public function newAction(Request $request)
     {
         $organization = new Organization();
+        $user = $this->getUser();
         $form = $this->createForm('AppBundle\Form\OrganizationType', $organization);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $organization->setUser($user);
+            $organization->setNameCanonical(strtolower($organization->getName()));
             $em->persist($organization);
             $em->flush();
 

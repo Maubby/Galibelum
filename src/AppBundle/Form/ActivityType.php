@@ -6,20 +6,21 @@
  *
  * @category ActivityType
  * @package  Type
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Activity type.
  *
- * @category Controller
- * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @category ActivityType
+ * @package  Type
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 class ActivityType extends AbstractType
 {
@@ -29,20 +30,20 @@ class ActivityType extends AbstractType
      * @param FormBuilderInterface $builder The formBuilderInterface form
      * @param array                $options The attribute array
      *
-     * @return null
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('type')
-            ->add('description')
-            ->add('date')
-            ->add('address')
-            ->add('mainGame')
-            ->add('urlVideo')
-            ->add('achievement')
-            ->add('socialLink');
+            ->add('name', TextareaType::class)
+            ->add('type', TextareaType::class)
+            ->add('description', TextareaType::class)
+            ->add('date', TextareaType::class)
+            ->add('address', TextareaType::class)
+            ->add('mainGame', TextareaType::class)
+            ->add('urlVideo', TextareaType::class)
+            ->add('achievement', TextareaType::class)
+            ->add('socialLink', TextareaType::class);
     }
 
     /**
@@ -50,7 +51,7 @@ class ActivityType extends AbstractType
      *
      * @param OptionsResolver $resolver The optionResolver class
      *
-     * @return null
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver)
     {

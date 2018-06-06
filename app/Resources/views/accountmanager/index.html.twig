@@ -29,6 +29,9 @@
                         <li>
                             <a href="{{ path('accountmanager_show', { 'id': accountManager.id }) }}">show</a>
                         </li>
+                        <li>
+                            <a href="{{ path('accountmanager_edit', { 'id': accountManager.id }) }}">edit</a>
+                        </li>
                     </ul>
                 </td>
             </tr>
@@ -36,5 +39,9 @@
         </tbody>
     </table>
 
-    
+    <ul>
+        <li>
+            <a href="{{ path('accountmanager_new') }}">Create a new accountManager</a>
+        </li>
+    </ul>
 {% endblock %}

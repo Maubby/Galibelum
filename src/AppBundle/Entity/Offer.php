@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Offer
@@ -12,12 +13,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Offer
 {
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->setStatus(0);
+    }
+
     /*
      * Relationship Mapping Metadata
      */
+
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\AccountManager", inversedBy="managerOffers")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $managerOffer;
 
@@ -43,6 +54,16 @@ class Offer
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=32)
+     *
+     * @Assert\NotBlank(
+     *      message = "Veuillez saisir un nom"
+     * )
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 32,
+     *      minMessage = "Votre nom doit contenir au minimum {{ limit }} caractères",
+     *      maxMessage = "Votre nom doit contenir au maximum {{ limit }} caractères"
+     * )
      */
     private $name;
 
@@ -57,6 +78,16 @@ class Offer
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     *
+     * @Assert\NotBlank(
+     *     message= "Veuillez détailler votre offre"
+     * )
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 250,
+     *      minMessage = "Votre description doit contenir au minimum {{ limit }} caractères",
+     *      maxMessage = "Votre description doit contenir au maximum {{ limit }} caractères"
+     * )
      */
     private $description;
 
@@ -64,6 +95,12 @@ class Offer
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="date")
+     *
+     * @Assert\NotBlank(
+     *     message="Veuillez saisir une date"
+     * )
+     * @Assert\Date()
+     *
      */
     private $date;
 
@@ -71,10 +108,20 @@ class Offer
      * @var int
      *
      * @ORM\Column(name="amount", type="integer")
+     *
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+     *
+     * @Assert\Range(
+     *      min = 1,
+     *     minMessage = "Veuillez saisir un montant minimal de 1€."
+     * )
      */
     private $amount;
 
-    /**
+    /***
      * @var int
      *
      * @ORM\Column(name="handlingFee", type="integer", nullable=true)
@@ -85,6 +132,14 @@ class Offer
      * @var int
      *
      * @ORM\Column(name="partnershipNumber", type="integer")
+     *
+     * @Assert\Type(
+     *     type="integer",
+     *     message="The value {{ value }} is not a valid {{ type }}."
+     * )
+     * @Assert\Range(
+     *      min = 0,
+     * )
      */
     private $partnershipNumber;
 

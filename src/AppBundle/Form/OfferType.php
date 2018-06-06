@@ -6,20 +6,23 @@
  *
  * @category OfferType
  * @package  Type
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 /**
  * Offer type.
  *
- * @category Controller
- * @package  Controller
- * @author   WildCodeSchool <www.wildcodeschool.fr>
+ * @category OfferType
+ * @package  Type
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 class OfferType extends AbstractType
 {
@@ -29,17 +32,44 @@ class OfferType extends AbstractType
      * @param FormBuilderInterface $builder The formBuilderInterface form
      * @param array                $options The attribute array
      *
-     * @return null
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('date')
-            ->add('amount')
-            ->add('partnershipNumber')
-            ->add('activity');
+            ->add(
+                'name', TextareaType::class, array(
+                    'attr' => array(
+                        'minlength' => 2, 'maxlength' => 32,
+                        'label' => 'name',
+                        'class' => 'form-control'))
+            )
+            ->add(
+                'description', TextareaType::class, array(
+                    'attr' => array('maxlength' => 250,
+                        'label' => 'description',
+                        'class' => 'form-control'))
+            )
+            ->add('date', DateType::class, array('data' => new \DateTime('now')))
+            ->add(
+                'amount', IntegerType::class,
+                array('attr' => array('min' => 1,
+                    'label' => 'amount',
+                    'class' => 'form-control'))
+            )
+            ->add(
+                'partnershipNumber', IntegerType::class,
+                array('attr' => array(
+                    'min' => 0,
+                    'label' => 'partnershipNumber',
+                    'class' => 'form-control'))
+            )
+            ->add(
+                'activity', TextareaType::class, array(
+                    'label' => "activity :",
+                    'attr' => array('class' => 'form-control'))
+            );
+
     }
 
     /**
@@ -47,13 +77,13 @@ class OfferType extends AbstractType
      *
      * @param OptionsResolver $resolver The optionResolver class
      *
-     * @return null
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
-            'data_class' => 'AppBundle\Entity\Offer'
+                'data_class' => 'AppBundle\Entity\Offer'
             )
         );
     }
@@ -67,6 +97,4 @@ class OfferType extends AbstractType
     {
         return 'appbundle_offer';
     }
-
-
 }

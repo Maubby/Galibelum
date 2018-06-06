@@ -36,5 +36,13 @@
         <li>
             <a href="{{ path('accountmanager_index') }}">Back to the list</a>
         </li>
+        <li>
+            <a href="{{ path('accountmanager_edit', { 'id': accountManager.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
     </ul>
 {% endblock %}
