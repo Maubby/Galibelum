@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Organization creation</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                {{ form_start(form) }}
+
+                <div class="form-group">
+                    {{ form_label(form.name) }}
+                    {{ form_widget(form.name) }}
+                    {{ form_errors(form.name) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.status) }}
+                    {{ form_widget(form.status) }}
+                    {{ form_errors(form.status) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.address) }}
+                    {{ form_widget(form.address) }}
+                    {{ form_errors(form.address) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.phoneNumber) }}
+                    {{ form_widget(form.phoneNumber) }}
+                    {{ form_errors(form.phoneNumber) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.email) }}
+                    {{ form_widget(form.email) }}
+                    {{ form_errors(form.email) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.relationNumber) }}
+                    {{ form_widget(form.relationNumber) }}
+                    {{ form_errors(form.relationNumber) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.userRole) }}
+                    {{ form_widget(form.userRole) }}
+                    {{ form_errors(form.userRole) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.description) }}
+                    {{ form_widget(form.description) }}
+                    {{ form_errors(form.description) }}
+                </div>
+
+                <input type="submit" value="Create" class="btn btn-primary">
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    <ul>
+        <li>
+            <a href="{{ path('organization_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}

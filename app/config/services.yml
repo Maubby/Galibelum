@@ -29,7 +29,24 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    AppBundle\DataFixtures\:
+        resource: '../../src/AppBundle/DataFixtures'
+        tags: ['doctrine.fixture.orm']
+
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+    app.form.registration:
+            class: AppBundle\Form\RegistrationType
+            tags:
+                - { name: form.type, alias: app_user_registration }
+    app.form.profile:
+            class: AppBundle\Form\ProfileType
+            tags:
+                - { name: form.type, alias: app_user_profile }
+    app.redirect_after_registration_subscriber:
+            class: AppBundle\EventListener\RedirectAfterRegistrationSubscriber
+            autowire: true
+            tags:
+                - { name: kernel.event_subscriber }

@@ -1,0 +1,48 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Modifier votre profil</h3>
+
+                {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+
+                <div class="form-group col-md-6">
+                    {{ form_label(form.firstName) }}
+                    {{ form_widget(form.firstName) }}
+                    {{ form_errors(form.firstName) }}
+                </div>
+                <div class="form-group col-md-6">
+                    {{ form_label(form.lastName) }}
+                    {{ form_widget(form.lastName) }}
+                    {{ form_errors(form.lastName) }}
+                </div>
+                <div class="form-group col-md-12">
+                    {{ form_label(form.email, 'Email  :')}}
+                    {{ form_widget(form.email, {'attr': {'class':'form-control' }}) }}
+                    {{ form_errors(form.email) }}
+                </div>
+                <div class="form-group col-md-12">
+                    {{ form_label(form.phoneNumber) }}
+                    {{ form_widget(form.phoneNumber) }}
+                    {{ form_errors(form.phoneNumber) }}
+                </div>
+                <div class="form-group col-md-12">
+                    {{ form_widget(form.plainPassword) }}
+                    {{ form_errors(form.plainPassword) }}
+                </div>
+
+                <div class="col-md-3 col-md-offset-5">
+                    <input class="btn btn-primary" type="submit" value="{{ 'Modifier'|trans }}" />
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+
+            <div class="col-md-offset-2 col-md-3">
+                <a href="https://placeholder.com"><img src="http://via.placeholder.com/350x450" alt="placeholder"></a>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

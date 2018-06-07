@@ -1,13 +1,59 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<html lang="fr">
+<head>
+    <!-- Meta -->
+    <meta charset="UTF-8">
+    <!-- maximum-scale=1.0 is now deprecated -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Wild Code School">
+    <meta name="description" content= "Galibelum est une plateforme web offrant des services pour l'eSport">
+    <meta name="keywords" content="Galibelum, eSport, Lille">
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+    <title>Galibelum - {% block title %}{% endblock %}</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ asset('build/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/bootstrap.css') }}" />
+    {% block stylesheets %}
+    {% endblock %}
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-default text-center">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <img src="https://i0.wp.com/gallibellum.fr/wp-content/uploads/2018/04/cropped-cropped-cropped-Logo-Fond-carré-transparent-e1523974513774.png?resize=180%2C180&ssl=1 180w"/>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Recherche structure</a></li>
+                    <li><a href="#">Contractualisation</a></li>
+                    <li><a href="#">Paiements</a></li>
+                    <li><a href="#">Ma marque</a></li>
+                    <li><a href="#">Mon compte</a></li>
+                    <li><a href="#">Déconnexion</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    {% block header %}
+    {% endblock %}
+</header>
+{% block body %}
+{% endblock %}
+<footer>
+    {% block footer %}
+    {% endblock %}
+</footer>
+{% block javascripts %}{% endblock %}
+</body>
 </html>
+
+
+
+
+
