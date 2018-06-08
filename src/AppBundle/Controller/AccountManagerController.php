@@ -62,7 +62,10 @@ class AccountManagerController extends Controller
     public function newAction(Request $request)
     {
         $accountManager = new Accountmanager();
-        $form = $this->createForm('AppBundle\Form\AccountManagerType', $accountManager);
+        $form = $this->createForm(
+            'AppBundle\Form\AccountManagerType',
+            $accountManager
+        );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -122,7 +125,10 @@ class AccountManagerController extends Controller
         $deleteForm
             = $this->_createDeleteForm($accountManager);
         $editForm
-            = $this->createForm('AppBundle\Form\AccountManagerType', $accountManager);
+            = $this->createForm(
+                'AppBundle\Form\AccountManagerType',
+                $accountManager
+            );
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

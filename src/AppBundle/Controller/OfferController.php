@@ -70,7 +70,10 @@ class OfferController extends Controller
             $em->persist($offer);
             $em->flush();
 
-            return $this->redirectToRoute('offer_show', array('id' => $offer->getId()));
+            return $this->redirectToRoute(
+                'offer_show', array(
+                'id' => $offer->getId())
+            );
         }
 
         return $this->render(
@@ -123,7 +126,10 @@ class OfferController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('offer_edit', array('id' => $offer->getId()));
+            return $this->redirectToRoute(
+                'offer_edit', array(
+                'id' => $offer->getId())
+            );
         }
 
         return $this->render(
