@@ -100,7 +100,6 @@ class Offer
      *     message="Veuillez saisir une date"
      * )
      * @Assert\Date()
-     *
      */
     private $date;
 

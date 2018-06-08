@@ -46,7 +46,8 @@ class ProfileType extends AbstractType
         );
 
         if (!empty($options['validation_groups'])) {
-            $constraintsOptions['groups'] = array(reset($options['validation_groups']));
+            $constraintsOptions['groups'] = array(
+                reset($options['validation_groups']));
         }
 
         $builder
@@ -71,7 +72,8 @@ class ProfileType extends AbstractType
                 'label' => 'form.email', 'translation_domain' => 'FOSUserBundle')
             )
 
-            ->add('plainPassword', RepeatedType::class, array(
+            ->add(
+                'plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'options' => array(
                     'translation_domain' => 'FOSUserBundle',
@@ -80,10 +82,13 @@ class ProfileType extends AbstractType
                         'class' => 'form-control',
                     ),
                 ),
-                'first_options' => array('label' => 'form.new_password'),
-                'second_options' => array('label' => 'form.new_password_confirmation'),
+                'first_options' => array(
+                    'label' => 'form.new_password'),
+                'second_options' => array(
+                    'label' => 'form.new_password_confirmation'),
                 'invalid_message' => 'fos_user.password.mismatch',
-            ))
+                )
+            )
 
             ->remove('username') //we use email as login
             ->remove('current_password');
