@@ -20,7 +20,7 @@
                     {{ form_errors(form.lastName) }}
                 </div>
                 <div class="form-group col-md-12">
-                    {{ form_label(form.email, 'Email * :')}}
+                    {{ form_label(form.email, 'Email :')}}
                     {{ form_widget(form.email, {'attr': {'class':'form-control' }}) }}
                     {{ form_errors(form.email) }}
                 </div>
@@ -30,15 +30,20 @@
                     {{ form_errors(form.phoneNumber) }}
                 </div>
                 <div class="col-md-12">
-                    {{ form_label(form.plainPassword.first, 'Mot de passe * :') }}
+                    {{ form_label(form.plainPassword.first, 'Mot de passe :') }}
                     {{ form_widget(form.plainPassword.first, {'attr': {'class':'form-control' }}) }}
                     {{ form_errors(form.plainPassword.first) }}
                 </div>
                 <div class="col-md-12">
-                    {{ form_label(form.plainPassword.second, 'Confirmation du mot de passe * :') }}
+                    {{ form_label(form.plainPassword.second, 'Confirmation du mot de passe :') }}
                     {{ form_widget(form.plainPassword.second, {'attr': {'class':'form-control' }}) }}
                 </div>
-                <div class="col-md-12"><p>*Champs Obligatoires</p></div>
+                <div class="col-md-12">
+                    {{ form_widget(form.cgu) }}
+                    {{ form_label(form.cgu) }}
+                    {{ form_errors(form.cgu) }}
+                </div>
+
                 <div class="col-md-3 col-md-offset-3">
                     <input class="btn btn-primary" type="submit" value="{{ "S'inscrire"|trans }}" />
                 </div>

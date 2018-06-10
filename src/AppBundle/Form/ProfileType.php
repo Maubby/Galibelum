@@ -38,17 +38,17 @@ class ProfileType extends AbstractType
         $builder
             ->add(
                 'firstName', TextType::class, array(
-                    'label' => 'Prénom * :',
+                    'label' => 'Prénom :',
                     'attr' => array('class' => 'form-control'))
             )
             ->add(
                 'lastName', TextType::class, array(
-                    'label' => "Nom * :",
+                    'label' => "Nom :",
                     'attr' => array('class' => 'form-control'))
             )
             ->add(
                 'phoneNumber', TelType::class, array(
-                    'label' => "Numéro de téléphone * :",
+                    'label' => "Numéro de téléphone :",
                     'attr' => array('class' => 'form-control')
                 )
             )
