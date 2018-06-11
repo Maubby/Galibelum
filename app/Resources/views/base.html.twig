@@ -13,9 +13,8 @@
     <title>Galibelum - {% block title %}{% endblock %}</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ asset('build/bootstrap.379bc1f4.css') }}" />
-    <link rel="stylesheet" href="{{ asset('build/font-awesome.57e112ec.css') }}" />
-    <link rel="stylesheet" href="{{ asset('build/style.8c0f9653.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/vendor.css') }}" />
+    <link rel="stylesheet" href="{{ asset('build/style.css') }}">
     {% block stylesheets %}
     {% endblock %}
     <!-- Favicons -->
@@ -26,7 +25,7 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <img src="https://i0.wp.com/gallibellum.fr/wp-content/uploads/2018/04/cropped-cropped-cropped-Logo-Fond-carré-transparent-e1523974513774.png?resize=180%2C180&ssl=1 180w"/>
+                <img src="https://i0.wp.com/gallibellum.fr/wp-content/uploads/2018/04/cropped-cropped-cropped-Logo-Fond-carré-transparent-e1523974513774.png?resize=140%2C70&ssl=1"/>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
@@ -49,6 +48,9 @@
     {% block footer %}
     {% endblock %}
 </footer>
+<!-- JS Webpack's vendor including Bootstrap.js and JQuery.js shared entry -->
+    <script src="{{ asset('build/manifest.js') }}"></script>
+    <script src="{{ asset('build/vendor.js') }}"></script>
 {% block javascripts %}{% endblock %}
 </body>
 </html>
