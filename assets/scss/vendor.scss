@@ -1,0 +1,13 @@
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-regular.scss";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-brands.scss";
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:300,500,600,700');
+
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+$fa-font-path : "~@fortawesome/fontawesome-free-webfonts/webfonts";
+$font-family-base: "Rajdhani", sans-serif;
+$bg-color: #F5F5F5;
+$brand-primary: darken(#428bca, 20%);
+
+
