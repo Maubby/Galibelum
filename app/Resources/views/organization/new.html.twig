@@ -14,11 +14,13 @@
                     {{ form_errors(form.name) }}
                 </div>
 
+                {% if  choose == 0 %}
                 <div class="form-group">
                     {{ form_label(form.status) }}
                     {{ form_widget(form.status) }}
                     {{ form_errors(form.status) }}
                 </div>
+                {% endif %}
 
                 <div class="form-group">
                     {{ form_label(form.address) }}
