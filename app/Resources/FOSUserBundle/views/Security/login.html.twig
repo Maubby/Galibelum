@@ -16,27 +16,40 @@
                         {% if csrf_token %}
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
                         {% endif %}
+                        
+                        <-- Enter email -->
                         <h3 class="col-md-12 text-center"> Entrez vos identifiants</h3>
-
                         <div class="col-md-12">
                             <label for="username" class="form-group">{{ 'Email :'|trans }}</label>
                             <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username"/>
                         </div>
-
+                        <-- End email -->
+                        
+                        <-- Enter password -->
                         <div class="col-md-12">
                             <label for="password" class="form-group">{{ 'Mot de passe :'|trans }}</label>
                             <input type="password" class="form-control" id="password"  name="_password" required="required" autocomplete="current-password"/>
                         </div>
+                        <-- End password -->
+                        
+                        <-- Forgotten password -->
                         <div class="col-md-12">
                             <a href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié</a>
                         </div>
+                        <-- End forgotten password -->
+                        
+                        <-- Ticking box to keep the client's information -->
                         <div class="col-md-12">
                             <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
                             <label for="remember_me">{{ 'Mémoriser mes identifiants'|trans }}</label>
                         </div>
+                        <-- End ticking box -->
+                        
+                        <-- Submit button -->
                         <div class="col-md-12 text-center">
                             <input type="submit" id="_submit" name="_submit" class="btn btn-primary" value="{{ 'Connecter'|trans }}"/>
                         </div>
+                        <-- End submit button -->
                     </form>
                 </div>
                 <div class="col-md-6 text-center hidden-xs">
