@@ -1,17 +1,25 @@
-let Encore = require('@symfony/webpack-encore');
+var Encore = require('@symfony/webpack-encore');
+
+// Including CopyWebpackPlugin to manage static images
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 Encore
     .setOutputPath('web/build/')
     .setPublicPath('/build')
-    .createSharedEntry('vendor', ['jquery','bootstrap-sass', 'bootstrap-sass/assets/stylesheets/_bootstrap.scss',])
-    .addStyleEntry('style', './assets/scss/style.scss')
-    .autoProvidejQuery()
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
-    .enableSassLoader(function(sassOptions) {}, {
-        resolveUrlLoader: false
-    })
+    .enableSassLoader()
     .enableSourceMaps(!Encore.isProduction())
-    .enableVersioning();
+    .autoProvidejQuery()
+    .enableVersioning()
+    .createSharedEntry('vendor', ['jquery', 'bootstrap-sass', 'bootstrap-sass/assets/stylesheets/_bootstrap.scss'])
+    .addStyleEntry('style', './assets/scss/style.scss')
+    .addEntry('main', './assets/js/main.js')
+    // Targeting images repository
+    .addPlugin(new CopyWebpackPlugin([
+        { from: './assets/images', to: 'images'}
+    ]));
+
 
 module.exports = Encore.getWebpackConfig();

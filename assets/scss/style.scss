@@ -1,3 +1,14 @@
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-regular.scss";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-brands.scss";
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:300,500,600,700');
+
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+$fa-font-path : "~@fortawesome/fontawesome-free-webfonts/webfonts";
+$font-family-base: "Rajdhani", sans-serif;
+$bg-color: #F5F5F5;
+$brand-primary: darken(#428bca, 20%);
 
 /* Stylizing titles */
 h1 {
@@ -107,19 +118,30 @@ h5 {
   margin-bottom: 0;
 }
 
+.navbar-brand > img {
+  margin-top: -8%;
+}
+
 .navbar-collapse.collapse {
-  display: block !important;
   padding-top: 1%;
-  overflow: visible !important;
-  padding-left: 40%;
 }
 
-.container > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-header, .container-fluid > .navbar-collapse {
-  margin-right: 5%;
-  margin-left: 2%;
+
+@media screen and (min-width: 541px) and (max-width: 1060px) {
+  .container > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-header, .container-fluid > .navbar-collapse {
+    margin-right: 0%;
+    margin-left: 0%;
+  }
 }
 
-/* body custom CSS*/
+@media screen and (max-width: 540px) {
+  .navbar-brand > img {
+    margin-top: -12%;
+  }
+}
+
+
+/* Inscription choose custom CSS*/
 
 .degradeblue {
   background: linear-gradient(to right, #137faf, #86ccc2);
@@ -154,8 +176,8 @@ p.space {
   padding-bottom: 2%;
 }
 
-p.grey {
-  color: #b5b5b5;
+.grey {
+  color: #999999;
 }
 
 p.size {
@@ -173,4 +195,9 @@ p.size {
   background-image:url(https://i1.wp.com/gallibellum.fr/wp-content/uploads/2018/03/Slider-inscription-gallibelluM.jpg);
   padding-top: 5%;
   padding-bottom: 5%;
+}
+
+a.btn-custom {
+  color: #ffffff;
+  font-weight: bold;
 }

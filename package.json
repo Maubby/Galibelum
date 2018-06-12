@@ -1,34 +1,43 @@
 {
   "name": "galibelum",
   "version": "1.0.0",
-  "description": "============",
-  "main": "index.js",
+  "description": "A Symfony 3.4.11 Project for Galibelum WCS",
+  "main": "webpack.config.js",
   "directories": {
     "test": "tests"
   },
+  "dependencies": {
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
+    "@symfony/webpack-encore": "^0.20.1",
+    "bootstrap-loader": "^3.0.0",
+    "bootstrap-sass": "^3.3.7",
+    "copy-webpack-plugin": "^4.5.1",
+    "css-loader": "^0.28.11",
+    "jquery": "^3.3.1",
+    "node-sass": "^4.9.0",
+    "resolve-url-loader": "^2.3.0",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "url-loader": "^1.0.1",
+    "webpack-notifier": "^1.6.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev-server": "./node_modules/.bin/encore dev-server",
+    "dev": "./node_modules/.bin/encore dev",
+    "webpack": "./node_modules/.bin/encore dev --watch",
+    "prod": "./node_modules/.bin/encore production"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Maubby/Galibelum.git"
   },
-  "author": "Wild Code Scholl",
+  "keywords": [
+    "Galibelum"
+  ],
+  "author": "Wild Code School",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Maubby/Galibelum/issues"
   },
-  "homepage": "https://github.com/Maubby/Galibelum#readme",
-  "dependencies": {
-    "@symfony/webpack-encore": "^0.20.1",
-    "bootstrap-sass": "^3.3.7",
-    "font-awesome": "^4.7.0",
-    "jquery": "^3.3.1",
-    "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.3",
-    "webpack-notifier": "^1.6.0"
-  },
-  "devDependencies": {
-    "webpack-notifier": "^1.6.0"
-  }
+  "homepage": "https://github.com/Maubby/Galibelum#readme"
 }
