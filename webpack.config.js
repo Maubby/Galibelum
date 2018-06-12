@@ -15,6 +15,7 @@ Encore
     .enableVersioning()
     .createSharedEntry('vendor', ['jquery', 'bootstrap-sass', 'bootstrap-sass/assets/stylesheets/_bootstrap.scss'])
     .addStyleEntry('style', './assets/scss/style.scss')
+    .addStyleEntry('waiting', './assets/scss/waiting.scss')
     .addEntry('main', './assets/js/main.js')
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
