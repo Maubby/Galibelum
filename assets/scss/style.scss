@@ -1,8 +1,203 @@
-@import '~bootstrap-sass/assets/stylesheets/bootstrap';
-@import '~font-awesome/scss/font-awesome.scss';
-$fa-font-path: "~font-awesome/fonts";
-$brand-primary: darken(#428bca, 20%);
-body{
-  color: $brand-primary;
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-regular.scss";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-brands.scss";
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:300,500,600,700');
 
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+$fa-font-path : "~@fortawesome/fontawesome-free-webfonts/webfonts";
+$font-family-base: "Rajdhani", sans-serif;
+$bg-color: #F5F5F5;
+$brand-primary: darken(#428bca, 20%);
+
+/* Stylizing titles */
+h1 {
+  font-size: 52px;
+  text-transform: none;
+  font-style: normal;
+  color: #30aae1;
+  font-weight: 900;
+  font-family:rajdhani sans-serif semi-bold;
+}
+
+h2 {
+  font-size: 43px;
+  text-transform: none;
+  font-style: normal;
+  color: #30aae1;
+  font-weight: 900;
+  font-family:rajdhani sans-serif semi-bold;
+}
+
+h3 {
+  font-size: 34px;
+  text-transform: none;
+  font-style: normal;
+  color: #30aae1;
+  font-weight: 900;
+  font-family:rajdhani sans-serif semi-bold;
+}
+
+h4 {
+  font-size: 29px;
+  text-transform: none;
+  font-style: normal;
+  color: #30aae1;
+  font-weight: 900;
+  font-family:rajdhani sans-serif semi-bold;
+}
+
+h5 {
+  font-size: 25px;
+  text-transform: none;
+  font-style: normal;
+  color: #30aae1;
+  font-weight: 900;
+  font-family:rajdhani sans-serif semi-bold;
+}
+
+/* Import Font */
+@font-face {
+  font-family:rajdhani sans-serif normal;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family:rajdhani sans-serif medium;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family:rajdhani sans-serif normal ;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Color typo and page */
+.main-color {
+  color: rgb(43,109,175);
+}
+
+.seconde-color {
+  color: rgb(41,117,181);
+}
+
+.three-color {
+  color: rgb(32,127,188);
+}
+
+.four-color {
+  color: rgb(22,138,196);
+}
+
+.five-color {
+  color: rgb(13,149,203);
+}
+
+.six-color {
+  color: rgb(14,160,204);
+}
+
+.seven-color {
+  color: rgb(13,188,208);
+}
+
+.eight-color {
+  color: rgb(55,195,203);
+}
+
+.nine-color {
+  color: rgb(91,199,194);
+}
+
+/* NavBar custom CSS*/
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.navbar-brand > img {
+  margin-top: -8%;
+}
+
+.navbar-collapse.collapse {
+  padding-top: 1%;
+}
+
+
+@media screen and (min-width: 541px) and (max-width: 1060px) {
+  .container > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-header, .container-fluid > .navbar-collapse {
+    margin-right: 0%;
+    margin-left: 0%;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .navbar-brand > img {
+    margin-top: -12%;
+  }
+}
+
+
+/* Inscription choose custom CSS*/
+
+.degradeblue {
+  background: linear-gradient(to right, #137faf, #86ccc2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.degradered {
+  background: linear-gradient( to right, #fad27b,#f9867d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.backred {
+  background-image: linear-gradient( to right, #fad27b, #f9867d);
+}
+
+.backblue {
+  background-image: linear-gradient( to right, #86ccc2 , #137faf);
+}
+
+.center {
+  text-align: center;
+}
+
+.btn{
+  padding: 7px 30%;
+}
+
+p.space {
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+.grey {
+  color: #999999;
+}
+
+p.size {
+  font-size: 1.5em;
+}
+
+.box {
+  background-color: rgba(252, 252, 252, .95);
+  padding: 5px 5px 20px 5px;
+  border-radius: 7px;
+  margin-top: 20px;
+}
+
+.backgroundimg {
+  background-image:url(https://i1.wp.com/gallibellum.fr/wp-content/uploads/2018/03/Slider-inscription-gallibelluM.jpg);
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+a.btn-custom {
+  color: #ffffff;
+  font-weight: bold;
 }

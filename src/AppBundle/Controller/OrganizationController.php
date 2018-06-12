@@ -53,13 +53,14 @@ class OrganizationController extends Controller
      * Creates a new organization entity.
      *
      * @param Request $request New posted info
+     * @param $choose organization or company
      *
-     * @Route("/new",  name="organization_new")
+     * @Route("/new/choose{choose}",  name="organization_new")
      * @Method({"GET", "POST"})
      *
      * @return Response A Response instance
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request,int $choose=NULL )
     {
         $organization = new Organization();
         $user = $this->getUser();
@@ -75,7 +76,8 @@ class OrganizationController extends Controller
 
             return $this->redirectToRoute(
                 'organization_show',
-                array('id' => $organization->getId())
+                array('id' => $organization->getId(),
+                )
             );
         }
 
@@ -83,6 +85,7 @@ class OrganizationController extends Controller
             'organization/new.html.twig', array(
             'organization' => $organization,
             'form' => $form->createView(),
+            'choose'=>$choose,
             )
         );
     }
@@ -123,7 +126,10 @@ class OrganizationController extends Controller
     public function editAction(Request $request, Organization $organization)
     {
         $deleteForm = $this->_createDeleteForm($organization);
-        $editForm = $this->createForm('AppBundle\Form\OrganizationType', $organization);
+        $editForm = $this->createForm(
+            'AppBundle\Form\OrganizationType',
+            $organization
+        );
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

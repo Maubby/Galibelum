@@ -154,7 +154,7 @@ class Organization
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="string", length=32)
+     * @ORM\Column(name="status", type="string", length=32, nullable=true)
      *
      * @Assert\Type("string")
      * @Assert\NotBlank(

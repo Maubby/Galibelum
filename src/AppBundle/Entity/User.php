@@ -55,6 +55,12 @@ class User extends BaseUser
      */
     private $phoneNumber;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="cgu", type="boolean")
+     */
+    private $cgu;
 
     /**
      * Get id
@@ -182,5 +188,30 @@ class User extends BaseUser
         $this->setUsername($email);
 
         return $this;
+    }
+
+
+    /**
+     * Set cgu.
+     *
+     * @param bool $cgu
+     *
+     * @return User
+     */
+    public function setCgu($cgu)
+    {
+        $this->cgu = $cgu;
+
+        return $this;
+    }
+
+    /**
+     * Get cgu.
+     *
+     * @return bool
+     */
+    public function getCgu()
+    {
+        return $this->cgu;
     }
 }

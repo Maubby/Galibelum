@@ -14,6 +14,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 /**
  * Registration type.
  *
@@ -36,19 +37,25 @@ class RegistrationType extends AbstractType
         $builder
             ->add(
                 'firstName', TextType::class, array(
-                'label' => 'Prénom * :',
+                'label' => 'Prénom :',
                 'attr' => array('class' => 'form-control'))
             )
             ->add(
                 'lastName', TextType::class, array(
-                'label' => "Nom * :",
+                'label' => "Nom :",
                 'attr' => array('class' => 'form-control'))
             )
             ->add(
                 'phoneNumber', TelType::class, array(
-                    'label' => "Numéro de téléphone * :",
-                    'attr' => array('class' => 'form-control')
-                )
+                    'label' => "Numéro de téléphone :",
+                    'attr' => array('class' => 'form-control'))
+            )
+            ->add(
+                'cgu', CheckboxType::class, array(
+                    'label' => "J'ai lu et j'accepte les
+                     conditions générales d'utilisation",
+                    'required' => true
+                    )
             )
             ->remove('username'); //we use email as login
     }
