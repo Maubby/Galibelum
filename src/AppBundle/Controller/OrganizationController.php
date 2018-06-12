@@ -50,21 +50,6 @@ class OrganizationController extends Controller
     }
 
     /**
-     * Lists all bubulles
-     *
-     * @Route("/dashboard",    name="dashboard_index")
-     * @Method("GET")
-     *
-     * @return Response A Response instance
-     */
-    public function dashboardAction()
-    {
-        return $this->render(
-            'dashboard/index.html.twig'
-        );
-    }
-
-    /**
      * Creates a new organization entity.
      *
      * @param Request $request New posted info
@@ -75,7 +60,7 @@ class OrganizationController extends Controller
      *
      * @return Response A Response instance
      */
-    public function newAction(Request $request,int $choose )
+    public function newAction(Request $request,int $choose=NULL )
     {
         $organization = new Organization();
         $user = $this->getUser();
