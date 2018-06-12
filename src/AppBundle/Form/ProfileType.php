@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 /**
- * Profile type.
+ * ProfileController type.
  *
  * @category ProfileType
  * @package  Type
