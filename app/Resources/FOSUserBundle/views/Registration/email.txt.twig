@@ -1,0 +1,126 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% block subject %}Confirmation inscription Galibelum{% endblock %}
+
+{% block body_text %}
+{%- autoescape false -%}
+{{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
+{%- endautoescape -%}
+{% endblock %}
+
+{% block body_html %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Email Confirmation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<!-- start body -->
+<body style="display: block; margin-left: auto; margin-right: auto; width: 40%;">
+<div class="container" style="background-color: #fcfcfc;">
+    <div style="width: 100%">
+        <div>
+            <div style="text-align: center;">
+                <div style="text-align: center;">
+                    <div>
+                        <div style="text-align: center; vertical-align: top;"></div>
+                    </div>
+                </div>
+                <div style="width: 100%;">
+                    <div>
+                        <div style="text-align: center; vertical-align: top; margin-bottom: -50px;">
+                            <img src="https://i1.wp.com/gallibellum.fr/wp-content/uploads/2018/05/cropped-Logo-Galibelum-Carr%C3%A9.png?fit=350%2C350&ssl=1" alt="Logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <div style="text-align: center;">
+            <div style="text-align: center;">
+                <div>
+                    <div style="text-align: center; vertical-align: top">
+                        <div style="width: 100%;">
+                            <div>
+                                <div style="padding: 36px 24px 0; border-top: 3px solid rgb(13, 188, 208);">
+                                    <h1 style="margin: 0; font-size: 32px; font-weight: 700; line-height: 48px;">Bienvenue {{user.firstName}} {{user.lastName}}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <div  style="text-align: center;">
+            <div  style="text-align: center;">
+                <div>
+                    <div style="text-align: center; vertical-align: top">
+                        <div style="max-width: 100%;">
+                            <div>
+                                <div style="padding: 24px; font-size: 16px; line-height: 24px;">
+                                    <div style="margin: 0;">
+                                        <p>
+                                            Merci de vous être inscrit(e) sur Galibelum. <br>
+                                            Nous sommes ravis de vous compter parmi nous ! <br>
+                                            Pour activer votre compte, veuillez cliquer sur le lien d'activation ci-dessous :
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- start button confirmation-->
+    <div>
+        <div style="text-align: left; background-color: #ffffff;">
+            <div style="width: 100%;">
+                <div>
+                    <div style="padding: 12px; text-align: center; background-color: #ffffff;">
+                        <div style="text-align: center;">
+                            <div style="text-align: center;">
+                                <div style="border-radius: 6px; text-align: center; background-color: rgb(13, 188, 208); margin-left: 25%; margin-right: 25%;">
+                                    <a href="{{ confirmationUrl }}" target="_blank" style="display: inline-block; padding: 16px 36px; font-size: 16px; color: #ffffff;">Activez votre compte</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end button confirmation-->
+
+    <div>
+        <div style="text-align: center;">
+            <div style="text-align: center;">
+                <div>
+                    <div style="text-align: center; vertical-align: top;">
+                        <div style="width: 100%;">
+                            <div>
+                                <div style="padding: 24px; font-size: 16px; line-height: 24px; text-align: center">
+                                    <div style="margin: 0;">Si cela ne fonctionne pas, copiez et collez le lien dans votre navigateur :</div>
+                                    <div style="margin: 0;"><a href="https://sendgrid.com" target="_blank">{{ confirmationUrl }}</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock %}
