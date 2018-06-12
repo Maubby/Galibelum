@@ -4,3 +4,7 @@ app:
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_user_profile_edit:
+    defaults: { _controller: AppBundle:Profile:edit }
+    path: /profile/edit
