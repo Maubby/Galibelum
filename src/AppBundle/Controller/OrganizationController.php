@@ -44,7 +44,29 @@ class OrganizationController extends Controller
 
         return $this->render(
             'organization/index.html.twig', array(
-            'organizations' => $organizations,
+                'organizations' => $organizations,
+            )
+        );
+    }
+
+    /**
+     * Lists all organization entities.
+     *
+     * @Route("/dashboard",    name="dashboard_index")
+     * @Method("GET")
+     */
+    public function dashboardAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $organization = $em->getRepository('AppBundle:Organization')->findby(array('id' => $this->getUser()));
+        $activities = $em->getRepository('AppBundle:Activity')->findby(array('organizationActivities' => $organization));
+        $offers = $em->getRepository('AppBundle:Offer')->findby(array('activity' => $activities));
+
+        return $this->render(
+            'dashboard/index.html.twig', array(
+                'organization' => $organization,
+                'activities' => $activities,
+                'offers' => $offers,
             )
         );
     }
@@ -53,7 +75,7 @@ class OrganizationController extends Controller
      * Creates a new organization entity.
      *
      * @param Request $request New posted info
-     * @param $choose organization or company
+     * @param int $choose organization or company
      *
      * @Route("/new/choose{choose}",  name="organization_new")
      * @Method({"GET", "POST"})
@@ -106,8 +128,8 @@ class OrganizationController extends Controller
 
         return $this->render(
             'organization/show.html.twig', array(
-            'organization' => $organization,
-            'delete_form' => $deleteForm->createView(),
+                'organization' => $organization,
+                'delete_form' => $deleteForm->createView(),
             )
         );
     }
@@ -143,9 +165,9 @@ class OrganizationController extends Controller
 
         return $this->render(
             'organization/edit.html.twig', array(
-            'organization' => $organization,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                'organization' => $organization,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
             )
         );
     }

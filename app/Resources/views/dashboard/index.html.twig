@@ -1,0 +1,91 @@
+{# app/Resources/default/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard - Structure{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/dashboard.css') }}">
+{% endblock %}
+{% block body %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <img src="http://via.placeholder.com/150">
+                        <ul class="list-unstyled">
+                            {% for organization in organization %}
+                                <li>{{ organization.name }}</li>
+                                <li>{{ organization.phoneNumber }}</li>
+                                <li>{{ organization.email }}</li>
+                                <li>{{ organization.description }}</li>
+                                <li>{{ organization.userRole }}</li>
+                                <li>{{ organization.status }}</li>
+                                <li>{{ organization.address }}</li>
+                                <li>{{ organization.relationNumber }}</li>
+
+                                <a href="{{ path('organization_edit', { 'id': organization.id }) }}" class="btn btn-primary">edit</a>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div id="carousel-example-generic" class="carousel slide vertical" data-ride="carousel">
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        {% for activity in activities %}
+                            <div class="active item">
+                                <ul class="list-unstyled">
+                                    <li>{{ activity.name }}</li>
+                                    <li><a href="{{ path('activity_show', { 'id': activity.id }) }}" class="btn btn-primary">Plus de détails</a></li>
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a href="{{ path('activity_new') }}" class="btn btn-primary">Ajouter une Activitée</a>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div id="carousel-example-generic" class="carousel slide vertical" data-ride="carousel">
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        {% for offer in offers %}
+                            <div class="active item">
+                                <ul class="list-unstyled">
+                                    <li>{{ offer.name }}</li>
+                                    <li><a href="{{ path('offer_show', { 'id': offer.id }) }}" class="btn btn-primary">Plus de détails</a></li>
+                                </ul>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a href="{{ path('offer_new') }}" class="btn btn-primary">Ajouter une Offre</a>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
