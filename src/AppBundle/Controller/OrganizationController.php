@@ -77,12 +77,12 @@ class OrganizationController extends Controller
      * @param Request $request New posted info
      * @param int $choose organization or company
      *
-     * @Route("/new/choose{choose}",  name="organization_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new/choose{choose}", name="organization_new")
+     * @Method({"GET",               "POST"})
      *
      * @return Response A Response instance
      */
-    public function newAction(Request $request,int $choose=NULL )
+    public function newAction(Request $request,int $choose=null )
     {
         $organization = new Organization();
         $user = $this->getUser();
