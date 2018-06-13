@@ -1,0 +1,59 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+label {
+  margin-top: 15px;
+}
+
+a {
+  padding-top: 10px;
+}
+
+input:-webkit-autofill {
+
+  -webkit-box-shadow: inset 0 0 0px 9999px white;
+}
+
+/* Background image */
+.backgroundimg {
+  background-image:url(https://i1.wp.com/gallibellum.fr/wp-content/uploads/2018/03/Slider-inscription-gallibelluM.jpg);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Form Sign in */
+.box {
+  background-color: rgba(38, 38, 38, .8);
+  padding: 5px 5px 20px 5px;
+  border-radius: 7px;
+  margin-top: 20px;
+}
+
+.forgotten-password {
+  padding-top: 5px;
+}
+
+.white-color {
+  color: white;
+}
+
+.orange-color {
+  color: #fad27b;
+}
+
+/* Logo Galibelum white */
+.logo-galibelum-blanc {
+  width: 400px;
+  padding-top: 10px;
+}
+
+@media (max-width: 843px) {
+  .logo-galibelum-blanc {
+    width: 360px;
+    padding-top: 35px;
+  }
+}

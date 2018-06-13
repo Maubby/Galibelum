@@ -188,18 +188,10 @@ class Organization
     private $address;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="relationNumber", type="integer")
+     * @ORM\Column(name="relationNumber", type="string", length=32)
      *
-     * @Assert\Type(
-     *     type="integer",
-     *     message="The value {{ value }} is not a valid {{ type }}."
-     * )
-     * @Assert\Range(
-     *     min = 1,
-     *     minMessage = "Veuillez saisir le nombre d'employés"
-     * )
      */
     private $relationNumber;
 
@@ -414,30 +406,6 @@ class Organization
     }
 
     /**
-     * Set relationNumber
-     *
-     * @param integer $relationNumber
-     *
-     * @return organization
-     */
-    public function setRelationNumber($relationNumber)
-    {
-        $this->relationNumber = $relationNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get relationNumber
-     *
-     * @return int
-     */
-    public function getRelationNumber()
-    {
-        return $this->relationNumber;
-    }
-
-    /**
      * Set isActive
      *
      * @param integer $isActive
@@ -549,5 +517,29 @@ class Organization
     public function getOrganizationActivity()
     {
         return $this->organizationActivity;
+    }
+
+    /**
+     * Set relationNumber.
+     *
+     * @param string $relationNumber
+     *
+     * @return Organization
+     */
+    public function setRelationNumber($relationNumber)
+    {
+        $this->relationNumber = $relationNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get relationNumber.
+     *
+     * @return string
+     */
+    public function getRelationNumber()
+    {
+        return $this->relationNumber;
     }
 }
