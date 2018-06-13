@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="{{ asset('build/vendor.css') }}">
     <link rel="stylesheet" href="{{ asset('build/style.css') }}">
     {% block stylesheets %}
-
     {% endblock %}
 
     <!-- Favicons -->
@@ -35,7 +34,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">
-                    <img src="https://i0.wp.com/gallibellum.fr/wp-content/uploads/2018/04/cropped-cropped-cropped-Logo-Fond-carré-transparent-e1523974513774.png?resize=140,50&ssl=1 300w"/>
+                    <img src="https://i0.wp.com/gallibellum.fr/wp-content/uploads/2018/04/cropped-cropped-cropped-Logo-Fond-carré-transparent-e1523974513774.png?resize=140,50&ssl=1" alt="logo Galibelum"/>
                 </a>
             </div>
 
@@ -45,9 +44,16 @@
                     <li><a href="#">Recherche structure</a></li>
                     <li><a href="#">Contractualisation</a></li>
                     <li><a href="#">Paiements</a></li>
-                    <li><a href="#">Ma marque</a></li>
-                    <li><a href="#">Mon compte</a></li>
-                    <li><a href="#">Déconnexion</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ma Structure <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Mes Activités</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Mes Offres</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ path('fos_user_profile_edit') }}">Mon compte</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
