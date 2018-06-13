@@ -5,53 +5,52 @@
 
 
 {% block body %}
-    <main>
-        <!-- Display waiting logo and message -->
-        <section>
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-                        <div class="box-shadow-waiting">
-                            <div class="row">
-                                <div class="col-md-10 col-md-offset-1">
-                                    <div class="box-waiting">
-                                        <div class="row">
-                                            <figure class="figure-waiting">
-                                        <img class="col-md-4 col-sm-12 col-xs-12" src="{{ asset('build/images/waiting-page.png') }}"
-                                             alt="Inscription waited to be validated by Galibelum">
+    <!-- Waiting Section -->
+    <section id="study" class="study text-center wow fadeIn"  data-wow-duration="2s" data-wow-dealy="1.5s">
+        <div class="container">
+            <div class="row">
+                <div class="galibelum_waiting_inscription_picture">
+                    <!-- Page title -->
+                    <div class="galibelum">
+                        <h2>Inscription en cours de validation</h2>
+                        <div class="separator"></div>
+                    </div>
 
-                                        <figcaption class="col-md-6 col-sm-12 col-xs-12 center">
-                                            Dossier en cours de validation
-                                        </figcaption>
-                                            </figure>
-                                        </div>
-                                        <p class="center">Votre dossier est en cours de validation. Vous
-                                            recevrez une notification par email dès que votre compte aura
-                                            été validé par l'un de nos managers, dans un délai maximum de
-                                            48h.
-                                        </p>
-                                    </div>
+                    <!-- Text center of the screen -->
+                    <div class="col-sm-6">
+                        <div class="waiting_text_background">
+                            <div class="waiting_slider">
+                                <div class="item">
+                                    <img src="{{ asset('build/images/waiting-page.png') }}"
+                                         alt="Inscription en cours de validation"><br><br>
+                                    <p>Vous recevrez une notification par email dès que votre
+                                        compte aura été validé par l'un de nos managers, dans un
+                                        délai maximum de 48h.</p>
+                                    <div class="separator3"></div>
+                                    <p class="contact_galibelum">Contacter Galibelum :</p><br>
+                                    <p>William Brassier (CEO)</p>
+                                    <p>Tel : 06 XX XX XX XX</p>
+                                    <p>Mail : contact@galibelum.fr</p><br>
+                                    <a class="backblue btn-custom waiting"
+                                       href="{{ path('inscription_index') }}">Retour à l'accueil</a>
                                 </div>
-                            </div><br>
-
-                            <!-- Display contact information -->
-                            <div class="col-md-12 col-sm-12 col-xs-12 center">
-                                <p>En savoir plus sur Galibelum :</p><br>
-                                <p>Contact :</p>
-                                <p>William Brassier (CEO)</p>
-                                <p>Tel : 06 XX XX XX XX</p>
-                                <p>Mail : contact@galibelum.fr</p><br>
                             </div>
-                            <div class="center">
-                                <a class="backblue btn-custom waiting" href="{{ path('inscription_index') }}">
-                                    Retour à l'accueil</a>
+                        </div>
+                    </div>
+
+                    <!-- Computer image -->
+                    <div class="single_study_right_img">
+                        <div class="col-sm-6">
+                            <div class="single_study_img">
+                                <img src="{{ asset('build/images/waiting-page.jpg') }}" alt="" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+        </div>
+    </section><!-- End waiting section -->
 
 {% endblock %}
 
