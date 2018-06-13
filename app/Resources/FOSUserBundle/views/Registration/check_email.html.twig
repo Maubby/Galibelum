@@ -1,0 +1,10 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <div class="thanks">
+        Merci de vous être inscrit(e) sur Galibelum.
+    </div>
+    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+{% endblock fos_user_content %}
