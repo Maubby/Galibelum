@@ -191,9 +191,6 @@ class Organization
      * @var string
      *
      * @ORM\Column(name="relationNumber", type="string", length=32)
-     *
-     * @Assert\Type("string")
-
      */
     private $relationNumber;
 

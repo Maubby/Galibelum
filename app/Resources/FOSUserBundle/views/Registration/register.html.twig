@@ -1,57 +1,59 @@
-{% extends "@FOSUser/layout.html.twig" %}
-
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/register.css') }}">
+{% endblock %}
 {% block body %}
     <section>
         <!-- Form to create your profile-->
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-xs-12">
-                    <h3 class = "col-md-12 text-center">Création de votre profil</h3>
-                    <p>Les informations requises pour l'inscription n'ont qu'un but d'identification. Vos données ne
+                <div class="col-sm-6 col-xs-12">
+                    <h3 class = "col-sm-12 text-center degradeblue">Création de votre profil</h3>
+                    <p class="text-justify">Les informations requises pour l'inscription n'ont qu'un but d'identification. Vos données ne
                         ne seront pas transmises aux différentes parties prenantes.</p>
 
                     {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'),}) }}
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-6">
                         {{ form_label(form.firstName) }}
                         {{ form_widget(form.firstName) }}
                         {{ form_errors(form.firstName) }}
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-6">
                         {{ form_label(form.lastName) }}
                         {{ form_widget(form.lastName) }}
                         {{ form_errors(form.lastName) }}
                     </div>
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-sm-12">
                         {{ form_label(form.email, 'Email :')}}
                         {{ form_widget(form.email, {'attr': {'class':'form-control' }}) }}
                         {{ form_errors(form.email) }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-sm-12">
                         {{ form_label(form.phoneNumber) }}
                         {{ form_widget(form.phoneNumber) }}
                         {{ form_errors(form.phoneNumber) }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-sm-12">
                         {{ form_label(form.plainPassword.first, 'Mot de passe :') }}
                         {{ form_widget(form.plainPassword.first, {'attr': {'class':'form-control' }}) }}
                         {{ form_errors(form.plainPassword.first) }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-sm-12">
                         {{ form_label(form.plainPassword.second, 'Confirmation du mot de passe :') }}
                         {{ form_widget(form.plainPassword.second, {'attr': {'class':'form-control' }}) }}
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-sm-12">
                         {{ form_widget(form.cgu) }}
                         {{ form_label(form.cgu) }}
                         {{ form_errors(form.cgu) }}
                     </div>
-                    <div class="col-md-12 text-center">
-                        <input class="btn btn-primary" type="submit" value="{{ "S'inscrire"|trans }}" />
+                    <div class="col-sm-12 col-xs-12 text-center">
+                        <input class="col-sm-12 col-xs-12 btn btn-primary backblue-btn" type="submit" value="{{ "S'inscrire"|trans }}" />
                     </div>
                     {{ form_end(form) }}
                 </div>
-                <div class="col-md-6 text-center hidden-xs">
-                    <a><img src="http://placekitten.com/g/350/450" alt="placeholder"></a>
+                <div class="col-sm-6 text-center hidden-xs">
+                    <img class="logo-galibelum" src="{{ asset('build/images/logo_galibelum.png') }}" alt="placeholder">
                 </div>
             </div>
         </div>
