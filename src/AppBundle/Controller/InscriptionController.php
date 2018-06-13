@@ -14,6 +14,7 @@ use User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Inscription controller.
@@ -32,6 +33,7 @@ class InscriptionController extends Controller
      * @Route("/",    name="inscription_index")
      * @Method("GET")
      *
+     * @return Response A Response instance
      */
     public function indexAction()
     {
