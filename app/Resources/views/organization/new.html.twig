@@ -1,76 +1,90 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <link rel="stylesheet" href="{{ asset('build/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('build/bootstrap.css') }}" >
-    <h1>Organization creation</h1>
 
-    <div class="container">
+
+    <link rel="stylesheet" href="{{ asset('build/organization_inscription.css') }}">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-7 ">
                 {{ form_start(form) }}
                 <div class="col-md-5 ">
-                    <a><img src="http://via.placeholder.com/200x150"></a>
+                    <h5 class="title">Information générale :</h5>
+                    <img class="picture" src="{{ asset('build/images/Logo Galibelum page inscription.png') }}"/img>
                 </div>
-                <div class="col-md-7 ">
-                    <div class="form-group">
-                        {{ form_label(form.name, 'Noms:') }}
-                        {{ form_widget(form.name) }}
-                        {{ form_errors(form.name) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.address,'Adresse du siège social')  }}
-                        {{ form_widget(form.address) }}
-                        {{ form_errors(form.address) }}
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.status,'Forme juridique') }}
-                        {{ form_widget(form.status) }}
-                        {{ form_errors(form.status) }}
+                <div class="col-md-7">
+                    <div class="onesection">
+                        <div class="form-group">
+                            {{ form_label(form.name, 'Nom de votre structure eSport : ') }}
+                            {{ form_widget(form.name) }}
+                            {{ form_errors(form.name) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.address,'Adresse du siège social : ')  }}
+                            {{ form_widget(form.address) }}
+                            {{ form_errors(form.address) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.status,'Forme juridique : ') }}
+                            {{ form_widget(form.status) }}
+                            {{ form_errors(form.status) }}
+                        </div>
                     </div>
 
                 </div>
-                <div class="form-group">
-                    {{ form_label(form.description,'Descrivez votre structure en quelques mots') }}
-                    {{ form_widget(form.description) }}
-                    {{ form_errors(form.description) }}
-                </div>
+                <div class="col-md-12 ">
+                    <div class="form-group">
+                        {{ form_label(form.description,'Décrivez votre structure eSport en quelques mots : ') }}
+                        {{ form_widget(form.description) }}
+                        {{ form_errors(form.description) }}
+                    </div>
 
-                <div class = "form-group">
-                    {{ form_label(form.relationNumber),'' }}
-                    {{ form_widget(form.relationNumber) }}
-                    {{ form_errors(form.relationNumber) }}
+                    <div class="form-group">
+                        {{ form_label(form.relationNumber,'Nombres de collaborateurs dans votre structure:') }}
+                        {{ form_widget(form.relationNumber) }}
+                        {{ form_errors(form.relationNumber) }}
+                    </div>
                 </div>
             </div>
-            <div class="col-md-5 ">
-                <div class="form-group">
-                    {{ form_label(form.userRole) }}
-                    {{ form_widget(form.userRole) }}
-                    {{ form_errors(form.userRole) }}
+            <div class="col-md-5">
+                <div class="border">
+                    <h5 class="degradeblue">Information de Contact :</h5>
+                    <div class="userRole">
+                        <div class="form-group">
+                            {{ form_label(form.userRole,'Poste au sein de la structure :') }}
+                            {{ form_widget(form.userRole) }}
+                            {{ form_errors(form.userRole) }}
+                        </div>
+                    </div>
+                    <div class="userRole">
+                        <div class="form-group">
+                            {{ form_label(form.email,'Email de la société : ') }}
+                            {{ form_widget(form.email) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+                    </div>
+                    <div class="userRole">
+                        <div class="form-group">
+                            {{ form_label(form.phoneNumber,'Téléphone de bureau : ')}}
+                            {{ form_widget(form.phoneNumber) }}
+                            {{ form_errors(form.phoneNumber) }}
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    {{ form_label(form.email) }}
-                    {{ form_widget(form.email) }}
-                    {{ form_errors(form.email) }}
-                </div>
-                <div class="form-group">
-                    {{ form_label(form.phoneNumber) }}
-                    {{ form_widget(form.phoneNumber) }}
-                    {{ form_errors(form.phoneNumber) }}
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <input type="submit" value="Create" class="btn btn-primary">
-                {{ form_end(form) }}
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Enregistrer" class="btn btn-primary">
+            {{ form_end(form) }}
+        </div>
+    </div>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('organization_index') }}">Back to the list</a>
-        </li>
-    </ul>
+
+
+    <a href="{{ path('organization_index') }}"></a>
+
+
 {% endblock %}

@@ -193,10 +193,7 @@ class Organization
      * @ORM\Column(name="relationNumber", type="string", length=32)
      *
      * @Assert\Type("string")
-     * @Assert\Length(
-     *     min = 5,
-     *     max = 32
-     * )
+
      */
     private $relationNumber;
 

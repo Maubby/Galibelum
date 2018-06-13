@@ -44,7 +44,8 @@ class OrganizationType extends AbstractType
                 'attr' => array(
                     'minlength' => 2, 'maxlength' => 32,
                     'label' => '',
-                    'class' => 'form-control'))
+                    'class' => 'form-control',
+                'placeholder' =>'Exemple : GBM eSport'))
             )
             ->add(
                 'phoneNumber', TextType::class,array(
@@ -62,7 +63,7 @@ class OrganizationType extends AbstractType
             )
             ->add('description', TextareaType::class,array(
                 'attr'=> array(
-                    'minlength'=>2, 'maxlength' => 250,
+                    'minlength'=>32, 'maxlength' => 250,
                     'label'=>'',
                     'class'=> 'form-control'))
             )
@@ -85,13 +86,14 @@ class OrganizationType extends AbstractType
                     'class'=>'form-control'))
             )
             ->add('relationNumber',ChoiceType::class,array(
+                    'attr'=> array(
+                        'class'=> 'form-control'),
                     'choices'  => array(
-
-                        'Aucun autre membre' => 1,
-                        '2-10 membres' => 2,
-                        '11-50 membres' => 3,
-                        '51-250 membres' => 4,
-                        'Plus de 251 membres'=> 5,
+                        'Aucun autre membre' => 'Aucun autre membre',
+                        '2-10 membres' => '2-10 membres',
+                        '11-50 membres' => '11-50 membres',
+                        '51-250 membres' => '51-250 membres',
+                        'Plus de 251 membres'=> 'Plus de 251 membres',
                         ))
             );
 
