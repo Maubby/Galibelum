@@ -1,13 +1,14 @@
 <?php
 /**
- * OfferController File Doc Comment
+ * WaitingController File Doc Comment
  *
  * PHP version 7.2
  *
- * @category InscriptionController
+ * @category WaitingController
  * @package  Controller
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
+
 namespace AppBundle\Controller;
 
 use User;
@@ -17,26 +18,26 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Inscription controller.
+ * Waiting controller.
  *
- * @Route("inscription")
+ * @Route("waiting")
  *
- * @category InscriptionController
+ * @category WaitingController
  * @package  Controller
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
-class InscriptionController extends Controller
+class WaitingController extends Controller
 {
     /**
-     * Inscription choose Company & Organization
+     * Company & Organization wait until their application is approved
+     * by the Account Manager
      *
-     * @Route("/",    name="inscription_index")
+     * @Route("/",    name="waiting_index")
      * @Method("GET")
      * @return        Response A Response instance
      */
     public function indexAction()
     {
-            return $this->render('inscription/index.html.twig');
+        return $this->render('waiting/index.html.twig');
     }
-
 }

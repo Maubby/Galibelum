@@ -172,7 +172,7 @@ class Organization
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=32)
+     * @ORM\Column(name="address", type="string", length=64)
      *
      * @Assert\Type("string")
      * @Assert\NotBlank(
@@ -180,7 +180,7 @@ class Organization
      * )
      * @Assert\Length(
      *     min = 5,
-     *     max = 32,
+     *     max = 64,
      *     minMessage = "Votre adresse doit contenir au mmoins {{ limit }} caractères",
      *     maxMessage = "Votre adresse ne peut pas contenir plus de {{ limit }} caractères"
      * )
@@ -188,18 +188,9 @@ class Organization
     private $address;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="relationNumber", type="integer")
-     *
-     * @Assert\Type(
-     *     type="integer",
-     *     message="The value {{ value }} is not a valid {{ type }}."
-     * )
-     * @Assert\Range(
-     *     min = 1,
-     *     minMessage = "Veuillez saisir le nombre d'employés"
-     * )
+     * @ORM\Column(name="relationNumber", type="string", length=32)
      */
     private $relationNumber;
 
@@ -414,30 +405,6 @@ class Organization
     }
 
     /**
-     * Set relationNumber
-     *
-     * @param integer $relationNumber
-     *
-     * @return organization
-     */
-    public function setRelationNumber($relationNumber)
-    {
-        $this->relationNumber = $relationNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get relationNumber
-     *
-     * @return int
-     */
-    public function getRelationNumber()
-    {
-        return $this->relationNumber;
-    }
-
-    /**
      * Set isActive
      *
      * @param integer $isActive
@@ -549,5 +516,29 @@ class Organization
     public function getOrganizationActivity()
     {
         return $this->organizationActivity;
+    }
+
+    /**
+     * Set relationNumber.
+     *
+     * @param string $relationNumber
+     *
+     * @return Organization
+     */
+    public function setRelationNumber($relationNumber)
+    {
+        $this->relationNumber = $relationNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get relationNumber.
+     *
+     * @return string
+     */
+    public function getRelationNumber()
+    {
+        return $this->relationNumber;
     }
 }

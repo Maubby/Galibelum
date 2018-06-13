@@ -11,6 +11,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -40,55 +41,62 @@ class OrganizationType extends AbstractType
         $builder
             ->add(
                 'name', TextType::class, array(
-                'label' => "Nom :",
-                'attr' => array('class' => 'form-control')
-                )
-            )
-            ->add(
-                'phoneNumber', TextType::class, array(
-                'label' => "Numéro de télephone :",
-                'attr' => array('class' => 'form-control')
-                )
-            )
-            ->add(
-                'email', EmailType::class, array(
-                'label' => "Adresse mail :",
-                'attr' => array('class' => 'form-control')
-                )
-            )
-            ->add(
-                'description', TextareaType::class, array(
-                'label' => "Description :",
                 'attr' => array(
+                    'minlength' => 2, 'maxlength' => 32,
+                    'label' => '',
                     'class' => 'form-control',
-                    'cols' => '5', 'rows' => '5'
-                )
-                )
+                'placeholder' =>'Exemple : GBM eSport'))
             )
             ->add(
-                'userRole', TextType::class, array(
-                'label' => "Poste occupé :",
-                'attr' => array('class' => 'form-control')
-                )
+                'phoneNumber', TextType::class,array(
+                    'attr' => array(
+                        'minlength'=> 8, 'maxlength' => 32,
+                        'label' =>'',
+                        'class' => 'form-control' ))
+
             )
-            ->add(
-                'status', TextType::class, array(
-                'label' => "Statut juridique :",
-                'attr' => array('class' => 'form-control')
-                )
+            ->add('email',TextType::class,array(
+                'attr' => array(
+                    'minlength'=>2, 'maxlength' => 64,
+                    'label'=>'',
+                    'class'=> 'form-control' ))
             )
-            ->add(
-                'address', TextType::class, array(
-                'label' => "Adresse :",
-                'attr' => array('class' => 'form-control')
-                )
+            ->add('description', TextareaType::class,array(
+                'attr'=> array(
+                    'minlength'=>32, 'maxlength' => 250,
+                    'label'=>'',
+                    'class'=> 'form-control'))
             )
-            ->add(
-                'relationNumber', IntegerType::class, array(
-                'label' => 'Nombre d\'employés :',
-                'attr' => array('min' => 1, 'class' => 'form-control')
-                )
+            ->add('userRole',TextType::class,array(
+                'attr'=> array(
+                    'minlength'=>2, 'maxlength' => 32,
+                    'label'=>'',
+                    'class'=>'form-control' )
+            ))
+            ->add('status',TextType::class,array(
+                'attr'=>array(
+                    'minlength'=>2,'maxlength' => 32,
+                    'label'=>'',
+                    'class'=>'form-control'))
+            )
+            ->add('address',TextType::class,array(
+                'attr'=>array(
+                    'minlength'=>2, 'maxlength' => 64,
+                    'label'=>'',
+                    'class'=>'form-control'))
+            )
+            ->add('relationNumber',ChoiceType::class,array(
+                    'attr'=> array(
+                        'class'=> 'form-control'),
+                    'choices'  => array(
+                        'Aucun autre membre' => 'Aucun autre membre',
+                        '2-10 membres' => '2-10 membres',
+                        '11-50 membres' => '11-50 membres',
+                        '51-250 membres' => '51-250 membres',
+                        'Plus de 251 membres'=> 'Plus de 251 membres',
+                        ))
             );
+
     }
 
     /**
