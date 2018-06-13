@@ -1,61 +1,72 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/login.css') }}">
+{% endblock %}
 
 {% block body %}
+    <main class="page-wrapper loading-done backgroundimg">
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            </div>
+        {% endif %}
+        <section>
+            <!-- Form to login-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12 box">
+                        <form action="{{ path("fos_user_security_check") }}" method="post">
+                            {% if csrf_token %}
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                            {% endif %}
 
-    {% if error %}
-        <div class="alert alert-danger" role="alert">
-            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        </div>
-    {% endif %}
-    <section>
-        <!-- Form to login-->
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-xs-12">
-                    <form action="{{ path("fos_user_security_check") }}" method="post">
-                        {% if csrf_token %}
-                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
-                        {% endif %}
-                        
-                        <-- Enter email -->
-                        <h3 class="col-md-12 text-center"> Entrez vos identifiants</h3>
-                        <div class="col-md-12">
-                            <label for="username" class="form-group">{{ 'Email :'|trans }}</label>
-                            <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username"/>
-                        </div>
-                        <-- End email -->
-                        
-                        <-- Enter password -->
-                        <div class="col-md-12">
-                            <label for="password" class="form-group">{{ 'Mot de passe :'|trans }}</label>
-                            <input type="password" class="form-control" id="password"  name="_password" required="required" autocomplete="current-password"/>
-                        </div>
-                        <-- End password -->
-                        
-                        <-- Forgotten password -->
-                        <div class="col-md-12">
-                            <a href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié</a>
-                        </div>
-                        <-- End forgotten password -->
-                        
-                        <-- Ticking box to keep the client's information -->
-                        <div class="col-md-12">
-                            <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
-                            <label for="remember_me">{{ 'Mémoriser mes identifiants'|trans }}</label>
-                        </div>
-                        <-- End ticking box -->
-                        
-                        <-- Submit button -->
-                        <div class="col-md-12 text-center">
-                            <input type="submit" id="_submit" name="_submit" class="btn btn-primary" value="{{ 'Connecter'|trans }}"/>
-                        </div>
-                        <-- End submit button -->
-                    </form>
-                </div>
-                <div class="col-md-6 text-center hidden-xs">
-                    <a><img src="http://placekitten.com/g/250/350" alt="placeholder"></a>
+                            <!-- Enter email -->
+                            <h3 class="col-sm-12 text-center degradeblue"> Entrez vos identifiants</h3>
+                            <div class="col-sm-12">
+                                <label for="username" class="form-group white-color">{{ 'Email :'|trans }}</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-at fa-fw six-color"></i></span>
+                                    <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" placeholder="contact@galilibelum.fr"/>
+                                </div>
+                            </div>
+                            <!-- End email -->
+
+                            <!-- Enter password -->
+                            <div class="col-sm-12">
+                                <label for="password" class="form-group white-color">{{ 'Mot de passe :'|trans }}</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-fw six-color"></i></span>
+                                    <input type="password" class="form-control" id="password"  name="_password" required="required" autocomplete="current-password" placeholder="Votre mot de passe"/>
+                                </div>
+                            </div>
+                            <!-- End password -->
+
+                            <!-- Forgotten password -->
+                            <div class="col-sm-12 forgotten-password">
+                                <a href="{{ path('fos_user_resetting_request') }}" class="six-color">Mot de passe oublié ?</a>
+                                <a href="{{ path('fos_user_registration_register') }}" class="orange-color">Créer votre compte</a>
+                            </div>
+                            <!-- End forgotten password -->
+
+                            <!-- Ticking box to keep the client's information -->
+                            <div class="col-sm-12">
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                                <label for="remember_me" class="white-color">{{ 'Mémoriser mes identifiants'|trans }}</label>
+                            </div>
+                            <!-- End ticking box -->
+
+                            <!-- Submit button -->
+                            <div class="col-sm-12 col-xs-12 text-center">
+                                <input type="submit" id="_submit" name="_submit" class="col-sm-12 col-xs-12 btn btn-primary backblue" value="{{ 'Connecter'|trans }}"/>
+                            </div>
+                            <!-- End submit button -->
+                        </form>
+                    </div>
+                    <div class="col-sm-6 text-center hidden-xs">
+                        <img class="logo-galibelum-blanc" src="{{ asset('build/images/logo_galibelum_blanc.png') }}" alt="placeholder">
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 {% endblock %}
