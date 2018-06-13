@@ -5,19 +5,26 @@
 
 
 {% block body %}
-    <main class="backgroundimg-waiting">
+    <main>
         <!-- Display waiting logo and message -->
         <section>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <div class="box">
+                    <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                        <div class="box-shadow-waiting">
                             <div class="row">
                                 <div class="col-md-10 col-md-offset-1">
                                     <div class="box-waiting">
-                                        <img src="{{ asset('build/images/waiting-page.png') }}"
+                                        <div class="row">
+                                            <figure class="figure-waiting">
+                                        <img class="col-md-4 col-sm-12 col-xs-12" src="{{ asset('build/images/waiting-page.png') }}"
                                              alt="Inscription waited to be validated by Galibelum">
-                                        <p class="center">Dossier en cours de validation</p><br>
+
+                                        <figcaption class="col-md-6 col-sm-12 col-xs-12 center">
+                                            Dossier en cours de validation
+                                        </figcaption>
+                                            </figure>
+                                        </div>
                                         <p class="center">Votre dossier est en cours de validation. Vous
                                             recevrez une notification par email dès que votre compte aura
                                             été validé par l'un de nos managers, dans un délai maximum de
@@ -29,14 +36,14 @@
 
                             <!-- Display contact information -->
                             <div class="col-md-12 col-sm-12 col-xs-12 center">
-                                <p>Pour en savoir plus sur Galibelum:</p><br>
+                                <p>En savoir plus sur Galibelum :</p><br>
                                 <p>Contact :</p>
                                 <p>William Brassier (CEO)</p>
                                 <p>Tel : 06 XX XX XX XX</p>
-                                <p>Mail : contact@galibelum.fr</p>
+                                <p>Mail : contact@galibelum.fr</p><br>
                             </div>
-                            <div class="center ">
-                                <a class="degradeblue btn btn-custom" href="{{ path('inscription_index') }}">
+                            <div class="center">
+                                <a class="backblue btn-custom waiting" href="{{ path('inscription_index') }}">
                                     Retour à l'accueil</a>
                             </div>
                         </div>

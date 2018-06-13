@@ -5,8 +5,17 @@
   margin-top: 20px;
 }
 
-.backgroundimg-waiting {
-  background-image:url(https://i1.wp.com/gallibellum.fr/wp-content/uploads/2018/03/Slider-inscription-gallibelluM.jpg);
-  padding-top: 5%;
-  padding-bottom: 5%;
+.box-shadow-waiting {
+  margin: 2em;
+  box-shadow: 0 20px 80px 0 rgba(0, 0, 0, 0.14);
+  padding: 2em;
+}
+
+.figure-waiting {
+  display: flex;
+  align-items: center;
+}
+
+.waiting {
+  padding: 10px;
 }
