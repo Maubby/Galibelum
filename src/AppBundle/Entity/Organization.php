@@ -172,7 +172,7 @@ class Organization
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=32)
+     * @ORM\Column(name="address", type="string", length=64)
      *
      * @Assert\Type("string")
      * @Assert\NotBlank(
@@ -180,7 +180,7 @@ class Organization
      * )
      * @Assert\Length(
      *     min = 5,
-     *     max = 32,
+     *     max = 64,
      *     minMessage = "Votre adresse doit contenir au mmoins {{ limit }} caractères",
      *     maxMessage = "Votre adresse ne peut pas contenir plus de {{ limit }} caractères"
      * )
@@ -191,7 +191,6 @@ class Organization
      * @var string
      *
      * @ORM\Column(name="relationNumber", type="string", length=32)
-     *
      */
     private $relationNumber;
 
