@@ -1,15 +1,24 @@
-{% extends 'base.html.twig' %}
 {% trans_default_domain 'FOSUserBundle' %}
 {% block subject %}Confirmation d'inscription Galibelum{% endblock %}
 
-{% block body %}
+{% block body_text %}
 {%- autoescape false -%}
 {{ 'registration.email.subject'|trans({'%username%': user.username, '%confirmationUrl%': confirmationUrl}) }}
 {%- endautoescape -%}
 {% endblock %}
 
 {% block body_html %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Email Confirmation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
+<!-- start body -->
+<body style="display: block; margin-left: auto; margin-right: auto; width: 40%;">
 <div class="container" style="background-color: #fcfcfc;">
     <div style="width: 100%">
         <div>
@@ -115,4 +124,6 @@
     </div>
 </div>
 
+</body>
+</html>
 {% endblock %}
