@@ -11,119 +11,117 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <title>Email de confirmation - Galibelum</title>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Email Confirmation</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        /* CLIENT-SPECIFIC STYLES */
+        #outlook a{padding:0;} /* Force Outlook to provide a "view in browser" message */
+        .ReadMsgBody{width:100%;} .ExternalClass{width:100%;} /* Force Hotmail to display emails at full width */
+        .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;} /* Force Hotmail to display normal line spacing */
+        body, table, td, a{-webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;} /* Prevent WebKit and Windows mobile changing default text sizes */
+        table, td{mso-table-lspace:0pt; mso-table-rspace:0pt;} /* Remove spacing between tables in Outlook 2007 and up */
+
+        /* RESET STYLES */
+        body{margin:0; padding:0;}
+        table{border-collapse:collapse !important;}
+        body{height:100% !important; margin:0; padding:0; width:100% !important;}
+
+        /* iOS BLUE LINKS */
+        .appleBody a {color:#68440a; text-decoration: none;}
+        .appleFooter a {color:#999999; text-decoration: none;}
+
+        /* MOBILE STYLES */
+        @media screen and (max-width: 525px) {
+
+            /* FULL-WIDTH TABLES */
+            table[class="responsive-table"]{
+                width:100%!important;
+            }
+
+            /* UTILITY CLASSES FOR ADJUSTING PADDING ON MOBILE */
+
+            td[class="padding-copy"]{
+                text-align: center;
+            }
+
+            td[class="section-padding"]{
+                padding: 0px 15px 50px 15px !important;
+            }
+
+            /* ADJUST BUTTONS ON MOBILE */
+
+            table[class="mobile-button-container"]{
+                margin:0 auto;
+                width:100% !important;
+            }
+
+            a[class="mobile-button"]{
+                width:80% !important;
+                padding: 15px !important;
+                border: 0 !important;
+                font-size: 15px !important;
+            }
+
+        }
+    </style>
 </head>
 
-<!-- start body -->
-<body style="display: block; margin-left: auto; margin-right: auto; width: 40%;">
-<div class="container" style="background-color: #fcfcfc;">
-    <div style="width: 100%">
-        <div>
-            <div style="text-align: center;">
-                <div style="text-align: center;">
-                    <div>
-                        <div style="text-align: center; vertical-align: top;"></div>
-                    </div>
-                </div>
-                <div style="width: 100%;">
-                    <div>
-                        <div style="text-align: center; vertical-align: top; margin-bottom: -50px;">
-                            <img src="https://i1.wp.com/gallibellum.fr/wp-content/uploads/2018/05/cropped-Logo-Galibelum-Carr%C3%A9.png?fit=350%2C350&ssl=1" alt="Logo">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div style="text-align: center;">
-        <div style="text-align: center;">
-            <div style="text-align: center;">
-                <div>
-                    <div style="text-align: center; vertical-align: top">
-                        <div style="width: 100%;">
-                            <div>
-                                <div style="padding: 36px 24px 0; border-top: 3px solid rgb(13, 188, 208);">
-                                    <h1 style="margin: 0; font-size: 32px; font-weight: 700; line-height: 48px;">Bienvenue {{user.firstName}} {{user.lastName}}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div style="text-align: center;">
-        <div  style="text-align: center;">
-            <div  style="text-align: center;">
-                <div>
-                    <div style="text-align: center; vertical-align: top">
-                        <div style="max-width: 100%;">
-                            <div>
-                                <div style="padding: 24px; font-size: 16px; line-height: 24px;">
-                                    <div style="margin: 0;">
-                                        <p>
-                                            Merci de vous être inscrit(e) sur Galibelum. <br>
-                                            Nous sommes ravis de vous compter parmi nous ! <br>
-                                            Pour activer votre compte, veuillez cliquer sur le lien d'activation ci-dessous :
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- start button confirmation-->
-    <div>
-        <div style="text-align: left; background-color: #ffffff;">
-            <div style="width: 100%;">
-                <div>
-                    <div style="padding: 12px; text-align: center; background-color: #ffffff;">
-                        <div style="text-align: center;">
-                            <div style="text-align: center;">
-                                <div style="border-radius: 6px; text-align: center; background-color: rgb(13, 188, 208); margin-left: 25%; margin-right: 25%;">
-                                    <a href="{{ confirmationUrl }}" target="_blank" style="display: inline-block; padding: 16px 36px; font-size: 16px; color: #ffffff;">Activez votre compte</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end button confirmation-->
-
-    <div>
-        <div style="text-align: center;">
-            <div style="text-align: center;">
-                <div>
-                    <div style="text-align: center; vertical-align: top;">
-                        <div style="width: 100%;">
-                            <div>
-                                <div style="padding: 24px; font-size: 16px; line-height: 24px; text-align: center">
-                                    <div style="margin: 0;">Si cela ne fonctionne pas, copiez et collez le lien dans votre navigateur :</div>
-                                    <div style="margin: 0;"><a href="https://sendgrid.com" target="_blank">{{ confirmationUrl }}</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="copyright" style="text-align: center;">
-        © 2018 <b>Galibelum</b>. All rights reserved.
-    </div>
-</div>
-
+<body style="margin: 0; padding: 0; border-top: solid rgb(13, 188, 208); border-bottom: solid rgb(13, 188, 208);">
+<!-- ONE COLUMN SECTION -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
+    <tr>
+        <td bgcolor="#ffffff" align="center" style="padding: 0px 15px 70px 15px;" class="section-padding">
+            <table border="0" cellpadding="0" cellspacing="0" width="500" class="responsive-table">
+                <tr>
+                    <td>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td>
+                                    <!-- COPY -->
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td align="center" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #000000; padding-top: 30px;" class="padding-copy">Bienvenue <br>
+                                                {{user.firstName}} {{user.lastName}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" style="font-size: 13px; font-family: Helvetica, Arial, sans-serif; color: #000000; padding-top: 30px; line-height: 1.5;" class="padding-copy">Merci de vous être inscrit(e) sur Galibelum. <br>
+                                                Nous sommes ravis de vous compter parmi nous ! <br>
+                                                Pour activer votre compte, veuillez cliquer sur le lien d'activation ci-dessous :
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center"><a href="{{ confirmationUrl }}" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: rgb(13, 188, 208); border-top: 15px solid rgb(13, 188, 208); border-bottom: 15px rgb(13, 188, 208); border-left: 25px solid rgb(13, 188, 208); border-right: 25px solid rgb(13, 188, 208); border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block; padding: 1%; margin-top: 5%; padding-bottom: 4%" class="mobile-button">Activez votre compte</a></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <!-- BULLETPROOF BUTTON -->
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="mobile-button-container">
+                                        <tr>
+                                            <td align="center" style="padding: 10px 0 0 0;" class="padding-copy">
+                                                <table border="0" cellspacing="0" cellpadding="0" class="responsive-table">
+                                                    <tr>
+                                                        <td align="center" style="padding: 10px 0 0 0; font-size: 10px; line-height: 1.5; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy">Si cela ne fonctionne pas, copiez et collez le lien dans votre navigateur : <br>
+                                                            <a href="{{ confirmationUrl }}" target="_blank">{{ confirmationUrl }}</a></div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
 {% endblock %}
