@@ -13,8 +13,9 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="panel panel-default">
+                    <h3 class="text-center">Ma Structure</h3>
                     <div class="panel-body">
-                        <img src="http://via.placeholder.com/150">
+                        <img class="center-block" src="http://via.placeholder.com/150">
                         <ul class="list-unstyled">
                             {% for organization in organization %}
                                 <li>{{ organization.name }}</li>
@@ -33,59 +34,81 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                <div id="carousel-example-generic" class="carousel slide vertical" data-ride="carousel">
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        {% for activity in activities %}
-                            <div class="active item">
-                                <ul class="list-unstyled">
-                                    <li>{{ activity.name }}</li>
-                                    <li><a href="{{ path('activity_show', { 'id': activity.id }) }}" class="btn btn-primary">Plus de détails</a></li>
-                                </ul>
+                <div class="panel panel-default">
+                    <h3 class="text-center">Mes Offres</h3>
+                    <div class="panel-body">
+                        <div id="myCarousel" class="carousel vertical" data-ride="carousel">
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner" role="listbox">
+                                {% for activity in activities %}
+                                    <div class="{% if loop.first %}active{% endif %} item">
+                                        <div class="media panel panel-default">
+                                            <div class="media-left media-middle">
+                                                <img class="media-object" src="http://via.placeholder.com/100" alt="placeholder">
+                                            </div>
+                                            <div class="media-body">
+                                                <h5 class="media-heading">{{ activity.name }}</h5>
+                                                <a href="{{ path('offer_show', { 'id': activity.id }) }}" class="btn btn-primary">Plus de détails</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
                             </div>
-                        {% endfor %}
-                    </div>
-                    <a href="{{ path('activity_new') }}" class="btn btn-primary">Ajouter une Activitée</a>
 
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                            <!-- Controls -->
+                            <a class="up carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="down carousel-control" href="#myCarousel" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                                <span class="sr-only">next</span>
+                            </a>
+                        </div>
+                        <a href="{{ path('offer_new') }}" class="btn btn-primary">Ajouter une Offre</a>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-4">
-                <div id="carousel-example-generic" class="carousel slide vertical" data-ride="carousel">
-
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner" role="listbox">
-                        {% for offer in offers %}
-                            <div class="active item">
-                                <ul class="list-unstyled">
-                                    <li>{{ offer.name }}</li>
-                                    <li><a href="{{ path('offer_show', { 'id': offer.id }) }}" class="btn btn-primary">Plus de détails</a></li>
-                                </ul>
+                <div class="panel panel-default">
+                    <h3 class="text-center">Activités</h3>
+                    <div class="panel-body">
+                        <div id="myCarouselActivity" class="carousel vertical" data-ride="carousel">
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner" role="listbox">
+                                {% for offer in offers %}
+                                    <div class="{% if loop.first %}active{% endif %} item">
+                                        <div class="media panel panel-default">
+                                            <div class="media-body">
+                                                <h5 class="text-center">{{ offer.name }}</h5>
+                                            </div>
+                                            <div>
+                                                <p>{{ offer.amount }}</p>
+                                                <a href="{{ path('activity_show', { 'id': offer.id }) }}" class="btn btn-primary">Plus de détails</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
                             </div>
-                        {% endfor %}
-                    </div>
-                    <a href="{{ path('offer_new') }}" class="btn btn-primary">Ajouter une Offre</a>
 
-                    <!-- Controls -->
-                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
+                            <!-- Controls -->
+                            <a class="up carousel-control" href="#myCarouselActivity" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="down carousel-control" href="#myCarouselActivity" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                        <a href="{{ path('activity_new') }}" class="btn btn-primary">Ajouter une Activitée</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/carousel.js') }}"></script>
 {% endblock %}

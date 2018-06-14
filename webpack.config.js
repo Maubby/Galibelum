@@ -20,7 +20,9 @@ Encore
     .addStyleEntry('login', './assets/scss/login.scss')
     .addStyleEntry('profile', './assets/scss/profile.scss')
     .addStyleEntry('register', './assets/scss/register.scss')
+    .addStyleEntry('dashboard', './assets/scss/dashboard.scss')
     .addEntry('main', './assets/js/main.js')
+    .addEntry('carousel', './assets/js/carousel.js')
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
         { from: './assets/images', to: 'images'}

@@ -59,19 +59,15 @@
         </div><!-- /.container-fluid -->
     </nav>
 <header>
-    {% block header %}
-    {% endblock %}
+    {% block header %}{% endblock %}
 </header>
-{% block body %}
-{% endblock %}
+    {% block body %}{% endblock %}
 <footer>
-    {% block footer %}
-    {% endblock %}
+    {% block footer %}{% endblock %}
 </footer>
 <!-- JS Webpack's vendor including Bootstrap.js and JQuery.js shared entry -->
 <script src="{{ asset('build/manifest.js') }}"></script>
 <script src="{{ asset('build/vendor.js') }}"></script>
-{% block javascripts %}
-{% endblock %}
+    {% block javascripts %}{% endblock %}
 </body>
 </html>
