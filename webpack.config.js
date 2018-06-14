@@ -22,6 +22,7 @@ Encore
     .addStyleEntry('profile', './assets/scss/profile.scss')
     .addStyleEntry('register', './assets/scss/register.scss')
     .addEntry('main', './assets/js/main.js')
+    .addEntry('countdown', './assets/js/countdown.js')
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
         { from: './assets/images', to: 'images'}
