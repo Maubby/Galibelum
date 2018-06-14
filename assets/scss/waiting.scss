@@ -1,22 +1,29 @@
-.study{
+.study {
   background: #f4f5f9;
 }
+
 .galibelum_waiting_inscription_picture {
   overflow: hidden;
+  max-width: 100%;
+  height: auto;
+}
+
+/* On screens that are 768px or less, set the waiting_text_background position */
+@media screen and (max-width: 768px) {
+  .waiting_text_background {
+    left: 13%;
+  }
 }
 
 .waiting_text_background {
   background: #fff;
   position: absolute;
   right:-15%;
-  top:85px;
-  width:100%;
+  top:15px;
+  max-width: 100%;
+  height: auto;
   z-index: 9;
-  padding: 10% 20%;
-}
-
-.single_study_right_img {
-  position: relative;
+  padding: 5% 10%;
 }
 
 .separator {
@@ -42,6 +49,4 @@
 
 a.waiting {
   padding: 10px;
-  margin-left: 20%;
-  margin-right: 20%;
 }
