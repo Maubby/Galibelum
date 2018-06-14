@@ -57,16 +57,19 @@ class OrganizationController extends Controller
      */
     public function dashboardAction()
     {
+        $user = $this->getUser();
+        $name = $user->getFirstName() .' '. $user->getLastName();
         $em = $this->getDoctrine()->getManager();
-        $organization = $em->getRepository('AppBundle:Organization')->findby(array('id' => $this->getUser()));
+        $organization = $em->getRepository('AppBundle:Organization')->findby(array('user' => $user));
         $activities = $em->getRepository('AppBundle:Activity')->findby(array('organizationActivities' => $organization));
         $offers = $em->getRepository('AppBundle:Offer')->findby(array('activity' => $activities));
 
         return $this->render(
             'dashboard/index.html.twig', array(
                 'organization' => $organization,
-                'activities' => $activities,
+                'activities' => $activities ,
                 'offers' => $offers,
+                'name' => $name,
             )
         );
     }
@@ -94,6 +97,7 @@ class OrganizationController extends Controller
             $organization->setUser($user);
             $organization->setNameCanonical(strtolower($organization->getName()));
             $em->persist($organization);
+            $em->persist($this->getUser()->setOrganization($organization));
             $em->flush();
 
             return $this->redirectToRoute(
@@ -105,9 +109,9 @@ class OrganizationController extends Controller
 
         return $this->render(
             'organization/new.html.twig', array(
-            'organization' => $organization,
-            'form' => $form->createView(),
-            'choose'=>$choose,
+                'organization' => $organization,
+                'form' => $form->createView(),
+                'choose'=>$choose,
             )
         );
     }

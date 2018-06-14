@@ -12,8 +12,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4">
-                <div class="panel panel-default">
-                    <h3 class="text-center">Ma Structure</h3>
+                    <h3 class="text-center">Bienvenue {{ name }}</h3>
                     <div class="panel-body">
                         <img class="center-block" src="http://via.placeholder.com/150">
                         <ul class="list-unstyled">
@@ -21,21 +20,15 @@
                                 <li>{{ organization.name }}</li>
                                 <li>{{ organization.phoneNumber }}</li>
                                 <li>{{ organization.email }}</li>
-                                <li>{{ organization.description }}</li>
-                                <li>{{ organization.userRole }}</li>
-                                <li>{{ organization.status }}</li>
                                 <li>{{ organization.address }}</li>
-                                <li>{{ organization.relationNumber }}</li>
-
-                                <a href="{{ path('organization_edit', { 'id': organization.id }) }}" class="btn btn-primary">edit</a>
+                                <li><a href="{{ path('organization_edit', { 'id': organization.id }) }}">Modifier votre structure</a></li>
                             {% endfor %}
                         </ul>
                     </div>
-                </div>
             </div>
             <div class="col-lg-4">
                 <div class="panel panel-default">
-                    <h3 class="text-center">Mes Offres</h3>
+                    <h3 class="text-center">Mes Activitées</h3>
                     <div class="panel-body">
                         <div id="myCarousel" class="carousel vertical" data-ride="carousel">
                             <!-- Wrapper for slides -->
@@ -48,6 +41,8 @@
                                             </div>
                                             <div class="media-body">
                                                 <h5 class="media-heading">{{ activity.name }}</h5>
+                                                <p>{{ activity.type }}</p>
+                                                <p>{{ activity.date }}</p>
                                                 <a href="{{ path('offer_show', { 'id': activity.id }) }}" class="btn btn-primary">Plus de détails</a>
                                             </div>
                                         </div>
@@ -71,7 +66,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="panel panel-default">
-                    <h3 class="text-center">Activités</h3>
+                    <h3 class="text-center">Mes offres</h3>
                     <div class="panel-body">
                         <div id="myCarouselActivity" class="carousel vertical" data-ride="carousel">
                             <!-- Wrapper for slides -->
@@ -83,6 +78,7 @@
                                                 <h5 class="text-center">{{ offer.name }}</h5>
                                             </div>
                                             <div>
+                                                <p>{{ offer.date|date("d M Y") }}</p>
                                                 <p>{{ offer.amount }}</p>
                                                 <a href="{{ path('activity_show', { 'id': offer.id }) }}" class="btn btn-primary">Plus de détails</a>
                                             </div>

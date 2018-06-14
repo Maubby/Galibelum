@@ -13,6 +13,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Offer
 {
+    /**
+     * @var /date
+     *
+     * @ORM\Column(name="creationDate", type="date", nullable=false)
+     */
+    private $creationDate;
 
     /**
      * Constructor
@@ -20,6 +26,8 @@ class Offer
     public function __construct()
     {
         $this->setStatus(0);
+        $this->setCreationDate(new \DateTime());
+        
     }
 
     /*
@@ -460,5 +468,29 @@ class Offer
     public function getActivity()
     {
         return $this->activity;
+    }
+
+    /**
+     * Set creationDate.
+     *
+     * @param \DateTime $creationDate
+     *
+     * @return Offer
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get creationDate.
+     *
+     * @return \DateTime
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
     }
 }
