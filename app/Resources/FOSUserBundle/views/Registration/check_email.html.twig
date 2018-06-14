@@ -13,4 +13,9 @@
     <div class="confirm">
         <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
     </div>
+
 {% endblock fos_user_content %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/countdown.js') }}"></script>
+{% endblock %}
