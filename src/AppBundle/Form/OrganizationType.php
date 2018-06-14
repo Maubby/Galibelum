@@ -48,44 +48,50 @@ class OrganizationType extends AbstractType
                 'placeholder' =>'Exemple : GBM eSport'))
             )
             ->add(
-                'phoneNumber', TextType::class,array(
+                'phoneNumber', TextType::class, array(
                     'attr' => array(
                         'minlength'=> 8, 'maxlength' => 32,
                         'label' =>'',
                         'class' => 'form-control' ))
-
             )
-            ->add('email',TextType::class,array(
+            ->add(
+                'email', TextType::class, array(
                 'attr' => array(
                     'minlength'=>2, 'maxlength' => 64,
                     'label'=>'',
                     'class'=> 'form-control' ))
             )
-            ->add('description', TextareaType::class,array(
+            ->add(
+                'description', TextareaType::class, array(
                 'attr'=> array(
                     'minlength'=>32, 'maxlength' => 250,
                     'label'=>'',
                     'class'=> 'form-control'))
             )
-            ->add('userRole',TextType::class,array(
+            ->add(
+                'userRole', TextType::class, array(
                 'attr'=> array(
                     'minlength'=>2, 'maxlength' => 32,
                     'label'=>'',
                     'class'=>'form-control' )
-            ))
-            ->add('status',TextType::class,array(
+                )
+            )
+            ->add(
+                'status', TextType::class, array(
                 'attr'=>array(
                     'minlength'=>2,'maxlength' => 32,
                     'label'=>'',
                     'class'=>'form-control'))
             )
-            ->add('address',TextType::class,array(
+            ->add(
+                'address', TextType::class, array(
                 'attr'=>array(
                     'minlength'=>2, 'maxlength' => 64,
                     'label'=>'',
                     'class'=>'form-control'))
             )
-            ->add('relationNumber',ChoiceType::class,array(
+            ->add(
+                'relationNumber', ChoiceType::class, array(
                     'attr'=> array(
                         'class'=> 'form-control'),
                     'choices'  => array(
