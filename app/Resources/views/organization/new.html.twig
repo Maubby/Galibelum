@@ -9,8 +9,7 @@
             <div class="col-md-7 ">
                 {{ form_start(form) }}
                 <div class="col-md-5 ">
-                    <h5 class="title">Information générale :</h5>
-                    <img class="picture" src="{{ asset('build/images/Logo Galibelum page inscription.png') }}"/img>
+                    <img class="picture" alt="Logo Galibelum" src="{{ asset('build/images/Logo_Galibelum_page_inscription.png') }}">
                 </div>
                 <div class="col-md-7">
                     <div class="onesection">
@@ -30,7 +29,6 @@
                             {{ form_errors(form.status) }}
                         </div>
                     </div>
-
                 </div>
                 <div class="col-md-12 ">
                     <div class="form-group">
@@ -48,7 +46,7 @@
             </div>
             <div class="col-md-5">
                 <div class="border">
-                    <h5 class="degradeblue">Information de Contact :</h5>
+                    <h1 class="degradeblue">Information de Contact </h1>
                     <div class="userRole">
                         <div class="form-group">
                             {{ form_label(form.userRole,'Poste au sein de la structure :') }}
@@ -73,13 +71,12 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <input type="submit" value="Enregistrer" class="btn btn-primary">
-            {{ form_end(form) }}
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <input type="submit" value="Enregistrer" class="btn btn-primary">
+                {{ form_end(form) }}
+            </div>
         </div>
-    </div>
     </div>
 
 

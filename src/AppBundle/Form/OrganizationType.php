@@ -45,45 +45,51 @@ class OrganizationType extends AbstractType
                     'minlength' => 2, 'maxlength' => 32,
                     'label' => '',
                     'class' => 'form-control',
-                'placeholder' =>'Exemple : GBM eSport'))
+                'placeholder' =>'Exemple: GBM eSport'))
             )
             ->add(
                 'phoneNumber', TextType::class,array(
                     'attr' => array(
                         'minlength'=> 8, 'maxlength' => 32,
                         'label' =>'',
-                        'class' => 'form-control' ))
+                        'class' => 'form-control',
+                        'placeholder' =>'Exemple: 0320353654'))
 
             )
             ->add('email',TextType::class,array(
                 'attr' => array(
                     'minlength'=>2, 'maxlength' => 64,
                     'label'=>'',
-                    'class'=> 'form-control' ))
+                    'class'=> 'form-control',
+                    'placeholder' =>'Exemple: Jeanfrançois@galibelum.fr'))
             )
             ->add('description', TextareaType::class,array(
                 'attr'=> array(
                     'minlength'=>32, 'maxlength' => 250,
                     'label'=>'',
-                    'class'=> 'form-control'))
+                    'class'=> 'form-control',
+                'placeholder' =>'Exemple: Maximun 250 caractères'))
             )
             ->add('userRole',TextType::class,array(
                 'attr'=> array(
                     'minlength'=>2, 'maxlength' => 32,
                     'label'=>'',
-                    'class'=>'form-control' )
-            ))
+                    'class'=>'form-control',
+                    'placeholder' =>'Exemple: Manager'))
+            )
             ->add('status',TextType::class,array(
                 'attr'=>array(
                     'minlength'=>2,'maxlength' => 32,
                     'label'=>'',
-                    'class'=>'form-control'))
+                    'class'=>'form-control',
+                    'placeholder' =>'Exemple : SA,SAS,SARL,Association ...' ))
             )
             ->add('address',TextType::class,array(
                 'attr'=>array(
                     'minlength'=>2, 'maxlength' => 64,
                     'label'=>'',
-                    'class'=>'form-control'))
+                    'class'=>'form-control',
+                    'placeholder' =>'Exemple : 4 avenue des Saules, bâtiment Le Doge, 59160 Lille'))
             )
             ->add('relationNumber',ChoiceType::class,array(
                     'attr'=> array(

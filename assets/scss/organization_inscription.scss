@@ -1,10 +1,7 @@
-.btn {
-  padding: 7px 4%;
-  margin-top: 2%;
-}
 
 .picture{
-  padding-right: 20%;
+  margin-left: 7%;
+  padding-right: 15%;
   padding-top: 2%;
   width: 100%;
 }
@@ -12,49 +9,40 @@
 .form-group{
   margin-bottom: 5%;
   padding: 3%;
-
 }
 
 .border{
-  padding:10% ;
+  margin-right: 5%;
   border: white solid 1px;
+  margin-left: 10%;
   border-radius: 5px;
-  margin: 5%;
   background-color: #e2e2e2;
-  padding-bottom: 17%;
-
+  margin-top: 5%;
 }
 
 .title
 {
-  padding-top:20% ;
+  padding-top:10% ;
   background: linear-gradient(to right, #137faf, #86ccc2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-align: center;
+  font-size: 34px;
 }
 
 #appbundle_organization_description {
- min-height: 250px;
-
+ min-height: 150px;
 }
 
 .onesection{
-  padding-top: 10%;
+  
+  padding-top: 5%;
 }
 
 .degradeblue{
-  margin-bottom: 20%;
+  margin-top: 10%;
   text-align: center;
-}
-
-.phoneNumber{
-  padding-top: 10%;
-  margin-bottom: 10%;
-}
-
-.email{
-  padding-top: 10%;
-
+  font-size: 34px;
 }
 
 .userRole{
