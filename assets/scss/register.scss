@@ -26,11 +26,13 @@ p.center{
 @media (min-width: 768px) and (max-width: 843px) {
   .logo-galibelum {
     width: 350px;
+    margin-left: 0;
   }
 }
 
-@media (min-width: 843px) and (max-width: 1110px) {
+@media (min-width: 843px) and (max-width: 1300px) {
   .logo-galibelum {
+    width: 400px;
     margin-left: 0;
   }
 }
