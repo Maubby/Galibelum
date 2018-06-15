@@ -1,0 +1,21 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/check_confirmed_email.css') }}">
+{% endblock %}
+
+{% block fos_user_content %}
+    <div class="thanks">
+        <p>Merci de vous être inscrit(e) sur Galibelum.</p>
+    </div>
+    <div class="confirm">
+        <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+    </div>
+
+{% endblock fos_user_content %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/countdown.js') }}"></script>
+{% endblock %}
