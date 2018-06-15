@@ -44,7 +44,32 @@ class OrganizationController extends Controller
 
         return $this->render(
             'organization/index.html.twig', array(
-            'organizations' => $organizations,
+                'organizations' => $organizations,
+            )
+        );
+    }
+
+    /**
+     * Lists all organization entities.
+     *
+     * @Route("/dashboard",    name="dashboard_index")
+     * @Method("GET")
+     */
+    public function dashboardAction()
+    {
+        $user = $this->getUser();
+        $name = $user->getFirstName() .' '. $user->getLastName();
+        $em = $this->getDoctrine()->getManager();
+        $organization = $em->getRepository('AppBundle:Organization')->findby(array('user' => $user));
+        $activities = $em->getRepository('AppBundle:Activity')->findby(array('organizationActivities' => $organization));
+        $offers = $em->getRepository('AppBundle:Offer')->findby(array('activity' => $activities));
+
+        return $this->render(
+            'dashboard/index.html.twig', array(
+                'organization' => $organization,
+                'activities' => $activities ,
+                'offers' => $offers,
+                'name' => $name,
             )
         );
     }
@@ -53,7 +78,7 @@ class OrganizationController extends Controller
      * Creates a new organization entity.
      *
      * @param Request $request New posted info
-     * @param int     $choose  organization or company
+     * @param int $choose organization or company
      *
      * @Route("/new/choose{choose}", name="organization_new")
      * @Method({"GET",               "POST"})
@@ -78,6 +103,7 @@ class OrganizationController extends Controller
             $organization->setUser($user);
             $organization->setNameCanonical(strtolower($organization->getName()));
             $em->persist($organization);
+            $em->persist($this->getUser()->setOrganization($organization));
             $em->flush();
 
             return $this->redirectToRoute(
@@ -89,9 +115,9 @@ class OrganizationController extends Controller
 
         return $this->render(
             'organization/new.html.twig', array(
-            'organization' => $organization,
-            'form' => $form->createView(),
-            'choose'=>$choose,
+                'organization' => $organization,
+                'form' => $form->createView(),
+                'choose'=>$choose,
             )
         );
     }
@@ -112,8 +138,8 @@ class OrganizationController extends Controller
 
         return $this->render(
             'organization/show.html.twig', array(
-            'organization' => $organization,
-            'delete_form' => $deleteForm->createView(),
+                'organization' => $organization,
+                'delete_form' => $deleteForm->createView(),
             )
         );
     }
@@ -149,9 +175,9 @@ class OrganizationController extends Controller
 
         return $this->render(
             'organization/edit.html.twig', array(
-            'organization' => $organization,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                'organization' => $organization,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
             )
         );
     }

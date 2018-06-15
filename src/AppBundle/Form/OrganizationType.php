@@ -88,6 +88,7 @@ class OrganizationType extends AbstractType
                     'attr'=>array(
                         'minlength'=>2, 'maxlength' => 64,
                         'class'=>'form-control'))
+
             )
             ->add(
                 'relationNumber', ChoiceType::class, array(

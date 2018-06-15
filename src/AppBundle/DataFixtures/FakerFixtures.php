@@ -87,7 +87,8 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
                 ->setPlainPassword($faker->password)
                 ->setFirstName($faker->firstName)
                 ->setLastName($faker->lastName)
-                ->setPhoneNumber($faker->phoneNumber);
+                ->setPhoneNumber($faker->phoneNumber)
+                ->setCgu(true);
 
             // Organization creation
             $organization = new Organization();
