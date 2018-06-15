@@ -63,7 +63,6 @@ class OfferController extends Controller
     {
         $offer = new Offer();
         $form = $this->createForm('AppBundle\Form\OfferType', $offer);
-        $offer = $this->getUser()->getOrganization()->getOrganizationActivity();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

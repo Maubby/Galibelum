@@ -9,41 +9,42 @@
 {% block body %}
     <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
     <!-- Zero intern console warning -->
-    <div class="container">
+    <div class="container pt-100 pb-60">
         <div class="row">
-            <div class="col-lg-4">
-                    <h3 class="text-center">Bienvenue {{ name }}</h3>
-                    <div class="panel-body">
-                        <img class="center-block" src="http://via.placeholder.com/150">
-                        <ul class="list-unstyled">
-                            {% for organization in organization %}
-                                <li>{{ organization.name }}</li>
-                                <li>{{ organization.phoneNumber }}</li>
-                                <li>{{ organization.email }}</li>
-                                <li>{{ organization.address }}</li>
-                                <li><a href="{{ path('organization_edit', { 'id': organization.id }) }}">Modifier votre structure</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
+            <div class="col-md-3 col">
+                <div class="card">
+                    <ul class="list-group">
+                        <li class="list-group-item text-center"><p>Bienvenue {{ name }}</p></li>
+                        {% for organization in organization %}
+                            <li class="list-group-item text-left">{{ organization.name }}</li>
+                            <li class="list-group-item text-left">{{ organization.phoneNumber }}</li>
+                            <li class="list-group-item text-left">{{ organization.email }}</li>
+                            <li class="list-group-item text-left">{{ organization.address }}</li>
+                            <li class="list-group-item text-left text-muted"><a href="{{ path('organization_edit', { 'id': organization.id }) }}">Modifier votre structure</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-md-offset-1 col-md-4">
                 <div class="panel panel-default">
-                    <h3 class="text-center">Mes Activitées</h3>
+                    <h3 class="text-center">Mes Activités</h3>
                     <div class="panel-body">
                         <div id="myCarousel" class="carousel vertical" data-ride="carousel">
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
                                 {% for activity in activities %}
                                     <div class="{% if loop.first %}active{% endif %} item">
-                                        <div class="media panel panel-default">
-                                            <div class="media-left media-middle">
+                                        <div class="panel panel-primary">
+                                            <!--<div class="media-left media-middle">
                                                 <img class="media-object" src="http://via.placeholder.com/100" alt="placeholder">
-                                            </div>
-                                            <div class="media-body">
-                                                <h5 class="media-heading">{{ activity.name }}</h5>
-                                                <p>{{ activity.type }}</p>
-                                                <p>{{ activity.date }}</p>
-                                                <a href="{{ path('offer_show', { 'id': activity.id }) }}" class="btn btn-primary">Plus de détails</a>
+                                            </div> -->
+                                            <h5 class="panel-title text-center">{{ activity.name }}</h5>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <p class="panel-item col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2 col-xs-4 col-xs-offset-2">{{ activity.type }}</p>
+                                                    <p class="panel-item col-md-6 col-sm-6 col-xs-6">{{ activity.date }}</p>
+                                                </div>
+                                                <a href="{{ path('offer_show', { 'id': activity.id }) }}" class="btn btn-primary center-block">Plus de détails</a>
                                             </div>
                                         </div>
                                     </div>
@@ -60,11 +61,11 @@
                                 <span class="sr-only">next</span>
                             </a>
                         </div>
-                        <a href="{{ path('offer_new') }}" class="btn btn-primary">Ajouter une Offre</a>
+                        <a href="{{ path('offer_new') }}" class="btn btn-primary panel-btn">Ajouter une Offre</a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-md-4">
                 <div class="panel panel-default">
                     <h3 class="text-center">Mes offres</h3>
                     <div class="panel-body">
@@ -97,7 +98,7 @@
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
-                        <a href="{{ path('activity_new') }}" class="btn btn-primary">Ajouter une Activitée</a>
+                        <a href="{{ path('activity_new') }}" class="btn btn-primary panel-btn">Ajouter une Activitée</a>
                     </div>
                 </div>
             </div>

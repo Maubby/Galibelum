@@ -30,14 +30,21 @@
     top: -30px;
   }
 }
-.panel {
-  margin-top: 30px;
-  h3 {
-    margin-bottom: 20px;
-  }
-  .panel-body {
-    .btn {
-      margin: auto;
+
+.panel-body {
+  .panel-primary {
+    .panel-title {
+      color: rgb(41,117,181);
+      padding-top: 10px;
     }
   }
+  .panel-btn {
+    margin-top: 30px;
+  }
+}
+.pt-100 {
+  padding-top: 100px;
+}
+.pb-60 {
+  padding-bottom: 60px;
 }
