@@ -15,4 +15,11 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+/web/uploads/
+/web/build/
+/node_modules/
 .idea
+*.php~
+.directory
+npm-debug.log
+package-lock.json

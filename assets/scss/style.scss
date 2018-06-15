@@ -1,0 +1,512 @@
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-regular.scss";
+@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-brands.scss";
+
+/*************/
+/* Variables */
+/*************/
+
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+$fa-font-path:  "~@fortawesome/fontawesome-free-webfonts/webfonts";
+
+/* Basic colors */
+
+$brand-primary: darken(#428bca, 20%);
+$grey-bg-color: rgba(222, 228, 232, 0.51);
+$lighter-grey-bg-color: rgba(245, 248, 250, 0.79);
+$border-color:  #e4e4e4;
+$placeholder-color: rgb(84, 149, 175);
+$background-a-color: rgba(43, 158, 176, 0.64);
+
+$grey-color:    #999999;
+$main-color:    rgb(43,109,175);
+$seconde-color: rgb(41,117,181);
+$three-color:   rgb(32,127,188);
+$four-color:    rgb(22,138,196);
+$five-color:    rgb(13,149,203);
+$six-color:     rgb(14,160,204);
+$seven-color:   rgb(13,188,208);
+$eight-color:   rgb(55,195,203);
+$nine-color:    rgb(91,199,194);
+
+/* Fonts */
+
+$font-family-base: sans-serif;
+
+/*******/
+/* CSS */
+/*******/
+
+body {
+  background-color: $grey-bg-color;
+  height: 100%;
+  margin: 0;
+}
+
+/* Colors */
+
+.grey {
+  color: $grey-color;
+}
+
+/* Stylizing titles and text */
+
+h1 {
+  font-size: 52px;
+  text-transform: none;
+  font-style: normal;
+  color: $six-color;
+  font-weight: 900;
+  font-family: $font-family-base;
+}
+
+h2 {
+  font-size: 43px;
+  text-transform: none;
+  font-style: normal;
+  color: $six-color;
+  font-weight: 900;
+  font-family: $font-family-base;
+}
+
+h3 {
+  font-size: 34px;
+  text-transform: none;
+  font-style: normal;
+  color: $six-color;
+  font-weight: 900;
+  font-family: $font-family-base;
+}
+
+h4 {
+  font-size: 29px;
+  text-transform: none;
+  font-style: normal;
+  color: $six-color;
+  font-weight: 900;
+  font-family: $font-family-base;
+}
+
+h5 {
+  font-size: 25px;
+  text-transform: none;
+  font-style: normal;
+  color: $six-color;
+  font-weight: 900;
+  font-family: $font-family-base;
+}
+
+.light-subtitle-text {
+  color: #5495AF;
+  font-weight: 300;
+}
+
+.normal-subtitle-text {
+  color: $grey-color;
+  font-weight: 300;
+}
+
+.bold-text {
+  color: #5495AF;
+  font-weight: 600;
+}
+
+p.space {
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+p.size {
+  font-size: 1.5em;
+}
+
+/* Generic Padding / Margin */
+
+.p-0 {
+  padding: 0 !important;
+}
+
+.pt-0 {
+  padding-top: 0 !important;
+}
+
+.pr-0 {
+  padding-right: 0 !important;
+}
+
+.pr-20 {
+  padding-right: 20px !important;
+}
+
+.pl-0 {
+  padding-left: 0 !important;
+}
+
+.pt-10 {
+  padding-top: 10px !important;
+}
+
+.pt-20 {
+  padding-top: 20px !important;
+}
+
+.pt-30 {
+  padding-top: 30px !important;
+}
+
+.pt-40 {
+  padding-top: 40px !important;
+}
+
+.pt-50 {
+  padding-top: 50px !important;
+}
+
+.pt-60 {
+  padding-top: 60px !important;
+}
+
+.pt-70 {
+  padding-top: 70px !important;
+}
+
+.pt-100 {
+  padding-top: 100px !important;
+}
+
+.pt-120 {
+  padding-top: 120px !important;
+}
+
+.pt-140 {
+  padding-top: 140px !important;
+}
+
+.p-select {
+  padding: 5px !important;
+}
+
+.pb-0 {
+  padding-bottom: 0 !important;
+}
+
+.pb-10 {
+  padding-bottom: 10px !important;
+}
+
+.pb-20 {
+  padding-bottom: 20px !important;
+}
+
+.pb-30 {
+  padding-bottom: 30px !important;
+}
+
+.pb-40 {
+  padding-bottom: 40px !important;
+}
+
+.pb-50 {
+  padding-bottom: 50px !important;
+}
+
+.pb-60 {
+  padding-bottom: 60px !important;
+}
+
+.pb-70 {
+  padding-bottom: 70px !important;
+}
+
+.pb-100 {
+  padding-bottom: 100px !important;
+}
+
+.pb-120 {
+  padding-bottom: 120px !important;
+}
+
+.pb-140 {
+  padding-bottom: 140px !important;
+}
+
+.m-0 {
+  margin: 0 !important;
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.mt-5 {
+  margin-top: 5px !important;
+}
+
+.mt-10 {
+  margin-top: 10px !important;
+}
+
+.mt-20 {
+  margin-top: 20px !important;
+}
+
+.mt-30 {
+  margin-top: 30px !important;
+}
+
+.mt-40 {
+  margin-top: 40px !important;
+}
+
+.mt-50 {
+  margin-top: 50px !important;
+}
+
+.mt-60 {
+  margin-top: 60px !important;
+}
+
+.mt-70 {
+  margin-top: 70px !important;
+}
+
+.mt-80 {
+  margin-top: 80px !important;
+}
+
+.mt-90 {
+  margin-top: 90px !important;
+}
+
+.mt-100 {
+  margin-top: 100px !important;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+
+.mb-20 {
+  margin-bottom: 20px !important;
+}
+
+.mb-30 {
+  margin-bottom: 30px !important;
+}
+
+.mb-40 {
+  margin-bottom: 40px !important;
+}
+
+.mb-50 {
+  margin-bottom: 50px !important;
+}
+
+.mb-60 {
+  margin-bottom: 60px !important;
+}
+
+.mb-70 {
+  margin-bottom: 70px !important;
+}
+
+.mb-80 {
+  margin-bottom: 80px !important;
+}
+
+.mb-90 {
+  margin-bottom: 90px !important;
+}
+
+.mb-100 {
+  margin-bottom: 100px !important;
+}
+
+/* NavBar */
+
+.navbar {
+  margin-bottom: 0;
+  background-color: white;
+  border: none !important;
+}
+
+.navbar-brand {
+  padding: 0 0 0 0;
+}
+
+.navbar-brand > img {
+  margin: 0 auto;
+  width: 110px;
+  height: auto;
+  padding: 7px 10px 10px 10px;
+}
+
+.navbar-custom .dropdown-menu {
+  background-color: $lighter-grey-bg-color;
+  -webkit-box-shadow: none;
+  box-shadow: none
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  background-color: $background-a-color;
+  color: white;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background-color: #679ba7c2;
+  color: white;
+}
+
+@media screen and (min-width: 541px) and (max-width: 1060px) {
+  .container > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-header, .container-fluid > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
+/* Inscription choose custom CSS */
+
+.degradeblue {
+  background: linear-gradient(to right, #137faf, #86ccc2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.degradered {
+  background: linear-gradient(to right, #fad27b,#f9867d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.backred {
+  background-image: linear-gradient(to right, #fad27b, #f9867d);
+}
+
+.backblue {
+  background-image: linear-gradient(to right, #86ccc2 , #137faf);
+}
+
+/* Buttons */
+
+.backblue-btn {
+  background-image: linear-gradient(to right, #86ccc2 , #137faf);
+  border-color: #FFFFFF;
+  width: 100%;
+}
+
+.backred-btn {
+  background-image: linear-gradient(to right, #fad27b, #f9867d);
+  border-color: #FFFFFF;
+  width: 100%;
+}
+
+/* Input fields */
+
+.input-group {
+  display: inline;
+}
+
+.input-field {
+  margin: 10px 0 0 0;
+  outline: 0;
+  display: inline-block !important;
+  width: 100% !important;
+  padding: 7px;
+  background-color: #fff;
+  border: 1px solid $border-color;
+  box-shadow: none;
+  border-radius: 4px !important;
+}
+
+input::placeholder {
+  font-weight: 200;
+  opacity: 0.7;
+  color: $placeholder-color !important;
+}
+
+/* Footer */
+
+#galibelum-footer {
+  background-color: $lighter-grey-bg-color;
+  color: $grey-color;
+  font-weight: 300;
+  margin-top: 50px;
+  text-align: center;
+  border-top: 1px solid $border-color;
+}
+
+.made-with-love {
+  color: #ff6f73;
+}
+
+
+#galibelum-footer ul li a {
+  color: $five-color;
+}
+
+#galibelum-footer ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#galibelum-footer ul li a {
+  font-size: 15px;
+  color: #9C9C9C;
+}
+
+.footer-social-links li a:hover {
+  opacity: .6;
+}
+
+#galibelum-footer p {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.footer-social-links {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.img_footer {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: 50%;
+}
+
+/* Others */
+
+.center {
+  text-align: center;
+}
+
+.box {
+  background-color: rgba(252, 252, 252, .95);
+  padding: 5px 5px 20px 5px;
+  border-radius: 7px;
+  margin-top: 20px;
+}
+
+.backgroundimg {
+  background-image:url(https://i1.wp.com/gallibellum.fr/wp-content/uploads/2018/03/Slider-inscription-gallibelluM.jpg);
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+a.btn-custom {
+  color: #ffffff;
+  font-weight: bold;
+  padding: 7px 30%;
+}
+
+.fa-user-circle {
+  font-size: 50px;
+}

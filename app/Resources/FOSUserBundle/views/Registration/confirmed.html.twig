@@ -1,0 +1,13 @@
+{% extends "@FOSUser/layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    {% if targetUrl %}
+    <p><a href="{{ path('inscription_index') }}">{{ 'registration.back'|trans }}</a></p>
+    {% endif %}
+{% endblock fos_user_content %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/countdown.js') }}"></script>
+{% endblock %}

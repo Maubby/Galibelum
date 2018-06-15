@@ -1,0 +1,92 @@
+{# app/Resources/FOSUserBundle/views/Security/login.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Se connecter{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/login.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <main id="login">
+        {% if error %}
+            <div class="alert alert-danger" role="alert">
+                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            </div>
+        {% endif %}
+        <section>
+            <!-- Form to login-->
+            <div class="container">
+                <div class="row boxing-canvas mt-50">
+                    <div class="col-md-6 col-md-offset-3">
+                        <form action="{{ path("fos_user_security_check") }}" method="post">
+                            <!-- Enter email -->
+                            <i class="far fa-user-circle text-center degradeblue" style="font-size: 50px"></i>
+                            <h5 class="text-center degradeblue">Se connecter à Galibelum</h5>
+                            <div class="col-sm-12">
+                                <label for="username"></label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-field" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" placeholder=" Adresse email">
+                                </div>
+                            </div>
+                            <!-- End email -->
+
+                            <!-- Enter password -->
+                            <div class="col-sm-12">
+                                <label for="password"></label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control input-field" id="password"  name="_password" required="required" autocomplete="current-password" placeholder=" Mot de passe">
+                                </div>
+                            </div>
+                            <!-- End password -->
+
+                            <!-- Ticking box to keep the client's information -->
+                            <div class="col-sm-12">
+                                <br>
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                                <label for="remember_me" class="light-subtitle-text">{{ 'Se souvenir de moi'|trans }}</label>
+                            </div>
+                            <!-- End ticking box -->
+
+                            <!-- Submit button -->
+                            <div class="col-sm-12 col-xs-12 text-center">
+                                <br>
+                                <input type="submit" id="_submit" name="_submit" class="btn btn-primary backblue-btn" value="{{ 'Se connecter'|trans }}"/>
+                            </div>
+                            <!-- End submit button -->
+
+                            {% if csrf_token %}
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row subtitle-boxing-canvas">
+                    <!-- Forgotten password -->
+                    <div class="col-sm-12 forgotten-password normal-subtitle-text">
+                        <i class="fas fa-unlock"></i> &nbsp;  Mot de passe oublié ?
+                        <a href="{{ path('fos_user_resetting_request') }}" class="five-color"> C'est par ici !</a>
+                        <br>
+                        <i class="fas fa-user-plus"></i>&nbsp; Nouveau sur Galibelum ?
+                        <a href="{{ path('fos_user_registration_register') }}" class="orange-color"> Créer un compte</a>
+                    </div>
+                    <!-- End forgotten password -->
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
