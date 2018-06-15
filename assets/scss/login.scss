@@ -1,59 +1,56 @@
-body, html {
-  height: 100%;
-  margin: 0;
-}
-
-label {
-  margin-top: 15px;
-}
+@import "style";
 
 a {
   padding-top: 10px;
 }
 
 input:-webkit-autofill {
-
-  -webkit-box-shadow: inset 0 0 0px 9999px white;
+  -webkit-box-shadow: inset 0 0 0 9999px white;
 }
 
-/* Background image */
-.backgroundimg {
-  background-image:url(https://i1.wp.com/gallibellum.fr/wp-content/uploads/2018/03/Slider-inscription-gallibelluM.jpg);
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.five-color {
+  color: $five-color;
+}
+
+#login {
+  text-align: center;
 }
 
 /* Form Sign in */
-.box {
-  background-color: rgba(38, 38, 38, .8);
-  padding: 5px 5px 20px 5px;
-  border-radius: 7px;
-  margin-top: 20px;
+.boxing-canvas {
+  background-color: #fff;
+  width: auto;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 40px 5px 20px 5px;
+  text-align: center;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-top: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+}
+
+.subtitle-boxing-canvas {
+  background-color: $lighter-grey-bg-color;
+  width: auto;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px 5px 20px 5px;
+  text-align: left;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
 }
 
 .forgotten-password {
   padding-top: 5px;
 }
 
-.white-color {
-  color: white;
-}
-
 .orange-color {
-  color: #fad27b;
-}
-
-/* Logo Galibelum white */
-.logo-galibelum-blanc {
-  width: 400px;
-  padding-top: 10px;
-}
-
-@media (max-width: 843px) {
-  .logo-galibelum-blanc {
-    width: 360px;
-    padding-top: 35px;
-  }
+  color: #ffaf7e;
 }

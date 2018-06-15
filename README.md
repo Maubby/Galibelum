@@ -17,7 +17,7 @@ Galibelum is a web platform linking eSport organizations with different brands, 
 
 ## Technos
 
-PHP ^7.1 / Symfony 3.4.11 / Bootstrap 3.3.7 SASS / Doctrine - MYSQL.
+PHP ^7.1 / Symfony 3.4.11 / Bootstrap 3.3.7 SASS Webpack / Doctrine - MYSQL.
 
 ## Require
     
@@ -25,17 +25,22 @@ PHP ^7.1 / Symfony 3.4.11 / Bootstrap 3.3.7 SASS / Doctrine - MYSQL.
     * MySql                         https://dev.mysql.com/downloads/installer/
     * Symfony Installer             https://github.com/symfony/symfony-installer
     * Composer                      https://getcomposer.org/download/
-    * npm 6.1.0                     https://www.npmjs.com/get-npm
-    * node 10.3.0                   https://www.npmjs.com/get-npm
+    * npm ^6.1.0                    https://www.npmjs.com/get-npm
+    * node ^10.3.0                  https://www.npmjs.com/get-npm
 
 ## Download project
 
 Go to your working folder
 
-    * Clone project -> git clone <url>
-    * composer install / composer update (create parameters.yml with your default config.)
-    * bin/console d:s:u --force (in "galibelum" database.)
-    * bin/console c:c
-    * bin/console s:r
+    * Clone project -> git clone <url>.
+    * 'composer install' / 'composer update' (create parameters.yml with your default config based on parameters.yml.dist).
+    * 'bin/console d:d:c' (will create "galibelum" database).
+    * 'bin/console d:s:u --force' (in "galibelum" database).
+    * 'bin/console d:f:l'.
+    * Run 'npm install' and then run 'npm run dev' to run the dev script.
+    * 'bin/console c:c'.
+    * 'bin/console s:r'.
+    * Go on localhost:8000, create a profile and access to all routes.
 
-- 29/05/2018 - V.1.0.0
+
+- 15/06/2018 - V.1.0.0
