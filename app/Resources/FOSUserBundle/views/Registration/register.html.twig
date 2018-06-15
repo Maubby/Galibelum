@@ -1,62 +1,90 @@
+{# app/Resources/FOSUserBundle/views/Registration/register.html.twig #}
 {% extends 'base.html.twig' %}
+
+{% block title %}S'enregistrer{% endblock %}
+
 {% block stylesheets %}
+
+    <!-- Additional CSS links-->
     <link rel="stylesheet" href="{{ asset('build/register.css') }}">
 {% endblock %}
-{% block body %}
-    <section>
-        <!-- Form to create your profile-->
-        <div class="container">
-            <div class="row ">
-                <div class="col-sm-6 col-xs-12 boxing-canvas mt-50">
-                    <h3 class = "col-sm-12 text-center degradeblue">Création de votre profil</h3>
-                    <p class="text-justify center">Les informations requises pour l'inscription n'ont qu'un but d'identification. Vos données ne
-                        ne seront pas transmises aux différentes parties prenantes.</p>
 
-                    {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'),}) }}
-                    <div class="form-group col-sm-6">
-                        {{ form_label(form.firstName) }}
-                        {{ form_widget(form.firstName) }}
-                        {{ form_errors(form.firstName) }}
-                    </div>
-                    <div class="form-group col-sm-6">
-                        {{ form_label(form.lastName) }}
-                        {{ form_widget(form.lastName) }}
-                        {{ form_errors(form.lastName) }}
-                    </div>
-                    <div class="form-group col-sm-12">
-                        {{ form_label(form.email, 'Email :')}}
-                        {{ form_widget(form.email, {'attr': {'class':'form-control' }}) }}
-                        {{ form_errors(form.email) }}
-                    </div>
-                    <div class="form-group col-sm-12">
-                        {{ form_label(form.phoneNumber) }}
-                        {{ form_widget(form.phoneNumber) }}
-                        {{ form_errors(form.phoneNumber) }}
-                    </div>
-                    <div class="form-group col-sm-12">
-                        {{ form_label(form.plainPassword.first, 'Mot de passe :') }}
-                        {{ form_widget(form.plainPassword.first, {'attr': {'class':'form-control' }}) }}
-                        {{ form_errors(form.plainPassword.first) }}
-                    </div>
-                    <div class="form-group col-sm-12">
-                        {{ form_label(form.plainPassword.second, 'Confirmation du mot de passe :') }}
-                        {{ form_widget(form.plainPassword.second, {'attr': {'class':'form-control' }}) }}
-                    </div>
-                    <div class="form-group col-sm-12">
-                        {{ form_widget(form.cgu) }}
-                        {{ form_label(form.cgu) }}
-                        {{ form_errors(form.cgu) }}
-                    </div>
-                    <div class="col-sm-12 col-xs-12 text-center">
-                        <input class="col-sm-12 col-xs-12 btn btn-primary backblue-btn" type="submit" value="{{ "S'inscrire"|trans }}" />
-                    </div>
-                    {{ form_end(form) }}
-                </div>
-                <div class="col-sm-6 text-center hidden-xs">
-                    <img class="logo-galibelum" src="{{ asset('build/images/logo_galibelum.png') }}" alt="placeholder">
-                </div>
-            </div>
-        </div>
-    </section>
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
 {% endblock %}
 
+{% block body %}
+    <main id="register">
+        <section>
+            <!-- Form to create your profile -->
+            <div class="container-fluid">
+                <div class="row boxing-canvas mt-50 pb-50">
+                    <div class="col-md-6 col-xs-12">
+                        <i class="fas fa-user-plus text-center degradeblue" style="font-size: 50px"></i>
+                        <h5 class="text-center degradeblue">Création de votre profil</h5>
+                        <p class="normal-subtitle-text text-justify center">Les informations requises pour l'inscription n'ont qu'un but d'identification.
+                            <br>Vos données ne seront pas transmises aux différentes parties prenantes.</p>
+
+                        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'),}) }}
+                        <div class="col-sm-6">
+                            {{ form_widget(form.firstName, {'attr': {'class':'form-control input-field', 'placeholder' : 'Prénom' }}) }}
+                            {{ form_errors(form.firstName) }}
+                        </div>
+                        <div class="col-sm-6">
+                            {{ form_widget(form.lastName, {'attr': {'class':'form-control input-field', 'placeholder' : 'Nom' }}) }}
+                            {{ form_errors(form.lastName) }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{ form_widget(form.email, {'attr': {'class':'form-control input-field', 'placeholder' : 'Adresse email valide' }}) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{ form_widget(form.phoneNumber, {'attr': {'class':'form-control input-field', 'placeholder' : 'Numéro de téléphone' }}) }}
+                            {{ form_errors(form.phoneNumber) }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{ form_widget(form.plainPassword.first,
+                                {'attr': {'class':'form-control input-field', 'placeholder' : 'Mot de passe'  }}) }}
+                            {{ form_errors(form.plainPassword.first) }}
+                        </div>
+                        <div class="col-sm-12">
+                            {{ form_widget(form.plainPassword.second,
+                                {'attr': {'class':'form-control input-field', 'placeholder' : 'Vérification mot de passe'  }}) }}
+                            {{ form_errors(form.plainPassword.second) }}
+                        </div>
+                        <div class="col-sm-12 normal-subtitle-text">
+                            {{ form_widget(form.cgu) }}
+                            {{ form_label(form.cgu) }}
+                            {{ form_errors(form.cgu) }}
+                        </div>
+                        <div class="col-sm-12 col-xs-12 text-center">
+                            <input class="col-sm-12 col-xs-12 btn btn-primary backblue-btn" type="submit" value="{{ "S'inscrire"|trans }}" />
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                    <div class="col-md-6 text-center hidden-xs">
+                        <img class="logo-galibelum" src="{{ asset('build/images/logo_galibelum.png') }}" alt="placeholder">
+                    </div>
+                </div>
+                <div class="row subtitle-boxing-canvas">
+                    <!-- Forgotten password -->
+                    <div class="col-sm-12 forgotten-password normal-subtitle-text">
+                        <i class="fas fa-unlock"></i> &nbsp;  Mot de passe oublié ?
+                        <a href="{{ path('fos_user_resetting_request') }}" class="five-color"> C'est par ici !</a>
+                        <br>
+                        <i class="fas fa-sign-in-alt"></i>&nbsp; Déjà un compte ?
+                        <a href="{{ path('fos_user_security_login') }}" class="orange-color"> Se connecter</a>
+                    </div>
+                    <!-- End forgotten password -->
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock %}
