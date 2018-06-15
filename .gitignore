@@ -1,6 +1,5 @@
 /.web-server-pid
 /app/config/parameters.yml
-/build/
 /phpunit.xml
 /var/*
 !/var/cache
@@ -14,12 +13,14 @@
 !var/sessions/.gitkeep
 !var/SymfonyRequirements.php
 /vendor/
+/node_modules/
 /web/bundles/
 /web/uploads/
 /web/build/
-/node_modules/
+/web/wordpress/
 .idea
 *.php~
 .directory
 npm-debug.log
 package-lock.json
+/web/.htaccess
