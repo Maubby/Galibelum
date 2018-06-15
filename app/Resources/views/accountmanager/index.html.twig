@@ -1,8 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Accountmanagers list</h1>
-
+    <h1>Account managers</h1>
     <table>
         <thead>
             <tr>
@@ -11,7 +10,6 @@
                 <th>Lastname</th>
                 <th>Phonenumber</th>
                 <th>Email</th>
-                <th>Password</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -23,7 +21,6 @@
                 <td>{{ accountManager.lastName }}</td>
                 <td>{{ accountManager.phoneNumber }}</td>
                 <td>{{ accountManager.email }}</td>
-                <td>{{ accountManager.password }}</td>
                 <td>
                     <ul>
                         <li>
@@ -44,4 +41,6 @@
             <a href="{{ path('accountmanager_new') }}">Create a new accountManager</a>
         </li>
     </ul>
+
 {% endblock %}
+

@@ -73,9 +73,19 @@ class AccountManagerController extends Controller
             $em->persist($accountManager);
             $em->flush();
 
+            $password = 'secretcode';
+            $options = ['cost' => 12];
+            $password_hash = password_hash($password, PASSWORD_DEFAULT, $options);
+            if (password_verify($password, $password_hash)) {
+                $accountManager->setPassword($password_hash);
+                $em->persist($accountManager);
+                $em->flush();
+            }
+
             return $this->redirectToRoute(
                 'accountmanager_show',
-                array('id' => $accountManager->getId())
+                array('id' => $accountManager->getId(),
+                )
             );
         }
 

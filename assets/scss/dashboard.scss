@@ -1,0 +1,50 @@
+.carousel.vertical {
+  .carousel-inner {
+    height: 100%;
+  }
+  .item {
+    -webkit-transition: 0.6s ease-in-out top;
+    -moz-transition: 0.6s ease-in-out top;
+    -ms-transition: 0.6s ease-in-out top;
+    -o-transition: 0.6s ease-in-out top;
+    transition: 0.6s ease-in-out top;
+    margin: auto;
+    .panel .media-body {
+      h5 {
+        font-size: 15px;
+      }
+    }
+  }
+  .next {
+    top: 400px;
+  }
+  .prev {
+    top: -400px;
+  }
+  .carousel-control {
+    width: 100%;
+    bottom: inherit;
+    top: inherit;
+  }
+  .up {
+    top: -30px;
+  }
+}
+
+.panel-body {
+  .panel-primary {
+    .panel-title {
+      color: rgb(41,117,181);
+      padding-top: 10px;
+    }
+  }
+  .panel-btn {
+    margin-top: 30px;
+  }
+}
+.pt-100 {
+  padding-top: 100px;
+}
+.pb-60 {
+  padding-bottom: 60px;
+}
