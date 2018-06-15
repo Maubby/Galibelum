@@ -8,6 +8,7 @@
             <a href="{{ path('fos_user_security_logout') }}">
                 {{ 'Se déconnecter'|trans({}, 'FOSUserBundle') }}
             </a>
+        {% elseif is_granted("IS_AUTHENTICATED_ANONYMOUSLY") %}
         {% else %}
             <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
         {% endif %}
@@ -16,7 +17,7 @@
     {% if app.request.hasPreviousSession %}
         {% for type, messages in app.session.flashbag.all() %}
             {% for message in messages %}
-                <div class="flash-{{ type }}">
+                <div class="flash flash-{{ type }}">
                     {{ message }}
                 </div>
             {% endfor %}
@@ -25,6 +26,6 @@
 
     <div>
         {% block fos_user_content %}
-         {% endblock fos_user_content %}
+        {% endblock fos_user_content %}
     </div>
 {% endblock %}

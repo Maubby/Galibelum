@@ -84,10 +84,10 @@ fos_user:
                 type: AppBundle\Form\RegistrationType
             confirmation:
                 enabled: true
-                template:   '@FOSUser/Registration/email.txt.twig'
+                template:    '@FOSUser/Registration/email.txt.twig'
                 from_email:
-                    address: "%mailer_user%"
-                    sender_name: Registration
+                    address:        "%mailer_user%"
+                    sender_name:    Registration
         profile:
             form:
                 type: AppBundle\Form\ProfileType
