@@ -13,6 +13,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Activity
 {
+    /**
+     * @var /date
+     *
+     * @ORM\Column(name="creationDate", type="date", nullable=false)
+     */
+    private $creationDate;
+
     /*
      * Relationship Mapping Metadata
      */
@@ -434,6 +441,7 @@ class Activity
     public function __construct()
     {
         $this->activities = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setCreationDate(new \DateTime());
     }
 
     /**
@@ -492,5 +500,29 @@ class Activity
     public function getOrganizationActivities()
     {
         return $this->organizationActivities;
+    }
+
+    /**
+     * Set creationDate.
+     *
+     * @param \DateTime $creationDate
+     *
+     * @return Activity
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get creationDate.
+     *
+     * @return  /date
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
     }
 }

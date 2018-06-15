@@ -54,19 +54,22 @@ class ActivityController extends Controller
      *
      * @param Request $request Delete posted info
      *
+     * @return Response A Response instance
      * @Route("/new",  name="activity_new")
      * @Method({"GET", "POST"})
      *
-     * @return Response A Response instance
      */
     public function newAction(Request $request)
     {
         $activity = new Activity();
         $form = $this->createForm('AppBundle\Form\ActivityType', $activity);
+        $organization = $this->getUser()->getOrganization();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $activity->setOrganizationActivities($organization);
+            $activity->setNameCanonical(strtolower($activity->getName()));
             $em->persist($activity);
             $em->flush();
 

@@ -45,13 +45,6 @@ class OfferType extends AbstractType
                         'class' => 'form-control'))
             )
             ->add(
-                'description', TextareaType::class, array(
-                    'attr' => array('maxlength' => 250,
-                        'label' => 'description',
-                        'class' => 'form-control'))
-            )
-            ->add('date', DateType::class, array('data' => new \DateTime('now')))
-            ->add(
                 'amount', IntegerType::class,
                 array('attr' => array('min' => 1,
                     'label' => 'amount',
@@ -64,10 +57,12 @@ class OfferType extends AbstractType
                     'label' => 'partnershipNumber',
                     'class' => 'form-control'))
             )
+            ->add('date', DateType::class, array('data' => new \DateTime('now')))
             ->add(
-                'activity', TextareaType::class, array(
-                    'label' => "activity :",
-                    'attr' => array('class' => 'form-control'))
+                'description', TextareaType::class, array(
+                    'attr' => array('maxlength' => 250,
+                        'label' => 'description',
+                        'class' => 'form-control'))
             );
 
     }
