@@ -6,10 +6,10 @@
     <section>
         <!-- Form to create your profile-->
         <div class="container">
-            <div class="row">
-                <div class="col-sm-6 col-xs-12">
+            <div class="row ">
+                <div class="col-sm-6 col-xs-12 boxing-canvas mt-50">
                     <h3 class = "col-sm-12 text-center degradeblue">Création de votre profil</h3>
-                    <p class="text-justify">Les informations requises pour l'inscription n'ont qu'un but d'identification. Vos données ne
+                    <p class="text-justify center">Les informations requises pour l'inscription n'ont qu'un but d'identification. Vos données ne
                         ne seront pas transmises aux différentes parties prenantes.</p>
 
                     {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'),}) }}
@@ -28,21 +28,21 @@
                         {{ form_widget(form.email, {'attr': {'class':'form-control' }}) }}
                         {{ form_errors(form.email) }}
                     </div>
-                    <div class="col-sm-12">
+                    <div class="form-group col-sm-12">
                         {{ form_label(form.phoneNumber) }}
                         {{ form_widget(form.phoneNumber) }}
                         {{ form_errors(form.phoneNumber) }}
                     </div>
-                    <div class="col-sm-12">
+                    <div class="form-group col-sm-12">
                         {{ form_label(form.plainPassword.first, 'Mot de passe :') }}
                         {{ form_widget(form.plainPassword.first, {'attr': {'class':'form-control' }}) }}
                         {{ form_errors(form.plainPassword.first) }}
                     </div>
-                    <div class="col-sm-12">
+                    <div class="form-group col-sm-12">
                         {{ form_label(form.plainPassword.second, 'Confirmation du mot de passe :') }}
                         {{ form_widget(form.plainPassword.second, {'attr': {'class':'form-control' }}) }}
                     </div>
-                    <div class="col-sm-12">
+                    <div class="form-group col-sm-12">
                         {{ form_widget(form.cgu) }}
                         {{ form_label(form.cgu) }}
                         {{ form_errors(form.cgu) }}

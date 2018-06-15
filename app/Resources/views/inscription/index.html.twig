@@ -1,5 +1,12 @@
 {% extends 'base.html.twig' %}
 
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/login.css') }}">
+{% endblock %}
+
 {% block body %}
     <main class="page-wrapper loading-done backgroundimg">
         <article id="post-4665" class="post-4665 page type-page status-publish hentry">
@@ -8,7 +15,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="box">
+                            <div class="pres">
                                 <p class="center grey space size" >
                                 <span>
                                     <strong><span class="text-uppercase ">VOUS REPRÉSENTEZ UNE</span></strong>
@@ -30,7 +37,6 @@
                                         afin de gagner en visibilité. Lancer une campagne de financement avec
                                         des critères spécifiques correspondant à vos choix de partenaires financiers.
                                     </p>
-                                    <br>
                                     <p class="center">
                                         <span>
                                             <strong>Accéder à des centaines de marques, institutions et particuliers</strong>
@@ -62,7 +68,7 @@
                         </div>
 
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="box">
+                            <div class="pres">
                                 <p class="center grey space size ">
                                 <span>
                                     <strong><span class="text-uppercase ">VOUS REPRÉSENTEZ UNE</span></strong>
@@ -70,7 +76,7 @@
                                 </p>
                                 <div class="si-cta-inner">
                                     <h2 class="center">
-                                        <strong><span class="degradered">MARQUE / INSTITUTION</span></strong>
+                                        <strong><span class="degradered">MARQUES</span></strong>
                                     </h2>
                                     <br>
                                     <p class="center">
@@ -123,8 +129,6 @@
     </main>
 {% endblock %}
 
-{% block footer %}
-{% endblock %}
 
 {% block javascripts %}
 {% endblock %}

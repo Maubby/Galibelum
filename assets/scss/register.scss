@@ -1,14 +1,40 @@
+@import "style";
+
 /* Logo Galibelum white */
 .logo-galibelum {
-  width: 400px;
-  padding-top: 100px;
+  width: 450px;
+  padding-top: 150px;
+  margin-left: 70px;
+}
+p.center{
+  text-align: center;
+}
+
+.boxing-canvas {
+  background-color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 10px 10px 10px;
+  text-align: center;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-top: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
 }
 
 @media (min-width: 768px) and (max-width: 843px) {
   .logo-galibelum {
-    width: 360px;
+    width: 350px;
   }
 }
+
+@media (min-width: 843px) and (max-width: 1110px) {
+  .logo-galibelum {
+    margin-left: 0;
+  }
+}
+
 
 /* Form register */
 .backblue-btn {
