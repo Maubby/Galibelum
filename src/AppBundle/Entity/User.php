@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
@@ -38,6 +39,16 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="firstName", type="string", length=32)
+     *
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir votre prénom"
+     * )
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 32,
+     *     minMessage = "Votre nom doit contenir au mmoins {{ limit }} caractères",
+     *     maxMessage = "Votre nom ne peut pas contenir plus de {{ limit }} caractères"
+     * )
      */
     private $firstName;
 
@@ -45,6 +56,16 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="lastName", type="string", length=32)
+     *
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir votre nom"
+     * )
+     * @Assert\Length(
+     *     min = 2,
+     *     max = 32,
+     *     minMessage = "Votre nom doit contenir au mmoins {{ limit }} caractères",
+     *     maxMessage = "Votre nom ne peut pas contenir plus de {{ limit }} caractères"
+     * )
      */
     private $lastName;
 
@@ -52,6 +73,20 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="phoneNumber", type="string", length=32)
+     *
+     * * @Assert\Type("string")
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir un numéro de téléphone"
+     * )
+     * @Assert\Length(
+     *     min = 9,
+     *     max = 32,
+     *     exactMessage = "Veuillez saisir un numéro de téléphone valide"
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$/",
+     *     message = "Veuillez saisir un numéro de téléphone valide"
+     *)
      */
     private $phoneNumber;
 

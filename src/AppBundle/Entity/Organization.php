@@ -157,9 +157,6 @@ class Organization
      * @ORM\Column(name="status", type="string", length=32, nullable=true)
      *
      * @Assert\Type("string")
-     * @Assert\NotBlank(
-     *     message = "Veuillez saisir la statut juridique"
-     * )
      * @Assert\Length(
      *     min = 2,
      *     max = 32,
