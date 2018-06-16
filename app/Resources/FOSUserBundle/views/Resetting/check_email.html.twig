@@ -1,9 +1,51 @@
+{# app/Resources/FOSUserBundle/views/Resetting/check_email.html.twig #}
+{# Also base.html.twig #}
 {% extends "@FOSUser/layout.html.twig" %}
+
+{% block title %}Confirmation d'envoi{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/login.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
 
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-<p>
-{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
-</p>
+    <section>
+        <div class="container">
+            <div class="row boxing-canvas mt-50 center">
+                <div class="col-md-8 col-md-offset-2">
+                    <p class="normal-subtitle-text text-justify center">
+                        {{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime})|nl2br }}
+                    </p>
+                    <p class="normal-subtitle-text text-justify center">Vous pourrez rénitialiser votre mot de passe une fois votre adresse email renseignée.</p>
+                </div>
+            </div>
+            <div class="row subtitle-boxing-canvas">
+                <!-- Forgotten password -->
+                <div class="col-sm-12 forgotten-password normal-subtitle-text">
+                    <i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp; Mot de passe retrouvé ?
+                    <a href="{{ path('fos_user_security_login') }}" class="five-color"> Connecte toi !</a>
+                    <br>
+                    <i class="fas fa-user-plus"></i>&nbsp; Nouveau sur Galibelum ?
+                    <a href="{{ path('fos_user_registration_register') }}" class="orange-color"> Créer un compte</a>
+                </div>
+                <!-- End forgotten password -->
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
 {% endblock %}
