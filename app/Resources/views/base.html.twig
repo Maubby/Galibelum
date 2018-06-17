@@ -65,63 +65,60 @@
 {% block body %}{% endblock %}
 <footer>
     {% block footer %}
-        <!-- Wrapper end -->
-        <footer>
-            <!-- Footer Bar with links -->
-            <section id="galibelum-footer" class="pb-20 pt-60">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-2">
-                            <p class="bold-text">Legal</p>
-                            <ul>
-                                <li><a href="#">Conditions générales</a></li>
-                                <li><a href="#">Politique de confidentialité</a></li>
-                                <li><a href="#">Utilisation des cookies</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-2">
-                            <p class="bold-text">Infos pratiques</p>
-                            <ul>
-                                <li><a href="#" target="_blank">Qui sommes-nous ?</a></li>
-                                <li><a href="#" target="_blank">Sécurité</a></li>
-                                <li><a href="#" target="_blank">Presse</a></li>
-                                <li><a href="#" target="_blank">Espaces partenaires</a></li>
-                                <li><a href="#" target="_blank">Foire aux questions</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-3">
-                            <p class="bold-text">Navigation</p>
-                            <ul>
-                                <li><a href="">Rechercher</a></li>
-                                <li><a href="">Contractualisation</a></li>
-                                <li><a href="">Paiements</a></li>
-                                <li><a href="{{ path('dashboard_index') }}">Ma structure</a></li>
-                                <li><a href="{{ path('fos_user_profile_edit') }}">Mon compte</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-5 text-center center-block mb-40">
-                            <div class="mb-20">
-                                <a href="{{ path('homepage') }}">
-                                    <img class="img_footer" src="{{ asset('build/images/logo_galibelum_horizontal.png') }}" alt="Logo Galibelum horizontal" title="Accueil">
-                                </a>
-                            </div>
-                            <div class="text-center center-block">
-                                <p class="degradeblue">
-                                    © 2018 <b>Galibelum</b>. All rights reserved.
-                                </p>
-                            </div>
-                        </div>
+        <!-- Footer Bar with links -->
+        <section id="galibelum-footer" class="pb-20 pt-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <p class="bold-text">Legal</p>
+                        <ul>
+                            <li><a href="#">Conditions générales</a></li>
+                            <li><a href="#">Politique de confidentialité</a></li>
+                            <li><a href="#">Utilisation des cookies</a></li>
+                        </ul>
                     </div>
-                    <div class="text-center center-block mt-20 mb-20">
-                        <p><a href="https://wildcodeschool.fr/lille/" class="light-subtitle-text" style="font-size: 12px;" target="_blank">
-                                Made with <i class="fas fa-heart made-with-love"></i> by Wild Code School Lille
+                    <div class="col-sm-2">
+                        <p class="bold-text">Infos pratiques</p>
+                        <ul>
+                            <li><a href="#" target="_blank">Qui sommes-nous ?</a></li>
+                            <li><a href="#" target="_blank">Sécurité</a></li>
+                            <li><a href="#" target="_blank">Presse</a></li>
+                            <li><a href="#" target="_blank">Espaces partenaires</a></li>
+                            <li><a href="#" target="_blank">Foire aux questions</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <p class="bold-text">Navigation</p>
+                        <ul>
+                            <li><a href="">Rechercher</a></li>
+                            <li><a href="">Contractualisation</a></li>
+                            <li><a href="">Paiements</a></li>
+                            <li><a href="{{ path('dashboard_index') }}">Ma structure</a></li>
+                            <li><a href="{{ path('fos_user_profile_edit') }}">Mon compte</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-5 text-center center-block mb-40">
+                        <div class="mb-20">
+                            <a href="{{ path('homepage') }}">
+                                <img class="img_footer" src="{{ asset('build/images/logo_galibelum_horizontal.png') }}" alt="Logo Galibelum horizontal" title="Accueil">
                             </a>
-                        </p>
+                        </div>
+                        <div class="text-center center-block">
+                            <p class="degradeblue">
+                                © 2018 <b>Galibelum</b>. All rights reserved.
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </section>
-            <!-- End Footer Bar -->
-        </footer>
+                <div class="text-center center-block mt-20 mb-20">
+                    <p><a href="https://wildcodeschool.fr/lille/" class="light-subtitle-text" style="font-size: 12px;" target="_blank">
+                            Made with <i class="fas fa-heart made-with-love"></i> by Wild Code School Lille
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- End Footer Bar -->
     {% endblock %}
 </footer>
 <!-- JS Webpack's vendor including Bootstrap.js and JQuery.js shared entry -->
