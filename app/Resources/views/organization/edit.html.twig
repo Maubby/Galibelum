@@ -1,75 +1,168 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/organization_edit.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
-    <h1>Organization edit</h1>
-
     <div class="container">
+        <!-- Edit form  -->
         <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                {{ form_start(edit_form) }}
+            {{ form_start(edit_form) }}
+            <div>
+                <h3 class="degradeblue text-center col-sm-12 col-xs-12">Modifier votre profil</h3>
+                <!--1st part of the edit form-->
+                <div class="col-sm-5 col-sm-offset-1 col-xs-offset-1 col-xs-10 col-xs-offset-1 box">
+                    <!--Structure's name-->
+                    <div class="input-no-border light-subtitle-text">
+                        <i class="fas fa-university"></i>{{ form_label(edit_form.name) }}
+                    </div>
+                    <div class="inputs-fields">
+                        {{ form_widget(edit_form.name) }}
+                        {{ form_errors(edit_form.name) }}
+                    </div>
+                    <!-- End structure's name-->
 
-                <div class="form-group">
-                    {{ form_label(edit_form.name) }}
-                    {{ form_widget(edit_form.name) }}
-                    {{ form_errors(edit_form.name) }}
+                    <!--Structure's status-->
+                    <div class="input-no-border light-subtitle-text">
+                        <i class="fas fa-gavel"></i>{{ form_label(edit_form.status) }}
+                    </div>
+                    <div class="inputs-fields">
+                        {{ form_widget(edit_form.status) }}
+                        {{ form_errors(edit_form.status) }}
+                    </div>
+                    <!--End structure's status-->
+
+                    <!--Structure's address-->
+                    <div class="input-no-border light-subtitle-text">
+                        <i class="fas fa-address-card"></i>{{ form_label(edit_form.address) }}
+                    </div>
+                    <div class="inputs-fields">
+                        {{ form_widget(edit_form.address) }}
+                        {{ form_errors(edit_form.address) }}
+                    </div>
+                    <!--End structure's address-->
+
+                    <!--Number of employees-->
+                    <div class="input-no-border light-subtitle-text">
+                        <i class="fas fa-users"></i>{{ form_label(edit_form.relationNumber) }}
+                    </div>
+                    <div class="inputs-fields">
+                        {{ form_widget(edit_form.relationNumber) }}
+                        {{ form_errors(edit_form.relationNumber) }}
+                    </div>
+                    <!--End Number of employees-->
+
+                    <!--Short structure's description-->
+                    <div class="input-no-border light-subtitle-text">
+                        <i class="fas fa-edit"></i>{{ form_label(edit_form.description) }}
+                    </div>
+                    <div class="inputs-fields">
+                        {{ form_widget(edit_form.description) }}
+                        {{ form_errors(edit_form.description) }}
+                    </div>
+                    <!--End short structure's description-->
                 </div>
+                <!--End of the 1st part-->
 
-                <div class="form-group">
-                    {{ form_label(edit_form.status) }}
-                    {{ form_widget(edit_form.status) }}
-                    {{ form_errors(edit_form.status) }}
+                <!--2nd part of the edit form-->
+                <div class="col-sm-offset-1 col-sm-4 col-sm-offset-1 col-xs-offset-1 col-xs-10 col-xs-offset-1 box">
+                    <!--Role inside the structure-->
+                    <div class="input-no-border light-subtitle-text">
+                        <i class="fas fa-user"></i>{{ form_label(edit_form.userRole) }}
+                    </div>
+                    <div class="inputs-fields">
+                        {{ form_widget(edit_form.userRole) }}
+                        {{ form_errors(edit_form.userRole) }}
+                    </div>
+                    <!--End role inside the structure-->
+
+                    <!--Structure's mail-->
+                    <div class="input-no-border light-subtitle-text">
+                        <i class="fas fa-at"></i>{{ form_label(edit_form.email) }}
+                    </div>
+                    <div class="inputs-fields">
+                        {{ form_widget(edit_form.email) }}
+                        {{ form_errors(edit_form.email) }}
+                    </div>
+                    <!--End structure's mail-->
+
+                    <!--Structure's phone-->
+                    <div class="input-no-border light-subtitle-text">
+                        <i class="fas fa-phone"></i>{{ form_label(edit_form.phoneNumber) }}
+                    </div>
+                    <div class="inputs-fields">
+                        {{ form_widget(edit_form.phoneNumber) }}
+                        {{ form_errors(edit_form.phoneNumber) }}
+                    </div>
+                    <!--End structure's phone-->
                 </div>
+                <!--End of the 2nd part-->
 
-                <div class="form-group">
-                    {{ form_label(edit_form.address) }}
-                    {{ form_widget(edit_form.address) }}
-                    {{ form_errors(edit_form.address) }}
+                <!--Submit part-->
+                <div class="row">
+                    <div class="col-sm-4 col-sm-offset-4 col-xs-offset-1 col-xs-10 col-xs-offset-1 text-center">
+                        <br>
+                        <input type="submit" value="Modifier votre profil" class="btn btn-primary backblue-btn">
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    {{ form_label(edit_form.phoneNumber) }}
-                    {{ form_widget(edit_form.phoneNumber) }}
-                    {{ form_errors(edit_form.phoneNumber) }}
-                </div>
-
-                <div class="form-group">
-                    {{ form_label(edit_form.email) }}
-                    {{ form_widget(edit_form.email) }}
-                    {{ form_errors(edit_form.email) }}
-                </div>
-
-                <div class="form-group">
-                    {{ form_label(edit_form.relationNumber) }}
-                    {{ form_widget(edit_form.relationNumber) }}
-                    {{ form_errors(edit_form.relationNumber) }}
-                </div>
-
-                <div class="form-group">
-                    {{ form_label(edit_form.userRole) }}
-                    {{ form_widget(edit_form.userRole) }}
-                    {{ form_errors(edit_form.userRole) }}
-                </div>
-
-                <div class="form-group">
-                    {{ form_label(edit_form.description) }}
-                    {{ form_widget(edit_form.description) }}
-                    {{ form_errors(edit_form.description) }}
-                </div>
-
-                <input type="submit" value="Edit" class="btn btn-primary">
-                {{ form_end(edit_form) }}
+                <!--End of the submit part-->
             </div>
+            {{ form_end(edit_form) }}
+        </div>
+        <!--End of the edit form-->
+    </div>
+    <!--Return to the homepage or delete the profile-->
+    <div class="row">
+        <div class="col-sm-6 col-xs-offset-1 col-xs-10 col-xs-offset-1 normal-subtitle-text">
+            <br>
+
+            <!--Link to go to the homepage-->
+            <i class="fas fa-reply"></i>&nbsp;  Retourner sur votre dashboard ?
+            <a href="{{ path('homepage') }}" class="five-color"> C'est par ici !</a>
+            <br>
+
+            <!--Link to open a delete modal-->
+            <i class="fas fa-user-times"></i>&nbsp; Supprimer votre profil ?
+            <a href="#" class="degradered" data-toggle="modal"
+               data-target="#deleteorganization">Cliquer ici !</a>
+
+            <!-- Modal introducing the delete profile -->
+            <div class="modal fade" id="deleteorganization" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-notify modal-info" role="document">
+                    <div class="modal-content">
+
+                        <!--Modal's header-->
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="fas fa-times" style="color: #ff6f73;" aria-hidden="true"></i></span>
+                            </button>
+                            <h6><span><i class="fas fa-exclamation-triangle degradered"></i></span> Êtes-vous sûr de vouloir supprimer votre profil ?</h6>
+                        </div>
+
+                        <!--Modal's body-->
+                        <div class="modal-body">
+                            <div>
+                                {{ form_start(delete_form) }}
+                                <input type="submit" value="Supprimer" class="btn btn-danger backred-btn">
+                                {{ form_end(delete_form) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of modal -->
         </div>
     </div>
-
-    <ul>
-        <li>
-            {{ form_start(delete_form) }}
-            <input type="submit" value="Delete" class="btn btn-danger">
-            {{ form_end(delete_form) }}
-        </li>
-        <li>
-            <a href="{{ path('dashboard_index') }}">Revenir au Dashboard</a>
-        </li>
-    </ul>
+    <!-- End part to go to the homepage or delete the profile-->
 {% endblock %}
