@@ -100,11 +100,13 @@ h5 {
 .light-subtitle-text {
   color: #5495AF;
   font-weight: 300;
+  font-size: 1em;
 }
 
 .normal-subtitle-text {
   color: $grey-color;
   font-weight: 300;
+  font-size: 1em;
 }
 
 .bold-text {
@@ -492,13 +494,7 @@ input::placeholder {
   background-color: rgba(252, 252, 252, .95);
   padding: 5px 5px 20px 5px;
   border-radius: 7px;
-  margin-top: 20px;
-}
-
-.backgroundimg {
-  background-image:url(https://i1.wp.com/gallibellum.fr/wp-content/uploads/2018/03/Slider-inscription-gallibelluM.jpg);
-  padding-top: 5%;
-  padding-bottom: 5%;
+  margin-top:5%;
 }
 
 a.btn-custom {
