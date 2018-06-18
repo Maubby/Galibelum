@@ -33,7 +33,7 @@ class OrganizationController extends Controller
     /**
      * Lists all organization entities.
      *
-     * @Route("/index",    name="organization_index")
+     * @Route("/index", name="organization_index")
      * @Method("GET")
      *
      * @return Response A Response instance
@@ -60,29 +60,45 @@ class OrganizationController extends Controller
     public function dashboardAction()
     {
         $user = $this->getUser();
+        $isActive = $user->getOrganization()->getIsActive();
 
-        if ($user->hasRole('ROLE_STRUCTURE') && $user->getOrganization()->getIsActive() === 1 || $user->hasRole('ROLE_MARQUE')  && $user->getOrganization()->getIsActive() === 1) {
+        if ($user->hasRole('ROLE_STRUCTURE') && $isActive === 1
+            || $user->hasRole('ROLE_MARQUE')  && $isActive === 1
+        ) {
+            $em= $this->getDoctrine()->getManager();
 
-            $name = $user->getFirstName() .' '. $user->getLastName();
-            $em = $this->getDoctrine()->getManager();
-            $organization = $em->getRepository('AppBundle:Organization')->findby(array('user' => $user));
-            $activities = $em->getRepository('AppBundle:Activity')->findby(array('organizationActivities' => $organization));
-            $offers = $em->getRepository('AppBundle:Offer')->findby(array('activity' => $activities));
+            $organization = $em->getRepository('AppBundle:Organization')
+                ->findBy(
+                    array(
+                        'user' => $user
+                    )
+                );
+            $activities = $em->getRepository('AppBundle:Activity')
+                ->findBy(
+                    array(
+                        'organizationActivities' => $organization
+                    )
+                );
+            $offers = $em->getRepository('AppBundle:Offer')
+                ->findBy(
+                    array(
+                        'activity' => $activities
+                    )
+                );
 
             return $this->render(
                 'dashboard/index.html.twig', array(
+                    'user' => $user,
                     'organization' => $organization,
                     'activities' => $activities ,
                     'offers' => $offers,
-                    'name' => $name,
                 )
             );
-        }
-        elseif ($user->hasRole('ROLE_STRUCTURE') && $user->getOrganization()->getIsActive() === 0 || $user->hasRole('ROLE_MARQUE') && $user->getOrganization()->getIsActive() === 0) {
-
+        } elseif ($user->hasRole('ROLE_STRUCTURE') && $isActive === 0
+            || $user->hasRole('ROLE_MARQUE') && $isActive === 0
+        ) {
             return $this->redirectToRoute('waiting_index');
-        }
-        else{
+        } else {
             return $this->redirectToRoute('inscription_index');
         }
     }
@@ -91,7 +107,7 @@ class OrganizationController extends Controller
      * Creates a new organization entity.
      *
      * @param Request $request New posted info
-     * @param int $choose organization or company
+     * @param int     $choose  organization or company
      *
      * @Route("/new/choose{choose}", name="organization_new")
      * @Method({"GET",               "POST"})

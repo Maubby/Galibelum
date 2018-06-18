@@ -1,3 +1,5 @@
+@import "style";
+
 .carousel.vertical {
   .carousel-inner {
     height: 100%;
@@ -29,22 +31,49 @@
   .up {
     top: -30px;
   }
+  .down {
+    top: calc(100% - 13.6px);
+  }
 }
 
 .panel-body {
+  border-color: $seconde-color;
   .panel-primary {
     .panel-title {
-      color: rgb(41,117,181);
+      color: $seconde-color;
       padding-top: 10px;
     }
   }
-  .panel-btn {
-    margin-top: 30px;
+  .btn-primary {
+    background-color: $six-color;
   }
 }
-.pt-100 {
-  padding-top: 100px;
+.boxing-title {
+  background-color: #fff;
+  width: auto;
+  max-width: 1200px;
+  padding-bottom: 5px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-top: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
 }
-.pb-60 {
-  padding-bottom: 60px;
+.boxing-canvas {
+  background-color: #fff;
+  width: auto;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 5px 20px 5px;
+  text-align: center;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-top: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+}
+
+.ml-25 {
+  margin-left: 25px;
 }
