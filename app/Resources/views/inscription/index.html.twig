@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/inscription.css') }}">
+{% endblock %}
+
 {% block body %}
     <main class="page-wrapper loading-done backgroundimg">
         <article id="post-4665" class="post-4665 page type-page status-publish hentry">
@@ -8,16 +12,16 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="box">
+                            <div class="boxing-canvas">
                                 <p class="center grey space size" >
                                 <span>
                                     <strong><span class="text-uppercase ">VOUS REPRÉSENTEZ UNE</span></strong>
                                 </span>
                                 </p>
                                 <div class="si-cta-inner">
-                                    <h2 class="center">
-                                        <strong><span class="degradeblue">STRUCTURE eSPORT</span></strong>
-                                    </h2>
+                                    <h3 class="center">
+                                        <strong><span class="degradeblue">STRUCTURE ESPORT</span></strong>
+                                    </h3>
                                     <br>
                                     <p class="center">
                                         <span>TROUVER LES MEILLEURS PARTENAIRES FINANCIERS</span>
@@ -27,7 +31,7 @@
                                         <span>
                                             <strong>Créer le profil de votre structure</strong>
                                         </span>
-                                        afin de gagner en visibilité. Lancer une campagne de financement avec
+                                        et lancer une campagne de financement avec
                                         des critères spécifiques correspondant à vos choix de partenaires financiers.
                                     </p>
                                     <br>
@@ -54,7 +58,7 @@
                                         <strong>3 – Contractualiser</strong> <span class="grey">facilement avec vos nouveaux partenaires financiers</span>
                                     </p>
                                     <br>
-                                    <div class="center ">
+                                    <div class="center">
                                         <a class="backblue btn btn-custom " href="{{ path('organization_new', {'choose': 0}) }}" title="inscription responsable de structure" >CRÉER VOTRE PROFIL</a>
                                     </div>
                                 </div>
@@ -62,19 +66,19 @@
                         </div>
 
                         <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="box">
+                            <div class="boxing-canvas">
                                 <p class="center grey space size ">
                                 <span>
                                     <strong><span class="text-uppercase ">VOUS REPRÉSENTEZ UNE</span></strong>
                                 </span>
                                 </p>
                                 <div class="si-cta-inner">
-                                    <h2 class="center">
-                                        <strong><span class="degradered">MARQUE / INSTITUTION</span></strong>
-                                    </h2>
+                                    <h3 class="center">
+                                        <strong><span class="degradered">MARQUES</span></strong>
+                                    </h3>
                                     <br>
                                     <p class="center">
-                                        <span>SPONSORISER / INVESTIR DANS LES MEILLEURES STRUCTURES eSPORT</span>
+                                        <span>INVESTIR DANS LES MEILLEURES STRUCTURES eSPORT</span>
                                     </p>
                                     <br>
                                     <p class="center">
@@ -83,6 +87,7 @@
                                         </span>à la recherche de partenaires financiers / sponsors.
                                     </p>
                                     <br>
+                                    <br class="space">
                                     <p class="center">
                                         <span>
                                             <strong>Lancer le processus d’investissement</strong>
@@ -102,16 +107,15 @@
                                     </p>
                                     <p class="center">
                                         <strong>2 – Trouver</strong>
-                                        <span class="grey">les structures les plus cohérentes pour votre marque ou institution</span></p>
+                                        <span class="grey">les structures les plus cohérentes pour votre marque</span></p>
                                     <p class="center">
                                         <strong>3 – Contractualiser &amp; suivre l’évolution de vos contrats
                                             <span class="grey"></span>
                                         </strong>
-                                        <span class="grey">via la plateforme</span>
                                     </p>
                                     <br>
                                     <div class="center">
-                                        <a class="backred btn btn-custom" href="{{ path('organization_new', {'choose': 1}) }}" title="Inscription de responsable de marques ou institutions" >CRÉER VOTRE PROFIL</a>
+                                        <a class="backred btn btn-custom place" href="{{ path('organization_new', {'choose': 1}) }}" title="Inscription de responsable de marques ou institutions" >CRÉER VOTRE PROFIL</a>
                                     </div>
                                 </div>
                             </div>
