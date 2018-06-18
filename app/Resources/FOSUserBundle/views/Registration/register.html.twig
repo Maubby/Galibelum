@@ -30,33 +30,33 @@
                             <br>Vos données ne seront pas transmises aux différentes parties prenantes.</p>
 
                         {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'),}) }}
-                        <div class="col-sm-6">
+                        <div class="col-sm-6 form-error">
                             {{ form_widget(form.firstName, {'attr': {'class':'form-control input-field', 'placeholder' : 'Prénom' }}) }}
                             {{ form_errors(form.firstName) }}
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6 form-error">
                             {{ form_widget(form.lastName, {'attr': {'class':'form-control input-field', 'placeholder' : 'Nom' }}) }}
                             {{ form_errors(form.lastName) }}
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 form-error">
                             {{ form_widget(form.email, {'attr': {'class':'form-control input-field', 'placeholder' : 'Adresse email valide' }}) }}
                             {{ form_errors(form.email) }}
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 form-error">
                             {{ form_widget(form.phoneNumber, {'attr': {'class':'form-control input-field', 'placeholder' : 'Numéro de téléphone' }}) }}
                             {{ form_errors(form.phoneNumber) }}
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 form-error">
                             {{ form_widget(form.plainPassword.first,
                                 {'attr': {'class':'form-control input-field', 'placeholder' : 'Mot de passe'  }}) }}
                             {{ form_errors(form.plainPassword.first) }}
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 form-error">
                             {{ form_widget(form.plainPassword.second,
                                 {'attr': {'class':'form-control input-field', 'placeholder' : 'Vérification mot de passe'  }}) }}
                             {{ form_errors(form.plainPassword.second) }}
                         </div>
-                        <div class="col-sm-12 normal-subtitle-text">
+                        <div class="col-sm-12 normal-subtitle-text form-error">
                             {{ form_widget(form.cgu) }}
                             {{ form_label(form.cgu) }}
                             {{ form_errors(form.cgu) }}
