@@ -23,9 +23,9 @@ Encore
     .addStyleEntry('register', './assets/scss/register.scss')
     .addStyleEntry('dashboard', './assets/scss/dashboard.scss')
     .addStyleEntry('inscription', './assets/scss/inscription_choose.scss')
+    .addStyleEntry('organization_edit', './assets/scss/organization_edit.scss')
     .addEntry('main', './assets/js/main.js')
     .addEntry('carousel', './assets/js/carousel.js')
-    .addEntry('countdown', './assets/js/countdown.js')
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
         { from: './assets/images', to: 'images'}

@@ -145,11 +145,13 @@ h5 {
 .light-subtitle-text {
   color: #5495AF;
   font-weight: 300;
+  font-size: 1em;
 }
 
 .normal-subtitle-text {
   color: $grey-color;
   font-weight: 300;
+  font-size: 1em;
 }
 
 .bold-text {
@@ -450,7 +452,18 @@ p.size {
   width: 100%;
 }
 
-/* Input fields */
+/* Input fields / Form */
+
+.form-error ul {
+  list-style: none;
+  color: #a9090a;
+  background-color: #f2dede;
+  padding: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ebccd1;
+  border-radius: 10px
+}
 
 .input-group {
   display: inline;
