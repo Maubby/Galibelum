@@ -216,11 +216,12 @@ class OrganizationController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($organization);
+            $organization->setIsActive(2);
+            $em->persist($organization);
             $em->flush();
         }
 
-        return $this->redirectToRoute('organization_index');
+        return $this->redirectToRoute('homepage');
     }
 
     /**

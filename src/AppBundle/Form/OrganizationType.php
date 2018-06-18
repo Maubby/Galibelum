@@ -43,7 +43,7 @@ class OrganizationType extends AbstractType
                 'name', TextType::class, array(
                 'attr' => array(
                     'minlength' => 2, 'maxlength' => 32,
-                    'data-label' => '',
+                    'data-label' => 'Nom de votre',
                     'class' => 'form-control input-field',
                 'placeholder' =>'Exemple : GBM eSport'))
             )
