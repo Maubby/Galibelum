@@ -19,20 +19,15 @@
 
 {% block body %}
     <main id="login">
-        {% if error %}
-            <div class="alert alert-danger" role="alert">
-                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            </div>
-        {% endif %}
         <section>
             <!-- Form to login-->
             <div class="container">
                 <div class="row boxing-canvas mt-50">
                     <div class="col-md-6 col-md-offset-3">
                         <form action="{{ path("fos_user_security_check") }}" method="post">
-                            <!-- Enter email -->
                             <i class="far fa-user-circle text-center degradeblue" style="font-size: 50px"></i>
                             <h5 class="text-center degradeblue">Se connecter à Galibelum</h5>
+                            <!-- Enter email -->
                             <div class="col-sm-12">
                                 <label for="username"></label>
                                 <div class="input-group">
@@ -49,6 +44,14 @@
                                 </div>
                             </div>
                             <!-- End password -->
+
+                            {% if error %}
+                                <div class="col-sm-12 mt-20">
+                                    <div class="alert alert-danger" role="alert">
+                                        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                    </div>
+                                </div>
+                            {% endif %}
 
                             <!-- Ticking box to keep the client's information -->
                             <div class="col-sm-12">
@@ -86,6 +89,10 @@
             </div>
         </section>
     </main>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
 {% endblock %}
 
 {% block javascripts %}

@@ -1,17 +1,81 @@
-/* Logo Galibelum white */
+@import "style";
+
+/* Basics */
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin: 10px;
+  font-weight: lighter;
+}
+
+a {
+  padding-top: 10px;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: inset 0 0 0 9999px white;
+}
+
+/* Form Register */
+
+.boxing-canvas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  width: auto;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 40px 5px 20px 5px;
+  text-align: center;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-top: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+}
+
+.subtitle-boxing-canvas {
+  background-color: $lighter-grey-bg-color;
+  width: auto;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px 5px 20px 5px;
+  text-align: left;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+}
+
 .logo-galibelum {
   width: 400px;
-  padding-top: 100px;
+  vertical-align: middle;
+  height: auto;
 }
 
 @media (min-width: 768px) and (max-width: 843px) {
   .logo-galibelum {
-    width: 360px;
+    width: 350px;
+    margin-left: 0;
   }
 }
 
-/* Form register */
-.backblue-btn {
-  background-image: linear-gradient( to right, #86ccc2 , #137faf);
-  font-weight: bold;
+@media (min-width: 843px) and (max-width: 1300px) {
+  .logo-galibelum {
+    width: 400px;
+    margin-left: 0;
+  }
+}
+
+.forgotten-password {
+  padding-top: 5px;
+}
+
+.orange-color {
+  color: #ffaf7e;
 }

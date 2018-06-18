@@ -1,5 +1,7 @@
 @import "style";
 
+/* Basics */
+
 a {
   padding-top: 10px;
 }
@@ -12,11 +14,12 @@ input:-webkit-autofill {
   color: $five-color;
 }
 
+/* Form Sign in */
+
 #login {
   text-align: center;
 }
 
-/* Form Sign in */
 .boxing-canvas {
   background-color: #fff;
   width: auto;
