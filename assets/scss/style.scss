@@ -407,7 +407,18 @@ p.size {
   width: 100%;
 }
 
-/* Input fields */
+/* Input fields / Form */
+
+.form-error ul {
+  list-style: none;
+  color: #a9090a;
+  background-color: #f2dede;
+  padding: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ebccd1;
+  border-radius: 10px
+}
 
 .input-group {
   display: inline;

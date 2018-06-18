@@ -10,12 +10,12 @@
                     <h5 class="text-center degradeblue">Réinitialiser son mot de passe</h5>
                     <p class="normal-subtitle-text text-justify center">Entrez votre nouveau de passe et conservez le au chaud !</p>
                     {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 form-error">
                         {{ form_widget(form.plainPassword.first,
                             {'attr': {'class':'form-control input-field', 'placeholder' : 'Nouveau mot de passe' }}) }}
                         {{ form_errors(form.plainPassword.first) }}
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 form-error">
                         {{ form_widget(form.plainPassword.second,
                             {'attr': {'class':'form-control input-field', 'placeholder' : 'Vérification mot de passe' }}) }}
                         {{ form_errors(form.plainPassword.second) }}
