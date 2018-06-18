@@ -43,57 +43,59 @@ class OrganizationType extends AbstractType
                 'name', TextType::class, array(
                 'attr' => array(
                     'minlength' => 2, 'maxlength' => 32,
-                    'label' => '',
-                    'class' => 'form-control',
+                    'data-label' => '',
+                    'class' => 'form-control input-field',
                 'placeholder' =>'Exemple : GBM eSport'))
             )
             ->add(
                 'phoneNumber', TextType::class, array(
                     'attr' => array(
                         'minlength'=> 8, 'maxlength' => 32,
-                        'label' =>'',
-                        'class' => 'form-control' ))
+                        'data-label' =>'',
+                        'class' => 'form-control input-field' ))
             )
             ->add(
                 'email', TextType::class, array(
                 'attr' => array(
                     'minlength'=>2, 'maxlength' => 64,
-                    'label'=>'',
-                    'class'=> 'form-control' ))
+                    'data-label'=>'',
+                    'class'=> 'form-control input-field' ))
             )
             ->add(
                 'description', TextareaType::class, array(
                 'attr'=> array(
                     'minlength'=>32, 'maxlength' => 250,
-                    'label'=>'',
-                    'class'=> 'form-control'))
+                    'data-label'=>'',
+                    'class'=> 'form-control input-field'))
             )
             ->add(
                 'userRole', TextType::class, array(
                 'attr'=> array(
                     'minlength'=>2, 'maxlength' => 32,
-                    'label'=>'',
-                    'class'=>'form-control' )
+                    'data-label'=>'',
+                    'class'=>'form-control input-field' )
                 )
             )
             ->add(
                 'status', TextType::class, array(
                 'attr'=>array(
                     'minlength'=>2,'maxlength' => 32,
-                    'label'=>'',
-                    'class'=>'form-control'))
+                    'data-label'=>'',
+                    'data-rows' => '5',
+                    'data-cols' => '5',
+                    'class'=>'form-control input-field'))
             )
             ->add(
                 'address', TextType::class, array(
                 'attr'=>array(
                     'minlength'=>2, 'maxlength' => 64,
-                    'label'=>'',
-                    'class'=>'form-control'))
+                    'data-label'=>'',
+                    'class'=>'form-control input-field'))
             )
             ->add(
                 'relationNumber', ChoiceType::class, array(
                     'attr'=> array(
-                        'class'=> 'form-control'),
+                        'class'=> 'form-control input-field'),
                     'choices'  => array(
                         'Aucun autre membre' => 'Aucun autre membre',
                         '2-10 membres' => '2-10 membres',
