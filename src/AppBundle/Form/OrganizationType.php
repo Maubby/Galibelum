@@ -14,6 +14,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -47,32 +48,32 @@ class OrganizationType extends AbstractType
                         'placeholder' =>'Exemple : GBM eSport'))
             )
             ->add(
-                'phoneNumber', TextType::class, array(
+                'phoneNumber', NumberType::class, array(
                     'attr' => array(
                         'minlength'=> 8, 'maxlength' => 32,
                         'class' => 'form-control',
-                        'placeholder'=>''))
+                        'placeholder'=>'Exemple: 0882244454'))
             )
             ->add(
-                'email', TextType::class, array(
+                'email', EmailType::class, array(
                     'attr' => array(
                         'minlength'=>2, 'maxlength' => 64,
                         'class'=> 'form-control',
-                    'placeholder' =>'Exemple : GBM eSport'))
+                    'placeholder' =>'Exemple: test@galibelum.com'))
             )
             ->add(
                 'description', TextareaType::class, array(
                     'attr'=> array(
                         'minlength'=>32, 'maxlength' => 250,
                         'class'=> 'form-control',
-                        'placeholder' =>'Exemple : GBM eSport'))
+                        'placeholder' =>'Maximun 250 caractère'))
             )
             ->add(
                 'userRole', TextType::class, array(
                     'attr'=> array(
                         'minlength'=>2, 'maxlength' => 32,
                         'class'=>'form-control',
-                        'placeholder' =>'Exemple : GBM eSport')
+                        'placeholder' =>'Exemple: Manager')
                 )
             )
             ->add(
@@ -81,13 +82,14 @@ class OrganizationType extends AbstractType
                         'data' => null,
                         'required' => false,
                         'minlength'=>2,'maxlength' => 32,
-                        'class'=>'form-control','placeholder' =>'Exemple : GBM eSport'))
+                        'class'=>'form-control','placeholder' =>'Exemple: GBM eSport'))
             )
             ->add(
                 'address', TextType::class, array(
                     'attr'=>array(
                         'minlength'=>2, 'maxlength' => 64,
-                        'class'=>'form-control'))
+                        'class'=>'form-control',
+                        'placeholder '=>'Exemple: 4 avenue des Saules, bâtiment Le Doge,'))
 
             )
             ->add(

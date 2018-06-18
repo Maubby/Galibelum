@@ -1,58 +1,53 @@
-
-.picture{
-  margin-left: -50%;
-  padding-right: 10%;
-  padding-top: 40%;
-  width: 150%;
-}
-
-.form-group{
-  margin-bottom: 3%;
-  padding: 1%;
-}
-
+@import "style";
+.border-one{
+  border-top: 1px solid $border-color ;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color ;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;;
+  background-color: #fff;
+  }
 .border{
-
-  padding: 3%;
-  margin-right: 5%;
-  border: white solid 1px;
-  margin-left: 15%;
-  border-radius: 5px;
-  background-color: #e2e2e2;
-  margin-top: 5%;
-  padding-bottom: 10%;
+  border-top: 1px solid $border-color ;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color ;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;;
+  background-color: #fff;
 }
+.general-form{
+padding: 5px;
+  margin: 7px;
+}
+.contact-form{
+padding:5px;
+  margin:7px;
 
+}
 #appbundle_organization_description {
  min-height: 150px;
-  width: 93%;
-}
-
-.onesection{
-  padding-right: 10%;
-  min-height: 10em;
-  padding-top: 5%;
+  width:100%;
 }
 
 .degradeblue{
-  margin-top: 10%;
   text-align: center;
-  font-size: 34px;
+  font-size:30px;
 }
-
-.userRole{
-  margin-top : 15%;
-}
-
 .form-control{
   height: 45px;
 }
 .relationNumber{
   padding-bottom: 20%;
-  width: 93%;
+  width: 100%;
 }
-.btn-primary{
-  margin-top: -22%;
+
+.backblue-btn{
+  margin-bottom: 10%;
+  width: 15%;
+}
+label .required {
+  padding: 10px;
+margin: 10px;
 }
 /* Media queries page inscription*/
 

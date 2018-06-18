@@ -1,88 +1,93 @@
 {% extends 'base.html.twig' %}
 
-
-
-
 {% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('build/organization_inscription.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/organization_inscription.css') }}">
 {% endblock %}
 {% block body %}
-
-
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-sm-8 ">
-                {{ form_start(form) }}
-                <div class="col-sm-3 ">
-                    <img class="picture" alt="Logo Galibelum" src="{{ asset('build/images/logo_inscription.png') }}">
-                </div>
-                <div class="col-sm-9">
-                    <div class="onesection">
-                        <div class="form-group">
-                            {{ form_label(form.name, 'Nom de votre structure eSport  ') }}
-                            {{ form_widget(form.name) }}
-                            {{ form_errors(form.name) }}
+            <h1 class="degradeblue ">Créer votre profil </h1>
+            <div class="col-sm-6 mt-50">
+                <div class="border">
+
+                    {{ form_start(form) }}
+                    <div class="general-form">
+                    <div class="form-group light-subtitle-text">
+                        {% if choose == 1 %}
+                            <i class="fas fa-university"></i> {{ form_label(form.name, ' Nom de votre marque ') }}
+                        {% else %}
+                            <i class="fas fa-university"></i> {{ form_label(form.name, 'Nom de votre structure eSport ') }}
+                        {% endif %}
+                        {{ form_widget(form.name) }}
+                        {{ form_errors(form.name) }}
+                    </div>
+                    </div>
+                    {% if choose == 0 %}
+                    <div class="general-form">
+                        <div class="form-group light-subtitle-text">
+
+                            <i class="fas fa-gavel"></i> {{ form_label(form.status,'Forme juridique  ') }}
+                            {{ form_widget(form.status) }}
+                            {{ form_errors(form.status) }}
                         </div>
-                        <div class="form-group">
-                            {{ form_label(form.address,'Adresse du siège social  ')  }}
+                        </div>
+                    {% endif %}
+                    <div class="general-form">
+                        <div class="form-group light-subtitle-text">
+                            <i class="fas fa-address-card"></i> {{ form_label(form.address,'Adresse du siège social  ')  }}
                             {{ form_widget(form.address) }}
                             {{ form_errors(form.address) }}
                         </div>
-
-                        {% if choose == 0 %}
-                            <div class="form-group">
-                                {{ form_label(form.status,'Forme juridique  ') }}
-                                {{ form_widget(form.status) }}
-                                {{ form_errors(form.status) }}
-                            </div>
-                        {% endif %}
                     </div>
-                </div>
-                <div class="col-sm-12 ">
-                    <div class="form-group">
-                        {{ form_label(form.description, 'Décrivez votre structure eSport en quelques mots  ') }}
-                        {{ form_widget(form.description) }}
-                        {{ form_errors(form.description) }}
-                    </div>
-                    <div class="relationNumber">
-                        <div class="form-group">
-                            {{ form_label(form.relationNumber,'Nombre de collaborateurs dans votre structure') }}
+                    <div class="general-form">
+                        <div class="form-group light-subtitle-text">
+                            <i class="fas fa-users"></i> {{ form_label(form.relationNumber,'Nombre de collaborateurs dans votre structure') }}
                             {{ form_widget(form.relationNumber) }}
                             {{ form_errors(form.relationNumber) }}
                         </div>
                     </div>
+                    <div class="general-form">
+                        <div class="form-group light-subtitle-text">
+                            <i class="fas fa-edit"></i> {{ form_label(form.description, 'Décrivez votre structure eSport en quelques mots  ') }}
+                            {{ form_widget(form.description) }}
+                            {{ form_errors(form.description) }}
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <div class="border">
-                    <h1 class="degradeblue">Informations de Contact </h1>
-                    <div class="userRole">
-                        <div class="form-group">
-                            {{ form_label(form.userRole,'Poste au sein de la structure ') }}
+            <div class="col-sm-4 col-sm-offset-1 mt-50">
+                <div class="border-one">
+
+                    <div class="contact-form">
+                        <div class="form-group light-subtitle-text">
+                            <i class="fas fa-user"></i>  {{ form_label(form.userRole,'Poste au sein de la structure ') }}
                             {{ form_widget(form.userRole) }}
                             {{ form_errors(form.userRole) }}
                         </div>
                     </div>
-                    <div class="userRole">
-                        <div class="form-group">
-                            {{ form_label(form.email,'Email de la société') }}
+                    <div class="contact-form">
+                        <div class="form-group light-subtitle-text">
+                            <i class="fas fa-at"></i>  {{ form_label(form.email,'Email de la société') }}
                             {{ form_widget(form.email) }}
                             {{ form_errors(form.email) }}
                         </div>
                     </div>
-                    <div class="userRole">
-                        <div class="form-group">
-                            {{ form_label(form.phoneNumber,'Téléphone de bureau')}}
+                    <div class="contact-form">
+                        <div class="form-group light-subtitle-text">
+                            <i class="fas fa-phone"></i> {{ form_label(form.phoneNumber,'Téléphone de bureau')}}
                             {{ form_widget(form.phoneNumber) }}
                             {{ form_errors(form.phoneNumber) }}
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container">
         <div class="row">
-            <div class="col-sm-12 text-center">
-                <input type="submit" value="Enregistrer" class="btn btn-primary">
+            <div class="col-sm-12 text-center mt-50">
+                <input type="submit" value="Enregistrer" class="btn btn-primary backblue-btn">
                 {{ form_end(form) }}
             </div>
         </div>
