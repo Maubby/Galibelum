@@ -126,10 +126,26 @@
             </section>
         </article>
     </main>
+    <!-- Registration confirmation modal -->
+    {% for message in app.flashes('registrationconfirmed') %}
+        <!--  Symfony > 3.3 -->
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content modal-galibelum">
+                    <div class="modal-body">
+                        <p class="light-subtitle-text"><i class="fas fa-gamepad" aria-hidden="true"></i> {{ message }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary backblue-btn white-color" data-dismiss="modal">{{ 'Fermer'|trans }}</button>
+                    </div>
+                </div><!-- modal-content end -->
+            </div><!-- modal-dialog end -->
+        </div><!-- modal end -->
+    {% endfor %}
 {% endblock %}
 
-
 {% block javascripts %}
+    <script src="{{ asset('build/login-script.js') }}"></script>
 {% endblock %}
 
 

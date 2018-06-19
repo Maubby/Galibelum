@@ -5,8 +5,7 @@
 
 Galibelum is a web platform linking eSport organizations with different brands, companies or institutions who wish to fundraise an event.
 
-
-## Contributors / gitlab profile
+## Contributors / Gitlab profile
 
     * Canis Julien : @CJulien1
     * Claude Amandine : @Dine16
@@ -17,12 +16,11 @@ Galibelum is a web platform linking eSport organizations with different brands, 
 
 ## Technos
 
-PHP ^7.1 / Symfony 3.4.11 / Bootstrap 3.3.7 SASS Webpack / Doctrine - MYSQL.
-
+PHP ^7.1 / Symfony ^3.4.11 / Bootstrap 3.3.7 SASS Webpack / Doctrine - MYSQL.
 
 ## Require
     
-    * Php ^7.1                      http://www.github.com/
+    * Php ^7.1                      http://php.net/manual/fr/install.php
     * MySql                         https://dev.mysql.com/downloads/installer/
     * Symfony Installer             https://github.com/symfony/symfony-installer
     * Composer                      https://getcomposer.org/download/
@@ -44,4 +42,4 @@ Go to your working folder
     * Go on localhost:8000, create a profile and access to all routes.
 
 
-- 15/06/2018 - V.1.0.0
+- 19/06/2018 - V.1.0.0
