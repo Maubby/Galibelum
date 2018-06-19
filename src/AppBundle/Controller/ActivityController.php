@@ -40,7 +40,11 @@ class ActivityController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $activities = $em->getRepository('AppBundle:Activity')->findAll();
+        $activities = $em->getRepository('AppBundle:Activity')->findBy(
+            array(
+                'organizationActivities' => $this->getUser()->getOrganization()
+            )
+        );
 
         return $this->render(
             'activity/index.html.twig', array(
@@ -54,10 +58,9 @@ class ActivityController extends Controller
      *
      * @param Request $request Delete posted info
      *
-     * @return Response A Response instance
+     * @return         Response A Response instance
      * @Route("/new",  name="activity_new")
      * @Method({"GET", "POST"})
-     *
      */
     public function newAction(Request $request)
     {

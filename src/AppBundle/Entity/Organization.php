@@ -16,6 +16,12 @@ class Organization
     /*
      * Relationship Mapping Metadata
      */
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Offer", mappedBy="organization")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $offers;
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\AccountManager", inversedBy="managerOrganizations")
      * @ORM\JoinColumn(nullable=true)
@@ -537,5 +543,41 @@ class Organization
     public function getRelationNumber()
     {
         return $this->relationNumber;
+    }
+
+    /**
+     * Add offer.
+     *
+     * @param \AppBundle\Entity\Offer $offer
+     *
+     * @return Organization
+     */
+    public function addOffer(Offer $offer)
+    {
+        $this->offers[] = $offer;
+
+        return $this;
+    }
+
+    /**
+     * Remove offer.
+     *
+     * @param \AppBundle\Entity\Offer $offer
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeOffer(Offer $offer)
+    {
+        return $this->offers->removeElement($offer);
+    }
+
+    /**
+     * Get offers.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOffers()
+    {
+        return $this->offers;
     }
 }

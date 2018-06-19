@@ -64,10 +64,10 @@ class OrganizationType extends AbstractType
             )
             ->add(
                 'description', TextareaType::class, array(
-                    'attr'=> array(
-                        'minlength'=>32, 'maxlength' => 250,
-                        'class'=> 'form-control',
-                        'placeholder' =>'Maximun 250 caractère'))
+                'attr'=> array(
+                    'minlength'=>32, 'maxlength' => 250,
+                    'class'=> 'form-control',
+                    'placeholder'=> 'Maximum 250 caractères'))
             )
             ->add(
                 'userRole', TextType::class, array(
@@ -107,7 +107,6 @@ class OrganizationType extends AbstractType
                         'Plus de 251 membres'=> 'Plus de 251 membres',
                     ))
             );
-
     }
 
     /**

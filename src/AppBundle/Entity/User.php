@@ -27,6 +27,7 @@ class User extends BaseUser
      */
 
     /**
+     *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Organization", inversedBy="user")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -37,15 +38,17 @@ class User extends BaseUser
      */
 
     /**
+     *
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id",               type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
+     *
      * @var string
      *
      * @ORM\Column(name="firstName", type="string", length=32)
@@ -56,6 +59,7 @@ class User extends BaseUser
     private $firstName;
 
     /**
+     *
      * @var string
      *
      * @ORM\Column(name="lastName", type="string", length=32)
@@ -68,6 +72,7 @@ class User extends BaseUser
     private $lastName;
 
     /**
+     *
      * @var string
      *
      * @Assert\Regex(pattern="/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/",
@@ -91,6 +96,7 @@ class User extends BaseUser
     private $phoneNumber;
 
     /**
+     *
      * @var bool
      *
      * @ORM\Column(name="cgu", type="boolean")
