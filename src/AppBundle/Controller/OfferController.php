@@ -10,6 +10,7 @@
  */
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Activity;
 use AppBundle\Entity\Offer;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -40,7 +41,13 @@ class OfferController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $offers = $em->getRepository('AppBundle:Offer')->findAll();
+        $offers = $em
+            ->getRepository('AppBundle:Offer')
+            ->findBy(
+                array(
+                    'organization' => $this->getUser()->getOrganization()
+                )
+            );
 
         return $this->render(
             'offer/index.html.twig', array(
@@ -52,14 +59,15 @@ class OfferController extends Controller
     /**
      * Creates a new offer entity.
      *
-     * @param Request $request New posted info
+     * @Route("/{id}/new", name="offer_new")
+     * @Method({"GET",     "POST"})
      *
-     * @Route("/new",  name="offer_new")
-     * @Method({"GET", "POST"})
+     * @param Request  $request  New offer posted with activity id
+     * @param Activity $activity New offer by activity
      *
      * @return Response A Response instance
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Activity $activity)
     {
         $offer = new Offer();
         $form = $this->createForm('AppBundle\Form\OfferType', $offer);
@@ -67,6 +75,9 @@ class OfferController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $offer = $offer
+                ->setActivity($activity)
+                ->setOrganization($this->getUser()->getOrganization());
             $em->persist($offer);
             $em->flush();
 

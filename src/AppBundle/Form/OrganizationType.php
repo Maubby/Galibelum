@@ -43,7 +43,7 @@ class OrganizationType extends AbstractType
                 'name', TextType::class, array(
                 'attr' => array(
                     'minlength' => 2, 'maxlength' => 32,
-                    'data-label' => '',
+                    'data-label' => 'Nom de votre',
                     'class' => 'form-control input-field',
                 'placeholder' =>'Exemple : GBM eSport'))
             )
@@ -64,6 +64,7 @@ class OrganizationType extends AbstractType
             ->add(
                 'description', TextareaType::class, array(
                 'attr'=> array(
+                    'rows' => '3',
                     'minlength'=>32, 'maxlength' => 250,
                     'data-label'=>'',
                     'class'=> 'form-control input-field'))
@@ -81,8 +82,6 @@ class OrganizationType extends AbstractType
                 'attr'=>array(
                     'minlength'=>2,'maxlength' => 32,
                     'data-label'=>'',
-                    'data-rows' => '5',
-                    'data-cols' => '5',
                     'class'=>'form-control input-field'))
             )
             ->add(
