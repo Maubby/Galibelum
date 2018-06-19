@@ -62,10 +62,9 @@ class OrganizationController extends Controller
     public function dashboardAction()
     {
         $user = $this->getUser();
-        $isActive = $user->getOrganization()->getIsActive();
 
-        if ($user->hasRole('ROLE_STRUCTURE') && $isActive === 1
-            || $user->hasRole('ROLE_MARQUE')  && $isActive === 1
+        if ($user->hasRole('ROLE_STRUCTURE') && $user->getOrganization()->getIsActive() === 1
+            || $user->hasRole('ROLE_MARQUE')  && $user->getOrganization()->getIsActive() === 1
         ) {
             $organization = $user->getOrganization();
 
@@ -75,8 +74,8 @@ class OrganizationController extends Controller
                     'organization' => $organization,
                 )
             );
-        } elseif ($user->hasRole('ROLE_STRUCTURE') && $isActive === 0
-            || $user->hasRole('ROLE_MARQUE') && $isActive === 0
+        } elseif ($user->hasRole('ROLE_STRUCTURE') && $user->getOrganization()->getIsActive() === 0
+            || $user->hasRole('ROLE_MARQUE') && $user->getOrganization()->getIsActive() === 0
         ) {
             return $this->redirectToRoute('waiting_index');
         } else {
