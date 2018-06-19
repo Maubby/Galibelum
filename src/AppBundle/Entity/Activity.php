@@ -116,12 +116,12 @@ class Activity
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=32, nullable=true)
+     * @ORM\Column(name="address", type="string", length=64, nullable=true)
      *
      * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
-     *      max = 32,
+     *      max = 64,
      *      minMessage = "The address must be at least {{ limit }} characters long",
      *      maxMessage = "The address cannot be longer than {{ limit }} characters"
      * )
