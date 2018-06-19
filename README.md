@@ -22,7 +22,7 @@ PHP ^7.1 / Symfony 3.4.11 / Bootstrap 3.3.7 SASS Webpack / Doctrine - MYSQL.
 
 ## Require
     
-    * Php 7.2.5                      http://www.github.com/
+    * Php ^7.1                      http://www.github.com/
     * MySql                         https://dev.mysql.com/downloads/installer/
     * Symfony Installer             https://github.com/symfony/symfony-installer
     * Composer                      https://getcomposer.org/download/
