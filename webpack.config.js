@@ -22,6 +22,7 @@ Encore
     .addStyleEntry('profile', './assets/scss/profile.scss')
     .addStyleEntry('register', './assets/scss/register.scss')
     .addStyleEntry('dashboard', './assets/scss/dashboard.scss')
+    .addStyleEntry('inscription', './assets/scss/inscription_choose.scss')
     .addStyleEntry('organization_edit', './assets/scss/organization_edit.scss')
     .addEntry('main', './assets/js/main.js')
     .addEntry('carousel', './assets/js/carousel.js')
