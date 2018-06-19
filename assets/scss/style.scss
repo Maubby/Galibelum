@@ -97,14 +97,61 @@ h5 {
   font-family: $font-family-base;
 }
 
+.h1 {
+  font-size: 52px;
+  text-transform: none;
+  font-style: normal;
+  color: $six-color;
+  font-weight: 900;
+  font-family: $font-family-base;
+}
+
+.h2 {
+  font-size: 43px;
+  text-transform: none;
+  font-style: normal;
+  color: $six-color;
+  font-weight: 900;
+  font-family: $font-family-base;
+}
+
+.h3 {
+  font-size: 34px;
+  text-transform: none;
+  font-style: normal;
+  color: $six-color;
+  font-weight: 900;
+  font-family: $font-family-base;
+}
+
+.h4 {
+  font-size: 29px;
+  text-transform: none;
+  font-style: normal;
+  color: $six-color;
+  font-weight: 900;
+  font-family: $font-family-base;
+}
+
+.h5 {
+  font-size: 25px;
+  text-transform: none;
+  font-style: normal;
+  color: $six-color;
+  font-weight: 900;
+  font-family: $font-family-base;
+}
+
 .light-subtitle-text {
   color: #5495AF;
   font-weight: 300;
+  font-size: 1em;
 }
 
 .normal-subtitle-text {
   color: $grey-color;
   font-weight: 300;
+  font-size: 1em;
 }
 
 .bold-text {
@@ -405,7 +452,18 @@ p.size {
   width: 100%;
 }
 
-/* Input fields */
+/* Input fields / Form */
+
+.form-error ul {
+  list-style: none;
+  color: #a9090a;
+  background-color: #f2dede;
+  padding: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ebccd1;
+  border-radius: 10px
+}
 
 .input-group {
   display: inline;
@@ -486,19 +544,6 @@ input::placeholder {
 
 .center {
   text-align: center;
-}
-
-.box {
-  background-color: rgba(252, 252, 252, .95);
-  padding: 5px 5px 20px 5px;
-  border-radius: 7px;
-  margin-top: 20px;
-}
-
-.backgroundimg {
-  background-image:url(https://i1.wp.com/gallibellum.fr/wp-content/uploads/2018/03/Slider-inscription-gallibelluM.jpg);
-  padding-top: 5%;
-  padding-bottom: 5%;
 }
 
 a.btn-custom {
