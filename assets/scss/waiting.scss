@@ -1,52 +1,26 @@
-.study {
-  background: #f4f5f9;
+.waiting_title {
+  margin: 20px;
 }
 
-.galibelum_waiting_inscription_picture {
-  overflow: hidden;
-  max-width: 100%;
-  height: auto;
-}
-
-/* On screens that are 768px or less, set the waiting_text_background position */
-@media screen and (max-width: 768px) {
-  .waiting_text_background {
-    left: 13%;
-  }
-}
-
-.waiting_text_background {
-  background: #fff;
-  position: absolute;
-  right:-15%;
-  top:15px;
-  max-width: 100%;
-  height: auto;
-  z-index: 9;
-  padding: 5% 10%;
+.waiting_text {
+  padding: 20px;
+  border: 1px solid #fff;
+  background-color: #fff;
+  margin-top: 30px;
+  position: relative;
+  left: 30px;
+  z-index: 1;
 }
 
 .separator {
-  width: 10px;
-  height: 10px;
-  margin: 20px auto;
-  background: rgb(43,109,175);
-  position: relative;
-  display: inline-block;
-  border-radius: 50%;
-}
-.separator3 {
   height: 2px;
   width: 40px;
   margin:20px auto;
   background: #888888;
 }
 
-.contact_galibelum {
-  color: rgb(43,109,175);
-  font-weight: bold;
-}
-
-a.waiting {
-  padding: 10px;
+.waiting_background_image {
+  position: relative;
+  max-width: 100%;
+  height: auto;
 }
