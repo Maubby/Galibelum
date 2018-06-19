@@ -40,7 +40,11 @@ class ActivityController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $activities = $em->getRepository('AppBundle:Activity')->findAll();
+        $activities = $em->getRepository('AppBundle:Activity')->findBy(
+            array(
+                'organizationActivities' => $this->getUser()->getOrganization()
+            )
+        );
 
         return $this->render(
             'activity/index.html.twig', array(

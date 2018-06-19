@@ -10,21 +10,19 @@
     <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
     <!-- Zero intern console warning -->
     <div class="container pb-60">
-    <div class="boxing-title mt-60 mb-40">
-        <h5 class="degradeblue ml-25"><span><i class="fas fa-chart-bar degradeblue" style="font-size: 30px"></i></span> Tableau de bord</h5>
-    </div>
+        <div class="boxing-title mt-60 mb-40">
+            <h5 class="degradeblue ml-25"><span><i class="fas fa-chart-bar degradeblue" style="font-size: 30px"></i></span> Tableau de bord</h5>
+        </div>
         <div class="row">
             <div class="col-md-2">
                 <div class="card">
                     <ul class="list-group">
                         <li class="list-group-item text-center"><P>Bienvenue {{ user.firstName }}</P></li>
-                        {% for organization in organization %}
-                            <li class="list-group-item text-left">{{ organization.name }}</li>
-                            <li class="list-group-item text-left">{{ organization.phoneNumber }}</li>
-                            <li class="list-group-item text-left">{{ organization.email }}</li>
-                            <li class="list-group-item text-left">{{ organization.address }}</li>
-                            <li class="list-group-item text-left text-muted"><a href="{{ path('organization_edit', { 'id': organization.id }) }}">Modifier votre structure</a></li>
-                        {% endfor %}
+                        <li class="list-group-item text-left">{{ organization.name }}</li>
+                        <li class="list-group-item text-left">{{ organization.phoneNumber }}</li>
+                        <li class="list-group-item text-left">{{ organization.email }}</li>
+                        <li class="list-group-item text-left">{{ organization.address }}</li>
+                        <li class="list-group-item text-left text-muted"><a href="{{ path('organization_edit', { 'id': organization.id }) }}">Modifier votre structure</a></li>
                     </ul>
                 </div>
             </div>
@@ -35,10 +33,10 @@
                         <div id="myCarousel" class="carousel vertical" data-ride="carousel">
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
-                                {% if activities is empty %}
+                                {% if organization.OrganizationActivity is empty %}
                                     <p>Créer une activités</p>
                                 {% else %}
-                                    {% for activity in activities %}
+                                    {% for activity in organization.OrganizationActivity %}
                                         <div class="{% if loop.first %}active{% endif %} item">
                                             <div class="panel panel-default">
                                                 <h5 class="panel-title text-center pt-10">{{ activity.name }}</h5>
@@ -77,10 +75,10 @@
                         <div id="myCarouselActivity" class="carousel vertical" data-ride="carousel">
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
-                                {% if offers is empty %}
+                                {% if organization.offers is empty %}
                                     <p>Créer une offre</p>
                                 {% else %}
-                                    {% for offer in offers %}
+                                    {% for offer in organization.offers %}
                                         <div class="{% if loop.first %}active{% endif %} item">
                                             <div class="panel panel-default">
                                                 <h5 class="panel-title text-center pt-10">{{ offer.name }}</h5>
@@ -107,7 +105,7 @@
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
-                        <a href="{{ path('offer_new') }}" class="btn btn-primary backblue-btn mt-20">Ajouter une offre</a>
+                        <a href="{{ path('activity_index') }}" class="btn btn-primary backblue-btn mt-20">Ajouter une offre</a>
                     </div>
                 </div>
             </div>

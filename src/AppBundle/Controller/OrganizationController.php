@@ -56,6 +56,8 @@ class OrganizationController extends Controller
      *
      * @Route("/",    name="dashboard_index")
      * @Method("GET")
+     *
+     * @return Response A Response instance
      */
     public function dashboardAction()
     {
@@ -65,33 +67,12 @@ class OrganizationController extends Controller
         if ($user->hasRole('ROLE_STRUCTURE') && $isActive === 1
             || $user->hasRole('ROLE_MARQUE')  && $isActive === 1
         ) {
-            $em= $this->getDoctrine()->getManager();
-
-            $organization = $em->getRepository('AppBundle:Organization')
-                ->findBy(
-                    array(
-                        'user' => $user
-                    )
-                );
-            $activities = $em->getRepository('AppBundle:Activity')
-                ->findBy(
-                    array(
-                        'organizationActivities' => $organization
-                    )
-                );
-            $offers = $em->getRepository('AppBundle:Offer')
-                ->findBy(
-                    array(
-                        'activity' => $activities
-                    )
-                );
+            $organization = $user->getOrganization();
 
             return $this->render(
                 'dashboard/index.html.twig', array(
                     'user' => $user,
                     'organization' => $organization,
-                    'activities' => $activities ,
-                    'offers' => $offers,
                 )
             );
         } elseif ($user->hasRole('ROLE_STRUCTURE') && $isActive === 0
