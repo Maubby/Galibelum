@@ -27,7 +27,7 @@
                     <div class="input-no-border light-subtitle-text">
                         <i class="fas fa-university"></i>{{ form_label(edit_form.name) }}
                     </div>
-                    <div class="inputs-fields">
+                    <div>
                         {{ form_widget(edit_form.name) }}
                         {{ form_errors(edit_form.name) }}
                     </div>
@@ -37,7 +37,7 @@
                     <div class="input-no-border light-subtitle-text">
                         <i class="fas fa-gavel"></i>{{ form_label(edit_form.status) }}
                     </div>
-                    <div class="inputs-fields">
+                    <div>
                         {{ form_widget(edit_form.status) }}
                         {{ form_errors(edit_form.status) }}
                     </div>
@@ -47,7 +47,7 @@
                     <div class="input-no-border light-subtitle-text">
                         <i class="fas fa-address-card"></i>{{ form_label(edit_form.address) }}
                     </div>
-                    <div class="inputs-fields">
+                    <div>
                         {{ form_widget(edit_form.address) }}
                         {{ form_errors(edit_form.address) }}
                     </div>
@@ -57,7 +57,7 @@
                     <div class="input-no-border light-subtitle-text">
                         <i class="fas fa-users"></i>{{ form_label(edit_form.relationNumber) }}
                     </div>
-                    <div class="inputs-fields">
+                    <div>
                         {{ form_widget(edit_form.relationNumber) }}
                         {{ form_errors(edit_form.relationNumber) }}
                     </div>
@@ -67,7 +67,7 @@
                     <div class="input-no-border light-subtitle-text">
                         <i class="fas fa-edit"></i>{{ form_label(edit_form.description) }}
                     </div>
-                    <div class="inputs-fields">
+                    <div>
                         {{ form_widget(edit_form.description) }}
                         {{ form_errors(edit_form.description) }}
                     </div>
@@ -91,7 +91,7 @@
                     <div class="input-no-border light-subtitle-text">
                         <i class="fas fa-at"></i>{{ form_label(edit_form.email) }}
                     </div>
-                    <div class="inputs-fields">
+                    <div>
                         {{ form_widget(edit_form.email) }}
                         {{ form_errors(edit_form.email) }}
                     </div>
@@ -101,7 +101,7 @@
                     <div class="input-no-border light-subtitle-text">
                         <i class="fas fa-phone"></i>{{ form_label(edit_form.phoneNumber) }}
                     </div>
-                    <div class="inputs-fields">
+                    <div>
                         {{ form_widget(edit_form.phoneNumber) }}
                         {{ form_errors(edit_form.phoneNumber) }}
                     </div>
@@ -111,7 +111,7 @@
 
                 <!--Submit part-->
                 <div class="row">
-                    <div class="col-sm-4 col-sm-offset-4 col-xs-offset-1 col-xs-10 col-xs-offset-1 text-center">
+                    <div class="col-sm-2 col-sm-offset-5 col-xs-offset-1 col-xs-10 col-xs-offset-1 text-center">
                         <br>
                         <input type="submit" value="Modifier votre profil" class="btn btn-primary backblue-btn">
                     </div>
@@ -124,10 +124,10 @@
     </div>
     <!--Return to the homepage or delete the profile-->
     <div class="row">
-        <div class="col-sm-6 col-xs-offset-1 col-xs-10 col-xs-offset-1 normal-subtitle-text">
+        <div class="col-sm-6 col-xs-offset-1 col-xs-10 col-xs-offset-1 forgotten-password normal-subtitle-text">
             <br>
 
-            <!--Link to go to the homepage-->
+            <!--Link to go to the dashboard-->
             <i class="fas fa-reply"></i>&nbsp;  Retourner sur votre dashboard ?
             <a href="{{ path('homepage') }}" class="five-color"> C'est par ici !</a>
             <br>

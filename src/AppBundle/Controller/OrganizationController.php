@@ -33,7 +33,7 @@ class OrganizationController extends Controller
     /**
      * Lists all organization entities.
      *
-     * @Route("/index",    name="organization_index")
+     * @Route("/index", name="organization_index")
      * @Method("GET")
      *
      * @return Response A Response instance
@@ -42,7 +42,9 @@ class OrganizationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $organizations = $em->getRepository('AppBundle:Organization')->findAll();
+        $organizations = $em->getRepository(
+            'AppBundle:Organization'
+        )->findByisActive(1);
 
         return $this->render(
             'organization/index.html.twig', array(
@@ -56,18 +58,30 @@ class OrganizationController extends Controller
      *
      * @Route("/",    name="dashboard_index")
      * @Method("GET")
+     *
+     * @return Response A Response instance
      */
     public function dashboardAction()
     {
         $user = $this->getUser();
 
-        if ($user->hasRole('ROLE_STRUCTURE') && $user->getOrganization()->getIsActive() === 1 || $user->hasRole('ROLE_MARQUE')  && $user->getOrganization()->getIsActive() === 1) {
+        if ($user->hasRole('ROLE_STRUCTURE')
+            && $user->getOrganization()->getIsActive() === 1
+            || $user->hasRole('ROLE_MARQUE')
+            && $user->getOrganization()->getIsActive() === 1
+        ) {
 
             $name = $user->getFirstName() .' '. $user->getLastName();
             $em = $this->getDoctrine()->getManager();
-            $organization = $em->getRepository('AppBundle:Organization')->findby(array('user' => $user));
-            $activities = $em->getRepository('AppBundle:Activity')->findby(array('organizationActivities' => $organization));
-            $offers = $em->getRepository('AppBundle:Offer')->findby(array('activity' => $activities));
+            $organization = $em->getRepository(
+                'AppBundle:Organization'
+            )->findby(array('user' => $user));
+            $activities = $em->getRepository(
+                'AppBundle:Activity'
+            )->findby(array('organizationActivities' => $organization));
+            $offers = $em->getRepository(
+                'AppBundle:Offer'
+            )->findby(array('activity' => $activities));
 
             return $this->render(
                 'dashboard/index.html.twig', array(
@@ -77,12 +91,13 @@ class OrganizationController extends Controller
                     'name' => $name,
                 )
             );
-        }
-        elseif ($user->hasRole('ROLE_STRUCTURE') && $user->getOrganization()->getIsActive() === 0 || $user->hasRole('ROLE_MARQUE') && $user->getOrganization()->getIsActive() === 0) {
-
+        } elseif ($user->hasRole('ROLE_STRUCTURE')
+            && $user->getOrganization()->getIsActive() === 0
+            || $user->hasRole('ROLE_MARQUE')
+            && $user->getOrganization()->getIsActive() === 0
+        ) {
             return $this->redirectToRoute('waiting_index');
-        }
-        else{
+        } else {
             return $this->redirectToRoute('inscription_index');
         }
     }
@@ -91,7 +106,7 @@ class OrganizationController extends Controller
      * Creates a new organization entity.
      *
      * @param Request $request New posted info
-     * @param int $choose organization or company
+     * @param int     $choose  organization or company
      *
      * @Route("/new/choose{choose}", name="organization_new")
      * @Method({"GET",               "POST"})
@@ -152,12 +167,16 @@ class OrganizationController extends Controller
     {
         $deleteForm = $this->_createDeleteForm($organization);
 
-        return $this->render(
-            'organization/show.html.twig', array(
-                'organization' => $organization,
-                'delete_form' => $deleteForm->createView(),
-            )
-        );
+        if ($organization->getIsActive(1)) {
+            return $this->render(
+                'organization/show.html.twig', array(
+                    'organization' => $organization,
+                    'delete_form' => $deleteForm->createView(),
+                )
+            );
+        } else {
+            return $this->redirectToRoute('homepage');
+        }
     }
 
     /**
@@ -216,11 +235,12 @@ class OrganizationController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($organization);
+            $organization->setIsActive(2);
+            $em->persist($organization);
             $em->flush();
         }
 
-        return $this->redirectToRoute('organization_index');
+        return $this->redirectToRoute('homepage');
     }
 
     /**
