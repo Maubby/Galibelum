@@ -24,7 +24,7 @@ Encore
     .addStyleEntry('dashboard', './assets/scss/dashboard.scss')
     .addStyleEntry('inscription', './assets/scss/inscription_choose.scss')
     .addStyleEntry('organization_edit', './assets/scss/organization_edit.scss')
-    .addEntry('main', './assets/js/main.js')
+    .addEntry('login-script', './assets/js/login-script.js')
     .addEntry('carousel', './assets/js/carousel.js')
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
