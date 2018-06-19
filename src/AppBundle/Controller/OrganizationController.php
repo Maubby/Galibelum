@@ -101,7 +101,13 @@ class OrganizationController extends Controller
     {
         $organization = new Organization();
         $user = $this->getUser();
-        $form = $this->createForm('AppBundle\Form\OrganizationType', $organization);
+        if ($choose === 1) {
+            $form = $this->createForm('AppBundle\Form\OrganizationType', $organization);
+            $form->remove('status');
+        } else {
+            $form = $this->createForm('AppBundle\Form\OrganizationType', $organization);
+        }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
