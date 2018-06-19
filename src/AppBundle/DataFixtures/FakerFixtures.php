@@ -83,24 +83,26 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
             $populator = new User();
             $populator
                 ->setEmail($faker->email)
-                ->setUsername($faker->userName)
-                ->setPlainPassword($faker->password)
+                ->setPlainPassword('galibelum1')
                 ->setFirstName($faker->firstName)
                 ->setLastName($faker->lastName)
                 ->setPhoneNumber($faker->phoneNumber)
-                ->setCgu(true);
+                ->setCgu(true)
+                ->setEnabled(1)
+                ->setRoles(array('ROLE_STRUCTURE'));
 
             // Organization creation
             $organization = new Organization();
             $organization
-                ->setName($faker->firstName)
+                ->setName($faker->name)
                 ->setStatus($faker->company)
                 ->setAddress($faker->streetAddress)
                 ->setPhoneNumber($faker->phoneNumber)
                 ->setEmail($faker->email)
                 ->setRelationNumber($faker->randomDigitNotNull)
                 ->setUserRole($faker->jobTitle)
-                ->setDescription($faker->text);
+                ->setDescription($faker->text)
+                ->setIsActive(1);
 
             // Activity creation
             $activity = new Activity();
@@ -125,11 +127,21 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
                 ->setPartnershipNumber($faker->randomDigitNotNull);
 
             $em->persist($populator);
+
             $organization->setUser($populator);
             $em->persist($organization);
+
+            $populator
+                ->setOrganization($organization)
+                ->setUsername($populator->getEmail());
+            $em->persist($populator);
+
             $activity->setOrganizationActivities($organization);
             $em->persist($activity);
-            $offer->setActivity($activity);
+
+            $offer
+                ->setActivity($activity)
+                ->setOrganization($organization);
             $em->persist($offer);
 
             $em->flush();

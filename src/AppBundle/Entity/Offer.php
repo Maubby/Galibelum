@@ -35,6 +35,12 @@ class Offer
      */
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organization", inversedBy="offers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $organization;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\AccountManager", inversedBy="managerOffers")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -492,5 +498,29 @@ class Offer
     public function getCreationDate()
     {
         return $this->creationDate;
+    }
+
+    /**
+     * Set organization.
+     *
+     * @param Organization $organization
+     *
+     * @return Offer
+     */
+    public function setOrganization(Organization $organization)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Get organization.
+     *
+     * @return Organization
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
     }
 }
