@@ -13,9 +13,11 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Organization;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
  * Organization controller.
@@ -31,7 +33,7 @@ class OrganizationController extends Controller
     /**
      * Lists all organization entities.
      *
-     * @Route("/",    name="organization_index")
+     * @Route("/index", name="organization_index")
      * @Method("GET")
      *
      * @return Response A Response instance
@@ -40,7 +42,9 @@ class OrganizationController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $organizations = $em->getRepository('AppBundle:Organization')->findAll();
+        $organizations = $em->getRepository(
+            'AppBundle:Organization'
+        )->findByisActive(1);
 
         return $this->render(
             'organization/index.html.twig', array(
@@ -52,33 +56,57 @@ class OrganizationController extends Controller
     /**
      * Lists all organization entities.
      *
-     * @Route("/dashboard",    name="dashboard_index")
+     * @Route("/",    name="dashboard_index")
      * @Method("GET")
+     *
+     * @return Response A Response instance
      */
     public function dashboardAction()
     {
         $user = $this->getUser();
-        $name = $user->getFirstName() .' '. $user->getLastName();
-        $em = $this->getDoctrine()->getManager();
-        $organization = $em->getRepository('AppBundle:Organization')->findby(array('user' => $user));
-        $activities = $em->getRepository('AppBundle:Activity')->findby(array('organizationActivities' => $organization));
-        $offers = $em->getRepository('AppBundle:Offer')->findby(array('activity' => $activities));
 
-        return $this->render(
-            'dashboard/index.html.twig', array(
-                'organization' => $organization,
-                'activities' => $activities ,
-                'offers' => $offers,
-                'name' => $name,
-            )
-        );
+        if ($user->hasRole('ROLE_STRUCTURE')
+            && $user->getOrganization()->getIsActive() === 1
+            || $user->hasRole('ROLE_MARQUE')
+            && $user->getOrganization()->getIsActive() === 1
+        ) {
+
+            $name = $user->getFirstName() .' '. $user->getLastName();
+            $em = $this->getDoctrine()->getManager();
+            $organization = $em->getRepository(
+                'AppBundle:Organization'
+            )->findby(array('user' => $user));
+            $activities = $em->getRepository(
+                'AppBundle:Activity'
+            )->findby(array('organizationActivities' => $organization));
+            $offers = $em->getRepository(
+                'AppBundle:Offer'
+            )->findby(array('activity' => $activities));
+
+            return $this->render(
+                'dashboard/index.html.twig', array(
+                    'organization' => $organization,
+                    'activities' => $activities ,
+                    'offers' => $offers,
+                    'name' => $name,
+                )
+            );
+        } elseif ($user->hasRole('ROLE_STRUCTURE')
+            && $user->getOrganization()->getIsActive() === 0
+            || $user->hasRole('ROLE_MARQUE')
+            && $user->getOrganization()->getIsActive() === 0
+        ) {
+            return $this->redirectToRoute('waiting_index');
+        } else {
+            return $this->redirectToRoute('inscription_index');
+        }
     }
 
     /**
      * Creates a new organization entity.
      *
      * @param Request $request New posted info
-     * @param int $choose organization or company
+     * @param int     $choose  organization or company
      *
      * @Route("/new/choose{choose}", name="organization_new")
      * @Method({"GET",               "POST"})
@@ -104,10 +132,19 @@ class OrganizationController extends Controller
             $organization->setNameCanonical(strtolower($organization->getName()));
             $em->persist($organization);
             $em->persist($this->getUser()->setOrganization($organization));
+
+            if ($choose === 0) {
+                $role = $this->getUser()->setRoles(array('ROLE_STRUCTURE'));
+            }
+            else ($choose === 1){
+                $role = $this->getUser()->setRoles(array('ROLE_MARQUE'))
+            };
+
+            $em->persist($role);
             $em->flush();
 
             return $this->redirectToRoute(
-                'organization_show',
+                'dashboard_index',
                 array('id' => $organization->getId(),
                 )
             );
@@ -136,12 +173,16 @@ class OrganizationController extends Controller
     {
         $deleteForm = $this->_createDeleteForm($organization);
 
-        return $this->render(
-            'organization/show.html.twig', array(
-                'organization' => $organization,
-                'delete_form' => $deleteForm->createView(),
-            )
-        );
+        if ($organization->getIsActive(1)) {
+            return $this->render(
+                'organization/show.html.twig', array(
+                    'organization' => $organization,
+                    'delete_form' => $deleteForm->createView(),
+                )
+            );
+        } else {
+            return $this->redirectToRoute('homepage');
+        }
     }
 
     /**
@@ -200,11 +241,12 @@ class OrganizationController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($organization);
+            $organization->setIsActive(2);
+            $em->persist($organization);
             $em->flush();
         }
 
-        return $this->redirectToRoute('organization_index');
+        return $this->redirectToRoute('homepage');
     }
 
     /**

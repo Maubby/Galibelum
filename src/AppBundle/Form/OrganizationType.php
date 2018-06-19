@@ -42,10 +42,12 @@ class OrganizationType extends AbstractType
         $builder
             ->add(
                 'name', TextType::class, array(
+
                     'attr' => array(
                         'minlength' => 2, 'maxlength' => 32,
                         'class' => 'form-control',
                         'placeholder' =>'Exemple : GBM eSport'))
+
             )
             ->add(
                 'phoneNumber', NumberType::class, array(
@@ -74,6 +76,7 @@ class OrganizationType extends AbstractType
                         'minlength'=>2, 'maxlength' => 32,
                         'class'=>'form-control',
                         'placeholder' =>'Exemple: Manager')
+
                 )
             )
             ->add(
@@ -91,11 +94,12 @@ class OrganizationType extends AbstractType
                         'class'=>'form-control',
                         'placeholder '=>'Exemple: 4 avenue des Saules, bâtiment Le Doge,'))
 
+
             )
             ->add(
                 'relationNumber', ChoiceType::class, array(
                     'attr'=> array(
-                        'class'=> 'form-control'),
+                        'class'=> 'form-control input-field'),
                     'choices'  => array(
                         'Aucun autre membre' => 'Aucun autre membre',
                         '2-10 membres' => '2-10 membres',

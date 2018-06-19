@@ -1,5 +1,27 @@
+{# app/Resources/FOSUserBundle/views/Resetting/reset.html.twig #}
+{# Also base.html.twig #}
 {% extends "@FOSUser/layout.html.twig" %}
+
+{% block title %}Nouveau mot de passe{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/login.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
 
 {% block fos_user_content %}
 {% include "@FOSUser/Resetting/reset_content.html.twig" %}
 {% endblock fos_user_content %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}
