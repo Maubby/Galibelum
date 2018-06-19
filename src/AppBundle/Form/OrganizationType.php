@@ -47,7 +47,6 @@ class OrganizationType extends AbstractType
                         'minlength' => 2, 'maxlength' => 32,
                         'class' => 'form-control',
                         'placeholder' =>'Exemple : GBM eSport'))
-
             )
             ->add(
                 'phoneNumber', NumberType::class, array(
@@ -82,19 +81,19 @@ class OrganizationType extends AbstractType
             ->add(
                 'status', TextType::class, array(
                     'attr'=>array(
-                        'data' => null,
+                        'data-label' => null,
                         'required' => false,
                         'minlength'=>2,'maxlength' => 32,
-                        'class'=>'form-control','placeholder' =>'Exemple: GBM eSport'))
+                        'class'=>'form-control',
+                        'placeholder' =>'Exemple: GBM eSport'))
             )
             ->add(
                 'address', TextType::class, array(
                     'attr'=>array(
                         'minlength'=>2, 'maxlength' => 64,
                         'class'=>'form-control',
-                        'placeholder '=>'Exemple: 4 avenue des Saules, bâtiment Le Doge,'))
-
-
+                        'placeholder '=>
+                            'Exemple: 4 avenue des Saules, bâtiment Le Doge'))
             )
             ->add(
                 'relationNumber', ChoiceType::class, array(
