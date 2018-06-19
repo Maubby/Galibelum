@@ -53,10 +53,19 @@ input:-webkit-autofill {
   border-right: 1px solid $border-color;
 }
 
+.modal-galibelum {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
 .forgotten-password {
   padding-top: 5px;
 }
 
 .orange-color {
   color: #ffaf7e;
+}
+
+.white-color {
+  color: white;
 }
