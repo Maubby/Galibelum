@@ -42,27 +42,19 @@ class ActivityType extends AbstractType
                 'attr' => array(
                     'minlength' => 2,
                     'maxlength' => 32,
-                    'placeholder' =>'Exemple : Lyon eSport',
-                    'class'=> 'form-control input-field',
                 )
             ))
             ->add('type', ChoiceType::class, array(
-                'attr'=> array(
-                    'class' => 'form-control input-field'),
                 'choices' => array(
                     'Activité de streaming' => 'Activité de streaming',
                     'Equipe eSport' => 'Equipe eSport',
                     'Évènement eSport' => 'Évènement eSport'
-
-
                 )
             ))
             ->add('description', TextareaType::class, array(
                 'attr' => array(
                     'minlength' => 32,
                     'maxlength' => 250,
-                    'placeholder' => 'Maximum 250 caractères',
-                    'class'=> 'form-control input-field',
                 )
             ))
             ->add('date', TextType::class, array(
@@ -81,23 +73,17 @@ class ActivityType extends AbstractType
             ->add('urlVideo', UrlType::class, array(
                 'required' => false,
                 'attr' => array(
-                    'class'=> 'form-control input-field',
+                    'maxlength' => 128,
                 )
             ))
             ->add('achievement', TextareaType::class, array(
                 'required' => false,
                 'attr' => array(
                     'maxlength' => 128,
-                    'placeholder' => 'Exemple : 1ère place aux IEM Katowice de CS:GO 2018',
-                    'class'=> 'form-control input-field',
                 )
             ))
-            ->add('socialLink', UrlType::class, array(
-                'attr' => array(
-                    'placeholder' => 'Exemple : https://www.twitch.tv/gallibellum',
-                    'class'=> 'form-control input-field',
-                )
-            ))
+            ->add('socialLink', UrlType::class)
+
             ->remove('mainGame')
             ->remove('address')
             ->remove('date');
@@ -128,6 +114,4 @@ class ActivityType extends AbstractType
     {
         return 'appbundle_activity';
     }
-
-
 }
