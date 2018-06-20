@@ -1,0 +1,53 @@
+@import "style";
+
+.boxing-canvas {
+  background-color: #fff;
+  width: auto;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  height: 550px;
+  padding: 10px 40px 10px 40px;
+  border-radius: 4px;
+  border: 1px solid $border-color;
+}
+
+.boxing-canvas-content-height {
+  height: 260px;
+}
+
+.boxing-canvas-button-height {
+  height: 155px;
+}
+
+br.space {
+  display: none;
+}
+
+@media screen and (max-width: 520px) {
+  .boxing-canvas-content-height {
+    height: 340px;
+  }
+  .boxing-canvas-button-height {
+    height: 200px;
+  }
+  .boxing-canvas {
+    height: 700px;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .boxing-canvas-content-height {
+    height: 355px;
+  }
+}
+
+.white-color {
+  color: white;
+}
+
+.modal-galibelum {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}

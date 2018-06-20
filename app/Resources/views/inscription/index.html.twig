@@ -1,131 +1,122 @@
+{# app/Resources/views/inscription/index.html.twig #}
 {% extends 'base.html.twig' %}
 
+{% block title %}Structure ou marque ?{% endblock %}
 
 {% block stylesheets %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+
     <!-- Additional CSS links-->
-    <link rel="stylesheet" href="{{ asset('build/inscription.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/inscription-choose.css') }}">
 {% endblock %}
 
 {% block body %}
-    <main class="page-wrapper loading-done backgroundimg">
-        <article id="post-4665" class="post-4665 page type-page status-publish hentry">
-            <h1 class="hidden"> Galibelum Structures/Sponsors </h1>
-            <section id="#inscriptionstructureesport" class="fw-section layout-full-equal without-overlay without-parallax vc_custom_1521657524772" data-offset-top="180">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="boxing-canvas">
-                                <p class="center grey space size" >
-                                <span>
-                                    <strong><span class="text-uppercase ">VOUS REPRÉSENTEZ UNE</span></strong>
-                                </span>
-                                </p>
-                                <div class="si-cta-inner">
-                                    <h3 class="center">
-                                        <strong><span class="degradeblue">STRUCTURE eSPORT</span></strong>
-                                    </h3>
-                                    <br>
-                                    <p class="center">
-                                        <span>TROUVER LES MEILLEURS PARTENAIRES FINANCIERS</span>
-                                    </p>
-                                    <br>
-                                    <p class="center">
-                                        <span>
-                                            <strong>Créer le profil de votre structure</strong>
-                                        </span>
-                                        et lancer une campagne de financement avec
-                                        des critères spécifiques correspondant à vos choix de partenaires financiers.
-                                    </p>
-                                    <p class="center">
-                                        <span>
-                                            <strong>Accéder à des centaines de marques, institutions et particuliers</strong>
-                                        </span> qui veulent investir dans l’eSport.
-                                    </p>
-                                </div>
+    <main>
+        <section class="center">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="boxing-canvas">
+                            <p class="center grey space size">
+                                <strong><span class="text-uppercase">VOUS REPRÉSENTEZ UNE</span></strong>
+                            </p>
+                            <div class="boxing-canvas-content-height light-blue-subtitle-text">
+                                <h3>
+                                    <strong><span class="degradeblue">STRUCTURE eSPORT</span></strong>
+                                </h3>
                                 <br>
-                                <div class="text-block vc_custom_1521651694627">
-                                    <p class="center">
-                                        <strong>
-                                            <span class ="degradeblue">3 ÉTAPES POUR TROUVER DES INVESTISSEURS</span>
-                                        </strong>
-                                    </p>
-                                    <p class="center">
-                                        <strong>1 – Créer le profil</strong> <span class="grey">de votre structure pour gagner en visibilité</span>
-                                    </p>
-                                    <p class="center">
-                                        <strong>2 – Lancer</strong><span class="grey"> un appel au financement</span>
-                                    </p>
-                                    <p class="center">
-                                        <strong>3 – Contractualiser</strong> <span class="grey">facilement avec vos nouveaux partenaires financiers</span>
-                                    </p>
-                                    <br>
-                                    <div class="center">
-                                        <a class="backblue btn btn-custom " href="{{ path('organization_new', {'choose': 0}) }}" title="inscription responsable de structure" >CRÉER VOTRE PROFIL</a>
-                                    </div>
-                                </div>
+                                <p>
+                                    TROUVER LES MEILLEURS PARTENAIRES FINANCIERS
+                                </p>
+                                <br>
+                                <p>
+                                    <strong>Créer le profil de votre structure</strong>
+                                    et lancer une campagne de financement avec
+                                    des critères spécifiques correspondant à vos choix de partenaires financiers.
+                                </p>
+                                <p>
+                                    <strong>Accéder à des centaines de marques, institutions et particuliers</strong>
+                                    qui veulent investir dans l’eSport.
+                                </p>
+                            </div>
+                            <div class="boxing-canvas-button-height">
+                                <p>
+                                    <strong>
+                                        <span class="degradeblue">3 ÉTAPES POUR TROUVER DES INVESTISSEURS</span>
+                                    </strong>
+                                </p>
+                                <p>
+                                    <strong>1 – Créer le profil</strong> <span class="grey">de votre structure pour gagner en visibilité</span>
+                                </p>
+                                <p>
+                                    <strong>2 – Lancer</strong><span class="grey"> un appel au financement</span>
+                                </p>
+                                <p>
+                                    <strong>3 – Contractualiser</strong> <span class="grey">facilement avec vos nouveaux partenaires financiers</span>
+                                </p>
+                            </div>
+                            <div>
+                                <a class="btn btn-primary btn-sm backblue-btn" href="{{ path('organization_new', {'choose': 0}) }}" title="Créer votre structure en cliquant ici">CRÉER VOTRE STRUCTURE</a>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-
-                            <div class="boxing-canvas">
-                                <p class="center grey space size ">
-                                <span>
-                                    <strong><span class="text-uppercase ">VOUS REPRÉSENTEZ UNE</span></strong>
-                                </span>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="boxing-canvas">
+                            <p class="center grey space size">
+                                <strong><span class="text-uppercase">VOUS REPRÉSENTEZ UNE</span></strong>
+                            </p>
+                            <div class="boxing-canvas-content-height red-blue-subtitle-text">
+                                <h3>
+                                    <strong><span class="degradered">MARQUE</span></strong>
+                                </h3>
+                                <br>
+                                <p>
+                                    INVESTIR DANS LES MEILLEURES STRUCTURES eSPORT
                                 </p>
-                                <div class="si-cta-inner">
-                                    <h3 class="center">
-                                        <strong><span class="degradered">MARQUE</span></strong>
-                                    </h3>
-                                    <br>
-                                    <p class="center">
-                                        <span>INVESTIR DANS LES MEILLEURES STRUCTURES eSPORT</span>
-                                    </p>
-                                    <br>
-                                    <p class="center">
-                                        <span>
-                                            <strong>Découvrir des milliers de structures eSport vérifiées</strong>
-                                        </span>à la recherche de partenaires financiers / sponsors.
-                                    </p>
-                                    <br class="space">
-                                    <p class="center">
-                                        <span>
-                                            <strong>Lancer le processus d’investissement</strong>
-                                        </span> et maximiser vos retours sur investissement grâce au module de reporting.
-                                    </p>
-                                </div>
-                                <div class="text-block vc_custom_1521651720933">
-                                    <br>
-                                    <p class="center">
-                                        <strong>
-                                            <span class="degradered">3 ÉTAPES POUR INVESTIR / SPONSORISER SEREINEMENT</span>
-                                        </strong>
-                                    </p>
-                                    <p class="center">
-                                        <strong>1 – Créer votre profil</strong>
-                                        <span class="grey">et définir vos objectifs d’investissement</span>
-                                    </p>
-                                    <p class="center">
-                                        <strong>2 – Trouver</strong>
-                                        <span class="grey">les structures les plus cohérentes pour votre marque</span></p>
-                                    <p class="center">
-                                        <strong>3 – Contractualiser et suivre l’évolution de vos contrats
-                                            <span class="grey"></span>
-                                        </strong>
-                                    </p>
-                                    <br>
-                                    <div class="center">
-                                        <a class="backred btn btn-custom place" href="{{ path('organization_new', {'choose': 1}) }}" title="Inscription de responsable de marques ou institutions" >CRÉER VOTRE PROFIL</a>
-                                    </div>
-                                </div>
+                                <br>
+                                <p>
+                                    <strong>Découvrir des milliers de structures eSport vérifiées</strong>
+                                    à la recherche de partenaires financiers / sponsors.
+                                </p>
+                                <br class="space">
+                                <p>
+                                    <strong>Lancer le processus d’investissement</strong>
+                                    et maximiser vos retours sur investissement grâce au module de reporting.
+                                </p>
+                            </div>
+                            <div class="boxing-canvas-button-height">
+                                <p>
+                                    <strong>
+                                        <span class="degradered">3 ÉTAPES POUR INVESTIR / SPONSORISER SEREINEMENT</span>
+                                    </strong>
+                                </p>
+                                <p>
+                                    <strong>1 – Créer votre profil</strong>
+                                    <span class="grey">et définir vos objectifs d’investissement</span>
+                                </p>
+                                <p>
+                                    <strong>2 – Trouver</strong>
+                                    <span class="grey">les structures les plus cohérentes pour votre marque</span></p>
+                                <p>
+                                    <strong>3 – Contractualiser et suivre l’évolution de vos contrats
+                                        <span class="grey"></span>
+                                    </strong>
+                                </p>
+                            </div>
+                            <div>
+                                <a class="btn btn-warning btn-sm backred-btn" href="{{ path('organization_new', {'choose': 1}) }}" title="Créer votre marque en cliquant ici">CRÉER VOTRE MARQUE</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </article>
+            </div>
+        </section>
     </main>
+
     <!-- Registration confirmation modal -->
     {% for message in app.flashes('registrationconfirmed') %}
         <!--  Symfony > 3.3 -->
@@ -133,7 +124,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content modal-galibelum">
                     <div class="modal-body">
-                        <p class="light-subtitle-text"><i class="fas fa-gamepad" aria-hidden="true"></i> {{ message }}</p>
+                        <p class="light-blue-subtitle-text"><i class="fas fa-gamepad" aria-hidden="true"></i> {{ message }}</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary backblue-btn white-color" data-dismiss="modal">{{ 'Fermer'|trans }}</button>
