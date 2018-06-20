@@ -22,11 +22,6 @@ class Organization
      * @ORM\JoinColumn(nullable=false)
      */
     private $offers;
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\AccountManager", inversedBy="managerOrganizations")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $managerOrganization;
 
     /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", mappedBy="organization")
@@ -434,30 +429,6 @@ class Organization
     {
         $this->organizationActivity = new \Doctrine\Common\Collections\ArrayCollection();
         $this->setIsActive(0);
-    }
-
-    /**
-     * Set managerOrganization
-     *
-     * @param \AppBundle\Entity\AccountManager $managerOrganization
-     *
-     * @return Organization
-     */
-    public function setManagerOrganization(AccountManager $managerOrganization)
-    {
-        $this->managerOrganization = $managerOrganization;
-
-        return $this;
-    }
-
-    /**
-     * Get managerOrganization
-     *
-     * @return \AppBundle\Entity\AccountManager
-     */
-    public function getManagerOrganization()
-    {
-        return $this->managerOrganization;
     }
 
     /**
