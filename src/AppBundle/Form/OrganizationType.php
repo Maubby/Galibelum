@@ -49,11 +49,11 @@ class OrganizationType extends AbstractType
                         'placeholder' =>'Exemple : GBM eSport'))
             )
             ->add(
-                'phoneNumber', NumberType::class, array(
+                'phoneNumber', TextType::class, array(
                     'attr' => array(
-                        'minlength'=> 8, 'maxlength' => 32,
+                        'minlength'=> 9, 'maxlength' => 32,
                         'class' => 'form-control',
-                        'placeholder'=>'Exemple : 0682244454'))
+                        'placeholder'=>'Exemple : 0601020304'))
             )
             ->add(
                 'email', EmailType::class, array(
@@ -85,7 +85,7 @@ class OrganizationType extends AbstractType
                         'required' => false,
                         'minlength'=>2,'maxlength' => 32,
                         'class'=>'form-control',
-                        'placeholder' =>'Exemple : GBM eSport'))
+                        'placeholder' =>'Exemple : SARL,SAS,SA,association'))
             )
             ->add(
                 'address', TextType::class, array(
