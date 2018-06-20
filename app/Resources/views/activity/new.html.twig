@@ -1,18 +1,118 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/activity_new.css') }}">
+{% endblock %}
+
 {% block body %}
-    <h1>Activity creation</h1>
+    <div class="container size-align">
+        <div class="row boxing-canvas mt-50">
+            <!--1st part of the new form-->
+            <!-- New form  -->
+            {{ form_start(form) }}
+            <div class="col-sm-10 col-sm-offset-1 ">
+                <h3 class=" h5 degradeblue text-center col-sm-12 mt-10">Créer votre activité</h3>
+                <div class="row  mt-60">
+                    <!--Activity's Type-->
+                    <div class="col-sm-6">
+                        <div class="input-no-border light-subtitle-text mt-20">
+                            {{ form_label(form.type, 'Type de votre activité') }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.type) }}
+                            {{ form_errors(form.type) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mt-50 center">
+                        <p>Vous avez déjà réaliser une vidéo de présentation de votre activité ?</p>
+                    </div>
+                </div>
+                <!-- End activity's Type-->
 
-    {{ form_start(form) }}
+                <!--Activity's Name-->
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="input-no-border light-subtitle-text mt-20">
+                            {{ form_label(form.name, 'Nom de votre activité') }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.name) }}
+                            {{ form_errors(form.name) }}
+                        </div>
+                    </div>
+                    <!-- End activity's Name-->
 
-    {{ form_widget(form.name) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+                    <!--Activity's Url Video-->
+                    <div class="col-sm-6 mt-20">
+                        <div class="input-no-border light-subtitle-text">
+                            {{ form_label(form.urlVideo, 'Url') }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.urlVideo) }}
+                            {{ form_errors(form.urlVideo) }}
+                        </div>
+                    </div>
+                </div>
+                <!--End Activity's Url Video-->
 
+                <!--Activity's Achievement-->
+                <div class="row">
+                    <div class="col-sm-12 mt-20">
+                        <div class="input-no-border light-subtitle-text">
+                            {{ form_label(form.achievement, 'Accomplissements') }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.achievement) }}
+                            {{ form_errors(form.achievement) }}
+                        </div>
+                    </div>
+                </div>
+                <!--End Activity's Achievement-->
 
-    <ul>
-        <li>
-            <a href="{{ path('dashboard_index') }}">Revenir au Dashboard</a>
-        </li>
-    </ul>
+                <!--Activity's Social Link-->
+                <div class="row">
+                    <div class="col-sm-12 mt-20">
+                        <div class="input-no-border light-subtitle-text">
+                            {{ form_label(form.socialLink, 'Vos réseaux sociaux') }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.socialLink) }}
+                            {{ form_errors(form.socialLink) }}
+                        </div>
+                    </div>
+                </div>
+                <!--End Activity's Social Link-->
+
+                <!--Activity's Description-->
+                <div class="row">
+                    <div class="col-sm-12 mt-20">
+                        <div class="input-no-border light-subtitle-text">
+                            {{ form_label(form.description, 'Description') }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.description) }}
+                            {{ form_errors(form.description) }}
+                        </div>
+                    </div>
+                </div>
+                <!--End Activity's Description-->
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <br>
+                        <input type="submit" value="Enregistrer" class="btn btn-primary backblue-btn">
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+        <div class="row subtitle-boxing-canvas">
+            <!-- Forgotten password -->
+            <div class="col-sm-12 forgotten-password normal-subtitle-text">
+                <i class="fas fa-reply"></i>&nbsp;
+                <a href="{{ path('dashboard_index') }}" class="five-color"> Retourner sur votre tableau de bord ?</a>
+            </div>
+            <!-- End forgotten password -->
+        </div>
+    </div>
 {% endblock %}
