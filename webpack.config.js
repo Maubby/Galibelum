@@ -22,7 +22,7 @@ Encore
     .addStyleEntry('profile', './assets/scss/profile.scss')
     .addStyleEntry('register', './assets/scss/register.scss')
     .addStyleEntry('dashboard', './assets/scss/dashboard.scss')
-    .addStyleEntry('inscription', './assets/scss/inscription_choose.scss')
+    .addStyleEntry('inscription-choose', './assets/scss/inscription-choose.scss')
     .addStyleEntry('organization_edit', './assets/scss/organization_edit.scss')
     .addEntry('login-script', './assets/js/login-script.js')
     .addEntry('carousel', './assets/js/carousel.js')

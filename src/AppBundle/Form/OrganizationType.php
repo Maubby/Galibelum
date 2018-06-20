@@ -51,7 +51,7 @@ class OrganizationType extends AbstractType
             ->add(
                 'phoneNumber', TextType::class, array(
                     'attr' => array(
-                        'minlength'=> 8, 'maxlength' => 32,
+                        'minlength'=> 9, 'maxlength' => 32,
                         'class' => 'form-control',
                         'placeholder'=>'Exemple : 0601020304'))
             )
