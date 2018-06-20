@@ -42,47 +42,65 @@ class ActivityType extends AbstractType
                 'attr' => array(
                     'minlength' => 2,
                     'maxlength' => 32,
-                    'placeholder' =>'Exemple : Lyon eSport'
+                    'placeholder' =>'Exemple : Lyon eSport',
+                    'class'=> 'form-control input-field',
                 )
             ))
             ->add('type', ChoiceType::class, array(
+                'attr'=> array(
+                    'class' => 'form-control input-field'),
                 'choices' => array(
                     'Activité de streaming' => 'Activité de streaming',
                     'Equipe eSport' => 'Equipe eSport',
-                    'Évènement eSport' => 'Évènement eSport',
+                    'Évènement eSport' => 'Évènement eSport'
+
+
                 )
             ))
             ->add('description', TextareaType::class, array(
                 'attr' => array(
-                    'minlenght' => 32,
-                    'maxlenght' => 250,
-                    'placeholder' => 'Maximum 250 caractères'
+                    'minlength' => 32,
+                    'maxlength' => 250,
+                    'placeholder' => 'Maximum 250 caractères',
+                    'class'=> 'form-control input-field',
                 )
             ))
             ->add('date', TextType::class, array(
                 'attr' => array(
-                    'maxlenght' => 16,
+                    'maxlength' => 16,
                 )
             ))
             ->add('address', TextType::class, array(
                 'attr' => array(
-                    'maxlenght' => 64,
+                    'maxlength' => 64,
                 )
             ))
-            ->add('mainGame', TextareaType::class)
-            ->add('urlVideo', UrlType::class)
-            ->add('achievement', TextareaType::class, array(
+            ->add('mainGame', TextareaType::class, array(
+                'required' => false,
+            ))
+            ->add('urlVideo', UrlType::class, array(
+                'required' => false,
                 'attr' => array(
-                    'maxlenght' => 128,
+                    'class'=> 'form-control input-field',
+                )
+            ))
+            ->add('achievement', TextareaType::class, array(
+                'required' => false,
+                'attr' => array(
+                    'maxlength' => 128,
                     'placeholder' => 'Exemple : 1ère place aux IEM Katowice de CS:GO 2018',
+                    'class'=> 'form-control input-field',
                 )
             ))
             ->add('socialLink', UrlType::class, array(
                 'attr' => array(
-                    'placeholder' => 'Exemple : https://www.twitch.tv/gallibellum'
+                    'placeholder' => 'Exemple : https://www.twitch.tv/gallibellum',
+                    'class'=> 'form-control input-field',
                 )
             ))
-            ->remove('mainGame');
+            ->remove('mainGame')
+            ->remove('address')
+            ->remove('date');
     }
 
     /**
@@ -96,7 +114,7 @@ class ActivityType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-            'data_class' => 'AppBundle\Entity\Activity'
+                'data_class' => 'AppBundle\Entity\Activity'
             )
         );
     }
