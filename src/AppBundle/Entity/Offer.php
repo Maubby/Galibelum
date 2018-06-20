@@ -423,30 +423,6 @@ class Offer
     }
 
     /**
-     * Set managerOffer
-     *
-     * @param \AppBundle\Entity\AccountManager $managerOffer
-     *
-     * @return Offer
-     */
-    public function setManagerOffer(AccountManager $managerOffer)
-    {
-        $this->managerOffer = $managerOffer;
-
-        return $this;
-    }
-
-    /**
-     * Get managerOffer
-     *
-     * @return \AppBundle\Entity\AccountManager
-     */
-    public function getManagerOffer()
-    {
-        return $this->managerOffer;
-    }
-
-    /**
      * Set activity
      *
      * @param \AppBundle\Entity\Activity $activity

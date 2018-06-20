@@ -432,30 +432,6 @@ class Organization
     }
 
     /**
-     * Set managerOrganization
-     *
-     * @param \AppBundle\Entity\AccountManager $managerOrganization
-     *
-     * @return Organization
-     */
-    public function setManagerOrganization(AccountManager $managerOrganization)
-    {
-        $this->managerOrganization = $managerOrganization;
-
-        return $this;
-    }
-
-    /**
-     * Get managerOrganization
-     *
-     * @return \AppBundle\Entity\AccountManager
-     */
-    public function getManagerOrganization()
-    {
-        return $this->managerOrganization;
-    }
-
-    /**
      * Set user
      *
      * @param \AppBundle\Entity\User $user
