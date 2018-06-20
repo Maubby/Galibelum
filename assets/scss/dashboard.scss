@@ -64,8 +64,11 @@
     font-size: 20px;
   }
 }
-
+.main-color {
+  color: $main-color;
+}
 .panel-title {
+  font-size: 15px;
   color: $seconde-color;
   padding-top: 10px;
 }
@@ -74,6 +77,9 @@
   .btn-primary {
     background-color: $six-color;
   }
+}
+.mr-10 {
+  margin-right: 10px;
 }
 .ml-25 {
   margin-left: 25px;
