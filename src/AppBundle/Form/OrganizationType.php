@@ -49,9 +49,9 @@ class OrganizationType extends AbstractType
                         'placeholder' =>'Exemple : GBM eSport'))
             )
             ->add(
-                'phoneNumber', NumberType::class, array(
+                'phoneNumber', TextType::class, array(
                     'attr' => array(
-                        'minlength'=> 8, 'maxlength' => 32,
+                        'minlength'=> 9, 'maxlength' => 32,
                         'class' => 'form-control',
                         'placeholder'=>'Exemple : 0682244454'))
             )
