@@ -22,11 +22,6 @@ class Organization
      * @ORM\JoinColumn(nullable=false)
      */
     private $offers;
-    /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\AccountManager", inversedBy="managerOrganizations")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $managerOrganization;
 
     /**
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", mappedBy="organization")

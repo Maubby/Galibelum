@@ -41,12 +41,6 @@ class Offer
     private $organization;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\AccountManager", inversedBy="managerOffers")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $managerOffer;
-
-    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Activity", inversedBy="activities")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -134,7 +128,7 @@ class Offer
      */
     private $amount;
 
-    /***
+    /**
      * @var int
      *
      * @ORM\Column(name="handlingFee", type="integer", nullable=true)
