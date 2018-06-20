@@ -21,13 +21,13 @@
             {{ form_start(edit_form) }}
             <div>
                 <!--1st part of the edit form-->
-                <div class="col-sm-12 box">
+                <div class="col-sm-12 box light-blue-subtitle-text">
                     <i class="far fa-user-circle text-center degradeblue col-sm-12 col-xs-12 pt-40" style="font-size: 50px"></i>
                     <h5 class="degradeblue text-center col-sm-12 col-xs-12 pb-20">Modifier votre profil</h5>
                     <div class="col-sm-6">
                         <!--Structure's name-->
-                        <div class="input-no-border light-subtitle-text">
-                            <i class="fas fa-university"></i>{{ form_label(edit_form.name) }}
+                        <div class="input-no-border">
+                            <i class="fas fa-university"></i>{{ form_label(edit_form.name,  'Nom de votre structure eSport') }}
                         </div>
                         <div>
                             {{ form_widget(edit_form.name) }}
@@ -36,8 +36,8 @@
                         <!-- End structure's name-->
 
                         <!--Structure's status-->
-                        <div class="input-no-border light-subtitle-text">
-                            <i class="fas fa-gavel"></i>{{ form_label(edit_form.status) }}
+                        <div class="input-no-border">
+                            <i class="fas fa-gavel"></i>{{ form_label(edit_form.status, 'Statut juridique') }}
                         </div>
                         <div>
                             {{ form_widget(edit_form.status) }}
@@ -46,8 +46,8 @@
                         <!--End structure's status-->
 
                         <!--Structure's address-->
-                        <div class="input-no-border light-subtitle-text">
-                            <i class="fas fa-address-card"></i>{{ form_label(edit_form.address) }}
+                        <div class="input-no-border">
+                            <i class="fas fa-address-card"></i>{{ form_label(edit_form.address, 'Adresse') }}
                         </div>
                         <div>
                             {{ form_widget(edit_form.address) }}
@@ -56,8 +56,8 @@
                         <!--End structure's address-->
 
                         <!--Number of employees-->
-                        <div class="input-no-border light-subtitle-text">
-                            <i class="fas fa-users"></i>{{ form_label(edit_form.relationNumber) }}
+                        <div class="input-no-border">
+                            <i class="fas fa-users"></i>{{ form_label(edit_form.relationNumber, ' Nombre de collaborateurs') }}
                         </div>
                         <div>
                             {{ form_widget(edit_form.relationNumber) }}
@@ -70,8 +70,8 @@
                     <!--2nd part of the edit form-->
                     <div class="col-sm-6">
                         <!--Role inside the structure-->
-                        <div class="input-no-border light-subtitle-text">
-                            <i class="fas fa-user"></i>{{ form_label(edit_form.userRole) }}
+                        <div class="input-no-border">
+                            <i class="fas fa-user"></i>{{ form_label(edit_form.userRole, 'Poste occupé') }}
                         </div>
                         <div class="inputs-fields">
                             {{ form_widget(edit_form.userRole) }}
@@ -80,7 +80,7 @@
                         <!--End role inside the structure-->
 
                         <!--Structure's mail-->
-                        <div class="input-no-border light-subtitle-text">
+                        <div class="input-no-border">
                             <i class="fas fa-at"></i>{{ form_label(edit_form.email) }}
                         </div>
                         <div>
@@ -90,8 +90,8 @@
                         <!--End structure's mail-->
 
                         <!--Structure's phone-->
-                        <div class="input-no-border light-subtitle-text">
-                            <i class="fas fa-phone"></i>{{ form_label(edit_form.phoneNumber) }}
+                        <div class="input-no-border">
+                            <i class="fas fa-phone"></i>{{ form_label(edit_form.phoneNumber, 'Numéro de téléphone') }}
                         </div>
                         <div>
                             {{ form_widget(edit_form.phoneNumber) }}
@@ -100,8 +100,8 @@
                         <!--End structure's phone-->
 
                         <!--Short structure's description-->
-                        <div class="input-no-border light-subtitle-text">
-                            <i class="fas fa-edit"></i>{{ form_label(edit_form.description) }}
+                        <div class="input-no-border">
+                            <i class="fas fa-edit"></i>{{ form_label(edit_form.description, ' Décrivez votre structure en quelques mots  ') }}
                         </div>
                         <div>
                             {{ form_widget(edit_form.description) }}

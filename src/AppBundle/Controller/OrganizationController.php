@@ -192,8 +192,12 @@ class OrganizationController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success', 'Votre profil a bien été modifié !');
+
             return $this->redirectToRoute(
-                'organization_edit',
+                'dashboard_index',
                 array('id' => $organization->getId())
             );
         }
