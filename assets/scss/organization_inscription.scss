@@ -1,66 +1,59 @@
-.btn {
-  padding: 7px 4%;
-  margin-top: 2%;
-}
+@import "style";
 
-.picture{
-  padding-right: 20%;
-  padding-top: 2%;
-  width: 100%;
-}
-
-.form-group{
-  margin-bottom: 5%;
-  padding: 3%;
-
-}
-
+/*border page and color page*/
 .border{
-  padding:10% ;
-  border: white solid 1px;
-  border-radius: 5px;
-  margin: 5%;
-  background-color: #e2e2e2;
-  padding-bottom: 17%;
-
+  border-top: 1px solid $border-color ;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color ;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;;
+  background-color: #fff;
+  margin-top: 5%;
 }
-
-.title
-{
-  padding-top:20% ;
-  background: linear-gradient(to right, #137faf, #86ccc2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/*icon tiltle*/
+.icon-enter{
+  margin-top: 5%;
+  padding-left: 48%;
 }
-
+/*size topple description*/
 #appbundle_organization_description {
- min-height: 250px;
-
+ min-height: 80px;
+  width:100%;
 }
-
-.onesection{
-  padding-top: 10%;
-}
-
+/*color title*/
 .degradeblue{
-  margin-bottom: 20%;
   text-align: center;
+  font-size:30px;
 }
-
-.phoneNumber{
-  padding-top: 10%;
-  margin-bottom: 10%;
-}
-
-.email{
-  padding-top: 10%;
-
-}
-
-.userRole{
-  margin-top : 15%;
-}
-
+/*size topple*/
 .form-control{
-  height: 45px;
+  height: 35px;
+}
+/* size button*/
+.backblue-btn{
+  width: 30%;
+  margin-left: 35%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+label .required {
+  padding: 10px;
+  margin: 10px;
+}
+/* Media queries page inscription*/
+
+@media screen and (max-width: 420px) {
+.border {
+  margin-left: 4%;
+  margin-bottom: 20%;
+}
+
+}
+@media screen and (max-width: 420px) {
+  .picture {
+    margin-bottom: 30%;
+    padding-top: 20%;
+  }
+
 }

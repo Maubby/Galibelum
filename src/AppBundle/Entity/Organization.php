@@ -16,6 +16,12 @@ class Organization
     /*
      * Relationship Mapping Metadata
      */
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Offer", mappedBy="organization")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $offers;
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\AccountManager", inversedBy="managerOrganizations")
      * @ORM\JoinColumn(nullable=true)
@@ -73,9 +79,10 @@ class Organization
     /**
      * @var string
      *
+     * @Assert\Regex(pattern="/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/",
+     *     message="Votre numéro de téléphone doit être composé comme ceci : 06 00 00 00 00 ou +33 6.")
      * @ORM\Column(name="phoneNumber", type="string", length=32)
      *
-     * @Assert\Type("string")
      * @Assert\NotBlank(
      *     message = "Veuillez saisir un numéro de téléphone"
      * )
@@ -83,10 +90,6 @@ class Organization
      *     min = 9,
      *     max = 32,
      *     exactMessage = "Veuillez saisir un numéro de téléphone valide"
-     * )
-     * @Assert\Regex(
-     *     pattern = "/^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$/",
-     *     message = "Veuillez saisir un numéro de téléphone valide"
      * )
      */
     private $phoneNumber;
@@ -157,9 +160,6 @@ class Organization
      * @ORM\Column(name="status", type="string", length=32, nullable=true)
      *
      * @Assert\Type("string")
-     * @Assert\NotBlank(
-     *     message = "Veuillez saisir la statut juridique"
-     * )
      * @Assert\Length(
      *     min = 2,
      *     max = 32,
@@ -540,5 +540,41 @@ class Organization
     public function getRelationNumber()
     {
         return $this->relationNumber;
+    }
+
+    /**
+     * Add offer.
+     *
+     * @param \AppBundle\Entity\Offer $offer
+     *
+     * @return Organization
+     */
+    public function addOffer(Offer $offer)
+    {
+        $this->offers[] = $offer;
+
+        return $this;
+    }
+
+    /**
+     * Remove offer.
+     *
+     * @param \AppBundle\Entity\Offer $offer
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeOffer(Offer $offer)
+    {
+        return $this->offers->removeElement($offer);
+    }
+
+    /**
+     * Get offers.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOffers()
+    {
+        return $this->offers;
     }
 }

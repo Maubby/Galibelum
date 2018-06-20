@@ -3,8 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints as Assert;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
@@ -27,6 +27,7 @@ class User extends BaseUser
      */
 
     /**
+     *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Organization", inversedBy="user")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -37,15 +38,17 @@ class User extends BaseUser
      */
 
     /**
+     *
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id",               type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
+     *
      * @var string
      *
      * @ORM\Column(name="firstName", type="string", length=32)
@@ -56,25 +59,44 @@ class User extends BaseUser
     private $firstName;
 
     /**
+     *
      * @var string
      *
      * @ORM\Column(name="lastName", type="string", length=32)
+
      * @Assert\Regex(pattern="/^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i", message="Votre nom ne doit être composé que de lettres.")
      * @Assert\Length(min=2, minMessage="Un nom inférieur à deux lettres sérieusement ?")
      * @Assert\Length(max=32, maxMessage="Le nom doit être en dessous de 32 caractères.")
+
      */
     private $lastName;
 
     /**
+     *
      * @var string
      *
      * @Assert\Regex(pattern="/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/",
      *     message="Votre numéro de téléphone doit être composé comme ceci : 06 00 00 00 00 ou +33 6.")
      * @ORM\Column(name="phoneNumber", type="string", length=32)
+     *
+     * * @Assert\Type("string")
+     * @Assert\NotBlank(
+     *     message = "Veuillez saisir un numéro de téléphone"
+     * )
+     * @Assert\Length(
+     *     min = 9,
+     *     max = 32,
+     *     exactMessage = "Veuillez saisir un numéro de téléphone valide"
+     * )
+     * @Assert\Regex(
+     *     pattern = "/^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$/",
+     *     message = "Veuillez saisir un numéro de téléphone valide"
+     *)
      */
     private $phoneNumber;
 
     /**
+     *
      * @var bool
      *
      * @ORM\Column(name="cgu", type="boolean")

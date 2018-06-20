@@ -57,7 +57,7 @@
                             <div class="col-sm-12">
                                 <br>
                                 <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
-                                <label for="remember_me" class="light-subtitle-text">{{ 'Se souvenir de moi'|trans }}</label>
+                                <label for="remember_me" class="light-blue-subtitle-text">{{ 'Se souvenir de moi'|trans }}</label>
                             </div>
                             <!-- End ticking box -->
 
@@ -89,6 +89,23 @@
             </div>
         </section>
     </main>
+
+    <!-- Registration confirmation modal -->
+    {% for message in app.flashes('emailconfirmed') %}
+        <!--  Symfony > 3.3 -->
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content modal-galibelum">
+                    <div class="modal-body">
+                        <p class="light-blue-subtitle-text"><i class="fas fa-envelope" aria-hidden="true"></i> {{ message }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary backblue-btn white-color" data-dismiss="modal">{{ 'Fermer'|trans }}</button>
+                    </div>
+                </div><!-- modal-content end -->
+            </div><!-- modal-dialog end -->
+        </div><!-- modal end -->
+    {% endfor %}
 {% endblock %}
 
 {% block footer %}
@@ -96,4 +113,5 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('build/login-script.js') }}"></script>
 {% endblock %}

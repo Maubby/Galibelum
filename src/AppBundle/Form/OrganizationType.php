@@ -14,6 +14,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,56 +42,58 @@ class OrganizationType extends AbstractType
         $builder
             ->add(
                 'name', TextType::class, array(
-                'attr' => array(
-                    'minlength' => 2, 'maxlength' => 32,
-                    'data-label' => 'Nom de votre',
-                    'class' => 'form-control input-field',
-                'placeholder' =>'Exemple : GBM eSport'))
+
+                    'attr' => array(
+                        'minlength' => 2, 'maxlength' => 32,
+                        'class' => 'form-control',
+                        'placeholder' =>'Exemple : GBM eSport'))
             )
             ->add(
                 'phoneNumber', TextType::class, array(
                     'attr' => array(
-                        'minlength'=> 8, 'maxlength' => 32,
-                        'data-label' =>'',
-                        'class' => 'form-control input-field' ))
+                        'minlength'=> 9, 'maxlength' => 32,
+                        'class' => 'form-control',
+                        'placeholder'=>'Exemple : 0682244454'))
             )
             ->add(
-                'email', TextType::class, array(
-                'attr' => array(
-                    'minlength'=>2, 'maxlength' => 64,
-                    'data-label'=>'',
-                    'class'=> 'form-control input-field' ))
+                'email', EmailType::class, array(
+                    'attr' => array(
+                        'minlength'=>2, 'maxlength' => 64,
+                        'class'=> 'form-control',
+                    'placeholder' =>'Exemple : test@galibelum.com'))
             )
             ->add(
                 'description', TextareaType::class, array(
                 'attr'=> array(
                     'minlength'=>32, 'maxlength' => 250,
-                    'data-label'=>'',
-                    'class'=> 'form-control input-field'))
+                    'class'=> 'form-control',
+                    'placeholder'=> 'Maximum 250 caractères'))
             )
             ->add(
                 'userRole', TextType::class, array(
-                'attr'=> array(
-                    'minlength'=>2, 'maxlength' => 32,
-                    'data-label'=>'',
-                    'class'=>'form-control input-field' )
+                    'attr'=> array(
+                        'minlength'=>2, 'maxlength' => 32,
+                        'class'=>'form-control',
+                        'placeholder' =>'Exemple : Manager')
+
                 )
             )
             ->add(
                 'status', TextType::class, array(
-                'attr'=>array(
-                    'minlength'=>2,'maxlength' => 32,
-                    'data-label'=>'',
-                    'data-rows' => '5',
-                    'data-cols' => '5',
-                    'class'=>'form-control input-field'))
+                    'attr'=>array(
+                        'data-label' => null,
+                        'required' => false,
+                        'minlength'=>2,'maxlength' => 32,
+                        'class'=>'form-control',
+                        'placeholder' =>'Exemple : GBM eSport'))
             )
             ->add(
                 'address', TextType::class, array(
-                'attr'=>array(
-                    'minlength'=>2, 'maxlength' => 64,
-                    'data-label'=>'',
-                    'class'=>'form-control input-field'))
+                    'attr'=>array(
+                        'minlength'=>2, 'maxlength' => 64,
+                        'class'=>'form-control',
+                        'placeholder '=>
+                            'Exemple : 4 avenue des Saules, bâtiment Le Doge'))
             )
             ->add(
                 'relationNumber', ChoiceType::class, array(
@@ -102,9 +105,8 @@ class OrganizationType extends AbstractType
                         '11-50 membres' => '11-50 membres',
                         '51-250 membres' => '51-250 membres',
                         'Plus de 251 membres'=> 'Plus de 251 membres',
-                        ))
+                    ))
             );
-
     }
 
     /**
@@ -118,7 +120,7 @@ class OrganizationType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-            'data_class' => 'AppBundle\Entity\Organization'
+                'data_class' => 'AppBundle\Entity\Organization'
             )
         );
     }
