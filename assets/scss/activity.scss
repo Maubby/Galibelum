@@ -34,19 +34,45 @@ label {
   margin-left: 10px;
 }
 
-/* Placeholder's colors*/
+/* Placeholder's and value's colors */
+/* New and Edit form */
 
 #appbundle_activity_achievement::placeholder {
   color: $placeholder-color !important;
 }
 
+#appbundle_activity_achievement {
+  color: $placeholder-color !important;
+}
+
+
 #appbundle_activity_description::placeholder {
+  color: $placeholder-color !important;
+}
+
+#appbundle_activity_description {
   color: $placeholder-color !important;
 }
 
 #appbundle_activity_type {
   color: $placeholder-color !important;
 }
+
+#appbundle_activity_name {
+  color: $placeholder-color !important;
+}
+
+#appbundle_activity_socialLink {
+  color: $placeholder-color !important;
+}
+
+#appbundle_activity_urlVideo {
+  color: $placeholder-color !important;
+}
+
+
+
+
 
 /* Basics */
 
