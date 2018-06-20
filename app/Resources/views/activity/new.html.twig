@@ -16,40 +16,37 @@
                 <div class="row  mt-60">
                     <!--Activity's Type-->
                     <div class="col-sm-6">
-                        <div class="input-no-border light-subtitle-text mt-20">
-                            {{ form_label(form.type, 'Type de votre activité') }}
+                        <div class="input-no-border mt-20">
+                            <i class="fas fa-gamepad"></i>{{ form_label(form.type, 'Type de votre activité') }}
                         </div>
                         <div>
-                            {{ form_widget(form.type) }}
+                            {{ form_widget(form.type, {'attr': {'class': "form-control input-field"}}) }}
                             {{ form_errors(form.type) }}
                         </div>
                     </div>
-                    <div class="col-sm-6 mt-50 center">
-                        <p>Vous avez déjà réaliser une vidéo de présentation de votre activité ?</p>
-                    </div>
-                </div>
-                <!-- End activity's Type-->
+                    <!-- End activity's Type-->
 
-                <!--Activity's Name-->
-                <div class="row">
+                    <!--Activity's Name-->
                     <div class="col-sm-6">
-                        <div class="input-no-border light-subtitle-text mt-20">
-                            {{ form_label(form.name, 'Nom de votre activité') }}
+                        <div class="input-no-border mt-20">
+                            <i class="fas fa-university"></i>{{ form_label(form.name, 'Nom de votre activité') }}
                         </div>
                         <div>
-                            {{ form_widget(form.name) }}
+                            {{ form_widget(form.name, {'attr': {'class': "form-control input-field", 'placeholder': "Exemple : Lyon eSport"}}) }}
                             {{ form_errors(form.name) }}
                         </div>
                     </div>
-                    <!-- End activity's Name-->
+                </div>
+                <!-- End activity's Name-->
 
-                    <!--Activity's Url Video-->
-                    <div class="col-sm-6 mt-20">
-                        <div class="input-no-border light-subtitle-text">
-                            {{ form_label(form.urlVideo, 'Url') }}
+                <!--Activity's Url Video-->
+                <div class="row">
+                    <div class="col-sm-12 mt-20">
+                        <div class="input-no-border">
+                            <i class="fas fa-link"></i>{{ form_label(form.urlVideo, 'Url') }}
                         </div>
                         <div>
-                            {{ form_widget(form.urlVideo) }}
+                            {{ form_widget(form.urlVideo, {'attr': {'class': "form-control input-field", 'placeholder': "Vous avez déjà réalisé une vidéo de présentation de votre activité ?"}}) }}
                             {{ form_errors(form.urlVideo) }}
                         </div>
                     </div>
@@ -59,11 +56,11 @@
                 <!--Activity's Achievement-->
                 <div class="row">
                     <div class="col-sm-12 mt-20">
-                        <div class="input-no-border light-subtitle-text">
-                            {{ form_label(form.achievement, 'Accomplissements') }}
+                        <div class="input-no-border">
+                            <i class="fas fa-trophy"></i>{{ form_label(form.achievement, 'Accomplissements') }}
                         </div>
                         <div>
-                            {{ form_widget(form.achievement) }}
+                            {{ form_widget(form.achievement, {'attr': {'class': "form-control input-field", 'placeholder': "Exemple : 1ère place aux IEM Katowice de CS:GO 2018"}}) }}
                             {{ form_errors(form.achievement) }}
                         </div>
                     </div>
@@ -73,11 +70,11 @@
                 <!--Activity's Social Link-->
                 <div class="row">
                     <div class="col-sm-12 mt-20">
-                        <div class="input-no-border light-subtitle-text">
-                            {{ form_label(form.socialLink, 'Vos réseaux sociaux') }}
+                        <div class="input-no-border">
+                            <i class="fas fa-user-friends"></i>{{ form_label(form.socialLink, 'Vos réseaux sociaux') }}
                         </div>
                         <div>
-                            {{ form_widget(form.socialLink) }}
+                            {{ form_widget(form.socialLink, {'attr': {'class': "form-control input-field", 'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}}) }}
                             {{ form_errors(form.socialLink) }}
                         </div>
                     </div>
@@ -87,11 +84,11 @@
                 <!--Activity's Description-->
                 <div class="row">
                     <div class="col-sm-12 mt-20">
-                        <div class="input-no-border light-subtitle-text">
-                            {{ form_label(form.description, 'Description') }}
+                        <div class="input-no-border">
+                            <i class="fas fa-edit"></i>{{ form_label(form.description, 'Description') }}
                         </div>
                         <div>
-                            {{ form_widget(form.description) }}
+                            {{ form_widget(form.description, {'attr': {'class': "form-control input-field", 'placeholder': "Maximum 250 caractères"}}) }}
                             {{ form_errors(form.description) }}
                         </div>
                     </div>

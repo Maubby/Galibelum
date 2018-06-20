@@ -1,5 +1,7 @@
 @import 'style';
 
+/* Form Create new activity and edit */
+
 .boxing-canvas {
   background-color: #fff;
   width: auto;
@@ -24,23 +26,30 @@
   border-right: 1px solid $border-color;
 }
 
-
-.size-align {
-  max-width: 1000px;
-}
-
-label {
-  margin-bottom: 0;
-}
 .input-field {
   margin: 2px 0 0 0;
 }
 
-
-.row {
-  margin: auto;
+label {
+  margin-left: 10px;
 }
 
+/* Placeholder's colors*/
+
 #appbundle_activity_achievement::placeholder {
-  color: $placeholder-color !important;;
+  color: $placeholder-color !important;
+}
+
+#appbundle_activity_description::placeholder {
+  color: $placeholder-color !important;
+}
+
+#appbundle_activity_type {
+  color: $placeholder-color !important;
+}
+
+/* Basics */
+
+.size-align {
+  max-width: 1000px;
 }

@@ -25,7 +25,6 @@ Encore
     .addStyleEntry('inscription-choose', './assets/scss/inscription-choose.scss')
     .addStyleEntry('organization_edit', './assets/scss/organization_edit.scss')
     .addStyleEntry('activity_new', './assets/scss/activity_new.scss')
-    .addEntry('main', './assets/js/main.js')
     .addEntry('login-script', './assets/js/login-script.js')
     .addEntry('carousel', './assets/js/carousel.js')
     // Targeting images repository
