@@ -79,9 +79,10 @@ class Organization
     /**
      * @var string
      *
+     * @Assert\Regex(pattern="/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/",
+     *     message="Votre numéro de téléphone doit être composé comme ceci : 06 00 00 00 00 ou +33 6.")
      * @ORM\Column(name="phoneNumber", type="string", length=32)
      *
-     * @Assert\Type("string")
      * @Assert\NotBlank(
      *     message = "Veuillez saisir un numéro de téléphone"
      * )
@@ -89,10 +90,6 @@ class Organization
      *     min = 9,
      *     max = 32,
      *     exactMessage = "Veuillez saisir un numéro de téléphone valide"
-     * )
-     * @Assert\Regex(
-     *     pattern = "/^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$/",
-     *     message = "Veuillez saisir un numéro de téléphone valide"
      * )
      */
     private $phoneNumber;
