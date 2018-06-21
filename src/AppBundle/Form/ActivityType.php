@@ -100,9 +100,7 @@ class ActivityType extends AbstractType
             )
             ->add('socialLink', UrlType::class)
 
-            ->remove('mainGame')
-            ->remove('address')
-            ->remove('date');
+            ->remove('mainGame');
     }
 
     /**
