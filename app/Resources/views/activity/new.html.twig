@@ -24,7 +24,7 @@
                             <i class="fas fa-gamepad"></i>{{ form_label(form.type, 'Type de votre activité') }}
                         </div>
                         <div>
-                            {{ form_widget(form.type, {'attr': {'class': "form-control input-field"}}) }}
+                            {{ form_widget(form.type, {'attr': {'class': "form-control input-field activity"}}) }}
                             {{ form_errors(form.type) }}
                         </div>
                     </div>
@@ -42,6 +42,34 @@
                     </div>
                 </div>
                 <!-- End activity's Name-->
+
+                <!--Activity's Address-->
+                <div class="row">
+                    <div class="col-sm-6 mt-20 activityInfo">
+                        <div class="input-no-border">
+                            <i class="fas fa-map-marker"></i>{{ form_label(form.address, 'Adresse de votre évènement') }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.address, {'attr': {'class': "form-control input-field"}}) }}
+                            {{ form_errors(form.address) }}
+                        </div>
+                    </div>
+
+                    <!--End Activity's Address-->
+
+                    <!--Activity's Date-->
+
+                    <div class="col-sm-6 mt-20 activityInfo">
+                        <div class="input-no-border">
+                            <i class="fas fa-calendar-alt"></i>{{ form_label(form.date, 'Date de votre évènement') }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.date, {'attr': {'class': "form-control input-field"}}) }}
+                            {{ form_errors(form.date) }}
+                        </div>
+                    </div>
+                </div>
+                <!--End Activity's Date-->
 
                 <!--Activity's Url Video-->
                 <div class="row">
@@ -116,4 +144,12 @@
             <!-- End return to dashboard -->
         </div>
     </div>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/input_display.js') }}"></script>
 {% endblock %}
