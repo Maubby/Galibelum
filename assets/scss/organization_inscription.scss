@@ -1,59 +1,82 @@
 @import "style";
 
-/*border page and color page*/
-.border{
-  border-top: 1px solid $border-color ;
-  border-left: 1px solid $border-color;
-  border-right: 1px solid $border-color ;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;;
-  background-color: #fff;
-  margin-top: 5%;
-}
-/*icon tiltle*/
-.icon-enter{
-  margin-top: 5%;
-  padding-left: 48%;
-}
-/*size topple description*/
-#appbundle_organization_description {
- min-height: 80px;
-  width:100%;
-}
-/*color title*/
-.degradeblue{
-  text-align: center;
-  font-size:30px;
-}
-/*size topple*/
-.form-control{
-  height: 35px;
-}
-/* size button*/
-.backblue-btn{
-  width: 30%;
-  margin-left: 35%;
-  margin-top: 5%;
-  margin-bottom: 5%;
+#organization {
+  .boxing-canvas {
+    background-color: #fff;
+    width: auto;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 750px;
+    padding: 30px;
+    border-radius: 4px;
+    border: 1px solid $border-color;
+  }
 }
 
-label .required {
-  padding: 10px;
-  margin: 10px;
-}
-/* Media queries page inscription*/
+/* Checking company or structure side */
 
-@media screen and (max-width: 420px) {
-.border {
-  margin-left: 4%;
-  margin-bottom: 20%;
-}
-
-}
-@media screen and (max-width: 420px) {
-  .picture {
-    margin-bottom: 30%;
-    padding-top: 20%;
+#company {
+  input::placeholder, select, textarea::placeholder {
+    font-weight: 200;
+    opacity: 0.7;
+    color: $red-placeholder-color !important;
   }
 
+  .boxing-canvas {
+    background-color: #fff;
+    width: auto;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 650px;
+    padding: 30px;
+    border-radius: 4px;
+    border: 1px solid $border-color;
+  }
+}
+
+.breadcrumb-boxing-canvas {
+  width: auto;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  border-radius: 4px;
+  border: 1px solid $border-color;
+}
+
+/* Description textarea */
+
+#appbundle_organization_description {
+  min-height: 80px;
+  width: 100%;
+}
+
+/* Media queries */
+
+@media screen and (max-width: 991px) {
+  #company {
+    .boxing-canvas {
+      height: 970px;
+    }
+  }
+  #organization {
+    .boxing-canvas {
+      height: 1090px;
+    }
+  }
+}
+
+@media screen and (max-width: 442px) {
+  #company {
+    .boxing-canvas {
+      height: 1130px;
+    }
+  }
+  #organization {
+    .boxing-canvas {
+      height: 1200px;
+    }
+  }
 }
