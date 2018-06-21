@@ -1,87 +1,25 @@
+{# app/Resources/views/organization/index.html.twig #}
 {% extends 'base.html.twig' %}
 
+{% block title %}Création de votre structure|marque{% endblock %}
+
 {% block stylesheets %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+
+    <!-- Additional CSS links-->
     <link rel="stylesheet" href="{{ asset('build/organization_inscription.css') }}">
 {% endblock %}
+
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="border">
-                {{ form_start(form) }}
-                <div class="col-md-12">
-                    <i class="far fa-user-circle  degradeblue icon-enter" style="font-size: 50px"></i>
-                    <h5 class="text-center degradeblue">Créer votre profil</h5>
-                </div>
-                <!--First section contact form -->
-                <div class="col-sm-6 mt-50">
-                    <div class="form-group light-subtitle-text">
-                        {% if choose == 1 %}
-                            <i class="fas fa-university"></i> {{ form_label(form.name, ' Nom de votre marque ') }}
-                        {% else %}
-                            <i class="fas fa-university"></i> {{ form_label(form.name, 'Nom de votre structure eSport ') }}
-                        {% endif %}
-                        {{ form_widget(form.name) }}
-                        {{ form_errors(form.name) }}
-                    </div>
-                    {% if choose == 0 %}
-                        <div class="form-group light-subtitle-text">
-                            <i class="fas fa-gavel"></i> {{ form_label(form.status,'Forme juridique  ') }}
-                            {{ form_widget(form.status) }}
-                            {{ form_errors(form.status) }}
-                        </div>
-                    {% endif %}
-                    <div class="form-group light-subtitle-text">
-                        <i class="fas fa-address-card"></i> {{ form_label(form.address,'Adresse du siège social  ')  }}
-                        {{ form_widget(form.address) }}
-                        {{ form_errors(form.address) }}
-                    </div>
-                </div>
-                <!-- End first section contact form -->
+    {% if choose is same as(0) %}
+        {% include "organization/_new_organization_content.html.twig" %}
+    {% else %}
+        {% include "organization/_new_company_content.html.twig" %}
+    {% endif %}
+{% endblock %}
 
-                <!-- Second section contact form-->
-                <div class="col-sm-6 mt-50">
-                    <div class="form-group light-subtitle-text">
-                        <i class="fas fa-user"></i>  {{ form_label(form.userRole,' Poste au sein de la structure ') }}
-                        {{ form_widget(form.userRole) }}
-                        {{ form_errors(form.userRole) }}
-                    </div>
-                    <div class="form-group light-subtitle-text">
-                        <i class="fas fa-at"></i>  {{ form_label(form.email,' Email de la société') }}
-                        {{ form_widget(form.email) }}
-                        {{ form_errors(form.email) }}
-                    </div>
-                    <div class="form-group light-subtitle-text">
-                        <i class="fas fa-phone"></i> {{ form_label(form.phoneNumber,' Téléphone de bureau')}}
-                        {{ form_widget(form.phoneNumber) }}
-                        {{ form_errors(form.phoneNumber) }}
-                    </div>
-                </div>
-                <!-- End second section contact form-->
-
-                <!-- Final section contact form-->
-                <div class="col-md-12 ">
-                    <div class="form-group light-subtitle-text">
-                        <i class="fas fa-users"></i> {{ form_label(form.relationNumber,' Nombre de collaborateurs dans votre structure') }}
-                        {{ form_widget(form.relationNumber) }}
-                        {{ form_errors(form.relationNumber) }}
-                    </div>
-
-                    <div class="form-group light-subtitle-text">
-                        {% if choose == 0 %}
-                            <i class="fas fa-edit"></i> {{ form_label(form.description, ' Décrivez votre structure eSport en quelques mots  ') }}
-                        {% else %}
-                            <i class="fas fa-edit"></i> {{ form_label(form.description, ' Décrivez votre marque eSport en quelques mots  ') }}
-                        {%endif%}
-                        {{ form_widget(form.description) }}
-                        {{ form_errors(form.description) }}
-                    </div>
-                </div>
-                <!-- End final section contact form-->
-                <input type="submit" value="Enregistrer" class="btn btn-primary backblue-btn">
-                {{ form_end(form) }}
-            </div>
-        </div>
-    </div>
-
-    <a href="{{ path('organization_index') }}"></a>
+{% block javascripts %}
 {% endblock %}
