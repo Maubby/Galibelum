@@ -27,6 +27,7 @@ Encore
     .addStyleEntry('activity', './assets/scss/activity.scss')
     .addEntry('login-script', './assets/js/login-script.js')
     .addEntry('carousel', './assets/js/carousel.js')
+    .addEntry('input_display', './assets/js/input_display.js')
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
         { from: './assets/images', to: 'images'}
