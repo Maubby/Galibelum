@@ -76,7 +76,6 @@ class Activity
      *
      * @ORM\Column(name="type", type="string", length=32)
      *
-     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
      *      max = 32,
@@ -91,7 +90,6 @@ class Activity
      *
      * @ORM\Column(name="description", type="text")
      *
-     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
@@ -106,7 +104,6 @@ class Activity
      *
      * @ORM\Column(name="date", type="string", length=16, nullable=true)
      *
-     * @Assert\NotBlank()
      * @Assert\Length(
      *      max = 16,
      *      maxMessage = "The date cannot be longer than {{ limit }} characters"
@@ -117,12 +114,11 @@ class Activity
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=32, nullable=true)
+     * @ORM\Column(name="address", type="string", length=64, nullable=true)
      *
-     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
-     *      max = 32,
+     *      max = 64,
      *      minMessage = "The address must be at least {{ limit }} characters long",
      *      maxMessage = "The address cannot be longer than {{ limit }} characters"
      * )
@@ -134,7 +130,6 @@ class Activity
      *
      * @ORM\Column(name="mainGame", type="string", length=32, nullable=true)
      *
-     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
      *      max = 32,
@@ -149,7 +144,6 @@ class Activity
      *
      * @ORM\Column(name="urlVideo", type="string", length=128, nullable=true)
      *
-     * @Assert\NotBlank()
      * @Assert\Length(
      *      max = 128,
      *      maxMessage = "The url link cannot be longer than {{ limit }} characters"
@@ -167,7 +161,6 @@ class Activity
      * @var array
      *
      * @ORM\Column(name="achievement", type="array", nullable=true)
-     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
