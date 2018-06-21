@@ -1,0 +1,85 @@
+@import 'style';
+
+/* Form Create new activity and edit */
+
+.boxing-canvas {
+  background-color: #fff;
+  width: auto;
+  max-width: 1200px;
+  padding: 40px 5px 20px 5px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-top: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+}
+
+.subtitle-boxing-canvas {
+  background-color: $lighter-grey-bg-color;
+  max-width: 1000px;
+  padding: 30px 5px 20px 5px;
+  text-align: left;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+}
+
+.input-field {
+  margin: 2px 0 0 0;
+}
+
+label {
+  margin-left: 10px;
+}
+
+/* Placeholder's and value's colors */
+/* New and Edit form */
+
+#appbundle_activity_achievement::placeholder {
+  color: $placeholder-color !important;
+}
+
+#appbundle_activity_achievement {
+  color: $placeholder-color !important;
+}
+
+
+#appbundle_activity_description::placeholder {
+  color: $placeholder-color !important;
+}
+
+#appbundle_activity_description {
+  color: $placeholder-color !important;
+}
+
+#appbundle_activity_type {
+  color: $placeholder-color !important;
+}
+
+#appbundle_activity_name {
+  color: $placeholder-color !important;
+}
+
+#appbundle_activity_socialLink {
+  color: $placeholder-color !important;
+}
+
+#appbundle_activity_urlVideo {
+  color: $placeholder-color !important;
+}
+
+
+
+
+
+/* Basics */
+
+.size-align {
+  max-width: 1000px;
+}
+
+.back-dashboard {
+  padding-top: 5px;
+}
