@@ -128,11 +128,11 @@ class Activity
     /**
      * @var string
      *
-     * @ORM\Column(name="mainGame", type="string", length=64, nullable=true)
+     * @ORM\Column(name="mainGame", type="string", length=32, nullable=true)
      *
      * @Assert\Length(
      *      min = 2,
-     *      max = 64,
+     *      max = 32,
      *      minMessage = "The game's name must be at least {{ limit }} characters long",
      *      maxMessage = "The game's name cannot be longer than {{ limit }} characters"
      * )
