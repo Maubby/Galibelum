@@ -1,6 +1,6 @@
-$(document).ready(function(){
+$(document).ready(function() {
     // On Select option changed
-    $(".activity").change(function(){
+    $(".activity").change(function() {
         // Check if current value is "Évènement eSport"
         if($(this).val() === "Évènement eSport") {
             // Security client view, input is required
