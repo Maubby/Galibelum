@@ -204,7 +204,7 @@ class OrganizationController extends Controller
 
             $request->getSession()
                 ->getFlashBag()
-                ->add('success', 'Vos modification ont bien été pris en compte !');
+                ->add('success', 'Vos modifications ont bien été prises en compte.');
 
             return $this->redirectToRoute(
                 'dashboard_index',
