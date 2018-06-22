@@ -27,11 +27,11 @@
                     <div class="profile-boxing-canvas mt-50">
                         <div class="profile-boxing-canvas-content-height normal-subtitle-text">
                             <h5 class="profile-title text-center degradeblue">Modifier votre profil</h5>
-                            {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+                            {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' }} ) }}
                             <!-- Modifying firstname -->
                             <div class="form-group col-sm-6 col-xs-6">
                                 {{ form_label(form.firstName) }}
-                                {{ form_widget(form.firstName, {'attr': {'class':'form-control','placeholder':  user.firstname }}) }}
+                                {{ form_widget(form.firstName, {'attr': {'class':'form-control','placeholder': user.firstname }} ) }}
                                 {{ form_errors(form.firstName) }}
                             </div>
                             <!-- End modifying firstname -->
@@ -39,7 +39,7 @@
                             <!-- Modifying lastname -->
                             <div class="form-group col-sm-6 col-xs-6">
                                 {{ form_label(form.lastName) }}
-                                {{ form_widget(form.lastName, {'attr': {'class':'form-control','placeholder': user.lastname }}) }}
+                                {{ form_widget(form.lastName, {'attr': {'class':'form-control','placeholder': user.lastname }} ) }}
                                 {{ form_errors(form.lastName) }}
                             </div>
                             <!-- End modifying lastname -->
@@ -47,7 +47,7 @@
                             <!-- Modifying email -->
                             <div class="form-group col-sm-12 col-xs-12">
                                 {{ form_label(form.email, 'Email :')}}
-                                {{ form_widget(form.email, {'attr': {'class':'form-control','placeholder': user.email }}) }}
+                                {{ form_widget(form.email, {'attr': {'class':'form-control','placeholder': user.email }} ) }}
                                 {{ form_errors(form.email) }}
                             </div>
                             <!-- End modifying email -->
@@ -55,7 +55,7 @@
                             <!-- Modifying phone number -->
                             <div class="form-group col-sm-12 col-xs-12">
                                 {{ form_label(form.phoneNumber) }}
-                                {{ form_widget(form.phoneNumber, {'attr': {'class':'form-control','placeholder': user.phonenumber }}) }}
+                                {{ form_widget(form.phoneNumber, {'attr': {'class':'form-control','placeholder': user.phonenumber }} ) }}
                                 {{ form_errors(form.phoneNumber) }}
                             </div>
                             <!-- End modifying phone number -->
@@ -82,10 +82,10 @@
                                 {{ form_label(formPassword.current_password, 'Entrer votre mot de passe actuel :') }}
                                 {% if formPassword.current_password.vars.errors|length %}
                                     {{ form_widget(formPassword.current_password,
-                                        formPassword.current_password.vars|merge({'attr': {'autofocus': null, 'class':'form-control', 'placeholder': 'Entrez votre mot de passe actuel'|trans} }) ) }}
+                                        formPassword.current_password.vars|merge({'attr': {'autofocus': null, 'class':'form-control', 'placeholder': 'Entrez votre mot de passe actuel'|trans}} ) ) }}
                                     {{ form_errors(formPassword.current_password) }}
                                 {% else %}
-                                    {{ form_widget(formPassword.current_password, { 'attr': {'class': 'form-control', 'placeholder': 'Entrez votre mot de passe actuel'|trans} }) }}
+                                    {{ form_widget(formPassword.current_password, { 'attr': {'class': 'form-control', 'placeholder': 'Entrez votre mot de passe actuel'|trans}} ) }}
                                 {% endif %}
                             </div>
                             <!-- End current password -->
@@ -95,10 +95,10 @@
                                 {{ form_label(formPassword.current_password, 'Entrer votre nouveau mot de passe :') }}
                                 {% if formPassword.plainPassword.first.vars.errors|length %}
                                     {{ form_widget(formPassword.plainPassword.first,
-                                        formPassword.plainPassword.first.vars|merge({'attr': {'autofocus': null, 'class': 'form-control', 'placeholder': 'Entrez votre nouveau mot de passe'|trans} }) ) }}
+                                        formPassword.plainPassword.first.vars|merge({'attr': {'autofocus': null, 'class': 'form-control', 'placeholder': 'Entrez votre nouveau mot de passe'|trans}} ) ) }}
                                     {{ form_errors(formPassword.plainPassword.first) }}
                                 {% else %}
-                                    {{ form_widget(formPassword.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'Entrez votre nouveau mot de passe'|trans} }) }}
+                                    {{ form_widget(formPassword.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'Entrez votre nouveau mot de passe'|trans}} ) }}
                                 {% endif %}
                             </div>
                             <!-- End new password -->
@@ -108,10 +108,10 @@
                                 {{ form_label(formPassword.current_password, 'Confirmer votre mot de passe :') }}
                                 {% if formPassword.plainPassword.second.vars.errors|length %}
                                     {{ form_widget(formPassword.plainPassword.second,
-                                        formPassword.plainPassword.second.vars|merge({'attr': {'autofocus': null, 'class': 'form-control', 'placeholder': 'Confirmez votre nouveau mot de passe'|trans} }) ) }}
+                                        formPassword.plainPassword.second.vars|merge({'attr': {'autofocus': null, 'class': 'form-control', 'placeholder': 'Confirmez votre nouveau mot de passe'|trans}} ) ) }}
                                     {{ form_errors(formPassword.plainPassword.second) }}
                                 {% else %}
-                                    {{ form_widget(formPassword.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'Confirmez votre nouveau mot de passe'|trans} }) }}
+                                    {{ form_widget(formPassword.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'Confirmez votre nouveau mot de passe'|trans}} ) }}
                                 {% endif %}
                             </div>
                             <!-- End new password's confirmation -->
@@ -130,5 +130,3 @@
         </div>
     </section>
  {% endblock body %}
-
-
