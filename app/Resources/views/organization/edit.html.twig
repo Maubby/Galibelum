@@ -1,16 +1,20 @@
-{# app/Resources/views/organization/index.html.twig #}
+{# app/Resources/views/organization/edit.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Modification de votre structure|marque{% endblock %}
 
 {% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/organization_inscription.css') }}">
+{% endblock %}
+
+{% block header %}
     <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
     <!-- Zero intern console warning -->
 
     <!-- Navbar in views/base.html.twig -->
-
-    <!-- Additional CSS links-->
-    <link rel="stylesheet" href="{{ asset('build/organization_inscription.css') }}">
+    {{ parent() }}
 {% endblock %}
 
 {% block body %}
