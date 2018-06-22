@@ -69,7 +69,7 @@ class OfferController extends Controller
      *
      * @return Response A Response instance
      */
-    public function newAction(Request $request, Activity $activity,ManagementFeesService $feesService)
+    public function newAction(Request $request, Activity $activity, ManagementFeesService $feesService)
     {
         $offer = new Offer();
         $form = $this->createForm('AppBundle\Form\OfferType', $offer);
