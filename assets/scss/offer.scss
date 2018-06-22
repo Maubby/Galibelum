@@ -38,6 +38,8 @@
   border: 1px solid $border-color;
 }
 
+/* Input Fields/labels : change margin */
+
 .input-field {
   margin: 2px 0 0 0;
   outline: 0;
@@ -52,13 +54,13 @@ label {
   margin-left: 10px;
 }
 
+/* Tables */
+
 th{
   text-align: center;
 }
 
-.correct-pl {
-  padding-left: 0;
-}
+/* PlaceHolders  */
 
 #appbundle_offer_date {
   color: $placeholder-color;
@@ -66,4 +68,10 @@ th{
 
 #appbundle_offer_description::placeholder {
   color: $placeholder-color;
+}
+
+/* Other  */
+
+.correct-pl {
+  padding-left: 0;
 }
