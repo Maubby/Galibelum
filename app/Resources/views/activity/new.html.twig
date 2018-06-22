@@ -78,10 +78,10 @@
 
                         <!--Activity's Achievement-->
                         <div class="row">
-                            <div class="col-sm-12 mt-20">
+                            <div class="col-sm-12 mt-20 activityAchievement activityHide">
                                 <div class="form-group form-error">
                                     <i class="fas fa-trophy"></i>{{ form_label(form.achievement, 'Accomplissements') }}
-                                    {{ form_widget(form.achievement, {'attr': {'class': "form-control input-field", 'placeholder': "Exemple : 1ère place aux IEM Katowice de CS:GO 2018"}}) }}
+                                    {{ form_widget(form.achievement, {'attr': {'class': "form-control input-field activityAchievement", 'placeholder': "Exemple : 1ère place aux IEM Katowice de CS:GO 2018"}}) }}
                                     {{ form_errors(form.achievement) }}
                                 </div>
                             </div>
