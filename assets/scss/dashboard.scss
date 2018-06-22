@@ -5,10 +5,6 @@ h5 {
   font-weight: 500;
 }
 
-.main-color {
-  color: $main-color;
-}
-
 .boxing-title {
   background-color: #fff;
   width: auto;
@@ -33,12 +29,11 @@ h5 {
   background-color: #fff;
   max-width: 400px;
   width: auto;
-  text-align: center;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border: 1px solid $border-color;
   h5 {
-    font-size: 17px;
+    font-size: 16px;
     text-align: center;
     color: #a2a2a2b3;
   }
@@ -47,18 +42,18 @@ h5 {
     border: 1px solid transparent;
   }
   .panel-default {
-    height: 170px;
+    height: 150px;
     border-color: transparent;
     background-color: #ededed66;
     .panel-title {
-      height: 25px;
       font-size: 14px;
-      color: $seconde-color;
       text-align: center;
+      color: $seconde-color;
       padding-top: 10px;
     }
     .panel-body {
-      height: 140px;
+      text-align: center;
+      white-space: nowrap;
       padding: 15px 20px;
       .btn-primary {
         background-color: $six-color;
@@ -70,15 +65,16 @@ h5 {
 .carousel.vertical {
   .carousel-inner {
     height: 100%;
+    margin-bottom: 10px;
   }
   .item {
+    max-height: 490px;
     -webkit-transition: 0.6s ease-in-out top;
     -moz-transition: 0.6s ease-in-out top;
     -ms-transition: 0.6s ease-in-out top;
     -o-transition: 0.6s ease-in-out top;
     transition: 0.6s ease-in-out top;
     margin: auto;
-    max-height: 510px;
   }
   .next {
     top: 400px;
@@ -95,7 +91,7 @@ h5 {
     top: -30px;
   }
   .down {
-    top: calc(100% - 13.6px);
+    top: calc(100% - 6px);
   }
 }
 
