@@ -1,4 +1,4 @@
-{# app/Resources/views/organization/_new_organization_content.html.twig #}
+{# app/Resources/views/organization/_edit_organization_content.html.twig #}
 {% block body %}
     <main id="organization">
         <section>
@@ -8,8 +8,9 @@
                         <!-- Return to the dashboard -->
                         <ol class="breadcrumb breadcrumb-boxing-canvas">
                             <li><i class="fas fa-reply degradeblue"></i>&nbsp;
-                                <a href="{{ path('dashboard_index') }}" class="degradeblue"> Retourner sur votre tableau de bord ?</a></li>
+                                <a href="{{ path('dashboard_index') }}" class="degradeblue">Retourner sur votre tableau de bord ?</a></li>
                         </ol>
+                        
                         <!--1st part of the edit form-->
                         <div class="boxing-canvas">
                             <div class="col-md-12 center">
@@ -43,13 +44,13 @@
                             <!-- Second section contact form-->
                             <div class="col-md-6 mt-20 light-blue-subtitle-text">
                                 <div class="form-group form-error">
-                                    <i class="fas fa-user"></i>  {{ form_label(edit_form.userRole, 'Votre poste au sein de la structure') }}
+                                    <i class="fas fa-user"></i> {{ form_label(edit_form.userRole, 'Votre poste au sein de la structure') }}
                                     {{ form_widget(edit_form.userRole, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : Manager' }} ) }}
                                     {{ form_errors(edit_form.userRole) }}
                                 </div>
                                 <div class="form-group form-error">
-                                    <i class="fas fa-at"></i>  {{ form_label(edit_form.email, 'Email de la société') }}
-                                    {{ form_widget(edit_form.email, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : test@galibelum.com' }} ) }}
+                                    <i class="fas fa-at"></i> {{ form_label(edit_form.email, 'Email de la société') }}
+                                    {{ form_widget(edit_form.email, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : contact@galibelum.com' }} ) }}
                                     {{ form_errors(edit_form.email) }}
                                 </div>
                                 <div class="form-group form-error">
@@ -75,6 +76,7 @@
                                 </div>
                             </div>
                             <!-- End final section contact edit_form-->
+                            
                             <div class="col-sm-12 col-xs-12 text-center">
                                 <input type="submit" value="Enregistrer votre structure" class="btn btn-primary backblue-btn-sm">
                             </div>
