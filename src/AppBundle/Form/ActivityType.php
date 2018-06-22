@@ -40,62 +40,65 @@ class ActivityType extends AbstractType
         $builder
             ->add(
                 'name', TextType::class, array(
-                'attr' => array(
-                    'minlength' => 2,
-                    'maxlength' => 32,
-                )
+                    'attr' => array(
+                        'minlength' => 2,
+                        'maxlength' => 32,
+                    )
                 )
             )
             ->add(
                 'type', ChoiceType::class, array(
-                'choices' => array(
-                    'Activité de streaming' => 'Activité de streaming',
-                    'Equipe eSport' => 'Equipe eSport',
-                    'Évènement eSport' => 'Évènement eSport'
-                )
+                    'choices' => array(
+                        "Choisissez un type d'activité" => '',
+                        'Activité de streaming' => 'Activité de streaming',
+                        'Equipe eSport' => 'Equipe eSport',
+                        'Évènement eSport' => 'Évènement eSport'
+                    )
                 )
             )
             ->add(
                 'description', TextareaType::class, array(
-                'attr' => array(
-                    'minlength' => 32,
-                    'maxlength' => 250,
-                )
+                    'attr' => array(
+                        'minlength' => 32,
+                        'maxlength' => 250,
+                    )
                 )
             )
             ->add(
                 'date', TextType::class, array(
-                'attr' => array(
-                    'maxlength' => 16,
-                )
+                    'required' => false,
+                    'attr' => array(
+                        'maxlength' => 16,
+                    )
                 )
             )
             ->add(
                 'address', TextType::class, array(
-                'attr' => array(
-                    'maxlength' => 64,
-                )
+                    'required' => false,
+                    'attr' => array(
+                        'maxlength' => 64,
+                    )
                 )
             )
             ->add(
                 'mainGame', TextareaType::class, array(
-                'required' => false,
+                    'required' => false,
                 )
             )
             ->add(
                 'urlVideo', UrlType::class, array(
-                'required' => false,
-                'attr' => array(
-                    'maxlength' => 128,
-                )
+                    'required' => false,
+                    'attr' => array(
+                        'maxlength' => 128,
+                    )
                 )
             )
             ->add(
                 'achievement', TextareaType::class, array(
-                'required' => false,
-                'attr' => array(
-                    'maxlength' => 128,
-                )
+                    'required' => false,
+                    'attr' => array(
+                        'maxlength' => 128,
+                    )
                 )
             )
             ->add('socialLink', UrlType::class)

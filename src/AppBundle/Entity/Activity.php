@@ -104,6 +104,7 @@ class Activity
      *
      * @ORM\Column(name="date", type="string", length=16, nullable=true)
      *
+     * @Assert\NotBlank()
      * @Assert\Length(
      *      max = 16,
      *      maxMessage = "The date cannot be longer than {{ limit }} characters"
@@ -116,6 +117,7 @@ class Activity
      *
      * @ORM\Column(name="address", type="string", length=64, nullable=true)
      *
+     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
      *      max = 64,
