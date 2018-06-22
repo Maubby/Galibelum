@@ -4,10 +4,14 @@
 {% block title %}Dashboard - Structure{% endblock %}
 
 {% block stylesheets %}
+    <!-- Import personal styleSheet -->
     <link rel="stylesheet" href="{{ asset('build/dashboard.css') }}">
 {% endblock %}
 {% block body %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
 
+    <!-- Flash message success edit organization profile -->
     {% if app.session.flashBag.has('success') %}
         <div class="alert alert-success">
             {% for msg in app.session.flashBag.get('success') %}
@@ -16,39 +20,45 @@
             {% endfor %}
         </div>
     {% endif %}
-    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
-    <!-- Zero intern console warning -->
+    <!-- End flash message -->
+
+    <!-- Start show information to organization, activities and offers -->
     <div class="container pb-60">
         <div class="boxing-title mt-60 mb-40">
-            <h5 class="degradeblue ml-25"><span><i class="fas fa-chart-bar degradeblue" style="font-size: 30px"></i></span> Tableau de bord</h5>
+            <h5 class="degradeblue ml-25"><span><i class="fas fa-chart-bar degradeblue"></i></span> Tableau de bord</h5>
         </div>
+        <!-- show user firstName and information to organization -->
         <div class="row">
             <div class="col-md-3">
                 <div class="card">
                     <ul class="list-group">
                         <li class="list-group-item text-center"><P>Bienvenue {{ user.firstName }}</P></li>
-                        <li class="list-group-item text-left"><i class="fas fa-university main-color mr-10"></i>{{ organization.name }}</li>
-                        <li class="list-group-item text-left"><i class="fas fa-phone main-color mr-10"></i>{{ organization.phoneNumber }}</li>
-                        <li class="list-group-item text-left"><i class="fas fa-at main-color mr-10"></i>{{ organization.email }}</li>
-                        <li class="list-group-item text-left"><i class="fas fa-address-card main-color mr-10"></i>{{ organization.address }}</li>
-                        <li class="list-group-item text-center text-muted"><a href="{{ path('organization_edit', { 'id': organization.id }) }}">Modifier votre structure</a></li>
+                        <li class="list-group-item"><i class="fas fa-university"></i>{{ organization.name }}</li>
+                        <li class="list-group-item"><i class="fas fa-phone"></i>{{ organization.phoneNumber }}</li>
+                        <li class="list-group-item"><i class="fas fa-at"></i>{{ organization.email }}</li>
+                        <li class="list-group-item"><i class="fas fa-address-card"></i>{{ organization.address }}</li>
+                        <li class="list-group-item"><a href="{{ path('organization_edit', { 'id': organization.id }) }}">Modifier votre structure</a></li>
                     </ul>
                 </div>
             </div>
+            <!-- end show information -->
+
+            <!-- Carousel to list last activities -->
             <div class="col-md-offset-1 col-md-4 mb-40">
                 <div class="boxing-canvas">
-                    <h5 class="text-center degradeblue pb-20 title-h5">Mes Activités</h5>
-                    <div class="panel-body">
+                    <h5>Mes Activités</h5>
+                    <div class="boxing-body">
                         <div id="myCarousel" class="carousel vertical" data-ride="carousel">
-                            <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
+                                <!-- to show message if activity is empty -->
                                 {% if organization.OrganizationActivity is empty %}
                                     <p>Créer une activité</p>
                                 {% else %}
+                                    <!-- Loop for show information activities in item carousel -->
                                     {% for activity in organization.OrganizationActivity %}
                                         <div class="{% if loop.first %}active{% endif %} item">
-                                            <div class="panel panel-default text-center">
-                                                <h5 class="panel-title pt-10">{{ activity.name }}</h5>
+                                            <div class="panel panel-default">
+                                                <h5 class="panel-title">{{ activity.name }}</h5>
                                                 <div class="panel-body">
                                                     <div>
                                                         <p class="panel-item"><strong>Adresse : </strong>{{ activity.address }}</p>
@@ -76,17 +86,21 @@
                     </div>
                 </div>
             </div>
+            <!-- End list activities -->
 
+            <!-- Carousel to list last offers -->
             <div class="col-md-4 mb-40">
                 <div class="boxing-canvas">
-                    <h5 class="text-center degradeblue pb-20 title-h5">Mes Offres</h5>
-                    <div class="panel-body">
+                    <h5>Mes Offres</h5>
+                    <div class="boxing-body">
                         <div id="myCarouselActivity" class="carousel vertical" data-ride="carousel">
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
+                                <!-- to show message if offer is empty -->
                                 {% if organization.offers is empty %}
                                     <p>Créer une offre</p>
                                 {% else %}
+                                    <!-- Loop for show information offers in item carousel -->
                                     {% for offer in organization.offers %}
                                         <div class="{% if loop.first %}active{% endif %} item">
                                             <div class="panel panel-default text-center">
@@ -118,10 +132,14 @@
                     </div>
                 </div>
             </div>
+            <!-- End list offers -->
+
         </div>
     </div>
+    <!-- End Content -->
 {% endblock %}
 
 {% block javascripts %}
+    <!-- Import personal javascript -->
     <script src="{{ asset('build/carousel.js') }}"></script>
 {% endblock %}
