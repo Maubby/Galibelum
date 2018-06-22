@@ -64,7 +64,7 @@ class OrganizationController extends Controller
 
         if ($user->hasRole('ROLE_STRUCTURE')
             && $user->getOrganization()->getIsActive() === 1
-            || $user->hasRole('ROLE_MARQUE')
+            || $user->hasRole('ROLE_COMPANY')
             && $user->getOrganization()->getIsActive() === 1
         ) {
             $organization = $user->getOrganization();
@@ -77,7 +77,7 @@ class OrganizationController extends Controller
             );
         } elseif ($user->hasRole('ROLE_STRUCTURE')
             && $user->getOrganization()->getIsActive() === 0
-            || $user->hasRole('ROLE_MARQUE')
+            || $user->hasRole('ROLE_COMPANY')
             && $user->getOrganization()->getIsActive() === 0
         ) {
             return $this->redirectToRoute('waiting_index');
@@ -122,7 +122,7 @@ class OrganizationController extends Controller
             $organization->setNameCanonical(strtolower($organization->getName()));
             $user->setOrganization($organization);
             $choose === 0 ?$user->setRoles(array('ROLE_STRUCTURE'))
-                : $user->setRoles(array('ROLE_MARQUE'));
+                : $user->setRoles(array('ROLE_COMPANY'));
 
             // Persisting user according to its new organization
             $em->persist($organization);
@@ -184,19 +184,27 @@ class OrganizationController extends Controller
      */
     public function editAction(Request $request, Organization $organization)
     {
+        $user = $this->getUser();
         $deleteForm = $this->_createDeleteForm($organization);
-        $editForm = $this->createForm(
-            'AppBundle\Form\OrganizationType',
-            $organization
-        );
+        if ($user->hasRole('ROLE_COMPANY')) {
+            $editForm = $this
+                ->createForm(
+                    'AppBundle\Form\OrganizationType', $organization
+                );
+            $editForm->remove('status');
+        } else {
+            $editForm = $this
+                ->createForm(
+                    'AppBundle\Form\OrganizationType', $organization
+                );
+        }
         $editForm->handleRequest($request);
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             $request->getSession()
                 ->getFlashBag()
-                ->add('success', 'Votre profil a bien été modifié !');
+                ->add('success', 'Vos modifications ont bien été prises en compte.');
 
             return $this->redirectToRoute(
                 'dashboard_index',
