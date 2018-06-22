@@ -1,19 +1,19 @@
 /* Form profile & form password*/
 
-.boxing-canvas {
+.profile-boxing-canvas {
   background-color: #fff;
+  height: 350px;
   padding: 30px 5px 20px 5px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
 
-/* Form password */
-.form-part-password{
-  box-shadow: 0 20px 80px 0 rgba(0, 0, 0, 0.20);
-  margin-top: 100px;
-  margin-bottom: 20px;
-  padding-bottom: 50px;
+.profile-boxing-canvas-content-height {
+  height: 350px;
 }
-.form-part-password:hover {
-  transform: scale(1.1);
+
+@media screen and (min-width: 300px) {
+  .profile-title {
+    font-size: 20px;
+  }
 }
