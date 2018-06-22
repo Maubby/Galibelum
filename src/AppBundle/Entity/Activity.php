@@ -163,6 +163,8 @@ class Activity
      * @var array
      *
      * @ORM\Column(name="achievement", type="array", nullable=true)
+     *
+     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
