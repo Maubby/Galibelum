@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Modifier votre profil{% endblock %}
+
 {% block stylesheets %}
 
     <!-- Additional CSS links-->
@@ -18,13 +20,22 @@
     <div class="container">
         <!-- Edit form  -->
         <div class="row">
+            <!--1st part of the edit form-->
             {{ form_start(edit_form) }}
             <div>
-                <!--1st part of the edit form-->
-                <div class="col-sm-12 box light-blue-subtitle-text">
-                    <i class="far fa-user-circle text-center degradeblue col-sm-12 col-xs-12 pt-40" style="font-size: 50px"></i>
-                    <h5 class="degradeblue text-center col-sm-12 col-xs-12 pb-20">Modifier votre profil</h5>
-                    <div class="col-sm-6">
+                <!-- If status active eSport structure color blue-->
+                {% if organization.status != null%}
+                    <div class="col-sm-12 box light-blue-subtitle-text">
+                        <i class="far fa-user-circle text-center degradeblue col-sm-12 col-xs-12 pt-40" style="font-size: 50px"></i>
+                        <h5 class="degradeblue text-center col-sm-12 col-xs-12 pb-20">Modifier votre profil</h5>
+                {% else %}
+                <!-- If status not active eSport structure color orange-->
+                    <div class="col-sm-12 box light-red-subtitle-text">
+                        <i class="far fa-user-circle text-center degradered col-sm-12 col-xs-12 pt-40" style="font-size: 50px"></i>
+                        <h5 class="degradered text-center col-sm-12 col-xs-12 pb-20">Modifier votre profil</h5>
+                {% endif %}
+
+                    <div class="col-sm-6 col-xs-12">
                         <!--Structure's name-->
                         <div class="input-no-border">
                             <i class="fas fa-university"></i>{{ form_label(edit_form.name,  'Nom de votre structure eSport') }}
@@ -35,14 +46,16 @@
                         </div>
                         <!-- End structure's name-->
 
-                        <!--Structure's status-->
-                        <div class="input-no-border">
-                            <i class="fas fa-gavel"></i>{{ form_label(edit_form.status, 'Statut juridique') }}
-                        </div>
-                        <div>
-                            {{ form_widget(edit_form.status) }}
-                            {{ form_errors(edit_form.status) }}
-                        </div>
+                        <!--Structure's status if juridic's status not empty-->
+                        {% if organization.status != null%}
+                            <div class="input-no-border">
+                                <i class="fas fa-gavel"></i>{{ form_label(edit_form.status, 'Statut juridique') }}
+                            </div>
+                            <div>
+                                {{ form_widget(edit_form.status) }}
+                                {{ form_errors(edit_form.status) }}
+                            </div>
+                        {% endif %}
                         <!--End structure's status-->
 
                         <!--Structure's address-->
@@ -109,12 +122,21 @@
                         </div>
                         <!--End short structure's description-->
                     </div>
+
                     <!--Submit part-->
                     <div class="container">
                         <div class="row">
+                            <!-- If status active eSport structure color blue-->
+                            {% if organization.status != null%}
                             <div class="col-sm-4 col-sm-offset-4 col-xs-offset-1 col-xs-10 col-xs-offset-1 text-center mt-20">
                                 <input type="submit" value="Modifier votre profil" class="btn btn-primary backblue-btn mb-20">
                             </div>
+                            {% else %}
+                            <!-- If status active eSport structure color red-->
+                            <div class="col-sm-4 col-sm-offset-4 col-xs-offset-1 col-xs-10 col-xs-offset-1 text-center mt-20">
+                                <input type="submit" value="Modifier votre profil" class="btn btn-primary backred-btn mb-20">
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                     <!--End of the submit part-->

@@ -183,12 +183,18 @@ class OrganizationController extends Controller
     public function editAction(Request $request, Organization $organization)
     {
         $deleteForm = $this->_createDeleteForm($organization);
-        $editForm = $this->createForm(
-            'AppBundle\Form\OrganizationType',
-            $organization
-        );
+        if ($organization->getStatus() === null) {
+            $editForm = $this->createForm(
+                'AppBundle\Form\OrganizationType', $organization
+            );
+            $editForm->remove('status');
+        } else {
+            $editForm = $this->createForm(
+                'AppBundle\Form\OrganizationType',
+                $organization
+            );
+        }
         $editForm->handleRequest($request);
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
