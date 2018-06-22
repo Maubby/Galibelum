@@ -34,46 +34,20 @@ label {
   margin-left: 10px;
 }
 
-/* Hide date's and address inputs */
+/* Hide date's and address inputs for new and edit form */
 
-.activityInfo {
+.activityHide {
   display: none;
 }
 
 /* Placeholder's and value's colors */
 /* New and Edit form */
-
-#appbundle_activity_achievement::placeholder {
-  color: $placeholder-color !important;
-}
-
-#appbundle_activity_achievement {
-  color: $placeholder-color !important;
-}
-
-
-#appbundle_activity_description::placeholder {
-  color: $placeholder-color !important;
-}
-
-#appbundle_activity_description {
-  color: $placeholder-color !important;
-}
-
-#appbundle_activity_type {
-  color: $placeholder-color !important;
-}
-
-#appbundle_activity_name {
-  color: $placeholder-color !important;
-}
-
-#appbundle_activity_socialLink {
-  color: $placeholder-color !important;
-}
-
-#appbundle_activity_urlVideo {
-  color: $placeholder-color !important;
+#activity {
+  input::placeholder, select, textarea::placeholder {
+    font-weight: 200;
+    opacity: 0.7;
+    color: $placeholder-color !important;
+  }
 }
 
 /* Basics */
