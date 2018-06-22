@@ -115,7 +115,7 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
                 ->setMainGame($faker->word)
                 ->setUrlVideo($faker->url)
                 ->setAchievement($faker->randomElement($array = array ('a','b','c')))
-                ->setSocialLink($faker->words($nb = 3, $asText = false));
+                ->setSocialLink($faker->url);
 
             // Offer creation
             $offer = new Offer();

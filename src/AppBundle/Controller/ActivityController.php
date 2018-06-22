@@ -48,7 +48,7 @@ class ActivityController extends Controller
 
         return $this->render(
             'activity/index.html.twig', array(
-            'activities' => $activities,
+                'activities' => $activities,
             )
         );
     }
@@ -84,8 +84,8 @@ class ActivityController extends Controller
 
         return $this->render(
             'activity/new.html.twig', array(
-            'activity' => $activity,
-            'form' => $form->createView(),
+                'activity' => $activity,
+                'form' => $form->createView(),
             )
         );
     }
@@ -106,8 +106,8 @@ class ActivityController extends Controller
 
         return $this->render(
             'activity/show.html.twig', array(
-            'activity' => $activity,
-            'delete_form' => $deleteForm->createView(),
+                'activity' => $activity,
+                'delete_form' => $deleteForm->createView(),
             )
         );
     }
@@ -140,9 +140,9 @@ class ActivityController extends Controller
 
         return $this->render(
             'activity/edit.html.twig', array(
-            'activity' => $activity,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                'activity' => $activity,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
             )
         );
     }
