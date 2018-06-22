@@ -4,8 +4,17 @@
 {% block title %}Créer votre activité{% endblock %}
 
 {% block stylesheets %}
+
     <!-- Additional CSS links-->
     <link rel="stylesheet" href="{{ asset('build/activity.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
 {% endblock %}
 
 {% block body %}
