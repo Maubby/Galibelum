@@ -1,63 +1,140 @@
+{# app/Resources/views/offer/new.html.twig #}
 {% extends 'base.html.twig' %}
 
+{% block title %}Créer une offre{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/offer.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
-    <h1>Offer edit</h1>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                {{ form_start(edit_form) }}
-
-                <div class="form-group">
-                    {{ form_label(edit_form.name) }}
-                    {{ form_widget(edit_form.name) }}
-                    {{ form_errors(edit_form.name) }}
+    <section>
+        <div class="container-fluid light-blue-subtitle-text mt-20">
+            <div class="row boxing-canvas mt-20">
+                <div class="col-md-10 col-md-offset-1 mt-20">
+                    <div class="col-md-12 text-center mt-20">
+                        <i class="fas fa-hand-holding-usd degradeblue" style="font-size: 50px"></i>
+                        <h5 class="degradeblue">Ajouter une offre :</h5>
+                    </div>
+                    {{ form_start(edit_form) }}
+                    <div class="col-sm-12 mt-20">
+                        <i class="fas fa-university"></i>
+                        {{ form_label(edit_form.name, 'Nom' )}}
+                        {{ form_widget(edit_form.name, {'attr': {'class':'form-control input-field', 'placeholder' : "Nom de l'offre" }}) }}
+                        {{ form_errors(edit_form.name) }}
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-md-6 correct-pl">
+                            <div class="mt-20">
+                                <i class="far fa-calendar-alt"></i>
+                                {{ form_label(edit_form.date, "Date d'expiration" )}}
+                                {{ form_widget(edit_form.date, {'attr': {'class':'form-control input-field'}}) }}
+                                {{ form_errors(edit_form.date) }}
+                            </div>
+                            <div class="mt-20">
+                                <i class="fas fa-dollar-sign"></i>
+                                {{ form_label(edit_form.amount, "Montant demandé" )}}
+                                {{ form_widget(edit_form.amount, {'attr': {'class':'form-control input-field js-datepicker', 'placeholder' : "Montant de l'offre" }}) }}
+                                {{ form_errors(edit_form.amount) }}
+                            </div>
+                            <div class="mt-20">
+                                <i class="fas fa-user-friends"></i>
+                                {{ form_label(edit_form.partnershipNumber, "Nombre de participants" )}}
+                                {{ form_widget(edit_form.partnershipNumber, {'attr': {'class':'form-control input-field', 'placeholder' : "Nombre de participant(s)" }}) }}
+                                {{ form_errors(edit_form.partnershipNumber) }}
+                            </div>
+                        </div>
+                        <!-- Fees details -->
+                        <div class="col-md-6 text-center box-border mt-30">
+                            <p class="bold-text pt-20">Calcul du montant des commissions retenues :</p>
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>Taux de commission</th>
+                                    <th>Fonds obtenus</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>15 %</td>
+                                    <td>200 €  &lt 10 000 €</td>
+                                </tr>
+                                <tr>
+                                    <td>10 %</td>
+                                    <td>10 001 € &lt 50 000 €</td>
+                                </tr>
+                                <tr>
+                                    <td>7 %</td>
+                                    <td>50 001 et +</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- End Fees details -->
+                    <div class="col-sm-12 mt-20">
+                        <i class="fas fa-edit"></i>
+                        {{ form_label(edit_form.description, "Description" )}}
+                        {{ form_widget(edit_form.description, {'attr': {'class':'form-control input-field', 'placeholder' : "Description de l'offre" }}) }}
+                        {{ form_errors(edit_form.description) }}
+                    </div>
+                    <div class="col-sm-12 col-xs-12 text-center">
+                        <input class="btn btn-primary backblue-btn mt-20" type="submit" value="{{ "Enregistrer"|trans }}" />
+                    </div>
+                    {{ form_end(edit_form) }}
                 </div>
+            </div>
+            <!--End of Form-->
+            <div class="row subtitle-boxing-canvas">
+                <!--Delete activty-->
+                <div class="col-sm-12 back-dashboard normal-subtitle-text">
+                    <!--Link to open a delete modal-->
+                    <i class="fas fa-user-times"></i>&nbsp; Supprimer votre offre ?
+                    <a href="{{ path('activity_delete', {'id': 'x'}) }}" class="degradered" data-toggle="modal"
+                       data-target="#deleteorganization">Cliquez ici !</a><br>
 
-                <div class="form-group">
-                    {{ form_label(edit_form.description) }}
-                    {{ form_widget(edit_form.description) }}
-                    {{ form_errors(edit_form.description) }}
+                    <!--Modal introducing the delete activity-->
+                    <div class="modal fade" id="deleteorganization" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-notify modal-info" role="document">
+                            <div class="modal-content">
+
+                                <!--Modal's header-->
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"><i class="fas fa-times" style="color: #ff6f73;" aria-hidden="true"></i></span>
+                                    </button>
+                                    <h6><i class="fas fa-exclamation-triangle degradered"></i>Êtes-vous sûr de vouloir supprimer cette offre ?</h6>
+                                </div>
+
+                                <!--Modal's body-->
+                                <div class="modal-body">
+                                    <div>
+                                        {{ form_start(delete_form) }}
+                                        <input type="submit" value="Supprimer" class="btn btn-danger backred-btn">
+                                        {{ form_end(delete_form) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End of modal-->
+                    <!--Return to the Dashboard-->
+                    <i class="fas fa-reply"></i>&nbsp;
+                    <a href="{{ path('dashboard_index') }}" class="five-color">Retourner sur votre tableau de bord ?</a>
+                    <!-- End to return to the dashboard -->
                 </div>
-
-                <div class="form-group">
-                    {{ form_label(edit_form.date) }}
-                    {{ form_widget(edit_form.date) }}
-                    {{ form_errors(edit_form.date) }}
-                </div>
-
-                <div class="form-group">
-                    {{ form_label(edit_form.amount) }}
-                    {{ form_widget(edit_form.amount) }}
-                    {{ form_errors(edit_form.amount) }}
-                </div>
-
-                <div class="form-group">
-                    {{ form_label(edit_form.partnershipNumber) }}
-                    {{ form_widget(edit_form.partnershipNumber) }}
-                    {{ form_errors(edit_form.partnershipNumber) }}
-                </div>
-
-                <div class="form-group">
-                    {{ form_label(edit_form.activity) }}
-                    {{ form_widget(edit_form.activity) }}
-                    {{ form_errors(edit_form.activity) }}
-                </div>
-
-                <input type="submit" value="Edit" class="btn btn-primary">
-                {{ form_end(edit_form) }}
+                <!--End delete activity-->
             </div>
         </div>
-    </div>
-
-    <ul>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete" class="btn btn-danger">
-            {{ form_end(delete_form) }}
-        </li>
-        <li>
-            <a href="{{ path('dashboard_index') }}">Revenir au Dashboard</a>
-        </li>
-    </ul>
+    </section>
 {% endblock %}
