@@ -8,27 +8,26 @@
                         <!-- Return to the dashboard -->
                         <ol class="breadcrumb breadcrumb-boxing-canvas">
                             <li><i class="fas fa-reply degradered"></i>&nbsp;
-                                <a href="{{ path('dashboard_index') }}" class="degradered">Retourner sur votre tableau de bord ?</a></li>
+                                <a href="{{ path('dashboard_index') }}" class="degradered">Retourner sur votre tableau de bord</a></li>
                         </ol>
                         <!--1st part of the edit form-->
                         <div class="boxing-canvas">
                             <div class="col-md-12 center">
                                 <i class="fas fa-building degradered" style="font-size: 50px"></i>
-                                <h5 class="degradered">Création de votre marque</h5>
-                                <p class="normal-subtitle-text text-justify center">Renseignez toutes les informations requises pour enregistrer votre marque/entreprise auprès de Galibelum.
-                                    <br> Une fois fait, vous pourrez rechercher des structures eSport et sponsoriser leurs offres. N'hésitez pas à bien remplir chacun des champs ci-dessous.
+                                <h5 class="degradered">Modification de votre marque</h5>
+                                <p class="normal-subtitle-text text-justify center">Modifier votre profil. Une fois fait, vous pourrez de nouveau rechercher des structures eSport et sponsoriser leurs offres.
                             </div>
 
                             {{ form_start(edit_form) }}
                             <!-- First section contact edit_form -->
                             <div class="col-md-6 mt-20 light-red-subtitle-text">
                                 <div class="form-group form-error">
-                                    <i class="fas fa-university"></i> {{ form_label(edit_form.name, 'Nom de votre marque') }}
+                                    <i class="fas fa-university"></i>{{ form_label(edit_form.name, 'Nom de votre marque') }}
                                     {{ form_widget(edit_form.name, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : beIN Sport' }} ) }}
                                     {{ form_errors(edit_form.name) }}
                                 </div>
                                 <div class="form-group form-error">
-                                    <i class="fas fa-address-card"></i> {{ form_label(edit_form.address, 'Adresse du siège social') }}
+                                    <i class="fas fa-address-card"></i>{{ form_label(edit_form.address, 'Adresse du siège social') }}
                                     {{ form_widget(edit_form.address, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : 4 avenue des Saules, bâtiment Le Doge' }} ) }}
                                     {{ form_errors(edit_form.address) }}
                                 </div>
@@ -43,7 +42,7 @@
                             <!-- Second section contact edit_form-->
                             <div class="col-md-6 mt-20 light-red-subtitle-text">
                                 <div class="form-group form-error">
-                                    <i class="fas fa-user"></i> {{ form_label(edit_form.userRole, 'Votre poste au sein de la marque') }}
+                                    <i class="fas fa-user"></i>{{ form_label(edit_form.userRole, 'Votre poste au sein de la marque') }}
                                     {{ form_widget(edit_form.userRole, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : Manager' }} ) }}
                                     {{ form_errors(edit_form.userRole) }}
                                 </div>
