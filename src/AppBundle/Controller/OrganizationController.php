@@ -64,7 +64,7 @@ class OrganizationController extends Controller
 
         if ($user->hasRole('ROLE_STRUCTURE')
             && $user->getOrganization()->getIsActive() === 1
-            || $user->hasRole('ROLE_MARQUE')
+            || $user->hasRole('ROLE_COMPANY')
             && $user->getOrganization()->getIsActive() === 1
         ) {
             $organization = $user->getOrganization();
@@ -77,7 +77,7 @@ class OrganizationController extends Controller
             );
         } elseif ($user->hasRole('ROLE_STRUCTURE')
             && $user->getOrganization()->getIsActive() === 0
-            || $user->hasRole('ROLE_MARQUE')
+            || $user->hasRole('ROLE_COMPANY')
             && $user->getOrganization()->getIsActive() === 0
         ) {
             return $this->redirectToRoute('waiting_index');
@@ -90,22 +90,28 @@ class OrganizationController extends Controller
      * Creates a new organization entity.
      *
      * @param Request $request New posted info
-     * @param int     $choose  organization or company
+     * @param int     $choose  Organization or company
      *
-     * @Route("/new/choose{choose}", name="organization_new")
-     * @Method({"GET",               "POST"})
+     * @Route("/new/choose/{choose}", name="organization_new")
+     * @Method({"GET",                "POST"})
      *
      * @return Response A Response instance
      */
-    public function newAction(Request $request,int $choose=null )
+    public function newAction(Request $request, int $choose = 0)
     {
         $organization = new Organization();
         $user = $this->getUser();
         if ($choose === 1) {
-            $form = $this->createForm('AppBundle\Form\OrganizationType', $organization);
+            $form = $this
+                ->createForm(
+                    'AppBundle\Form\OrganizationType', $organization
+                );
             $form->remove('status');
         } else {
-            $form = $this->createForm('AppBundle\Form\OrganizationType', $organization);
+            $form = $this
+                ->createForm(
+                    'AppBundle\Form\OrganizationType', $organization
+                );
         }
 
         $form->handleRequest($request);
@@ -114,17 +120,13 @@ class OrganizationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $organization->setUser($user);
             $organization->setNameCanonical(strtolower($organization->getName()));
+            $user->setOrganization($organization);
+            $choose === 0 ?$user->setRoles(array('ROLE_STRUCTURE'))
+                : $user->setRoles(array('ROLE_COMPANY'));
+
+            // Persisting user according to its new organization
             $em->persist($organization);
-            $em->persist($this->getUser()->setOrganization($organization));
-
-            if ($choose === 0) {
-                $role = $this->getUser()->setRoles(array('ROLE_STRUCTURE'));
-            }
-            else ($choose === 1){
-                $role = $this->getUser()->setRoles(array('ROLE_MARQUE'))
-            };
-
-            $em->persist($role);
+            $em->persist($user);
             $em->flush();
 
             return $this->redirectToRoute(
@@ -182,18 +184,30 @@ class OrganizationController extends Controller
      */
     public function editAction(Request $request, Organization $organization)
     {
+        $user = $this->getUser();
         $deleteForm = $this->_createDeleteForm($organization);
-        $editForm = $this->createForm(
-            'AppBundle\Form\OrganizationType',
-            $organization
-        );
+        if ($user->hasRole('ROLE_COMPANY')) {
+            $editForm = $this
+                ->createForm(
+                    'AppBundle\Form\OrganizationType', $organization
+                );
+            $editForm->remove('status');
+        } else {
+            $editForm = $this
+                ->createForm(
+                    'AppBundle\Form\OrganizationType', $organization
+                );
+        }
         $editForm->handleRequest($request);
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success', 'Vos modifications ont bien été prises en compte.');
+
             return $this->redirectToRoute(
-                'organization_edit',
+                'dashboard_index',
                 array('id' => $organization->getId())
             );
         }

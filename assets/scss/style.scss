@@ -17,6 +17,7 @@ $grey-bg-color: rgba(222, 228, 232, 0.51);
 $lighter-grey-bg-color: rgba(245, 248, 250, 0.79);
 $border-color:  #e4e4e4;
 $placeholder-color: rgb(84, 149, 175);
+$red-placeholder-color: rgb(249, 174, 154);
 $background-a-color: rgba(43, 158, 176, 0.64);
 
 $grey-color:    #999999;
@@ -142,8 +143,14 @@ h5 {
   font-family: $font-family-base;
 }
 
-.light-subtitle-text {
+.light-blue-subtitle-text {
   color: #5495AF;
+  font-weight: 300;
+  font-size: 1em;
+}
+
+.light-red-subtitle-text {
+  color: #e06e52;
   font-weight: 300;
   font-size: 1em;
 }
@@ -425,7 +432,7 @@ p.size {
 }
 
 .degradered {
-  background: linear-gradient(to right, #fad27b,#f9867d);
+  background: linear-gradient(to right, #fad27b, #f9867d);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -446,10 +453,22 @@ p.size {
   width: 100%;
 }
 
+.backblue-btn-sm {
+  background-image: linear-gradient(to right, #86ccc2 , #137faf);
+  border-color: #FFFFFF;
+  width: 190px;
+}
+
 .backred-btn {
   background-image: linear-gradient(to right, #fad27b, #f9867d);
   border-color: #FFFFFF;
   width: 100%;
+}
+
+.backred-btn-sm {
+  background-image: linear-gradient(to right, #fad27b, #f9867d);
+  border-color: #FFFFFF;
+  width: 190px;
 }
 
 /* Input fields / Form */
@@ -481,7 +500,7 @@ p.size {
   border-radius: 4px !important;
 }
 
-input::placeholder {
+input::placeholder, select, textarea::placeholder {
   font-weight: 200;
   opacity: 0.7;
   color: $placeholder-color !important;

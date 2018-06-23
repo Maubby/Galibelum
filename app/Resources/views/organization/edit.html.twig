@@ -1,9 +1,12 @@
+{# app/Resources/views/organization/edit.html.twig #}
 {% extends 'base.html.twig' %}
+
+{% block title %}Modification de votre structure|marque{% endblock %}
 
 {% block stylesheets %}
 
     <!-- Additional CSS links-->
-    <link rel="stylesheet" href="{{ asset('build/organization_edit.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/organization_inscription.css') }}">
 {% endblock %}
 
 {% block header %}
@@ -15,158 +18,12 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-        <!-- Edit form  -->
-        <div class="row">
-            {{ form_start(edit_form) }}
-            <div>
-                <!--1st part of the edit form-->
-                <div class="col-sm-12 box">
-                    <i class="far fa-user-circle text-center degradeblue col-sm-12 col-xs-12 pt-40" style="font-size: 50px"></i>
-                    <h5 class="degradeblue text-center col-sm-12 col-xs-12 pb-20">Modifier votre profil</h5>
-                    <div class="col-sm-6">
-                        <!--Structure's name-->
-                        <div class="input-no-border light-subtitle-text">
-                            <i class="fas fa-university"></i>{{ form_label(edit_form.name) }}
-                        </div>
-                        <div>
-                            {{ form_widget(edit_form.name) }}
-                            {{ form_errors(edit_form.name) }}
-                        </div>
-                        <!-- End structure's name-->
+    {% if app.user.hasRole('ROLE_COMPANY') %}
+        {% include "organization/_edit_company_content.html.twig" %}
+    {% else %}
+        {% include "organization/_edit_organization_content.html.twig" %}
+    {% endif %}
+{% endblock %}
 
-                        <!--Structure's status-->
-                        <div class="input-no-border light-subtitle-text">
-                            <i class="fas fa-gavel"></i>{{ form_label(edit_form.status) }}
-                        </div>
-                        <div>
-                            {{ form_widget(edit_form.status) }}
-                            {{ form_errors(edit_form.status) }}
-                        </div>
-                        <!--End structure's status-->
-
-                        <!--Structure's address-->
-                        <div class="input-no-border light-subtitle-text">
-                            <i class="fas fa-address-card"></i>{{ form_label(edit_form.address) }}
-                        </div>
-                        <div>
-                            {{ form_widget(edit_form.address) }}
-                            {{ form_errors(edit_form.address) }}
-                        </div>
-                        <!--End structure's address-->
-
-                        <!--Number of employees-->
-                        <div class="input-no-border light-subtitle-text">
-                            <i class="fas fa-users"></i>{{ form_label(edit_form.relationNumber) }}
-                        </div>
-                        <div>
-                            {{ form_widget(edit_form.relationNumber) }}
-                            {{ form_errors(edit_form.relationNumber) }}
-                        </div>
-                        <!--End Number of employees-->
-                    </div>
-                    <!--End of the 1st part-->
-
-                    <!--2nd part of the edit form-->
-                    <div class="col-sm-6">
-                        <!--Role inside the structure-->
-                        <div class="input-no-border light-subtitle-text">
-                            <i class="fas fa-user"></i>{{ form_label(edit_form.userRole) }}
-                        </div>
-                        <div class="inputs-fields">
-                            {{ form_widget(edit_form.userRole) }}
-                            {{ form_errors(edit_form.userRole) }}
-                        </div>
-                        <!--End role inside the structure-->
-
-                        <!--Structure's mail-->
-                        <div class="input-no-border light-subtitle-text">
-                            <i class="fas fa-at"></i>{{ form_label(edit_form.email) }}
-                        </div>
-                        <div>
-                            {{ form_widget(edit_form.email) }}
-                            {{ form_errors(edit_form.email) }}
-                        </div>
-                        <!--End structure's mail-->
-
-                        <!--Structure's phone-->
-                        <div class="input-no-border light-subtitle-text">
-                            <i class="fas fa-phone"></i>{{ form_label(edit_form.phoneNumber) }}
-                        </div>
-                        <div>
-                            {{ form_widget(edit_form.phoneNumber) }}
-                            {{ form_errors(edit_form.phoneNumber) }}
-                        </div>
-                        <!--End structure's phone-->
-
-                        <!--Short structure's description-->
-                        <div class="input-no-border light-subtitle-text">
-                            <i class="fas fa-edit"></i>{{ form_label(edit_form.description) }}
-                        </div>
-                        <div>
-                            {{ form_widget(edit_form.description) }}
-                            {{ form_errors(edit_form.description) }}
-                        </div>
-                        <!--End short structure's description-->
-                    </div>
-                    <!--Submit part-->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-4 col-sm-offset-4 col-xs-offset-1 col-xs-10 col-xs-offset-1 text-center mt-20">
-                                <input type="submit" value="Modifier votre profil" class="btn btn-primary backblue-btn mb-20">
-                            </div>
-                        </div>
-                    </div>
-                    <!--End of the submit part-->
-                </div>
-                <!--End of the 2nd part-->
-            </div>
-            {{ form_end(edit_form) }}
-        </div>
-        <!--Return to the homepage or delete the profile-->
-        <div class="row box-grey">
-            <div class="col-sm-12 col-xs-12 normal-subtitle-text">
-                <br>
-
-                <!--Link to go to the dashboard-->
-                <div class="pb-10">
-                    <i class="fas fa-reply"></i>&nbsp;
-                    <a href="{{ path('dashboard_index') }}" class="five-color"> Retourner sur votre tableau de bord ?</a>
-                    <br>
-                </div>
-
-                <!--Link to open a delete modal-->
-                <i class="fas fa-user-times"></i>&nbsp; Supprimer votre profil ?
-                <a href="#" class="degradered" data-toggle="modal"
-                   data-target="#deleteorganization">Cliquer ici !</a>
-
-                <!-- Modal introducing the delete profile -->
-                <div class="modal fade" id="deleteorganization" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-notify modal-info" role="document">
-                        <div class="modal-content">
-
-                            <!--Modal's header-->
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true"><i class="fas fa-times" style="color: #ff6f73;" aria-hidden="true"></i></span>
-                                </button>
-                                <h6><span><i class="fas fa-exclamation-triangle degradered"></i></span> Êtes-vous sûr de vouloir supprimer votre profil ?</h6>
-                            </div>
-
-                            <!--Modal's body-->
-                            <div class="modal-body">
-                                <div>
-                                    {{ form_start(delete_form) }}
-                                    <input type="submit" value="Supprimer" class="btn btn-danger backred-btn">
-                                    {{ form_end(delete_form) }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End of modal -->
-            </div>
-        </div>
-    </div>
-    <!-- End part to go to the homepage or delete the profile-->
+{% block javascripts %}
 {% endblock %}

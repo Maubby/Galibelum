@@ -48,12 +48,12 @@
                         </div>
                         <div class="col-sm-12 form-error">
                             {{ form_widget(form.plainPassword.first,
-                                {'attr': {'class':'form-control input-field', 'placeholder' : 'Mot de passe'  }}) }}
+                                {'attr': {'class':'form-control input-field', 'placeholder' : 'Mot de passe' }}) }}
                             {{ form_errors(form.plainPassword.first) }}
                         </div>
                         <div class="col-sm-12 form-error">
                             {{ form_widget(form.plainPassword.second,
-                                {'attr': {'class':'form-control input-field', 'placeholder' : 'Vérification mot de passe'  }}) }}
+                                {'attr': {'class':'form-control input-field', 'placeholder' : 'Vérification mot de passe' }}) }}
                             {{ form_errors(form.plainPassword.second) }}
                         </div>
                         <div class="col-sm-12 normal-subtitle-text form-error">
@@ -62,7 +62,7 @@
                             {{ form_errors(form.cgu) }}
                         </div>
                         <div class="col-sm-12 col-xs-12 text-center">
-                            <input class="col-sm-12 col-xs-12 btn btn-primary backblue-btn" type="submit" value="{{ "S'inscrire"|trans }}" />
+                            <input class="btn btn-primary backblue-btn" type="submit" value="{{ "S'inscrire"|trans }}" />
                         </div>
                         {{ form_end(form) }}
                     </div>

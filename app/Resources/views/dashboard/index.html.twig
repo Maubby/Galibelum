@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="{{ asset('build/dashboard.css') }}">
 {% endblock %}
 {% block body %}
+
+    {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('success') %}
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% endfor %}
+        </div>
+    {% endif %}
     <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
     <!-- Zero intern console warning -->
     <div class="container pb-60">
@@ -14,36 +23,36 @@
             <h5 class="degradeblue ml-25"><span><i class="fas fa-chart-bar degradeblue" style="font-size: 30px"></i></span> Tableau de bord</h5>
         </div>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="card">
                     <ul class="list-group">
                         <li class="list-group-item text-center"><P>Bienvenue {{ user.firstName }}</P></li>
-                        <li class="list-group-item text-left">{{ organization.name }}</li>
-                        <li class="list-group-item text-left">{{ organization.phoneNumber }}</li>
-                        <li class="list-group-item text-left">{{ organization.email }}</li>
-                        <li class="list-group-item text-left">{{ organization.address }}</li>
-                        <li class="list-group-item text-left text-muted"><a href="{{ path('organization_edit', { 'id': organization.id }) }}">Modifier votre structure</a></li>
+                        <li class="list-group-item text-left"><i class="fas fa-university main-color mr-10"></i>{{ organization.name }}</li>
+                        <li class="list-group-item text-left"><i class="fas fa-phone main-color mr-10"></i>{{ organization.phoneNumber }}</li>
+                        <li class="list-group-item text-left"><i class="fas fa-at main-color mr-10"></i>{{ organization.email }}</li>
+                        <li class="list-group-item text-left"><i class="fas fa-address-card main-color mr-10"></i>{{ organization.address }}</li>
+                        <li class="list-group-item text-center text-muted"><a href="{{ path('organization_edit', { 'id': organization.id }) }}">Modifier votre structure</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="col-md-offset-2 col-md-4 mb-40">
+            <div class="col-md-offset-1 col-md-4 mb-40">
                 <div class="boxing-canvas">
-                    <h5 class="text-center degradeblue pb-20">Mes Activités</h5>
+                    <h5 class="text-center degradeblue pb-20 title-h5">Mes Activités</h5>
                     <div class="panel-body">
                         <div id="myCarousel" class="carousel vertical" data-ride="carousel">
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner" role="listbox">
                                 {% if organization.OrganizationActivity is empty %}
-                                    <p>Créer une activités</p>
+                                    <p>Créer une activité</p>
                                 {% else %}
                                     {% for activity in organization.OrganizationActivity %}
                                         <div class="{% if loop.first %}active{% endif %} item">
-                                            <div class="panel panel-default">
-                                                <h5 class="panel-title text-center pt-10">{{ activity.name }}</h5>
+                                            <div class="panel panel-default text-center">
+                                                <h5 class="panel-title pt-10">{{ activity.name }}</h5>
                                                 <div class="panel-body">
-                                                    <div class="row">
-                                                        <p class="panel-item col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-1">{{ activity.type }}</p>
-                                                        <p class="panel-item col-md-6 col-sm-6 col-xs-6">{{ activity.date }}</p>
+                                                    <div>
+                                                        <p class="panel-item"><strong>Adresse : </strong>{{ activity.address }}</p>
+                                                        <p class="panel-item"><strong>Date de l'événement : </strong>{{ activity.date }}</p>
                                                     </div>
                                                     <a href="{{ path('activity_show', { 'id': activity.id }) }}" class="btn btn-primary btn-sm">Plus de détails</a>
                                                 </div>
@@ -70,7 +79,7 @@
 
             <div class="col-md-4 mb-40">
                 <div class="boxing-canvas">
-                    <h5 class="text-center degradeblue pb-20">Mes Offres</h5>
+                    <h5 class="text-center degradeblue pb-20 title-h5">Mes Offres</h5>
                     <div class="panel-body">
                         <div id="myCarouselActivity" class="carousel vertical" data-ride="carousel">
                             <!-- Wrapper for slides -->
@@ -80,12 +89,12 @@
                                 {% else %}
                                     {% for offer in organization.offers %}
                                         <div class="{% if loop.first %}active{% endif %} item">
-                                            <div class="panel panel-default">
-                                                <h5 class="panel-title text-center pt-10">{{ offer.name }}</h5>
+                                            <div class="panel panel-default text-center">
+                                                <h5 class="panel-title pt-10">{{ offer.name }}</h5>
                                                 <div class="panel-body">
                                                     <div class="row">
-                                                        <p class="panel-item col-md-4 col-md-offset-1 col-sm-4 col-sm-offset-1 col-xs-4 col-xs-offset-1"> Montant : {{ offer.amount }}</p>
-                                                        <p class="panel-item col-md-6 col-sm-6 col-xs-6">Date : {{ offer.date|date("d M Y") }}</p>
+                                                        <p class="panel-item"><strong>Montant : </strong>{{ offer.amount }} €</p>
+                                                        <p class="panel-item"><strong>Dépôt des fonds avant le : </strong>{{ offer.date|date("d M Y") }}</p>
                                                     </div>
                                                     <a href="{{ path('offer_show', { 'id': offer.id }) }}" class="btn btn-primary btn-sm">Plus de détails</a>
                                                 </div>

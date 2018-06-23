@@ -13,8 +13,6 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -42,40 +40,37 @@ class OrganizationType extends AbstractType
         $builder
             ->add(
                 'name', TextType::class, array(
-
                     'attr' => array(
-                        'minlength' => 2, 'maxlength' => 32,
-                        'class' => 'form-control',
-                        'placeholder' =>'Exemple : GBM eSport'))
+                        'minlength' => 2, 'maxlength' => 32
+                    )
+                )
             )
             ->add(
-                'phoneNumber', NumberType::class, array(
+                'phoneNumber', TextType::class, array(
                     'attr' => array(
-                        'minlength'=> 8, 'maxlength' => 32,
-                        'class' => 'form-control',
-                        'placeholder'=>'Exemple : 0682244454'))
+                        'minlength' => 9, 'maxlength' => 32
+                    )
+                )
             )
             ->add(
                 'email', EmailType::class, array(
                     'attr' => array(
-                        'minlength'=>2, 'maxlength' => 64,
-                        'class'=> 'form-control',
-                    'placeholder' =>'Exemple : test@galibelum.com'))
+                        'minlength' => 2, 'maxlength' => 64
+                    )
+                )
             )
             ->add(
                 'description', TextareaType::class, array(
-                'attr'=> array(
-                    'minlength'=>32, 'maxlength' => 250,
-                    'class'=> 'form-control',
-                    'placeholder'=> 'Maximum 250 caractères'))
+                    'attr'=> array(
+                        'minlength' => 32, 'maxlength' => 250
+                    )
+                )
             )
             ->add(
                 'userRole', TextType::class, array(
                     'attr'=> array(
-                        'minlength'=>2, 'maxlength' => 32,
-                        'class'=>'form-control',
-                        'placeholder' =>'Exemple : Manager')
-
+                        'minlength' => 2, 'maxlength' => 32
+                    )
                 )
             )
             ->add(
@@ -83,22 +78,19 @@ class OrganizationType extends AbstractType
                     'attr'=>array(
                         'data-label' => null,
                         'required' => false,
-                        'minlength'=>2,'maxlength' => 32,
-                        'class'=>'form-control',
-                        'placeholder' =>'Exemple : GBM eSport'))
+                        'minlength' => 2,'maxlength' => 32
+                    )
+                )
             )
             ->add(
                 'address', TextType::class, array(
                     'attr'=>array(
-                        'minlength'=>2, 'maxlength' => 64,
-                        'class'=>'form-control',
-                        'placeholder '=>
-                            'Exemple : 4 avenue des Saules, bâtiment Le Doge'))
+                        'minlength' => 2, 'maxlength' => 64
+                    )
+                )
             )
             ->add(
                 'relationNumber', ChoiceType::class, array(
-                    'attr'=> array(
-                        'class'=> 'form-control input-field'),
                     'choices'  => array(
                         'Aucun autre membre' => 'Aucun autre membre',
                         '2-10 membres' => '2-10 membres',
@@ -134,6 +126,4 @@ class OrganizationType extends AbstractType
     {
         return 'appbundle_organization';
     }
-
-
 }

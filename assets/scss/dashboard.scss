@@ -36,18 +36,6 @@
   }
 }
 
-.panel-body {
-  border-color: $seconde-color;
-  .panel-primary {
-    .panel-title {
-      color: $seconde-color;
-      padding-top: 10px;
-    }
-  }
-  .btn-primary {
-    background-color: $six-color;
-  }
-}
 .boxing-title {
   background-color: #fff;
   width: auto;
@@ -72,8 +60,27 @@
   border-top: 1px solid $border-color;
   border-left: 1px solid $border-color;
   border-right: 1px solid $border-color;
+  .title-h5 {
+    font-size: 20px;
+  }
 }
-
+.main-color {
+  color: $main-color;
+}
+.panel-title {
+  font-size: 15px;
+  color: $seconde-color;
+  padding-top: 10px;
+}
+.panel-body {
+  border-color: $seconde-color;
+  .btn-primary {
+    background-color: $six-color;
+  }
+}
+.mr-10 {
+  margin-right: 10px;
+}
 .ml-25 {
   margin-left: 25px;
 }
