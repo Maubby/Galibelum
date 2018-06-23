@@ -1,0 +1,83 @@
+{# app/Resources/views/organization/_edit_company_content.html.twig #}
+{% block body %}
+    <main id="company">
+        <section>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Return to the dashboard -->
+                        <ol class="breadcrumb breadcrumb-boxing-canvas">
+                            <li><i class="fas fa-reply degradered"></i>&nbsp;
+                                <a href="{{ path('dashboard_index') }}" class="degradered">Retourner sur votre tableau de bord ?</a></li>
+                        </ol>
+                        <!--1st part of the edit form-->
+                        <div class="boxing-canvas">
+                            <div class="col-md-12 center">
+                                <i class="fas fa-building degradered" style="font-size: 50px"></i>
+                                <h5 class="degradered">Création de votre marque</h5>
+                                <p class="normal-subtitle-text text-justify center">Renseignez toutes les informations requises pour enregistrer votre marque/entreprise auprès de Galibelum.
+                                    <br> Une fois fait, vous pourrez rechercher des structures eSport et sponsoriser leurs offres. N'hésitez pas à bien remplir chacun des champs ci-dessous.
+                            </div>
+
+                            {{ form_start(edit_form) }}
+                            <!-- First section contact edit_form -->
+                            <div class="col-md-6 mt-20 light-red-subtitle-text">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-university"></i> {{ form_label(edit_form.name, 'Nom de votre marque') }}
+                                    {{ form_widget(edit_form.name, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : beIN Sport' }} ) }}
+                                    {{ form_errors(edit_form.name) }}
+                                </div>
+                                <div class="form-group form-error">
+                                    <i class="fas fa-address-card"></i> {{ form_label(edit_form.address, 'Adresse du siège social') }}
+                                    {{ form_widget(edit_form.address, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : 4 avenue des Saules, bâtiment Le Doge' }} ) }}
+                                    {{ form_errors(edit_form.address) }}
+                                </div>
+                                <div class="form-group form-error">
+                                    <i class="fas fa-users"></i> {{ form_label(edit_form.relationNumber, 'Nombre de collaborateurs dans votre entreprise') }}
+                                    {{ form_widget(edit_form.relationNumber, {'attr': {'class':'form-control input-field'}} ) }}
+                                    {{ form_errors(edit_form.relationNumber) }}
+                                </div>
+                            </div>
+                            <!-- End first section contact edit_form -->
+
+                            <!-- Second section contact edit_form-->
+                            <div class="col-md-6 mt-20 light-red-subtitle-text">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-user"></i> {{ form_label(edit_form.userRole, 'Votre poste au sein de la marque') }}
+                                    {{ form_widget(edit_form.userRole, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : Manager' }} ) }}
+                                    {{ form_errors(edit_form.userRole) }}
+                                </div>
+                                <div class="form-group form-error">
+                                    <i class="fas fa-at"></i>  {{ form_label(edit_form.email, 'Email de la société') }}
+                                    {{ form_widget(edit_form.email, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : test@galibelum.com' }} ) }}
+                                    {{ form_errors(edit_form.email) }}
+                                </div>
+                                <div class="form-group form-error">
+                                    <i class="fas fa-phone"></i> {{ form_label(edit_form.phoneNumber, 'Téléphone de la société') }}
+                                    {{ form_widget(edit_form.phoneNumber, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : 0601020304' }} ) }}
+                                    {{ form_errors(edit_form.phoneNumber) }}
+                                </div>
+                            </div>
+                            <!-- End second section contact edit_form-->
+
+                            <!-- Final section contact edit_form-->
+                            <div class="col-md-12 light-red-subtitle-text">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-edit"></i> {{ form_label(edit_form.description, 'Décrivez votre marque en quelques mots') }}
+                                    {{ form_widget(edit_form.description, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : Maximum 250 caractères' }} ) }}
+                                    {{ form_errors(edit_form.description) }}
+                                </div>
+                            </div>
+                            <!-- End final section contact edit_form-->
+                            
+                            <div class="col-sm-12 col-xs-12 text-center">
+                                <input type="submit" value="Enregistrer votre marque" class="btn btn-danger backred-btn-sm">
+                            </div>
+                            {{ form_end(edit_form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
