@@ -35,8 +35,8 @@ i{
   border-radius: 4px;
   border: 1px solid $border-color;
 }
-/* Checking company or structure side */
 
+/* Checking company or structure side */
 #company {
   input::placeholder, select, textarea::placeholder {
     font-weight: 200;
@@ -63,24 +63,23 @@ i{
 }
 
 /* Media queries */
-
 @media screen and (max-width: 991px) {
   #company {
     .boxing-canvas {
-      height: 600px;
+      height: 850px;
     }
   }
   #organization {
     .boxing-canvas {
-      height: 1030px;
+      height: 1000px;
     }
   }
 }
 
-@media screen and (max-width: 578px) {
+@media screen and (max-width: 450px) {
   #company {
     .boxing-canvas {
-      height: 1130px;
+      height: 970px;
     }
   }
   #organization {
@@ -90,28 +89,15 @@ i{
   }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 340px) {
   #company {
     .boxing-canvas {
-      height: 1130px;
+      height: 1030px;
     }
   }
   #organization {
     .boxing-canvas {
-      height: 1150px;
-    }
-  }
-}
-
-@media screen and (max-width: 420px) {
-  #company {
-    .boxing-canvas {
-      height: 1130px;
-    }
-  }
-  #organization {
-    .boxing-canvas {
-      height: 1250px;
+      height: 1190px;
     }
   }
 }

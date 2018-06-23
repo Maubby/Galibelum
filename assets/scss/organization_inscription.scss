@@ -71,12 +71,25 @@
 @media screen and (max-width: 442px) {
   #company {
     .boxing-canvas {
-      height: 1130px;
+      height: 1070px;
     }
   }
   #organization {
     .boxing-canvas {
-      height: 1200px;
+      height: 1250px;
+    }
+  }
+}
+
+@media screen and (max-width: 360px) {
+  #company {
+    .boxing-canvas {
+      height: 1190px;
+    }
+  }
+  #organization {
+    .boxing-canvas {
+      height: 1330px;
     }
   }
 }
