@@ -12,6 +12,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Activity;
 use AppBundle\Entity\Offer;
+use AppBundle\Service\ManagementFeesService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -57,27 +58,33 @@ class OfferController extends Controller
     }
 
     /**
-     * Creates a new offer entity.
+     * Creates a new offer entity and get information for current activity.
      *
-     * @Route("/{id}/new", name="offer_new")
-     * @Method({"GET",     "POST"})
+     * @param Request               $request     New offer posted with activity id
+     * @param Activity              $activity    New offer by activity
+     * @param ManagementFeesService $feesService Fees Calculation services
      *
-     * @param Request  $request  New offer posted with activity id
-     * @param Activity $activity New offer by activity
+     * @Route("/{id}/new",     name="offer_new")
+     * @Method({"GET","POST"})
      *
      * @return Response A Response instance
      */
-    public function newAction(Request $request, Activity $activity)
+    public function newAction(Request $request, Activity $activity, ManagementFeesService $feesService)
     {
         $offer = new Offer();
         $form = $this->createForm('AppBundle\Form\OfferType', $offer);
         $form->handleRequest($request);
 
+        $user = $this->getUser();
+        $fees = $feesService->getFees($offer->getAmount(), $offer->getFinalDeal());
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $offer = $offer
                 ->setActivity($activity)
-                ->setOrganization($this->getUser()->getOrganization());
+                ->setNameCanonical(strtolower($activity->getName()))
+                ->setHandlingFee($fees)
+                ->setOrganization($user->getOrganization());
             $em->persist($offer);
             $em->flush();
 
@@ -90,13 +97,14 @@ class OfferController extends Controller
         return $this->render(
             'offer/new.html.twig', array(
             'offer' => $offer,
+            'activity'=> $activity,
             'form' => $form->createView(),
             )
         );
     }
 
     /**
-     * Finds and displays a offer entity.
+     * Finds and displays all offer's from search result.
      *
      * @param Offer $offer The offer entity
      *
@@ -189,8 +197,8 @@ class OfferController extends Controller
         return $this->createFormBuilder()
             ->setAction(
                 $this->generateUrl(
-                    'offer_delete',
-                    array('id' => $offer->getId())
+                    'offer_delete', array(
+                    'id' => $offer->getId())
                 )
             )
             ->setMethod('DELETE')
