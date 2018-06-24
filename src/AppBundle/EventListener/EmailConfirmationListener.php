@@ -89,7 +89,7 @@ class EmailConfirmationListener implements EventSubscriberInterface
         $this->_session->set('fos_user_send_confirmation_email/email', $user->getEmail());
         $this->_session->getFlashBag()->add(
             'emailconfirmed',
-            'Un email de validation vous a été envoyé à votre adresse renseignée.
+            'Un email de validation a été envoyé à l\'adresse renseignée.
              Si celui-ci n\'a pas été reçu, vérifiez vos spams ou contactez Galibelum.'
         );
         $url = $this->_router->generate('fos_user_security_login');
