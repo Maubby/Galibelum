@@ -31,10 +31,11 @@ class ActivityController extends Controller
     /**
      * Lists all activity entities.
      *
+     * @param Request $request Edit posted info
+     *
      * @Route("/",    name="activity_index")
      * @Method("GET")
      *
-     * @param Request $request Edit posted info
      * @return Response A Response instance
      */
     public function indexAction(Request $request)
@@ -49,8 +50,11 @@ class ActivityController extends Controller
 
         $request->getSession()
             ->getFlashBag()
-            ->add("warning", "Pour faire une offre, faites votre choix parmi la liste des
-            activités présentées ci-dessous puis cliquez sur le bouton Créer une offre.");
+            ->add(
+                "warning", "Pour faire une offre, faites votre choix parmi la liste
+                 des activités présentées ci-dessous puis cliquez sur le bouton 
+                 Créer une offre."
+            );
 
         return $this->render(
             'activity/index.html.twig', array(
