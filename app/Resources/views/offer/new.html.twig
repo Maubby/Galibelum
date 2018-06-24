@@ -19,10 +19,21 @@
 
 {% block body %}
     <section>
+
         <!-- Offer list for the current activity -->
-        <div class="container-fluid light-blue-subtitle-text mt-50">
-            <div class="row boxing-canvas mt-40">
-                <div class="text-center">
+        <div class="container-fluid light-blue-subtitle-text">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Return to the dashboard -->
+                    <ol class="breadcrumb breadcrumb-boxing-canvas">
+                        <li><i class="fas fa-reply degradeblue"></i>&nbsp;
+                            <a href="{{ path('dashboard_index') }}" class="degradeblue">Retourner sur votre tableau de bord ?</a></li>
+                    </ol>
+                </div>
+            </div>
+                <!-- End Return to the dashboard -->
+            <div class="row boxing-canvas">
+                <div class="text-center col-md-12">
                     <h4 class="degradeblue">Récapitulatif de vos offres pour l'activité :</h4>
                     <h5 class="degradeblue pt-20 pb-10">"{{ activity.name }}"</h5>
                 </div>
@@ -60,7 +71,7 @@
         </div>
         <!--  End of offer list for current activity -->
         <!-- Form to create your offers -->
-        <div class="container-fluid mt-20">
+        <div class="container-fluid light-blue-subtitle-text mt-20">
             <div class="row boxing-canvas mt-20">
                 <div class="col-md-10 col-md-offset-1 mt-20">
                     <div class="col-md-12 text-center mt-20">
@@ -108,11 +119,11 @@
                                 <tbody>
                                 <tr>
                                     <td>15 %</td>
-                                    <td>200 €  &lt 10 000 €</td>
+                                    <td>200 €  &lt; 10 000 €</td>
                                 </tr>
                                 <tr>
                                     <td>10 %</td>
-                                    <td>10 001 € &lt 50 000 €</td>
+                                    <td>10 001 € &lt; 50 000 €</td>
                                 </tr>
                                 <tr>
                                     <td>7 %</td>
@@ -136,14 +147,6 @@
                 </div>
             </div>
             <!--End of Form-->
-            <div class="row subtitle-boxing-canvas">
-                <!--Return to Dashboard-->
-                <div class="col-sm-12 back-dashboard normal-subtitle-text">
-                    <i class="fas fa-reply"></i>&nbsp;
-                    <a href="{{ path('dashboard_index')}}" class="five-color">Retourner sur votre tableau de bord ?</a>
-                </div>
-                <!--End return to dashboard-->
-            </div>
         </div>
     </section>
 {% endblock %}
