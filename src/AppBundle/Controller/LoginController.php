@@ -48,7 +48,6 @@ class LoginController implements AuthenticationSuccessHandlerInterface
         $this->authorizationChecker = $authorizationChecker;
     }
 
-
     /**
      * Redirection after login successfully
      *
@@ -59,7 +58,6 @@ class LoginController implements AuthenticationSuccessHandlerInterface
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
-
         $response = null;
 
         if ($this->authorizationChecker->isGranted(
