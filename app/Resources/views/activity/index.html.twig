@@ -3,6 +3,12 @@
 {% block body %}
     <h1>Activities list</h1>
 
+    {% for flash_message in app.session.flashBag.get('warning') %}
+        <div class="alert alert-success">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+
     <table>
         <thead>
             <tr>
