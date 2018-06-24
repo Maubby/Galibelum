@@ -32,7 +32,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class LoginController implements AuthenticationSuccessHandlerInterface
 {
-
     protected $router;
     protected $authorizationChecker;
 
