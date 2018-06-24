@@ -4,6 +4,7 @@
 {% block title %}Créer votre activité{% endblock %}
 
 {% block stylesheets %}
+
     <!--Additional CSS links-->
     <link rel="stylesheet" href="{{ asset('build/activity.css') }}">
 {% endblock %}
@@ -11,6 +12,7 @@
 {% block header %}
     <!--PASSED W3C VALIDATOR https://validator.w3.org/-->
     <!--Zero intern console warning-->
+    
     <!--Navbar in views/base.html.twig-->
     {{ parent() }}
 {% endblock %}
@@ -24,7 +26,7 @@
                         <!-- Return to the dashboard -->
                         <ol class="breadcrumb breadcrumb-boxing-canvas">
                             <li><i class="fas fa-reply degradeblue"></i>&nbsp;
-                                <a href="{{ path('dashboard_index') }}" class="degradeblue">Retourner sur votre tableau de bord ?</a></li>
+                                <a href="{{ path('dashboard_index') }}" class="degradeblue">Retourner sur votre tableau de bord</a></li>
                         </ol>
                     </div>
                 </div>
