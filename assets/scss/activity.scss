@@ -1,11 +1,13 @@
 @import 'style';
 
-/* Form Create new activity and edit */
+// Form Create new activity and edit
 
 .boxing-canvas {
   background-color: #fff;
   width: auto;
-  max-width: 1200px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 40px 5px 20px 5px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
@@ -16,7 +18,10 @@
 
 .subtitle-boxing-canvas {
   background-color: $lighter-grey-bg-color;
-  max-width: 1000px;
+  width: auto;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 30px 5px 20px 5px;
   text-align: left;
   border-bottom-left-radius: 4px;
@@ -34,28 +39,35 @@ label {
   margin-left: 10px;
 }
 
-/* Hide date's and address inputs for new and edit form */
+// Back to the dashboard
+
+.back-dashboard {
+  padding-top: 5px;
+}
+
+.breadcrumb-boxing-canvas {
+  width: auto;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  border-radius: 4px;
+  border: 1px solid $border-color;
+}
+
+// Hide date's and address inputs for new and edit form
 
 .activityHide {
   display: none;
 }
 
-/* Placeholder's and value's colors */
-/* New and Edit form */
+/* Placeholder's and value's colors
+New and Edit form */
+
 #activity {
   input::placeholder, select, textarea::placeholder {
     font-weight: 200;
     opacity: 0.7;
     color: $placeholder-color !important;
   }
-}
-
-/* Basics */
-
-.size-align {
-  max-width: 1000px;
-}
-
-.back-dashboard {
-  padding-top: 5px;
 }
