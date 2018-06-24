@@ -17,6 +17,7 @@ Encore
     .addStyleEntry('style', './assets/scss/style.scss')
     .addStyleEntry('check_confirmed_email', './assets/scss/check_confirmed_email.scss')
     .addStyleEntry('organization_inscription', './assets/scss/organization_inscription.scss')
+    .addStyleEntry('organization_show', './assets/scss/organization_show.scss')
     .addStyleEntry('waiting', './assets/scss/waiting.scss')
     .addStyleEntry('login', './assets/scss/login.scss')
     .addStyleEntry('profile', './assets/scss/profile.scss')
