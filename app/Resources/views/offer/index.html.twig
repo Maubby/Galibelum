@@ -1,53 +1,68 @@
+{# app/Resources/views/offer/.html.twig #}
 {% extends 'base.html.twig' %}
 
+{% block title %}Vos offres{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/offer.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
-    <h1>Offers list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Handlingfee</th>
-                <th>Partnershipnumber</th>
-                <th>Finaldeal</th>
-                <th>Status</th>
-                <th>Signature</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for offer in offers %}
-            <tr>
-                <td>{{ offer.name }}</td>
-                <td>{{ offer.description }}</td>
-                <td>{% if offer.date %}{{ offer.date|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ offer.amount }}</td>
-                <td>{{ offer.handlingFee }}</td>
-                <td>{{ offer.partnershipNumber }}</td>
-                <td>{{ offer.finalDeal }}</td>
-                <td>{{ offer.status }}</td>
-                <td>{% if offer.signature %}Yes{% else %}No{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('offer_show', { 'id': offer.id }) }}">show</a>
+    <section>
+        <!-- Offer list for the current activity -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Return to the dashboard -->
+                    <ol class="breadcrumb breadcrumb-boxing-canvas">
+                        <li><i class="fas fa-reply degradeblue"></i>&nbsp;
+                            <a href="{{ path('dashboard_index') }}" class="degradeblue">Retourner sur votre tableau de bord</a>
                         </li>
-                        <li>
-                            <a href="{{ path('offer_edit', { 'id': offer.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('activity_index') }}">Create a new offer</a>
-        </li>
-    </ul>
+                    </ol>
+                </div>
+            </div>
+            <!-- End Return to the dashboard -->
+            <div class="row boxing-canvas">
+                <div class="col-md-12 text-center ">
+                    <h4 class="degradeblue">Liste de vos offres :</h4>
+                </div>
+                <div class="col-md-12 mt-50">
+                    {% for offer in offers %}
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title text-center">{{offer.activity.name}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                {% for offer in offers %}
+                                <div class="col-sm-4 col-md-4">
+                                    <div class="thumbnail text-center">
+                                        <div class="caption">
+                                            <h5>{{ offer.name }}</h5>
+                                            <p>{{ offer.amount }} €</p>
+                                            <p>{% if offer.date %}{{ offer.date|date('Y-m-d') }}{% endif %}</p>
+                                            <a class="btn btn-primary" href="{{ path('offer_show', { 'id': offer.id }) }}">Voir</a>
+                                            <a class="btn btn-primary" href="{{ path('offer_edit', { 'id': offer.id }) }}">Modifier</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
 {% endblock %}
