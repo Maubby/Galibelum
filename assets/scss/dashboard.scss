@@ -13,13 +13,19 @@ h5 {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   border: 1px solid $border-color;
-  i{
-    font-size: 25px
+  h5 {
+    margin-left: 25px;
+    i{
+      font-size: 25px
+    }
   }
 }
 
 .list-group-item {
   color: #999;
+  p {
+    margin-bottom: 0;
+  }
   i {
     margin-right: 10px;
   }
@@ -27,7 +33,7 @@ h5 {
 
 .boxing-canvas {
   background-color: #fff;
-  max-width: 400px;
+  max-width: 1200px;
   width: auto;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
@@ -35,14 +41,14 @@ h5 {
   h5 {
     font-size: 16px;
     text-align: center;
-    color: #a2a2a2b3;
+    color: #5d5c5c;
   }
   .boxing-body {
-    padding: 25px 30px 30px;
+    padding: 25px 30px;
     border: 1px solid transparent;
   }
   .panel-default {
-    height: 150px;
+    max-height: 180px;
     border-color: transparent;
     background-color: #ededed66;
     .panel-title {
@@ -53,8 +59,7 @@ h5 {
     }
     .panel-body {
       text-align: center;
-      white-space: nowrap;
-      padding: 15px 20px;
+      padding: 10px;
       .btn-primary {
         background-color: $six-color;
       }
@@ -91,10 +96,6 @@ h5 {
     top: -30px;
   }
   .down {
-    top: calc(100% - 6px);
+    top: calc(100% - 10px);
   }
-}
-
-.ml-25 {
-  margin-left: 25px;
 }
