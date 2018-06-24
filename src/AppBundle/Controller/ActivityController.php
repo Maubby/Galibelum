@@ -31,12 +31,14 @@ class ActivityController extends Controller
     /**
      * Lists all activity entities.
      *
+     * @param Request $request Edit posted info
+     *
      * @Route("/",    name="activity_index")
      * @Method("GET")
      *
      * @return Response A Response instance
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -45,6 +47,14 @@ class ActivityController extends Controller
                 'organizationActivities' => $this->getUser()->getOrganization()
             )
         );
+
+        $request->getSession()
+            ->getFlashBag()
+            ->add(
+                "warning", "Pour faire une offre, faites votre choix parmi la liste
+                 des activités présentées ci-dessous puis cliquez sur le bouton 
+                 Créer une offre."
+            );
 
         return $this->render(
             'activity/index.html.twig', array(
