@@ -50,3 +50,7 @@ services:
         class: AppBundle\Form\ProfileType
         tags:
             - { name: form.type, alias: app_user_profile }
+
+    authentication.handler.login_success_handler:
+        class:  AppBundle\Controller\LoginController
+        arguments:  ['@router', '@security.authorization_checker']

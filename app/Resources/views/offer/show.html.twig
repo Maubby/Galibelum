@@ -1,4 +1,21 @@
+{# app/Resources/views/offer/show.html.twig #}
 {% extends 'base.html.twig' %}
+
+{% block title %}Liste des offres{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/organization_show.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
     <h1>Offer</h1>
@@ -54,7 +71,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('dashboard_index') }}">Revenir au Dashboard</a>
+            <a href="{{ path('dashboard_index') }}">Retourner sur votre tableau de bord</a>
         </li>
         <li>
             <a href="{{ path('offer_edit', { 'id': offer.id }) }}">Edit</a>

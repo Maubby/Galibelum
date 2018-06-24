@@ -42,8 +42,10 @@ class EmailConfirmationListener implements EventSubscriberInterface
      * @param UrlGeneratorInterface   $router         Router to redirect to route
      * @param SessionInterface        $session        Using session for flash
      */
-    public function __construct(TwigSwiftMailer $mailer, TokenGeneratorInterface $tokenGenerator, UrlGeneratorInterface $router, SessionInterface $session)
-    {
+    public function __construct(TwigSwiftMailer $mailer,
+        TokenGeneratorInterface $tokenGenerator, UrlGeneratorInterface $router,
+        SessionInterface $session
+    ) {
         $this->_mailer =  $mailer;
         $this->_tokenGenerator = $tokenGenerator;
         $this->_router = $router;
@@ -67,7 +69,8 @@ class EmailConfirmationListener implements EventSubscriberInterface
     /**
      * Send email on registration success
      *
-     * @param  FormEvent $event catching event
+     * @param FormEvent $event catching event
+     *
      * @return void
      */
     public function onRegistrationSuccess(FormEvent $event)
@@ -81,16 +84,23 @@ class EmailConfirmationListener implements EventSubscriberInterface
 
         $user->setEnabled(false);
         if (null === $user->getConfirmationToken()) {
-            $user->setConfirmationToken($this->_tokenGenerator->generateToken());
+            $user->setConfirmationToken(
+                $this->_tokenGenerator
+                    ->generateToken()
+            );
         }
 
         $this->_mailer->sendConfirmationEmailMessage($user);
 
-        $this->_session->set('fos_user_send_confirmation_email/email', $user->getEmail());
+        $this->_session->set(
+            'fos_user_send_confirmation_email/email',
+            $user->getEmail()
+        );
+
         $this->_session->getFlashBag()->add(
             'emailconfirmed',
-            'Un email de validation vous a été envoyé à votre adresse renseignée.
-             Si celui-ci n\'a pas été reçu, vérifiez vos spams ou contactez Galibelum.'
+            'Un email de validation a été envoyé à l\'adresse renseignée.
+             Si vous ne l\'avez pas reçu, vérifiez vos spams ou contactez Galibelum.'
         );
         $url = $this->_router->generate('fos_user_security_login');
         $event->setResponse(new RedirectResponse($url));
