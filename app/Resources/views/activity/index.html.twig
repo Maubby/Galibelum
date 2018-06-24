@@ -1,7 +1,30 @@
+{# app/Resources/views/activity/index.html.twig #}
 {% extends 'base.html.twig' %}
+
+{% block title %}Liste des activités{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/organization_show.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
     <h1>Activities list</h1>
+
+    {% for flash_message in app.session.flashBag.get('warning') %}
+        <div class="alert alert-success">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
 
     <table>
         <thead>
@@ -27,7 +50,7 @@
                             <a href="{{ path('activity_edit', { 'id': activity.id }) }}">edit</a>
                         </li>
                         <li>
-                            <a href="{{ path('offer_new', { 'id': activity.id }) }}">Créer une Offre</a>
+                            <a href="{{ path('offer_new', { 'id': activity.id }) }}">Créer une offre</a>
                         </li>
                     </ul>
                 </td>
