@@ -1,24 +1,41 @@
+{# app/Resources/views/organization/index.html.twig #}
 {% extends 'base.html.twig' %}
+ 
+{% block title %}Liste des structures eSport|marques{% endblock %}
+ 
+{% block stylesheets %}
+ 
+     <!-- Additional CSS links-->
+     <link rel="stylesheet" href="{{ asset('build/organization_show.css') }}">
+{% endblock %}
+ 
+{% block header %}
+     <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+     <!-- Zero intern console warning -->
+ 
+     <!-- Navbar in views/base.html.twig -->
+     {{ parent() }}
+{% endblock %}
 
 {% block body %}
     <h1>Organizations list</h1>
 
     <table>
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Namecanonical</th>
-                <th>Phonenumber</th>
-                <th>Email</th>
-                <th>Description</th>
-                <th>Userrole</th>
-                <th>Status</th>
-                <th>Address</th>
-                <th>Relationnumber</th>
-                <th>Isactive</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Namecanonical</th>
+            <th>Phonenumber</th>
+            <th>Email</th>
+            <th>Description</th>
+            <th>Userrole</th>
+            <th>Status</th>
+            <th>Address</th>
+            <th>Relationnumber</th>
+            <th>Isactive</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for organization in organizations %}
