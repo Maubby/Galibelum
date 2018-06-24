@@ -71,8 +71,8 @@
         <!--  End of offer list for current activity -->
         <!-- Form to create your offers -->
         <div class="container-fluid light-blue-subtitle-text mt-20">
-            <div class="row boxing-canvas mt-20">
-                <div class="col-md-10 col-md-offset-1 mt-20">
+            <div class="row boxing-canvas">
+                <div class="col-md-10 col-md-offset-1">
                     <div class="col-md-12 text-center mt-20">
                         <i class="fas fa-hand-holding-usd degradeblue" style="font-size: 50px"></i>
                         <h5 class="degradeblue">Ajouter une offre :</h5>
@@ -139,8 +139,8 @@
                         {{ form_widget(form.description, {'attr': {'class':'form-control input-field', 'placeholder' : "Description de l'offre" }}) }}
                         {{ form_errors(form.description) }}
                     </div>
-                    <div class="col-sm-12 col-xs-12 text-center">
-                        <input class="btn btn-primary backblue-btn mt-20" type="submit" value="{{ "Enregistrer"|trans }}" />
+                    <div class="col-sm-12 col-xs-12 text-center mt-20">
+                        <input class="btn btn-primary backblue-btn" type="submit" value="{{ "Enregistrer"|trans }}" />
                     </div>
                     {{ form_end(form) }}
                 </div>
