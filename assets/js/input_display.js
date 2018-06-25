@@ -18,7 +18,6 @@ $(document).ready(function() {
         }
 
         if($(this).val() === "Equipe eSport") {
-            console.log('trouduc');
             // Security client view, input is required
             $(".activityInfo").prop('required',true);
             // Security client view, input is required
