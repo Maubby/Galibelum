@@ -38,7 +38,12 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('admin/index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('AppBundle:User')->findAll();
+
+        return $this->render('admin/index.html.twig',
+            array('users' => $users,)
+        );
     }
 
     /**
@@ -80,5 +85,52 @@ class AdminController extends Controller
                 'form' => $form->createView(),
             )
         );
+    }
+
+    /**
+     * Deletes a manager entity.
+     *
+     * @param Request      $request      Delete posted info
+     * @param User $manager The account manager
+     *
+     * @Route("/{id}",   name="admin_delete")
+     * @Method("DELETE")
+     *
+     * @return Response A Response instance
+     */
+    public function deleteAction(Request $request, User $manager)
+    {
+        $form = $this->_createDeleteForm($manager);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $manager->isEnabled(0);
+            $em->persist($manager);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('admin_index');
+    }
+
+    /**
+     * Creates a form to delete a manager entity.
+     *
+     * @param User $manager The manager entity
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    private function _createDeleteForm(User $manager)
+    {
+        return $this
+            ->createFormBuilder()
+            ->setAction(
+                $this->generateUrl(
+                    'manager_delete',
+                    array('id' => $manager->getId())
+                )
+            )
+            ->setMethod('DELETE')
+            ->getForm();
     }
 }
