@@ -26,6 +26,7 @@ Encore
     .addStyleEntry('offer', './assets/scss/offer.scss')
     .addStyleEntry('inscription-choose', './assets/scss/inscription-choose.scss')
     .addStyleEntry('activity', './assets/scss/activity.scss')
+    .addStyleEntry('admin', './assets/scss/admin.scss')
     .addEntry('login-script', './assets/js/login-script.js')
     .addEntry('datepicker', './assets/js/datepicker.js')
     .addEntry('carousel', './assets/js/carousel.js')
