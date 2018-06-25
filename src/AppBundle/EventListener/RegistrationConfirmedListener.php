@@ -33,11 +33,12 @@ class RegistrationConfirmedListener implements EventSubscriberInterface
     /**
      * EmailConfirmationListener constructor.
      *
-     * @param UrlGeneratorInterface   $router         Router to redirect to route
-     * @param SessionInterface        $session        Using session for flash
+     * @param UrlGeneratorInterface $router  Router to redirect to route
+     * @param SessionInterface      $session Using session for flash
      */
-    public function __construct(UrlGeneratorInterface $router, SessionInterface $session)
-    {
+    public function __construct(UrlGeneratorInterface $router,
+        SessionInterface $session
+    ) {
         $this->_router = $router;
         $this->_session = $session;
     }
@@ -59,14 +60,16 @@ class RegistrationConfirmedListener implements EventSubscriberInterface
     /**
      * Redirect on inscription index after registration
      *
-     * @param  GetResponseUserEvent $event catching event
+     * @param GetResponseUserEvent $event catching event
+     *
      * @return void
      */
     public function onRegistrationConfirm(GetResponseUserEvent $event)
     {
         $this->_session->getFlashBag()->add(
             'registrationconfirmed',
-            'Votre compte est validé. Vous pouvez désormais créer votre structure eSport ou sponsoriser des offres sur Galibelum.'
+            'Votre compte est validé. Vous pouvez désormais créer votre structure 
+            eSport ou sponsoriser des offres sur Galibelum.'
         );
         $url = $this->_router->generate('inscription_index');
         $event->setResponse(new RedirectResponse($url));

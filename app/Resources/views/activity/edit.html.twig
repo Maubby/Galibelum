@@ -4,14 +4,16 @@
 {% block title %}Modifier votre activité{% endblock %}
 
 {% block stylesheets %}
+
     <!-- Additional CSS links-->
     <link rel="stylesheet" href="{{ asset('build/activity.css') }}">
 {% endblock %}
 
 {% block header %}
-    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
-    <!-- Zero intern console warning -->
-    <!-- Navbar in views/base.html.twig -->
+    <!--PASSED W3C VALIDATOR https://validator.w3.org/-->
+    <!--Zero intern console warning-->
+    
+    <!--Navbar in views/base.html.twig-->
     {{ parent() }}
 {% endblock %}
 
@@ -21,10 +23,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-12">
-                        <!-- Return to the dashboard -->
+                        <!--Return to the dashboar-->
                         <ol class="breadcrumb breadcrumb-boxing-canvas">
                             <li><i class="fas fa-reply degradeblue"></i>&nbsp;
-                                <a href="{{ path('dashboard_index') }}" class="degradeblue">Retourner sur votre tableau de bord ?</a></li>
+                                <a href="{{ path('dashboard_index') }}" class="degradeblue">Retourner sur votre tableau de bord</a></li>
                         </ol>
                     </div>
                 </div>
@@ -61,7 +63,7 @@
 
                         <!--Activity's Address-->
                         <div class="row">
-                            <div class="{% if activity.type is same as("Évènement eSport") %} col-sm-6 mt-20 activityInfo {% else %} col-sm-6 mt-20 activityInfo activityHide{% endif %}">
+                            <div class="{% if activity.type is same as("Évènement eSport") %} col-sm-6 mt-20 activityInfo {% else %} col-sm-6 mt-20 activityInfo activityHide {% endif %}">
                                 <div class="form-group form-error">
                                     <i class="fas fa-map-marker"></i>{{ form_label(edit_form.address, 'Adresse de votre évènement') }}
                                     {{ form_widget(edit_form.address, {'attr': {'class': "form-control input-field activityInfo"}}) }}
@@ -95,7 +97,7 @@
 
                         <!--Activity's Achievement-->
                         <div class="row">
-                            <div class="{% if activity.type is same as("Equipe eSport") %} col-sm-12 mt-20 activityAchievement {% else %} col-sm-12 mt-20 activityAchievement activityHide{% endif %}">
+                            <div class="{% if activity.type is same as("Equipe eSport") %} col-sm-12 mt-20 activityAchievement {% else %} col-sm-12 mt-20 activityAchievement activityHide {% endif %}">
                                 <div class="form-group form-error">
                                     <i class="fas fa-trophy"></i>{{ form_label(edit_form.achievement, 'Accomplissements') }}
                                     {{ form_widget(edit_form.achievement, {'attr': {'class': "form-control input-field activityAchievement", 'placeholder': "Exemple : 1ère place aux IEM Katowice de CS:GO 2018"}}) }}
@@ -180,7 +182,7 @@
 {% endblock %}
 
 {% block footer %}
-    <!-- Footer in views/base.html.twig -->
+    <!--Footer in views/base.html.twig-->
     {{ parent() }}
 {% endblock %}
 

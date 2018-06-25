@@ -18,10 +18,10 @@
 {% endblock %}
 
 {% block body %}
-    {% if app.user.hasRole('ROLE_COMPANY') %}
-        {% include "organization/_show_company_content.html.twig" %}
-    {% else %}
+    {% if organization.status != null %}
         {% include "organization/_show_organization_content.html.twig" %}
+    {% else %}
+        {% include "organization/_show_company_content.html.twig" %}
     {% endif %}
 {% endblock %}
 
