@@ -11,7 +11,6 @@
 
 namespace AppBundle\Controller;
 
-use User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -48,6 +47,6 @@ class WaitingController extends Controller
             return $this->redirectToRoute('dashboard_index');
         } else {
             return $this->render('waiting/index.html.twig');
-        };
+        }
     }
 }
