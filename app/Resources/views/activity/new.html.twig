@@ -150,5 +150,6 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
     <script src="{{ asset('build/input_display.js') }}"></script>
 {% endblock %}
