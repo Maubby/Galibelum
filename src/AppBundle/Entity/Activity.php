@@ -517,7 +517,7 @@ class Activity
     /**
      * Get creationDate.
      *
-     * @return  Date
+     * @return Date
      */
     public function getCreationDate()
     {
