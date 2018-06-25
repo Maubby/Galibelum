@@ -14,13 +14,9 @@
 
 {% block body %}
     {% for user in users %}
-        {% if user.hasRole('ROLE_MANAGER') %}
-            {{ user.firstName }}
-            {{ user.lastName }}
-
-            {{ form_start(delete_form) }}
-            <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        {% endif %}
+        {{ user.firstName }}
+        {{ user.lastName }}
+        {{ user.email }}
+        <a href="{{ path('admin_delete', { 'id': user.id }) }}">delete</a>
     {% endfor %}
 {% endblock %}

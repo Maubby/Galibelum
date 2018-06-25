@@ -12,10 +12,10 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
  * Admin controller.
@@ -39,9 +39,10 @@ class AdminController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('AppBundle:User')->findAll();
+        $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
 
-        return $this->render('admin/index.html.twig',
+        return $this->render(
+            'admin/index.html.twig',
             array('users' => $users,)
         );
     }
@@ -58,20 +59,22 @@ class AdminController extends Controller
      */
     public function newAction(Request $request)
     {
-        $manager = new User();
+        $managers = new User();
 
-        $form = $this->createForm('AppBundle\Form\RegistrationType', $manager);
+        $form = $this->createForm('AppBundle\Form\RegistrationType', $managers);
         $form->remove('cgu');
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $manager->setCgu(1);
-            $manager->setRoles(array('ROLE_MANAGER'));
+
+            $managers
+                ->setCgu(1)
+                ->setRoles(array('ROLE_MANAGER'))
+                ->setEnabled(1);
 
             // Persisting user according to its new account Manager
-            $em->persist($manager);
+            $em->persist($managers);
             $em->flush();
 
             return $this->redirectToRoute(
@@ -81,56 +84,30 @@ class AdminController extends Controller
 
         return $this->render(
             'admin/new.html.twig', array(
-                'manager' => $manager,
+                'managers' => $managers,
                 'form' => $form->createView(),
             )
         );
     }
 
     /**
-     * Deletes a manager entity.
+     * Delete a manager entity.
      *
-     * @param Request      $request      Delete posted info
-     * @param User $manager The account manager
+     * @param User    $manager The account manager
      *
      * @Route("/{id}",   name="admin_delete")
-     * @Method("DELETE")
+     * @Method("GET")
      *
      * @return Response A Response instance
      */
-    public function deleteAction(Request $request, User $manager)
+    public function deleteAction(User $manager)
     {
-        $form = $this->_createDeleteForm($manager);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $manager->isEnabled(0);
+            $manager->setEnabled(false);
+
             $em->persist($manager);
             $em->flush();
-        }
 
         return $this->redirectToRoute('admin_index');
-    }
-
-    /**
-     * Creates a form to delete a manager entity.
-     *
-     * @param User $manager The manager entity
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    private function _createDeleteForm(User $manager)
-    {
-        return $this
-            ->createFormBuilder()
-            ->setAction(
-                $this->generateUrl(
-                    'manager_delete',
-                    array('id' => $manager->getId())
-                )
-            )
-            ->setMethod('DELETE')
-            ->getForm();
     }
 }
