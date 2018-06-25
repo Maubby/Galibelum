@@ -66,7 +66,6 @@ class ActivityType extends AbstractType
             )
             ->add(
                 'date', TextType::class, array(
-                    'required' => false,
                     'attr' => array(
                         'maxlength' => 16,
                     )
@@ -74,7 +73,6 @@ class ActivityType extends AbstractType
             )
             ->add(
                 'address', TextType::class, array(
-                    'required' => false,
                     'attr' => array(
                         'maxlength' => 64,
                     )
