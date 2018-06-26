@@ -53,7 +53,7 @@ class User extends BaseUser
      *
      * @ORM\Column(name="firstName",                                   type="string", length=32)
      * @Assert\Regex(pattern="/^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i", message="Votre prénom ne doit être composé que de lettres.")
-     * @Assert\Length(min=2,                                           minMessage="Un prénom d'une lettre sérieusement ?")
+     * @Assert\Length(min=2,                                           minMessage="Le prénom doit contenir au minimum 2 caractères.")
      * @Assert\Length(max=32,                                          maxMessage="Le prénom doit être en dessous de 32 caractères.")
      */
     private $firstName;
@@ -65,7 +65,7 @@ class User extends BaseUser
      * @ORM\Column(name="lastName", type="string", length=32)
 
      * @Assert\Regex(pattern="/^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i", message="Votre nom ne doit être composé que de lettres.")
-     * @Assert\Length(min=2,                                           minMessage="Un nom inférieur à deux lettres sérieusement ?")
+     * @Assert\Length(min=2,                                           minMessage="Le nom doit contenir au minimum 2 caractères.")
      * @Assert\Length(max=32,                                          maxMessage="Le nom doit être en dessous de 32 caractères.")
      */
     private $lastName;
@@ -75,7 +75,7 @@ class User extends BaseUser
      * @var string
      *
      * @Assert\Regex(pattern="/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/",
-     *     message="Votre numéro de téléphone doit être composé comme ceci : 06 00 00 00 00 ou +33 6.")
+     *     message="Veuillez saisir un numéro de téléphone valide, exemple : 06 00 00 00 00 ou +33 6.")
      * @ORM\Column(name="phoneNumber",                                                                                                     type="string", length=32)
      *
      * * @Assert\Type("string")
@@ -107,7 +107,7 @@ class User extends BaseUser
      * @var string
      *
      * @Assert\Regex(pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/",
-     *     message="Le mot de passe doit au moins contenir 8 caractères alphanumériques dont au moins un chiffre.")
+     *     message="Le mot de passe doit contenir au moins 8 caractères alphanumériques et au moins un chiffre.")
      */
     protected $plainPassword;
 
