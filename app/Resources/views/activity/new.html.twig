@@ -77,14 +77,14 @@
                         <div class="row">
                             <div class="col-sm-6 mt-20 activityDate activityHide">
                                 <div class="form-group form-error">
-                                    <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateStart, 'Date de votre évènement') }}
+                                    <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateStart, 'Date de début de votre évènement') }}
                                     {{ form_widget(form.dateStart, {'attr': {'class': "form-control input-field activityDate"}}) }}
                                     {{ form_errors(form.dateStart) }}
                                 </div>
                             </div>
                             <div class="col-sm-6 mt-20 activityDate activityHide">
                                 <div class="form-group form-error">
-                                    <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateEnd, 'Date de votre évènement') }}
+                                    <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateEnd, 'Date de fin de votre évènement') }}
                                     {{ form_widget(form.dateEnd, {'attr': {'class': "form-control input-field activityDate"}}) }}
                                     {{ form_errors(form.dateEnd) }}
                                 </div>
