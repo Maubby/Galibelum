@@ -93,9 +93,9 @@ class AdminController extends Controller
     /**
      * Delete a manager entity.
      *
-     * @param User    $manager The account manager
+     * @param User $manager The account manager
      *
-     * @Route("/{id}",   name="admin_delete")
+     * @Route("/{id}", name="admin_delete")
      * @Method("GET")
      *
      * @return Response A Response instance
