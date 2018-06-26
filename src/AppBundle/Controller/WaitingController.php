@@ -41,7 +41,7 @@ class WaitingController extends Controller
 
         if ($user->hasRole('ROLE_STRUCTURE')
             && $user->getOrganization()->getIsActive() === 1
-            || $user->hasRole('ROLE_MARQUE')
+            || $user->hasRole('ROLE_COMPANY')
             && $user->getOrganization()->getIsActive() === 1
         ) {
             return $this->redirectToRoute('dashboard_index');
