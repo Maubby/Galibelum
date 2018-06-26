@@ -114,9 +114,11 @@ class ActivityType extends AbstractType
                     )
                 )
             )
-            ->add('socialLink', UrlType::class, array(
+            ->add(
+                'socialLink', UrlType::class, array(
                 'required' => true,
-            ))
+                )
+            )
 
             ->remove('mainGame');
     }
