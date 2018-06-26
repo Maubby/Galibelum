@@ -19,20 +19,15 @@
 
 {% block body %}
     <main id="login">
-        {% if error %}
-            <div class="alert alert-danger" role="alert">
-                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            </div>
-        {% endif %}
         <section>
             <!-- Form to login-->
             <div class="container">
                 <div class="row boxing-canvas mt-50">
                     <div class="col-md-6 col-md-offset-3">
                         <form action="{{ path("fos_user_security_check") }}" method="post">
-                            <!-- Enter email -->
                             <i class="far fa-user-circle text-center degradeblue" style="font-size: 50px"></i>
                             <h5 class="text-center degradeblue">Se connecter à Galibelum</h5>
+                            <!-- Enter email -->
                             <div class="col-sm-12">
                                 <label for="username"></label>
                                 <div class="input-group">
@@ -50,11 +45,19 @@
                             </div>
                             <!-- End password -->
 
+                            {% if error %}
+                                <div class="col-sm-12 mt-20">
+                                    <div class="alert alert-danger" role="alert">
+                                        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                    </div>
+                                </div>
+                            {% endif %}
+
                             <!-- Ticking box to keep the client's information -->
                             <div class="col-sm-12">
                                 <br>
                                 <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
-                                <label for="remember_me" class="light-subtitle-text">{{ 'Se souvenir de moi'|trans }}</label>
+                                <label for="remember_me" class="light-blue-subtitle-text">{{ 'Se souvenir de moi'|trans }}</label>
                             </div>
                             <!-- End ticking box -->
 
@@ -86,7 +89,29 @@
             </div>
         </section>
     </main>
+
+    <!-- Registration confirmation modal -->
+    {% for message in app.flashes('emailconfirmed') %}
+        <!--  Symfony > 3.3 -->
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content modal-galibelum">
+                    <div class="modal-body">
+                        <p class="light-blue-subtitle-text"><i class="fas fa-envelope" aria-hidden="true"></i> {{ message }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary backblue-btn white-color" data-dismiss="modal">{{ 'Fermer'|trans }}</button>
+                    </div>
+                </div><!-- modal-content end -->
+            </div><!-- modal-dialog end -->
+        </div><!-- modal end -->
+    {% endfor %}
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('build/login-script.js') }}"></script>
 {% endblock %}

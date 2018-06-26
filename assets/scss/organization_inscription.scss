@@ -1,66 +1,95 @@
-.btn {
-  padding: 7px 4%;
-  margin-top: 2%;
+@import "style";
+
+#organization {
+  .boxing-canvas {
+    background-color: #fff;
+    width: auto;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 750px;
+    padding: 30px;
+    border-radius: 4px;
+    border: 1px solid $border-color;
+  }
 }
 
-.picture{
-  padding-right: 20%;
-  padding-top: 2%;
+/* Checking company or structure side */
+
+#company {
+  input::placeholder, select, textarea::placeholder {
+    font-weight: 200;
+    opacity: 0.7;
+    color: $red-placeholder-color !important;
+  }
+
+  .boxing-canvas {
+    background-color: #fff;
+    width: auto;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 650px;
+    padding: 30px;
+    border-radius: 4px;
+    border: 1px solid $border-color;
+  }
+}
+
+.breadcrumb-boxing-canvas {
+  width: auto;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  border-radius: 4px;
+  border: 1px solid $border-color;
+}
+
+/* Description textarea */
+
+#appbundle_organization_description {
+  min-height: 80px;
   width: 100%;
 }
 
-.form-group{
-  margin-bottom: 5%;
-  padding: 3%;
+/* Media queries */
 
+@media screen and (max-width: 991px) {
+  #company {
+    .boxing-canvas {
+      height: 970px;
+    }
+  }
+  #organization {
+    .boxing-canvas {
+      height: 1090px;
+    }
+  }
 }
 
-.border{
-  padding:10% ;
-  border: white solid 1px;
-  border-radius: 5px;
-  margin: 5%;
-  background-color: #e2e2e2;
-  padding-bottom: 17%;
-
+@media screen and (max-width: 442px) {
+  #company {
+    .boxing-canvas {
+      height: 1070px;
+    }
+  }
+  #organization {
+    .boxing-canvas {
+      height: 1250px;
+    }
+  }
 }
 
-.title
-{
-  padding-top:20% ;
-  background: linear-gradient(to right, #137faf, #86ccc2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-#appbundle_organization_description {
- min-height: 250px;
-
-}
-
-.onesection{
-  padding-top: 10%;
-}
-
-.degradeblue{
-  margin-bottom: 20%;
-  text-align: center;
-}
-
-.phoneNumber{
-  padding-top: 10%;
-  margin-bottom: 10%;
-}
-
-.email{
-  padding-top: 10%;
-
-}
-
-.userRole{
-  margin-top : 15%;
-}
-
-.form-control{
-  height: 45px;
+@media screen and (max-width: 360px) {
+  #company {
+    .boxing-canvas {
+      height: 1190px;
+    }
+  }
+  #organization {
+    .boxing-canvas {
+      height: 1330px;
+    }
+  }
 }

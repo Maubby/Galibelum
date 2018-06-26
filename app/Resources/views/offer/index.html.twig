@@ -6,9 +6,7 @@
     <table>
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
-                <th>Namecanonical</th>
                 <th>Description</th>
                 <th>Date</th>
                 <th>Amount</th>
@@ -23,9 +21,7 @@
         <tbody>
         {% for offer in offers %}
             <tr>
-                <td><a href="{{ path('offer_show', { 'id': offer.id }) }}">{{ offer.id }}</a></td>
                 <td>{{ offer.name }}</td>
-                <td>{{ offer.nameCanonical }}</td>
                 <td>{{ offer.description }}</td>
                 <td>{% if offer.date %}{{ offer.date|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ offer.amount }}</td>
@@ -51,7 +47,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('offer_new') }}">Create a new offer</a>
+            <a href="{{ path('activity_index') }}">Create a new offer</a>
         </li>
     </ul>
 {% endblock %}

@@ -1,21 +1,200 @@
+{# app/Resources/views/activity/edit.html.twig #}
 {% extends 'base.html.twig' %}
 
+{% block title %}Modifier votre activité{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/activity.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!--PASSED W3C VALIDATOR https://validator.w3.org/-->
+    <!--Zero intern console warning-->
+
+    <!--Navbar in views/base.html.twig-->
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
-    <h1>Activity edit</h1>
+    <main id="activity" class="light-blue-subtitle-text">
+        <section>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!--Return to the dashboar-->
+                        <ol class="breadcrumb breadcrumb-boxing-canvas">
+                            <li><a href="{{ path('dashboard_index') }}">Retourner sur votre tableau de bord</a></li>
+                            <li>Modifier votre activité</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row boxing-canvas">
+                    <!--1st part of the edit form-->
+                    <!--Form Edit-->
+                    {{ form_start(edit_form) }}
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <div class="col-sm-12 text-center">
+                            <i class="fas fa-desktop degradeblue" style="font-size: 50px"></i>
+                            <h5 class="degradeblue text-center mt-10">Modifier votre activité</h5>
+                        </div>
+                        <div class="row">
+                            <!--Activity's Type-->
+                            <div class="col-sm-6 mt-20">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-gamepad"></i>{{ form_label(edit_form.type, 'Type de votre activité') }}
+                                    {{ form_widget(edit_form.type, {'attr': {'class': "form-control input-field activity"}}) }}
+                                    {{ form_errors(edit_form.type) }}
+                                </div>
+                            </div>
+                            <!--End activity's Type-->
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+                            <!--Activity's Name-->
+                            <div class="col-sm-6 mt-20">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-university"></i>{{ form_label(edit_form.name, 'Nom de votre activité') }}
+                                    {{ form_widget(edit_form.name, {'attr': {'class': "form-control input-field", 'placeholder': "Exemple : Lyon eSport"}}) }}
+                                    {{ form_errors(edit_form.name) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!--End activity's Name-->
 
-    <ul>
-        <li>
-            <a href="{{ path('activity_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+                        <!--Activity's Address-->
+                        <div class="row">
+                            <div class="{% if activity.type is same as("Évènement eSport") %} col-sm-12 mt-20 activityAddress {% else %} col-sm-12 mt-20 activityAddress activityHide {% endif %}">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-map-marker"></i>{{ form_label(edit_form.address, 'Adresse de votre évènement') }}
+                                    {{ form_widget(edit_form.address, {'attr': {'class': "form-control input-field activityAddress"}}) }}
+                                    {{ form_errors(edit_form.address) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Activity's Address-->
+
+                        <!--Activity's Date-->
+                        <div class="row">
+                            <div class="{% if activity.type is same as("Évènement eSport") %} col-sm-6 mt-20 activityDate {% else %} col-sm-6 mt-20 activityDate activityHide {% endif %}">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-calendar-alt"></i>{{ form_label(edit_form.dateStart, "Début de l'évènement eSport") }}
+                                    {{ form_widget(edit_form.dateStart, {'attr': {'class': "form-control input-field activityDate"}}) }}
+                                    {{ form_errors(edit_form.dateStart) }}
+                                </div>
+                            </div>
+                            <div class="{% if activity.type is same as("Évènement eSport") %} col-sm-6 mt-20 activityDate {% else %} col-sm-6 mt-20 activityDate activityHide {% endif %}">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-calendar-alt"></i>{{ form_label(edit_form.dateEnd, "Fin de l'évènement eSport") }}
+                                    {{ form_widget(edit_form.dateEnd, {'attr': {'class': "form-control input-field activityDate"}}) }}
+                                    {{ form_errors(edit_form.dateEnd) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Activity's Date-->
+
+                        <!--Activity's Url Video-->
+                        <div class="row">
+                            <div class="col-sm-12 mt-20">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-link"></i>{{ form_label(edit_form.urlVideo, 'Url') }}
+                                    {{ form_widget(edit_form.urlVideo, {'attr': {'class': "form-control input-field", 'placeholder': "Partager une vidéo de présentation de votre activité"}}) }}
+                                    {{ form_errors(edit_form.urlVideo) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Activity's Url Video-->
+
+                        <!--Activity's Achievement-->
+                        <div class="row">
+                            <div class="{% if activity.type is same as("Equipe eSport") %} col-sm-12 mt-20 activityAchievement {% else %} col-sm-12 mt-20 activityAchievement activityHide {% endif %}">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-trophy"></i>{{ form_label(edit_form.achievement, 'Accomplissements') }}
+                                    {{ form_widget(edit_form.achievement, {'attr': {'class': "form-control input-field activityAchievement", 'placeholder': "Exemple : 1ère place aux IEM Katowice de CS:GO 2018"}}) }}
+                                    {{ form_errors(edit_form.achievement) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Activity's Achievement-->
+
+                        <!--Activity's Social Link-->
+                        <div class="row">
+                            <div class="col-sm-12 mt-20">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-user-friends"></i>{{ form_label(edit_form.socialLink, 'Réseaux sociaux et chaînes de streaming') }}
+                                    {{ form_widget(edit_form.socialLink, {'attr': {'class': "form-control input-field", 'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}}) }}
+                                    {{ form_errors(edit_form.socialLink) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Activity's Social Link-->
+
+                        <!--Activity's Description-->
+                        <div class="row">
+                            <div class="col-sm-12 mt-20">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-edit"></i>{{ form_label(edit_form.description, 'Description') }}
+                                    {{ form_widget(edit_form.description, {'attr': {'class': "form-control input-field", 'placeholder': "Maximum 250 caractères"}}) }}
+                                    {{ form_errors(edit_form.description) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Activity's Description-->
+
+                        <div class="row mt-10">
+                            <div class="col-sm-12 text-center">
+                                <input type="submit" value="Enregistrer" class="btn btn-primary backblue-btn">
+                            </div>
+                        </div>
+                    </div>
+                    {{ form_end(edit_form) }}
+                </div>
+
+                <div class="row subtitle-boxing-canvas">
+                    <!--Delete activty-->
+                    <div class="col-sm-12 back-dashboard normal-subtitle-text">
+                        <!--Link to open a delete modal-->
+                        <i class="fas fa-user-times"></i>&nbsp; Supprimer votre activité ?
+                        <a href="{{ path('activity_delete', {'id': 'x'}) }}" class="degradered" data-toggle="modal"
+                           data-target="#deleteorganization">Cliquez ici !</a><br>
+
+                        <!--Modal introducing the delete activity-->
+                        <div class="modal fade" id="deleteorganization" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-notify modal-info" role="document">
+                                <div class="modal-content">
+
+                                    <!--Modal's header-->
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true"><i class="fas fa-times" style="color: #ff6f73;" aria-hidden="true"></i></span>
+                                        </button>
+                                        <h6><i class="fas fa-exclamation-triangle degradered"></i>Êtes-vous sûr de vouloir supprimer votre activité ? Cela entrainera la suppression de vos offres.</h6>
+                                    </div>
+
+                                    <!--Modal's body-->
+                                    <div class="modal-body">
+                                        <div>
+                                            {{ form_start(delete_form) }}
+                                            <input type="submit" value="Supprimer" class="btn btn-danger backred-btn">
+                                            {{ form_end(delete_form) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End of modal-->
+                    </div>
+                    <!--End delete activity-->
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block footer %}
+    <!--Footer in views/base.html.twig-->
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/input_display.js') }}"></script>
 {% endblock %}

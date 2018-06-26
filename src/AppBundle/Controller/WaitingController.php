@@ -11,7 +11,6 @@
 
 namespace AppBundle\Controller;
 
-use User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -38,6 +37,16 @@ class WaitingController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('waiting/index.html.twig');
+        $user = $this->getUser();
+
+        if ($user->hasRole('ROLE_STRUCTURE')
+            && $user->getOrganization()->getIsActive() === 1
+            || $user->hasRole('ROLE_COMPANY')
+            && $user->getOrganization()->getIsActive() === 1
+        ) {
+            return $this->redirectToRoute('dashboard_index');
+        } else {
+            return $this->render('waiting/index.html.twig');
+        }
     }
 }

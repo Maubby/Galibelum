@@ -1,39 +1,47 @@
+{# app/Resources/views/activity/index.html.twig #}
 {% extends 'base.html.twig' %}
+
+{% block title %}Liste des activités{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/organization_show.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
     <h1>Activities list</h1>
 
+    {% for flash_message in app.session.flashBag.get('warning') %}
+        <div class="alert alert-success">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+
     <table>
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Namecanonical</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Date</th>
-                <th>Address</th>
-                <th>Maingame</th>
-                <th>Urlvideo</th>
-                <th>Achievement</th>
-                <th>Sociallink</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for activity in activities %}
             <tr>
-                <td><a href="{{ path('activity_show', { 'id': activity.id }) }}">{{ activity.id }}</a></td>
                 <td>{{ activity.name }}</td>
-                <td>{{ activity.nameCanonical }}</td>
                 <td>{{ activity.type }}</td>
-                <td>{{ activity.description }}</td>
-                <td>{{ activity.date }}</td>
-                <td>{{ activity.address }}</td>
-                <td>{{ activity.mainGame }}</td>
-                <td>{{ activity.urlVideo }}</td>
-                <td>{% if activity.achievement %}{{ activity.achievement|join(', ') }}{% endif %}</td>
-                <td>{% if activity.socialLink %}{{ activity.socialLink|join(', ') }}{% endif %}</td>
+                <td>{% if activity.dateStart %}{{ activity.dateStart|date('d-m-Y') }}{% endif %}</td>
+                <td>{% if activity.dateEnd %}{{ activity.dateEnd|date('d-m-Y') }}{% endif %}</td>
                 <td>
                     <ul>
                         <li>
@@ -41,6 +49,9 @@
                         </li>
                         <li>
                             <a href="{{ path('activity_edit', { 'id': activity.id }) }}">edit</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('offer_new', { 'id': activity.id }) }}">Créer une offre</a>
                         </li>
                     </ul>
                 </td>
