@@ -23,6 +23,7 @@ namespace AppBundle\Repository;
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
+     *
      * @param string $role
      *
      * @return array
