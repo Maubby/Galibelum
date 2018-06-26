@@ -77,14 +77,14 @@
                         <div class="row">
                             <div class="{% if activity.type is same as("Évènement eSport") %} col-sm-6 mt-20 activityDate {% else %} col-sm-6 mt-20 activityDate activityHide {% endif %}">
                                 <div class="form-group form-error">
-                                    <i class="fas fa-calendar-alt"></i>{{ form_label(edit_form.dateStart, 'Début de votre évènement') }}
+                                    <i class="fas fa-calendar-alt"></i>{{ form_label(edit_form.dateStart, "Début de l'évènement eSport") }}
                                     {{ form_widget(edit_form.dateStart, {'attr': {'class': "form-control input-field activityDate"}}) }}
                                     {{ form_errors(edit_form.dateStart) }}
                                 </div>
                             </div>
                             <div class="{% if activity.type is same as("Évènement eSport") %} col-sm-6 mt-20 activityDate {% else %} col-sm-6 mt-20 activityDate activityHide {% endif %}">
                                 <div class="form-group form-error">
-                                    <i class="fas fa-calendar-alt"></i>{{ form_label(edit_form.dateEnd, 'Fin de votre évènement') }}
+                                    <i class="fas fa-calendar-alt"></i>{{ form_label(edit_form.dateEnd, "Fin de l'évènement eSport") }}
                                     {{ form_widget(edit_form.dateEnd, {'attr': {'class': "form-control input-field activityDate"}}) }}
                                     {{ form_errors(edit_form.dateEnd) }}
                                 </div>
