@@ -179,9 +179,9 @@ class Activity
 
     /**
      *
-     * @var array
+     * @var string
      *
-     * @ORM\Column(name="achievement", type="array", nullable=true)
+     * @ORM\Column(name="achievement", type="string", nullable=true)
      *
      * @Assert\Length(
      *      min = 2,
@@ -194,9 +194,9 @@ class Activity
 
     /**
      *
-     * @var array
+     * @var string
      *
-     * @ORM\Column(name="socialLink", type="array")
+     * @ORM\Column(name="socialLink", type="string")
      *
      * @Assert\NotBlank()
      */
