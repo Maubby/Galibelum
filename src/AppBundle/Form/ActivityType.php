@@ -41,6 +41,7 @@ class ActivityType extends AbstractType
         $builder
             ->add(
                 'name', TextType::class, array(
+                    'required' => true,
                     'attr' => array(
                         'minlength' => 2,
                         'maxlength' => 32,
@@ -59,6 +60,7 @@ class ActivityType extends AbstractType
             )
             ->add(
                 'description', TextareaType::class, array(
+                    'required' => true,
                     'attr' => array(
                         'minlength' => 32,
                         'maxlength' => 250,
@@ -66,7 +68,17 @@ class ActivityType extends AbstractType
                 )
             )
             ->add(
-                'date', DateType::class, array(
+                'dateStart', DateType::class, array(
+                    'required' => true,
+                    'widget' => 'single_text',
+                    'attr' => array(
+                        'maxlength' => 16,
+                    )
+                )
+            )
+            ->add(
+                'dateEnd', DateType::class, array(
+                    'required' => true,
                     'widget' => 'single_text',
                     'attr' => array(
                         'maxlength' => 16,
@@ -75,6 +87,7 @@ class ActivityType extends AbstractType
             )
             ->add(
                 'address', TextType::class, array(
+                    'required' => true,
                     'attr' => array(
                         'maxlength' => 64,
                     )
@@ -101,7 +114,9 @@ class ActivityType extends AbstractType
                     )
                 )
             )
-            ->add('socialLink', UrlType::class)
+            ->add('socialLink', UrlType::class, array(
+                'required' => true,
+            ))
 
             ->remove('mainGame');
     }
