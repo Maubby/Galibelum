@@ -1,0 +1,22 @@
+{# app/Resources/views/activity/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Accueil{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block header %}
+    <nav>
+        sidebar
+    </nav>
+{% endblock %}
+
+{% block body %}
+    {% for user in users %}
+        {{ user.firstName }}
+        {{ user.lastName }}
+        {{ user.email }}
+        <a href="{{ path('admin_delete', { 'id': user.id }) }}">delete</a>
+    {% endfor %}
+{% endblock %}
