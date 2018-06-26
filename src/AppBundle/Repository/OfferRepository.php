@@ -22,4 +22,19 @@ namespace AppBundle\Repository;
  */
 class OfferRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function search($data)
+    {
+        $query = $this->createQueryBuilder('off')
+            ->select('off')
+            ->where('off.amount LIKE :data')
+            ->orWhere('off.date LIKE :data')
+            ->setParameter('data', '%'.$data.'%')
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }

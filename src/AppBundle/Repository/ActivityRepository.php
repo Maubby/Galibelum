@@ -22,4 +22,19 @@ namespace AppBundle\Repository;
  */
 class ActivityRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function search($data)
+    {
+        $query = $this->createQueryBuilder('act')
+            ->select('act')
+            ->where('act.name LIKE :data')
+            ->orWhere('act.description LIKE :data')
+            ->setParameter('data', '%'.$data.'%')
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }
