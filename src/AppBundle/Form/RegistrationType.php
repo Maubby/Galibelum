@@ -50,7 +50,8 @@ class RegistrationType extends AbstractType
                         'maxLength' => '32',)
                 )
             )
-            ->add('phoneNumber', TextType::class, array(
+            ->add(
+                'phoneNumber', TextType::class, array(
                     'label' => 'Numéro de téléphone'
                 )
             )

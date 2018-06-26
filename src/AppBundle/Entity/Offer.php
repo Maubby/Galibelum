@@ -18,12 +18,14 @@ class Offer
      */
 
     /**
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organization", inversedBy="offers")
      * @ORM\JoinColumn(nullable=false)
      */
     private $organization;
 
     /**
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Activity", inversedBy="activities")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -34,6 +36,7 @@ class Offer
      */
 
     /**
+     *
      * @var /date
      *
      * @ORM\Column(name="creationDate", type="date", nullable=false)
@@ -45,15 +48,17 @@ class Offer
      */
 
     /**
+     *
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id",               type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
+     *
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=32)
@@ -71,6 +76,7 @@ class Offer
     private $name;
 
     /**
+     *
      * @var string
      *
      * @ORM\Column(name="nameCanonical", type="string", length=32, nullable=true)
@@ -78,6 +84,7 @@ class Offer
     private $nameCanonical;
 
     /**
+     *
      * @var string
      *
      * @ORM\Column(name="description", type="text")
@@ -95,6 +102,7 @@ class Offer
     private $description;
 
     /**
+     *
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="date")
@@ -107,6 +115,7 @@ class Offer
     private $date;
 
     /**
+     *
      * @var int
      *
      * @ORM\Column(name="amount", type="integer")
@@ -124,6 +133,7 @@ class Offer
     private $amount;
 
     /**
+     *
      * @var int
      *
      * @ORM\Column(name="handlingFee", type="integer", nullable=true)
@@ -131,6 +141,7 @@ class Offer
     private $handlingFee;
 
     /**
+     *
      * @var int
      *
      * @ORM\Column(name="partnershipNumber", type="integer")
@@ -147,6 +158,7 @@ class Offer
     private $partnershipNumber;
 
     /**
+     *
      * @var int
      *
      * @ORM\Column(name="finalDeal", type="integer", nullable=true)
@@ -154,6 +166,7 @@ class Offer
     private $finalDeal;
 
     /**
+     *
      * @var int
      *
      * @ORM\Column(name="status", type="integer")
@@ -161,6 +174,7 @@ class Offer
     private $status;
 
     /**
+     *
      * @var bool
      *
      * @ORM\Column(name="signature", type="boolean", nullable=true)
