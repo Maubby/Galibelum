@@ -12,7 +12,7 @@
 {% block header %}
     <!--PASSED W3C VALIDATOR https://validator.w3.org/-->
     <!--Zero intern console warning-->
-    
+
     <!--Navbar in views/base.html.twig-->
     {{ parent() }}
 {% endblock %}
@@ -63,21 +63,30 @@
 
                         <!--Activity's Address-->
                         <div class="row">
-                            <div class="col-sm-6 mt-20 activityInfo activityHide">
+                            <div class="col-sm-12 mt-20 activityAddress activityHide">
                                 <div class="form-group form-error">
                                     <i class="fas fa-map-marker"></i>{{ form_label(form.address, 'Adresse de votre évènement') }}
-                                    {{ form_widget(form.address, {'attr': {'class': "form-control input-field activityInfo"}}) }}
+                                    {{ form_widget(form.address, {'attr': {'class': "form-control input-field activityAddress"}}) }}
                                     {{ form_errors(form.address) }}
                                 </div>
                             </div>
-                            <!--End Activity's Address-->
+                        </div>
+                        <!--End Activity's Address-->
 
-                            <!--Activity's Date-->
-                            <div class="col-sm-6 mt-20 activityInfo activityHide">
+                        <!--Activity's Date-->
+                        <div class="row">
+                            <div class="col-sm-6 mt-20 activityDate activityHide">
                                 <div class="form-group form-error">
-                                    <i class="fas fa-calendar-alt"></i>{{ form_label(form.date, 'Date de votre évènement') }}
-                                    {{ form_widget(form.date, {'attr': {'class': "form-control input-field activityInfo"}}) }}
-                                    {{ form_errors(form.date) }}
+                                    <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateStart, 'Date de votre évènement') }}
+                                    {{ form_widget(form.dateStart, {'attr': {'class': "form-control input-field activityDate"}}) }}
+                                    {{ form_errors(form.dateStart) }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6 mt-20 activityDate activityHide">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateEnd, 'Date de votre évènement') }}
+                                    {{ form_widget(form.dateEnd, {'attr': {'class': "form-control input-field activityDate"}}) }}
+                                    {{ form_errors(form.dateEnd) }}
                                 </div>
                             </div>
                         </div>
