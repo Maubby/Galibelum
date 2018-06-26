@@ -95,7 +95,7 @@
                             <div class="mt-20">
                                 <i class="fas fa-dollar-sign"></i>
                                 {{ form_label(form.amount, "Montant demandé" )}}
-                                {{ form_widget(form.amount, {'attr': {'class':'form-control input-field js-datepicker', 'placeholder' : "Montant de l'offre" }}) }}
+                                {{ form_widget(form.amount, {'attr': {'class':'form-control input-field', 'placeholder' : "Montant de l'offre" }}) }}
                                 {{ form_errors(form.amount) }}
                             </div>
                             <div class="mt-20">
@@ -140,7 +140,7 @@
                         {{ form_errors(form.description) }}
                     </div>
                     <div class="col-sm-12 col-xs-12 text-center mt-20">
-                        <input class="btn btn-primary backblue-btn" type="submit" value="{{ "Enregistrer"|trans }}" />
+                        <input class="btn btn-primary backblue-btn-sm" type="submit" value="{{ "Enregistrer"|trans }}" />
                     </div>
                     {{ form_end(form) }}
                 </div>
@@ -154,6 +154,3 @@
     {{ parent() }}
 {% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('build/datepicker.js') }}"></script>
-{% endblock %}
