@@ -71,18 +71,12 @@ class ActivityType extends AbstractType
                 'dateStart', DateType::class, array(
                     'required' => true,
                     'widget' => 'single_text',
-                    'attr' => array(
-                        'maxlength' => 16,
-                    )
                 )
             )
             ->add(
                 'dateEnd', DateType::class, array(
                     'required' => true,
                     'widget' => 'single_text',
-                    'attr' => array(
-                        'maxlength' => 16,
-                    )
                 )
             )
             ->add(
@@ -116,7 +110,7 @@ class ActivityType extends AbstractType
             )
             ->add(
                 'socialLink', UrlType::class, array(
-                'required' => true,
+                    'required' => true,
                 )
             )
 
