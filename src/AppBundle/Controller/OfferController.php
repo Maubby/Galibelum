@@ -40,6 +40,7 @@ class OfferController extends Controller
      */
     public function indexAction()
     {
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
         $offers = $em
@@ -49,10 +50,33 @@ class OfferController extends Controller
                     'organization' => $this->getUser()->getOrganization()
                 )
             );
+        $event_activities = $em->getRepository('AppBundle:Activity')->findBy(
+            array(
+                'organizationActivities' => $user->getOrganization(),
+                'type' => 'Évènement eSport'
+            )
+        );
+
+        $stream_activities = $em->getRepository('AppBundle:Activity')->findBy(
+            array(
+                'organizationActivities' => $user->getOrganization(),
+                'type' => 'Activité de streaming'
+            )
+        );
+        $team_activities = $em->getRepository('AppBundle:Activity')->findBy(
+            array(
+                'organizationActivities' => $user->getOrganization(),
+                'type' => 'Equipe eSport'
+            )
+        );
+
 
         return $this->render(
             'offer/index.html.twig', array(
             'offers' => $offers,
+            'event_activities' => $event_activities,
+            'stream_activities' => $stream_activities,
+            'team_activities' => $team_activities,
             )
         );
     }
