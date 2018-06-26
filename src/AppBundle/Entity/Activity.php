@@ -100,17 +100,24 @@ class Activity
     private $description;
 
     /**
-     * @var string
+     * @var date
      *
-     * @ORM\Column(name="date", type="string", length=16, nullable=true)
+     * @ORM\Column(name="dateStart", type="date")
      *
      * @Assert\NotBlank()
-     * @Assert\Length(
-     *      max = 16,
-     *      maxMessage = "The date cannot be longer than {{ limit }} characters"
-     * )
+     * @Assert\Date()
      */
-    private $date;
+    private $dateStart;
+
+    /**
+     * @var date
+     *
+     * @ORM\Column(name="dateEnd", type="date")
+     *
+     * @Assert\NotBlank()
+     * @Assert\Date()
+     */
+    private $dateEnd;
 
     /**
      * @var string
@@ -164,7 +171,6 @@ class Activity
      *
      * @ORM\Column(name="achievement", type="array", nullable=true)
      *
-     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
@@ -288,30 +294,6 @@ class Activity
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set date
-     *
-     * @param string $date
-     *
-     * @return Activity
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return string
-     */
-    public function getDate()
-    {
-        return $this->date;
     }
 
     /**
@@ -522,5 +504,53 @@ class Activity
     public function getCreationDate()
     {
         return $this->creationDate;
+    }
+
+    /**
+     * Set dateStart.
+     *
+     * @param \DateTime $dateStart
+     *
+     * @return Activity
+     */
+    public function setDateStart($dateStart)
+    {
+        $this->dateStart = $dateStart;
+
+        return $this;
+    }
+
+    /**
+     * Get dateStart.
+     *
+     * @return Date
+     */
+    public function getDateStart()
+    {
+        return $this->dateStart;
+    }
+
+    /**
+     * Set dateEnd.
+     *
+     * @param \DateTime $dateEnd
+     *
+     * @return Activity
+     */
+    public function setDateEnd($dateEnd)
+    {
+        $this->dateEnd = $dateEnd;
+
+        return $this;
+    }
+
+    /**
+     * Get dateEnd.
+     *
+     * @return Date
+     */
+    public function getDateEnd()
+    {
+        return $this->dateEnd;
     }
 }
