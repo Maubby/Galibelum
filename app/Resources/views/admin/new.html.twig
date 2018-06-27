@@ -1,18 +1,21 @@
-{# app/Resources/FOSUserBundle/views/Registration/register.html.twig #}
-{% extends 'base.html.twig' %}
+{# app/Resources/views/admin/new.html.twig #}
+{% extends 'base_back.html.twig' %}
 
-{% block title %}Enregistrer un account manager{% endblock %}
+{% block title %}Créer un account manager{% endblock %}
 
 {% block stylesheets %}
 
     <!-- Additional CSS links-->
     <link rel="stylesheet" href="{{ asset('build/register.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
 {% endblock %}
 
 {% block header %}
-    <nav>
-        sidebar
-    </nav>
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/admin/index.html.twig -->
+    {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -23,7 +26,7 @@
                 <div class="row boxing-canvas mt-50 pb-50">
                     <div class="col-md-6 col-xs-12">
                         <i class="fas fa-user-plus text-center degradeblue" style="font-size: 50px"></i>
-                        <h5 class="text-center degradeblue">Création du profil Account manager</h5>
+                        <h5 class="text-center degradeblue">Création du profil Account Manager</h5>
 
                         {{ form_start(form) }}
                         <div class="col-sm-6 form-error">
@@ -53,7 +56,7 @@
                             {{ form_errors(form.plainPassword.second) }}
                         </div>
                         <div class="col-sm-12 col-xs-12 text-center pt-10">
-                            <input class="btn btn-primary backblue-btn" type="submit" value="{{ "S'inscrire"|trans }}" />
+                            <input class="btn btn-primary backblue-btn" type="submit" value="{{ "Créer le profil"|trans }}" />
                         </div>
                         {{ form_end(form) }}
                     </div>
@@ -67,4 +70,9 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('build/menu-toggle.js') }}"></script>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
 {% endblock %}

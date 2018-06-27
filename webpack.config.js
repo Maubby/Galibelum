@@ -31,6 +31,7 @@ Encore
     .addEntry('datepicker', './assets/js/datepicker.js')
     .addEntry('carousel', './assets/js/carousel.js')
     .addEntry('input_display', './assets/js/input_display.js')
+    .addEntry('menu-toggle', './assets/js/menu-toggle.js')
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
         { from: './assets/images', to: 'images'}
