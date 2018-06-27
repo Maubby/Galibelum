@@ -4,10 +4,13 @@
 {% block title %}Tableau de bord - Structure{% endblock %}
 
 {% block stylesheets %}
+
+    <!-- Import personal styleSheet -->
     <link rel="stylesheet" href="{{ asset('build/dashboard.css') }}">
 {% endblock %}
-{% block body %}
 
+{% block body %}
+    <!-- Flash message success edit organization profile -->
     {% if app.session.flashBag.has('success') %}
         <div class="alert alert-success">
             {% for msg in app.session.flashBag.get('success') %}
@@ -16,112 +19,74 @@
             {% endfor %}
         </div>
     {% endif %}
-    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
-    <!-- Zero intern console warning -->
+    <!-- End flash message -->
+
+    <!-- Start show information to organization, activities and offers -->
     <div class="container pb-60">
         <div class="boxing-title mt-60 mb-40">
-            <h5 class="degradeblue ml-25"><span><i class="fas fa-chart-bar degradeblue" style="font-size: 30px"></i></span> Tableau de bord</h5>
+            <h5 class="degradeblue"><span><i class="fas fa-chart-bar degradeblue"></i></span> Tableau de bord</h5>
         </div>
+
+        <!-- show user firstName and information to organization -->
         <div class="row">
             <div class="col-md-3">
                 <div class="card">
                     <ul class="list-group">
-                        <li class="list-group-item text-center"><P>Bienvenue {{ user.firstName }}</P></li>
-                        <li class="list-group-item text-left"><i class="fas fa-university main-color mr-10"></i>{{ organization.name }}</li>
-                        <li class="list-group-item text-left"><i class="fas fa-phone main-color mr-10"></i>{{ organization.phoneNumber }}</li>
-                        <li class="list-group-item text-left"><i class="fas fa-at main-color mr-10"></i>{{ organization.email }}</li>
-                        <li class="list-group-item text-left"><i class="fas fa-address-card main-color mr-10"></i>{{ organization.address }}</li>
-                        <li class="list-group-item text-center text-muted"><a href="{{ path('organization_edit', { 'id': organization.id }) }}">Modifier votre structure</a></li>
+                        <li class="list-group-item text-center"><P class="degradeblue">Bienvenue {{ user.firstName }}</P></li>
+                        <li class="list-group-item"><i class="fas fa-university"></i>{{ organization.name }}</li>
+                        <li class="list-group-item"><i class="fas fa-phone"></i>{{ organization.phoneNumber }}</li>
+                        <li class="list-group-item"><i class="fas fa-at"></i>{{ organization.email }}</li>
+                        <li class="list-group-item"><i class="fas fa-address-card"></i>{{ organization.address }}</li>
+                        <li class="list-group-item"><a href="{{ path('organization_edit', { 'id': organization.id }) }}">Modifier votre structure</a></li>
                     </ul>
                 </div>
             </div>
+            <!-- end show information -->
+
+            <!-- list last activities -->
             <div class="col-md-offset-1 col-md-4 mb-40">
                 <div class="boxing-canvas">
-                    <h5 class="text-center degradeblue pb-20 title-h5">Mes Activités</h5>
-                    <div class="panel-body">
-                        <div id="myCarousel" class="carousel vertical" data-ride="carousel">
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner" role="listbox">
-                                {% if organization.OrganizationActivity is empty %}
-                                    <p>Créer une activité</p>
-                                {% else %}
-                                    {% for activity in organization.OrganizationActivity %}
-                                        <div class="{% if loop.first %}active{% endif %} item">
-                                            <div class="panel panel-default text-center">
-                                                <h5 class="panel-title pt-10">{{ activity.name }}</h5>
-                                                <div class="panel-body">
-                                                    <div>
-                                                        <p class="panel-item"><strong>Adresse : </strong>{{ activity.address }}</p>
-                                                        <p class="panel-item"><strong>Date de l'évènement : </strong>
-                                                            {% if activity.dateStart %}{{ activity.dateStart|date('d-m-Y') }}{% endif %}
-                                                            {% if activity.dateEnd %}{{ activity.dateEnd|date('d-m-Y') }}{% endif %}
-                                                        </p>
-                                                    </div>
-                                                    <a href="{{ path('activity_show', { 'id': activity.id }) }}" class="btn btn-primary btn-sm">Plus de détails</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-
-                            <!-- Controls -->
-                            <a class="up carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="down carousel-control" href="#myCarousel" role="button" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                                <span class="sr-only">next</span>
-                            </a>
-                        </div>
-                        <a href="{{ path('activity_new') }}" class="btn btn-primary backblue-btn mt-20">Ajouter une activité</a>
+                    <h5>Mes Activités</h5>
+                    <div class="boxing-body">
+                        <!-- to show message if activity is empty -->
+                        {% if organization.OrganizationActivity is empty %}
+                            <p>Créer une activité</p>
+                        {% else %}
+                            {% if organization.OrganizationActivity|length < 3 %}
+                                {% include "dashboard/_activity_dashboard.html.twig" %}
+                            {% else %}
+                                {% include "dashboard/_activity_carousel_dashboard.html.twig" %}
+                            {% endif %}
+                        {% endif %}
+                        <a href="{{ path('activity_new') }}" class="btn btn-primary backblue-btn mt-10">Ajouter une activité</a>
                     </div>
                 </div>
             </div>
+            <!-- End list activities -->
 
+            <!-- list last offers -->
             <div class="col-md-4 mb-40">
                 <div class="boxing-canvas">
-                    <h5 class="text-center degradeblue pb-20 title-h5">Mes Offres</h5>
-                    <div class="panel-body">
-                        <div id="myCarouselActivity" class="carousel vertical" data-ride="carousel">
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner" role="listbox">
-                                {% if organization.offers is empty %}
-                                    <p>Créer une offre</p>
-                                {% else %}
-                                    {% for offer in organization.offers %}
-                                        <div class="{% if loop.first %}active{% endif %} item">
-                                            <div class="panel panel-default text-center">
-                                                <h5 class="panel-title pt-10">{{ offer.name }}</h5>
-                                                <div class="panel-body">
-                                                    <div class="row">
-                                                        <p class="panel-item"><strong>Montant : </strong>{{ offer.amount }} €</p>
-                                                        <p class="panel-item"><strong>Dépôt des fonds avant le : </strong>{{ offer.date|date("d M Y") }}</p>
-                                                    </div>
-                                                    <a href="{{ path('offer_show', { 'id': offer.id }) }}" class="btn btn-primary btn-sm">Plus de détails</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-
-                            <!-- Controls -->
-                            <a class="up carousel-control" href="#myCarouselActivity" role="button" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="down carousel-control" href="#myCarouselActivity" role="button" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </div>
-                        <a href="#" class="btn btn-primary backblue-btn mt-20" data-toggle="modal" data-target="#pop-up-offer">Ajouter une offre</a>
-                        <!-- Modal introducing the redirection to the activity_index -->
+                    <h5>Mes Offres</h5>
+                    <div class="boxing-body">
+                        <!-- to show message if offer is empty -->
+                        {% if organization.offers is empty %}
+                            <p>Créer une offre</p>
+                        {% else %}
+                            {% if organization.offers|length < 3 %}
+                                {% include "dashboard/_offer_dashboard.html.twig" %}
+                            {% else %}
+                                {% include "dashboard/_offer_carousel_dashboard.html.twig" %}
+                            {% endif %}
+                        {% endif %}
+                        <a href="{{ path('activity_index') }}" class="btn btn-primary backblue-btn mt-10">Ajouter une offre</a>
+                      </div>
+                        
+                      <!-- Modal introducing the redirection to the activity_index -->
                         <div class="modal fade" id="pop-up-offer" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-notify modal-info" role="document">
                                 <div class="modal-content">
+                                
                                     <!--Modal's header-->
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -131,6 +96,7 @@
                                             redirigé vers la liste des activités existentes. Vous pourrez ainsi sélectionner l'activité de votre choix
                                             puis faire une offre.</p>
                                     </div>
+                                    
                                     <!--Modal's body-->
                                     <div class="modal-body">
                                         <div>
@@ -144,10 +110,13 @@
                     </div>
                 </div>
             </div>
+            <!-- End list offers -->
         </div>
     </div>
+    <!-- End Content -->
 {% endblock %}
 
 {% block javascripts %}
+    <!-- Import personal javascript -->
     <script src="{{ asset('build/carousel.js') }}"></script>
 {% endblock %}
