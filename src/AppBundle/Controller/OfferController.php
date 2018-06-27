@@ -50,6 +50,7 @@ class OfferController extends Controller
                     'organization' => $this->getUser()->getOrganization()
                 )
             );
+        
         $event_activities = $em->getRepository('AppBundle:Activity')->findBy(
             array(
                 'organizationActivities' => $user->getOrganization(),
@@ -63,13 +64,13 @@ class OfferController extends Controller
                 'type' => 'Activité de streaming'
             )
         );
+        
         $team_activities = $em->getRepository('AppBundle:Activity')->findBy(
             array(
                 'organizationActivities' => $user->getOrganization(),
                 'type' => 'Equipe eSport'
             )
         );
-
 
         return $this->render(
             'offer/index.html.twig', array(
@@ -109,6 +110,7 @@ class OfferController extends Controller
                 ->setNameCanonical(strtolower($activity->getName()))
                 ->setHandlingFee($fees)
                 ->setOrganization($user->getOrganization());
+            
             $em->persist($offer);
             $em->flush();
 
