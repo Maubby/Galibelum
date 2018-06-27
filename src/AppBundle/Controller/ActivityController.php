@@ -142,8 +142,12 @@ class ActivityController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success', 'Vos modifications ont bien été prises en compte.');
+
             return $this->redirectToRoute(
-                'activity_edit',
+                'dashboard_index',
                 array('id' => $activity->getId())
             );
         }

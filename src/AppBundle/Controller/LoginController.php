@@ -61,12 +61,12 @@ class LoginController implements AuthenticationSuccessHandlerInterface
         $response = null;
 
         if ($this->authorizationChecker->isGranted(
-            'ROLE_ADMIN'
+            'ROLE_SUPER_ADMIN'
         )
         ) {
             $response = new RedirectResponse(
                 $this->router->generate(
-                    'dashboard_index'
+                    'admin_index'
                 )
             );
         } else if ($this->authorizationChecker->isGranted(
