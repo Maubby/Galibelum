@@ -28,19 +28,20 @@
 
     <table>
         <thead>
-            <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for activity in activities %}
             <tr>
                 <td>{{ activity.name }}</td>
                 <td>{{ activity.type }}</td>
-                <td>{{ activity.date }}</td>
+                <td>{% if activity.dateStart %}{{ activity.dateStart|date('d-m-Y') }}{% endif %}</td>
+                <td>{% if activity.dateEnd %}{{ activity.dateEnd|date('d-m-Y') }}{% endif %}</td>
                 <td>
                     <ul>
                         <li>

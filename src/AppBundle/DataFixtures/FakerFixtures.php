@@ -110,11 +110,12 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
                 ->setName($faker->name)
                 ->setType($faker->jobTitle)
                 ->setDescription($faker->text)
-                ->setDate($faker->date('Y-m-d', 'now'))
+                ->setDateStart($faker->dateTimeAD($max = 'now', $timezone = null))
+                ->setDateEnd($faker->dateTimeAD($max = 'now', $timezone = null))
                 ->setAddress($faker->streetAddress)
                 ->setMainGame($faker->word)
                 ->setUrlVideo($faker->url)
-                ->setAchievement($faker->randomElement($array = array ('a','b','c')))
+                ->setAchievement($faker->word)
                 ->setSocialLink($faker->url);
 
             // Offer creation
