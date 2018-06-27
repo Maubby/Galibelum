@@ -1,0 +1,47 @@
+{# app/Resources/views/activity/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin Accueil{% endblock %}
+
+{% block stylesheets %}
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/managers.css') }}">
+{% endblock %}
+
+{% block header %}
+    <nav>
+        sidebar
+    </nav>
+{% endblock %}
+
+{% block body %}
+
+
+    <i class="fas fa-home degradeblue icon " style="font-size: 50px"></i>
+    <h5 class="degradeblue text-center">Bienvenu dans votre menu</h5>
+    <table class="table border">
+        <thead class="table table-striped degradeblue text-center">
+        <tr>
+            <th class="text-center" scope="col"><span><i class="fas fa-portrait degradeblue"></i>Prénom</span></th>
+            <th class="text-center" scope="col"><span><i class="fas fa-portrait degradeblue"></i>Noms</span></th>
+            <th class="email text-center" scope="col"><span><i class="fas fa-envelope-open degradeblue"></i>Email</span></th>
+            <th class="text-center" scope="col"><span><i class="fas fa-bell degradeblue"></i>Actif</span></th>
+        </thead>
+
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td class="text-center">{{ user.firstName }}</td>
+                <td class="text-center">{{ user.lastName }}</td>
+                <td class="text-center">{{ user.email }}</td>
+                <td class="text-center">{% if user.enabled == 1 %} Oui {% else %} Non {% endif %}</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+
+
+{% endblock %}
