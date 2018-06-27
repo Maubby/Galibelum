@@ -4,13 +4,12 @@
 {% block title %}Tableau de bord - Structure{% endblock %}
 
 {% block stylesheets %}
+
     <!-- Import personal styleSheet -->
     <link rel="stylesheet" href="{{ asset('build/dashboard.css') }}">
 {% endblock %}
-{% block body %}
-    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
-    <!-- Zero intern console warning -->
 
+{% block body %}
     <!-- Flash message success edit organization profile -->
     {% if app.session.flashBag.has('success') %}
         <div class="alert alert-success">
