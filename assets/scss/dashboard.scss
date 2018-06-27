@@ -15,7 +15,7 @@ h5 {
   border: 1px solid $border-color;
   h5 {
     margin-left: 25px;
-    i{
+    i {
       font-size: 25px
     }
   }
@@ -43,10 +43,12 @@ h5 {
     text-align: center;
     color: #5d5c5c;
   }
+  
   .boxing-body {
     padding: 25px 30px;
     border: 1px solid transparent;
   }
+  
   .panel-default {
     max-height: 180px;
     border-color: transparent;
