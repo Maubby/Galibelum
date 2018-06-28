@@ -9,6 +9,7 @@
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Controller;
+
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -44,7 +45,7 @@ class AdminController extends Controller
             array('users' => $users,)
         );
     }
-    
+
     /**
      *  Creates a new account manager.
      *
@@ -61,6 +62,7 @@ class AdminController extends Controller
         $form = $this->createForm('AppBundle\Form\RegistrationType', $managers);
         $form->remove('cgu');
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $managers
@@ -70,10 +72,12 @@ class AdminController extends Controller
             // Persisting user according to its new account Manager
             $em->persist($managers);
             $em->flush();
+
             return $this->redirectToRoute(
                 'admin_index'
             );
         }
+
         return $this->render(
             'admin/new.html.twig', array(
                 'managers' => $managers,
@@ -81,13 +85,13 @@ class AdminController extends Controller
             )
         );
     }
-    
+
     /**
      * Delete a manager entity.
      *
-     * @param User    $manager The account manager
+     * @param User $manager The account manager
      *
-     * @Route("/{id}",   name="admin_delete")
+     * @Route("/{id}", name="admin_delete")
      * @Method("GET")
      *
      * @return Response A Response instance

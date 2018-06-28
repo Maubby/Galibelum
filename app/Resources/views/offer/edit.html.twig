@@ -54,7 +54,7 @@
                             <div class="mt-20">
                                 <i class="fas fa-dollar-sign"></i>
                                 {{ form_label(edit_form.amount, "Montant demandé" )}}
-                                {{ form_widget(edit_form.amount, {'attr': {'class':'form-control input-field js-datepicker', 'placeholder' : "Montant de l'offre" }}) }}
+                                {{ form_widget(edit_form.amount, {'attr': {'class':'form-control input-field', 'placeholder' : "Montant de l'offre" }}) }}
                                 {{ form_errors(edit_form.amount) }}
                             </div>
                             <div class="mt-20">
@@ -99,7 +99,7 @@
                         {{ form_errors(edit_form.description) }}
                     </div>
                     <div class="col-sm-12 col-xs-12 text-center">
-                        <input class="btn btn-primary backblue-btn mt-20" type="submit" value="{{ "Enregistrer"|trans }}" />
+                        <input class="btn btn-primary backblue-btn-sm mt-20" type="submit" value="{{ "Enregistrer"|trans }}" />
                     </div>
                     {{ form_end(edit_form) }}
                 </div>

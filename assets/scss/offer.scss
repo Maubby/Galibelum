@@ -1,5 +1,16 @@
 @import "style";
 
+/* Background */
+
+.caption {
+  background-color: $lighter-grey-bg-color;
+}
+
+.thumbnail {
+  background-color: $lighter-grey-bg-color;
+  min-height: 170px;
+}
+
 /* Box */
 
 .boxing-canvas {
@@ -85,3 +96,4 @@ th {
 .correct-pl {
   padding-left: 0;
 }
+

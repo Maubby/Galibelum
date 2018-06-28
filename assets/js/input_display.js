@@ -3,51 +3,38 @@ $(document).ready(function() {
     $(".activity").change(function() {
         // Check if current value is "Évènement eSport"
         if($(this).val() === "Évènement eSport") {
-            // Security client view, input is required
-            $(".activityInfo").prop('required',true);
-            // Remove n/a value when you want to create an event
-            $(".activityInfo").val("");
-            // Set n/a value when you want to create an event
-            $(".activityAchievement").val("n/a");
-            // Show input field
-            $(".activityInfo").show();
-            // Hide input field
+            // Remove default date value when you want to create an event and Show input
+            $(".activityDate").removeAttr("value").show();
+            // Remove n/a value when you want to create an event and Show input
+            $(".activityAddress").val("").show();
+            // Set n/a value when you want to create an event and Hide input field
             $(".activityAchievement").hide();
         }
-        
+
         if($(this).val() === "Equipe eSport") {
-            console.log('trouduc');
-            // Security client view, input is required
-            $(".activityInfo").prop('required',true);
-            // Set n/a value when you want to create a team
-            $(".activityInfo").val("n/a");
-            // Remove n/a value when you want to create a team
-            $(".activityAchievement").val("");
-            // Hide input field
-            $(".activityInfo").hide();
-            // Show input field
+            // Set default date value when you want to create a team and Hide input
+            $(".activityDate").attr("value","1993-07-07").hide();
+            // Set n/a value when you want to create a team and Hide input
+            $(".activityAddress").val("n/a").hide();
+            // Remove n/a value when you want to create a team and Show input field
             $(".activityAchievement").show();
         }
-        
+
         if($(this).val() === "Activité de streaming") {
-            // Security client view, input is required
-            $(".activityInfo").prop('required',true);
-            // Set n/a value when you want to create an activity
-            $(".activityInfo").val("n/a");
-            $(".activityAchievement").val("n/a");
+            // Set default value date when you want to create an activity and Hide input
+            $(".activityDate").attr("value","1993-07-07").hide();
+            // Set n/a value when you want to create an activity and Hide input
+            $(".activityAddress").val("n/a").hide();
             // Hide input field
-            $(".activityInfo").hide();
             $(".activityAchievement").hide();
         }
-        
+
         if($(this).val() === "") {
-            // Security client view, input is required
-            $(".activityInfos").prop('required',true);
-            // Set n/a value
-            $(".activityInfo").val("n/a");
-            $(".activityAchievement").val("n/a");
+            // Set default value date when you want to create an activity and Hide input
+            $(".activityDate").attr("value","1993-07-07").hide();
+            // Set n/a value when you want to create a team and Hide input
+            $(".activityAddress").val("n/a").hide();
             // Hide input field
-            $(".activityInfo").hide();
             $(".activityAchievement").hide();
         }
     });
