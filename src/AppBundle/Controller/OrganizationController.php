@@ -254,8 +254,8 @@ class OrganizationController extends Controller
         $request->getSession()
             ->getFlashBag()
             ->add(
-                'success', 'Votre compte a bien été désactivité. 
-            Si vous souhaitez nous rejoindre à nouveau contactez Gallibelum'
+                'success', 'Votre compte a bien été désactivé. 
+            Si vous souhaitez nous rejoindre à nouveau, contactez Gallibelum.'
             );
 
         return $this->redirectToRoute('fos_user_security_login');
