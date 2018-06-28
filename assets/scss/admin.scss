@@ -19,12 +19,8 @@
   background-color: black;
 }
 
-.btn-primary.active {
+.btn-primary.active, .active:hover {
   background-color: black;
-}
-
-.btn-primary.active:hover {
-    background-color: black;
 }
 
 #wrapper.toggled {
