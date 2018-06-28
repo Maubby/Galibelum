@@ -11,11 +11,14 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Organization;
+use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
+
 /**
  * Organization controller.
  *
@@ -226,25 +229,36 @@ class OrganizationController extends Controller
      *
      * @param Request      $request      Delete posted info
      * @param Organization $organization The organization entity
+     * @param User         $user         The user entity
      *
      * @Route("/{id}",   name="organization_delete")
      * @Method("DELETE")
      *
      * @return Response A Response instance
      */
-    public function deleteAction(Request $request, Organization $organization)
-    {
+    public function deleteAction(
+        Request $request, Organization $organization, User $user
+    ) {
         $form = $this->_createDeleteForm($organization);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $organization->setIsActive(2);
+            $user->setEnabled(false);
             $em->persist($organization);
+            $em->persist($user);
             $em->flush();
         }
 
-        return $this->redirectToRoute('homepage');
+        $request->getSession()
+            ->getFlashBag()
+            ->add(
+                'success', 'Votre compte a bien été désactivité. 
+            Si vous souhaitez nous rejoindre à nouveau contactez Gallibelum'
+            );
+
+        return $this->redirectToRoute('fos_user_security_login');
     }
 
     /**

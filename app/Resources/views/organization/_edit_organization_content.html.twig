@@ -80,6 +80,32 @@
                                 <input type="submit" value="Enregistrer votre structure" class="btn btn-primary backblue-btn-sm">
                             </div>
                             {{ form_end(edit_form) }}
+                            <div class="col-sm-12 col-xs-12 text-left">
+                                <a href="#" style="color: #999999" data-toggle="modal" data-target="#pop-up-desactive">Désactiver votre compte</a>
+                                <!-- Modal introducing the redirection to the activity_index -->
+                                <div class="modal fade" id="pop-up-desactive" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-notify modal-info" role="document">
+                                        <div class="modal-content">
+
+                                            <!--Modal's header-->
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true"><i class="fas fa-times" style="color: #999999;" aria-hidden="true"></i></span>
+                                                </button>
+                                                <p style="font-size: 24px">Êtes-vous sûr de vouloir désactiver votre compte ?</p>
+                                            </div>
+                                            <!--Modal's body-->
+                                            <div class="modal-body">
+                                                <div class="text-center">
+                                                    {{ form_start(delete_form) }}
+                                                    <input type="submit" value="Désactiver votre compte" class="text-center btn btn-danger backred-btn-sm">
+                                                    {{ form_end(delete_form) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
