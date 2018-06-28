@@ -12,6 +12,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -40,6 +41,7 @@ class ActivityType extends AbstractType
         $builder
             ->add(
                 'name', TextType::class, array(
+                    'required' => true,
                     'attr' => array(
                         'minlength' => 2,
                         'maxlength' => 32,
@@ -58,6 +60,7 @@ class ActivityType extends AbstractType
             )
             ->add(
                 'description', TextareaType::class, array(
+                    'required' => true,
                     'attr' => array(
                         'minlength' => 32,
                         'maxlength' => 250,
@@ -65,16 +68,20 @@ class ActivityType extends AbstractType
                 )
             )
             ->add(
-                'date', TextType::class, array(
-                    'required' => false,
-                    'attr' => array(
-                        'maxlength' => 16,
-                    )
+                'dateStart', DateType::class, array(
+                    'required' => true,
+                    'widget' => 'single_text',
+                )
+            )
+            ->add(
+                'dateEnd', DateType::class, array(
+                    'required' => true,
+                    'widget' => 'single_text',
                 )
             )
             ->add(
                 'address', TextType::class, array(
-                    'required' => false,
+                    'required' => true,
                     'attr' => array(
                         'maxlength' => 64,
                     )
@@ -101,7 +108,11 @@ class ActivityType extends AbstractType
                     )
                 )
             )
-            ->add('socialLink', UrlType::class)
+            ->add(
+                'socialLink', UrlType::class, array(
+                    'required' => true,
+                )
+            )
 
             ->remove('mainGame');
     }

@@ -23,6 +23,18 @@
             <!-- Form to login-->
             <div class="container">
                 <div class="row boxing-canvas mt-50">
+
+                    <!-- Message flash to deactivate a account-->
+                    {% if app.session.flashBag.has('success') %}
+                        <div class="alert alert-success">
+                            {% for msg in app.session.flashBag.get('success') %}
+                                {{ msg }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <!--End part message flash -->
+
                     <div class="col-md-6 col-md-offset-3">
                         <form action="{{ path("fos_user_security_check") }}" method="post">
                             <i class="far fa-user-circle text-center degradeblue" style="font-size: 50px"></i>
