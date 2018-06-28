@@ -8,6 +8,25 @@
   margin: 8px;
 }
 
+.btn {
+  padding: 0;
+  border: none;
+  background-color: black;
+  left: 8px;
+}
+
+.btn:hover {
+  background-color: black;
+}
+
+.btn-primary.active {
+  background-color: black;
+}
+
+.btn-primary.active:hover {
+    background-color: black;
+}
+
 #wrapper.toggled {
   padding-left: 250px;
 }
