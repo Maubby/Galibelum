@@ -15,6 +15,7 @@
     <!-- CSS Webpack Vendor including Bootstrap and so on -->
     <link rel="stylesheet" href="{{ asset('build/vendor.css') }}">
     <link rel="stylesheet" href="{{ asset('build/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
     {% block stylesheets %}
     {% endblock %}
 
@@ -64,11 +65,11 @@
                                     <span class="glyphicon glyphicon-user" aria-hidden="true">
                                         </span> Accounts managers <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ path('admin/new.html.twig') }}">
+                                <li><a href="{{ path('admin_manager_new') }}">
                                         <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
                                         Créer un compte</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                <li><a href="{{ path('admin_manager_list') }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                                         Gestion des comptes</a></li>
                             </ul>
                         </li>

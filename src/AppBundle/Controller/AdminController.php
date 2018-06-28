@@ -51,37 +51,75 @@ class AdminController extends Controller
      *
      * @param Request $request New posted info
      *
-     * @Route("/new",  name="admin/new.html.twig")
+     * @Route("/new",  name="admin_manager_new")
      * @Method({"GET", "POST"})
      *
      * @return Response A Response instance
      */
     public function newAction(Request $request)
     {
-        $managers = new User();
-        $form = $this->createForm('AppBundle\Form\RegistrationType', $managers);
+        $manager = new User();
+        $form = $this->createForm('AppBundle\Form\RegistrationType', $manager);
         $form->remove('cgu');
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $managers
+            $manager
                 ->setCgu(1)
                 ->setRoles(array('ROLE_MANAGER'))
                 ->setEnabled(1);
             // Persisting user according to its new account Manager
-            $em->persist($managers);
+            $em->persist($manager);
             $em->flush();
-
             return $this->redirectToRoute(
                 'admin_index'
             );
         }
-
         return $this->render(
             'admin/new.html.twig', array(
-                'managers' => $managers,
+                'manager' => $manager,
                 'form' => $form->createView(),
+            )
+        );
+    }
+
+    /**
+     * Displays a form to edit an existing managers entity.
+     *
+     * @param Request  $request  Delete posted info
+     * @param User $manager The User manager
+     *
+     * @Route("/{id}/edit", name="admin_manager_edit")
+     * @Method({"GET",      "POST"})
+     *
+     * @return Response A Response instance
+     */
+    public function editAction(Request $request,User $manager)
+    {
+        $editForm = $this->createForm('AppBundle\Form\RegistrationType', $manager);
+        $editForm->remove('cgu');
+        $editForm->handleRequest($request);
+
+
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success', 'Vos modifications ont bien été prises en compte.');
+
+            return $this->redirectToRoute(
+                'admin_manager_list',
+                array('id' => $manager->getId())
+            );
+        }
+
+        return $this->render(
+            'admin/edit.html.twig', array(
+                'manager' => $manager,
+                'edit_form' => $editForm->createView(),
+
             )
         );
     }
@@ -89,7 +127,7 @@ class AdminController extends Controller
     /**
      * Lists all account managers.
      *
-     * @Route("/managers",    name="admin_managers")
+     * @Route("/managers",    name="admin_manager_list")
      * @Method("GET")
      *
      * @return Response A Response instance
@@ -98,7 +136,6 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
-
         return $this->render(
             'admin/managers.html.twig',
             array('users' => $users,)
@@ -106,16 +143,16 @@ class AdminController extends Controller
     }
 
     /**
-     * Delete a manager entity.
+     * Delete a managers entity.
      *
-     * @param User $manager The account manager
+     * @param User $managers The account manager
      *
      * @Route("/{id}", name="admin_delete")
      * @Method("GET")
      *
      * @return Response A Response instance
      */
-    public function deleteAction(User $manager)
+    public function deleteAction(User $managers)
     {
         $em = $this->getDoctrine()->getManager();
         $manager->setEnabled(false);

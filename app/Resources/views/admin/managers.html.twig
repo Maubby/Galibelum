@@ -1,5 +1,5 @@
 {# app/Resources/views/activity/index.html.twig #}
-{% extends 'base.html.twig' %}
+{% extends 'base_back.html.twig' %}
 
 {% block title %}Admin Accueil{% endblock %}
 
@@ -9,12 +9,18 @@
 {% endblock %}
 
 {% block header %}
-    <nav>
-        sidebar
-    </nav>
+    {{ parent() }}
 {% endblock %}
 
 {% block body %}
+ {% if app.session.flashBag.has('success') %}
+     <div class="alert alert-success">
+         {% for msg in app.session.flashBag.get('success') %}
+             {{ msg }}
+             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         {% endfor %}
+     </div>
+ {% endif %}
 <div class="container-fluid">
     <div class="row">
         <div class="border">
@@ -30,6 +36,7 @@
                     <th class="text-center" scope="col"><span><i class="fas fa-portrait degradeblue"></i>Noms</span></th>
                     <th class="text-center" scope="col"><span><i class="far fa-envelope-open degradeblue"></i>Email</span></th>
                     <th class="text-center" scope="col"><span><i class="far fa-bell degradeblue"></i>Actif</span></th>
+                    <th class="text-center" scope="col"></th>
                 </thead>
                 {% for user in users %}
                     <tr>
@@ -37,16 +44,14 @@
                         <td class="text-center">{{ user.lastName }}</td>
                         <td class="text-center">{{ user.email }}</td>
                         <td class="text-center">{% if user.enabled == 1 %} Oui {% else %} Non {% endif %}</td>
-                    </tr>
+
+
+
+                        <td ><a href="{{ path('admin_manager_edit', { 'id': user.id }) }}" class="icon">Modifier</a></td>
                 {% endfor %}
 
                 </tbody>
             </table>
-
-
-            <div class="col-md-offset-5">
-                <input  type="submit"  value="Modifier" class="btn btn-danger backblue-btn-sm">
-            </div>
         </div>
     </div>
 

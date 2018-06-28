@@ -6,7 +6,6 @@
 {% block stylesheets %}
 
     <!-- Additional CSS links-->
-    <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
 {% endblock %}
 
 {% block header %}
@@ -26,23 +25,6 @@
                 <h3 class="degradeblue">Bonjour William !</h3>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <!-- Dashboard welcoming sentence -->
-                <h5 class="normal-subtitle-text">Depuis votre tableau de bord, vous pouvez naviguer sur le site, créer ou supprimer des accounts
-                    managers, gérer les différentes organisations et les contrats.</h5>
-                <!-- End dashboard welcoming sentence -->
-
-                {% for user in users %}
-                    {{ user.firstName }}
-                    {{ user.lastName }}
-                    {{ user.email }}
-                    <a href="{{ path('admin_delete', { 'id': user.id }) }}">Modifier le compte</a>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    <!-- End page content -->
 {% endblock %}
 
 {% block footer %}
