@@ -14,52 +14,116 @@
 {% endblock %}
 
 {% block body %}
-    <main id="register">
-        <section>
-            <!-- Form to create your profile -->
-            <div class="container-fluid">
-                <div class="row boxing-canvas mt-50 pb-50">
-                    <div class="col-md-6 col-xs-12">
-                        <i class="fas fa-user-plus text-center degradeblue" style="font-size: 50px"></i>
-                        <h5 class="text-center degradeblue">Création du profil Account Manager</h5>
+    <!-- Two forms, one to edit profile and one to change password -->
+    <section id="two-forms">
+        <div class="container">
+            <div class="row">
+                <!-- Profile form start -->
+                <div class="col-md-4 col-md-offset-1 col-sm-12 col-xs-12">
+                    <div class="profile-boxing-canvas mt-50">
+                        <div class="profile-boxing-canvas-content-height normal-subtitle-text">
+                            <h5 class="profile-title text-center degradeblue">Modifier votre profil</h5>
+                            {{ form_start(edit_form) }}
+                            <!-- Modifying firstname -->
+                            <div class="form-group col-sm-6 col-xs-6">
+                                {{ form_label(edit_form.firstName) }}
+                                {{ form_widget(edit_form.firstName) }}
+                                {{ form_errors(edit_form.firstName) }}
+                            </div>
+                            <!-- End modifying firstname -->
 
-                        {{ form_start(edit_form) }}
-                        <div class="col-sm-6 form-error">
-                            {{ form_widget(edit_form.firstName, {'attr': {'class':'form-control input-field', 'placeholder' : 'Prénom' }}) }}
-                            {{ form_errors(edit_form.firstName) }}
+                            <!-- Modifying lastname -->
+                            <div class="form-group col-sm-6 col-xs-6">
+                                {{ form_label(edit_form.lastName) }}
+                                {{ form_widget(edit_form.lastName) }}
+                                {{ form_errors(edit_form.lastName) }}
+                            </div>
+                            <!-- End modifying lastname -->
+
+                            <!-- Modifying email -->
+                            <div class="form-group col-sm-12 col-xs-12">
+                                {{ form_label(edit_form.email, 'Email :')}}
+                                {{ form_widget(edit_form.email) }}
+                                {{ form_errors(edit_form.email) }}
+                            </div>
+                            <!-- End modifying email -->
+
+                            <!-- Modifying phone number -->
+                            <div class="form-group col-sm-12 col-xs-12">
+                                {{ form_label(edit_form.phoneNumber) }}
+                                {{ form_widget(edit_form.phoneNumber) }}
+                                {{ form_errors(edit_form.phoneNumber) }}
+                            </div>
+                            <!-- End modifying phone number -->
+
+                            <!-- Submit button -->
+                            <div class="col-sm-12 col-xs-12">
+                                <input type="submit" class="btn btn-primary backblue-btn" value="{{ 'Modifier votre profil'|trans }}"/>
+                            </div>
+                            <!-- End submit button -->
+                            {{ form_end(edit_form) }}
                         </div>
-                        <div class="col-sm-6 form-error">
-                            {{ form_widget(edit_form.lastName, {'attr': {'class':'form-control input-field', 'placeholder' : 'Nom' }}) }}
-                            {{ form_errors(edit_form.lastName) }}
-                        </div>
-                        <div class="col-sm-12 form-error">
-                            {{ form_widget(edit_form.email, {'attr': {'class':'form-control input-field', 'placeholder' : 'Adresse email valide' }}) }}
-                            {{ form_errors(edit_form.email) }}
-                        </div>
-                        <div class="col-sm-12 form-error">
-                            {{ form_widget(edit_form.phoneNumber, {'attr': {'class':'form-control input-field', 'placeholder' : 'Numéro de téléphone' }}) }}
-                            {{ form_errors(edit_form.phoneNumber) }}
-                        </div>
-                        <div class="col-sm-12 form-error">
-                            {{ form_widget(edit_form.plainPassword.first,
-                                {'attr': {'class':'form-control input-field', 'placeholder' : 'Mot de passe' }}) }}
-                            {{ form_errors(edit_form.plainPassword.first) }}
-                        </div>
-                        <div class="col-sm-12 form-error">
-                            {{ form_widget(edit_form.plainPassword.second,
-                                {'attr': {'class':'form-control input-field', 'placeholder' : 'Vérification mot de passe' }}) }}
-                            {{ form_errors(edit_form.plainPassword.second) }}
-                        </div>
-                        <div class="col-sm-12 col-xs-12 text-center pt-10">
-                            <input class="btn btn-primary backblue-btn" type="submit" value="{{ "Créer le compte"|trans }}" />
-                        </div>
-                        {{ form_end(edit_form) }}
                     </div>
-                    <div class="col-md-6 text-center hidden-xs">
-                        <img class="logo-galibelum" src="{{ asset('build/images/logo_galibelum.png') }}" alt="placeholder">
+                </div>
+                <!-- End profile form -->
+
+                <!-- Password form start-->
+                <div class="col-md-4 col-md-offset-2 col-sm-12 col-xs-12">
+                    <div class="profile-boxing-canvas mt-50">
+                        <div class="profile-boxing-canvas-content-height normal-subtitle-text">
+                            <h5 class="profile-title text-center degradered">Modifier votre mot de passe</h5>
+                            {{ form_start(form) }}
+                            <!-- Current password -->
+                            <div class="form-group col-sm-12 col-xs-12">
+                                {{ form_label(formPassword.current_password, 'Entrer votre mot de passe actuel :') }}
+                                {% if formPassword.current_password.vars.errors|length %}
+                                    {{ form_widget(edit_formPassword.current_password,
+                                        formPassword.current_password.vars|merge({'attr': {'autofocus': null, 'class':'form-control', 'placeholder': 'Entrez votre mot de passe actuel'|trans}} ) ) }}
+                                    {{ form_errors(edit_formPassword.current_password) }}
+                                {% else %}
+                                    {{ form_widget(edit_formPassword.current_password, { 'attr': {'class': 'form-control', 'placeholder': 'Entrez votre mot de passe actuel'|trans}} ) }}
+                                {% endif %}
+                            </div>
+                            <!-- End current password -->
+
+                            <!-- New password -->
+                            <div class="form-group col-sm-12 col-xs-12">
+                                {{ form_label(edit_formPassword.current_password, 'Entrer votre nouveau mot de passe :') }}
+                                {% if formPassword.plainPassword.first.vars.errors|length %}
+                                    {{ form_widget(edit_formPassword.plainPassword.first,
+                                        formPassword.plainPassword.first.vars|merge({'attr': {'autofocus': null, 'class': 'form-control', 'placeholder': 'Entrez votre nouveau mot de passe'|trans}} ) ) }}
+                                    {{ form_errors(edit_formPassword.plainPassword.first) }}
+                                {% else %}
+                                    {{ form_widget(edit_formPassword.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'Entrez votre nouveau mot de passe'|trans}} ) }}
+                                {% endif %}
+                            </div>
+                            <!-- End new password -->
+
+                            <!-- New password's confirmation -->
+                            <div class="form-group col-sm-12 col-xs-12">
+                                {{ form_label(edit_formPassword.current_password, 'Confirmer votre mot de passe :') }}
+                                {% if formPassword.plainPassword.second.vars.errors|length %}
+                                    {{ form_widget(edit_formPassword.plainPassword.second,
+                                        formPassword.plainPassword.second.vars|merge({'attr': {'autofocus': null, 'class': 'form-control', 'placeholder': 'Confirmez votre nouveau mot de passe'|trans}} ) ) }}
+                                    {{ form_errors(edit_formPassword.plainPassword.second) }}
+                                {% else %}
+                                    {{ form_widget(edit_formPassword.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'Confirmez votre nouveau mot de passe'|trans}} ) }}
+                                {% endif %}
+                            </div>
+                            <!-- End new password's confirmation -->
+
+                            <!-- Submit button -->
+                            <div class="col-sm-12 col-xs-12">
+                                <input type="submit" class="btn btn-primary backred-btn" value="{{ 'Modifier votre mot de passe'|trans }}"/>
+                            </div>
+                            <!-- End submit button -->
+                            {{ form_end(edit_formPassword) }}
+                            <!-- End password form -->
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 {% endblock %}
+

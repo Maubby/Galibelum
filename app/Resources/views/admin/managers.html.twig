@@ -23,7 +23,7 @@
  {% endif %}
 <div class="container-fluid">
     <div class="row">
-        <div class="border">
+        <div class="boxing-canvas">
             <table class="table">
                 <tbody>
 
@@ -34,8 +34,8 @@
                 <tr>
                     <th class="text-center" scope="col"><span><i class="fas fa-portrait degradeblue"></i>Prénom</span></th>
                     <th class="text-center" scope="col"><span><i class="fas fa-portrait degradeblue"></i>Noms</span></th>
-                    <th class="text-center" scope="col"><span><i class="far fa-envelope-open degradeblue"></i>Email</span></th>
-                    <th class="text-center" scope="col"><span><i class="far fa-bell degradeblue"></i>Actif</span></th>
+                    <th class="text-center" scope="col"><span><i class="fas fa-envelope-open degradeblue"></i>Email</span></th>
+                    <th class="text-center" scope="col"><span><i class="fas fa-bell degradeblue"></i>Actif</span></th>
                     <th class="text-center" scope="col"></th>
                 </thead>
                 {% for user in users %}
@@ -44,16 +44,15 @@
                         <td class="text-center">{{ user.lastName }}</td>
                         <td class="text-center">{{ user.email }}</td>
                         <td class="text-center">{% if user.enabled == 1 %} Oui {% else %} Non {% endif %}</td>
-
-
-
-                        <td ><a href="{{ path('admin_manager_edit', { 'id': user.id }) }}" class="icon">Modifier</a></td>
+                        <td ><a href="{{ path('admin_manager_edit', { 'id': user.id }) }}" class=" degradeblue icon">Modifier</a></td>
+                    </tr>
                 {% endfor %}
 
                 </tbody>
             </table>
         </div>
     </div>
+</div>
 
 
 
