@@ -62,12 +62,12 @@
                                     </div>
                                     <div class="activity-date-height">
                                         {% if activity.type is same as("Évènement eSport") %}
-                                            <p><strong>Date de l'événement :</strong> <br>
+                                            <p><strong>Date de l'évènement :</strong> <br>
                                                 {{ activity.dateStart|date('d-m-Y') }} <strong>/</strong> {{ activity.dateEnd|date('d-m-Y') }} </p>
                                         {% endif %}
                                     </div>
                                     <div class="activity-btn-height">
-                                        <a href="{{ path('activity_show', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn mt-20">Plus de détail</a>
+                                        <a href="{{ path('activity_show', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn mt-20">Plus de détails</a>
                                         <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backred-btn mt-10">Créer une offre</a>
                                     </div>
                                 </div>
