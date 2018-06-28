@@ -23,7 +23,6 @@ namespace AppBundle\Repository;
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
-     *
      * @param string $role
      *
      * @return array
@@ -35,7 +34,6 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             ->from('AppBundle:User', 'u')
             ->where('u.roles LIKE :roles')
             ->setParameter('roles', '%"'.$role.'"%');
-
         return $qb->getQuery()->getResult();
     }
 }
