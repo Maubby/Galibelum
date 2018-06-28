@@ -15,11 +15,7 @@
   left: 8px;
 }
 
-.btn:hover {
-  background-color: black;
-}
-
-.btn-primary.active, .active:hover {
+.btn-primary.active, .active:hover, .btn:hover {
   background-color: black;
 }
 
