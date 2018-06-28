@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 /**
  * Admin controller.
  *
@@ -43,6 +44,7 @@ class AdminController extends Controller
             array('users' => $users,)
         );
     }
+    
     /**
      *  Creates a new account manager.
      *
@@ -79,6 +81,7 @@ class AdminController extends Controller
             )
         );
     }
+    
     /**
      * Delete a manager entity.
      *
