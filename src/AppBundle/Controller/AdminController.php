@@ -87,6 +87,25 @@ class AdminController extends Controller
     }
 
     /**
+     * Lists all account managers.
+     *
+     * @Route("/manager", name="admin/manager.html.twig")
+     * @Method("GET")
+     *
+     * @return Response A Response instance
+     */
+    public function managersAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
+
+        return $this->render(
+            'admin/manager.html.twig',
+            array('users' => $users,)
+        );
+    }
+    
+    /**
      * Delete a manager entity.
      *
      * @param User $manager The account manager

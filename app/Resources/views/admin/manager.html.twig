@@ -1,0 +1,76 @@
+{# app/Resources/views/activity/index.html.twig #}
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Gestion des accounts managers{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/manager.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row boxing-canvas mt-50">
+            <div class="col-md-12 col-sm-12 col-xs-12 center">
+                <i class="far fa-user-circle text-center degradeblue" style="font-size: 50px"></i>
+                <h5 class="degradeblue text-center">Gérer les accounts managers</h5>
+
+                <!-- Creating a responsive table -->
+                <div class="table-responsive">
+                    <table class="table">
+                        <!-- Table head -->
+                        <thead class="table table-striped degradeblue text-center">
+                        <tr>
+                            <th class="text-center" scope="col"><span>
+                                <i class="fas fa-portrait degradeblue"></i> Nom</span></th>
+                            <th class="text-center" scope="col"><span>
+                                <i class="fas fa-portrait degradeblue"></i> Prénom</span></th>
+                            <th class="text-center" scope="col"><span>
+                                <i class="far fa-envelope-open degradeblue"></i> Email</span></th>
+                            <th class="text-center" scope="col"><span>
+                                <i class="far fa-bell degradeblue"></i> Actif</span></th>
+                            <th class="text-center" scope="col"><span>
+                                <i class="far fa-edit degradeblue"></i> Mettre à jour</span></th>
+                        </tr>
+                        </thead>
+                        <!-- End of table head -->
+
+                        <!-- Starting listing the account managers -->
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td class="text-center">{{ user.lastName }}</td>
+                                <td class="text-center">{{ user.firstName }}</td>
+                                <td class="text-center">{{ user.email }}</td>
+                                <td class="text-center">{% if user.enabled == 1 %} Oui {% else %} Non {% endif %}</td>
+                                <td class="text-center normal-subtitle-text"><a href="#" class="five-color">
+                                        Modifier le profil</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <!-- End listing the account managers -->
+                    </table>
+                </div>
+            </div>
+            <!-- End responsive table -->
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/menu-toggle.js') }}"></script>
+{% endblock %}
