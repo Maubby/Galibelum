@@ -17,79 +17,86 @@
 {% endblock %}
 
 {% block body %}
-    <div class="boxing-title">
-        <ul class="list-unstyled">
-            <li>{{ activity.organizationActivities.name }}</li>
-            <li>{{ activity.organizationActivities.status }}</li>
-            <li>{{ activity.organizationActivities.description }}</li>
-            <li>{{ activity.organizationActivities.relationNumber }} salariés</li>
-            <li>{{ activity.organizationActivities.address }}</li>
-        </ul>
-    </div>
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-9">
-                <table>
-                    <tbody>
-                    <tr>
-                        <th>Name</th>
-                        <td>{{ activity.name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Type</th>
-                        <td>{{ activity.type }}</td>
-                    </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td>{{ activity.description }}</td>
-                    </tr>
-                    <tr>
-                        <th>Date Start</th>
-                        <td>{% if activity.dateStart %}{{ activity.dateStart|date('d-m-Y') }}{% endif %}</td>
-                    </tr>
-                    <tr>
-                        <th>Date End</th>
-                        <td>{% if activity.dateEnd %}{{ activity.dateEnd|date('d-m-Y') }}{% endif %}</td>
-                    </tr>
-                    <tr>
-                        <th>Address</th>
-                        <td>{{ activity.address }}</td>
-                    </tr>
-                    <tr>
-                        <th>Maingame</th>
-                        <td>{{ activity.mainGame }}</td>
-                    </tr>
-                    <tr>
-                        <th>Urlvideo</th>
-                        <td>{{ activity.urlVideo }}</td>
-                    </tr>
-                    <tr>
-                        <th>Achievement</th>
-                        <td>{% if activity.achievement %}{{ activity.achievement|join(', ') }}{% endif %}</td>
-                    </tr>
-                    <tr>
-                        <th>Sociallink</th>
-                        <td>{% if activity.socialLink %}{{ activity.socialLink|join(', ') }}{% endif %}</td>
-                    </tr>
-                    </tbody>
-                </table>
+    <div class="container">
+        <div class="panel panel-default mt-20">
+            <div class="panel-body">
+                <h3 class="panel-title">{{ activity.organizationActivities.name }}</h3>
+                <p>{{ activity.organizationActivities.status }}</p>
+                <p>{{ activity.organizationActivities.description }}</p>
+                <p>{{ activity.organizationActivities.relationNumber }} salariés</p>
+                <p>{{ activity.organizationActivities.address }}</p>
             </div>
-            <div class="col-md-3">
-                <!-- Loop for show information offers -->
-                {% for offer in activity.activities %}
-                    <div class="item">
-                        <div class="panel panel-default text-center">
-                            <h5 class="panel-title pt-10">{{ offer.name }}</h5>
-                            <div class="panel-body">
-                                <p class="panel-item"><strong>Montant : </strong>{{ offer.amount }} €</p>
-                                <p class="panel-item"><strong>Dépôt des fonds avant le : </strong>{{ offer.date|date("d M Y") }}</p>
-                                <a href="{{ path('offer_show', { 'id': offer.id }) }}" class="btn btn-primary btn-sm">Plus de détails</a>
-                            </div>
-                        </div>
+        </div>
+
+        <div class="row m-0">
+            <div class="col-md-9 panel panel-default activity">
+                <div class="description">
+                    <h5 class="text-center pt-20 pb-30">{{ activity.name }} - {{ activity.type }}</h5>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe id="myIframe" src=""></iframe>
                     </div>
-                {% endfor %}
+                    <p>{{ activity.description }}</p>
+                </div>
+                <div class="achevement">
+                    <p>Accomplissements :</p>
+                    <p>{% if activity.achievement %}{{ activity.achievement|join(', ') }}{% endif %}</p>
+                </div>
+
+                {#
+                <th>Date Start</th>
+                <td>{% if activity.dateStart %}{{ activity.dateStart|date('d-m-Y') }}{% endif %}</td>
+                <th>Date End</th>
+                <td>{% if activity.dateEnd %}{{ activity.dateEnd|date('d-m-Y') }}{% endif %}</td>
+                <th>Address</th>
+                <td>{{ activity.address }}</td>
+                #}
+
+                <p>Maingame</p>
+                <p>{{ activity.mainGame }}</p>
+
+                {#
+                <hr>
+                <th>Document join</th>
+                <td>{{ activity.uploadPdf }}</td>
+                #}
+                <p>Réseaux Sociaux</p>
+                <p>twitch : <a href="{% if activity.socialLink %}{{ activity.socialLink|join(', ') }}{% endif %}">{% if activity.socialLink %}{{ activity.socialLink|join(', ') }}{% endif %}</a></p>
+            </div>
+
+            <div class="col-md-3 pr-0">
+                <div class="boxing-canvas">
+                    <div class="boxing-body">
+                        <!-- Loop for show information offers -->
+                        {% for offer in activity.activities %}
+                            <div class="item">
+                                <div class="panel panel-default text-center">
+                                    <h5 class="panel-title pt-10">{{ offer.name }}</h5>
+                                    <div class="panel-body">
+                                        <p class="panel-item"><strong>Montant : </strong>{{ offer.amount }} €</p>
+                                        <p class="panel-item"><strong>Date d'expiration : </strong>{{ offer.date|date("d M Y") }}</p>
+                                        <p class="panel-item">{{ offer.description }}</p>
+                                        <a href="{{ path('offer_show', { 'id': offer.id }) }}" class="btn btn-primary btn-sm">Se mettre en relation</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+
+        var url ="{{ activity.urlVideo }}";
+        var id = new URL(url).search.substr(3);
+        var embedlink = "http://www.youtube.com/embed/" + id;
+
+        document.getElementById("myIframe").src = embedlink;
+
+    </script>
+
 {% endblock %}

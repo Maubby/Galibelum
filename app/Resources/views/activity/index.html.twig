@@ -1,7 +1,7 @@
 {# app/Resources/views/activity/index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des activités{% endblock %}
+{% block title %}Vos activités{% endblock %}
 
 {% block stylesheets %}
 
@@ -26,7 +26,7 @@
                     <div class="col-md-12">
                         <ol class="breadcrumb breadcrumb-boxing-canvas">
                             <li>
-                                <a href="{{ path('dashboard_index') }}">Retourner sur votre tableau de bord</a></li>
+                                <a href="{{ path('dashboard_index') }}">Tableau de bord</a></li>
                             <li>Ensemble de vos activités</li>
                         </ol>
                     </div>
@@ -42,7 +42,7 @@
                     <!-- Loop for each activity -->
                     <div class="col-md-12 center">
                         {% for activity in activities %}
-                            <div class="col-md-3 col-sm-4 col-xs-12 pb-20 mt-20 center">
+                            <div class="col-md-3 col-sm-4 col-xs-12 pb-20 mt-20">
                                 <!-- activity'box creation-->
                                 <div class="activity-box">
                                     <div class="activity-name-height">

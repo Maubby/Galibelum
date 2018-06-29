@@ -50,6 +50,7 @@ h5 {
   }
   
   .panel-default {
+    min-height: 137px;
     max-height: 180px;
     border-color: transparent;
     background-color: #ededed66;
@@ -75,7 +76,7 @@ h5 {
     margin-bottom: 10px;
   }
   .item {
-    max-height: 490px;
+    max-height: 520px;
     -webkit-transition: 0.6s ease-in-out top;
     -moz-transition: 0.6s ease-in-out top;
     -ms-transition: 0.6s ease-in-out top;

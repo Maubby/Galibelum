@@ -81,8 +81,9 @@ class ActivityController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $activity->setOrganizationActivities($organization);
-            $activity->setNameCanonical(strtolower($activity->getName()));
+            $activity
+                ->setOrganizationActivities($organization)
+                ->setNameCanonical(strtolower($activity->getName()));
             $em->persist($activity);
             $em->flush();
 
