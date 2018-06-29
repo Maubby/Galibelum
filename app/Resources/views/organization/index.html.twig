@@ -1,5 +1,5 @@
 {# app/Resources/views/organization/index.html.twig #}
-{% extends 'base.html.twig' %}
+{% extends 'base_back.html.twig' %}
  
 {% block title %}Liste des structures eSport|marques{% endblock %}
  
@@ -7,6 +7,7 @@
  
      <!-- Additional CSS links-->
      <link rel="stylesheet" href="{{ asset('build/organization_show.css') }}">
+     <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
 {% endblock %}
  
 {% block header %}
@@ -18,21 +19,16 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Organizations list</h1>
+    <h1>Liste des organisations</h1>
 
     <table>
         <thead>
         <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Namecanonical</th>
             <th>Phonenumber</th>
             <th>Email</th>
             <th>Description</th>
-            <th>Userrole</th>
-            <th>Status</th>
-            <th>Address</th>
-            <th>Relationnumber</th>
             <th>Isactive</th>
             <th>Actions</th>
         </tr>
@@ -42,22 +38,17 @@
             <tr>
                 <td><a href="{{ path('organization_show', { 'id': organization.id }) }}">{{ organization.id }}</a></td>
                 <td>{{ organization.name }}</td>
-                <td>{{ organization.nameCanonical }}</td>
                 <td>{{ organization.phoneNumber }}</td>
                 <td>{{ organization.email }}</td>
                 <td>{{ organization.description }}</td>
-                <td>{{ organization.userRole }}</td>
-                <td>{{ organization.status }}</td>
-                <td>{{ organization.address }}</td>
-                <td>{{ organization.relationNumber }}</td>
                 <td>{{ organization.isActive }}</td>
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('organization_show', { 'id': organization.id }) }}">show</a>
+                            <a href="{{ path('organization_show', { 'id': organization.id }) }}">Activer</a>
                         </li>
                         <li>
-                            <a href="{{ path('organization_edit', { 'id': organization.id }) }}">edit</a>
+                            <a href="{{ path('organization_edit', { 'id': organization.id }) }}">Désactiver</a>
                         </li>
                     </ul>
                 </td>
@@ -65,10 +56,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('organization_new') }}">Create a new organization</a>
-        </li>
-    </ul>
 {% endblock %}

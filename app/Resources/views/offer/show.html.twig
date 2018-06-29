@@ -23,24 +23,16 @@
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ offer.id }}</td>
-            </tr>
-            <tr>
                 <th>Name</th>
                 <td>{{ offer.name }}</td>
-            </tr>
-            <tr>
-                <th>Namecanonical</th>
-                <td>{{ offer.nameCanonical }}</td>
             </tr>
             <tr>
                 <th>Description</th>
                 <td>{{ offer.description }}</td>
             </tr>
             <tr>
-                <th>Date</th>
-                <td>{% if offer.date %}{{ offer.date|date('Y-m-d') }}{% endif %}</td>
+                <th>Date d'expiration</th>
+                <td>{% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Amount</th>
@@ -55,16 +47,8 @@
                 <td>{{ offer.partnershipNumber }}</td>
             </tr>
             <tr>
-                <th>Finaldeal</th>
-                <td>{{ offer.finalDeal }}</td>
-            </tr>
-            <tr>
                 <th>Status</th>
                 <td>{{ offer.status }}</td>
-            </tr>
-            <tr>
-                <th>Signature</th>
-                <td>{% if offer.signature %}Yes{% else %}No{% endif %}</td>
             </tr>
         </tbody>
     </table>

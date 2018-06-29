@@ -128,6 +128,7 @@ class AdminController extends Controller
      * Lists all account managers.
      *
      * @Route("/managers",    name="admin_manager_list")
+     *
      * @Method("GET")
      *
      * @return Response A Response instance
@@ -152,7 +153,7 @@ class AdminController extends Controller
      *
      * @return Response A Response instance
      */
-    public function deleteAction(User $managers)
+    public function deleteAction(User $manager)
     {
         $em = $this->getDoctrine()->getManager();
         $manager->setEnabled(false);

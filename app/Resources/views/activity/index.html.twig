@@ -1,7 +1,7 @@
 {# app/Resources/views/activity/index.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Liste des activités{% endblock %}
+{% block title %}Vos activités{% endblock %}
 
 {% block stylesheets %}
 
@@ -26,7 +26,7 @@
                     <div class="col-md-12">
                         <ol class="breadcrumb breadcrumb-boxing-canvas">
                             <li>
-                                <a href="{{ path('dashboard_index') }}">Retourner sur votre tableau de bord</a></li>
+                                <a href="{{ path('dashboard_index') }}">Tableau de bord</a></li>
                             <li>Ensemble de vos activités</li>
                         </ol>
                     </div>
@@ -42,7 +42,7 @@
                     <!-- Loop for each activity -->
                     <div class="col-md-12 center">
                         {% for activity in activities %}
-                            <div class="col-md-3 col-sm-4 col-xs-12 pb-20 mt-20 center">
+                            <div class="col-md-3 col-sm-4 col-xs-12 pb-20 mt-20">
                                 <!-- activity'box creation-->
                                 <div class="activity-box">
                                     <div class="activity-name-height">
@@ -51,22 +51,23 @@
                                     <div>
                                         {% if activity.type is same as("Évènement eSport") %}
                                             <i class="fas fa-gamepad degradeblue" style="font-size: 50px"></i><br>
-                                            <p>Type : {{ activity.type }}</p>
+                                            <p><strong>Type :</strong> {{ activity.type }}</p>
                                         {% elseif activity.type is same as ("Equipe eSport") %}
                                             <i class="fas fa-users degradeblue" style="font-size: 50px"></i><br>
-                                            <p>Type : {{ activity.type }}</p>
+                                            <p><strong>Type :</strong> {{ activity.type }}</p>
                                         {% else %}
                                             <i class="fas fa-video degradeblue" style="font-size: 50px"></i><br>
-                                            <p>Type : {{ activity.type }}</p>
+                                            <p><strong>Type :</strong> {{ activity.type }}</p>
                                         {% endif %}
                                     </div>
                                     <div class="activity-date-height">
                                         {% if activity.type is same as("Évènement eSport") %}
-                                            <p>Date : {{ activity.date }}</p>
+                                            <p><strong>Date de l'évènement :</strong> <br>
+                                                {{ activity.dateStart|date('d-m-Y') }} <strong>/</strong> {{ activity.dateEnd|date('d-m-Y') }} </p>
                                         {% endif %}
                                     </div>
                                     <div class="activity-btn-height">
-                                        <a href="{{ path('activity_show', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn mt-20">Plus de détail</a>
+                                        <a href="{{ path('activity_show', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn mt-20">Plus de détails</a>
                                         <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backred-btn mt-10">Créer une offre</a>
                                     </div>
                                 </div>

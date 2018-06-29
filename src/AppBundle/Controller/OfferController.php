@@ -47,7 +47,7 @@ class OfferController extends Controller
             ->getRepository('AppBundle:Offer')
             ->findBy(
                 array(
-                    'organization' => $this->getUser()->getOrganization()
+                    'organization' => $user->getOrganization()
                 )
             );
         
@@ -85,20 +85,22 @@ class OfferController extends Controller
     /**
      * Creates a new offer entity and get information for current activity.
      *
-     * @param Request               $request     New offer posted with activity id
-     * @param Activity              $activity    New offer by activity
+     * @param Request $request New offer posted with activity id
+     * @param Activity $activity New offer by activity
      * @param ManagementFeesService $feesService Fees Calculation services
      *
      * @Route("/{id}/new",     name="offer_new")
      * @Method({"GET","POST"})
      *
      * @return Response A Response instance
+     * @throws \Exception
      */
     public function newAction(Request $request, Activity $activity, ManagementFeesService $feesService)
     {
         $offer = new Offer();
         $form = $this->createForm('AppBundle\Form\OfferType', $offer);
         $form->handleRequest($request);
+        $interval = new \DateInterval($this->getParameter('periode'));
 
         $user = $this->getUser();
         $fees = $feesService->getFees($offer->getAmount(), $offer->getFinalDeal());
@@ -109,7 +111,8 @@ class OfferController extends Controller
                 ->setActivity($activity)
                 ->setNameCanonical(strtolower($activity->getName()))
                 ->setHandlingFee($fees)
-                ->setOrganization($user->getOrganization());
+                ->setOrganization($user->getOrganization())
+                ->setDate($offer->getDate()->sub($interval));
             
             $em->persist($offer);
             $em->flush();

@@ -30,7 +30,7 @@
             <div class="container">
                 <div class="navbar-header navbar-brand">
                     <div class="btn-group">
-                        <a href="#menu-toggle" class="btn btn-primary active" id="menu-toggle">
+                        <a href="#menu-toggle" class="btn-menu btn-primary active" id="menu-toggle">
                             <i class="navbar-toggle collapsed" data-toggle="collapse" role="contentinfo"
                                data-target="#navbar" aria-expanded="false">
                                 <span class="sr-only">Toggle navigation</span>
@@ -58,6 +58,8 @@
                                 <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Tableau de bord</a>
                         </li>
 
+                        <!--Only display the dropdown menu if logged in as ROLE_SUPER_ADMIN -->
+                        {% if app.user.hasRole('ROLE_SUPER_ADMIN') %}
                         <!-- Dropdown menu starts -->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -74,6 +76,8 @@
                             </ul>
                         </li>
                         <!-- End dropdown menu -->
+                        {% endif %}
+                        <!-- End condition -->
 
                         <li>
                             <a href="{{ path('organization_index') }}"><span class="glyphicon glyphicon-pencil"
