@@ -1,43 +1,80 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dawnrmax
- * Date: 26/06/18
- * Time: 17:58
- */
 
+/**
+ * Event Listener file
+ *
+ * PHP version 7.1
+ *
+ * @category Listener
+ * @package  Listener
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
+ */
 namespace AppBundle\EventListener;
 
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use AppBundle\Entity\Activity;
 use AppBundle\Service\FileUploaderService;
 
+/**
+ * FileUploadListener class.
+ *
+ * @category Listener
+ * @package  Listener
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
+ */
 class FileUploadListener
 {
-    private $uploader;
+    private $_uploader;
 
-    public function __construct(FileUploaderService $uploader)
+    /**
+     * FileUploadListener constructor.
+     *
+     * @param FileUploaderService $_uploader Uploader to upload
+     */
+    public function __construct(FileUploaderService $_uploader)
     {
-        $this->uploader = $uploader;
+        $this->_uploader = $_uploader;
     }
 
+    /**
+     * FileUploadListener constructor.
+     *
+     * @param LifecycleEventArgs $args prePersist
+     *
+     * @return string
+     */
     public function prePersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
 
-        $this->uploadFile($entity);
+        $this->_uploadFile($entity);
     }
 
+    /**
+     * FileUploadListener constructor.
+     *
+     * @param PreUpdateEventArgs $args preUpdate
+     *
+     * @return string
+     */
     public function preUpdate(PreUpdateEventArgs $args)
     {
         $entity = $args->getEntity();
 
-        $this->uploadFile($entity);
+        $this->_uploadFile($entity);
     }
 
-    private function uploadFile($entity)
+    /**
+     * FileUploadListener constructor.
+     *
+     * @param Entity $entity UploadFile
+     *
+     * @return string
+     */
+    private function _uploadFile($entity)
     {
         // upload only works for Activity entities
         if (!$entity instanceof Activity) {
@@ -48,7 +85,7 @@ class FileUploadListener
 
         // only upload new files
         if ($file instanceof UploadedFile) {
-            $fileName = $this->uploader->upload($file);
+            $fileName = $this->_uploader->upload($file);
             $entity->setUploadPdf($fileName);
         }
     }
