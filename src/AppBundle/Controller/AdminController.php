@@ -29,7 +29,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class AdminController extends Controller
 {
     /**
-     * Lists all offer entities.
+     * Welcomes the admin manager.
      *
      * @Route("/",    name="admin_index")
      * @Method("GET")

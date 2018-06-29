@@ -57,12 +57,12 @@
                         or ROLE_MANAGER -->
                         {% if app.user.hasRole('ROLE_MANAGER') %}
                         <li class="sidebar-brand">
-                            <a href="{{ path('admin_index') }}" class="navbar-brand">
+                            <a href="{{ path('manager_dashboard') }}" class="navbar-brand">
                                 <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Tableau de bord</a>
                         </li>
                         {% else %}
                         <li class="sidebar-brand">
-                            <a href="{{ path('manager_dashboard') }}" class="navbar-brand">
+                            <a href="{{ path('admin_index') }}" class="navbar-brand">
                                 <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Tableau de bord</a>
                         </li>
                         {% endif %}
