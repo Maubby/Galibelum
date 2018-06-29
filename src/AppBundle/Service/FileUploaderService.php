@@ -43,7 +43,6 @@ class FileUploaderService
         } else {
             $file->move(__DIR__ .$path, $fileName);
         }
-
         return $fileName;
     }
 }
