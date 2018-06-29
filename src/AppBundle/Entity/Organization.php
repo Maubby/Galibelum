@@ -135,7 +135,9 @@ class Organization
      * )
      * @Assert\Length(
      *     min = 32,
-     *     minMessage = "Votre description doit contenir au mmoins {{ limit }} caractères"
+     *     max = 250,
+     *     minMessage = "Votre description doit contenir au moins {{ limit }} caractères",
+     *     maxMessage = "Votre description ne peut pas contenir plus de {{ limit }} caractères"
      * )
      */
     private $description;

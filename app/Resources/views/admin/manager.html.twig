@@ -1,4 +1,4 @@
-{# app/Resources/views/activity/index.html.twig #}
+{# app/Resources/views/activity/dashboard.html.twig #}
 {% extends 'base_back.html.twig' %}
 
 {% block title %}Gestion des accounts managers{% endblock %}
@@ -31,15 +31,13 @@
                         <!-- Table head -->
                         <thead class="table table-striped degradeblue text-center">
                         <tr>
-                            <th class="text-center" scope="col"><span>
+                            <th scope="col"><span>
                                 <i class="fas fa-portrait degradeblue"></i> Nom</span></th>
-                            <th class="text-center" scope="col"><span>
+                            <th scope="col"><span>
                                 <i class="fas fa-portrait degradeblue"></i> Prénom</span></th>
-                            <th class="text-center" scope="col"><span>
+                            <th scope="col"><span>
                                 <i class="far fa-envelope-open degradeblue"></i> Email</span></th>
-                            <th class="text-center" scope="col"><span>
-                                <i class="far fa-bell degradeblue"></i> Actif</span></th>
-                            <th class="text-center" scope="col"><span>
+                            <th scope="col"><span>
                                 <i class="far fa-edit degradeblue"></i> Mettre à jour</span></th>
                         </tr>
                         </thead>
@@ -49,11 +47,10 @@
                         <tbody>
                         {% for user in users %}
                             <tr>
-                                <td class="text-center">{{ user.lastName }}</td>
-                                <td class="text-center">{{ user.firstName }}</td>
-                                <td class="text-center">{{ user.email }}</td>
-                                <td class="text-center">{% if user.enabled == 1 %} Oui {% else %} Non {% endif %}</td>
-                                <td class="text-center normal-subtitle-text"><a href="#" class="five-color">
+                                <td>{{ user.lastName }}</td>
+                                <td>{{ user.firstName }}</td>
+                                <td>{{ user.email }}</td>
+                                <td class="normal-subtitle-text"><a href="#" class="five-color">
                                         Modifier le profil</a></td>
                             </tr>
                         {% endfor %}
