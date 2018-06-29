@@ -18,6 +18,17 @@
 {% endblock %}
 
 {% block body %}
+    <!--Adding Flashbag-->
+    {% if app.session.flashBag.has('pdf') %}
+        <div class="alert alert-info">
+            {% for msg in app.session.flashBag.get('pdf') %}
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <!--End Flashbag-->
+
     <main id="activity" class="light-blue-subtitle-text">
         <section>
             <div class="container-fluid">
@@ -133,12 +144,25 @@
                             <div class="col-sm-12 mt-20">
                                 <div class="form-group form-error">
                                     <i class="fas fa-edit"></i>{{ form_label(edit_form.description, 'Description') }}
-                                    {{ form_widget(edit_form.description, {'attr': {'class': "form-control input-field", 'placeholder': "Maximum 250 caractères"}}) }}
+                                    {{ form_widget(edit_form.description, {'attr': {'class': "form-control input-field", 'placeholder': "Maximum 255 caractères"}}) }}
                                     {{ form_errors(edit_form.description) }}
                                 </div>
                             </div>
                         </div>
                         <!--End Activity's Description-->
+
+                        <!--Activity's PDF Upload-->
+                        <div class="row">
+                            <div class="col-sm-12 mt-20">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-upload"></i>{{ form_label(edit_form.uploadPdf, 'Vous pouvez ajouter un PDF pour décrire votre activité') }}
+                                    {{ form_widget(edit_form.uploadPdf, {'attr': {'class': "filebrowse"} }) }}
+                                    {{ form_errors(edit_form.uploadPdf) }}
+                                    {{ activity.uploadPdf }}
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Activity's PDF Upload-->
 
                         <div class="row mt-10">
                             <div class="col-sm-12 text-center">

@@ -10,9 +10,11 @@
  */
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Activity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -113,6 +115,12 @@ class ActivityType extends AbstractType
                     'required' => true,
                 )
             )
+            ->add(
+                'uploadPdf', FileType::class, array(
+                    'required' => false,
+                    'data_class' => null,
+                )
+            )
 
             ->remove('mainGame');
     }
@@ -128,7 +136,7 @@ class ActivityType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'AppBundle\Entity\Activity'
+                'data_class' => Activity::class,
             )
         );
     }

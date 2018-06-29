@@ -63,8 +63,6 @@ class Activity
      * @Assert\Length(
      *      min = 2,
      *      max = 32,
-     *      minMessage = "Your name must be at least {{ limit }} characters long",
-     *      maxMessage = "Your name cannot be longer than {{ limit }} characters"
      * )
      */
     private $name;
@@ -86,8 +84,6 @@ class Activity
      * @Assert\Length(
      *      min = 2,
      *      max = 32,
-     *      minMessage = "The activity type must be at least {{ limit }} characters long",
-     *      maxMessage = "The activity type cannot be longer than {{ limit }} characters"
      * )
      */
     private $type;
@@ -98,11 +94,10 @@ class Activity
      *
      * @ORM\Column(name="description", type="text")
      *
+     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
-     *      minMessage = "The description is a little bit too short, it must be at least {{ limit }} characters long",
-     *      maxMessage = "The description cannot be longer than {{ limit }} characters"
      * )
      */
     private $description;
@@ -137,8 +132,6 @@ class Activity
      * @Assert\Length(
      *      min = 2,
      *      max = 64,
-     *      minMessage = "The address must be at least {{ limit }} characters long",
-     *      maxMessage = "The address cannot be longer than {{ limit }} characters"
      * )
      */
     private $address;
@@ -152,8 +145,6 @@ class Activity
      * @Assert\Length(
      *      min = 2,
      *      max = 32,
-     *      minMessage = "The game's name must be at least {{ limit }} characters long",
-     *      maxMessage = "The game's name cannot be longer than {{ limit }} characters"
      * )
      */
     private $mainGame;
@@ -166,13 +157,10 @@ class Activity
      *
      * @Assert\Length(
      *      max = 128,
-     *      maxMessage = "The url link cannot be longer than {{ limit }} characters"
      * )
      * @Assert\Url(
-     *     message = "The url '{{ value }}' is not a valid url",
      *     protocols = {"http", "https", "ftp"},
      *     checkDNS = "ANY",
-     *     dnsMessage = "The host '{{ value }}' could not be resolved."
      * )
      */
     private $urlVideo;
@@ -184,24 +172,52 @@ class Activity
      * @ORM\Column(name="achievement", type="string", nullable=true)
      *
      * @Assert\Length(
+
      *      min = 2,
      *      max = 255,
-     *      minMessage = "The achievement description is a little bit too short, it must be at least {{ limit }} characters long",
-     *      maxMessage = "The achievement description cannot be longer than {{ limit }} characters"
      * )
      */
     private $achievement;
 
     /**
+     * @var array
      *
-     * @var string
-     *
-     * @ORM\Column(name="socialLink", type="string")
+     * @ORM\Column(name="socialLink", type="array")
      *
      * @Assert\NotBlank()
      */
     private $socialLink;
 
+    /**
+     * @ORM\Column(name="uploadPdf", type="string", nullable=true)
+     *
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     * )
+     */
+    private $uploadPdf;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->activities = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setCreationDate(new \DateTime());
+    }
+
+    // Adding personal methods
+
+    /**
+     * Return id string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->id . '';
+    }
 
     /**
      * Get id
@@ -384,7 +400,7 @@ class Activity
     /**
      * Set achievement
      *
-     * @param array $achievement
+     * @param string $achievement
      *
      * @return Activity
      */
@@ -398,7 +414,7 @@ class Activity
     /**
      * Get achievement
      *
-     * @return array
+     * @return string
      */
     public function getAchievement()
     {
@@ -427,14 +443,6 @@ class Activity
     public function getSocialLink()
     {
         return $this->socialLink;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->activities = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->setCreationDate(new \DateTime());
     }
 
     /**
@@ -565,5 +573,17 @@ class Activity
     public function getDateEnd()
     {
         return $this->dateEnd;
+    }
+
+    public function getUploadPdf()
+    {
+        return $this->uploadPdf;
+    }
+
+    public function setUploadPdf($uploadPdf)
+    {
+        $this->uploadPdf = $uploadPdf;
+
+        return $this;
     }
 }
