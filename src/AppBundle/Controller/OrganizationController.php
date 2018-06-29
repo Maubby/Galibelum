@@ -33,29 +33,6 @@ class OrganizationController extends Controller
     /**
      * Lists all organization entities.
      *
-     * @Route("/index", name="organization_index")
-     * @Method("GET")
-     *
-     * @return Response A Response instance
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $organizations = $em
-            ->getRepository('AppBundle:Organization')
-            ->findByisActive(1);
-
-        return $this->render(
-            'organization/index.html.twig', array(
-                'organizations' => $organizations,
-            )
-        );
-    }
-
-    /**
-     * Lists all organization entities.
-     *
      * @Route("/",    name="dashboard_index")
      * @Method("GET")
      *

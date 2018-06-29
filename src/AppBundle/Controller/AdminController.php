@@ -74,7 +74,7 @@ class AdminController extends Controller
             $em->flush();
 
             return $this->redirectToRoute(
-                'admin_index'
+                'admin/manager.html.twig'
             );
         }
 
