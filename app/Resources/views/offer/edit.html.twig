@@ -1,7 +1,7 @@
 {# app/Resources/views/offer/new.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier une offre{% endblock %}
+{% block title %}Modifier votre offre{% endblock %}
 
 {% block stylesheets %}
 
@@ -24,8 +24,8 @@
                 <div class="col-md-12">
                     <!-- Return to the dashboard -->
                     <ol class="breadcrumb breadcrumb-boxing-canvas">
-                        <li><i class="fas fa-reply degradeblue"></i>&nbsp;
-                            <a href="{{ path('dashboard_index') }}" class="degradeblue">Retourner sur votre tableau de bord</a></li>
+                        <li><a href="{{ path('dashboard_index') }}" class="degradeblue">Tableau de bord</a></li>
+                        <li>Modifier votre offre</li>
                     </ol>
                 </div>
             </div>
@@ -47,14 +47,14 @@
                         <div class="col-md-6 correct-pl">
                             <div class="mt-20">
                                 <i class="far fa-calendar-alt"></i>
-                                {{ form_label(edit_form.date, "Date d'expiration" )}}
+                                {{ form_label(edit_form.date, "Date d'expiration" )}} <i class="fas fa-question-circle" title="La phase de contractualisation étant fixée à 3 semaines, la date de votre offre a été avancée de 21 jours afin de vous laisser le temps nécessaire pour finaliser les contrats avec les différents partenaires."></i>
                                 {{ form_widget(edit_form.date, {'attr': {'class':'form-control input-field'}}) }}
                                 {{ form_errors(edit_form.date) }}
                             </div>
                             <div class="mt-20">
                                 <i class="fas fa-dollar-sign"></i>
                                 {{ form_label(edit_form.amount, "Montant demandé" )}}
-                                {{ form_widget(edit_form.amount, {'attr': {'class':'form-control input-field js-datepicker', 'placeholder' : "Montant de l'offre" }}) }}
+                                {{ form_widget(edit_form.amount, {'attr': {'class':'form-control input-field', 'placeholder' : "Montant de l'offre" }}) }}
                                 {{ form_errors(edit_form.amount) }}
                             </div>
                             <div class="mt-20">
@@ -98,9 +98,34 @@
                         {{ form_widget(edit_form.description, {'attr': {'class':'form-control input-field', 'placeholder' : "Description de l'offre" }}) }}
                         {{ form_errors(edit_form.description) }}
                     </div>
+
                     <div class="col-sm-12 col-xs-12 text-center">
-                        <input class="btn btn-primary backblue-btn mt-20" type="submit" value="{{ "Enregistrer"|trans }}" />
+                        <a href="#" class="btn btn-primary backblue-btn-sm mt-20" data-toggle="modal" data-target="#pop-up-offer">Modifier votre offre</a>
                     </div>
+
+                    <!-- Modal introducing the redirection to the activity_index -->
+                    <div class="modal fade" id="pop-up-offer" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-notify modal-info" role="document">
+                            <div class="modal-content">
+
+                                <!--Modal's header-->
+                                <div class="modal-header text-center">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"><i class="fas fa-times" style="color: #999999;" aria-hidden="true"></i></span>
+                                    </button>
+                                    <p class="h6">La phase de contractualisation étant fixée à 3 semaines, la date de votre offre a été avancée de 21 jours afin de vous laisser le temps nécessaire pour finaliser les contrats avec les différents partenaires.</p>
+                                </div>
+
+                                <!--Modal's body-->
+                                <div class="modal-body">
+                                    <div class="col-sm-12 col-xs-12 text-center mt-20">
+                                        <input class="btn btn-primary backblue-btn-sm" type="submit" value="{{ "Enregistrer"|trans }}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of modal -->
                     {{ form_end(edit_form) }}
                 </div>
             </div>

@@ -40,7 +40,6 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
-
         return $this->render(
             'admin/index.html.twig',
             array('users' => $users,)
@@ -60,19 +59,16 @@ class AdminController extends Controller
     public function newAction(Request $request)
     {
         $managers = new User();
-
         $form = $this->createForm('AppBundle\Form\RegistrationType', $managers);
         $form->remove('cgu');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-
             $managers
                 ->setCgu(1)
                 ->setRoles(array('ROLE_MANAGER'))
                 ->setEnabled(1);
-
             // Persisting user according to its new account Manager
             $em->persist($managers);
             $em->flush();
@@ -91,6 +87,25 @@ class AdminController extends Controller
     }
 
     /**
+     * Lists all account managers.
+     *
+     * @Route("/manager", name="admin/manager.html.twig")
+     * @Method("GET")
+     *
+     * @return Response A Response instance
+     */
+    public function managersAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
+
+        return $this->render(
+            'admin/manager.html.twig',
+            array('users' => $users,)
+        );
+    }
+    
+    /**
      * Delete a manager entity.
      *
      * @param User $manager The account manager
@@ -102,12 +117,10 @@ class AdminController extends Controller
      */
     public function deleteAction(User $manager)
     {
-            $em = $this->getDoctrine()->getManager();
-            $manager->setEnabled(false);
-
-            $em->persist($manager);
-            $em->flush();
-
+        $em = $this->getDoctrine()->getManager();
+        $manager->setEnabled(false);
+        $em->persist($manager);
+        $em->flush();
         return $this->redirectToRoute('admin_index');
     }
 }

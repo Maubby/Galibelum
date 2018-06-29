@@ -1,0 +1,13 @@
+<!-- Loop for show information offers -->
+{% for offer in organization.offers %}
+    <div class="item">
+        <div class="panel panel-default text-center">
+            <h5 class="panel-title pt-10">{{ offer.name }}</h5>
+            <div class="panel-body">
+                <p class="panel-item"><strong>Montant : </strong>{{ offer.amount }} €</p>
+                <p class="panel-item"><strong>Date d'expiration : </strong>{{ offer.date|date("d M Y") }}</p>
+                <a href="{{ path('offer_show', { 'id': offer.id }) }}" class="btn btn-primary btn-sm">Plus de détails</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}

@@ -26,10 +26,13 @@ Encore
     .addStyleEntry('offer', './assets/scss/offer.scss')
     .addStyleEntry('inscription-choose', './assets/scss/inscription-choose.scss')
     .addStyleEntry('activity', './assets/scss/activity.scss')
+    .addStyleEntry('admin', './assets/scss/admin.scss')
+    .addStyleEntry('activity_index', './assets/scss/activity_index.scss')
+    .addStyleEntry('manager', './assets/scss/manager.scss')
     .addEntry('login-script', './assets/js/login-script.js')
-    .addEntry('datepicker', './assets/js/datepicker.js')
     .addEntry('carousel', './assets/js/carousel.js')
     .addEntry('input_display', './assets/js/input_display.js')
+    .addEntry('menu-toggle', './assets/js/menu-toggle.js')
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
         { from: './assets/images', to: 'images'}
