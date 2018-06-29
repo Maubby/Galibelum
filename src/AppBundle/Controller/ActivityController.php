@@ -11,6 +11,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Activity;
+use AppBundle\Form\ActivityType;
+use AppBundle\Service\FileUploaderService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -75,19 +77,27 @@ class ActivityController extends Controller
     public function newAction(Request $request)
     {
         $activity = new Activity();
-        $form = $this->createForm('AppBundle\Form\ActivityType', $activity);
+        $form = $this->createForm(ActivityType::class, $activity);
+        $form->remove('uploadPdf');
         $organization = $this->getUser()->getOrganization();
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $activity->setOrganizationActivities($organization);
-            $activity->setNameCanonical(strtolower($activity->getName()));
+
+            $activity
+                ->setOrganizationActivities($organization)
+                ->setNameCanonical(strtolower($activity->getName()));
+
+            $request->getSession()
+                ->getFlashBag()
+                ->add('pdf', "Vous pouvez ajouter un PDF pour décrire votre activité");
+
             $em->persist($activity);
             $em->flush();
 
             return $this->redirectToRoute(
-                'activity_show',
+                'activity_edit',
                 array('id' => $activity->getId())
             );
         }
@@ -113,11 +123,13 @@ class ActivityController extends Controller
     public function showAction(Activity $activity)
     {
         $deleteForm = $this->_createDeleteForm($activity);
+        $user = $this->getUser();
 
         return $this->render(
             'activity/show.html.twig', array(
                 'activity' => $activity,
                 'delete_form' => $deleteForm->createView(),
+                'organization_id' => $user->getOrganization()->getId(),
             )
         );
     }
@@ -125,22 +137,44 @@ class ActivityController extends Controller
     /**
      * Displays a form to edit an existing activity entity.
      *
-     * @param Request  $request  Delete posted info
-     * @param Activity $activity The activity entity
+     * @param Request             $request             Delete posted info
+     * @param Activity            $activity            The activity entity
+     * @param FileUploaderService $fileUploaderService Uploader Service
      *
+     * @return              Response A Response instance
      * @Route("/{id}/edit", name="activity_edit")
      * @Method({"GET",      "POST"})
-     *
-     * @return Response A Response instance
      */
-    public function editAction(Request $request, Activity $activity)
+    public function editAction(Request $request, Activity $activity, FileUploaderService $fileUploaderService)
     {
         $deleteForm = $this->_createDeleteForm($activity);
-        $editForm = $this->createForm('AppBundle\Form\ActivityType', $activity);
+        $editForm = $this->createForm(ActivityType::class, $activity);
         $editForm->handleRequest($request);
 
+        $user = $this->getUser();
+        $organizationId = $user->getOrganization()->getId();
+
+        // Var for the file name
+        $path = '/../../../web/uploads/pdf/organization_'.$organizationId.'/activity/activity_'.$activity->getId().'.pdf';
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $file = $activity->getUploadPdf();
+
+            // Check if the file exist and set the new or old value
+            if ($file === null && file_exists(__DIR__ .$path)) {
+                $activity->setUploadPdf('activity_'.$activity->getId().'.pdf');
+                $this->getDoctrine()->getManager()->flush();
+            } elseif ($file == null && !file_exists(__DIR__ .$path)) {
+                $this->getDoctrine()->getManager()->flush();
+            } else {
+                $fileName = $fileUploaderService
+                    ->upload(
+                        $file, $activity
+                        ->getId(), $organizationId
+                    );
+                $activity->setUploadPdf($fileName);
+                $this->getDoctrine()->getManager()->flush();
+            }
 
             $request->getSession()
                 ->getFlashBag()
@@ -148,8 +182,11 @@ class ActivityController extends Controller
 
             return $this->redirectToRoute(
                 'dashboard_index',
-                array('id' => $activity->getId())
+                array(
+                    'id' => $activity->getId(),
+                )
             );
+
         }
 
         return $this->render(
