@@ -186,7 +186,6 @@ class ActivityController extends Controller
                     'id' => $activity->getId(),
                 )
             );
-
         }
 
         return $this->render(
