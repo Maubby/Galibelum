@@ -22,8 +22,15 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class FileUploaderService
 {
+    private $_targetDirectory;
+
+    public function __construct($targetDirectory)
+    {
+        $this->_targetDirectory = $targetDirectory;
+    }
+
     /**
-     * Uploader for Galibelum
+     * Uploader for file
      *
      * @param UploadedFile $file           get name of the upload file in db
      * @param int          $id             extension of the file's name
@@ -34,15 +41,19 @@ class FileUploaderService
     public function upload(UploadedFile $file, $id, $organizationId)
     {
         $fileName = 'activity_'.$id.'.'.$file->guessExtension();
-        $path = '/../../../web/uploads/pdf/'.'/organization_'.$organizationId.'/activity';
+        $path = $this->getTargetDirectory().'/organization_'.$organizationId.'/activity';
 
         // Check if the directory exist and create if no
-        if (!file_exists(__DIR__ .$path)) {
-            mkdir(__DIR__ .$path, 0777, true);
-            $file->move(__DIR__ .$path, $fileName);
+        if (!file_exists($path)) {
+            $file->move( $path, $fileName);
         } else {
-            $file->move(__DIR__ .$path, $fileName);
+            $file->move($path, $fileName);
         }
         return $fileName;
+    }
+
+    public function getTargetDirectory()
+    {
+        return $this->_targetDirectory;
     }
 }
