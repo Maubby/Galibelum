@@ -13,7 +13,8 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     .autoProvidejQuery()
     .enableVersioning()
-    .createSharedEntry('vendor', ['jquery', 'bootstrap-sass', 'bootstrap-sass/assets/stylesheets/_bootstrap.scss'])
+    .createSharedEntry('vendor', ['jquery', 'bootstrap-sass', 'bootstrap-sass/assets/stylesheets/_bootstrap.scss',
+        'datatables.net-dt/css/jquery.dataTables.min.css', 'datatables.net-dt/js/dataTables.dataTables.min.js'])
     .addStyleEntry('style', './assets/scss/style.scss')
     .addStyleEntry('check_confirmed_email', './assets/scss/check_confirmed_email.scss')
     .addStyleEntry('organization_inscription', './assets/scss/organization_inscription.scss')
@@ -33,6 +34,7 @@ Encore
     .addEntry('carousel', './assets/js/carousel.js')
     .addEntry('input_display', './assets/js/input_display.js')
     .addEntry('menu-toggle', './assets/js/menu-toggle.js')
+    .addEntry('table-manager', './assets/js/table-manager.js')
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
         { from: './assets/images', to: 'images'}

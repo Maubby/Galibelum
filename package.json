@@ -13,6 +13,8 @@
     "bootstrap-sass": "^3.3.7",
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
+    "datatables.net": "^1.10.19",
+    "datatables.net-dt": "^1.10.19",
     "jquery": "^3.3.1",
     "node-sass": "^4.9.0",
     "resolve-url-loader": "^2.3.0",

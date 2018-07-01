@@ -27,7 +27,7 @@
 
                 <!-- Creating a responsive table -->
                 <div class="table-responsive">
-                    <table class="table">
+                    <table id="table-manager">
                         <!-- Table head -->
                         <thead class="table table-striped degradeblue text-center">
                         <tr>
@@ -95,4 +95,5 @@
 
 {% block javascripts %}
     <script src="{{ asset('build/menu-toggle.js') }}"></script>
+    <script src="{{ asset('build/table-manager.js') }}"></script>
 {% endblock %}
