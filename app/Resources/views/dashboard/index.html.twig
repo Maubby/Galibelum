@@ -46,7 +46,7 @@
             <!-- list last activities -->
             <div class="col-md-offset-1 col-md-4 mb-40">
                 <div class="boxing-canvas">
-                    <h5>Mes Activités</h5>
+                    <h5><a href="{{ path('activity_index') }}">Ensemble de mes activités</a></h5>
                     <div class="boxing-body">
                         <!-- to show message if activity is empty -->
                         {% if organization.OrganizationActivity is empty %}
@@ -67,7 +67,7 @@
             <!-- list last offers -->
             <div class="col-md-4 mb-40">
                 <div class="boxing-canvas">
-                    <h5>Mes Offres</h5>
+                    <h5><a href="{{ path('offer_index') }}">Ensemble de mes offres</a></h5>
                     <div class="boxing-body">
                         <!-- to show message if offer is empty -->
                         {% if organization.offers is empty %}
