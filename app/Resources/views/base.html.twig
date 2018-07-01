@@ -44,6 +44,16 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
+
+                        <!-- Link for the ROLE_SUPER_ADMIN to go back to his dashboard -->
+                        {#{% if app.user.hasRole('ROLE_SUPER_ADMIN') %}#}
+                        {#<li>#}
+                            {#<a href="{{ path('admin/manager.html.twig') }}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>#}
+                                {#Retourner sur votre tableau de bord</a>#}
+                        {#</li>#}
+                        {#{% endif %}#}
+                        <!-- End link -->
+
                         <li><a href="#"><i class="fas fa-search"></i> Recherche structure</a></li>
                         <li><a href="#">Contractualisation</a></li>
                         <li><a href="#">Paiements</a></li>
