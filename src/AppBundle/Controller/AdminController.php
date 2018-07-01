@@ -98,6 +98,7 @@ class AdminController extends Controller
     {
         $editForm = $this->createForm('AppBundle\Form\RegistrationType', $manager);
         $editForm->remove('cgu');
+        $editForm->remove('phoneNumber');
         $editForm->handleRequest($request);
 
 
@@ -133,20 +134,20 @@ class AdminController extends Controller
      *
      * @return Response A Response instance
      */
-    public function managersAction()
+    public function managerAction()
     {
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
         return $this->render(
-            'admin/managers.html.twig',
+            'admin/manager.html.twig',
             array('users' => $users,)
         );
     }
 
     /**
-     * Delete a managers entity.
+     * Delete a manager entity.
      *
-     * @param User $managers The account manager
+     * @param User $manager The account manager
      *
      * @Route("/{id}", name="admin_delete")
      * @Method("GET")
