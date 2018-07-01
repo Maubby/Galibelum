@@ -16,7 +16,6 @@
 /node_modules/
 /web/bundles/
 /web/uploads/
-/web/build/
 /web/wordpress/
 .idea
 *.php~

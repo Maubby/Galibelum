@@ -12,7 +12,6 @@ Encore
     .enableSassLoader()
     .enableSourceMaps(!Encore.isProduction())
     .autoProvidejQuery()
-    .enableVersioning()
     .createSharedEntry('vendor', ['jquery', 'bootstrap-sass', 'bootstrap-sass/assets/stylesheets/_bootstrap.scss'])
     .addStyleEntry('style', './assets/scss/style.scss')
     .addStyleEntry('check_confirmed_email', './assets/scss/check_confirmed_email.scss')
