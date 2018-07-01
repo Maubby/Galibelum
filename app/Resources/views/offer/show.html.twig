@@ -1,4 +1,21 @@
+{# app/Resources/views/offer/show.html.twig #}
 {% extends 'base.html.twig' %}
+
+{% block title %}Liste des offres{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/organization_show.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
     <h1>Offer</h1>
@@ -6,24 +23,16 @@
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ offer.id }}</td>
-            </tr>
-            <tr>
                 <th>Name</th>
                 <td>{{ offer.name }}</td>
-            </tr>
-            <tr>
-                <th>Namecanonical</th>
-                <td>{{ offer.nameCanonical }}</td>
             </tr>
             <tr>
                 <th>Description</th>
                 <td>{{ offer.description }}</td>
             </tr>
             <tr>
-                <th>Date</th>
-                <td>{% if offer.date %}{{ offer.date|date('Y-m-d') }}{% endif %}</td>
+                <th>Date d'expiration</th>
+                <td>{% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Amount</th>
@@ -38,23 +47,15 @@
                 <td>{{ offer.partnershipNumber }}</td>
             </tr>
             <tr>
-                <th>Finaldeal</th>
-                <td>{{ offer.finalDeal }}</td>
-            </tr>
-            <tr>
                 <th>Status</th>
                 <td>{{ offer.status }}</td>
-            </tr>
-            <tr>
-                <th>Signature</th>
-                <td>{% if offer.signature %}Yes{% else %}No{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('offer_index') }}">Back to the list</a>
+            <a href="{{ path('dashboard_index') }}">Retourner sur votre tableau de bord</a>
         </li>
         <li>
             <a href="{{ path('offer_edit', { 'id': offer.id }) }}">Edit</a>

@@ -11,13 +11,13 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Organization;
+use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
 
 /**
  * Organization controller.
@@ -33,56 +33,35 @@ class OrganizationController extends Controller
     /**
      * Lists all organization entities.
      *
-     * @Route("/index",    name="organization_index")
+     * @Route("/",    name="dashboard_index")
      * @Method("GET")
      *
      * @return Response A Response instance
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $organizations = $em->getRepository('AppBundle:Organization')->findAll();
-
-        return $this->render(
-            'organization/index.html.twig', array(
-                'organizations' => $organizations,
-            )
-        );
-    }
-
-    /**
-     * Lists all organization entities.
-     *
-     * @Route("/",    name="dashboard_index")
-     * @Method("GET")
      */
     public function dashboardAction()
     {
         $user = $this->getUser();
 
-        if ($user->hasRole('ROLE_STRUCTURE') && $user->getOrganization()->getIsActive() === 1 || $user->hasRole('ROLE_MARQUE')  && $user->getOrganization()->getIsActive() === 1) {
-
-            $name = $user->getFirstName() .' '. $user->getLastName();
-            $em = $this->getDoctrine()->getManager();
-            $organization = $em->getRepository('AppBundle:Organization')->findby(array('user' => $user));
-            $activities = $em->getRepository('AppBundle:Activity')->findby(array('organizationActivities' => $organization));
-            $offers = $em->getRepository('AppBundle:Offer')->findby(array('activity' => $activities));
+        if ($user->hasRole('ROLE_STRUCTURE')
+            && $user->getOrganization()->getIsActive() === 1
+            || $user->hasRole('ROLE_COMPANY')
+            && $user->getOrganization()->getIsActive() === 1
+        ) {
+            $organization = $user->getOrganization();
 
             return $this->render(
                 'dashboard/index.html.twig', array(
+                    'user' => $user,
                     'organization' => $organization,
-                    'activities' => $activities ,
-                    'offers' => $offers,
-                    'name' => $name,
                 )
             );
-        }
-        elseif ($user->hasRole('ROLE_STRUCTURE') && $user->getOrganization()->getIsActive() === 0 || $user->hasRole('ROLE_MARQUE') && $user->getOrganization()->getIsActive() === 0) {
-
+        } elseif ($user->hasRole('ROLE_STRUCTURE')
+            && $user->getOrganization()->getIsActive() === 0
+            || $user->hasRole('ROLE_COMPANY')
+            && $user->getOrganization()->getIsActive() === 0
+        ) {
             return $this->redirectToRoute('waiting_index');
-        }
-        else{
+        } else {
             return $this->redirectToRoute('inscription_index');
         }
     }
@@ -91,35 +70,43 @@ class OrganizationController extends Controller
      * Creates a new organization entity.
      *
      * @param Request $request New posted info
-     * @param int $choose organization or company
+     * @param int     $choose  Organization or company
      *
-     * @Route("/new/choose{choose}", name="organization_new")
-     * @Method({"GET",               "POST"})
+     * @Route("/new/choose/{choose}", name="organization_new")
+     * @Method({"GET",                "POST"})
      *
      * @return Response A Response instance
      */
-    public function newAction(Request $request,int $choose=null )
+    public function newAction(Request $request, int $choose = 0)
     {
         $organization = new Organization();
         $user = $this->getUser();
-        $form = $this->createForm('AppBundle\Form\OrganizationType', $organization);
+        if ($choose === 1) {
+            $form = $this
+                ->createForm(
+                    'AppBundle\Form\OrganizationType', $organization
+                );
+            $form->remove('status');
+        } else {
+            $form = $this
+                ->createForm(
+                    'AppBundle\Form\OrganizationType', $organization
+                );
+        }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $organization->setUser($user);
             $organization->setNameCanonical(strtolower($organization->getName()));
+            $user->setOrganization($organization);
+            $choose === 0 ?$user->setRoles(array('ROLE_STRUCTURE'))
+                : $user->setRoles(array('ROLE_COMPANY'));
+
+            // Persisting user according to its new organization
             $em->persist($organization);
-            $em->persist($this->getUser()->setOrganization($organization));
-
-            if ($choose === 0) {
-                $role = $this->getUser()->setRoles(array('ROLE_STRUCTURE'));
-            }
-            else ($choose === 1){
-                $role = $this->getUser()->setRoles(array('ROLE_MARQUE'))
-            };
-
-            $em->persist($role);
+            $em->persist($user);
             $em->flush();
 
             return $this->redirectToRoute(
@@ -152,12 +139,16 @@ class OrganizationController extends Controller
     {
         $deleteForm = $this->_createDeleteForm($organization);
 
-        return $this->render(
-            'organization/show.html.twig', array(
-                'organization' => $organization,
-                'delete_form' => $deleteForm->createView(),
-            )
-        );
+        if ($organization->getIsActive() === 1) {
+            return $this->render(
+                'organization/show.html.twig', array(
+                    'organization' => $organization,
+                    'delete_form' => $deleteForm->createView(),
+                )
+            );
+        } else {
+            return $this->redirectToRoute('homepage');
+        }
     }
 
     /**
@@ -173,18 +164,30 @@ class OrganizationController extends Controller
      */
     public function editAction(Request $request, Organization $organization)
     {
+        $user = $this->getUser();
         $deleteForm = $this->_createDeleteForm($organization);
-        $editForm = $this->createForm(
-            'AppBundle\Form\OrganizationType',
-            $organization
-        );
+        if ($user->hasRole('ROLE_COMPANY')) {
+            $editForm = $this
+                ->createForm(
+                    'AppBundle\Form\OrganizationType', $organization
+                );
+            $editForm->remove('status');
+        } else {
+            $editForm = $this
+                ->createForm(
+                    'AppBundle\Form\OrganizationType', $organization
+                );
+        }
         $editForm->handleRequest($request);
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $request->getSession()
+                ->getFlashBag()
+                ->add('success', 'Vos modifications ont bien été prises en compte.');
+
             return $this->redirectToRoute(
-                'organization_edit',
+                'dashboard_index',
                 array('id' => $organization->getId())
             );
         }
@@ -203,24 +206,36 @@ class OrganizationController extends Controller
      *
      * @param Request      $request      Delete posted info
      * @param Organization $organization The organization entity
+     * @param User         $user         The user entity
      *
      * @Route("/{id}",   name="organization_delete")
      * @Method("DELETE")
      *
      * @return Response A Response instance
      */
-    public function deleteAction(Request $request, Organization $organization)
-    {
+    public function deleteAction(
+        Request $request, Organization $organization, User $user
+    ) {
         $form = $this->_createDeleteForm($organization);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($organization);
+            $organization->setIsActive(2);
+            $user->setEnabled(false);
+            $em->persist($organization);
+            $em->persist($user);
             $em->flush();
         }
 
-        return $this->redirectToRoute('organization_index');
+        $request->getSession()
+            ->getFlashBag()
+            ->add(
+                'success', 'Votre compte a bien été désactivé. 
+            Si vous souhaitez nous rejoindre à nouveau, contactez Galibelum.'
+            );
+
+        return $this->redirectToRoute('fos_user_security_login');
     }
 
     /**

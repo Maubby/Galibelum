@@ -10,7 +10,9 @@
  */
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Activity;
 use AppBundle\Entity\Offer;
+use AppBundle\Service\ManagementFeesService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -38,35 +40,80 @@ class OfferController extends Controller
      */
     public function indexAction()
     {
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
 
-        $offers = $em->getRepository('AppBundle:Offer')->findAll();
+        $offers = $em
+            ->getRepository('AppBundle:Offer')
+            ->findBy(
+                array(
+                    'organization' => $user->getOrganization()
+                )
+            );
+        
+        $event_activities = $em->getRepository('AppBundle:Activity')->findBy(
+            array(
+                'organizationActivities' => $user->getOrganization(),
+                'type' => 'Évènement eSport'
+            )
+        );
+
+        $stream_activities = $em->getRepository('AppBundle:Activity')->findBy(
+            array(
+                'organizationActivities' => $user->getOrganization(),
+                'type' => 'Activité de streaming'
+            )
+        );
+        
+        $team_activities = $em->getRepository('AppBundle:Activity')->findBy(
+            array(
+                'organizationActivities' => $user->getOrganization(),
+                'type' => 'Equipe eSport'
+            )
+        );
 
         return $this->render(
             'offer/index.html.twig', array(
             'offers' => $offers,
+            'event_activities' => $event_activities,
+            'stream_activities' => $stream_activities,
+            'team_activities' => $team_activities,
             )
         );
     }
 
     /**
-     * Creates a new offer entity.
+     * Creates a new offer entity and get information for current activity.
      *
-     * @param Request $request New posted info
+     * @param Request $request New offer posted with activity id
+     * @param Activity $activity New offer by activity
+     * @param ManagementFeesService $feesService Fees Calculation services
      *
-     * @Route("/new",  name="offer_new")
-     * @Method({"GET", "POST"})
+     * @Route("/{id}/new",     name="offer_new")
+     * @Method({"GET","POST"})
      *
      * @return Response A Response instance
+     * @throws \Exception
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Activity $activity, ManagementFeesService $feesService)
     {
         $offer = new Offer();
         $form = $this->createForm('AppBundle\Form\OfferType', $offer);
         $form->handleRequest($request);
+        $interval = new \DateInterval($this->getParameter('periode'));
+
+        $user = $this->getUser();
+        $fees = $feesService->getFees($offer->getAmount(), $offer->getFinalDeal());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $offer = $offer
+                ->setActivity($activity)
+                ->setNameCanonical(strtolower($activity->getName()))
+                ->setHandlingFee($fees)
+                ->setOrganization($user->getOrganization())
+                ->setDate($offer->getDate()->sub($interval));
+            
             $em->persist($offer);
             $em->flush();
 
@@ -79,13 +126,14 @@ class OfferController extends Controller
         return $this->render(
             'offer/new.html.twig', array(
             'offer' => $offer,
+            'activity'=> $activity,
             'form' => $form->createView(),
             )
         );
     }
 
     /**
-     * Finds and displays a offer entity.
+     * Finds and displays all offer's from search result.
      *
      * @param Offer $offer The offer entity
      *
@@ -178,8 +226,8 @@ class OfferController extends Controller
         return $this->createFormBuilder()
             ->setAction(
                 $this->generateUrl(
-                    'offer_delete',
-                    array('id' => $offer->getId())
+                    'offer_delete', array(
+                    'id' => $offer->getId())
                 )
             )
             ->setMethod('DELETE')

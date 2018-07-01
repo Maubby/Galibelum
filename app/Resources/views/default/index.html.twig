@@ -1,4 +1,4 @@
-{# app/Resources/default/index.html.twig #}
+{# app/Resources/views/default/index.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Home{% endblock %}
@@ -13,12 +13,6 @@
             <div class="row">
                 <h1>Routes disponibles :</h1>
                 <ul>
-                    <li>
-                        <a href="{{ path('organization_index') }}">Voir les organisations</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('accountmanager_index') }}">Voir les AM</a>
-                    </li>
                     <li>
                         <a href="{{ path('activity_index') }}">Voir les activités</a>
                     </li>
