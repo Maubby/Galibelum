@@ -29,7 +29,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class AdminController extends Controller
 {
     /**
-     * Lists all offer entities.
+     * Welcomes the admin manager.
      *
      * @Route("/",    name="admin_index")
      * @Method("GET")
@@ -74,7 +74,7 @@ class AdminController extends Controller
             $em->flush();
 
             return $this->redirectToRoute(
-                'admin_index'
+                'admin/manager.html.twig'
             );
         }
 

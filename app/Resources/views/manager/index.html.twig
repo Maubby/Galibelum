@@ -1,14 +1,15 @@
 {# app/Resources/views/manager/index.html.twig #}
 {% extends 'base_back.html.twig' %}
-
-{% block title %}Tableau de bord{% endblock %}
-
+ 
+{% block title %}Liste des structures eSport|marques{% endblock %}
+ 
 {% block stylesheets %}
 
     <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/organization_show.css') }}">
     <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
 {% endblock %}
-
+ 
 {% block header %}
     <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
     <!-- Zero intern console warning -->
@@ -18,24 +19,74 @@
 {% endblock %}
 
 {% block body %}
-    <!-- Page Content -->
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <br>
-                <h3 class="degradeblue">Bienvenue {{ user.firstName }} !</h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <!-- Dashboard welcoming sentence -->
-                <h5 class="normal-subtitle-text">Depuis votre tableau de bord, vous pouvez naviguer sur le site,
-                    gérer les différentes organisations et les contrats.</h5>
-                <!-- End dashboard welcoming sentence -->
+        <div class="row boxing-canvas mt-50">
+            <div class="col-md-12 col-sm-12 col-xs-12 center">
+                <i class="far fa-user-circle text-center degradeblue" style="font-size: 50px"></i>
+                <h5 class="degradeblue text-center">Liste des structures eSport et marques</h5>
+
+                <!-- Creating a responsive table -->
+                <div class="table-responsive">
+                    <table class="table">
+                        <!-- Table head -->
+                        <thead class="table table-striped degradeblue text-center">
+                        <tr>
+                            <th>Nom</th>
+                            <th>Téléphone</th>
+                            <th>Email</th>
+                            <th>Forme juridique</th>
+                            <th class="hidden-xs">Description</th>
+                            <th>Statut</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <!-- End of table head -->
+
+                        <!-- Starting listing the account managers -->
+                        <tbody>
+                        {% for organization in organizations %}
+                            <tr>
+                                <td>{{ organization.name }}</td>
+                                <td>{{ organization.phoneNumber }}</td>
+                                <td>{{ organization.email }}</td>
+                                <td>
+                                    {% if organization.status != null %}
+                                        {{ organization.status }}
+                                    {% else %}
+                                        n/a
+                                    {% endif %}
+                                </td>
+                                <td class="hidden-xs"><p class="textarea-table">{{ organization.description }}</p></td>
+
+                                <!-- Displaying organizations' status -->
+                                {% if organization.isActive == 0 %}
+                                    <td class="degradered">En attente de validation</td>
+                                {% elseif organization.isActive == 1 %}
+                                    <td class="degradeblue">Compte activé</td>
+                                {% else %}
+                                    <td class="normal-subtitle-text">Compte désactivé</td>
+                                {% endif %}
+                                <!-- End displaying organizations' status -->
+
+                                <!-- Activate / deactivate buttons start -->
+                                <td>
+                                    {% if organization.isActive == 1 %}
+                                        <a href="{{ path('manager_organization_deactivate', { 'id': organization.id }) }}" class="button button-red text-center">
+                                            <strong>Désactiver</strong></a>
+                                    {% else %}
+                                        <a href="{{ path('manager_organization_activate', { 'id': organization.id }) }}" class="button button-green text-center">
+                                            <strong>Activer</strong></a>
+                                    {% endif %}
+                                </td>
+                                <!-- End activate / deactivate buttons -->
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-    <!-- End page content -->
 {% endblock %}
 
 {% block footer %}
