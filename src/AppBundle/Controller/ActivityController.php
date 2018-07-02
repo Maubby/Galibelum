@@ -188,6 +188,7 @@ class ActivityController extends Controller
             );
         }
 
+
         return $this->render(
             'activity/edit.html.twig', array(
                 'activity' => $activity,
