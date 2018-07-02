@@ -1,7 +1,7 @@
 {# app/Resources/views/admin/new.html.twig #}
 {% extends 'base_back.html.twig' %}
 
-{% block title %}Enregistrer un account manager{% endblock %}
+{% block title %}Modifier un account manager{% endblock %}
 
 {% block stylesheets %}
 
@@ -25,7 +25,7 @@
                 <div class="row boxing-canvas mt-50 pb-50">
                     <div class="col-md-6 col-xs-12">
                         <i class="fas fa-user-plus text-center degradeblue" style="font-size: 50px"></i>
-                        <h5 class="text-center degradeblue">Mofication de votre profil Account Manager</h5>
+                        <h5 class="text-center degradeblue">Modification du profil Account Manager</h5>
 
                         {{ form_start(edit_form) }}
                         <div class="col-sm-6 form-error">
@@ -47,11 +47,11 @@
                         </div>
                         <div class="col-sm-12 form-error">
                             {{ form_widget(edit_form.plainPassword.second,
-                                {'attr': {'class':'form-control input-field', 'placeholder' : 'Vérification mot de passe' }}) }}
+                                {'attr': {'class':'form-control input-field', 'placeholder' : 'Vérification du mot de passe' }}) }}
                             {{ form_errors(edit_form.plainPassword.second) }}
                         </div>
                         <div class="col-sm-12 col-xs-12 text-center pt-10">
-                            <input class="btn btn-primary backblue-btn" type="submit" value="{{ "Modifier votre profil"|trans }}" />
+                            <input class="btn btn-primary backblue-btn" type="submit" value="{{ "Modifier le profil"|trans }}" />
                         </div>
                         {{ form_end(edit_form) }}
                     </div>
