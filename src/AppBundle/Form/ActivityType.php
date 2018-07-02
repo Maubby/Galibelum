@@ -111,6 +111,15 @@ class ActivityType extends AbstractType
                 )
             )
             ->add(
+                'selectSocialLink', ChoiceType::class, array(
+                    'choices' => array(
+                        'Twitch' => 'Twitch',
+                        'Facebook' => 'Facebook',
+                        'Twitter' => 'Twitter',
+                    )
+                )
+            )
+            ->add(
                 'socialLink', UrlType::class, array(
                     'required' => true,
                 )
