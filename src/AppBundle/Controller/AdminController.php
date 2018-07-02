@@ -86,8 +86,8 @@ class AdminController extends Controller
     /**
      * Displays a form to edit an existing managers entity.
      *
-     * @param Request  $request  Delete posted info
-     * @param User $manager The User manager
+     * @param Request $request Delete posted info
+     * @param User    $manager The User manager
      *
      * @Route("/{id}/edit", name="admin_manager_edit")
      * @Method({"GET",      "POST"})
@@ -128,7 +128,7 @@ class AdminController extends Controller
     /**
      * Lists all account managers.
      *
-     * @Route("/managers",    name="admin_manager_list")
+     * @Route("/manager", name="admin_manager_list")
      *
      * @Method("GET")
      *
