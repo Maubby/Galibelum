@@ -29,10 +29,12 @@ class ActivityRepository extends \Doctrine\ORM\EntityRepository
     public function search($data)
     {
         $query = $this->createQueryBuilder('act')
-            ->select('act')
-            ->where('act.name LIKE :data')
-            ->orWhere('act.description LIKE :data')
+            ->SELECT('act')
+            ->WHERE('act.name LIKE :data')
+            ->ORWHERE('org.name LIKE :data')
+            ->LEFTJOIN('act.organizationActivities','org')
             ->setParameter('data', '%'.$data.'%')
+            ->orderBy('act.creationDate')
             ->getQuery();
 
         return $query->getResult();

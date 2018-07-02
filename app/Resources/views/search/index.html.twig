@@ -1,22 +1,98 @@
+{# app/Resources/views/offer/new.html.twig #}
 {% extends 'base.html.twig' %}
 
+{% block title %}Modifier une offre{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/search.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Return to the dashboard -->
+                <ol class="breadcrumb breadcrumb-boxing-canvas">
+                    <li>
+                        <a href="{{ path('dashboard_index') }}">Retourner sur votre tableau de bord</a></li>
+                    <li>Recherche de structure(s)</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row boxing-canvas">
+            <div class="col-md-12 text-center">
+                <i class="fas fa-search degradeblue" style="font-size: 50px"></i>
+                <h5 class="degradeblue">Votre recherche :</h5>
+            </div>
+            <div class="col-md-12 mt-30">
+                <form class="search-form text-center" action="{{ path('search_action') }}">
+                    <input id="search" title="search" name="search" class="search-bar" value="{{ data }}">
+                    <button id="btn_search" class="backblue"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="row boxing-canvas mt-50">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- Creating a responsive table -->
+                <div class="table-responsive table-striped text-center">
+                    <table id="table-manager">
+                        <!-- Table head -->
+                        <thead class="table">
+                            <tr>
+                                <th class="text-center">Nom</th>
+                                <th class="text-center">Type d'activité</th>
+                                <th class="text-center">Montant</th>
+                                <th class="text-center">Date d'expiration</th>
+                                <th class="text-center">Détails</th>
+                            </tr>
+                        </thead>
+                        <!-- End of table head -->
 
-    <div class="container">
-        <input id="search" title="search" name="search">
-        <div class="alert-danger error" style="display: none;">La recherche dois comporter 3 caracteres</div>
-        <button id="btn_search">Rechercher</button>
-    </div>
-
-    <div class="container-fluid bg-success" id="search_result" style="width: 100%; height: 1000px;">
-
+                        <!-- Starting listing the account managers -->
+                        <tbody>
+                        {% if activitylist is not defined %}
+                            <tr>
+                                <td>Aucun résultat pour votre recherche</td>
+                            </tr>
+                        {% else %}
+                            {% for activity in activitylist %}
+                            <tr>
+                                <td >{{ activity.name }} | {{ activity.organizationActivities.name }} <br>
+                                {{ activity.description }}</td>
+                                <td class="text-center">{{ activity.type }}</td>
+                                {% for offer in activity.activities %}
+                                <td class="text-center">{{offer.amount}}</td>
+                                <td class="text-center">{% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</td>
+                                {% endfor %}
+                                <td class="text-center"><a href="{{ path('activity_show', { 'id': activity.id }) }}">Voir</a></td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}
 
 {% block javascripts %}
+    <script src="{{ asset('build/menu-toggle.js') }}"></script>
+    <script src="{{ asset('build/table-manager.js') }}"></script>
+{% endblock %}
 
-    <script src="../../../../assets/js/jquery-3.3.1.js"></script>
+    {#<script src="../../../../assets/js/jquery-3.3.1.js"></script>
 
 
     <script>
@@ -38,67 +114,84 @@
                 data: formData,
                 dataType: 'json',
                 encode: true
-
             })
+
                 .done (function (data) {
 
-                    //console.log(data.organization);
-                    //alert('La première zone a été mise à jour');
+                    console.log(data);
+
+
+                    //console.log(result.act_name)
 
                     var org = data[0].organization;
                     var act = data[1].activity;
 
 
-
-                    $('#search_result').append(
-                        '<div class="ajax_result"><p>'+ act.name + '</p></div><br>' +
-                        '<div class="ajax_result"><p>'+ act.description + '</p></div>' +
-                        '<div class="ajax_result"><p>'+ org.name + '</p></div>' +
-                        '<div class="ajax_result"><p>'+ org.description + '</p></div>'
-
-
-
-
-                    )
-
-
-                        /*if (data.activity) {
-                            alert("t'es bien dans les activites");
-                            for (let i =0; i < data.activity.length; i++) {
-                                alert("t'es bien dans les activites");
-
-                                $('#search_result').append(
-                                    '<div class="ajax_result"><p>' + [1].data[i].activity.name + '</p><br><p>' + data[i].activity.description + '</p></div>'
-                                )
-                            }
-                        }*/
-
-                       /* if (data.organization) {
-                            for (let i =0; i < data.organization.length; i++) {
-                                console.log(i);
-
-                                $('#search_result').append(
-                                    '<div class="ajax_result"><p>' + data[i].organization.name + '</p><br><p>' + data[i].organization.description + '</p></div>'
-                                )
-                            }
+                    let i = 0;
+                    if(act.name) {
+                        for (i ; i < act.name.length; i++) {
+                            $('#search_result').append(
+                                '<div class="ajax_result"><p>' + "Nom de l\'activité :" + act.name[i] +'</p><p>' + "Nom de la structure :" + org.name[i] + '</p></div>' +
+                                '<div class="ajax_result"><p>'+ "Description de l'activité :" + act.description[i] + '</p></div><br>');
                         }
+                    }
+                });
+        });
+    </script>#}
+    {#<script src="../../../../assets/js/jquery-ui.js"></script>#}
+    {#<script>
 
-                        if (data.offer) {
-                            for (let i =0; i < data.offer.length; i++) {
-                                console.log(i);
+        var list = [
 
-                                $('#search_result').append(
-                                    '<div class="ajax_result"><p>' + data[i].offer.amount + '</p><br><p>' + data[i].offer.amount.date.date + '</p></div>'
-                                )
-                            }
-                        }*/
+            "Draggable",
+
+            "Droppable",
+
+            "Resizable",
+
+            "Selectable",
+
+            "Sortable"
+
+        ];
+        $('#search').autocomplete({
+            source : list,
+            minLength : 3 // on indique qu'il faut taper au moins 3 caractères pour afficher l'autocomplétion
+        });
+
+        /*$('#search').autocomplete({
 
 
 
+            source : function(requete, reponse){ // les deux arguments représentent les données nécessaires au plugin
 
+                $.ajax({
+
+                    url : 'http://ws.geonames.org/searchJSON', // on appelle le script JSON
+
+                    dataType : 'json', // on spécifie bien que le type de données est en JSON
+
+                    data : {
+
+                        name_startsWith : $('#recherche').val() // on donne la chaîne de caractère tapée dans le champ de recherche
+
+                    },
+
+
+
+                    success : function(donnee){
+
+                        reponse($.map(donnee.geonames, function(objet){
+
+                            return objet.name + ', ' + objet.countryName; // on retourne cette forme de suggestion
+
+                        }));
+
+                    }
 
                 });
 
-        });
-    </script>
-{% endblock %}
+            }
+
+        });*/
+    </script>#}
