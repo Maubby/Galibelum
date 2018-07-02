@@ -177,6 +177,7 @@ class ActivityController extends Controller
             return $this->redirectToRoute('dashboard_index');
         }
 
+
         return $this->render(
             'activity/edit.html.twig', array(
                 'activity' => $activity,
