@@ -35,6 +35,7 @@ Encore
     .addEntry('input_display', './assets/js/input_display.js')
     .addEntry('menu-toggle', './assets/js/menu-toggle.js')
     .addEntry('table-manager', './assets/js/table-manager.js')
+    .addEntry('multiple-fields', './assets/js/multiple-fields.js')
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
         { from: './assets/images', to: 'images'}
