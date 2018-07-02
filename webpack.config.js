@@ -26,7 +26,6 @@ Encore
     .addStyleEntry('offer', './assets/scss/offer.scss')
     .addStyleEntry('inscription-choose', './assets/scss/inscription-choose.scss')
     .addStyleEntry('activity', './assets/scss/activity.scss')
-    .addStyleEntry('managers', './assets/scss/managers.scss')
     .addStyleEntry('admin', './assets/scss/admin.scss')
     .addStyleEntry('activity_index', './assets/scss/activity_index.scss')
     .addStyleEntry('manager', './assets/scss/manager.scss')
