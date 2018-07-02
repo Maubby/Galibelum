@@ -1,18 +1,21 @@
 {# app/Resources/views/admin/new.html.twig #}
-{% extends 'base.html.twig' %}
+{% extends 'base_back.html.twig' %}
 
-{% block title %}Enregistrer un account manager{% endblock %}
+{% block title %}Créer un account manager{% endblock %}
 
 {% block stylesheets %}
 
     <!-- Additional CSS links-->
     <link rel="stylesheet" href="{{ asset('build/register.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
 {% endblock %}
 
 {% block header %}
-    <nav>
-        sidebar
-    </nav>
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base_back.html.twig -->
+    {{ parent() }}
 {% endblock %}
 
 {% block body %}
@@ -53,7 +56,7 @@
                             {{ form_errors(form.plainPassword.second) }}
                         </div>
                         <div class="col-sm-12 col-xs-12 text-center pt-10">
-                            <input class="btn btn-primary backblue-btn" type="submit" value="{{ "Créer le compte"|trans }}" />
+                            <input class="btn btn-primary backblue-btn" type="submit" value="{{ "Créer le profil"|trans }}" />
                         </div>
                         {{ form_end(form) }}
                     </div>
@@ -64,4 +67,12 @@
             </div>
         </section>
     </main>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/menu-toggle.js') }}"></script>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
 {% endblock %}

@@ -8,7 +8,7 @@ $(document).ready(function() {
             // Remove n/a value when you want to create an event and Show input
             $(".activityAddress").val("").show();
             // Set n/a value when you want to create an event and Hide input field
-            $(".activityAchievement").hide();
+            $(".activityAchievement").val('').hide();
         }
 
         if($(this).val() === "Equipe eSport") {
@@ -26,7 +26,7 @@ $(document).ready(function() {
             // Set n/a value when you want to create an activity and Hide input
             $(".activityAddress").val("n/a").hide();
             // Hide input field
-            $(".activityAchievement").hide();
+            $(".activityAchievement").val('').hide();
         }
 
         if($(this).val() === "") {
@@ -35,7 +35,7 @@ $(document).ready(function() {
             // Set n/a value when you want to create a team and Hide input
             $(".activityAddress").val("n/a").hide();
             // Hide input field
-            $(".activityAchievement").hide();
+            $(".activityAchievement").val('').hide();
         }
     });
 });

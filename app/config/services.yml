@@ -54,3 +54,12 @@ services:
     authentication.handler.login_success_handler:
         class:  AppBundle\Controller\LoginController
         arguments:  ['@router', '@security.authorization_checker']
+
+    AppBundle\Service\FileUploaderService:
+        arguments:
+            $targetDirectory: '%pdf_directory%'
+
+    AppBundle\EventListener\FileUploadListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }

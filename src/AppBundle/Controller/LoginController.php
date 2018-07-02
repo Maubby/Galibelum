@@ -70,9 +70,15 @@ class LoginController implements AuthenticationSuccessHandlerInterface
                 )
             );
         } else if ($this->authorizationChecker->isGranted(
-            'ROLE_USER'
+            'ROLE_MANAGER'
         )
         ) {
+            $response = new RedirectResponse(
+                $this->router->generate(
+                    'manager_dashboard'
+                )
+            );
+        } else {
             $response = new RedirectResponse(
                 $this->router->generate(
                     'dashboard_index'

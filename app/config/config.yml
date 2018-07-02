@@ -7,6 +7,11 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+    periode: P21D
+    fee15: 0.15
+    fee10: 0.10
+    fee7: 0.07
+    pdf_directory: '%kernel.project_dir%/web/uploads/pdf'
 
 framework:
     templating:
