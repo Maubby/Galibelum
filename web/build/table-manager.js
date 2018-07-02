@@ -1,0 +1,1 @@
+webpackJsonp([17],{"7x0W":function(a,n,t){(function(a){a(document).ready(function(){a("#table-manager").DataTable()})}).call(n,t("7t+N"))}},["7x0W"]);

@@ -1,0 +1,50 @@
+//
+// Partner Logos
+// --------------------------------------------------
+
+// Basic Item Style
+.si-logos-item {
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -ms-flex-pack: justify;
+  justify-content: center;
+  padding: ceil($grid-vertical-step * 3);
+  transition: .3s;
+
+  .si-logos-img {
+    width: 100px;
+    transition: .3s;
+  }
+  .si-logos-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding: {
+      right: ceil($grid-vertical-step * 2);
+      bottom: $grid-vertical-step;
+      left: ceil($grid-vertical-step * 2);
+    }
+    -ms-transform: translateY(10px);
+    transition: .15s;
+    color: $text-color;
+    text-align: center;
+    opacity: 0;
+    p { margin: 0; }
+  }
+
+  &:hover {
+    box-shadow: 0 20px 72px -20px rgba(0, 0, 0, .2);
+    .si-logos-img {
+      -ms-transform: scale(.8) translateY(-45%);
+      transform: scale(.8) translateY(-45%);
+    }
+    .si-logos-info {
+      transform: translateY(0);
+      transition: .3s;
+      opacity: 1;
+    }
+  }
+}
