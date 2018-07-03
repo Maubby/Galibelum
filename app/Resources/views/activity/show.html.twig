@@ -54,18 +54,18 @@
             <td>{% if activity.socialLink %}{{ activity.socialLink|join(', ') }}{% endif %}</td>
         </tr>
         <tr>
-            <th>Upload PDF</th>
-            <td><a href="{{ asset('/uploads/pdf/organization_' ~ activity.organizationActivities.id ~ '/activity_' ~ activity.id ~ '/' ~ activity.uploadPdf) }}">View brochure (PDF)</a></td>
+            <th>Télécharger un fichier PDF</th>
+            <td><a href="{{ asset('/uploads/pdf/organization_' ~ activity.organizationActivities.id ~ '/activity_' ~ activity.id ~ '/' ~ activity.uploadPdf) }}">Voir le PDF</a></td>
         </tr>
         </tbody>
     </table>
 
     <ul>
         <li>
-            <a href="{{ path('dashboard_index') }}">Revenir au Dashboard</a>
+            <a href="{{ path('dashboard_index') }}">Revenir au tableau de bord</a>
         </li>
         <li>
-            <a href="{{ path('activity_edit', { 'id': activity.id }) }}">Edit</a>
+            <a href="{{ path('activity_edit', { 'id': activity.id }) }}">Modifier</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
