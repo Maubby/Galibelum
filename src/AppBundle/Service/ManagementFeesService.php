@@ -14,13 +14,25 @@ namespace AppBundle\Service;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+/**
+ * FileUploader class service.
+ *
+ * @category ManagementFeesService
+ * @package  Service
+ * @author   WildCodeSchool <contact@wildcodeschool.fr>
+ */
 class ManagementFeesService
 {
-    private $container;
+    private $_container;
 
+    /**
+     * ManagementFeesService constructor.
+     *
+     * @param ContainerInterface $container To use a global constant
+     */
     public function __construct(ContainerInterface $container)
     {
-        $this->container = $container;
+        $this->_container = $container;
     }
 
     /**
@@ -37,13 +49,13 @@ class ManagementFeesService
         $fees =0;
         if (empty($finalDeal)) {
             if ($amount >= 200 && $amount < 10000) {
-                $fees = $amount * $this->container->getParameter('fee15');
+                $fees = $amount * $this->_container->getParameter('fee15');
             }
             if ($amount >= 10000 && $amount < 50000) {
-                $fees = $amount * $this->container->getParameter('fee10');
+                $fees = $amount * $this->_container->getParameter('fee10');
             }
             if ($amount >= 50000) {
-                $fees = $amount * $this->container->getParameter('fee7');
+                $fees = $amount * $this->_container->getParameter('fee7');
             }
         } else {
             $fees = $amount - $finalDeal;

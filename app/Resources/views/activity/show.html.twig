@@ -55,7 +55,7 @@
         </tr>
         <tr>
             <th>Upload PDF</th>
-            <td><a href="{{ asset('/uploads/pdf/organization_' ~ organization_id ~'/activity/' ~ activity.uploadPdf) }}">View brochure (PDF)</a></td>
+            <td><a href="{{ asset('/uploads/pdf/organization_' ~ activity.organizationActivities.id ~ '/activity_' ~ activity.id ~ '/' ~ activity.uploadPdf) }}">View brochure (PDF)</a></td>
         </tr>
         </tbody>
     </table>

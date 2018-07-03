@@ -103,6 +103,7 @@ class Activity
     private $description;
 
     /**
+     *
      * @var date
      *
      * @ORM\Column(name="dateStart", type="date")
@@ -113,6 +114,7 @@ class Activity
     private $dateStart;
 
     /**
+     *
      * @var date
      *
      * @ORM\Column(name="dateEnd", type="date")
@@ -180,6 +182,7 @@ class Activity
     private $achievement;
 
     /**
+     *
      * @var array
      *
      * @ORM\Column(name="socialLink", type="array")
@@ -189,6 +192,7 @@ class Activity
     private $socialLink;
 
     /**
+     *
      * @ORM\Column(name="uploadPdf", type="string", nullable=true)
      *
      * @Assert\File(

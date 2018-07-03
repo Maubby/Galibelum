@@ -91,7 +91,9 @@ class ActivityController extends Controller
 
             $request->getSession()
                 ->getFlashBag()
-                ->add('pdf', "Vous pouvez ajouter un PDF pour décrire votre activité");
+                ->add(
+                    'pdf', "Vous pouvez ajouter un PDF pour décrire votre activité"
+                );
 
             $em->persist($activity);
             $em->flush();
@@ -129,7 +131,6 @@ class ActivityController extends Controller
             'activity/show.html.twig', array(
                 'activity' => $activity,
                 'delete_form' => $deleteForm->createView(),
-                'organization_id' => $user->getOrganization()->getId(),
             )
         );
     }
@@ -147,6 +148,8 @@ class ActivityController extends Controller
      */
     public function editAction(Request $request, Activity $activity, FileUploaderService $fileUploaderService)
     {
+        $fileName = $activity->getUploadPdf();
+
         $deleteForm = $this->_createDeleteForm($activity);
         $editForm = $this->createForm(ActivityType::class, $activity);
         $editForm->handleRequest($request);
@@ -154,27 +157,21 @@ class ActivityController extends Controller
         $user = $this->getUser();
         $organizationId = $user->getOrganization()->getId();
 
-        // Var for the file name
-        $path = '/../../../web/uploads/pdf/organization_'.$organizationId.'/activity/activity_'.$activity->getId().'.pdf';
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $file = $activity->getUploadPdf();
 
             // Check if the file exist and set the new or old value
-            if ($file === null && file_exists(__DIR__ .$path)) {
-                $activity->setUploadPdf('activity_'.$activity->getId().'.pdf');
-                $this->getDoctrine()->getManager()->flush();
-            } elseif ($file == null && !file_exists(__DIR__ .$path)) {
-                $this->getDoctrine()->getManager()->flush();
-            } else {
+            if ($file != null) {
                 $fileName = $fileUploaderService
                     ->upload(
-                        $file, $activity
-                        ->getId(), $organizationId
+                        $file,
+                        $organizationId,
+                        $activity->getId()
                     );
-                $activity->setUploadPdf($fileName);
-                $this->getDoctrine()->getManager()->flush();
             }
+
+            $activity->setUploadPdf($fileName);
+            $this->getDoctrine()->getManager()->flush();
 
             $request->getSession()
                 ->getFlashBag()

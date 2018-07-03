@@ -85,8 +85,8 @@ class OfferController extends Controller
     /**
      * Creates a new offer entity and get information for current activity.
      *
-     * @param Request $request New offer posted with activity id
-     * @param Activity $activity New offer by activity
+     * @param Request               $request     New offer posted with activity id
+     * @param Activity              $activity    New offer by activity
      * @param ManagementFeesService $feesService Fees Calculation services
      *
      * @Route("/{id}/new",     name="offer_new")
