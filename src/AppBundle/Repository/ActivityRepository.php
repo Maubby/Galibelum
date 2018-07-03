@@ -23,20 +23,64 @@ namespace AppBundle\Repository;
 class ActivityRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
-     * @param $data
+     * @param $name
+     * @param $type
+     * @param $date
      * @return mixed
      */
-    public function search($data)
+    public function search($name, $type, $date=null)
     {
-        $query = $this->createQueryBuilder('act')
-            ->SELECT('act')
-            ->WHERE('act.name LIKE :data')
-            ->ORWHERE('org.name LIKE :data')
-            ->LEFTJOIN('act.organizationActivities','org')
-            ->setParameter('data', '%'.$data.'%')
-            ->orderBy('act.creationDate')
-            ->getQuery();
 
-        return $query->getResult();
+        $query = $this->createQueryBuilder('act')
+            ->INNERJOIN('act.organizationActivities', 'org')
+            ->INNERJOIN('act.activities', 'off')
+            ->SELECT('act')
+            ->GROUPBY('off.activity')
+            ->ORDERBY('act.creationDate');
+
+        if ($name != '') {
+            $query
+                ->WHERE('act.name LIKE :name')
+                ->ORWHERE('org.name LIKE :name')
+                ->setParameter('name', '%' . $name . '%');
+        }
+
+        if ($type === 'Activité de streaming' OR $type === 'Equipe eSport' OR $type === 'Évènement eSport') {
+            $query
+                ->ANDWHERE('act.type LIKE :type')
+                ->setParameter('type', '%' . $type . '%');
+        }
+
+/*        if ($date != '')  {
+            $query
+                ->ANDWHERE('MAX(off.date) AS min_date' <= ':date')
+                ->setParameter('date', '%' . $date . '%');
+        }*/
+
+        return $query->getQuery()->getResult();
     }
 }
+
+/*SELECT act.name, act.type, org.name , MIN(off.date) AS minDate,MIN(off.amount) AS minAmount, MAX(off.amount) AS maxAmount
+FROM activity as act
+inner join organization as org on act.organization_activities_id = org.id
+inner join offer as off on act.id = off.activity_id
+GROUP BY act.id*/
+
+
+
+
+/*if($newdate !='') {
+            $query
+        ->INNERJOIN('act.activities','off');
+                ->WHERE('off.date <= :newdate')
+                ->setParameter('newdate', '%' . $newdate . '%');
+        }*/
+/*if($amount_min !=null) {
+    $query
+        ->WHERE('off.amount > :amount_min')
+        ->ANDWHERE('off.amount < :amount_max')
+        ->setParameter('amount_min', '%' . $amount_min . '%')
+        ->setParameter('amount_max', '%' . $amount_max . '%');
+}*/
+

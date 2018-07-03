@@ -1,7 +1,7 @@
 {# app/Resources/views/offer/new.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier une offre{% endblock %}
+{% block title %}Recherche{% endblock %}
 
 {% block stylesheets %}
 
@@ -35,19 +35,48 @@
                 <h5 class="degradeblue">Votre recherche :</h5>
             </div>
             <div class="col-md-12 mt-30">
-                <form class="search-form text-center" action="{{ path('search_action') }}">
-                    <input id="search" title="search" name="search" class="search-bar" value="{{ data }}">
-                    <button id="btn_search" class="backblue"><i class="fas fa-search"></i></button>
+                <form class="text-center col-md-12" action="{{ path('search_action') }}">
+                    <div class="col-md-3 pt-10">
+                        <label>
+                            <input id="search" title="search" name="name" class="input-field form-control" value="{{ name }}">
+                        </label>
+                    </div>
+                    <div class="col-md-3 box-border-search pt-10">
+                        <label>Types d'activités :
+                            <select id="type" name='type' class="input-field form-control mt-30">
+                                <option value="Types d'activités" {% if type == "Types d'activités" %}selected{% endif %} >Types d'activités</option>
+                                <option value="Activité de streaming" {% if type == "Activité de streaming" %}selected{% endif %} >Activité de streaming</option>
+                                <option value="Equipe eSport" {% if type == "Equipe eSport" %}selected{% endif %}>Equipe eSport</option>
+                                <option value="Évènement eSport" {% if type == "Évènement eSport" %}selected{% endif %}>Evenement eSport</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-md-3 box-border-search pt-10">
+                        <label for="amount">Budget:</label>
+                        <input type="text" id="amount" class="amount mt-20" readonly>
+                        <div id="slider-range"></div>
+                    </div>
+                    <div class="col-md-3 box-border-search pt-10">
+                        <label>Recherche par date :
+                            <input type="date" name="date" class="input-field form-control mt-30" value="{{ date }}" />
+                        </label>
+                    </div>
+                    <div class="col-md-12 mt-30">
+                        <button id="btn_search" class="btn btn-primary backblue-btn"><i class="fas fa-search"></i></button>
+                    </div>
                 </form>
             </div>
         </div>
         <div class="row boxing-canvas mt-50">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <!-- Creating a responsive table -->
-                <div class="table-responsive table-striped text-center">
-                    <table id="table-manager">
-                        <!-- Table head -->
-                        <thead class="table">
+                <div class="table-responsive table-striped">
+                    {% if activitylist is not defined %}
+                        <div class="col-md-12 text-center">Aucun résultat pour votre recherche</div>
+                    {% else %}
+                        <table id="table-manager">
+                            <!-- Table head -->
+                            <thead class="table">
                             <tr>
                                 <th class="text-center">Nom</th>
                                 <th class="text-center">Type d'activité</th>
@@ -55,143 +84,52 @@
                                 <th class="text-center">Date d'expiration</th>
                                 <th class="text-center">Détails</th>
                             </tr>
-                        </thead>
-                        <!-- End of table head -->
+                            </thead>
+                            <!-- End of table head -->
 
-                        <!-- Starting listing the account managers -->
-                        <tbody>
-                        {% if activitylist is not defined %}
-                            <tr>
-                                <td>Aucun résultat pour votre recherche</td>
-                            </tr>
-                        {% else %}
+                            <!-- Starting listing the account managers -->
+                            <tbody>
                             {% for activity in activitylist %}
-                            <tr>
-                                <td >{{ activity.name }} | {{ activity.organizationActivities.name }} <br>
-                                {{ activity.description }}</td>
-                                <td class="text-center">{{ activity.type }}</td>
-                                {% for offer in activity.activities %}
-                                <td class="text-center">{{offer.amount}}</td>
-                                <td class="text-center">{% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</td>
-                                {% endfor %}
-                                <td class="text-center"><a href="{{ path('activity_show', { 'id': activity.id }) }}">Voir</a></td>
-                            </tr>
+                                <tr>
+                                    <td >{{ activity.name }} | {{ activity.organizationActivities.name }} <br>
+                                        {{ activity.description }}</td>
+                                    <td class="text-center">{{ activity.type }}</td>
+                                        {% for offer in activity.activities %}
+                                            <td class="text-center">{{offer.amount}}</td>
+                                            <td class="text-center">{% if offer.date %}{{ offer.date|date('d-m-Y') }}{% endif %}</td>
+                                        {% endfor %}
+                                    <td class="text-center"><a href="{{ path('activity_show', { 'id': activity.id }) }}">Voir</a></td>
+                                </tr>
                             {% endfor %}
-                        {% endif %}
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}
+
 
 {% block javascripts %}
-    <script src="{{ asset('build/menu-toggle.js') }}"></script>
-    <script src="{{ asset('build/table-manager.js') }}"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#slider-range" ).slider({
+                range: true,
+                min: 200,
+                max: 100000,
+                values: [ 50000, 100000 ],
+                slide: function( event, ui ) {
+                    $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                }
+            });
+            $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) + "€" +
+                " - " + $( "#slider-range" ).slider( "values", 1 ) + '€' );
+        } );
+    </script>
 {% endblock %}
 
-    {#<script src="../../../../assets/js/jquery-3.3.1.js"></script>
-
-
-    <script>
-
-
-        $('#btn_search').click(function(event) {
-
-            $('.ajax_result').remove();
-
-            event.preventDefault();
-
-            var formData = {
-                'search': $('#search').val()
-            };
-
-            $.ajax({
-                url: '/result',
-                type: 'POST',
-                data: formData,
-                dataType: 'json',
-                encode: true
-            })
-
-                .done (function (data) {
-
-                    console.log(data);
-
-
-                    //console.log(result.act_name)
-
-                    var org = data[0].organization;
-                    var act = data[1].activity;
-
-
-                    let i = 0;
-                    if(act.name) {
-                        for (i ; i < act.name.length; i++) {
-                            $('#search_result').append(
-                                '<div class="ajax_result"><p>' + "Nom de l\'activité :" + act.name[i] +'</p><p>' + "Nom de la structure :" + org.name[i] + '</p></div>' +
-                                '<div class="ajax_result"><p>'+ "Description de l'activité :" + act.description[i] + '</p></div><br>');
-                        }
-                    }
-                });
-        });
-    </script>#}
-    {#<script src="../../../../assets/js/jquery-ui.js"></script>#}
-    {#<script>
-
-        var list = [
-
-            "Draggable",
-
-            "Droppable",
-
-            "Resizable",
-
-            "Selectable",
-
-            "Sortable"
-
-        ];
-        $('#search').autocomplete({
-            source : list,
-            minLength : 3 // on indique qu'il faut taper au moins 3 caractères pour afficher l'autocomplétion
-        });
-
-        /*$('#search').autocomplete({
-
-
-
-            source : function(requete, reponse){ // les deux arguments représentent les données nécessaires au plugin
-
-                $.ajax({
-
-                    url : 'http://ws.geonames.org/searchJSON', // on appelle le script JSON
-
-                    dataType : 'json', // on spécifie bien que le type de données est en JSON
-
-                    data : {
-
-                        name_startsWith : $('#recherche').val() // on donne la chaîne de caractère tapée dans le champ de recherche
-
-                    },
-
-
-
-                    success : function(donnee){
-
-                        reponse($.map(donnee.geonames, function(objet){
-
-                            return objet.name + ', ' + objet.countryName; // on retourne cette forme de suggestion
-
-                        }));
-
-                    }
-
-                });
-
-            }
-
-        });*/
-    </script>#}

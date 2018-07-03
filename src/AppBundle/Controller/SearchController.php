@@ -12,6 +12,7 @@ use AppBundle\Entity\Activity;
 use AppBundle\Entity\Offer;
 use AppBundle\Entity\Organization;
 use AppBundle\Repository\ActivityRepository;
+use AppBundle\Repository\OfferRepository;
 use AppBundle\Repository\OrganizationRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -20,6 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\Validator\Constraints\Date;
 
 
 /**
@@ -32,8 +34,6 @@ use Symfony\Component\Form\Extension\Core\Type\SearchType;
  */
 class SearchController extends Controller
 {
-
-
     /**
      * @Route("/search")
      * @param Request $request
@@ -42,12 +42,16 @@ class SearchController extends Controller
     public function indexAction(Request $request)
     {
         $session = $request->getSession();
-        $data = $session->get('data');
+        $name = $session->get('name');
+        $date = $session->get('date');
+        $type = $session->get('type');
+
 
         return $this->render(
             'search/index.html.twig',array(
-          /*  'form' => $form->createView(),*/
-                'data' => $data,
+                'name' => $name,
+                'date' => $date,
+                'type' => $type,
         ));
     }
 
@@ -60,23 +64,50 @@ class SearchController extends Controller
     {
         $session = $request->getSession();
 
-        $session->set('data', $request->get('search'));
+        $session->set('name', $request->get('name'));
+        $session->set('type', $request->get('type'));
+        $session->set('date', $request->get('date'));
+        //$session->set('amount_min', $amount_min);
+        //$session->set('amount_max', $amount_max);
 
-        $data = $session->get('data');
+        $name = $request->get('name');
+        $type = $request->get('type');
+        $oldDate = $request->get('date');
+        $amount_min = $request->get('amount_min');
+        $amount_max = $request->get('amount_max');
+
+        if ($oldDate === ''){
+            $date ='';
+        }
+        else {
+            $date = date('d-m-Y', strtotime($oldDate));
+        }
+
 
         $em = $this->getDoctrine()->getManager();
         $activities = $em->getRepository('AppBundle\Entity\Activity')->findAll();
-        $activityRepository = $this->getDoctrine()->getRepository(Activity::class);
 
-        $activitylist
-            = $activityRepository->search($data);
+           // var_dump($type);
+            var_dump($name);
+        //var_dump($date);
+
+
+        $activityRepository = $this->getDoctrine()->getRepository(Activity::class);
+        //$offerRepository = $this->getDoctrine()->getRepository(Offer::class);
+
+        $activitylist = $activityRepository->search($name,$type,$date);
+
+        //var_dump($activitylist);
+
 
 
         return $this->render(
             'search/index.html.twig', array(
                 'activitylist' => $activitylist,
                 'activities' => $activities,
-                'data' => $data,
+                'date' => $date,
+                'name' => $name,
+                'type' => $type,
             )
         );
         /*$result = [];
