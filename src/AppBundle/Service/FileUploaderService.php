@@ -42,12 +42,13 @@ class FileUploaderService
      * @param UploadedFile $file           get name of the upload file in db
      * @param int          $organizationId organization 's id
      * @param int          $activityId     activity 's id
-     * @param null         $offerId        offer 's id
+     * @param null|int     $offerId        offer 's id
      *
      * @return string
      */
-    public function upload(UploadedFile $file, $organizationId, $activityId, $offerId = null)
-    {
+    public function upload(UploadedFile $file, $organizationId,
+        $activityId, $offerId = null
+    ) {
         $fileName = $this->setNameCanonical(
             $file->getClientOriginalExtension(), $file->getClientOriginalName()
         ) . '_' . md5(uniqid()) . '.' . $file->guessExtension();
@@ -70,7 +71,7 @@ class FileUploaderService
      * @param int  $organizationId organization 's id
      * @param int  $activityId     activity 's id
      * @param null $offerId        offer 's id
-     * 
+     *
      * @return string
      */
     public function getTargetDirectory($organizationId, $activityId, $offerId = null)

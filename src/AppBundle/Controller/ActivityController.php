@@ -146,8 +146,9 @@ class ActivityController extends Controller
      * @Route("/{id}/edit", name="activity_edit")
      * @Method({"GET",      "POST"})
      */
-    public function editAction(Request $request, Activity $activity, FileUploaderService $fileUploaderService)
-    {
+    public function editAction(Request $request, Activity $activity,
+        FileUploaderService $fileUploaderService
+    ) {
         $fileName = $activity->getUploadPdf();
 
         $deleteForm = $this->_createDeleteForm($activity);

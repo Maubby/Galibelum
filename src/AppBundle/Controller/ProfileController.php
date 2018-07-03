@@ -54,7 +54,7 @@ class ProfileController extends BaseController
 
         return $this->render(
             '@FOSUser/Profile/show.html.twig', array(
-            'user' => $user,
+                'user' => $user,
             )
         );
     }

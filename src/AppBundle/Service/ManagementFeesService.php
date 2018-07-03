@@ -43,7 +43,7 @@ class ManagementFeesService
      *
      * @return int
      */
-    public function getFees($amount, $finalDeal) 
+    public function getFees($amount, $finalDeal)
     {
 
         $fees =0;

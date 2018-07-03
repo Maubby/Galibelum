@@ -104,7 +104,7 @@ class ManagerController extends Controller
      *
      * @param Request      $request      Deactivate posted info
      * @param Organization $organization The organization entity
-     * 
+     *
      * @route("/{id}/deactivate", name="manager_organization_deactivate")
      *
      * @method("GET")

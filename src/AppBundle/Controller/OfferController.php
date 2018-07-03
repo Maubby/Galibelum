@@ -50,7 +50,7 @@ class OfferController extends Controller
                     'organization' => $user->getOrganization()
                 )
             );
-        
+
         $event_activities = $em->getRepository('AppBundle:Activity')->findBy(
             array(
                 'organizationActivities' => $user->getOrganization(),
@@ -64,7 +64,7 @@ class OfferController extends Controller
                 'type' => 'Activité de streaming'
             )
         );
-        
+
         $team_activities = $em->getRepository('AppBundle:Activity')->findBy(
             array(
                 'organizationActivities' => $user->getOrganization(),
@@ -74,10 +74,10 @@ class OfferController extends Controller
 
         return $this->render(
             'offer/index.html.twig', array(
-            'offers' => $offers,
-            'event_activities' => $event_activities,
-            'stream_activities' => $stream_activities,
-            'team_activities' => $team_activities,
+                'offers' => $offers,
+                'event_activities' => $event_activities,
+                'stream_activities' => $stream_activities,
+                'team_activities' => $team_activities,
             )
         );
     }
@@ -95,8 +95,9 @@ class OfferController extends Controller
      * @return Response A Response instance
      * @throws \Exception
      */
-    public function newAction(Request $request, Activity $activity, ManagementFeesService $feesService)
-    {
+    public function newAction(Request $request, Activity $activity,
+        ManagementFeesService $feesService
+    ) {
         $offer = new Offer();
         $form = $this->createForm('AppBundle\Form\OfferType', $offer);
         $form->handleRequest($request);
@@ -113,21 +114,21 @@ class OfferController extends Controller
                 ->setHandlingFee($fees)
                 ->setOrganization($user->getOrganization())
                 ->setDate($offer->getDate()->sub($interval));
-            
+
             $em->persist($offer);
             $em->flush();
 
             return $this->redirectToRoute(
                 'offer_show', array(
-                'id' => $offer->getId())
+                    'id' => $offer->getId())
             );
         }
 
         return $this->render(
             'offer/new.html.twig', array(
-            'offer' => $offer,
-            'activity'=> $activity,
-            'form' => $form->createView(),
+                'offer' => $offer,
+                'activity'=> $activity,
+                'form' => $form->createView(),
             )
         );
     }
@@ -148,8 +149,8 @@ class OfferController extends Controller
 
         return $this->render(
             'offer/show.html.twig', array(
-            'offer' => $offer,
-            'delete_form' => $deleteForm->createView(),
+                'offer' => $offer,
+                'delete_form' => $deleteForm->createView(),
             )
         );
     }
@@ -176,15 +177,15 @@ class OfferController extends Controller
 
             return $this->redirectToRoute(
                 'offer_edit', array(
-                'id' => $offer->getId())
+                    'id' => $offer->getId())
             );
         }
 
         return $this->render(
             'offer/edit.html.twig', array(
-            'offer' => $offer,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                'offer' => $offer,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
             )
         );
     }
@@ -227,7 +228,7 @@ class OfferController extends Controller
             ->setAction(
                 $this->generateUrl(
                     'offer_delete', array(
-                    'id' => $offer->getId())
+                        'id' => $offer->getId())
                 )
             )
             ->setMethod('DELETE')
