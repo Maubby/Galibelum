@@ -65,7 +65,7 @@ class ProfileType extends AbstractType
             )
             ->add(
                 'email', EmailType::class, array(
-                'label' => 'form.email', 'translation_domain' => 'FOSUserBundle')
+                    'label' => 'form.email', 'translation_domain' => 'FOSUserBundle')
             )
 
             ->remove('username') //we use email as login
