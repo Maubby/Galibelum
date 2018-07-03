@@ -46,7 +46,7 @@ class ManagementFeesService
     public function getFees($amount, $finalDeal)
     {
 
-        $fees =0;
+        $fees = 0;
         if (empty($finalDeal)) {
             if ($amount >= 200 && $amount < 10000) {
                 $fees = $amount * $this->_container->getParameter('fee15');
