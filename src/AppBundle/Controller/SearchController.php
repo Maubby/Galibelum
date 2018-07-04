@@ -10,19 +10,10 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Activity;
 use AppBundle\Entity\Offer;
-use AppBundle\Entity\Organization;
-use AppBundle\Repository\ActivityRepository;
 use AppBundle\Repository\OfferRepository;
-use AppBundle\Repository\OrganizationRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
-use Symfony\Component\Validator\Constraints\Date;
-
 
 /**
  * Search controller.
@@ -72,15 +63,15 @@ class SearchController extends Controller
 
         $name = $request->get('name');
         $type = $request->get('type');
-        $oldDate = $request->get('date');
+        $date = $request->get('date');
         $amount_min = $request->get('amount_min');
         $amount_max = $request->get('amount_max');
 
-        if ($oldDate === ''){
-            $date ='';
+        if ($date === ''){
+            $date ='00-00-0000';
         }
         else {
-            $date = date('d-m-Y', strtotime($oldDate));
+            $date = new \DateTime($date);
         }
 
 
@@ -88,18 +79,15 @@ class SearchController extends Controller
         $activities = $em->getRepository('AppBundle\Entity\Activity')->findAll();
 
            // var_dump($type);
-            var_dump($name);
-        //var_dump($date);
-
+           // var_dump($name);
+           // var_dump($date);
 
         $activityRepository = $this->getDoctrine()->getRepository(Activity::class);
-        //$offerRepository = $this->getDoctrine()->getRepository(Offer::class);
 
-        $activitylist = $activityRepository->search($name,$type,$date);
+        $activitylist
+            = $activityRepository->search($name,$type,$date);
 
         //var_dump($activitylist);
-
-
 
         return $this->render(
             'search/index.html.twig', array(

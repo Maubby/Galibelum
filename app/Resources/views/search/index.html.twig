@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-md-3 box-border-search pt-10">
                         <label>Recherche par date :
-                            <input type="date" name="date" class="input-field form-control mt-30" value="{{ date }}" />
+                            <input type="date" name="date" class="input-field form-control mt-30" value="{{ date|date('Y-m-d') }}" />
                         </label>
                     </div>
                     <div class="col-md-12 mt-30">
@@ -74,7 +74,7 @@
                     {% if activitylist is not defined %}
                         <div class="col-md-12 text-center">Aucun résultat pour votre recherche</div>
                     {% else %}
-                        <table id="table-manager">
+                        <table id="">
                             <!-- Table head -->
                             <thead class="table">
                             <tr>
@@ -95,8 +95,13 @@
                                         {{ activity.description }}</td>
                                     <td class="text-center">{{ activity.type }}</td>
                                         {% for offer in activity.activities %}
-                                            <td class="text-center">{{offer.amount}}</td>
-                                            <td class="text-center">{% if offer.date %}{{ offer.date|date('d-m-Y') }}{% endif %}</td>
+                                            {% if activity.activities |length > 1 %}
+                                                <td class="text-center">{{offer.amount}}</td>
+                                                <td class="text-center">{% if offer.date %}{{ offer.date|date('d-m-Y') }}{% endif %}</td>
+                                            {% else %}
+                                                <td class="text-center">{{offer.amount}}</td>
+                                                <td class="text-center">{% if offer.date %}{{ offer.date|date('d-m-Y') }}{% endif %}</td>
+                                            {% endif %}
                                         {% endfor %}
                                     <td class="text-center"><a href="{{ path('activity_show', { 'id': activity.id }) }}">Voir</a></td>
                                 </tr>

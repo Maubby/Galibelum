@@ -25,17 +25,17 @@ class ActivityRepository extends \Doctrine\ORM\EntityRepository
     /**
      * @param $name
      * @param $type
-     * @param $date
+     * @param $oldDate
      * @return mixed
      */
-    public function search($name, $type, $date=null)
+    public function search($name, $type, $oldDate)
     {
 
         $query = $this->createQueryBuilder('act')
             ->INNERJOIN('act.organizationActivities', 'org')
             ->INNERJOIN('act.activities', 'off')
-            ->SELECT('act')
-            ->GROUPBY('off.activity')
+            ->SELECT('act,org,off')
+            ->GROUPBY('off')
             ->ORDERBY('act.creationDate');
 
         if ($name != '') {
@@ -51,11 +51,11 @@ class ActivityRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter('type', '%' . $type . '%');
         }
 
-/*        if ($date != '')  {
+       if ($oldDate != '00-00-0000')  {
             $query
-                ->ANDWHERE('MAX(off.date) AS min_date' <= ':date')
-                ->setParameter('date', '%' . $date . '%');
-        }*/
+                ->ANDWHERE('off.date <= 12-07-1217');
+
+        }
 
         return $query->getQuery()->getResult();
     }

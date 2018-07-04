@@ -1,0 +1,44 @@
+@import "style";
+
+.boxing-canvas {
+  background-color: #fff;
+  width: auto;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 40px 5px 20px 5px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-top: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+}
+
+.box-border-search {
+  min-height: 150px;
+  border-radius: 3px;
+  border: 1px solid $border-color;
+}
+
+.breadcrumb-boxing-canvas {
+  width: auto;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  border-radius: 4px;
+  border: 1px solid $border-color;
+}
+
+
+/* Style the input */
+.backblue-btn{
+  height: 40px;
+}
+.amount {
+  border: 0;
+  color: $five-color;
+  text-align: center;
+  font-weight: bold;
+}
