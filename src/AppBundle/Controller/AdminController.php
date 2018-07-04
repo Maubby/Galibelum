@@ -72,7 +72,7 @@ class AdminController extends Controller
             $em->persist($manager);
             $em->flush();
             return $this->redirectToRoute(
-                'admin/manager.html.twig'
+                'admin_manager_list'
             );
         }
         return $this->render(

@@ -11,13 +11,11 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\AppBundle;
 use AppBundle\Entity\Offer;
 use AppBundle\Entity\Organization;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -75,26 +73,19 @@ class ManagerController extends Controller
     /**
      * Activates a organization entity.
      *
-     * @param Request      $request      Activate posted info
      * @param Organization $organization The organization entity
      *
      * @Route("/activate/{id}", name="manager_organization_activate")
      * @Method("GET")
      *
-     * @return Response A Response instance
+     * @return Response A Response Instance
      */
-    public function activateAction(Request $request, Organization $organization)
+    public function activateAction(Organization $organization)
     {
         $em = $this->getDoctrine()->getManager();
         $organization->setIsActive(1);
         $em->persist($organization);
         $em->flush();
-
-        $request->getSession()
-            ->getFlashBag()
-            ->add(
-                'success', 'L\'organisation a bien été activée.'
-            );
 
         return $this->redirectToRoute('manager_organization_list');
     }
@@ -102,7 +93,6 @@ class ManagerController extends Controller
     /**
      * Disable one organization.
      *
-     * @param Request      $request      Disable posted info
      * @param Organization $organization The organization entity
      *
      * @route("/disable/{id}", name="manager_organization_disable")
@@ -110,18 +100,12 @@ class ManagerController extends Controller
      *
      * @return Response A Response Instance
      */
-    public function disableAction(Request $request, Organization $organization)
+    public function disableAction(Organization $organization)
     {
         $em = $this->getDoctrine()->getManager();
         $organization->setIsActive(2);
         $em->persist($organization);
         $em->flush();
-
-        $request->getSession()
-            ->getFlashBag()
-            ->add(
-                'success', 'L\'organisation a bien été désactivée.'
-            );
 
         return $this->redirectToRoute('manager_organization_list');
     }
