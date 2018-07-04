@@ -37,6 +37,12 @@ class SearchController extends Controller
         $date = $session->get('date');
         $type = $session->get('type');
 
+        if ($date ===''){
+            $date ='00-00-0000';
+        }
+        else {
+            $date = new \DateTime($date);
+        }
 
         return $this->render(
             'search/index.html.twig',array(
@@ -67,7 +73,7 @@ class SearchController extends Controller
         $amount_min = $request->get('amount_min');
         $amount_max = $request->get('amount_max');
 
-        if ($date === ''){
+        if ($date ===''){
             $date ='00-00-0000';
         }
         else {
@@ -80,7 +86,7 @@ class SearchController extends Controller
 
            // var_dump($type);
            // var_dump($name);
-           // var_dump($date);
+            var_dump($date);
 
         $activityRepository = $this->getDoctrine()->getRepository(Activity::class);
 
