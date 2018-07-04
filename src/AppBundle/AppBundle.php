@@ -23,6 +23,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class AppBundle extends Bundle
 {
+    /**
+     * Returns the bundle parent name.
+     *
+     * @return null|string
+     */
     public function getParent()
     {
         return 'FOSUserBundle';

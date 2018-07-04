@@ -1,0 +1,228 @@
+//
+// Portfolio
+// -------------------------------------------------------
+
+.portfolio-post {
+  overflow: hidden;
+  .portfolio-tile-title a {
+    font-size: $font-size-h4;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  .portfolio-tile-text { color: $h4-color; }
+}
+
+// Portfolio Tile Format
+.portfolio-post-tile {
+  position: relative;
+  transform: translateZ(0);
+  transition: box-shadow .4s;
+  border-radius: $border-radius-default;
+
+  img {
+    display: block;
+    width: 100%;
+    transition: .3s;
+    backface-visibility: hidden;
+  }
+
+  > .portfolio-tile-title {
+    position: absolute;
+    bottom: $grid-vertical-step;
+    left: $grid-vertical-step;
+    margin-bottom: 0;
+    z-index: 5;
+  }
+
+  // Pill tile Links
+  .portfolio-post-tile-icon-links {
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    @include center(xy);
+    margin-top: -50px;
+    z-index: 7;
+    a {
+      display: -ms-flexbox;
+      display: flex;
+      align-items: center;
+      -ms-flex-align: center;
+      justify-content: center;
+      -ms-flex-pack: center;
+      width: 60px;
+      height: 60px;
+      transform: translateX(-10px);
+      transition: .25s;
+      border-radius: 50%;
+      background: $white-color;
+      text-align: center;
+      text-decoration: none;
+      box-shadow: 0 5px 9px 0 rgba($black-color, .2);
+      opacity: 0;
+      i { font-size: 34px; }
+      + a {
+        margin-left: 30px;
+        transform: translateX(10px);
+      }
+    }
+  }
+
+  .portfolio-post-info {
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: {
+      top: ($grid-vertical-step + 8px);
+      right: $grid-vertical-step;
+      bottom: $grid-vertical-step;
+      left: $grid-vertical-step;
+    }
+    transform: translateY(100%);
+    transition: .2s;
+    opacity: 0;
+    z-index: 6;
+
+    .portfolio-tile-title {
+      position: relative;
+      z-index: 5;
+      a { color: $text-color; }
+    }
+
+    .svg-bg {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 150%;
+      height: 200px;
+      transform: rotate(-20deg);
+      transition: .3s;
+      opacity: 0;
+      z-index: 3;
+    }
+  }
+
+  .portfolio-tile-text {
+    display: block;
+    position: relative;
+    margin-bottom: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 5;
+  }
+
+  // Tile Hover statement
+  &:hover {
+    box-shadow: 0 20px 72px -20px rgba(0, 0, 0, .2);
+
+    > img { transform: translateY(-20px); }
+
+    .portfolio-post-info {
+      transform: translateY(0);
+      transition: .25s .1s;
+      opacity: 1;
+    }
+    .portfolio-post-info .svg-bg {
+      top: 0;
+      transform: rotate(0);
+      transition: .4s;
+      opacity: 1;
+    }
+    .portfolio-post-tile-icon-links a {
+      transform: translateX(0);
+      transition: .35s;
+      opacity: 1;
+    }
+  }
+
+  // Overlay Layer
+  &::after {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 30%,
+      rgba(0, 0, 0, .2) 70%,
+      rgba(0, 0, 0, .6) 100%);
+    content: '';
+    z-index: 3;
+  }
+}
+
+.touchevents {
+  // Tile Hover statement
+  .portfolio-post-tile {
+    > img { transform: translateY(-20px); }
+
+    .portfolio-post-info {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .portfolio-post-info .svg-bg {
+      top: 0;
+      transform: rotate(0);
+      opacity: 1;
+    }
+    .portfolio-post-tile-icon-links a {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}
+
+.portfolio-carousel .portfolio-post-tile {
+  box-shadow: none !important;
+  &::after { display: none !important; }
+}
+
+// If no gap choosed
+.grid-no-gap, .portfolio-carousel-no-gap {
+  .portfolio-post-tile::after { display: none; }
+  .portfolio-post-tile {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+}
+
+// Portfolio List Format
+.portfolio-post-list {
+  margin-bottom: 0;
+  padding-bottom: $grid-vertical-step;
+  .portfolio-carousel-item {
+    height: 400px;
+    background: {
+      position: center;
+      repeat: no-repeat;
+      size: cover;
+    }
+  }
+  .owl-carousel {
+    border-radius: $border-radius-default;
+    overflow: hidden;
+  }
+  .portfolio-post-list-info {
+    display: inline-block;
+    width: 100%;
+    max-width: 520px;
+  }
+}
+
+// Portfolio Toolbar
+.portfolio-toolbar {
+  display: flex;
+  margin-bottom: ceil($grid-vertical-step * 2);
+  .entry-share {
+    margin-left: auto;
+    a.btn { margin: 0; }
+    .popover {
+      right: 0;
+      left: auto;
+    }
+  }
+}

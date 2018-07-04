@@ -1,0 +1,22 @@
+//
+// Service Pages like: Search results, Nothing Found, etc.
+// -------------------------------------------------------
+
+// Nothing Found
+.no-results {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: $grid-vertical-step;
+  padding: $grid-vertical-step;
+  border-radius: $border-radius-default;
+  background-color: lighten($gray-lighter, 2%);
+  > i {
+    display: block;
+    margin-bottom: floor($grid-vertical-step / 1.5); //~16px
+    color: darken($gray-lighter, 8%);
+    font-size: 60px;
+  }
+  .search-box {
+    margin-bottom: floor($grid-vertical-step / 1.5); //~16px
+  }
+}

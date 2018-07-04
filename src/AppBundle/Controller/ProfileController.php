@@ -54,7 +54,7 @@ class ProfileController extends BaseController
 
         return $this->render(
             '@FOSUser/Profile/show.html.twig', array(
-            'user' => $user,
+                'user' => $user,
             )
         );
     }
@@ -80,7 +80,6 @@ class ProfileController extends BaseController
          *
          * @var $formFactory FactoryInterface
          */
-        $user = $this->getUser();
         $formFactory = $this->get('fos_user.profile.form.factory');
         $form = $formFactory->createForm();
         $form->setData($user);
