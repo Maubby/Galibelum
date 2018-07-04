@@ -29,11 +29,13 @@ Encore
     .addStyleEntry('admin', './assets/scss/admin.scss')
     .addStyleEntry('activity_index', './assets/scss/activity_index.scss')
     .addStyleEntry('manager', './assets/scss/manager.scss')
+    .addStyleEntry('page_404', './assets/scss/page_404.scss')
     .addEntry('login-script', './assets/js/login-script.js')
     .addEntry('carousel', './assets/js/carousel.js')
     .addEntry('input_display', './assets/js/input_display.js')
     .addEntry('menu-toggle', './assets/js/menu-toggle.js')
     .addEntry('table-manager', './assets/js/table-manager.js')
+    .addEntry('autocomplete', './assets/js/autocomplete.js')
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
         { from: './assets/images', to: 'images'}
