@@ -1,0 +1,223 @@
+//
+// Mixins
+// --------------------------------------------------
+
+// Clearfix
+@mixin clearfix {
+  &::before,
+  &::after {
+    display: table;
+    content: ' ';
+  }
+  &::after { clear: both; }
+}
+
+// Block paddings classes
+@mixin block-padding-top($from: 1, $to: 10) {
+  @for $i from $from through $to {
+    .padding-top-#{$i}x {
+      padding-top: floor($grid-vertical-step * $i) !important;
+      @media #{$tablet-port} {
+        padding-top: floor(($grid-vertical-step * $i) / 1.5) !important;
+      }
+    }
+  }
+}
+@mixin block-padding-bottom($from: 1, $to: 10) {
+  @for $i from $from through $to {
+    .padding-bottom-#{$i}x {
+      padding-bottom: floor($grid-vertical-step * $i) !important;
+      @media #{$tablet-port} {
+        padding-bottom: floor(($grid-vertical-step * $i) / 1.5) !important;
+      }
+    }
+  }
+}
+
+// Block margins classes
+@mixin block-margin-top($from: 1, $to: 10) {
+  @for $i from $from through $to {
+    .margin-top-#{$i}x {
+      margin-top: floor($grid-vertical-step * $i) !important;
+      @media #{$tablet-port} {
+        margin-top: floor(($grid-vertical-step * $i) / 1.5) !important;
+      }
+    }
+  }
+}
+@mixin block-margin-bottom($from: 1, $to: 10) {
+  @for $i from $from through $to {
+    .margin-bottom-#{$i}x {
+      margin-bottom: floor($grid-vertical-step * $i) !important;
+      @media #{$tablet-port} {
+        margin-bottom: floor(($grid-vertical-step * $i) / 1.5) !important;
+      }
+    }
+  }
+}
+
+// Theme Gradient
+// Background gradient
+@mixin gradient-background($gradient-color-1: $gradient-color-1, $gradient-color-2: $gradient-color-2) {
+  background: $gradient-color-2;
+  background: linear-gradient(to right, $gradient-color-1 0%, $gradient-color-1 20%, $gradient-color-2 100%);
+}
+@mixin gradient-background-reverse($gradient-color-1: $gradient-color-1, $gradient-color-2: $gradient-color-2) {
+  background: $gradient-color-2;
+  background: linear-gradient(to left, $gradient-color-1 0%, $gradient-color-1 20%, $gradient-color-2 100%);
+}
+
+// Text gradient
+@mixin gradient-color($gradient, $bg: 'light') {
+  @supports(mix-blend-mode: lighten) {
+    display: inline-block;
+    position: relative;
+    &::before {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: unquote($gradient);
+      content: '';
+      pointer-events: none;
+    }
+
+    @if ($bg == 'light') {
+      background: $white-color;
+      color: $black-color;
+      mix-blend-mode: multiply;
+
+      &::before {
+        mix-blend-mode: screen;
+      }
+    } @else {
+      background: $black-color;
+      color: $white-color;
+      mix-blend-mode: lighten;
+
+      &::before {
+        mix-blend-mode: multiply;
+      }
+    }
+  }
+}
+
+// Overlay Block
+@mixin overlay-block($zindex, $bg-color, $opacity) {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $bg-color;
+  content: '';
+  opacity: $opacity;
+  z-index: $zindex;
+}
+
+// Center vertically and/or horizontally an absolute positioned element
+@mixin center($xy: xy) {
+  @if $xy == xy {
+    top: 50%;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  @else if $xy == x {
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  @else if $xy == y {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
+  }
+}
+
+// Solid Button Variants
+@mixin button-variant($bg-color, $color, $bg-hover-color, $shadow-color) {
+  background-color: $bg-color;
+  color: $color;
+  &:hover {
+    background-color: $bg-hover-color;
+    color: $color;
+    box-shadow: 0 14px 25px -8px $shadow-color;
+  }
+}
+
+// Ghost Button Variants
+@mixin button-ghost-variant($color, $color-hover, $bg-hover-color, $shadow-color) {
+  border-color: $color;
+  color: $color;
+  &::before {
+    background-color: $bg-hover-color;
+  }
+  &:hover {
+    color: $color-hover;
+    box-shadow: 0 14px 25px -8px $shadow-color;
+  }
+}
+
+// Link Button Variants
+@mixin button-link-variant($color, $shadow-color) {
+  color: $color;
+  &:hover {
+    background-color: $white-color;
+    color: $color;
+    box-shadow: 0 14px 25px -8px $shadow-color;
+  }
+}
+
+// User Select
+@mixin user-select($value: none) {
+  -webkit-user-select: $value;
+  -moz-user-select: $value;
+  -ms-user-select: $value;
+  user-select: $value;
+}
+
+// Placeholder text
+@mixin placeholder($color: $form-placeholder-color) {
+  // Firefox
+  &::-moz-placeholder {
+    color: $color;
+    opacity: 1; // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  } // Internet Explorer 10+
+  &::-webkit-input-placeholder  {
+    color: $color;
+  } // Safari and Chrome
+}
+
+// Appearance
+@mixin appearance($value) {
+  -webkit-appearance: $value;
+  -moz-appearance: $value;
+  -ms-appearance: $value;
+  appearance: $value;
+}
+
+// Element Aspect Ratio Holder
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &::before {
+    display: block;
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+    content: '';
+  }
+  > .content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}

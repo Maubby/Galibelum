@@ -1,0 +1,27 @@
+//
+// Contacts Card
+// -------------------------------------------------------
+
+// Main styles, are nesting from .widget .widget_silicon_contacts
+.contacts-card {
+  border-radius: $border-radius-default;
+  background-color: $white-color;
+  overflow: hidden;
+  img { display: block; }
+  .widget {
+    margin: 0;
+    padding: $grid-vertical-step;
+    padding-bottom: floor($grid-vertical-step * 1.2);
+    border-radius: $border-radius-default;
+  }
+  .google-maps + .widget,
+  img + .widget {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+  .contacts-card-title {
+    margin-bottom: $grid-vertical-step;
+    font-weight: bold;
+  }
+  .widget_silicon_contacts ul > li { border: 0; }
+}

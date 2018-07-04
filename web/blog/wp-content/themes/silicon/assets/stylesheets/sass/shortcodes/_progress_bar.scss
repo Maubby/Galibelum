@@ -1,0 +1,54 @@
+//
+// Progress Bar
+// --------------------------------------------------
+
+.progress {
+  margin-bottom: $grid-vertical-step; // ~24px
+
+  // Bar
+  .progress-bar {
+    position: relative;
+    height: 5px;
+    border-radius: 5px;
+    background-color: $gray-lighter;
+    .rails {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      transition: .8s cubic-bezier(0.250, 0.460, 0.450, 0.940); /* easeOutQuad */
+      border-radius: 5px;
+      z-index: 1;
+    }
+  }
+
+  // Label
+  .progress-bar-label {
+    display: block;
+    margin-top: floor($grid-vertical-step / 2); // ~12px
+    margin-bottom: ceil($grid-vertical-step * .42);
+    font: {
+      size: $font-size-base;
+      weight: bold;
+    }
+
+    i {
+      display: inline-block;
+      margin-right: 4px;
+      font-size: 1.3em;
+      vertical-align: middle;
+    }
+  }
+
+  // Light Skin
+  &.progress-light {
+    .progress-bar {
+      background-color: rgba($white-color, .15);
+    }
+    .progress-bar-label {
+      color: $white-color;
+    }
+  }
+}

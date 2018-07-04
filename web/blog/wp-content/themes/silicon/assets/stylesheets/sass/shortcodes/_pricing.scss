@@ -1,0 +1,193 @@
+//
+// Pricing
+// --------------------------------------------------
+
+.pricing {
+  border-radius: $border-radius-default;
+  background-color: $white-color;
+  overflow: hidden;
+  .pricing-title {
+    margin: 0;
+    padding: {
+      top: ceil($grid-vertical-step / 2);
+      bottom: ceil($grid-vertical-step / 2);
+    }
+    text-transform: uppercase;
+    &:empty { display: none; }
+  }
+  .pricing-price-container {
+    position: relative;
+    padding: {
+      top: ceil($grid-vertical-step + 9);
+      bottom: $grid-vertical-step;
+    }
+    background-color: $gray-lighter;
+    overflow: hidden;
+    .pricing-price {
+      display: inline-block;
+      position: relative;
+    }
+    .pricing-currency {
+      position: absolute;
+      top: -12px;
+      left: -16px;
+      font-size: 18px;
+      font-weight: 900;
+    }
+    .pricing-price-value {
+      font-size: 60px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .pricing-price-period {
+      font-size: $font-size-sm;
+      text-transform: uppercase;
+    }
+  }
+  .pricing-body {
+    padding: {
+      top: $grid-vertical-step;
+      right: ceil($grid-vertical-step * 2);
+      bottom: $grid-vertical-step;
+      left: ceil($grid-vertical-step * 2);
+    }
+  }
+  .pricing-info-list {
+    display: inline-block;
+    margin: 0;
+    padding: {
+      top: $grid-vertical-step;
+      bottom: $grid-vertical-step;
+    }
+    &:empty { display: none; }
+  }
+  .btn { margin-left: 0; }
+
+  // Featured Pricing
+  &.pricing-featured {
+    box-shadow: 0 20px 84px -23px rgba(0, 0, 0, .2);
+    .pricing-title {
+      padding: {
+        top: $grid-vertical-step;
+        bottom: $grid-vertical-step;
+      }
+    }
+    .pricing-price-value {
+      font-size: 80px;
+    }
+  }
+}
+
+// On Toggle Click Animation
+.pricing-price-container .pricing-price {
+  > * { transition: .4s ease; }
+  &.hidden-value {
+    position: absolute;
+    @include center(xy);
+    > * {
+      transform: translateY(40px);
+      transition: .2s ease;
+      opacity: 0;
+    }
+  }
+}
+
+.active .pricing-price-container .pricing-price {
+  > * {
+    transform: translateY(-40px);
+    transition: .2s ease;
+    opacity: 0;
+  }
+  &.hidden-value {
+    position: absolute;
+    @include center(xy);
+    > * {
+      transform: translateY(0);
+      transition: .4s ease;
+      opacity: 1;
+    }
+  }
+}
+
+// Pricing Grouped
+.pricing-container-inner {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-align-content: center;
+  align-content: center;
+  -ms-flex-line-pack: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: center;
+  margin: {
+    right: -15px;
+    left: -15px;
+  }
+  .pricing {
+    flex: 1;
+    min-width: 220px;
+    max-width: 360px;
+    margin: {
+      top: 15px;
+      right: 15px;
+      bottom: 15px;
+      left: 15px;
+    }
+    @media #{$tablet-port} {
+      flex: none;
+    }
+  }
+}
+
+// Pricing Grouped Toggle
+.pricing-toggle {
+  display: inline-block;
+  margin-bottom: ceil($grid-vertical-step * 1.3); // ~32px
+  > * { vertical-align: middle; }
+  .pricing-label {
+    transition: .3s;
+    font-size: $font-size-xl;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: .5;
+    small { font-weight: 400; }
+    &.on { opacity: 1; }
+  }
+  .btn-toggle {
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    height: 21px;
+    margin: {
+      right: 10px;
+      left: 10px;
+    }
+    transition: all .5s ease;
+    cursor: pointer;
+    .btn-toggle-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 2em;
+      opacity: .15;
+    }
+    .togler {
+      display: block;
+      position: absolute;
+      left: 0;
+      width: 23px;
+      height: 23px;
+      @include center(y);
+      transition: all .2s ease;
+      border-radius: 50%;
+    }
+    &.on .togler {
+      left: 100%;
+      margin-left: -23px;
+    }
+  }
+}

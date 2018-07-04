@@ -12,7 +12,6 @@ Encore
     .enableSassLoader()
     .enableSourceMaps(!Encore.isProduction())
     .autoProvidejQuery()
-    .enableVersioning()
     .createSharedEntry('vendor', ['jquery', 'bootstrap-sass', 'bootstrap-sass/assets/stylesheets/_bootstrap.scss',
         'datatables.net-dt/css/jquery.dataTables.min.css', 'datatables.net-dt/js/dataTables.dataTables.min.js'])
     .addStyleEntry('style', './assets/scss/style.scss')

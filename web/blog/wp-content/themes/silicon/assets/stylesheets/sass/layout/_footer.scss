@@ -1,0 +1,140 @@
+//
+// Footer
+// --------------------------------------------------
+
+.site-footer {
+  position: relative;
+  background: {
+    position: center;
+    repeat: no-repeat;
+    size: cover;
+  }
+  > .overlay {
+    @include overlay-block(1, $black-color, .75);
+  }
+  > .container,
+  > .container-fluid {
+    position: relative;
+    z-index: 5;
+  }
+  .footer-row {
+    padding-bottom: floor($grid-vertical-step / 2); //~12px
+    &:last-child {
+      padding-top: floor($grid-vertical-step * 2); // ~48px
+    }
+    &:first-child {
+      padding-top: floor($grid-vertical-step * 2.5); // ~60px
+    }
+  }
+
+  // Light Skin
+  &.footer-light {
+    .footer-row:last-child {
+      border-color: $border-light-color !important;
+    }
+
+    // Widgets
+    .widget-title,
+    .widgettitle {
+      border-bottom: 1px solid $border-light-color;
+      color: rgba($white-color, .5) !important;
+    }
+    .widget {
+      div > ul > li a,
+      > ul > li a {
+        color: $white-color !important;
+        &:hover { color: rgba($white-color, .5) !important; }
+      }
+    }
+    .widget_categories,
+    .widget_recent_entries,
+    .widget_recent_comments,
+    .widget_archive,
+    .widget_meta,
+    .widget_nav_menu div,
+    .widget_pages,
+    .widget_product_categories,
+    .woocommerce-MyAccount-navigation {
+      > ul > li {
+        border-bottom-color: $border-light-color;
+        color: rgba($white-color, .5) !important;
+        &:last-child { border: 0; }
+      }
+    }
+    .widget_recent_comments {
+      .comment-author-link > a {
+        color: rgba($white-color, .5) !important;
+        &:hover { color: $white-color !important; }
+      }
+      ul > li::before { color: rgba($white-color, .5) !important; }
+    }
+    .widget_tag_cloud,
+    .widget_product_tag_cloud,
+    .tags-links {
+      a {
+        background-color: rgba($white-color, .15);
+        color: $white-color !important;
+        &:hover {
+          background-color: $brand-primary;
+          color: $white-color !important;
+        }
+      }
+    }
+    .widget_calendar caption,
+    .widget_text p,
+    .rssSummary { color: rgba($white-color, .5) !important; }
+    .widget_rss {
+      .widget-title > a {
+        color: $white-color !important;
+        &:hover { color: rgba($white-color, .5) !important; }
+      }
+      > ul > li {
+        border-bottom-color: $border-light-color;
+        .rss-date,
+        cite { color: rgba($white-color, .5) !important; }
+      }
+    }
+    .widget_silicon_button {
+      .text-gray, p { color: rgba($white-color, .5) !important; }
+    }
+    .widget_silicon_contacts ul > li {
+      border-bottom-color: $border-light-color;
+      .contact-label { color: rgba($white-color, .5) !important; }
+      span.contact-info { color: $white-color !important; }
+    }
+    .widget_silicon_recent_posts,
+    .widget_silicon_recent_posts_carousel {
+      .post-item { border-bottom-color: $border-light-color; }
+      .post-meta a {
+        color: rgba($white-color, .5) !important;
+        &:hover { color: $white-color !important; }
+      }
+      .post-title > a {
+        color: $white-color !important;
+        &:hover { color: rgba($white-color, .5) !important; }
+      }
+    }
+    .owl-carousel .owl-dots .owl-dot { background-color: $white-color !important; }
+    textarea,
+    select,
+    input[type]:not([type='submit']):not([type='button']):not([type='hidden']):not([type='checkbox']):not([type='radio']):not([type='file']) {
+      border-color: $border-light-color !important;
+      background-color: transparent !important;
+      color: $white-color !important;
+      @include placeholder(rgba($white-color, .5));
+      &:focus:not(select) {
+        border-color: transparent !important;
+        background-color: $border-light-color !important;
+      }
+    }
+    .search-box,
+    .input-group {
+      button[type='submit'] {
+        color: $white-color !important;
+        &:hover { color: rgba($white-color, .5) !important; }
+      }
+    }
+    .form-select::before { color: $white-color !important; }
+    .widget_silicon_subscribe p { color: rgba($white-color, .5) !important; }
+  }
+}
