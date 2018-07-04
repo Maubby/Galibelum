@@ -11,6 +11,8 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\AppBundle;
+use AppBundle\Entity\Offer;
 use AppBundle\Entity\Organization;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -39,11 +41,11 @@ class ManagerController extends Controller
      */
     public function dashboardAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $user = $this->getUser();
+        $this->getDoctrine()->getManager();
+
         return $this->render(
             'manager/dashboard.html.twig',
-            array('user' => $user)
+            array('user' => $this->getUser())
         );
     }
 
@@ -70,15 +72,13 @@ class ManagerController extends Controller
         );
     }
 
-    /* Method to activate an organization */
     /**
      * Activates a organization entity.
      *
      * @param Request      $request      Activate posted info
      * @param Organization $organization The organization entity
      *
-     * @Route("/{id}/activate", name="manager_organization_activate")
-     *
+     * @Route("/activate/{id}", name="manager_organization_activate")
      * @Method("GET")
      *
      * @return Response A Response instance
@@ -100,18 +100,17 @@ class ManagerController extends Controller
     }
 
     /**
-     * Deactivate one organization.
+     * Disable one organization.
      *
-     * @param Request      $request      Deactivate posted info
+     * @param Request      $request      Disable posted info
      * @param Organization $organization The organization entity
-     * 
-     * @route("/{id}/deactivate", name="manager_organization_deactivate")
      *
+     * @route("/disable/{id}", name="manager_organization_disable")
      * @method("GET")
      *
      * @return Response A Response Instance
      */
-    public function deactivateAction(Request $request, Organization $organization)
+    public function disableAction(Request $request, Organization $organization)
     {
         $em = $this->getDoctrine()->getManager();
         $organization->setIsActive(2);
@@ -125,5 +124,53 @@ class ManagerController extends Controller
             );
 
         return $this->redirectToRoute('manager_organization_list');
+    }
+
+    /**
+     * Lists all contracts.
+     *
+     * @Route("/contract", name="manager_contract_list")
+     * @Method("GET")
+     *
+     * @return Response A Response instance
+     */
+    public function contractAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $offers = $em
+            ->getRepository('AppBundle:Offer')
+            ->findAll();
+
+        return $this->render(
+            'manager/contract.html.twig', array(
+                'offers' => $offers,
+            )
+        );
+    }
+
+    /**
+     * Changes offers' status.
+     *
+     * @param Offer $offer  The offer entity
+     * @param Int   $status Status value
+     *
+     * @route("/contract/{id}/{status}", name="manager_contract_status")
+     * @Method("GET")
+     *
+     * @return Response A Response Instance
+     */
+    public function statusAction(Offer $offer, int $status)
+    {
+        if ($status >= 0 && $status <= 5) {
+            $em = $this->getDoctrine()->getManager();
+            $offer->setStatus($status);
+            $em->persist($offer);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute(
+            'manager_contract_list'
+        );
     }
 }
