@@ -68,17 +68,17 @@
                                 {% endif %}
                                 <!-- End displaying organizations' status -->
 
-                                <!-- Activate / deactivate buttons start -->
+                                <!-- Activate / disable buttons start -->
                                 <td>
                                     {% if organization.isActive == 1 %}
-                                        <a href="{{ path('manager_organization_deactivate', { 'id': organization.id }) }}" class="button button-red text-center">
+                                        <a href="{{ path('manager_organization_disable', { 'id': organization.id }) }}" class="button button-red text-center">
                                             <strong>Désactiver</strong></a>
                                     {% else %}
                                         <a href="{{ path('manager_organization_activate', { 'id': organization.id }) }}" class="button button-green text-center">
                                             <strong>Activer</strong></a>
                                     {% endif %}
                                 </td>
-                                <!-- End activate / deactivate buttons -->
+                                <!-- End activate / disable buttons -->
                             </tr>
                         {% endfor %}
                         </tbody>
