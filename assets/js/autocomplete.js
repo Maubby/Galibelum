@@ -26,6 +26,5 @@ function onPlaceChanged() {
 google.maps.event.addDomListener(window, 'load', function() {
     initializeAutocomplete('appbundle_activity_address');
     initializeAutocomplete(`appbundle_organization_address`);
-    initializeAutocomplete(`appbundle_organization_address`);
 });
 
