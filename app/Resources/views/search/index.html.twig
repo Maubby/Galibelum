@@ -74,7 +74,7 @@
                     {% if activitylist is not defined %}
                         <div class="col-md-12 text-center">Aucun résultat pour votre recherche</div>
                     {% else %}
-                        <table id="">
+                        <table id="table-manager">
                             <!-- Table head -->
                             <thead class="table">
                             <tr>
@@ -121,13 +121,14 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ asset('build/table-manager.js') }}"></script>
     <script>
         $( function() {
             $( "#slider-range" ).slider({
                 range: true,
                 min: 200,
                 max: 100000,
-                values: [ 50000, 100000 ],
+                values: [ 200, 100000 ],
                 slide: function( event, ui ) {
                     $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
                 }
