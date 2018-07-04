@@ -35,7 +35,7 @@
                     <!--New form-->
                     {{ form_start(form) }}
                     <div class="col-sm-10 col-sm-offset-1">
-                        <div class="col-sm-12 text-center">
+                        <div class="p-0 text-center">
                             <i class="fas fa-desktop degradeblue" style="font-size: 50px"></i>
                             <h5 class="degradeblue text-center mt-10">Créer votre activité</h5>
                         </div>
@@ -54,7 +54,8 @@
                             <div class="col-sm-6 mt-20">
                                 <div class="form-group form-error">
                                     <i class="fas fa-university"></i>{{ form_label(form.name, 'Nom de votre activité') }}
-                                    {{ form_widget(form.name, {'attr': {'class': "form-control input-field", 'placeholder': "Exemple : Lyon eSport"}}) }}
+                                    {{ form_widget(form.name, {'attr': {'class': "form-control input-field",
+                                        'placeholder': "Exemple : Lyon eSport"}}) }}
                                     {{ form_errors(form.name) }}
                                 </div>
                             </div>
@@ -62,13 +63,11 @@
                         <!--End activity's Name-->
 
                         <!--Activity's Address-->
-                        <div class="row">
-                            <div class="col-sm-12 mt-20 activityAddress activityHide">
-                                <div class="form-group form-error">
-                                    <i class="fas fa-map-marker"></i>{{ form_label(form.address, 'Adresse de votre évènement') }}
-                                    {{ form_widget(form.address, {'attr': {'class': "form-control input-field activityAddress"}}) }}
-                                    {{ form_errors(form.address) }}
-                                </div>
+                        <div class="mt-20 p-0 activityAddress activityHide">
+                            <div class="form-group form-error">
+                                <i class="fas fa-map-marker"></i>{{ form_label(form.address, 'Adresse de votre évènement') }}
+                                {{ form_widget(form.address, {'attr': {'class': "form-control input-field activityAddress"}}) }}
+                                {{ form_errors(form.address) }}
                             </div>
                         </div>
                         <!--End Activity's Address-->
@@ -93,87 +92,73 @@
                         <!--End Activity's Date-->
 
                         <!--Activity's Url Video-->
-                        <div class="row">
-                            <div class="col-sm-12 mt-20">
-                                <div class="form-group form-error">
-                                    <i class="fas fa-link"></i>{{ form_label(form.urlVideo, 'Url') }}
-                                    {{ form_widget(form.urlVideo, {'attr': {'class': "form-control input-field", 'placeholder': "Partager une vidéo de présentation de votre activité"}}) }}
-                                    {{ form_errors(form.urlVideo) }}
-                                </div>
+                        <div class="mt-20 p-0">
+                            <div class="form-group form-error">
+                                <i class="fas fa-link"></i>{{ form_label(form.urlVideo, 'Url') }}
+                                {{ form_widget(form.urlVideo, {'attr': {'class': "form-control input-field",
+                                    'placeholder': "Partager une vidéo de présentation de votre activité"}}) }}
+                                {{ form_errors(form.urlVideo) }}
                             </div>
                         </div>
                         <!--End Activity's Url Video-->
 
                         <!--Activity's Achievement-->
-                        <div class="row">
-                            <div class="col-sm-12 mt-20 activityAchievement activityHide">
-                                <div class="form-group form-error">
-                                    <i class="fas fa-trophy"></i>{{ form_label(form.achievement, 'Accomplissements') }}
-                                    {{ form_widget(form.achievement, {'attr': {'class': "form-control input-field activityAchievement", 'placeholder': "Exemple : 1ère place aux IEM Katowice de CS:GO 2018"}}) }}
-                                    {{ form_errors(form.achievement) }}
-                                </div>
+                        <div class="mt-20 p-0 activityAchievement activityHide">
+                            <div class="form-group form-error">
+                                <i class="fas fa-trophy"></i>{{ form_label(form.achievement, 'Accomplissements') }}
+                                {{ form_widget(form.achievement, {'attr': {'class': "form-control input-field activityAchievement",
+                                    'placeholder': "Exemple : 1ère place aux IEM Katowice de CS:GO 2018"}}) }}
+                                {{ form_errors(form.achievement) }}
                             </div>
                         </div>
                         <!--End Activity's Achievement-->
 
                         <!--Activity's Social Link-->
-                        <div class="row form-group form-error multiple-form-group input-group">
-                            <div class="col-sm-6 mt-20">
-                                <i class="fas fa-user-friends"></i>{{ form_label(form.selectSocialLink, 'Réseaux sociaux et chaînes de streaming') }}
-                                {{ form_widget(form.selectSocialLink, {'attr': {'class': "form-control input-field", 'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}}) }}
-                                {{ form_errors(form.selectSocialLink) }}
+                        <div class="mt-20 p-0">
+                            <div class="form-group form-error">
+                                <i class="fas fa-user-friends"></i>{{ form_label(form.socialLink, 'Réseaux sociaux et chaînes de streaming') }}
                             </div>
 
-                            <div class="col-sm-6 mt-20">
-                                <i class="fas fa-user-friends"></i>{{ form_label(form.socialLink, 'Réseaux sociaux et chaînes de streaming') }}
-                                {{ form_widget(form.socialLink, {'attr': {'class': "form-control input-field", 'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}}) }}
-                                {{ form_errors(form.socialLink) }}
+                            <div class="row">
+                                {# store the prototype on the data-prototype attribute #}
+
+                                <div id="selectSocialLink-fields-list" data-prototype="{{
+                                form_widget(form.selectSocialLink.vars.prototype,{'attr': {'class': "form-control input-field"}})|e }}" data-widget-tags="{{
+                                '<div class="col-sm-6"></div>'|e }}">
+                                    {% for selectSocialLinkField in form.selectSocialLink %}
+                                        {{ form_errors(selectSocialLinkField) }}
+                                        {{ form_widget(selectSocialLinkField) }}
+                                    {% endfor %}
+                                </div>
+
+                                <div id="SocialLink-fields-list" data-prototype="{{
+                                form_widget(form.socialLink.vars.prototype,{'attr': {'class': "form-control input-field",
+                                    'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}})|e }}"
+                                     data-widget-tags="{{ '<div class="col-sm-6"></div>'|e }}">
+                                    {% for socialLinkField in form.socialLink %}
+                                        {{ form_errors(socialLinkField) }}
+                                        {{ form_widget(socialLinkField) }}
+                                    {% endfor %}
+                                </div>
+
+                                <button type="button" class="add-another-collection-widget" data-list-1="#selectSocialLink-fields-list" data-list-2="#SocialLink-fields-list">Plus</button>
                             </div>
-                            <span class="input-group-btn"><button type="button" class="btn btn-default btn-add">+</button></span>
                         </div>
                         <!--End Activity's Social Link-->
 
                         <!--Activity's Description-->
-                        <div class="row">
-                            <div class="col-sm-12 mt-20">
-                                <div class="form-group form-error">
-                                    <i class="fas fa-edit"></i>{{ form_label(form.description, 'Description') }}
-                                    {{ form_widget(form.description, {'attr': {'class': "form-control input-field", 'placeholder': "Décrivez votre activité aux différentes marques (255 caractères maximum)"}}) }}
-                                    {{ form_errors(form.description) }}
-                                </div>
+                        <div class="mt-20 p-0">
+                            <div class="form-group form-error">
+                                <i class="fas fa-edit"></i>{{ form_label(form.description, 'Description') }}
+                                {{ form_widget(form.description,{'attr': {'class': "form-control input-field",
+                                    'placeholder': "Décrivez votre activité aux différentes marques (255 caractères maximum)"}}) }}
+                                {{ form_errors(form.description) }}
                             </div>
                         </div>
                         <!--End Activity's Description-->
 
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <div class="form-group multiple-form-group" data-max=3>
-                                    <label>Multiple inputs (with data-max=3)</label>
-
-                                    <div class="form-group input-group">
-                                        <input type="text" name="multiple[]" class="form-control">
-                                        <span class="input-group-btn"><button type="button" class="btn btn-default btn-add">+
-						</button></span>
-                                    </div>
-                                </div>
-                                <div class="form-group multiple-form-group">
-                                    <label>Multiple selects</label>
-
-                                    <div class="form-group input-group">
-                                        <select name="multiple[]" class="form-control">
-                                            <option value="">Default select</option>
-                                            <option value="">Option 1</option>
-                                            <option value="">Option 2</option>
-                                        </select>
-                                        <span class="input-group-btn"><button type="button" class="btn btn-default btn-add">+
-						</button></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-10">
-                            <div class="col-sm-12 text-center">
+                        <div class="mt-10">
+                            <div class="text-center">
                                 <input type="submit" value="Enregistrer" class="btn btn-primary backblue-btn">
                             </div>
                         </div>
@@ -192,6 +177,8 @@
 
 {% block javascripts %}
     {{ parent() }}
+    <script  src="{{ asset('build/add-collection-widget.js') }}" ></script>
     <script src="{{ asset('build/input_display.js') }}"></script>
-    <script src="{{ asset('build/multiple-fields.js') }}"></script>
+
+    {#<script src="{{ asset('build/multiple-fields.js') }}"></script>#}
 {% endblock %}

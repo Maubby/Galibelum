@@ -17,7 +17,7 @@
 /web/bundles/
 /web/uploads/
 /web/build/
-/web/wordpress/
+/web/blog/
 .idea
 *.php~
 .directory
