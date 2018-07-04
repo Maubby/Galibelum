@@ -20,7 +20,7 @@ class Offer
     /**
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organization", inversedBy="offers")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $organization;
 
