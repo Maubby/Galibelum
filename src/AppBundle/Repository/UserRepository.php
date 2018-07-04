@@ -23,7 +23,9 @@ namespace AppBundle\Repository;
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
     /**
-     * @param string $role
+     * Query to find user by role
+     *
+     * @param string $role constant role
      *
      * @return array
      */
