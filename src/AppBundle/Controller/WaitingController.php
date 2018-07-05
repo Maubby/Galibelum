@@ -45,8 +45,16 @@ class WaitingController extends Controller
             && $user->getOrganization()->getIsActive() === 1
         ) {
             return $this->redirectToRoute('dashboard_index');
+
+        } elseif ($user->hasRole('ROLE_STRUCTURE')
+            && $user->getOrganization()->getIsActive() === 0
+            || $user->hasRole('ROLE_COMPANY')
+            && $user->getOrganization()->getIsActive() === 0
+        ) {
+            return $this->redirectToRoute('waiting_index');
+
         } else {
-            return $this->render('waiting/index.html.twig');
+            return $this->redirectToRoute('inscription_index');
         }
     }
 }
