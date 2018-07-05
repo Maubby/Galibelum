@@ -1,39 +1,4 @@
-@import "~@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss";
-@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss";
-@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-regular.scss";
-@import "~@fortawesome/fontawesome-free-webfonts/scss/fa-brands.scss";
-
-/*************/
-/* Variables */
-/*************/
-
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-$fa-font-path:  "~@fortawesome/fontawesome-free-webfonts/webfonts";
-
-/* Basic colors */
-
-$brand-primary: darken(#428bca, 20%);
-$grey-bg-color: rgba(222, 228, 232, 0.51);
-$lighter-grey-bg-color: rgba(245, 248, 250, 0.79);
-$border-color:  #e4e4e4;
-$placeholder-color: rgb(84, 149, 175);
-$red-placeholder-color: rgb(249, 174, 154);
-$background-a-color: rgba(43, 158, 176, 0.64);
-
-$grey-color:    #999999;
-$main-color:    rgb(43,109,175);
-$seconde-color: rgb(41,117,181);
-$three-color:   rgb(32,127,188);
-$four-color:    rgb(22,138,196);
-$five-color:    rgb(13,149,203);
-$six-color:     rgb(14,160,204);
-$seven-color:   rgb(13,188,208);
-$eight-color:   rgb(55,195,203);
-$nine-color:    rgb(91,199,194);
-
-/* Fonts */
-
-$font-family-base: sans-serif;
+@import "_variables";
 
 /*******/
 /* CSS */
@@ -90,51 +55,6 @@ h4 {
 }
 
 h5 {
-  font-size: 25px;
-  text-transform: none;
-  font-style: normal;
-  color: $six-color;
-  font-weight: 900;
-  font-family: $font-family-base;
-}
-
-.h1 {
-  font-size: 52px;
-  text-transform: none;
-  font-style: normal;
-  color: $six-color;
-  font-weight: 900;
-  font-family: $font-family-base;
-}
-
-.h2 {
-  font-size: 43px;
-  text-transform: none;
-  font-style: normal;
-  color: $six-color;
-  font-weight: 900;
-  font-family: $font-family-base;
-}
-
-.h3 {
-  font-size: 34px;
-  text-transform: none;
-  font-style: normal;
-  color: $six-color;
-  font-weight: 900;
-  font-family: $font-family-base;
-}
-
-.h4 {
-  font-size: 29px;
-  text-transform: none;
-  font-style: normal;
-  color: $six-color;
-  font-weight: 900;
-  font-family: $font-family-base;
-}
-
-.h5 {
   font-size: 25px;
   text-transform: none;
   font-style: normal;
@@ -423,7 +343,7 @@ p.size {
   }
 }
 
-/* Inscription choose custom CSS */
+/* Linear-Gradient CSS */
 
 .degradeblue {
   background: linear-gradient(to right, #137faf, #86ccc2);
@@ -557,6 +477,37 @@ input::placeholder, select, textarea::placeholder {
   margin-right: auto;
   display: block;
   width: 50%;
+}
+
+/* Boxing-Canvas */
+
+.boxing-canvas {
+  background-color: #fff;
+  width: auto;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 40px 5px 20px 5px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-top: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+}
+
+.subtitle-boxing-canvas {
+  background-color: $lighter-grey-bg-color;
+  width: auto;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px 5px 20px 5px;
+  text-align: left;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom: 1px solid $border-color;
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
 }
 
 /* Others */
