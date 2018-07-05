@@ -135,6 +135,8 @@ class ActivityController extends Controller
     public function editAction(Request $request, Activity $activity,
         FileUploaderService $fileUploaderService
     ) {
+        $fileName = $activity->getUploadPdf();
+
         $deleteForm = $this->_createDeleteForm($activity);
         $editForm = $this->createForm(ActivityType::class, $activity);
         $editForm->handleRequest($request);
@@ -147,11 +149,8 @@ class ActivityController extends Controller
             $file = $activity->getUploadPdf();
 
             // Check if the file exist and set the new or old value
-            if ($file !== null) {
-                $filePdf = $fileUploaderService->upload(
-                    $file, $organizationId, $activity->getId()
-                );
-            }
+            $filePdf = $file!=null ? $filePdf = $fileUploaderService->upload(
+                $file, $organizationId, $activity->getId()) : $fileName;
 
             $activity->setUploadPdf($filePdf);
 
