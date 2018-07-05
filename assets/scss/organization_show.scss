@@ -1,22 +1,18 @@
-@import "style";
+@import "_variables";
+
+// Table
 
 .boxing-canvas {
-  background-color: #fff;
-  width: auto;
   max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 40px 5px 20px 5px;
-  text-align: center;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  border-top: 1px solid $border-color;
-  border-left: 1px solid $border-color;
-  border-right: 1px solid $border-color;
 }
 
 .container {
   padding: 0;
+}
+
+table.dataTable tbody td {
+  padding: 8px 10px;
+  vertical-align: middle;
 }
 
 th, td {
@@ -29,7 +25,14 @@ th, td {
   text-align: justify;
 }
 
-//Part button
+// Button width for manager_index
+
+.btn-organization {
+  width: 90px;
+}
+
+// Buttons part for manager_contract
+
 @function hsb($h-hsb, $s-hsb, $b-hsb, $a: 1) {
   @if $b-hsb == 0 {
     @return hsla(0, 0, 0, $a);
@@ -97,11 +100,11 @@ strong {
   cursor: pointer;
   display: inline-block;
   font-family: $font-family-base, sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 20px;
   width: 140px;
-  padding: 9px 16px 9px;
+  padding: 7px 16px 7px;
   transition: all 20ms ease-out;
   vertical-align: top;
 }

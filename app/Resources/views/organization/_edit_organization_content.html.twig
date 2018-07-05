@@ -8,17 +8,16 @@
                         <!-- Return to the dashboard -->
                         <ol class="breadcrumb breadcrumb-boxing-canvas">
                             <li><i class="fas fa-reply degradeblue"></i>&nbsp;
-                                <a href="{{ path('dashboard_index') }}" class="degradeblue">Tableau de bord</a></li>
+                                <a href="{{ path('dashboard_index') }}" class="degradeblue">Tableau de bord</a>
+                            </li>
                         </ol>
-                        
                         <!--1st part of the edit form-->
                         <div class="boxing-canvas">
-                            <div class="col-md-12 center">
+                            <div class="col-md-12 text-center">
                                 <i class="fas fa-gamepad degradeblue" style="font-size: 50px"></i>
                                 <h5 class="degradeblue">Modification de votre structure eSport</h5>
-                                <p class="normal-subtitle-text text-justify center">Une fois le profil mis à jour, vous pourrez de nouveau rechercher des structures eSport et sponsoriser leurs offres.</p>
+                                <p class="normal-subtitle-text text-justify text-center">Une fois le profil mis à jour, vous pourrez de nouveau rechercher des structures eSport et sponsoriser leurs offres.</p>
                             </div>
-
                             {{ form_start(edit_form) }}
                             <!-- First section contact form -->
                             <div class="col-md-6 mt-20 light-blue-subtitle-text">
@@ -39,7 +38,6 @@
                                 </div>
                             </div>
                             <!-- End first section contact form -->
-
                             <!-- Second section contact form-->
                             <div class="col-md-6 mt-20 light-blue-subtitle-text">
                                 <div class="form-group form-error">
@@ -59,7 +57,6 @@
                                 </div>
                             </div>
                             <!-- End second section contact edit_form-->
-
                             <!-- Final section contact edit_form-->
                             <div class="col-md-12 light-blue-subtitle-text">
                                 <div class="form-group form-error">
@@ -67,7 +64,6 @@
                                     {{ form_widget(edit_form.relationNumber, {'attr': {'class':'form-control input-field'}} ) }}
                                     {{ form_errors(edit_form.relationNumber) }}
                                 </div>
-
                                 <div class="form-group form-error">
                                     <i class="fas fa-edit"></i> {{ form_label(edit_form.description, 'Décrivez votre structure eSport en quelques mots') }}
                                     {{ form_widget(edit_form.description, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : Maximum 250 caractères' }} ) }}
@@ -75,7 +71,6 @@
                                 </div>
                             </div>
                             <!-- End final section contact edit_form-->
-                            
                             <div class="col-sm-12 col-xs-12 text-center">
                                 <input type="submit" value="Enregistrer votre structure" class="btn btn-primary backblue-btn-sm">
                             </div>

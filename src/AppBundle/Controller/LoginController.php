@@ -2,7 +2,7 @@
 /**
  * LoginController File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category LoginController
  * @package  Controller
@@ -62,20 +62,12 @@ class LoginController implements AuthenticationSuccessHandlerInterface
 
         if ($this->authorizationChecker->isGranted(
             'ROLE_SUPER_ADMIN'
+            || 'ROLE_MANAGER'
         )
         ) {
             $response = new RedirectResponse(
                 $this->router->generate(
-                    'admin_index'
-                )
-            );
-        } else if ($this->authorizationChecker->isGranted(
-            'ROLE_MANAGER'
-        )
-        ) {
-            $response = new RedirectResponse(
-                $this->router->generate(
-                    'manager_dashboard'
+                    'manager_contract_list'
                 )
             );
         } else {

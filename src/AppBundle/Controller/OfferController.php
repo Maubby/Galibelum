@@ -2,7 +2,7 @@
 /**
  * OfferController File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category OfferController
  * @package  Controller
@@ -14,8 +14,7 @@ use AppBundle\Entity\Activity;
 use AppBundle\Entity\Offer;
 use AppBundle\Service\ManagementFeesService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -33,8 +32,7 @@ class OfferController extends Controller
     /**
      * Lists all offer entities.
      *
-     * @Route("/",    name="offer_index")
-     * @Method("GET")
+     * @Route("/", methods={"GET"}, name="offer_index")
      *
      * @return Response A Response instance
      */
@@ -89,8 +87,7 @@ class OfferController extends Controller
      * @param Activity              $activity    New offer by activity
      * @param ManagementFeesService $feesService Fees Calculation services
      *
-     * @Route("/{id}/new",     name="offer_new")
-     * @Method({"GET","POST"})
+     * @Route("/{id}/new", methods={"GET", "POST"}, name="offer_new")
      *
      * @return Response A Response instance
      * @throws \Exception
@@ -120,7 +117,8 @@ class OfferController extends Controller
 
             return $this->redirectToRoute(
                 'offer_show', array(
-                    'id' => $offer->getId())
+                    'id' => $offer->getId(),
+                )
             );
         }
 
@@ -138,8 +136,7 @@ class OfferController extends Controller
      *
      * @param Offer $offer The offer entity
      *
-     * @Route("/{id}", name="offer_show")
-     * @Method("GET")
+     * @Route("/{id}", methods={"GET"}, name="offer_show")
      *
      * @return Response A Response instance
      */
@@ -161,8 +158,7 @@ class OfferController extends Controller
      * @param Request $request Edit posted info
      * @param Offer   $offer   The offer entity
      *
-     * @Route("/{id}/edit", name="offer_edit")
-     * @Method({"GET",      "POST"})
+     * @Route("/{id}/edit", methods={"GET", "POST"}, name="offer_edit")
      *
      * @return Response A Response instance
      */
@@ -191,13 +187,12 @@ class OfferController extends Controller
     }
 
     /**
-     * Deletes a offer entity.
+     * Deletes an offer entity.
      *
      * @param Request $request Delete posted info
      * @param Offer   $offer   The offer entity
      *
-     * @Route("/{id}",   name="offer_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", methods={"DELETE"}, name="offer_delete")
      *
      * @return Response A Response instance
      */
@@ -216,7 +211,7 @@ class OfferController extends Controller
     }
 
     /**
-     * Creates a form to delete a offer entity.
+     * Creates a form to delete an offer entity.
      *
      * @param Offer $offer The offer entity
      *

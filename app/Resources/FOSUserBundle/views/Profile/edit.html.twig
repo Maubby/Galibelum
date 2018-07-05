@@ -19,66 +19,60 @@
 
 {% block body %}
     <!-- Two forms, one to edit profile and one to change password -->
-    <section id="two-forms">
-        <div class="container">
-            <div class="row">
+    <section>
+        <div class="container-fluid">
+            <div class="row boxing-canvas boxing-canvas-maxing-width mt-50 pb-50">
                 <!-- Profile form start -->
-                <div class="col-md-4 col-md-offset-1 col-sm-12 col-xs-12">
-                    <div class="profile-boxing-canvas mt-50">
-                        <div class="profile-boxing-canvas-content-height normal-subtitle-text">
-                            <h5 class="profile-title text-center degradeblue">Modifier votre profil</h5>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-6 normal-subtitle-text mb-30">
+                            <h5 class="text-center degradeblue mb-30" style="font-size: 18px;"><i class="fas fa-user-edit text-center degradeblue" style="font-size: 18px;"></i> Modifier votre profil</h5>
                             {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' }} ) }}
                             <!-- Modifying firstname -->
-                            <div class="form-group col-sm-6 col-xs-6">
-                                {{ form_label(form.firstName) }}
-                                {{ form_widget(form.firstName, {'attr': {'class':'form-control','placeholder': user.firstname }} ) }}
+                            <div class="form-group col-md-6">
+                                {{ form_label(form.firstName, 'Votre prénom :') }}
+                                {{ form_widget(form.firstName, {'attr': {'class':'form-control', 'placeholder': user.firstname }} ) }}
                                 {{ form_errors(form.firstName) }}
                             </div>
                             <!-- End modifying firstname -->
 
                             <!-- Modifying lastname -->
-                            <div class="form-group col-sm-6 col-xs-6">
-                                {{ form_label(form.lastName) }}
-                                {{ form_widget(form.lastName, {'attr': {'class':'form-control','placeholder': user.lastname }} ) }}
+                            <div class="form-group col-md-6">
+                                {{ form_label(form.lastName, 'Votre nom :') }}
+                                {{ form_widget(form.lastName, {'attr': {'class':'form-control', 'placeholder': user.lastname }} ) }}
                                 {{ form_errors(form.lastName) }}
                             </div>
                             <!-- End modifying lastname -->
 
                             <!-- Modifying email -->
-                            <div class="form-group col-sm-12 col-xs-12">
-                                {{ form_label(form.email, 'Email :')}}
-                                {{ form_widget(form.email, {'attr': {'class':'form-control','placeholder': user.email }} ) }}
+                            <div class="form-group col-md-12">
+                                {{ form_label(form.email, 'Votre email :') }}
+                                {{ form_widget(form.email, {'attr': {'class':'form-control', 'placeholder': user.email }} ) }}
                                 {{ form_errors(form.email) }}
                             </div>
                             <!-- End modifying email -->
 
                             <!-- Modifying phone number -->
-                            <div class="form-group col-sm-12 col-xs-12">
-                                {{ form_label(form.phoneNumber) }}
-                                {{ form_widget(form.phoneNumber, {'attr': {'class':'form-control','placeholder': user.phonenumber }} ) }}
+                            <div class="form-group col-md-12">
+                                {{ form_label(form.phoneNumber, 'Votre numéro de téléphone :') }}
+                                {{ form_widget(form.phoneNumber, {'attr': {'class':'form-control', 'placeholder': user.phonenumber }} ) }}
                                 {{ form_errors(form.phoneNumber) }}
                             </div>
                             <!-- End modifying phone number -->
 
                             <!-- Submit button -->
-                            <div class="col-sm-12 col-xs-12">
+                            <div class="col-md-12">
                                 <input type="submit" class="btn btn-primary backblue-btn" value="{{ 'Modifier votre profil'|trans }}"/>
                             </div>
-                            <!-- End submit button -->
+
                             {{ form_end(form) }}
                         </div>
-                    </div>
-                </div>
-                <!-- End profile form -->
 
-                <!-- Password form start-->
-                <div class="col-md-4 col-md-offset-2 col-sm-12 col-xs-12">
-                    <div class="profile-boxing-canvas mt-50">
-                        <div class="profile-boxing-canvas-content-height normal-subtitle-text">
-                            <h5 class="profile-title text-center degradered">Modifier votre mot de passe</h5>
+                        <div class="col-md-6 normal-subtitle-text mb-30">
+                            <h5 class="text-center degradered mb-30" style="font-size: 18px;"><i class="fas fa-user-lock text-center degradered"></i> Modifier votre mot de passe</h5>
                             {{ form_start(formPassword) }}
                             <!-- Current password -->
-                            <div class="form-group col-sm-12 col-xs-12">
+                            <div class="form-group col-md-12">
                                 {{ form_label(formPassword.current_password, 'Entrer votre mot de passe actuel :') }}
                                 {% if formPassword.current_password.vars.errors|length %}
                                     {{ form_widget(formPassword.current_password,
@@ -91,7 +85,7 @@
                             <!-- End current password -->
 
                             <!-- New password -->
-                            <div class="form-group col-sm-12 col-xs-12">
+                            <div class="form-group col-md-12">
                                 {{ form_label(formPassword.current_password, 'Entrer votre nouveau mot de passe :') }}
                                 {% if formPassword.plainPassword.first.vars.errors|length %}
                                     {{ form_widget(formPassword.plainPassword.first,
@@ -104,7 +98,7 @@
                             <!-- End new password -->
 
                             <!-- New password's confirmation -->
-                            <div class="form-group col-sm-12 col-xs-12">
+                            <div class="form-group col-md-12">
                                 {{ form_label(formPassword.current_password, 'Confirmer votre mot de passe :') }}
                                 {% if formPassword.plainPassword.second.vars.errors|length %}
                                     {{ form_widget(formPassword.plainPassword.second,
@@ -117,12 +111,12 @@
                             <!-- End new password's confirmation -->
 
                             <!-- Submit button -->
-                            <div class="col-sm-12 col-xs-12">
-                                <input type="submit" class="btn btn-primary backred-btn" value="{{ 'Modifier votre mot de passe'|trans }}"/>
+                            <div class="col-md-12">
+                                <input type="submit" class="btn btn-warning backred-btn" value="{{ 'Modifier votre mot de passe'|trans }}"/>
                             </div>
                             <!-- End submit button -->
+
                             {{ form_end(formPassword) }}
-                            <!-- End password form -->
                         </div>
                     </div>
                 </div>
