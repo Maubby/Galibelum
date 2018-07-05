@@ -125,7 +125,7 @@ class ActivityController extends Controller
     /**
      * Displays a form to edit an existing activity entity.
      *
-     * @param Request             $request             Delete posted info
+     * @param Request             $request             Edit posted info
      * @param Activity            $activity            The activity entity
      * @param FileUploaderService $fileUploaderService Uploader Service
      *
