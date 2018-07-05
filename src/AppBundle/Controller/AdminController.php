@@ -38,6 +38,7 @@ class AdminController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
+
         return $this->render(
             'admin/index.html.twig',
             array('users' => $users,)
@@ -72,6 +73,7 @@ class AdminController extends Controller
                 'admin_manager_list'
             );
         }
+
         return $this->render(
             'admin/new.html.twig', array(
                 'manager' => $manager,
@@ -81,9 +83,9 @@ class AdminController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing managers entity.
+     * Displays a form to edit an existing manager entity.
      *
-     * @param Request $request Delete posted info
+     * @param Request $request Edit posted info
      * @param User    $manager The User manager
      *
      * @Route("/{id}/edit", methods={"GET", "POST"}, name="admin_manager_edit")
@@ -97,18 +99,18 @@ class AdminController extends Controller
         $editForm->remove('phoneNumber');
         $editForm->handleRequest($request);
 
-
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'Vos modifications ont bien été prises en compte.');
+            $this
+                ->addFlash(
+                    'success',
+                    "Vos modifications ont bien été prises en compte."
+                );
 
             return $this->redirectToRoute(
                 'admin_manager_list',
-                array('id' => $manager->getId())
+                array('id' => $manager->getId(),)
             );
         }
 
@@ -116,7 +118,6 @@ class AdminController extends Controller
             'admin/edit.html.twig', array(
                 'manager' => $manager,
                 'edit_form' => $editForm->createView(),
-
             )
         );
     }
@@ -139,7 +140,7 @@ class AdminController extends Controller
     }
 
     /**
-     * Delete a manager entity.
+     * Deletes a manager entity.
      *
      * @param User $manager The account manager
      *
@@ -153,6 +154,7 @@ class AdminController extends Controller
         $manager->setEnabled(false);
         $em->persist($manager);
         $em->flush();
+        
         return $this->redirectToRoute('admin_index');
     }
 }
