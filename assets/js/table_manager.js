@@ -1,3 +1,3 @@
 $(document).ready(function() {
-    $("#table-manager").DataTable();
+    $("#table_manager").DataTable();
 });

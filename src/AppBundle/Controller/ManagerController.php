@@ -30,20 +30,20 @@ use Symfony\Component\HttpFoundation\Response;
 class ManagerController extends Controller
 {
     /**
-     * Lists all managers.
+     * Landing page for account managers.
      *
-     * @Route("/",    name="manager_dashboard")
+     * @Route("/",    name="manager_contract")
      * @Method("GET")
      *
      * @return Response A Response instance
      */
     public function dashboardAction()
     {
-        $this->getDoctrine()->getManager();
-
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
         return $this->render(
-            'manager/dashboard.html.twig',
-            array('user' => $this->getUser())
+            'manager/contract.html.twig',
+            array('users' => $users,)
         );
     }
 

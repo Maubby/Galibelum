@@ -49,46 +49,18 @@
             <div class="container">
                 <!-- Sidebar starts -->
                 <div id="sidebar-wrapper">
+                    <div class="sidebar-nav">
+                    <!-- Landing page for ROLE_SUPER_ADMIN and ROLE_MANAGER -->
+                        <a href="{{ path('manager_contract_list') }}" class="navbar-brand">
+                            <img class="logo-galibelum-admin" src="{{ asset('build/images/logo_galibelum.png') }}" alt="Logo Galibelum">
+                        </a>
+                    <!-- End landing page -->
+                    </div>
+
                     <ul class="sidebar-nav">
                         <li class="sidebar-brand">
                             <br>
                         </li>
-
-                        <!-- Creating route to go back to one's dashboard when logged in as ROLE_SUPER_ADMIN
-                        or ROLE_MANAGER -->
-                        {% if app.user.hasRole('ROLE_MANAGER') %}
-                        <li class="sidebar-brand">
-                            <a href="{{ path('manager_dashboard') }}" class="navbar-brand">
-                                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Tableau de bord</a>
-                        </li>
-                        {% else %}
-                        <li class="sidebar-brand">
-                            <a href="{{ path('admin_index') }}" class="navbar-brand">
-                                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Tableau de bord</a>
-                        </li>
-                        {% endif %}
-                        <!-- End route to go back to dashboard -->
-
-                        <!--Only display the dropdown menu if logged in as ROLE_SUPER_ADMIN -->
-                        {% if app.user.hasRole('ROLE_SUPER_ADMIN') %}
-                        <!-- Dropdown menu starts -->
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">
-                                    <span class="glyphicon glyphicon-user" aria-hidden="true">
-                                        </span> Accounts managers <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ path('admin_manager_new') }}">
-                                        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-                                        Créer un compte</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{{ path('admin_manager_list') }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                                        Gestion des comptes</a></li>
-                            </ul>
-                        </li>
-                        <!-- End dropdown menu -->
-                        {% endif %}
-                        <!-- End condition -->
 
                         <li>
                             <a href="{{ path('manager_organization_list') }}"><span class="glyphicon glyphicon-pencil"
@@ -98,9 +70,34 @@
                             <a href="{{ path('manager_contract_list') }}"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>
                                 Gérer les contrats</a>
                         </li>
+
+                        <!--Only display the dropdown menu if logged in as ROLE_SUPER_ADMIN -->
+                        {% if app.user.hasRole('ROLE_SUPER_ADMIN') %}
+                            <!-- Dropdown menu starts -->
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true">
+                                        </span> Accounts managers <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('admin_manager_new') }}">
+                                            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                                            Créer un compte</a>
+                                    </li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ path('admin_manager_list') }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                            Gestion des comptes</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- End condition -->
+                        {% endif %}
+                        <!-- End dropdown menu -->
+
                         <li>
-                            <a href="#"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-                                Aller sur Galibelum.fr</a>
+                            <a href="{{ path('fos_user_security_logout') }}">
+                                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                                Se déconnecter</a>
                         </li>
                     </ul>
                 </div>

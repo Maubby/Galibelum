@@ -29,20 +29,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class AdminController extends Controller
 {
     /**
-     * Welcomes the admin manager.
+     * Landing page for admin manager.
      *
-     * @Route("/",    name="admin_index")
+     * @Route("/",    name="manager_contract")
      * @Method("GET")
      *
      * @return Response A Response instance
      */
-    public function indexAction()
+    public function dashboardAction()
     {
-        $this->getDoctrine()->getManager();
-
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_SUPER_ADMIN');
         return $this->render(
-            'admin/index.html.twig',
-            array('user' => $this->getUser())
+            'manager/contract.html.twig',
+            array('users' => $users,)
         );
     }
 
@@ -160,6 +160,6 @@ class AdminController extends Controller
         $manager->setEnabled(false);
         $em->persist($manager);
         $em->flush();
-        return $this->redirectToRoute('admin_index');
+        return $this->redirectToRoute('admin_manager_list');
     }
 }
