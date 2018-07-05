@@ -17,28 +17,46 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Default controller.
  *
- * @category DefaultController
+ * @Route("redirect")
+ *
+ * @category AdminController
  * @package  Controller
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 class DefaultController extends Controller
 {
     /**
-     * Lists all entities.
+     * Redirect when customers have an access denied
      *
-     * @Route("/", name="homepage")
+     * @Route("/", methods={"GET"}, name="redirect")
      * @return     Response A Response instance
      */
-    public function indexAction()
+    public function redirectAction()
     {
-        // replace this example code with whatever you need
-        return $this->render(
-            'default/index.html.twig',
-            [
-                'base_dir' => realpath(
-                    $this->getParameter('kernel.project_dir')
-                ).DIRECTORY_SEPARATOR,
-            ]
-        );
+        $user = $this->getUser();
+
+        if ($user->hasRole('ROLE_STRUCTURE')
+            && $user->getOrganization()->getIsActive() === 1
+            || $user->hasRole('ROLE_COMPANY')
+            && $user->getOrganization()->getIsActive() === 1
+        ) {
+            return $this->redirectToRoute('dashboard_index');
+
+        } elseif ($user->hasRole('ROLE_STRUCTURE')
+            && $user->getOrganization()->getIsActive() === 0
+            || $user->hasRole('ROLE_COMPANY')
+            && $user->getOrganization()->getIsActive() === 0
+        ) {
+            return $this->redirectToRoute('waiting_index');
+
+        } elseif ($user->hasRole('ROLE_MANAGER')) {
+            return $this->redirectToRoute('manager_index');
+
+        } elseif ($user->hasRole('ROLE_SUPER_ADMIN')) {
+            return $this->redirectToRoute('admin_index');
+
+        } else {
+            return $this->redirectToRoute('inscription_index');
+        }
     }
 }

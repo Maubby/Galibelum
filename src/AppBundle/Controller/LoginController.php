@@ -73,7 +73,7 @@ class LoginController implements AuthenticationSuccessHandlerInterface
         } else {
             $response = new RedirectResponse(
                 $this->router->generate(
-                    'dashboard_index'
+                    'waiting_index'
                 )
             );
         }
