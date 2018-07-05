@@ -6,7 +6,7 @@
 {% block stylesheets %}
 
     <!-- Additional CSS links-->
-    <link rel="stylesheet" href="{{ asset('build/activity_index.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/activity.css') }}">
 {% endblock %}
 
 {% block header %}
@@ -46,7 +46,7 @@
                                 <!-- activity'box creation-->
                                 <div class="activity-box">
                                     <div class="activity-name-height">
-                                        <p class="h5">{{ activity.name }}</p>
+                                        <h5>{{ activity.name }}</h5>
                                     </div>
                                     <div>
                                         {% if activity.type is same as("Évènement eSport") %}

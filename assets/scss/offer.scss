@@ -1,4 +1,4 @@
-@import "style";
+@import "_variables";
 
 /* Background */
 
@@ -14,33 +14,15 @@
 /* Box */
 
 .boxing-canvas {
-  background-color: #fff;
-  width: auto;
   max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 40px 5px 20px 5px;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  border-top: 1px solid $border-color;
-  border-left: 1px solid $border-color;
-  border-right: 1px solid $border-color;
-  border-bottom: 1px solid $border-color;
 }
 
 .subtitle-boxing-canvas {
-  background-color: $lighter-grey-bg-color;
-  width: auto;
   max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 30px 5px 20px 5px;
-  text-align: left;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  border-bottom: 1px solid $border-color;
-  border-left: 1px solid $border-color;
-  border-right: 1px solid $border-color;
+}
+
+.breadcrumb-boxing-canvas {
+  max-width: 1100px;
 }
 
 .box-border {
@@ -49,26 +31,10 @@
   border: 1px solid $border-color;
 }
 
-.breadcrumb-boxing-canvas {
-  width: auto;
-  max-width: 1100px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
-  border-radius: 4px;
-  border: 1px solid $border-color;
-}
-
 /* Input Fields/labels : change margin */
 
 .input-field {
   margin: 2px 0 0 0;
-  outline: 0;
-  display: inline-block !important;
-  width: 100% !important;
-  padding: 7px;
-  background-color: #fff;
-  border: 1px solid $border-color;
 }
 
 label {
@@ -91,7 +57,7 @@ th {
   color: $placeholder-color;
 }
 
-/* Other  */
+/* Correct padding */
 
 .correct-pl {
   padding-left: 0;

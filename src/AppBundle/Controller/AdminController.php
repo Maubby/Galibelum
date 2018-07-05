@@ -36,12 +36,11 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
+        $this->getDoctrine()->getManager();
 
         return $this->render(
             'admin/index.html.twig', array(
-                'users' => $users,
+                'user' => $this->getUser(),
             )
         );
     }
