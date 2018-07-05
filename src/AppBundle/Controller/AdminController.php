@@ -14,8 +14,7 @@ use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Admin controller.
@@ -31,8 +30,7 @@ class AdminController extends Controller
     /**
      * Welcomes the admin manager.
      *
-     * @Route("/",    name="admin_index")
-     * @Method("GET")
+     * @Route("/", methods={"GET"}, name="admin_index")
      *
      * @return Response A Response instance
      */
@@ -47,12 +45,11 @@ class AdminController extends Controller
     }
 
     /**
-     *  Creates a new account manager.
+     * Creates a new account manager.
      *
      * @param Request $request New posted info
      *
-     * @Route("/new",  name="admin_manager_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", methods={"GET", "POST"}, name="admin_manager_new")
      *
      * @return Response A Response instance
      */
@@ -89,8 +86,7 @@ class AdminController extends Controller
      * @param Request $request Delete posted info
      * @param User    $manager The User manager
      *
-     * @Route("/{id}/edit", name="admin_manager_edit")
-     * @Method({"GET",      "POST"})
+     * @Route("/{id}/edit", methods={"GET", "POST"}, name="admin_manager_edit")
      *
      * @return Response A Response instance
      */
@@ -128,9 +124,7 @@ class AdminController extends Controller
     /**
      * Lists all account managers.
      *
-     * @Route("/manager", name="admin_manager_list")
-     *
-     * @Method("GET")
+     * @Route("/manager", methods={"GET"}, name="admin_manager_list")
      *
      * @return Response A Response instance
      */
@@ -149,8 +143,7 @@ class AdminController extends Controller
      *
      * @param User $manager The account manager
      *
-     * @Route("/{id}", name="admin_delete")
-     * @Method("GET")
+     * @Route("/{id}", methods={"GET"}, name="admin_delete")
      *
      * @return Response A Response instance
      */
