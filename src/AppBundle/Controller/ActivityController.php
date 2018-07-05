@@ -8,14 +8,14 @@
  * @package  Controller
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
+
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Activity;
 use AppBundle\Form\ActivityType;
 use AppBundle\Service\FileUploaderService;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -35,8 +35,7 @@ class ActivityController extends Controller
      *
      * @param Request $request Edit posted info
      *
-     * @Route("/",    name="activity_index")
-     * @Method("GET")
+     * @Route("/", methods={"GET"}, name="activity_index")
      *
      * @return Response A Response instance
      */
