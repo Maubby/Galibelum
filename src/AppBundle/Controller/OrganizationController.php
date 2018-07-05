@@ -79,50 +79,54 @@ class OrganizationController extends Controller
      */
     public function newAction(Request $request, int $choose = 0)
     {
-        $organization = new Organization();
         $user = $this->getUser();
-        if ($choose === 1) {
-            $form = $this
-                ->createForm(
-                    'AppBundle\Form\OrganizationType', $organization
+
+        if ($user->getOrganization()->getId() === null) {
+            $organization = new Organization();
+            if ($choose === 1) {
+                $form = $this
+                    ->createForm(
+                        'AppBundle\Form\OrganizationType', $organization
+                    );
+                $form->remove('status');
+            } else {
+                $form = $this
+                    ->createForm(
+                        'AppBundle\Form\OrganizationType', $organization
+                    );
+            }
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $organization->setUser($user);
+                $organization->setNameCanonical(strtolower($organization->getName()));
+                $user->setOrganization($organization);
+                $choose === 0 ? $user->setRoles(array('ROLE_STRUCTURE'))
+                    : $user->setRoles(array('ROLE_COMPANY'));
+
+                // Persisting user according to its new organization
+                $em->persist($organization);
+                $em->persist($user);
+                $em->flush();
+
+                return $this->redirectToRoute(
+                    'dashboard_index',
+                    array('id' => $organization->getId(),
+                    )
                 );
-            $form->remove('status');
-        } else {
-            $form = $this
-                ->createForm(
-                    'AppBundle\Form\OrganizationType', $organization
-                );
-        }
+            }
 
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $organization->setUser($user);
-            $organization->setNameCanonical(strtolower($organization->getName()));
-            $user->setOrganization($organization);
-            $choose === 0 ?$user->setRoles(array('ROLE_STRUCTURE'))
-                : $user->setRoles(array('ROLE_COMPANY'));
-
-            // Persisting user according to its new organization
-            $em->persist($organization);
-            $em->persist($user);
-            $em->flush();
-
-            return $this->redirectToRoute(
-                'dashboard_index',
-                array('id' => $organization->getId(),
+            return $this->render(
+                'organization/new.html.twig', array(
+                    'organization' => $organization,
+                    'form' => $form->createView(),
+                    'choose' => $choose,
                 )
             );
         }
-
-        return $this->render(
-            'organization/new.html.twig', array(
-                'organization' => $organization,
-                'form' => $form->createView(),
-                'choose'=>$choose,
-            )
-        );
+        return $this->redirectToRoute('redirect');
     }
 
     /**
