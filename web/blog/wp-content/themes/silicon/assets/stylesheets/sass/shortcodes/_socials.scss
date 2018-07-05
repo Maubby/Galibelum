@@ -1,0 +1,807 @@
+//
+// Social Buttons
+// --------------------------------------------------
+
+// Basic styles & Behaviour
+// ------------------------
+.social-button {
+  display: inline-block;
+  position: relative;
+  width: $btn-xs-height;
+  height: $btn-xs-height;
+  margin: {
+    right: floor($btn-xs-height / 1.6);
+    bottom: floor($btn-xs-height / 1.6);
+  }
+  font-size: 13px;
+  text-decoration: none;
+  -webkit-transform: translate3d(0, 0, 0);
+
+  i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity .25s;
+    @include center(xy);
+
+    &::before {
+      display: block;
+      transition: transform .25s;
+      -webkit-transform: translate3d(0, 0, 0);
+      -webkit-transform-style: preserve-3d;
+      transform: translate3d(0, 0, 0);
+      transform-style: preserve-3d;
+    }
+  }
+
+  .unhvrd {
+    opacity: 1;
+    &::before {
+      transform: translateY(0) scale(1);
+    }
+  }
+  .hvrd {
+    color: $gray-darker;
+    opacity: 0;
+    &::before {
+      transform: translateY(10px) scale(.7);
+    }
+  }
+
+  &:hover {
+    .unhvrd {
+      opacity: 0;
+      &::before {
+        transform: translateY(-10px) scale(.7);
+        transition: transform .15s;
+      }
+    }
+    .hvrd {
+      opacity: 1;
+      &::before {
+        transform: translateY(0) scale(1);
+      }
+    }
+  }
+
+  // Shapes Types
+  // ------------------------
+
+  &.sb-shape-polygon,
+  &.sb-shape-circle,
+  &.sb-shape-rounded,
+  &.sb-shape-square {
+    width: $btn-sm-height;
+    height: $btn-sm-height;
+    margin: {
+      right: 10px;
+      bottom: 10px;
+    }
+  }
+
+  // Polygon
+  &.sb-shape-polygon {
+    svg {
+      display: block;
+      position: absolute;
+      width: 100%;
+    }
+  }
+
+  // Circle
+  &.sb-shape-circle { border-radius: 50%; }
+
+  // Rounded
+  &.sb-shape-rounded { border-radius: $border-radius-default; }
+
+  // Square
+  &.sb-shape-square { border-radius: 0; }
+}
+
+// Buttons Color & Hover
+// ------------------------
+
+// Default Colored Icons
+/* Email */
+.sb-mail {
+  color: $brand-primary;
+  svg {
+    transform: rotate(10deg);
+  }
+}
+
+/* Facebook */
+.sb-facebook {
+  color: #3b5998;
+  svg {
+    transform: rotate(90deg);
+  }
+}
+
+/* Twitter */
+.sb-twitter {
+  color: #1da1f2;
+  svg {
+    transform: rotate(45deg);
+  }
+}
+
+/* Google+ */
+.sb-googleplus {
+  color: #dd4b39;
+  font-size: 16px;
+  svg {
+    transform: rotate(30deg);
+  }
+}
+
+/* Google Play */
+.sb-play {
+  color: #00c4ff;
+  svg {
+    transform: rotate(30deg);
+  }
+}
+
+/* DeviantArt */
+.sb-deviantart {
+  color: #05cc47;
+  font-size: 16px;
+  svg {
+    transform: rotate(50deg);
+  }
+}
+
+/* Digg */
+.sb-digg {
+  color: #005be2;
+  font-size: 16px;
+  svg {
+    transform: rotate(60deg);
+  }
+}
+
+/* Instagram */
+.sb-instagram {
+  color: #c13584;
+  svg {
+    transform: rotate(40deg);
+  }
+}
+
+/* LastFM */
+.sb-lastfm {
+  color: #d51007;
+  font-size: 14px;
+  svg {
+    transform: rotate(60deg);
+  }
+}
+
+/* LinkedIn */
+.sb-linkedin {
+  color: #0077b5;
+  svg {
+    transform: rotate(70deg);
+  }
+}
+
+/* Foursquare */
+.sb-foursquare {
+  color: #f94877;
+  svg {
+    transform: rotate(10deg);
+  }
+}
+
+/* AirBNB */
+.sb-airbnb {
+  color: #fd5c63;
+  svg {
+    transform: rotate(20deg);
+  }
+}
+
+/* Android */
+.sb-android {
+  color: #a4c639;
+  svg {
+    transform: rotate(750deg);
+  }
+}
+
+/* Apple */
+.sb-apple {
+  color: #000000;
+  svg {
+    transform: rotate(20deg);
+  }
+}
+
+/* Behance */
+.sb-behance {
+  color: #1769ff;
+  font-size: 14px;
+  svg {
+    transform: rotate(55deg);
+  }
+}
+
+/* Blogger */
+.sb-blogger {
+  color: #f57d00;
+  svg {
+    transform: rotate(20deg);
+  }
+}
+
+/* GitHub */
+.sb-github {
+  color: #4078c0;
+  svg {
+    transform: rotate(0deg);
+  }
+}
+
+/* Pinterest */
+.sb-pinterest {
+  color: #bd081c;
+  svg {
+    transform: rotate(90deg);
+  }
+}
+
+/* Flickr */
+.sb-flickr {
+  color: #0063dc;
+  svg {
+    transform: rotate(0deg);
+  }
+}
+
+/* Disqus */
+.sb-disqus {
+  color: #2e9fff;
+  svg {
+    transform: rotate(70deg);
+  }
+}
+
+/* Dribbble */
+.sb-dribbble {
+  color: #ea4c89;
+  svg {
+    transform: rotate(95deg);
+  }
+}
+
+/* Odnoklassniki */
+.sb-odnoklassniki {
+  color: #ed812b;
+  svg {
+    transform: rotate(10deg);
+  }
+}
+
+/* Stack Overflow */
+.sb-stackoverflow {
+  color: #f48024;
+  svg {
+    transform: rotate(30deg);
+  }
+}
+
+/* PayPal */
+.sb-paypal {
+  color: #009cde;
+  svg {
+    transform: rotate(80deg);
+  }
+}
+
+/* Playstation */
+.sb-playstation {
+  color: #003087;
+  font-size: 15px;
+  svg {
+    transform: rotate(80deg);
+  }
+}
+
+/* Reddit */
+.sb-reddit {
+  color: #ff4500;
+  svg {
+    transform: rotate(0deg);
+  }
+}
+
+/* RSS */
+.sb-rss {
+  color: #f26522;
+  svg {
+    transform: rotate(0deg);
+  }
+}
+
+/* Skype */
+.sb-skype {
+  color: #00aff0;
+  svg {
+    transform: rotate(10deg);
+  }
+}
+
+/* Snapchat */
+.sb-snapchat {
+  color: #cbc91e;
+  svg {
+    transform: rotate(10deg);
+  }
+}
+
+/* SoundCloud */
+.sb-soundcloud {
+  color: #ff8800;
+  font-size: 16px;
+  svg {
+    transform: rotate(20deg);
+  }
+}
+
+/* Steam */
+.sb-steam {
+  color: #00adee;
+  svg {
+    transform: rotate(40deg);
+  }
+}
+
+/* Stumbleupon */
+.sb-stumbleupon {
+  color: #eb4924;
+  svg {
+    transform: rotate(35deg);
+  }
+}
+
+/* Telegram */
+.sb-telegram {
+  color: #0088cc;
+  svg {
+    transform: rotate(65deg);
+  }
+}
+
+/* Tumblr */
+.sb-tumblr {
+  color: #35465c;
+  svg {
+    transform: rotate(90deg);
+  }
+}
+
+/* Viber */
+.sb-viber {
+  color: #8f5db7;
+  svg {
+    transform: rotate(0deg);
+  }
+}
+
+/* Vimeo */
+.sb-vimeo {
+  color: #1ab7ea;
+  svg {
+    transform: rotate(30deg);
+  }
+}
+
+/* Vine */
+.sb-vine {
+  color: #00b488;
+  svg {
+    transform: rotate(60deg);
+  }
+}
+
+/* Vkontakte */
+.sb-vkontakte {
+  color: #45668e;
+  font-size: 14px;
+  svg {
+    transform: rotate(40deg);
+  }
+}
+
+/* Whatsapp */
+.sb-whatsapp {
+  color: #25d366;
+  svg {
+    transform: rotate(10deg);
+  }
+}
+
+/* Windows */
+.sb-windows {
+  color: #00bcf2;
+  svg {
+    transform: rotate(70deg);
+  }
+}
+
+/* Wordpress */
+.sb-wordpress {
+  color: #21759b;
+  svg {
+    transform: rotate(55deg);
+  }
+}
+
+/* Xbox */
+.sb-xbox {
+  color: #52b043;
+  svg {
+    transform: rotate(15deg);
+  }
+}
+
+/* Xing */
+.sb-xing {
+  color: #cfdc00;
+  svg {
+    transform: rotate(55deg);
+  }
+}
+
+/* Yahoo */
+.sb-yahoo {
+  color: #410093;
+  svg {
+    transform: rotate(95deg);
+  }
+}
+
+/* Yelp */
+.sb-yelp {
+  color: #af0606;
+  svg {
+    transform: rotate(5deg);
+  }
+}
+
+/* Youtube */
+.sb-youtube {
+  color: #cd201f;
+  svg {
+    transform: rotate(0deg);
+  }
+}
+
+// Buttons Color & Hover Monochrome to Colored Type
+.social-button.sb-monochrome {
+  /* Email */
+  &.sb-mail {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: $brand-primary; }
+  }
+
+  /* Facebook */
+  &.sb-facebook {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #3b5998; }
+  }
+
+  /* Twitter */
+  &.sb-twitter {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #1da1f2; }
+  }
+
+  /* Google+ */
+  &.sb-googleplus {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #dd4b39; }
+  }
+
+  /* Google Play */
+  &.sb-play {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #00c4ff; }
+  }
+
+  /* DeviantArt */
+  &.sb-deviantart {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #05cc47; }
+  }
+
+  /* Digg */
+  &.sb-digg {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #005be2; }
+  }
+
+  /* Instagram */
+  &.sb-instagram {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #c13584; }
+  }
+
+  /* LastFM */
+  &.sb-lastfm {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #d51007; }
+  }
+
+  /* LinkedIn */
+  &.sb-linkedin {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #0077b5; }
+  }
+
+  /* Foursquare */
+  &.sb-foursquare {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #f94877; }
+  }
+
+  /* AirBNB */
+  &.sb-airbnb {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #fd5c63; }
+  }
+
+  /* Android */
+  &.sb-android {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #a4c639; }
+  }
+
+  /* Apple */
+  &.sb-apple {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #000000; }
+  }
+
+  /* Behance */
+  &.sb-behance {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #1769ff; }
+  }
+
+  /* Blogger */
+  &.sb-blogger {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #f57d00; }
+  }
+
+  /* GitHub */
+  &.sb-github {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #4078c0; }
+  }
+
+  /* Pinterest */
+  &.sb-pinterest {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #bd081c; }
+  }
+
+  /* Flickr */
+  &.sb-flickr {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #0063dc; }
+  }
+
+  /* Disqus */
+  &.sb-disqus {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #2e9fff; }
+  }
+
+  /* Dribbble */
+  &.sb-dribbble {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #ea4c89; }
+  }
+
+  /* Odnoklassniki */
+  &.sb-odnoklassniki {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #ed812b; }
+  }
+
+  /* Stack Overflow */
+  &.sb-stackoverflow {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #f48024; }
+  }
+
+  /* PayPal */
+  &.sb-paypal {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #009cde; }
+  }
+
+  /* Playstation */
+  &.sb-playstation {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #003087; }
+  }
+
+  /* Reddit */
+  &.sb-reddit {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #ff4500; }
+  }
+
+  /* RSS */
+  &.sb-rss {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #f26522; }
+  }
+
+  /* Skype */
+  &.sb-skype {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #00aff0; }
+  }
+
+  /* Snapchat */
+  &.sb-snapchat {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #cbc91e; }
+  }
+
+  /* SoundCloud */
+  &.sb-soundcloud {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #ff8800; }
+  }
+
+  /* Steam */
+  &.sb-steam {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #00adee; }
+  }
+
+  /* Stumbleupon */
+  &.sb-stumbleupon {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #eb4924; }
+  }
+
+  /* Telegram */
+  &.sb-telegram {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #0088cc; }
+  }
+
+  /* Tumblr */
+  &.sb-tumblr {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #35465c; }
+  }
+
+  /* Viber */
+  &.sb-viber {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #8f5db7; }
+  }
+
+  /* Vimeo */
+  &.sb-vimeo {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #1ab7ea; }
+  }
+
+  /* Vine */
+  &.sb-vine {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #00b488; }
+  }
+
+  /* Vkontakte */
+  &.sb-vkontakte {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #45668e; }
+  }
+
+  /* Whatsapp */
+  &.sb-whatsapp {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #25d366; }
+  }
+
+  /* Windows */
+  &.sb-windows {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #00bcf2; }
+  }
+
+  /* Wordpress */
+  &.sb-wordpress {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #21759b; }
+  }
+
+  /* Xbox */
+  &.sb-xbox {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #52b043; }
+  }
+
+  /* Xing */
+  &.sb-xing {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #cfdc00; }
+  }
+
+  /* Yahoo */
+  &.sb-yahoo {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #410093; }
+  }
+
+  /* Yelp */
+  &.sb-yelp {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #af0606; }
+  }
+
+  /* Youtube */
+  &.sb-youtube {
+    .unhvrd { color: $gray-darker; }
+    .hvrd { color: #cd201f; }
+  }
+}
+
+// Alingment
+// ------------------------
+
+// Center Alingmentt
+.text-center {
+  .social-button {
+    margin: {
+      right: floor($btn-xs-height / 3.2);
+      left: floor($btn-xs-height / 3.2);
+    }
+  }
+  .sb-shape-polygon,
+  .sb-shape-circle,
+  .sb-shape-rounded,
+  .sb-shape-square {
+    margin: {
+      right: 5px;
+      left: 5px;
+    }
+  }
+}
+
+// Right Alignment
+.text-right {
+  .social-button {
+    margin: {
+      right: 0;
+      left: floor($btn-xs-height / 1.6);
+    }
+  }
+  .sb-shape-polygon,
+  .sb-shape-circle,
+  .sb-shape-rounded,
+  .sb-shape-square {
+    margin: {
+      right: 0;
+      left: 10px;
+    }
+  }
+}
+
+// Buttons Color & Hover Light Type
+.social-button.sb-light {
+  border-color: $border-light-color;
+  backface-visibility: hidden;
+  .unhvrd { color: rgba($white-color, .5) !important; }
+  .hvrd { color: $white-color !important; }
+}

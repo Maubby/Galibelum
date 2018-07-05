@@ -14,13 +14,11 @@
 !var/SymfonyRequirements.php
 /vendor/
 /node_modules/
-/web/bundles/
-/web/uploads/
 /web/build/
-/web/wordpress/
+/web/uploads/
+/web/blog/
 .idea
 *.php~
 .directory
 npm-debug.log
 package-lock.json
-/web/.htaccess

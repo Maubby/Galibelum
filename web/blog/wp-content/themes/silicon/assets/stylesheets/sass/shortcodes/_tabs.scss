@@ -1,0 +1,281 @@
+//
+// Horizontal / Vertical Tabs + Filters
+// --------------------------------------------------
+
+.nav-tabs,
+.wc-tabs,
+.nav-filters > ul {
+  margin-bottom: 0;
+  padding-left: 0;
+  border: 0;
+  list-style: none;
+  > li {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    > a {
+      @extend .btn, .btn-link, .btn-pill, .btn-default;
+      margin: 0;
+      i {
+        position: relative;
+        top: -1px;
+      }
+    }
+
+    // Active state, and its :hover to override normal :hover
+    &.active > a,
+    &.active > a:hover,
+    &.active > a:focus {
+      background-color: $brand-primary;
+      color: $white-color;
+      box-shadow: none;
+      cursor: default;
+    }
+  }
+}
+
+// Horizontal Layout (Tour)
+.tabs-horizontal .nav-tabs,
+.nav-filters > ul,
+.tabs-horizontal .wc-tabs {
+  > li { margin: 0 ($grid-vertical-step / 2) $grid-vertical-step 0; }
+}
+
+// Vertical Layout (Tour)
+.tabs-vertical {
+  display: table;
+  width: 100%;
+  .nav-tabs,
+  .tab-content {
+    display: table-cell;
+    vertical-align: top;
+  }
+  .nav-tabs > li {
+    display: block;
+    margin-bottom: ($grid-vertical-step / 2);
+    > a {
+      display: inline-block;
+      white-space: nowrap;
+    }
+  }
+  &.tabs-vertical-left {
+    .tab-content { padding: 5px 0 0 15px; }
+  }
+  &.tabs-vertical-right {
+    .tab-content { padding: 5px 15px 0 0; }
+  }
+}
+
+// For Nav Filters(Masonry Like)
+.nav-filters {
+  margin-bottom: floor($grid-vertical-step * 1.5); //~36px
+  > ul > li { margin: 0 6px 10px 0; }
+  &.text-center {
+    > ul > li { margin: 0 3px 10px 3px; }
+  }
+  &.text-right {
+    > ul > li { margin: 0 0 10px 6px; }
+  }
+}
+
+// Bordered Horizontal
+.tabs-bordered {
+  .nav-tabs li {
+    // Bordered style Arrow
+    &::after, &::before {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      margin-top: 8px;
+      transition: .3s;
+      border: solid transparent;
+      content: '';
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    &::after {
+      margin-left: -10px;
+      border-width: 10px;
+      border-bottom-color: $white-color;
+    }
+    &::before {
+      margin-left: -8px;
+      border-width: 8px;
+      border-bottom-color: $border-color;
+    }
+    &.active {
+      &::after, &::before {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &.tabs-vertical-left .nav-tabs li {
+    display: block;
+    margin-right: 0;
+    // Bordered style Arrow
+    &::after, &::before {
+      top: 50%;
+      left: 100%;
+      border-color: transparent;
+    }
+    &::after {
+      margin: {
+        top: -13px;
+        left: -8px;
+      }
+      border-width: 10px;
+      border-right-color: $white-color;
+    }
+    &::before {
+      margin-top: -11px;
+      border-width: 8px;
+      border-right-color: $border-color;
+    }
+  }
+
+  &.tabs-vertical-right .nav-tabs li {
+    display: block;
+    margin-left: 0;
+    // Bordered style Arrow
+    &::after, &::before {
+      top: 50%;
+      right: 100%;
+      left: auto;
+      border-color: transparent;
+    }
+    &::after {
+      margin: {
+        top: -13px;
+        left: -8px;
+      }
+      border-width: 10px;
+      border-left-color: $white-color;
+    }
+    &::before {
+      margin-top: -11px;
+      border-width: 8px;
+      border-left-color: $border-color;
+    }
+  }
+
+  .tab-content {
+    padding: $grid-vertical-step !important;
+    border-radius: $border-radius-default;
+  }
+}
+
+// Alignment: Left
+.tabs-vertical-left {
+  .nav-tabs {
+    padding-right: $grid-vertical-step;
+    > li::after, > li::before {
+      left: calc(100% + 16px) !important;
+    }
+  }
+}
+
+// Alignment: Center
+.text-center {
+  .tabs-horizontal .nav-tabs,
+  &.tabs-horizontal .nav-tabs {
+    > li { margin: 0 16px 14px; }
+  }
+}
+
+// Alignment: Right
+.tabs-horizontal .nav-tabs {
+  > li {
+    margin-right: 0;
+    margin-left: ($grid-vertical-step / 2);
+  }
+  > li:first-child { margin-left: 0; }
+}
+
+.tabs-vertical-right {
+  .nav-tabs {
+    padding: {
+      right: auto;
+      left: $grid-vertical-step;
+    }
+    > li::after, > li::before {
+      right: calc(100% + 9px) !important;
+    }
+  }
+}
+.tabs-bordered .tab-content { background-color: $white-color; }
+
+// Tabbable tabs
+.tab-content {
+  padding-top: floor($grid-vertical-step / 2); // ~12px
+  overflow: hidden;
+  > .tab-pane { display: none; }
+  > .active { display: block; }
+}
+
+// Light Skin
+.tabs-light,
+.filters-light {
+  .nav-tabs li,
+  &.nav-filters li {
+    a {
+      color: $white-color;
+      &:hover {
+        color: $text-color;
+      }
+    }
+    &.active a { color: $white-color; }
+  }
+}
+
+// Component Animations
+.transition {
+  &.fade {
+    transition: all .4s ease-in-out;
+    opacity: 0;
+    backface-visibility: hidden;
+    &.in { opacity: 1; }
+  }
+  &.scale.fade {
+    transform: scale(.9);
+  }
+  &.scaledown.fade {
+    transform: scale(1.1);
+  }
+  &.scale.fade.in,
+  &.scaledown.fade.in {
+    transform: scale(1);
+  }
+  &.left.fade {
+    transform: translateX(40px);
+  }
+  &.right.fade {
+    transform: translateX(-40px);
+  }
+  &.left.fade.in,
+  &.right.fade.in {
+    transform: translateX(0);
+  }
+  &.top.fade {
+    transform: translateY(-40px);
+  }
+  &.bottom.fade {
+    transform: translateY(40px);
+  }
+  &.top.fade.in,
+  &.bottom.fade.in {
+    transform: translateY(0);
+  }
+  &.flip.fade {
+    transform: rotateY(-90deg) scale(1.1);
+    transform: origin(50% 50%);
+  }
+  &.flip.fade.in {
+    transform: rotateY(0deg) scale(1);
+    transform: origin(50% 50%);
+  }
+}

@@ -1,0 +1,339 @@
+//
+// Buttons
+// --------------------------------------------------
+
+// Base class
+.btn,
+input[type='submit'],
+input[type='button'] {
+  display: inline-block;
+  position: relative;
+  height: $btn-height;
+  margin: {
+    top: floor($btn-margin / 1.5);
+    right: $btn-margin;
+    bottom: floor($btn-margin / 1.5);
+  }
+  padding: 0 24px;
+  transform: translateZ(0);
+  transition: all .4s;
+  border: 1px solid transparent;
+  background: {
+    color: transparent;
+    image: none;
+  }
+  color: $navi-link-color;
+  font: {
+    family: $font-family-navs;
+    size: $font-size-navi;
+    style: $font-style-navi;
+    weight: $font-weight-navi;
+  }
+  letter-spacing: .1em;
+  line-height: $btn-height;
+  white-space: nowrap;
+  cursor: pointer;
+  vertical-align: middle;
+  text: {
+    transform: $text-transform-navi;
+    decoration: none;
+    align: center;
+  }
+  touch-action: manipulation;
+  @include user-select(none);
+  &:hover,
+  &:focus
+  &:active,
+  &.active {
+    outline: none;
+    background-image: none;
+    text-decoration: none;
+    box-shadow: none;
+  }
+  > i {
+    display: inline-block;
+    font-size: 1.1em;
+    vertical-align: middle;
+    &.si, &.material-icons { font-size: 1.3em; }
+  }
+
+  // Disabled
+  &[disabled],
+  &.disabled {
+    cursor: not-allowed;
+    opacity: .5;
+    &:hover { box-shadow: none !important; }
+  }
+}
+
+// Button sizes
+.btn-lg {
+  height: $btn-lg-height;
+  line-height: $btn-lg-height;
+}
+.btn-sm {
+  height: $btn-sm-height;
+  padding: 0 20px;
+  line-height: $btn-sm-height;
+}
+
+// Button shapes
+.btn-pill {
+  border-radius: floor($btn-height / 2);
+  &.btn-lg { border-radius: floor($btn-lg-height / 2); }
+  &.btn-sm { border-radius: floor($btn-sm-height / 2); }
+}
+.btn-rounded {
+  border-radius: $border-radius-default;
+}
+
+// Alignment
+.text-center .btn {
+  margin: {
+    right: floor($btn-margin / 2);
+    left: floor($btn-margin / 2);
+  }
+}
+.text-right .btn {
+  margin: {
+    right: 0;
+    left: $btn-margin;
+  }
+}
+
+// Block button
+.btn-block {
+  display: block;
+  width: 100%;
+  margin: {
+    top: $grid-vertical-step;
+    right: 0;
+    bottom: $grid-vertical-step;
+    left: 0;
+  }
+}
+
+// Solid Buttons Color Variants
+// Uses @mixin button-variant($bg-color, $color, $bg-hover-color, $shadow-color)
+.btn-solid.btn-default {
+  @include button-variant($gray-lighter, $navi-link-color, $gray-lighter, rgba($black-color, .23));
+  border-color: $border-color;
+}
+.btn-solid.btn-primary {
+  @include button-variant($brand-primary, $white-color, darken($brand-primary, 8%), rgba($brand-primary, .55));
+}
+.btn-solid.btn-success {
+  @include button-variant($brand-success, $white-color, darken($brand-success, 8%), rgba($brand-success, .6));
+}
+.btn-solid.btn-info {
+  @include button-variant($brand-info, $white-color, darken($brand-info, 8%), rgba($brand-info, .6));
+}
+.btn-solid.btn-warning {
+  @include button-variant($brand-warning, $white-color, darken($brand-warning, 8%), rgba($brand-warning, .6));
+}
+.btn-solid.btn-danger {
+  @include button-variant($brand-danger, $white-color, darken($brand-danger, 8%), rgba($brand-danger, .6));
+}
+.btn-solid.btn-white {
+  @include button-variant($white-color, $navi-link-color, $white-color, rgba($black-color, .23));
+}
+.btn-solid.btn-gradient {
+  @include gradient-background;
+  color: $white-color;
+  &:hover {
+    @include gradient-background;
+    color: $white-color;
+    box-shadow: 0 14px 25px -8px rgba($gradient-color-2, .55);
+  }
+}
+
+
+// Ghost Buttons Color Variants
+// Uses @mixin button-ghost-variant($color, $color-hover, $bg-hover-color, $shadow-color)
+.btn-ghost {
+  overflow: hidden;
+  z-index: 1;
+  &::before {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: translateY(100%);
+    transition: all .28s;
+    content: '';
+    opacity: 0;
+    z-index: -1;
+  }
+  &:hover::before {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.btn-ghost.btn-default {
+  @include button-ghost-variant($navi-link-color, $navi-link-color, $gray-lighter, rgba($black-color, .23));
+  border-color: $border-color;
+}
+.btn-ghost.btn-primary {
+  @include button-ghost-variant($brand-primary, $white-color, $brand-primary, rgba($brand-primary, .55));
+}
+.btn-ghost.btn-success {
+  @include button-ghost-variant($brand-success, $white-color, $brand-success, rgba($brand-success, .6));
+}
+.btn-ghost.btn-info {
+  @include button-ghost-variant($brand-info, $white-color, $brand-info, rgba($brand-info, .6));
+}
+.btn-ghost.btn-warning {
+  @include button-ghost-variant($brand-warning, $white-color, $brand-warning, rgba($brand-warning, .6));
+}
+.btn-ghost.btn-danger {
+  @include button-ghost-variant($brand-danger, $white-color, $brand-danger, rgba($brand-danger, .6));
+}
+.btn-ghost.btn-white {
+  @include button-ghost-variant($white-color, $navi-link-color, $white-color, rgba($black-color, .23));
+  border-color: $border-light-color;
+}
+
+
+// Link Buttons Color Variants
+// Uses @mixin button-link-variant($color, $shadow-color)
+.btn-link.btn-default {
+  @include button-link-variant($navi-link-color, rgba($black-color, .23));
+}
+.btn-link.btn-primary {
+  @include button-link-variant($brand-primary, rgba($brand-primary, .45));
+}
+.btn-link.btn-success {
+  @include button-link-variant($brand-success, rgba($brand-success, .45));
+}
+.btn-link.btn-info {
+  @include button-link-variant($brand-info, rgba($brand-info, .45));
+}
+.btn-link.btn-warning {
+  @include button-link-variant($brand-warning, rgba($brand-warning, .45));
+}
+.btn-link.btn-danger {
+  @include button-link-variant($brand-danger, rgba($brand-danger, .45));
+}
+.btn-link.btn-white {
+  color: $white-color;
+  &:hover {
+    background-color: $white-color;
+    color: $navi-link-color;
+    box-shadow: 0 14px 25px -8px rgba($black-color, .23);
+  }
+}
+.btn-link.btn-gradient {
+  @include gradient-color(linear-gradient(to right, $gradient-color-1, $gradient-color-2), 'light');
+  &:hover {
+    background-color: $white-color;
+    box-shadow: 0 14px 25px -8px rgba($gradient-color-2, .55);
+  }
+}
+
+
+// Market Buttons: App Store, Google Play, Amazon, Windows, Blackberry
+//---------------------------------------------------------------------
+
+.market-btn {
+  display: inline-block;
+  height: $market-btn-height;
+  margin: 0 floor($grid-vertical-step / 2) floor($grid-vertical-step / 2) 0;
+  border-radius: $border-radius-default;
+  background: {
+    position: center;
+    repeat: no-repeat;
+    size: cover;
+  }
+  font: {
+    family: $font-family-navs;
+    size: floor(($font-size-base * 1.29)); // ~18px
+    weight: normal;
+  }
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  &:focus, &:active { text-decoration: none; }
+  > span {
+    display: block;
+    font-size: $font-size-sm;
+    line-height: 1.3;
+  }
+
+  // Amazon
+  &.btn-amazon {
+    width: $amazon-btn-width;
+    padding: 9px 18px 0 24px;
+    background-color: $amazon-btn-bg;
+    color: $amazon-btn-color;
+  }
+
+  // App Store
+  &.btn-appstore {
+    width: $appstore-btn-width;
+    padding: 9px 18px 0 73px;
+    background-color: $appstore-btn-bg;
+    color: $appstore-btn-color;
+  }
+
+  // Google Play
+  &.btn-playstore {
+    width: $playstore-btn-width;
+    padding: 9px 18px 0 76px;
+    background-color: $playstore-btn-bg;
+    color: $playstore-btn-color;
+  }
+
+  // Windows Store
+  &.btn-windows {
+    width: $windows-btn-width;
+    padding: 9px 18px 0 75px;
+    background-color: $windows-btn-bg;
+    color: $windows-btn-color;
+  }
+
+  // Blackberry Store
+  &.btn-blackberry {
+    width: $blackberry-btn-width;
+    padding: 9px 8px 0 73px;
+    background-color: $blackberry-btn-bg;
+    color: $blackberry-btn-color;
+  }
+}
+
+// Scroll to Top Button
+.scroll-to-top-btn {
+  display: block;
+  position: fixed;
+  right: 16px;
+  bottom: -($btn-height * 2);
+  width: $btn-height;
+  height: $btn-height;
+  transition: bottom 400ms cubic-bezier(.68, -.55, .265, 1.55), opacity .3s, background-color .3s, border-color .3s;
+  border-radius: 50%;
+  background-color: rgba($black-color, .3);
+  color: $white-color;
+  font-size: $font-size-lead;
+  line-height: $btn-height;
+  opacity: 0;
+  z-index: 2000;
+  text: {
+    align: center;
+    decoration: none;
+  }
+  &:hover {
+    background-color: rgba($black-color, .8);
+    color: $white-color;
+  }
+  &.visible {
+    bottom: 14px;
+    opacity: 1;
+  }
+  @media #{$mobile-land} {
+    bottom: -($btn-sm-height * 2);
+    width: $btn-sm-height;
+    height: $btn-sm-height;
+    line-height: $btn-sm-height;
+  }
+}

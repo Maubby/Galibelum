@@ -6,7 +6,7 @@
 {% block stylesheets %}
 
     <!-- Additional CSS links-->
-    <link rel="stylesheet" href="{{ asset('build/activity_index.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/activity.css') }}">
 {% endblock %}
 
 {% block header %}
@@ -35,18 +35,18 @@
 
                 <!-- Starting listing all activities -->
                 <div class="row boxing-canvas">
-                    <div class="col-md-12 center">
+                    <div class="col-md-12 text-center">
                         <i class="fas fa-desktop degradeblue mb-20" style="font-size: 50px"></i>
                         <h5 class="degradeblue">Ensemble de vos activités</h5>
                     </div>
                     <!-- Loop for each activity -->
-                    <div class="col-md-12 center">
+                    <div class="col-md-12 text-center">
                         {% for activity in activities %}
                             <div class="col-md-3 col-sm-4 col-xs-12 pb-20 mt-20">
                                 <!-- activity'box creation-->
                                 <div class="activity-box">
                                     <div class="activity-name-height">
-                                        <p class="h5">{{ activity.name }}</p>
+                                        <h5>{{ activity.name }}</h5>
                                     </div>
                                     <div>
                                         {% if activity.type is same as("Évènement eSport") %}

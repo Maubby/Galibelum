@@ -1,0 +1,80 @@
+//
+// Accordion
+// --------------------------------------------------
+
+// Panel
+.panel { margin-bottom: -1px; }
+
+// Panel title
+.panel-title {
+  margin: 0;
+  > a {
+    display: block;
+    position: relative;
+    padding: ceil($grid-vertical-step - 3);
+    transition: .3s;
+    color: $navi-link-color;
+    font: {
+      size: $font-size-base;
+      weight: 600;
+    }
+    text-decoration: none;
+    box-shadow: 0 13px 22px -11px rgba(0, 0, 0, .2);
+    > i {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .si.si-plus {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: $grid-vertical-step;
+      height: 100%;
+      transform: rotate(45deg);
+      transition: .3s;
+      font: {
+        size: 20px;
+        weight: 300;
+      }
+    }
+    .si.si-plus::before {
+      position: absolute;
+      @include center (xy);
+    }
+    &.collapsed .si.si-plus { transform: rotate(0); }
+    &:hover {
+      box-shadow: 0 13px 22px -11px rgba(0, 0, 0, .2) !important;
+    }
+    &.collapsed { box-shadow: none; }
+  }
+}
+
+// Panel collapse
+.panel-collapse {
+  > .panel-collapse-inner {
+    padding: $grid-vertical-step;
+    padding-top: floor($grid-vertical-step * 1.3);
+  }
+}
+
+// Light Skin
+.panel-group-light {
+  border-color: $border-light-color;
+  .panel-collapse { border-color: $border-light-color; }
+  .panel-title > a {
+    border-color: $border-light-color;
+    color: $white-color;
+  }
+}
+
+// Component Animation
+.collapse {
+  display: none;
+  &.in { display: block; }
+}
+.collapsing {
+  position: relative;
+  height: 0;
+  transition: .3s;
+  overflow: hidden;
+}

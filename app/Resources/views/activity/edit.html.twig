@@ -12,7 +12,7 @@
 {% block header %}
     <!--PASSED W3C VALIDATOR https://validator.w3.org/-->
     <!--Zero intern console warning-->
-    
+
     <!--Navbar in views/base.html.twig-->
     {{ parent() }}
 {% endblock %}
@@ -221,4 +221,9 @@
 
 {% block javascripts %}
     <script src="{{ asset('build/input_display.js') }}"></script>
+    <!-- Include Google Maps JS API -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB3N8qr-skNcWJ-ctPpwDgAW7xvGguA8-M">
+    </script>
+    <!-- Custom JS code to bind to Autocomplete API -->
+    <script src="{{ asset('build/autocomplete.js') }}"></script>
 {% endblock %}

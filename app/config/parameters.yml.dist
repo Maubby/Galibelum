@@ -19,4 +19,4 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
 
     # Adding Google API Key
-    api_key: ~
+    api_key: AIzaSyB3N8qr-skNcWJ-ctPpwDgAW7xvGguA8-M

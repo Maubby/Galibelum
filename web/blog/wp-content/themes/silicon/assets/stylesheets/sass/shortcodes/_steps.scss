@@ -1,0 +1,143 @@
+//
+// Steps
+// --------------------------------------------------
+
+.step {
+  position: relative;
+  transition: .25s;
+  border-radius: $border-radius-default;
+
+  .step-digit { user-select: none; }
+  &.step-simple {
+    padding: {
+      top: floor($grid-vertical-step * 1.89);
+      right: $grid-vertical-step;
+      bottom: $grid-vertical-step;
+      left: floor($grid-vertical-step + 15);
+    }
+    .step-digit {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: $gray-light;
+      font-size: 80px;
+      font-weight: 900;
+      line-height: .9;
+      z-index: 1;
+    }
+    .step-body {
+      position: relative;
+      z-index: 2;
+    }
+  }
+
+  &.step-hover,
+  &.step-image {
+    padding: {
+      top: ceil($grid-vertical-step * 2);
+      right: $grid-vertical-step;
+      bottom: ceil($grid-vertical-step * 2);
+      left: $grid-vertical-step;
+    }
+    text-align: center;
+    overflow: hidden;
+
+    .step-digit {
+      display: inline-block;
+      padding-bottom: ceil($grid-vertical-step / 2);
+      transform: scale(2);
+      transition: .3s;
+      color: $gray;
+      font-size: $font-size-h3;
+      font-weight: 900;
+    }
+    .step-title { transition: .3s; }
+    .step-text {
+      margin-bottom: 0;
+      transition: .3s;
+      color: $gray;
+    }
+    &:hover {
+      box-shadow: 0 20px 72px -20px rgba(0, 0, 0, .25);
+      cursor: default;
+
+      .step-digit {
+        transform: scale(1);
+      }
+      .step-title {
+        transform: scale(1.5);
+      }
+      .step-text,
+      .step-digit { color: $gray-dark; }
+    }
+  }
+
+  &.step-image {
+    transform: translateZ(0);
+    border-radius: $border-radius-default;
+    .step-bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition:  .45s;
+      background: {
+        position: center;
+        repeat: no-repeat;
+        size: cover;
+      }
+      opacity: 0;
+      visibility: hidden;
+      z-index: 0;
+
+      &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($gray-darker, .45);
+        content: '';
+        z-index: 5;
+      }
+    }
+    &:hover {
+      .step-bg-image {
+        transform: scale(1.1);
+        opacity: 1;
+        visibility: visible;
+        backface-visibility: hidden;
+      }
+      .step-digit,
+      .step-text {
+        color: $white-color;
+        opacity: .5;
+      }
+      .step-title { color: $white-color; }
+    }
+  }
+
+  // Light Skin
+  &.step-light {
+    .step-digit, .step-text {
+      color: $white-color;
+      opacity: .25;
+    }
+    .step-text { opacity: .5; }
+    &.step-hover,
+    &.step-image {
+      .step-digit { opacity: .5; }
+    }
+
+    .step-title { color: $white-color; }
+    &.step-hover:hover {
+      background-color: $white-color;
+      .step-digit, .step-text {
+        color: $gray-dark;
+        opacity: 1;
+      }
+      .step-title { color: $gray-darker; }
+    }
+  }
+}

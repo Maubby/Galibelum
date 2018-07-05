@@ -13,6 +13,14 @@
     <link rel="stylesheet" href="{{ asset('build/organization_inscription.css') }}">
 {% endblock %}
 
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
     {% if choose is same as(0) %}
         {% include "organization/_new_organization_content.html.twig" %}
@@ -22,4 +30,9 @@
 {% endblock %}
 
 {% block javascripts %}
+    <!-- Include Google Maps JS API -->
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB3N8qr-skNcWJ-ctPpwDgAW7xvGguA8-M">
+    </script>
+    <!-- Custom JS code to bind to Autocomplete API -->
+    <script src="{{ asset('build/autocomplete.js') }}"></script>
 {% endblock %}

@@ -150,7 +150,7 @@ class ActivityController extends Controller
         FileUploaderService $fileUploaderService
     ) {
         $fileName = $activity->getUploadPdf();
-
+  
         $deleteForm = $this->_createDeleteForm($activity);
         $editForm = $this->createForm(ActivityType::class, $activity);
         $editForm->handleRequest($request);
@@ -158,32 +158,25 @@ class ActivityController extends Controller
         $user = $this->getUser();
         $organizationId = $user->getOrganization()->getId();
 
+        // Var for the file name
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $file = $activity->getUploadPdf();
 
             // Check if the file exist and set the new or old value
-            if ($file != null) {
-                $fileName = $fileUploaderService
-                    ->upload(
-                        $file,
-                        $organizationId,
-                        $activity->getId()
-                    );
+            if ($file !== null) {
+                $filePdf = $fileUploaderService->upload(
+                    $file, $activity->getId(), $organizationId);
             }
 
-            $activity->setUploadPdf($fileName);
+            $activity->setUploadPdf($filePdf);
+
             $this->getDoctrine()->getManager()->flush();
 
             $request->getSession()
                 ->getFlashBag()
                 ->add('success', 'Vos modifications ont bien été prises en compte.');
 
-            return $this->redirectToRoute(
-                'dashboard_index',
-                array(
-                    'id' => $activity->getId(),
-                )
-            );
+            return $this->redirectToRoute('dashboard_index');
         }
 
 
