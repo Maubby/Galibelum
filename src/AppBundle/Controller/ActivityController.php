@@ -135,8 +135,6 @@ class ActivityController extends Controller
     public function editAction(Request $request, Activity $activity,
         FileUploaderService $fileUploaderService
     ) {
-        $fileName = $activity->getUploadPdf();
-  
         $deleteForm = $this->_createDeleteForm($activity);
         $editForm = $this->createForm(ActivityType::class, $activity);
         $editForm->handleRequest($request);
