@@ -1,0 +1,71 @@
+{# app/Resources/views/organization/_show_organization_content.html.twig #}
+{% block body %}
+    <main id="organization">
+        <section>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Return to the dashboard -->
+                        <ol class="breadcrumb breadcrumb-boxing-canvas">
+                            <li><i class="fas fa-reply degradeblue"></i>&nbsp;
+                                <a href="{{ path('dashboard_index') }}" class="degradeblue">Tableau de bord</a>
+                            </li>
+                        </ol>
+                        <!--The organization _show -->
+                        <div class="boxing-canvas">
+                            <div class="col-md-12 center">
+                                <i class="fas fa-gamepad degradeblue" style="font-size: 50px"></i>
+                                <h5 class="degradeblue">Structure eSport : {{ organization.name }}</h5>
+                                <p class="normal-subtitle-text text-justify center">Informations générales sur la structure eSport.</p>
+                            </div>
+                            <!-- First section contact organization -->
+                            <div class="col-md-6 mt-20 light-blue-subtitle-text">
+                                <p><i class="fas fa-university"></i>Nom de la structure eSport</p>
+                                <div class="form-group form-error">
+                                    {{ organization.name }}
+                                </div>
+                                <p><i class="fas fa-gavel"></i>Forme juridique</p>
+                                <div class="form-group form-error">
+                                    {{ organization.status }}
+                                </div>
+                                <p><i class="fas fa-address-card"></i>Adresse</p>
+                                <div class="form-group form-error">
+                                    {{ organization.address }}
+                                </div>
+                            </div>
+                            <!-- End first section contact organization -->
+                            <!-- Second section contact organization-->
+                            <div class="col-md-6 mt-20 light-blue-subtitle-text">
+                                <p><i class="fas fa-user"></i>Poste occupé</p>
+                                <div class="form-group form-error">
+                                    {{ organization.userRole }}
+                                </div>
+                                <p><i class="fas fa-at"></i>Email professionnel</p>
+                                <div class="form-group form-error">
+                                    {{ organization.email }}
+                                </div>
+                                <p><i class="fas fa-phone"></i>Téléphone professionnel</p>
+                                <div class="form-group form-error">
+                                    {{ organization.phoneNumber }}
+                                </div>
+                            </div>
+                            <!-- End second section contact organization -->
+                            <!-- Final section contact organization -->
+                            <div class="col-md-12 light-blue-subtitle-text">
+                                <p><i class="fas fa-users"></i>Nombre de collaborateurs</p>
+                                <div class="form-group form-error">
+                                    {{ organization.relationNumber }}
+                                </div>
+                                <p><i class="fas fa-edit"></i>Description de la structure eSport en quelques mots</p>
+                                <div class="form-group form-error">
+                                    <p class="description-text">{{ organization.description }}</p>
+                                </div>
+                            </div>
+                            <!-- End final section organization show-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

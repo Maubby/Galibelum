@@ -1,0 +1,78 @@
+{# app/Resources/views/admin/new.html.twig #}
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Créer un account manager{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/register.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base_back.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <main id="register">
+        <section>
+            <!-- Form to create your profile -->
+            <div class="container-fluid">
+                <div class="row boxing-canvas mt-50 pb-50">
+                    <div class="col-md-6 col-xs-12">
+                        <i class="fas fa-user-plus text-center degradeblue" style="font-size: 50px"></i>
+                        <h5 class="text-center degradeblue">Création du profil Account Manager</h5>
+
+                        {{ form_start(form) }}
+                        <div class="col-sm-6 form-error">
+                            {{ form_widget(form.firstName, {'attr': {'class':'form-control input-field', 'placeholder' : 'Prénom' }}) }}
+                            {{ form_errors(form.firstName) }}
+                        </div>
+                        <div class="col-sm-6 form-error">
+                            {{ form_widget(form.lastName, {'attr': {'class':'form-control input-field', 'placeholder' : 'Nom' }}) }}
+                            {{ form_errors(form.lastName) }}
+                        </div>
+                        <div class="col-sm-12 form-error">
+                            {{ form_widget(form.email, {'attr': {'class':'form-control input-field', 'placeholder' : 'Adresse email valide' }}) }}
+                            {{ form_errors(form.email) }}
+                        </div>
+                        <div class="col-sm-12 form-error">
+                            {{ form_widget(form.phoneNumber, {'attr': {'class':'form-control input-field', 'placeholder' : 'Numéro de téléphone' }}) }}
+                            {{ form_errors(form.phoneNumber) }}
+                        </div>
+                        <div class="col-sm-12 form-error">
+                            {{ form_widget(form.plainPassword.first,
+                                {'attr': {'class':'form-control input-field', 'placeholder' : 'Mot de passe' }}) }}
+                            {{ form_errors(form.plainPassword.first) }}
+                        </div>
+                        <div class="col-sm-12 form-error">
+                            {{ form_widget(form.plainPassword.second,
+                                {'attr': {'class':'form-control input-field', 'placeholder' : 'Vérification mot de passe' }}) }}
+                            {{ form_errors(form.plainPassword.second) }}
+                        </div>
+                        <div class="col-sm-12 col-xs-12 text-center pt-10">
+                            <input class="btn btn-primary backblue-btn" type="submit" value="{{ "Créer le profil"|trans }}" />
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                    <div class="col-md-6 text-center hidden-xs">
+                        <img class="logo-galibelum" src="{{ asset('build/images/logo_galibelum.png') }}" alt="placeholder">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/menu_toggle.js') }}"></script>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}

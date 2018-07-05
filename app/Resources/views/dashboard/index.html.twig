@@ -1,0 +1,122 @@
+{# app/Resources/views/dashboard/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Import personal styleSheet -->
+    <link rel="stylesheet" href="{{ asset('build/dashboard.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <!-- Flash message success edit organization profile -->
+    {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('success') %}
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <!-- End flash message -->
+    <!-- Start show information to organization, activities and offers -->
+    <div class="container pb-60">
+        <div class="boxing-title mt-60 mb-40">
+            <h5 class="degradeblue"><span><i class="fas fa-chart-bar degradeblue"></i></span> Tableau de bord</h5>
+        </div>
+        <!-- show user firstName and information to organization -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <ul class="list-group">
+                        <li class="list-group-item text-center"><P class="degradeblue">Bienvenue {{ user.firstName }}</P></li>
+                        <li class="list-group-item"><i class="fas fa-university"></i>{{ organization.name }}</li>
+                        <li class="list-group-item"><i class="fas fa-phone"></i>{{ organization.phoneNumber }}</li>
+                        <li class="list-group-item"><i class="fas fa-at"></i>{{ organization.email }}</li>
+                        <li class="list-group-item"><i class="fas fa-address-card"></i>{{ organization.address }}</li>
+                        <li class="list-group-item"><a href="{{ path('organization_edit', { 'id': organization.id }) }}">Modifier votre structure</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- end show information -->
+            <!-- list last activities -->
+            <div class="col-md-offset-1 col-md-4 mb-40">
+                <div class="boxing-canvas">
+                    <h5><a href="{{ path('activity_index') }}">Ensemble de mes activités</a></h5>
+                    <div class="boxing-body">
+                        <!-- to show message if activity is empty -->
+                        {% if organization.OrganizationActivity is empty %}
+                            <p class="text-center text-muted">Créer une activité</p>
+                        {% else %}
+                            {% if organization.OrganizationActivity|length < 3 %}
+                                {% include "dashboard/_activity_dashboard.html.twig" %}
+                            {% else %}
+                                {% include "dashboard/_activity_carousel_dashboard.html.twig" %}
+                            {% endif %}
+                        {% endif %}
+                        <a href="{{ path('activity_new') }}" class="btn btn-primary backblue-btn mt-10">Ajouter une activité</a>
+                    </div>
+                </div>
+            </div>
+            <!-- End list activities -->
+            <!-- list last offers -->
+            <div class="col-md-4 mb-40">
+                <div class="boxing-canvas">
+                    <h5><a href="{{ path('offer_index') }}">Ensemble de mes offres</a></h5>
+                    <div class="boxing-body">
+                        <!-- to show message if offer is empty -->
+                        {% if organization.offers is empty %}
+                            <p class="text-center text-muted">Créer une offre</p>
+                        {% else %}
+                            {% if organization.offers|length < 3 %}
+                                {% include "dashboard/_offer_dashboard.html.twig" %}
+                            {% else %}
+                                {% include "dashboard/_offer_carousel_dashboard.html.twig" %}
+                            {% endif %}
+                        {% endif %}
+                        <a href="#" class="btn btn-primary backblue-btn mt-10" data-toggle="modal" data-target="#pop-up-offer">Ajouter une offre</a>
+                    </div>
+                    <!-- Modal introducing the redirection to the activity_index -->
+                    <div class="modal fade" id="pop-up-offer" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-notify modal-info" role="document">
+                            <div class="modal-content">
+                                <!--Modal's header-->
+                                <div class="modal-header text-center">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true"><i class="fas fa-times" style="color: #999999;" aria-hidden="true"></i></span>
+                                    </button>
+                                    <p class="normal-subtitle-text">Pour créer une offre, vous allez être
+                                        redirigé vers la liste des activités existentes. Vous pourrez ainsi sélectionner l'activité de votre choix
+                                        puis faire une offre.</p>
+                                </div>
+                                <!--Modal's body-->
+                                <div class="modal-body">
+                                    <div>
+                                        <a href="{{ path('activity_index') }}" class="btn btn-primary backblue-btn mt-20">Continuer</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of modal -->
+                </div>
+            </div>
+        </div>
+        <!-- End list offers -->
+    </div>
+    <!-- End Content -->
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Import personal javascript -->
+    <script src="{{ asset('build/carousel.js') }}"></script>
+{% endblock %}

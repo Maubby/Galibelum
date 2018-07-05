@@ -1,0 +1,47 @@
+{# app/Resources/views/manager/dashboard.html.twig #}
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base_back.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <br>
+                <h3 class="degradeblue">Bienvenue {{ user.firstName }} !</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <!-- Dashboard welcoming sentence -->
+                <h5 class="normal-subtitle-text">Depuis votre tableau de bord, vous pouvez naviguer sur le site,
+                    gérer les différentes organisations et les contrats.</h5>
+                <!-- End dashboard welcoming sentence -->
+            </div>
+        </div>
+    </div>
+    <!-- End page content -->
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/menu_toggle.js') }}"></script>
+{% endblock %}

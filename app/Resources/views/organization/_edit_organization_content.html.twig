@@ -1,0 +1,112 @@
+{# app/Resources/views/organization/_edit_organization_content.html.twig #}
+{% block body %}
+    <main id="organization">
+        <section>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Return to the dashboard -->
+                        <ol class="breadcrumb breadcrumb-boxing-canvas">
+                            <li><i class="fas fa-reply degradeblue"></i>&nbsp;
+                                <a href="{{ path('dashboard_index') }}" class="degradeblue">Tableau de bord</a>
+                            </li>
+                        </ol>
+                        <!--1st part of the edit form-->
+                        <div class="boxing-canvas">
+                            <div class="col-md-12 center">
+                                <i class="fas fa-gamepad degradeblue" style="font-size: 50px"></i>
+                                <h5 class="degradeblue">Modification de votre structure eSport</h5>
+                                <p class="normal-subtitle-text text-justify center">Une fois le profil mis à jour, vous pourrez de nouveau rechercher des structures eSport et sponsoriser leurs offres.</p>
+                            </div>
+                            {{ form_start(edit_form) }}
+                            <!-- First section contact form -->
+                            <div class="col-md-6 mt-20 light-blue-subtitle-text">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-university"></i> {{ form_label(edit_form.name, 'Nom de votre structure eSport') }}
+                                    {{ form_widget(edit_form.name, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : GBM eSport' }} ) }}
+                                    {{ form_errors(edit_form.name) }}
+                                </div>
+                                <div class="form-group form-error">
+                                    <i class="fas fa-gavel"></i> {{ form_label(edit_form.status, 'Forme juridique') }}
+                                    {{ form_widget(edit_form.status, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : SARL, SAS, SA, association ...' }} ) }}
+                                    {{ form_errors(edit_form.status) }}
+                                </div>
+                                <div class="form-group form-error">
+                                    <i class="fas fa-address-card"></i> {{ form_label(edit_form.address, 'Adresse du siège social') }}
+                                    {{ form_widget(edit_form.address, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : 4 avenue des Saules, bâtiment Le Doge' }} ) }}
+                                    {{ form_errors(edit_form.address) }}
+                                </div>
+                            </div>
+                            <!-- End first section contact form -->
+                            <!-- Second section contact form-->
+                            <div class="col-md-6 mt-20 light-blue-subtitle-text">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-user"></i> {{ form_label(edit_form.userRole, 'Votre poste au sein de la structure') }}
+                                    {{ form_widget(edit_form.userRole, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : Manager' }} ) }}
+                                    {{ form_errors(edit_form.userRole) }}
+                                </div>
+                                <div class="form-group form-error">
+                                    <i class="fas fa-at"></i> {{ form_label(edit_form.email, 'Email de la société') }}
+                                    {{ form_widget(edit_form.email, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : contact@galibelum.com' }} ) }}
+                                    {{ form_errors(edit_form.email) }}
+                                </div>
+                                <div class="form-group form-error">
+                                    <i class="fas fa-phone"></i> {{ form_label(edit_form.phoneNumber, 'Téléphone de la société')}}
+                                    {{ form_widget(edit_form.phoneNumber, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : 0601020304' }} ) }}
+                                    {{ form_errors(edit_form.phoneNumber) }}
+                                </div>
+                            </div>
+                            <!-- End second section contact edit_form-->
+                            <!-- Final section contact edit_form-->
+                            <div class="col-md-12 light-blue-subtitle-text">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-users"></i> {{ form_label(edit_form.relationNumber, 'Nombre de collaborateurs dans votre structure') }}
+                                    {{ form_widget(edit_form.relationNumber, {'attr': {'class':'form-control input-field'}} ) }}
+                                    {{ form_errors(edit_form.relationNumber) }}
+                                </div>
+                                <div class="form-group form-error">
+                                    <i class="fas fa-edit"></i> {{ form_label(edit_form.description, 'Décrivez votre structure eSport en quelques mots') }}
+                                    {{ form_widget(edit_form.description, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : Maximum 250 caractères' }} ) }}
+                                    {{ form_errors(edit_form.description) }}
+                                </div>
+                            </div>
+                            <!-- End final section contact edit_form-->
+                            <div class="col-sm-12 col-xs-12 text-center">
+                                <input type="submit" value="Enregistrer votre structure" class="btn btn-primary backblue-btn-sm">
+                            </div>
+                            {{ form_end(edit_form) }}
+                            <div class="col-sm-12 col-xs-12 mt-20 text-left">
+                                <a href="#" style="color: #999999" data-toggle="modal" data-target="#pop-up-desactive">Désactiver votre compte</a>
+                                <!-- Modal introducing the redirection to the activity_index -->
+                                <div class="modal fade" id="pop-up-desactive" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-notify modal-info" role="document">
+                                        <div class="modal-content">
+
+                                            <!--Modal's header-->
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true"><i class="fas fa-times" style="color: #999999;" aria-hidden="true"></i></span>
+                                                </button>
+                                                <p style="font-size: 20px">Êtes-vous sûr de vouloir désactiver votre compte ?</p>
+                                                <p style="font-size: 16px">Cette action entraînera également la désactivation de vos activités,
+                                                    de vos offres et de vos contrats.</p>
+                                            </div>
+                                            <!--Modal's body-->
+                                            <div class="modal-body">
+                                                <div class="text-center">
+                                                    {{ form_start(delete_form) }}
+                                                    <input type="submit" value="Désactiver votre compte" class="text-center btn btn-danger backred-btn-sm">
+                                                    {{ form_end(delete_form) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

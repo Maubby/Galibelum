@@ -1,0 +1,69 @@
+{# app/Resources/views/offer/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des offres{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/organization_show.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>Offer</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Name</th>
+            <td>{{ offer.name }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ offer.description }}</td>
+        </tr>
+        <tr>
+            <th>Date d'expiration</th>
+            <td>{% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Amount</th>
+            <td>{{ offer.amount }}</td>
+        </tr>
+        <tr>
+            <th>Handlingfee</th>
+            <td>{{ offer.handlingFee }}</td>
+        </tr>
+        <tr>
+            <th>Partnershipnumber</th>
+            <td>{{ offer.partnershipNumber }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ offer.status }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('dashboard_index') }}">Retourner sur votre tableau de bord</a>
+        </li>
+        <li>
+            <a href="{{ path('offer_edit', { 'id': offer.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+            <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
