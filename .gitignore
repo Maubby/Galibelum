@@ -22,4 +22,3 @@
 .directory
 npm-debug.log
 package-lock.json
-/web/build/
