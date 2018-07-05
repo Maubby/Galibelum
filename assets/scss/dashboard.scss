@@ -1,4 +1,4 @@
-@import "style";
+@import "_variables";
 
 h5 {
   font-size: 20px;
@@ -32,12 +32,7 @@ h5 {
 }
 
 .boxing-canvas {
-  background-color: #fff;
   max-width: 1200px;
-  width: auto;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  border: 1px solid $border-color;
   h5 {
     font-size: 16px;
     text-align: center;
@@ -79,7 +74,6 @@ h5 {
     max-height: 520px;
     -webkit-transition: 0.6s ease-in-out top;
     -moz-transition: 0.6s ease-in-out top;
-    -ms-transition: 0.6s ease-in-out top;
     -o-transition: 0.6s ease-in-out top;
     transition: 0.6s ease-in-out top;
     margin: auto;
@@ -101,13 +95,4 @@ h5 {
   .down {
     top: calc(100% - 10px);
   }
-}
-
-.h6 {
-  font-size: 15px;
-  text-transform: none;
-  font-style: normal;
-  color: $grey-color;
-  font-weight: 900;
-  font-family: $font-family-base;
 }
