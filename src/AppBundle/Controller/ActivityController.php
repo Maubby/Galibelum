@@ -88,8 +88,9 @@ class ActivityController extends Controller
             $em->flush();
 
             return $this->redirectToRoute(
-                'activity_edit',
-                array('id' => $activity->getId())
+                'activity_edit', array(
+                    'id' => $activity->getId(),
+                )
             );
         }
 
@@ -211,8 +212,9 @@ class ActivityController extends Controller
         return $this->createFormBuilder()
             ->setAction(
                 $this->generateUrl(
-                    'activity_delete',
-                    array('id' => $activity->getId())
+                    'activity_delete', array(
+                        'id' => $activity->getId(),
+                    )
                 )
             )
             ->setMethod('DELETE')
