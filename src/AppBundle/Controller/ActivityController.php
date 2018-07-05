@@ -42,6 +42,12 @@ class ActivityController extends Controller
      */
     public function indexAction(Request $request)
     {
+        if ($this->getUser()->hasRole('ROLE_MANAGER')
+            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $activities = $em->getRepository('AppBundle:Activity')->findBy(
@@ -76,6 +82,12 @@ class ActivityController extends Controller
      */
     public function newAction(Request $request)
     {
+        if ($this->getUser()->hasRole('ROLE_MANAGER')
+            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
+
         $activity = new Activity();
         $form = $this->createForm(ActivityType::class, $activity);
         $form->remove('uploadPdf');
@@ -124,8 +136,13 @@ class ActivityController extends Controller
      */
     public function showAction(Activity $activity)
     {
+        if ($this->getUser()->hasRole('ROLE_MANAGER')
+            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
+
         $deleteForm = $this->_createDeleteForm($activity);
-        $user = $this->getUser();
 
         return $this->render(
             'activity/show.html.twig', array(
@@ -147,11 +164,18 @@ class ActivityController extends Controller
      * @Method({"GET",      "POST"})
      */
     public function editAction(Request $request, Activity $activity,
-                               FileUploaderService $fileUploaderService
+        FileUploaderService $fileUploaderService
     ) {
-        $user = $this->getUser();
+        if ($this->getUser()->hasRole('ROLE_MANAGER')
+            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
 
-        if ($user->getOrganization()->getOrganizationActivity()->contains($activity)) {
+        }
+
+        $user = $this->getUser();
+        if ($user->getOrganization()->getOrganizationActivity()->contains($activity)
+        ) {
 
             $fileName = $activity->getUploadPdf();
 
@@ -159,7 +183,7 @@ class ActivityController extends Controller
             $editForm = $this->createForm(ActivityType::class, $activity);
             $editForm->handleRequest($request);
 
-            $organizationId = $user->getOrganization()->getId();
+            $organizationId = $this->getUser()->getOrganization()->getId();
 
             // Var for the file name
             if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -168,7 +192,8 @@ class ActivityController extends Controller
                 // Check if the file exist and set the new or old value
                 if ($file !== null) {
                     $filePdf = $fileUploaderService->upload(
-                        $file, $activity->getId(), $organizationId);
+                        $file, $activity->getId(), $organizationId
+                    );
                 }
 
                 $activity->setUploadPdf($filePdf);
@@ -177,7 +202,9 @@ class ActivityController extends Controller
 
                 $request->getSession()
                     ->getFlashBag()
-                    ->add('success', 'Vos modifications ont bien été prises en compte.');
+                    ->add(
+                        'success', 'Vos modifications ont bien été prises en compte.'
+                    );
 
                 return $this->redirectToRoute('dashboard_index');
             }
@@ -207,9 +234,14 @@ class ActivityController extends Controller
      */
     public function deleteAction(Request $request, Activity $activity)
     {
+        if ($this->getUser()->hasRole('ROLE_MANAGER')
+            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
         $user = $this->getUser();
-
-        if ($user->getOrganization()->getOrganizationActivity()->contains($activity)) {
+        if ($user->getOrganization()->getOrganizationActivity()->contains($activity)
+        ) {
 
             $form = $this->_createDeleteForm($activity);
             $form->handleRequest($request);

@@ -19,8 +19,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\UserBundle\Form\Factory\FactoryInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * Overriding controller managing the user profile.
@@ -136,25 +134,5 @@ class ProfileController extends BaseController
                 'user' => $user,
             )
         );
-    }
-    /**
-     * Deletes a user entity.
-     *
-     * @Route("/profile/delete/", name="profile_delete")
-     * @Method("GET")
-     * @return                    Response A Response instance
-     */
-    public function deleteUser()
-    {
-        $user = $this->getUser();
-        if ($user->hasRole('ROLE_USER')) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($user);
-            $em->flush();
-            $this->addFlash('danger', 'Votre compte a bien été supprimé.');
-            return $this->redirectToRoute('homepage');
-        } else {
-            return $this->redirectToRoute('fos_user_profile_show');
-        }
     }
 }

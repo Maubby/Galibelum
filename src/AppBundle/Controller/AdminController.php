@@ -96,33 +96,39 @@ class AdminController extends Controller
      */
     public function editAction(Request $request,User $manager)
     {
-        $editForm = $this->createForm('AppBundle\Form\RegistrationType', $manager);
-        $editForm->remove('cgu');
-        $editForm->remove('phoneNumber');
-        $editForm->handleRequest($request);
+        if ($manager->hasRole('ROLE_MANAGER')) {
+            $editForm = $this->createForm(
+                'AppBundle\Form\RegistrationType', $manager
+            );
+            $editForm->remove('cgu');
+            $editForm->remove('phoneNumber');
+            $editForm->handleRequest($request);
 
 
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+                $request->getSession()
+                    ->getFlashBag()
+                    ->add(
+                        'success', 'Vos modifications ont bien été prises en compte.'
+                    );
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'Vos modifications ont bien été prises en compte.');
+                return $this->redirectToRoute(
+                    'admin_manager_list',
+                    array('id' => $manager->getId())
+                );
+            }
 
-            return $this->redirectToRoute(
-                'admin_manager_list',
-                array('id' => $manager->getId())
+            return $this->render(
+                'admin/edit.html.twig', array(
+                    'manager' => $manager,
+                    'edit_form' => $editForm->createView(),
+
+                )
             );
         }
-
-        return $this->render(
-            'admin/edit.html.twig', array(
-                'manager' => $manager,
-                'edit_form' => $editForm->createView(),
-
-            )
-        );
+        return $this->redirectToRoute('admin_manager_list');
     }
 
     /**
@@ -142,24 +148,5 @@ class AdminController extends Controller
             'admin/manager.html.twig',
             array('users' => $users,)
         );
-    }
-
-    /**
-     * Delete a manager entity.
-     *
-     * @param User $manager The account manager
-     *
-     * @Route("/{id}", name="admin_delete")
-     * @Method("GET")
-     *
-     * @return Response A Response instance
-     */
-    public function deleteAction(User $manager)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $manager->setEnabled(false);
-        $em->persist($manager);
-        $em->flush();
-        return $this->redirectToRoute('admin_index');
     }
 }

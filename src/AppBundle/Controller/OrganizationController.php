@@ -41,8 +41,11 @@ class OrganizationController extends Controller
     public function dashboardAction()
     {
         $user = $this->getUser();
+        if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
 
-        if ($user->hasRole('ROLE_STRUCTURE')
+        } elseif ($user->hasRole('ROLE_STRUCTURE')
             && $user->getOrganization()->getIsActive() === 1
             || $user->hasRole('ROLE_COMPANY')
             && $user->getOrganization()->getIsActive() === 1
@@ -61,9 +64,10 @@ class OrganizationController extends Controller
             && $user->getOrganization()->getIsActive() === 0
         ) {
             return $this->redirectToRoute('waiting_index');
-        } else {
-            return $this->redirectToRoute('inscription_index');
+
         }
+
+        return $this->redirectToRoute('inscription_index');
     }
 
     /**
@@ -79,9 +83,13 @@ class OrganizationController extends Controller
      */
     public function newAction(Request $request, int $choose = 0)
     {
-        $user = $this->getUser();
 
-        if ($user->getOrganization()->getId() === null) {
+        $user = $this->getUser();
+        if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+
+        } elseif ($user->getOrganization()->getId() === null) {
             $organization = new Organization();
             if ($choose === 1) {
                 $form = $this
@@ -101,7 +109,13 @@ class OrganizationController extends Controller
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $organization->setUser($user);
-                $organization->setNameCanonical(strtolower($organization->getName()));
+                $organization->setNameCanonical(
+                    strtolower(
+                        str_replace(
+                            ' ', '_', $organization->getName()
+                        )
+                    )
+                );
                 $user->setOrganization($organization);
                 $choose === 0 ? $user->setRoles(array('ROLE_STRUCTURE'))
                     : $user->setRoles(array('ROLE_COMPANY'));
@@ -143,8 +157,11 @@ class OrganizationController extends Controller
     public function editAction(Request $request, Organization $organization)
     {
         $user = $this->getUser();
+        if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
 
-        if ($user->getOrganization()->getId() === $organization->getId()) {
+        } elseif ($user->getOrganization()->getId() === $organization->getId()) {
             $deleteForm = $this->_createDeleteForm($organization);
             if ($user->hasRole('ROLE_COMPANY')) {
                 $editForm = $this
@@ -164,7 +181,9 @@ class OrganizationController extends Controller
 
                 $request->getSession()
                     ->getFlashBag()
-                    ->add('success', 'Vos modifications ont bien été prises en compte.');
+                    ->add(
+                        'success', 'Vos modifications ont bien été prises en compte.'
+                    );
 
                 return $this->redirectToRoute(
                     'dashboard_index',
@@ -197,9 +216,13 @@ class OrganizationController extends Controller
      */
     public function deleteAction(Request $request, Organization $organization)
     {
-        $user = $this->getUser();
 
-        if ($user->getOrganization()->getId() === $organization->getId()) {
+        $user = $this->getUser();
+        if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+
+        } elseif ($user->getOrganization()->getId() === $organization->getId()) {
             $form = $this->_createDeleteForm($organization);
             $form->handleRequest($request);
 

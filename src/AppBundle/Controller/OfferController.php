@@ -40,34 +40,39 @@ class OfferController extends Controller
      */
     public function indexAction()
     {
-        $user = $this->getUser();
+        if ($this->getUser()->hasRole('ROLE_MANAGER')
+            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $offers = $em
             ->getRepository('AppBundle:Offer')
             ->findBy(
                 array(
-                    'organization' => $user->getOrganization()
+                    'organization' => $this->getUser()->getOrganization()
                 )
             );
 
         $event_activities = $em->getRepository('AppBundle:Activity')->findBy(
             array(
-                'organizationActivities' => $user->getOrganization(),
+                'organizationActivities' => $this->getUser()->getOrganization(),
                 'type' => 'Évènement eSport'
             )
         );
 
         $stream_activities = $em->getRepository('AppBundle:Activity')->findBy(
             array(
-                'organizationActivities' => $user->getOrganization(),
+                'organizationActivities' => $this->getUser()->getOrganization(),
                 'type' => 'Activité de streaming'
             )
         );
 
         $team_activities = $em->getRepository('AppBundle:Activity')->findBy(
             array(
-                'organizationActivities' => $user->getOrganization(),
+                'organizationActivities' => $this->getUser()->getOrganization(),
                 'type' => 'Equipe eSport'
             )
         );
@@ -98,12 +103,17 @@ class OfferController extends Controller
     public function newAction(Request $request, Activity $activity,
         ManagementFeesService $feesService
     ) {
+        if ($this->getUser()->hasRole('ROLE_MANAGER')
+            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
+
         $offer = new Offer();
         $form = $this->createForm('AppBundle\Form\OfferType', $offer);
         $form->handleRequest($request);
         $interval = new \DateInterval($this->getParameter('periode'));
 
-        $user = $this->getUser();
         $fees = $feesService->getFees($offer->getAmount(), $offer->getFinalDeal());
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -112,7 +122,7 @@ class OfferController extends Controller
                 ->setActivity($activity)
                 ->setNameCanonical(strtolower($activity->getName()))
                 ->setHandlingFee($fees)
-                ->setOrganization($user->getOrganization())
+                ->setOrganization($this->getUser()->getOrganization())
                 ->setDate($offer->getDate()->sub($interval));
 
             $em->persist($offer);
@@ -145,6 +155,12 @@ class OfferController extends Controller
      */
     public function showAction(Offer $offer)
     {
+        if ($this->getUser()->hasRole('ROLE_MANAGER')
+            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
+
         $deleteForm = $this->_createDeleteForm($offer);
 
         return $this->render(
@@ -168,6 +184,12 @@ class OfferController extends Controller
      */
     public function editAction(Request $request, Offer $offer)
     {
+        if ($this->getUser()->hasRole('ROLE_MANAGER')
+            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
+
         $deleteForm = $this->_createDeleteForm($offer);
         $editForm = $this->createForm('AppBundle\Form\OfferType', $offer);
         $editForm->handleRequest($request);
@@ -203,6 +225,14 @@ class OfferController extends Controller
      */
     public function deleteAction(Request $request, Offer $offer)
     {
+        if ($this->getUser()->hasRole('ROLE_MANAGER')
+            || $this->getUser()->hasRole(
+                'ROLE_SUPER_ADMIN'
+            )
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
+
         $form = $this->_createDeleteForm($offer);
         $form->handleRequest($request);
 
