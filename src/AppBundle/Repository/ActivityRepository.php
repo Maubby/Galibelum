@@ -25,12 +25,13 @@ class ActivityRepository extends \Doctrine\ORM\EntityRepository
     /**
      * @param $name
      * @param $type
-     * @param $oldDate
+     * @param $date
      * @return mixed
      */
-    public function search($name, $type, $oldDate)
+    public function search($name, $type, $date)
     {
-
+        // Create private functions according to name, type and date.
+        
         $query = $this->createQueryBuilder('act')
             ->INNERJOIN('act.organizationActivities', 'org')
             ->INNERJOIN('act.activities', 'off')
@@ -51,7 +52,7 @@ class ActivityRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter('type', '%' . $type . '%');
         }
 
-       if ($oldDate != '00-00-0000')  {
+       if ($date != '00-00-0000')  {
             $query
                 ->ANDWHERE('off.date <= 12-07-1217');
 

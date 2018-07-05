@@ -46,9 +46,9 @@ class SearchController extends Controller
 
         return $this->render(
             'search/index.html.twig',array(
-                'name' => $name,
-                'date' => $date,
-                'type' => $type,
+            'name' => $name,
+            'date' => $date,
+            'type' => $type,
         ));
     }
 
@@ -61,49 +61,31 @@ class SearchController extends Controller
     {
         $session = $request->getSession();
 
-        $session->set('name', $request->get('name'));
-        $session->set('type', $request->get('type'));
-        $session->set('date', $request->get('date'));
-        //$session->set('amount_min', $amount_min);
-        //$session->set('amount_max', $amount_max);
+        // Faire amount
+        if ($request->get('name'))
+            $session->set('name', $request->get('name'));
+        if ($request->get('type'))
+            $session->set('type', $request->get('type'));
 
-        $name = $request->get('name');
-        $type = $request->get('type');
-        $date = $request->get('date');
-        $amount_min = $request->get('amount_min');
-        $amount_max = $request->get('amount_max');
-
-        if ($date ===''){
-            $date ='00-00-0000';
-        }
-        else {
-            $date = new \DateTime($date);
-        }
-
+        if ($request->get('date'))
+            $session->set('date', new \DateTime($request->get('date')));
+        else
+            $session->set('date', new \DateTime('now'));
 
         $em = $this->getDoctrine()->getManager();
-        $activities = $em->getRepository('AppBundle\Entity\Activity')->findAll();
-
-           // var_dump($type);
-           // var_dump($name);
-            var_dump($date);
-
-        $activityRepository = $this->getDoctrine()->getRepository(Activity::class);
-
-        $activitylist
-            = $activityRepository->search($name,$type,$date);
-
-        //var_dump($activitylist);
+        $activitylist = $em->getRepository(Activity::class)
+            ->search($session->get('name'),
+                $session->get('type'), $session->get('date'));
 
         return $this->render(
             'search/index.html.twig', array(
                 'activitylist' => $activitylist,
-                'activities' => $activities,
-                'date' => $date,
-                'name' => $name,
-                'type' => $type,
+                'date' => $session->get('date'),
+                'name' => $session->get('name'),
+                'type' => $session->get('type'),
             )
         );
+
         /*$result = [];
 
         $data = $_POST['search'];
