@@ -13,6 +13,14 @@
     <link rel="stylesheet" href="{{ asset('build/inscription-choose.css') }}">
 {% endblock %}
 
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
     <main>
         <section>
@@ -34,9 +42,7 @@
                                     <strong><span class="degradeblue">STRUCTURE eSPORT</span></strong>
                                 </h3>
                                 <br>
-                                <p>
-                                    TROUVER LES MEILLEURS PARTENAIRES FINANCIERS
-                                </p>
+                                <p>TROUVER LES MEILLEURS PARTENAIRES FINANCIERS</p>
                                 <br>
                                 <p>
                                     <strong>Créer le profil de votre structure</strong>
@@ -88,7 +94,7 @@
                                     <strong>Découvrir des milliers de structures eSport vérifiées</strong>
                                     à la recherche de partenaires financiers / sponsors.
                                 </p>
-                                <br class="space">
+                                <br>
                                 <p>
                                     <strong>Lancer le processus d’investissement</strong>
                                     et maximiser vos retours sur investissement grâce au module de reporting.
@@ -142,7 +148,7 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('build/login-script.js') }}"></script>
+    <script src="{{ asset('build/login_script.js') }}"></script>
 {% endblock %}
 
 

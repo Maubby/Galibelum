@@ -8,7 +8,8 @@
                         <!-- Return to the dashboard -->
                         <ol class="breadcrumb breadcrumb-boxing-canvas">
                             <li><i class="fas fa-reply degradered"></i>&nbsp;
-                                <a href="{{ path('dashboard_index') }}" class="degradered">Tableau de bord</a></li>
+                                <a href="{{ path('dashboard_index') }}" class="degradered">Tableau de bord</a>
+                            </li>
                         </ol>
                         <!--1st part of the edit form-->
                         <div class="boxing-canvas">
@@ -17,7 +18,6 @@
                                 <h5 class="degradered">Modification de votre marque</h5>
                                 <p class="normal-subtitle-text text-justify center">Une fois le profil mis à jour, vous pourrez de nouveau rechercher des structures eSport et sponsoriser leurs offres.
                             </div>
-
                             {{ form_start(edit_form) }}
                             <!-- First section contact edit_form -->
                             <div class="col-md-6 mt-20 light-red-subtitle-text">
@@ -38,7 +38,6 @@
                                 </div>
                             </div>
                             <!-- End first section contact edit_form -->
-
                             <!-- Second section contact edit_form-->
                             <div class="col-md-6 mt-20 light-red-subtitle-text">
                                 <div class="form-group form-error">
@@ -58,7 +57,6 @@
                                 </div>
                             </div>
                             <!-- End second section contact edit_form-->
-
                             <!-- Final section contact edit_form-->
                             <div class="col-md-12 light-red-subtitle-text">
                                 <div class="form-group form-error">
@@ -68,12 +66,10 @@
                                 </div>
                             </div>
                             <!-- End final section contact edit_form-->
-
                             <div class="col-sm-12 col-xs-12 text-center">
                                 <input type="submit" value="Enregistrer votre marque" class="btn btn-danger backred-btn-sm">
                             </div>
                             {{ form_end(edit_form) }}
-
                             <!-- Modal to deactivate a account -->
                             <div class="col-sm-12 col-xs-12 mt-20 text-left">
                                 <a href="#" style="color: #999999" data-toggle="modal" data-target="#pop-up-desactive">Désactiver votre compte</a>
@@ -81,15 +77,13 @@
                                 <div class="modal fade" id="pop-up-desactive" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog modal-notify modal-info" role="document">
                                         <div class="modal-content">
-
                                             <!--Modal's header-->
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true"><i class="fas fa-times" style="color: #999999;" aria-hidden="true"></i></span>
                                                 </button>
                                                 <p style="font-size: 20px">Êtes-vous sûr de vouloir désactiver votre compte ?</p>
-                                                <p style="font-size: 16px">Cette action entraînera également la désactivation de vos offres et
-                                                    de vos contrats.</p>
+                                                <p style="font-size: 16px">Cette action entraînera également la désactivation de vos offres et de vos contrats.</p>
                                             </div>
                                             <!--Modal's body-->
                                             <div class="modal-body">
