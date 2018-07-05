@@ -1,5 +1,7 @@
-// Creating sidebar for admin and manager accounts
-/* Toggle Styles */
+/* Creating sidebar for admin and manager accounts */
+
+// Toggle Styles
+
 .navbar-inverse, .navbar-toggle {
   background-color: black;
 }
@@ -52,7 +54,8 @@
   margin-right: -250px;
 }
 
-/* Sidebar Styles */
+// Sidebar Styles
+
 .sidebar-nav {
   position: absolute;
   top: 0;
@@ -98,6 +101,8 @@
   background: none;
   color: #fff;
 }
+
+// Changing size for smaller screens
 
 @media (min-width: 768px) {
   .container {

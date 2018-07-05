@@ -1,6 +1,7 @@
 @import '_variables';
 
-// Page activity_index
+/* Page activity_index */
+
 #index-activity {
   .boxing-canvas {
     max-width: 1100px;
@@ -11,7 +12,8 @@
   }
 }
 
-  // Control height of each tuple for activity
+// Control height of each tuple for activity
+
 .activity-box {
   border: 1px lightgray solid;
   background: $lighter-grey-bg-color;
@@ -20,6 +22,8 @@
   height: 300px;
   word-break: break-all;
 }
+
+// Optimization boxing height
 
 .activity-name-height {
   height: 57px;
@@ -36,7 +40,8 @@
   padding-right: 13px;
 }
 
-// Page activity_new and activity_edit: creating form
+/* Page activity_new and activity_edit: creating form */
+
 .boxing-canvas {
   max-width: 1100px;
 }
@@ -57,7 +62,8 @@ label {
   max-width: 400px;
 }
 
- // Back to the dashboard
+// Back to the dashboard
+
 .back-dashboard {
   padding-top: 5px;
 }
@@ -66,12 +72,14 @@ label {
   max-width: 1100px;
 }
 
- // Hide date's and address inputs for new and edit form
+// Hide date's and address inputs for new and edit form
+
 .activityHide {
   display: none;
 }
 
- // Placeholder's and value's colors
+// Placeholder's and value's colors
+
 #activity {
   input::placeholder, select, textarea::placeholder {
     font-weight: 200;
