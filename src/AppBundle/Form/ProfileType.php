@@ -49,26 +49,23 @@ class ProfileType extends AbstractType
         $builder
             ->add(
                 'firstName', TextType::class, array(
-                    'label' => 'Prénom :',
                     'attr' => array('class' => 'form-control'))
             )
             ->add(
                 'lastName', TextType::class, array(
-                    'label' => "Nom :",
                     'attr' => array('class' => 'form-control'))
             )
             ->add(
                 'phoneNumber', TelType::class, array(
-                    'label' => "Numéro de téléphone :",
                     'attr' => array('class' => 'form-control')
                 )
             )
             ->add(
                 'email', EmailType::class, array(
-                    'label' => 'form.email', 'translation_domain' => 'FOSUserBundle')
+                    'translation_domain' => 'FOSUserBundle')
             )
 
-            ->remove('username') //we use email as login
+            ->remove('username')
             ->remove('current_password');
     }
 
