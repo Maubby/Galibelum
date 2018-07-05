@@ -10,6 +10,8 @@
  */
 namespace AppBundle\Repository;
 
+use \Doctrine\ORM\EntityRepository;
+
 /**
  * ActivityRepository
  *
@@ -20,68 +22,83 @@ namespace AppBundle\Repository;
  * @package  Repository
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
-class ActivityRepository extends \Doctrine\ORM\EntityRepository
+class ActivityRepository extends EntityRepository
 {
     /**
-     * @param $name
-     * @param $type
-     * @param $date
+     * Search activities according to user's search
+     *
+     * @param String    $name Activity name
+     * @param String    $type Activity Type
+     * @param \DateTime $date Ending date
+     *
      * @return mixed
      */
-    public function search($name, $type, $date)
+    public function search(string $name, string $type, \DateTime $date)
     {
-        // Create private functions according to name, type and date.
-        
+        if (!$name && $type == "0") {
+            return $this->_searchAll($date);
+        }
+
+        return $this->_searchByName($name, $type, $date);
+    }
+
+    /**
+     * Search activities according to user's search without name
+     *
+     * @param \DateTime $date Ending date
+     *
+     * @return mixed
+     */
+    private function _searchAll(\DateTime $date)
+    {
+        // If user is searching without selected input,
+        // just search all activites with offers > date now
         $query = $this->createQueryBuilder('act')
             ->INNERJOIN('act.organizationActivities', 'org')
             ->INNERJOIN('act.activities', 'off')
-            ->SELECT('act,org,off')
+            ->SELECT('act, org, off')
+            ->WHERE('off.date >= :date')
+            ->setParameter('date', $date)
             ->GROUPBY('off')
             ->ORDERBY('act.creationDate');
 
-        if ($name != '') {
-            $query
-                ->WHERE('act.name LIKE :name')
-                ->ORWHERE('org.name LIKE :name')
-                ->setParameter('name', '%' . $name . '%');
-        }
+        return $query->getQuery()->getResult();
+    }
 
-        if ($type === 'Activité de streaming' OR $type === 'Equipe eSport' OR $type === 'Évènement eSport') {
+    /**
+     * Search activities according to user's search with a name
+     *
+     * @param String    $name Activity name
+     * @param String    $type Activity Type
+     * @param \DateTime $date Ending date
+     *
+     * @return mixed
+     */
+    private function _searchByName(string $name, string $type, \DateTime $date)
+    {
+        // If user is searching with a name and a valid type,
+        // just search all activites or organization with the selected name/type
+        // and with offers > date now
+        $query = $this->createQueryBuilder('act')
+            ->INNERJOIN('act.organizationActivities', 'org')
+            ->INNERJOIN('act.activities', 'off')
+            ->SELECT('act, org, off')
+            ->WHERE('act.name LIKE :name')
+            ->ORWHERE('org.name LIKE :name')
+            ->setParameter('name', '%' . $name . '%');
+        if ($type == "Activité de streaming"
+            || $type == "Equipe eSport"
+            || $type == "Évènement eSport"
+        ) {
             $query
                 ->ANDWHERE('act.type LIKE :type')
                 ->setParameter('type', '%' . $type . '%');
         }
-
-       if ($date != '00-00-0000')  {
-            $query
-                ->ANDWHERE('off.date <= 12-07-1217');
-
-        }
+        $query->ANDWHERE('off.date >= :date')
+            ->setParameter('date', $date)
+            ->GROUPBY('off')
+            ->ORDERBY('act.creationDate');
 
         return $query->getQuery()->getResult();
     }
 }
-
-/*SELECT act.name, act.type, org.name , MIN(off.date) AS minDate,MIN(off.amount) AS minAmount, MAX(off.amount) AS maxAmount
-FROM activity as act
-inner join organization as org on act.organization_activities_id = org.id
-inner join offer as off on act.id = off.activity_id
-GROUP BY act.id*/
-
-
-
-
-/*if($newdate !='') {
-            $query
-        ->INNERJOIN('act.activities','off');
-                ->WHERE('off.date <= :newdate')
-                ->setParameter('newdate', '%' . $newdate . '%');
-        }*/
-/*if($amount_min !=null) {
-    $query
-        ->WHERE('off.amount > :amount_min')
-        ->ANDWHERE('off.amount < :amount_max')
-        ->setParameter('amount_min', '%' . $amount_min . '%')
-        ->setParameter('amount_max', '%' . $amount_max . '%');
-}*/
-
