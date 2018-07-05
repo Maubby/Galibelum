@@ -1,11 +1,18 @@
 @import "_variables";
 
+// Table
+
 .boxing-canvas {
   max-width: 1000px;
 }
 
 .container {
   padding: 0;
+}
+
+table.dataTable tbody td {
+  padding: 8px 10px;
+  vertical-align: middle;
 }
 
 th, td {
@@ -18,7 +25,14 @@ th, td {
   text-align: justify;
 }
 
-// Buttons part
+// Button width for manager_index
+
+.btn-organization {
+  width: 90px;
+}
+
+// Buttons part for manager_contract
+
 @function hsb($h-hsb, $s-hsb, $b-hsb, $a: 1) {
   @if $b-hsb == 0 {
     @return hsla(0, 0, 0, $a);
@@ -86,11 +100,11 @@ strong {
   cursor: pointer;
   display: inline-block;
   font-family: $font-family-base, sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 20px;
   width: 140px;
-  padding: 9px 16px 9px;
+  padding: 7px 16px 7px;
   transition: all 20ms ease-out;
   vertical-align: top;
 }

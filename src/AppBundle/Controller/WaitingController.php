@@ -11,9 +11,8 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -31,9 +30,9 @@ class WaitingController extends Controller
      * Company & Organization wait until their application is approved
      * by the Account Manager
      *
-     * @Route("/",    name="waiting_index")
-     * @Method("GET")
-     * @return        Response A Response instance
+     * @Route("/", methods={"GET"}, name="waiting_index")
+     *
+     * @return Response A Response instance
      */
     public function indexAction()
     {

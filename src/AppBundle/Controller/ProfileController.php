@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\UserBundle\Form\Factory\FactoryInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Overriding controller managing the user profile.
@@ -91,7 +92,7 @@ class ProfileController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             /**
-             * If profile submitted & valide
+             * If profile submitted & valid
              *
              * @var $userManager UserManagerInterface
              */
@@ -109,7 +110,7 @@ class ProfileController extends BaseController
         }
         if ($formPassword->isSubmitted() && $formPassword->isValid()) {
             /**
-             * If submitted & valide new password edited
+             * If submitted & valid new password edited
              *
              * @var $userManager UserManagerInterface
              */
@@ -134,5 +135,26 @@ class ProfileController extends BaseController
                 'user' => $user,
             )
         );
+    }
+
+    /**
+     * Deletes a user entity.
+     *
+     * @Route("/profile/delete/", methods={"GET"}, name="profile_delete")
+     *
+     * @return Response A Response instance
+     */
+    public function deleteUser()
+    {
+        $user = $this->getUser();
+        if ($user->hasRole('ROLE_USER')) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($user);
+            $em->flush();
+            $this->addFlash('danger', 'Votre compte a bien été supprimé.');
+            return $this->redirectToRoute('homepage');
+        } else {
+            return $this->redirectToRoute('fos_user_profile_show');
+        }
     }
 }

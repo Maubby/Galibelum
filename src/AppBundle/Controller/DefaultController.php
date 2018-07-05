@@ -2,7 +2,7 @@
 /**
  * DefaultController File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category DefaultController
  * @package  Controller
@@ -10,10 +10,9 @@
  */
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Default controller.
@@ -29,9 +28,8 @@ class DefaultController extends Controller
     /**
      * Redirect when customers have an access denied
      *
-     * @Route("/",    name="redirect")
-     * @Method("GET")
-     * @return        Response A Response instance
+     * @Route("/", methods={"GET"}, name="redirect")
+     * @return     Response A Response instance
      */
     public function redirectAction()
     {

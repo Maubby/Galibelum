@@ -10,11 +10,9 @@
  */
 namespace AppBundle\Controller;
 
-use User;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Inscription controller.
@@ -30,9 +28,9 @@ class InscriptionController extends Controller
     /**
      * Inscription choose Company & Organization
      *
-     * @Route("/",    name="inscription_index")
-     * @Method("GET")
-     * @return        Response A Response instance
+     * @Route("/", methods={"GET"}, name="inscription_index")
+     *
+     * @return Response A Response instance
      */
     public function indexAction()
     {
@@ -58,5 +56,4 @@ class InscriptionController extends Controller
             return $this->render('inscription/index.html.twig');
         }
     }
-
 }
