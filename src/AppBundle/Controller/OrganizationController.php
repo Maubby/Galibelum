@@ -2,7 +2,7 @@
 /**
  * OrganizationController File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category OrganizationController
  * @package  Controller
@@ -12,8 +12,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Organization;
 use AppBundle\Entity\User;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,8 +32,7 @@ class OrganizationController extends Controller
     /**
      * Lists all organization entities.
      *
-     * @Route("/",    name="dashboard_index")
-     * @Method("GET")
+     * @Route("/", methods={"GET"}, name="dashboard_index")
      *
      * @return Response A Response instance
      */
@@ -72,8 +70,8 @@ class OrganizationController extends Controller
      * @param Request $request New posted info
      * @param int     $choose  Organization or company
      *
-     * @Route("/new/choose/{choose}", name="organization_new")
-     * @Method({"GET",                "POST"})
+     * @Route("/new/choose/{choose}", methods={"GET", "POST"},
+     *     name="organization_new")
      *
      * @return Response A Response instance
      */
@@ -126,12 +124,11 @@ class OrganizationController extends Controller
     }
 
     /**
-     * Finds and displays a organization entity.
+     * Finds and displays an organization entity.
      *
      * @param Organization $organization The organization entity
      *
-     * @Route("/{id}", name="organization_show")
-     * @Method("GET")
+     * @Route("/{id}", methods={"GET"}, name="organization_show")
      *
      * @return Response A Response instance
      */
@@ -157,8 +154,7 @@ class OrganizationController extends Controller
      * @param Request      $request      Edit posted info
      * @param Organization $organization The organization entity
      *
-     * @Route("/{id}/edit", name="organization_edit")
-     * @Method({"GET",      "POST"})
+     * @Route("/{id}/edit", methods={"GET", "POST"}, name="organization_edit")
      *
      * @return Response A Response instance
      */
@@ -182,9 +178,11 @@ class OrganizationController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'Vos modifications ont bien été prises en compte.');
+            $this
+                ->addFlash(
+                    'success',
+                    "Vos modifications ont bien été prises en compte."
+                );
 
             return $this->redirectToRoute(
                 'dashboard_index',
@@ -202,14 +200,13 @@ class OrganizationController extends Controller
     }
 
     /**
-     * Deletes a organization entity.
+     * Deletes an organization entity.
      *
      * @param Request      $request      Delete posted info
      * @param Organization $organization The organization entity
      * @param User         $user         The user entity
      *
-     * @Route("/{id}",   name="organization_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", methods={"DELETE"}, name="organization_delete")
      *
      * @return Response A Response instance
      */
@@ -228,11 +225,11 @@ class OrganizationController extends Controller
             $em->flush();
         }
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add(
-                'success', 'Votre compte a bien été désactivé. 
-            Si vous souhaitez nous rejoindre à nouveau, contactez Galibelum.'
+        $this
+            ->addFlash(
+                'success',
+                "Votre compte a bien été désactivé. 
+            Si vous souhaitez nous rejoindre à nouveau, contactez Galibelum."
             );
 
         return $this->redirectToRoute('fos_user_security_login');
