@@ -55,7 +55,7 @@ class OfferType extends AbstractType
             )
             ->add(
                 'date', DateType::class, array(
-                'widget' => 'single_text')
+                    'widget' => 'single_text')
             )
             ->add(
                 'description', TextareaType::class, array(

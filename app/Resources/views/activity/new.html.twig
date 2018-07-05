@@ -97,7 +97,7 @@
                             <div class="col-sm-12 mt-20">
                                 <div class="form-group form-error">
                                     <i class="fas fa-link"></i>{{ form_label(form.urlVideo, 'Url') }}
-                                    {{ form_widget(form.urlVideo, {'attr': {'class': "form-control input-field", 'placeholder': "Partager une vidéo de présentation de votre activité"}}) }}
+                                    {{ form_widget(form.urlVideo, {'attr': {'class': "form-control input-field",'id': "user_input_autocomplete_address", 'placeholder': "Partager une vidéo de présentation de votre activité"}}) }}
                                     {{ form_errors(form.urlVideo) }}
                                 </div>
                             </div>
@@ -161,4 +161,10 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('build/input_display.js') }}"></script>
+    <!-- Include Google Maps JS API -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB3N8qr-skNcWJ-ctPpwDgAW7xvGguA8-M">
+    </script>
+    <!-- Custom JS code to bind to Autocomplete API -->
+    <script src="{{ asset('build/autocomplete.js') }}"></script>
 {% endblock %}
+

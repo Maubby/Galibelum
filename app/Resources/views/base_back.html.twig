@@ -15,6 +15,7 @@
     <!-- CSS Webpack Vendor including Bootstrap and so on -->
     <link rel="stylesheet" href="{{ asset('build/vendor.css') }}">
     <link rel="stylesheet" href="{{ asset('build/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
     {% block stylesheets %}
     {% endblock %}
 
@@ -76,16 +77,16 @@
                                    aria-haspopup="true" aria-expanded="false">
                                     <span class="glyphicon glyphicon-user" aria-hidden="true">
                                         </span> Accounts managers <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{{ path('admin/new.html.twig') }}">
-                                            <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
-                                            Créer un compte</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="{{ path('admin/manager.html.twig') }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                                            Gestion des comptes</a></li>
-                                </ul>
-                            </li>
-                            <!-- End dropdown menu -->
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('admin_manager_new') }}">
+                                        <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                                        Créer un compte</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{{ path('admin_manager_list') }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                                        Gestion des comptes</a></li>
+                            </ul>
+                        </li>
+                        <!-- End dropdown menu -->
                         {% endif %}
                         <!-- End condition -->
 
@@ -94,7 +95,7 @@
                                                                                     aria-hidden="true"></span> Voir les organisations</a>
                         </li>
                         <li>
-                            <a href="#"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>
+                            <a href="{{ path('manager_contract_list') }}"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>
                                 Gérer les contrats</a>
                         </li>
                         <li>

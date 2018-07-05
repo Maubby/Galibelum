@@ -1,0 +1,46 @@
+{# app/Resources/TwigBundle/views/Exception/error404.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Page erreur 404{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/page_404.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base_back.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <h1 class="first-four">4</h1>
+            </div>
+            <div class="col-md-4">
+                <img class="logo-galibelum" src="{{ asset('build/images/logo_galibelum.png') }}" alt="Logo Galibelum">
+            </div>
+            <div class="col-md-3">
+                <h1 class="second-four">4</h1>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <h5 class="text-center phrase">Ooops la page n'existe pas.</h5>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <footer>
+    </footer>
+{% endblock %}

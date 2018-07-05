@@ -13,6 +13,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Activity;
 use AppBundle\Entity\Offer;
 use AppBundle\Service\ManagementFeesService;
+use Swift_Mailer;
+use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -50,7 +52,7 @@ class OfferController extends Controller
                     'organization' => $user->getOrganization()
                 )
             );
-        
+
         $event_activities = $em->getRepository('AppBundle:Activity')->findBy(
             array(
                 'organizationActivities' => $user->getOrganization(),
@@ -64,7 +66,7 @@ class OfferController extends Controller
                 'type' => 'Activité de streaming'
             )
         );
-        
+
         $team_activities = $em->getRepository('AppBundle:Activity')->findBy(
             array(
                 'organizationActivities' => $user->getOrganization(),
@@ -74,10 +76,10 @@ class OfferController extends Controller
 
         return $this->render(
             'offer/index.html.twig', array(
-            'offers' => $offers,
-            'event_activities' => $event_activities,
-            'stream_activities' => $stream_activities,
-            'team_activities' => $team_activities,
+                'offers' => $offers,
+                'event_activities' => $event_activities,
+                'stream_activities' => $stream_activities,
+                'team_activities' => $team_activities,
             )
         );
     }
@@ -85,8 +87,8 @@ class OfferController extends Controller
     /**
      * Creates a new offer entity and get information for current activity.
      *
-     * @param Request $request New offer posted with activity id
-     * @param Activity $activity New offer by activity
+     * @param Request               $request     New offer posted with activity id
+     * @param Activity              $activity    New offer by activity
      * @param ManagementFeesService $feesService Fees Calculation services
      *
      * @Route("/{id}/new",     name="offer_new")
@@ -95,8 +97,9 @@ class OfferController extends Controller
      * @return Response A Response instance
      * @throws \Exception
      */
-    public function newAction(Request $request, Activity $activity, ManagementFeesService $feesService)
-    {
+    public function newAction(Request $request, Activity $activity,
+                              ManagementFeesService $feesService
+    ) {
         $offer = new Offer();
         $form = $this->createForm('AppBundle\Form\OfferType', $offer);
         $form->handleRequest($request);
@@ -113,21 +116,21 @@ class OfferController extends Controller
                 ->setHandlingFee($fees)
                 ->setOrganization($user->getOrganization())
                 ->setDate($offer->getDate()->sub($interval));
-            
+
             $em->persist($offer);
             $em->flush();
 
             return $this->redirectToRoute(
                 'offer_show', array(
-                'id' => $offer->getId())
+                    'id' => $offer->getId())
             );
         }
 
         return $this->render(
             'offer/new.html.twig', array(
-            'offer' => $offer,
-            'activity'=> $activity,
-            'form' => $form->createView(),
+                'offer' => $offer,
+                'activity'=> $activity,
+                'form' => $form->createView(),
             )
         );
     }
@@ -136,22 +139,40 @@ class OfferController extends Controller
      * Finds and displays all offer's from search result.
      *
      * @param Offer $offer The offer entity
-     *
-     * @Route("/{id}", name="offer_show")
-     * @Method("GET")
+     * @param Swift_Mailer $mailer
      *
      * @return Response A Response instance
+     * @Route("/{id}", name="offer_relation")
+     * @Method("GET")
      */
-    public function showAction(Offer $offer)
+    public function relationAction(Offer $offer, Swift_Mailer $mailer)
     {
-        $deleteForm = $this->_createDeleteForm($offer);
+        $user = $this->getUser();
 
-        return $this->render(
-            'offer/show.html.twig', array(
-            'offer' => $offer,
-            'delete_form' => $deleteForm->createView(),
-            )
-        );
+        if ($user->hasRole('ROLE_STRUCTURE' && $user->getOrganization()->getIsActive() === 1)) {
+
+            $offer->setOrganization($user->getOrganization());
+            $this->getDoctrine()->getManager()->flush();
+
+            $message = (new Swift_Message('Hello Email'))
+                ->setFrom('contact@galibelum.fr')
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'offer/email.txt.twig'),
+                    'text/plain'
+                );
+
+            $mailer->send($message);
+
+            return $this->redirectToRoute(
+                'activity_show', array(
+                    'id' => $offer->getId()
+                )
+            );
+        }
+
+        return $this->redirectToRoute('dashboard_index');
     }
 
     /**
@@ -176,15 +197,15 @@ class OfferController extends Controller
 
             return $this->redirectToRoute(
                 'offer_edit', array(
-                'id' => $offer->getId())
+                    'id' => $offer->getId())
             );
         }
 
         return $this->render(
             'offer/edit.html.twig', array(
-            'offer' => $offer,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                'offer' => $offer,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
             )
         );
     }
@@ -227,7 +248,7 @@ class OfferController extends Controller
             ->setAction(
                 $this->generateUrl(
                     'offer_delete', array(
-                    'id' => $offer->getId())
+                        'id' => $offer->getId())
                 )
             )
             ->setMethod('DELETE')

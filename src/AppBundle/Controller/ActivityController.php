@@ -91,7 +91,9 @@ class ActivityController extends Controller
 
             $request->getSession()
                 ->getFlashBag()
-                ->add('pdf', "Vous pouvez ajouter un PDF pour décrire votre activité");
+                ->add(
+                    'pdf', "Vous pouvez ajouter un PDF pour décrire votre activité"
+                );
 
             $em->persist($activity);
             $em->flush();
@@ -140,8 +142,11 @@ class ActivityController extends Controller
      * @Route("/{id}/edit", name="activity_edit")
      * @Method({"GET",      "POST"})
      */
-    public function editAction(Request $request, Activity $activity, FileUploaderService $fileUploaderService)
-    {
+    public function editAction(Request $request, Activity $activity,
+        FileUploaderService $fileUploaderService
+    ) {
+        $fileName = $activity->getUploadPdf();
+  
         $deleteForm = $this->_createDeleteForm($activity);
         $editForm = $this->createForm(ActivityType::class, $activity);
         $editForm->handleRequest($request);
@@ -150,38 +155,26 @@ class ActivityController extends Controller
         $organizationId = $user->getOrganization()->getId();
 
         // Var for the file name
-        $path = '/../../../web/uploads/pdf/organization_'.$organizationId.'/activity/activity_'.$activity->getId().'.pdf';
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $file = $activity->getUploadPdf();
 
             // Check if the file exist and set the new or old value
-            if ($file === null && file_exists(__DIR__ .$path)) {
-                $activity->setUploadPdf('activity_'.$activity->getId().'.pdf');
-                $this->getDoctrine()->getManager()->flush();
-            } elseif ($file == null && !file_exists(__DIR__ .$path)) {
-                $this->getDoctrine()->getManager()->flush();
-            } else {
-                $fileName = $fileUploaderService
-                    ->upload(
-                        $file, $activity
-                        ->getId(), $organizationId
-                    );
-                $activity->setUploadPdf($fileName);
-                $this->getDoctrine()->getManager()->flush();
+            if ($file !== null) {
+                $filePdf = $fileUploaderService->upload(
+                    $file, $activity->getId(), $organizationId);
             }
+
+            $activity->setUploadPdf($filePdf);
+
+            $this->getDoctrine()->getManager()->flush();
 
             $request->getSession()
                 ->getFlashBag()
                 ->add('success', 'Vos modifications ont bien été prises en compte.');
 
-            return $this->redirectToRoute(
-                'dashboard_index',
-                array(
-                    'id' => $activity->getId(),
-                )
-            );
+            return $this->redirectToRoute('dashboard_index');
         }
+
 
         return $this->render(
             'activity/edit.html.twig', array(

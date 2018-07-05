@@ -36,7 +36,7 @@ class InscriptionController extends Controller
      */
     public function indexAction()
     {
-            return $this->render('inscription/index.html.twig');
+        return $this->render('inscription/index.html.twig');
     }
 
 }

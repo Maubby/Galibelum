@@ -12,8 +12,8 @@ Encore
     .enableSassLoader()
     .enableSourceMaps(!Encore.isProduction())
     .autoProvidejQuery()
-    .enableVersioning()
-    .createSharedEntry('vendor', ['jquery', 'bootstrap-sass', 'bootstrap-sass/assets/stylesheets/_bootstrap.scss'])
+    .createSharedEntry('vendor', ['jquery', 'bootstrap-sass', 'bootstrap-sass/assets/stylesheets/_bootstrap.scss',
+        'datatables.net-dt/css/jquery.dataTables.min.css', 'datatables.net-dt/js/dataTables.dataTables.min.js'])
     .addStyleEntry('style', './assets/scss/style.scss')
     .addStyleEntry('register', './assets/scss/register.scss')
     .addStyleEntry('check_confirmed_email', './assets/scss/check_confirmed_email.scss')
@@ -30,10 +30,13 @@ Encore
     .addStyleEntry('offer', './assets/scss/offer.scss')
     .addStyleEntry('admin', './assets/scss/admin.scss')
     .addStyleEntry('manager', './assets/scss/manager.scss')
+    .addStyleEntry('page_404', './assets/scss/page_404.scss')
     .addEntry('login-script', './assets/js/login-script.js')
     .addEntry('carousel', './assets/js/carousel.js')
     .addEntry('input_display', './assets/js/input_display.js')
     .addEntry('menu-toggle', './assets/js/menu-toggle.js')
+    .addEntry('table-manager', './assets/js/table-manager.js')
+    .addEntry('autocomplete', './assets/js/autocomplete.js')
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
         { from: './assets/images', to: 'images'}

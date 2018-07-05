@@ -19,6 +19,15 @@
 {% endblock %}
 
 {% block body %}
+    <!-- Message flash -->
+    {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('success') %}
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% endfor %}
+        </div>
+    {% endif %}
     <div class="container">
         <div class="row boxing-canvas mt-50">
             <div class="col-md-12 col-sm-12 col-xs-12 center">
@@ -50,7 +59,7 @@
                                 <td>{{ user.lastName }}</td>
                                 <td>{{ user.firstName }}</td>
                                 <td>{{ user.email }}</td>
-                                <td class="normal-subtitle-text"><a href="#" class="five-color">
+                                <td class="normal-subtitle-text"><a href="{{ path('admin_manager_edit', { 'id': user.id }) }}" class="five-color">
                                         Modifier le profil</a></td>
                             </tr>
                         {% endfor %}

@@ -8,7 +8,6 @@
  * @package  DataFixtures
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
-// src/AppBundle/DataFixtures/FakerFixtures.php
 
 namespace AppBundle\DataFixtures;
 
@@ -44,7 +43,7 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
 
     /**
      * Setting container.
-     * 
+     *
      * @param ContainerInterface $_container |null
      *
      * @Route("/",    name="faker")
@@ -140,9 +139,7 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
             $activity->setOrganizationActivities($organization);
             $em->persist($activity);
 
-            $offer
-                ->setActivity($activity)
-                ->setOrganization($organization);
+            $offer->setActivity($activity);
             $em->persist($offer);
 
             $em->flush();

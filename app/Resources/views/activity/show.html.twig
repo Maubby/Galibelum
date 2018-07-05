@@ -57,7 +57,7 @@
                     <td>{{ activity.address }}</td>
                     #}
 
-                    <a href="{{ asset('/uploads/pdf/organization_' ~ organization_id ~'/activity/' ~ activity.uploadPdf) }}">Pdf de présentation</a>
+                    <a href="{{ asset('/uploads/pdf/organization_' ~ activity.OrganizationActivities.id ~'/activity/' ~ activity.uploadPdf) }}">Pdf de présentation</a>
 
                     <div class="boxing-body">
                         <h6 class="title"><strong>Sociaux : </strong></h6>
@@ -84,7 +84,7 @@
                                     <p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.partnershipNumber }}</p>
                                     <p class="panel-item"><strong>Date d'expiration : </strong>{{ offer.date|date("d M Y") }}</p>
                                     <p class="panel-item">{{ offer.description }}</p>
-                                    <a href="{{ path('offer_show', { 'id': offer.id }) }}" class="btn btn-primary btn-sm">Se mettre en relation</a>
+                                    <a href="{{ path('offer_relation', { 'id': offer.id }) }}" class="btn btn-primary btn-sm">Se mettre en relation</a>
                                 </div>
                             </div>
                         </div>
