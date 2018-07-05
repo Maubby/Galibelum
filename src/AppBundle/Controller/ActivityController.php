@@ -113,7 +113,6 @@ class ActivityController extends Controller
     public function showAction(Activity $activity)
     {
         $deleteForm = $this->_createDeleteForm($activity);
-        $user = $this->getUser();
 
         return $this->render(
             'activity/show.html.twig', array(
