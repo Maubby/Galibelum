@@ -126,32 +126,6 @@ class OrganizationController extends Controller
     }
 
     /**
-     * Finds and displays a organization entity.
-     *
-     * @param Organization $organization The organization entity
-     *
-     * @Route("/{id}", name="organization_show")
-     * @Method("GET")
-     *
-     * @return Response A Response instance
-     */
-    public function showAction(Organization $organization)
-    {
-        $deleteForm = $this->_createDeleteForm($organization);
-
-        if ($organization->getIsActive() === 1) {
-            return $this->render(
-                'organization/show.html.twig', array(
-                    'organization' => $organization,
-                    'delete_form' => $deleteForm->createView(),
-                )
-            );
-        } else {
-            return $this->redirectToRoute('homepage');
-        }
-    }
-
-    /**
      * Displays a form to edit an existing organization entity.
      *
      * @param Request      $request      Edit posted info
@@ -165,40 +139,45 @@ class OrganizationController extends Controller
     public function editAction(Request $request, Organization $organization)
     {
         $user = $this->getUser();
-        $deleteForm = $this->_createDeleteForm($organization);
-        if ($user->hasRole('ROLE_COMPANY')) {
-            $editForm = $this
-                ->createForm(
-                    'AppBundle\Form\OrganizationType', $organization
-                );
-            $editForm->remove('status');
-        } else {
-            $editForm = $this
-                ->createForm(
-                    'AppBundle\Form\OrganizationType', $organization
-                );
-        }
-        $editForm->handleRequest($request);
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'Vos modifications ont bien été prises en compte.');
+        if ($user->getOrganization()->getId() === $organization->getId()) {
+            $deleteForm = $this->_createDeleteForm($organization);
+            if ($user->hasRole('ROLE_COMPANY')) {
+                $editForm = $this
+                    ->createForm(
+                        'AppBundle\Form\OrganizationType', $organization
+                    );
+                $editForm->remove('status');
+            } else {
+                $editForm = $this
+                    ->createForm(
+                        'AppBundle\Form\OrganizationType', $organization
+                    );
+            }
+            $editForm->handleRequest($request);
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute(
-                'dashboard_index',
-                array('id' => $organization->getId())
+                $request->getSession()
+                    ->getFlashBag()
+                    ->add('success', 'Vos modifications ont bien été prises en compte.');
+
+                return $this->redirectToRoute(
+                    'dashboard_index',
+                    array('id' => $organization->getId())
+                );
+            }
+
+            return $this->render(
+                'organization/edit.html.twig', array(
+                    'organization' => $organization,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                )
             );
         }
 
-        return $this->render(
-            'organization/edit.html.twig', array(
-                'organization' => $organization,
-                'edit_form' => $editForm->createView(),
-                'delete_form' => $deleteForm->createView(),
-            )
-        );
+        return $this->redirectToRoute('redirect');
     }
 
     /**
@@ -206,36 +185,40 @@ class OrganizationController extends Controller
      *
      * @param Request      $request      Delete posted info
      * @param Organization $organization The organization entity
-     * @param User         $user         The user entity
      *
      * @Route("/{id}",   name="organization_delete")
      * @Method("DELETE")
      *
      * @return Response A Response instance
      */
-    public function deleteAction(
-        Request $request, Organization $organization, User $user
-    ) {
-        $form = $this->_createDeleteForm($organization);
-        $form->handleRequest($request);
+    public function deleteAction(Request $request, Organization $organization)
+    {
+        $user = $this->getUser();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $organization->setIsActive(2);
-            $user->setEnabled(false);
-            $em->persist($organization);
-            $em->persist($user);
-            $em->flush();
+        if ($user->getOrganization()->getId() === $organization->getId()) {
+            $form = $this->_createDeleteForm($organization);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $organization->setIsActive(2);
+                $user->setEnabled(false);
+                $em->persist($organization);
+                $em->persist($user);
+                $em->flush();
+            }
+
+            $request->getSession()
+                ->getFlashBag()
+                ->add(
+                    'success', 'Votre compte a bien été désactivé. 
+            Si vous souhaitez nous rejoindre à nouveau, contactez Galibelum.'
+                );
+
+            return $this->redirectToRoute('fos_user_security_login');
         }
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add(
-                'success', 'Votre compte a bien été désactivé. 
-            Si vous souhaitez nous rejoindre à nouveau, contactez Galibelum.'
-            );
-
-        return $this->redirectToRoute('fos_user_security_login');
+        return $this->redirectToRoute('redirect');
     }
 
     /**

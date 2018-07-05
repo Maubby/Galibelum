@@ -22,6 +22,8 @@ security:
 
             logout:       true
             anonymous:    true
+            access_denied_url: /redirect
+
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
