@@ -65,7 +65,7 @@ class ActivityType extends AbstractType
                     'required' => true,
                     'attr' => array(
                         'minlength' => 32,
-                        'maxlength' => 250,
+                        'maxlength' => 255,
                     )
                 )
             )
@@ -85,6 +85,7 @@ class ActivityType extends AbstractType
                 'address', TextType::class, array(
                     'required' => true,
                     'attr' => array(
+                        'minlength' => 2,
                         'maxlength' => 64,
                     )
                 )
@@ -106,6 +107,7 @@ class ActivityType extends AbstractType
                 'achievement', TextareaType::class, array(
                     'required' => false,
                     'attr' => array(
+                        'minlength' => 2,
                         'maxlength' => 128,
                     )
                 )
