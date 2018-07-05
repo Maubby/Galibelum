@@ -53,7 +53,7 @@ class InscriptionController extends Controller
             return $this->redirectToRoute('waiting_index');
 
         } else {
-            return $this->redirectToRoute('inscription_index');
+            return $this->render('inscription/index.html.twig');
         }
     }
 
