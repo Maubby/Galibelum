@@ -14,7 +14,7 @@
 !var/SymfonyRequirements.php
 /vendor/
 /node_modules/
-/web/bundles/
+/web/build/
 /web/uploads/
 /web/blog/
 .idea
@@ -22,4 +22,3 @@
 .directory
 npm-debug.log
 package-lock.json
-/web/build/
