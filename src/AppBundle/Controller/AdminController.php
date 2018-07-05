@@ -154,7 +154,7 @@ class AdminController extends Controller
         $manager->setEnabled(false);
         $em->persist($manager);
         $em->flush();
-        
+
         return $this->redirectToRoute('admin_index');
     }
 }
