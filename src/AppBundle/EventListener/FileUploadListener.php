@@ -3,7 +3,7 @@
 /**
  * Event Listener file
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category Listener
  * @package  Listener
@@ -11,6 +11,7 @@
  */
 namespace AppBundle\EventListener;
 
+use AppBundle\Entity\Organization;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Event\LifecycleEventArgs;
@@ -72,7 +73,7 @@ class FileUploadListener
      *
      * @param Entity $entity UploadFile
      *
-     * @return string
+     * @return void
      */
     private function _uploadFile($entity)
     {
@@ -82,10 +83,12 @@ class FileUploadListener
         }
 
         $file = $entity->getUploadPdf();
+        $organizationId = $entity->getOrganizationActivities()->getId();
+        $activityId = $entity->getId();
 
         // only upload new files
-        if ($file instanceof UploadedFile) {
-            $fileName = $this->_uploader->upload($file);
+        if ($file instanceof UploadedFile && $organizationId instanceof Organization && $activityId instanceof Activity) {
+            $fileName = $this->_uploader->upload($file, $organizationId, $activityId);
             $entity->setUploadPdf($fileName);
         }
     }

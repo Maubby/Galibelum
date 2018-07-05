@@ -2,7 +2,7 @@
 /**
  * AdminController File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category AdminController
  * @package  Controller
@@ -14,8 +14,7 @@ use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Admin controller.
@@ -31,8 +30,7 @@ class AdminController extends Controller
     /**
      * Landing page for admin manager.
      *
-     * @Route("/",    name="manager_contract")
-     * @Method("GET")
+     * @Route("/", methods={"GET"}, name="manager_contract")
      *
      * @return Response A Response instance
      */
@@ -42,18 +40,18 @@ class AdminController extends Controller
         $users = $em->getRepository('AppBundle:User')
             ->findByRole('ROLE_SUPER_ADMIN');
         return $this->render(
-            'manager/contract.html.twig',
-            array('users' => $users,)
+            'manager/contract.html.twig', array(
+                'user' => $this->getUser(),
+            )
         );
     }
 
     /**
-     *  Creates a new account manager.
+     * Creates a new account manager.
      *
      * @param Request $request New posted info
      *
-     * @Route("/new",  name="admin_manager_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", methods={"GET", "POST"}, name="admin_manager_new")
      *
      * @return Response A Response instance
      */
@@ -76,6 +74,7 @@ class AdminController extends Controller
                 'admin_manager_list'
             );
         }
+
         return $this->render(
             'admin/new.html.twig', array(
                 'manager' => $manager,
@@ -85,13 +84,12 @@ class AdminController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing managers entity.
+     * Displays a form to edit an existing manager entity.
      *
-     * @param Request $request Delete posted info
+     * @param Request $request Edit posted info
      * @param User    $manager The User manager
      *
-     * @Route("/{id}/edit", name="admin_manager_edit")
-     * @Method({"GET",      "POST"})
+     * @Route("/{id}/edit", methods={"GET", "POST"}, name="admin_manager_edit")
      *
      * @return Response A Response instance
      */
@@ -102,18 +100,19 @@ class AdminController extends Controller
         $editForm->remove('phoneNumber');
         $editForm->handleRequest($request);
 
-
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'Vos modifications ont bien été prises en compte.');
+            $this
+                ->addFlash(
+                    'success',
+                    "Vos modifications ont bien été prises en compte."
+                );
 
             return $this->redirectToRoute(
-                'admin_manager_list',
-                array('id' => $manager->getId())
+                'admin_manager_list', array(
+                    'id' => $manager->getId(),
+                )
             );
         }
 
@@ -121,7 +120,6 @@ class AdminController extends Controller
             'admin/edit.html.twig', array(
                 'manager' => $manager,
                 'edit_form' => $editForm->createView(),
-
             )
         );
     }
@@ -129,9 +127,7 @@ class AdminController extends Controller
     /**
      * Lists all account managers.
      *
-     * @Route("/manager", name="admin_manager_list")
-     *
-     * @Method("GET")
+     * @Route("/manager", methods={"GET"}, name="admin_manager_list")
      *
      * @return Response A Response instance
      */
@@ -140,18 +136,18 @@ class AdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
         return $this->render(
-            'admin/manager.html.twig',
-            array('users' => $users,)
+            'admin/manager.html.twig', array(
+                'users' => $users,
+            )
         );
     }
 
     /**
-     * Delete a manager entity.
+     * Deletes a manager entity.
      *
      * @param User $manager The account manager
      *
-     * @Route("/{id}", name="admin_delete")
-     * @Method("GET")
+     * @Route("/{id}", methods={"GET"}, name="admin_delete")
      *
      * @return Response A Response instance
      */
@@ -161,6 +157,7 @@ class AdminController extends Controller
         $manager->setEnabled(false);
         $em->persist($manager);
         $em->flush();
+
         return $this->redirectToRoute('admin_manager_list');
     }
 }
