@@ -150,19 +150,21 @@ class ActivityController extends Controller
 
             // Check if the file exist and set the new or old value
             $filePdf = $file!=null ? $filePdf = $fileUploaderService->upload(
-                $file, $organizationId, $activity->getId()) : $fileName;
+                $file, $organizationId, $activity->getId()
+            ) : $fileName;
 
             $activity->setUploadPdf($filePdf);
 
             $this->getDoctrine()->getManager()->flush();
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'Vos modifications ont bien été prises en compte.');
+            $this
+                ->addFlash(
+                    'success',
+                    "Vos modifications ont bien été prises en compte."
+                );
 
             return $this->redirectToRoute('dashboard_index');
         }
-
 
         return $this->render(
             'activity/edit.html.twig', array(
