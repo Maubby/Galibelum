@@ -57,7 +57,7 @@ class ActivityController extends Controller
     /**
      * Creates a new activity entity.
      *
-     * @param Request $request Delete posted info
+     * @param Request $request New posted info
      *
      * @Route("/new", methods={"GET", "POST"}, name="activity_new")
      *
@@ -78,10 +78,10 @@ class ActivityController extends Controller
                 ->setOrganizationActivities($organization)
                 ->setNameCanonical(strtolower($activity->getName()));
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add(
-                    'pdf', "Vous pouvez ajouter un PDF pour décrire votre activité"
+            $this
+                ->addFlash(
+                    'pdf',
+                    "Vous pouvez ajouter un PDF pour décrire votre activité"
                 );
 
             $em->persist($activity);
