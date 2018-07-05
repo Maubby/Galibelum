@@ -17,6 +17,7 @@ input:-webkit-autofill {
 }
 
 /* Form Register */
+
 .boxing-canvas {
   display: flex;
   justify-content: center;
@@ -35,6 +36,14 @@ input:-webkit-autofill {
   height: auto;
 }
 
+.forgotten-password {
+  padding-top: 5px;
+}
+
+.orange-color {
+  color: #ffaf7e;
+}
+
 @media (min-width: 768px) and (max-width: 843px) {
   .logo-galibelum {
     width: 350px;
@@ -49,10 +58,3 @@ input:-webkit-autofill {
   }
 }
 
-.forgotten-password {
-  padding-top: 5px;
-}
-
-.orange-color {
-  color: #ffaf7e;
-}
