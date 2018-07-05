@@ -190,26 +190,32 @@ class OfferController extends Controller
             return $this->redirectToRoute('manager_contract_list');
         }
 
-        $deleteForm = $this->_createDeleteForm($offer);
-        $editForm = $this->createForm('AppBundle\Form\OfferType', $offer);
-        $editForm->handleRequest($request);
+        $user = $this->getUser();
+        if ($user->getOrganization()->getOrganizationActivity()->contains($offer->getActivity())
+        ) {
+            $deleteForm = $this->_createDeleteForm($offer);
+            $editForm = $this->createForm('AppBundle\Form\OfferType', $offer);
+            $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute(
-                'offer_edit', array(
-                    'id' => $offer->getId())
+                return $this->redirectToRoute(
+                    'offer_edit', array(
+                        'id' => $offer->getId())
+                );
+            }
+
+            return $this->render(
+                'offer/edit.html.twig', array(
+                    'offer' => $offer,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                )
             );
         }
 
-        return $this->render(
-            'offer/edit.html.twig', array(
-                'offer' => $offer,
-                'edit_form' => $editForm->createView(),
-                'delete_form' => $deleteForm->createView(),
-            )
-        );
+        return $this->redirectToRoute('redirect');
     }
 
     /**
