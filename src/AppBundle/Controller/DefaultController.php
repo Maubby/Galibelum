@@ -2,7 +2,7 @@
 /**
  * DefaultController File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category DefaultController
  * @package  Controller
