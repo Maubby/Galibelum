@@ -28,18 +28,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends Controller
 {
     /**
-     * Welcomes the admin manager.
+     * Landing page for admin manager.
      *
-     * @Route("/", methods={"GET"}, name="admin_index")
+     * @Route("/", methods={"GET"}, name="manager_contract")
      *
      * @return Response A Response instance
      */
-    public function indexAction()
+    public function dashboardAction()
     {
-        $this->getDoctrine()->getManager();
-
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('AppBundle:User')
+            ->findByRole('ROLE_SUPER_ADMIN');
         return $this->render(
-            'admin/index.html.twig', array(
+            'manager/contract.html.twig', array(
                 'user' => $this->getUser(),
             )
         );
@@ -157,6 +158,6 @@ class AdminController extends Controller
         $em->persist($manager);
         $em->flush();
 
-        return $this->redirectToRoute('admin_index');
+        return $this->redirectToRoute('admin_manager_list');
     }
 }
