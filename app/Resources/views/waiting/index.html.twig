@@ -1,64 +1,76 @@
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Validation de votre structure|marque{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('build/waiting.css') }}">
+
 {% endblock %}
 
 {% block body %}
-    <section>
-        <div class="container">
-            <div class="row">
-                <!-- Title -->
-                <div class="waiting_title col-md-12 col-sm-10 col-xs-10">
-                    <h2 class="text-center degradeblue">Inscription en cours de validation</h2>
+    <main id="company">
+        <section>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ol class="breadcrumb breadcrumb-boxing-canvas">
+                            <li>Choix de création</li>
+                            <li>Création de la marque</li>
+                            <li>En attente de validation</li>
+                        </ol>
+                        <div class="boxing-canvas">
+                            <div class="row">
+                                <!-- Title -->
+                                <div class="col-md-12 waiting_title">
+                                    <h2 class="text-center degradeblue">Inscription en cours de validation</h2>
+                                </div>
+                                <!-- End title -->
+
+                                <div class="col-md-12 text-center">
+                                    <!-- Waiting text part -->
+                                    <div class="col-md-12">
+                                        <img src="{{ asset('build/images/waiting-page-logo.png') }}"
+                                             alt="Inscription en cours de validation"><br><br>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p>Vous recevrez une notification par email dès que votre
+                                            compte aura été validé par l'un de nos managers,<br> dans un
+                                            délai maximum de 48h.</p>
+                                        <div class="separator"></div>
+                                    </div>
+                                    <!-- End waiting text part -->
+
+                                    <!-- Contact Galibelum part -->
+                                    <div class="col-md-12">
+                                        <p class="light-blue-subtitle-text">Contacter Galibelum</p>
+                                    </div>
+                                    <div class=" col-md-12">
+                                        <p>William Brassier (CEO)</p>
+                                        <p>06 XX XX XX XX</p>
+                                        <p>contact@galibelum.fr</p><br>
+                                    </div>
+                                    <!-- End contact Galibelum part -->
+
+                                    <!-- Back home button -->
+                                    <div class="col-sm-12">
+                                        <a class="btn btn-primary backblue-btn-sm" href="{{ path('homepage') }}">
+                                            Retour à l'accueil</a>
+                                    </div>
+                                    <!-- End back home button -->
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <!-- End title -->
-
-                <div class="waiting_text col-md-6 col-sm-11 col-xs-10 center">
-                    <!-- Waiting text part -->
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <img src="{{ asset('build/images/waiting-page-logo.png') }}"
-                             alt="Inscription en cours de validation"><br><br>
-                    </div>
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <p>Vous recevrez une notification par email dès que votre
-                            compte aura été validé par l'un de nos managers, dans un
-                            délai maximum de 48h.</p>
-                        <div class="separator"></div>
-                    </div>
-                    <!-- End waiting text part -->
-
-                    <!-- Contact Galibelum part -->
-                    <div class="col-sm-6 col-sm-offset-6">
-                        <p>William Brassier (CEO)</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p class="light-blue-subtitle-text">Contacter Galibelum</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p>06 XX XX XX XX</p>
-                        <p>contact@galibelum.fr</p><br>
-                    </div>
-                    <!-- End contact Galibelum part -->
-
-                    <!-- Back home button -->
-                    <div class="col-sm-12 col-xs-12 text-center">
-                        <a class="btn btn-primary backblue-btn" href="{{ path('homepage') }}">
-                            Retour à l'accueil</a>
-                    </div>
-                    <!-- End back home button -->
-                </div>
-
-                <!-- Background image -->
-                <div class="col-md-6 col-sm-12 col-xs-12 center">
-                    <img class="waiting_background_image hidden-sm hidden-xs"
-                         src="{{ asset('build/images/waiting-page.jpg') }}"
-                         alt="Inscription en attente de validation par Galibelum.">
-                </div>
-                <!-- End background image -->
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 {% endblock %}
+
+{% block javascripts %}
+{% endblock %}
+
