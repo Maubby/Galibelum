@@ -1,5 +1,6 @@
 {# app/Resources/FOSUserBundle/views/Profile/edit.html.twig #}
-{% extends 'base.html.twig' %}
+{% if is_granted('ROLE_SUPER_ADMIN') %} {% set base = 'base_back.html.twig' %} {% else %} {% set base = 'base.html.twig' %} {% endif %}
+{% extends base %}
 
 {% block title %}Modifier votre profil{% endblock %}
 

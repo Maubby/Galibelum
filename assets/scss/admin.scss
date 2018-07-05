@@ -11,6 +11,11 @@
   left: 5px;
 }
 
+.navbar-brand > img {
+  margin-left: 70px;
+  padding-top: 50px;
+}
+
 .btn-menu {
   padding: 0;
   border: none;
@@ -88,7 +93,7 @@
 }
 
 .sidebar-nav > .sidebar-brand {
-  height: 65px;
+  margin-top: 90px;
   font-size: 18px;
   line-height: 60px;
 }

@@ -64,6 +64,7 @@ class Activity
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=32)
+     * @Assert\Regex(pattern="/^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i", message="Votre prénom ne doit être composé que de lettres.")
      * @Assert\Type("string")
      * @Assert\NotBlank()
      * @Assert\Length(
@@ -86,7 +87,7 @@ class Activity
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=32)
-     *
+     * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
      *      max = 32,
@@ -180,7 +181,6 @@ class Activity
      * @ORM\Column(name="achievement", type="string", nullable=true)
      *
      * @Assert\Length(
-
      *      min = 2,
      *      max = 255,
      * )
