@@ -40,8 +40,9 @@ class AdminController extends Controller
         $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
 
         return $this->render(
-            'admin/index.html.twig',
-            array('users' => $users,)
+            'admin/index.html.twig', array(
+                'users' => $users,
+            )
         );
     }
 
@@ -109,8 +110,9 @@ class AdminController extends Controller
                 );
 
             return $this->redirectToRoute(
-                'admin_manager_list',
-                array('id' => $manager->getId(),)
+                'admin_manager_list', array(
+                    'id' => $manager->getId(),
+                )
             );
         }
 
@@ -134,8 +136,9 @@ class AdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
         return $this->render(
-            'admin/manager.html.twig',
-            array('users' => $users,)
+            'admin/manager.html.twig', array(
+                'users' => $users,
+            )
         );
     }
 
