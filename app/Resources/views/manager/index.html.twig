@@ -29,15 +29,15 @@
                     <table id="table_manager" class="table table-striped text-center">
                         <!-- Table head -->
                         <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Téléphone</th>
-                                <th>Email</th>
-                                <th>Forme juridique</th>
-                                <th class="hidden-xs">Description</th>
-                                <th>Statut</th>
-                                <th>Action</th>
-                            </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Téléphone</th>
+                            <th>Email</th>
+                            <th>Forme juridique</th>
+                            <th class="hidden-xs">Description</th>
+                            <th>Statut</th>
+                            <th>Action</th>
+                        </tr>
                         </thead>
                         <!-- End of table head -->
 
@@ -61,13 +61,13 @@
 
                                 <!-- Displaying organizations' status -->
                                 <td>
-                                {% if organization.isActive == 0 %}
-                                    <p class="degradered">En attente de validation</p>
-                                {% elseif organization.isActive == 1 %}
-                                    <p class="degradeblue">Compte activé</p>
-                                {% else %}
-                                    <p class="normal-subtitle-text">Compte désactivé</p>
-                                {% endif %}
+                                    {% if organization.isActive == 0 %}
+                                        <p class="degradered">En attente de validation</p>
+                                    {% elseif organization.isActive == 1 %}
+                                        <p class="degradeblue">Compte activé</p>
+                                    {% else %}
+                                        <p class="normal-subtitle-text">Compte désactivé</p>
+                                    {% endif %}
                                 </td>
                                 <!-- End displaying organizations' status -->
 
@@ -75,11 +75,11 @@
                                 <td>
                                     {% if organization.isActive == 1 %}
                                         <a href="{{ path('manager_organization_disable', { 'id': organization.id }) }}"
-                                           class="button button-red btn-organization text-center"><strong>Désactiver</strong>
+                                           class="button button-red btn-organization text-center">Désactiver
                                         </a>
                                     {% else %}
                                         <a href="{{ path('manager_organization_activate', { 'id': organization.id }) }}"
-                                           class="button button-green btn-organization text-center"><strong>Activer</strong>
+                                           class="button button-green btn-organization text-center">Activer
                                         </a>
                                     {% endif %}
                                 </td>

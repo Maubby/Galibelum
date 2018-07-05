@@ -39,7 +39,8 @@ class AdminController extends Controller
     public function dashboardAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_SUPER_ADMIN');
+        $users = $em->getRepository('AppBundle:User')
+            ->findByRole('ROLE_SUPER_ADMIN');
         return $this->render(
             'manager/contract.html.twig',
             array('users' => $users,)
