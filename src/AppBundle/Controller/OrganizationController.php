@@ -124,31 +124,6 @@ class OrganizationController extends Controller
     }
 
     /**
-     * Finds and displays an organization entity.
-     *
-     * @param Organization $organization The organization entity
-     *
-     * @Route("/{id}", methods={"GET"}, name="organization_show")
-     *
-     * @return Response A Response instance
-     */
-    public function showAction(Organization $organization)
-    {
-        $deleteForm = $this->_createDeleteForm($organization);
-
-        if ($organization->getIsActive() === 1) {
-            return $this->render(
-                'organization/show.html.twig', array(
-                    'organization' => $organization,
-                    'delete_form' => $deleteForm->createView(),
-                )
-            );
-        } else {
-            return $this->redirectToRoute('homepage');
-        }
-    }
-
-    /**
      * Displays a form to edit an existing organization entity.
      *
      * @param Request      $request      Edit posted info
