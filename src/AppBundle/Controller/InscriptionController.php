@@ -36,7 +36,25 @@ class InscriptionController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('inscription/index.html.twig');
+        $user = $this->getUser();
+
+        if ($user->hasRole('ROLE_STRUCTURE')
+            && $user->getOrganization()->getIsActive() === 1
+            || $user->hasRole('ROLE_COMPANY')
+            && $user->getOrganization()->getIsActive() === 1
+        ) {
+            return $this->redirectToRoute('dashboard_index');
+
+        } elseif ($user->hasRole('ROLE_STRUCTURE')
+            && $user->getOrganization()->getIsActive() === 0
+            || $user->hasRole('ROLE_COMPANY')
+            && $user->getOrganization()->getIsActive() === 0
+        ) {
+            return $this->redirectToRoute('waiting_index');
+
+        } else {
+            return $this->redirectToRoute('inscription_index');
+        }
     }
 
 }
