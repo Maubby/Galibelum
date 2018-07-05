@@ -103,7 +103,6 @@ class OfferController extends Controller
         $form->handleRequest($request);
         $interval = new \DateInterval($this->getParameter('periode'));
 
-        $user = $this->getUser();
         $fees = $feesService->getFees($offer->getAmount(), $offer->getFinalDeal());
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -112,7 +111,6 @@ class OfferController extends Controller
                 ->setActivity($activity)
                 ->setNameCanonical(strtolower($activity->getName()))
                 ->setHandlingFee($fees)
-                ->setOrganization($user->getOrganization())
                 ->setDate($offer->getDate()->sub($interval));
 
             $em->persist($offer);

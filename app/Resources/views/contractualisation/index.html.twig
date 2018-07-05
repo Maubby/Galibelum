@@ -1,5 +1,5 @@
 {# app/Resources/views/manager/index.html.twig #}
-{% extends 'base_back.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Contractualisation{% endblock %}
 
@@ -7,38 +7,37 @@
 
     <!-- Additional CSS links-->
     <link rel="stylesheet" href="{{ asset('build/organization_show.css') }}">
-    <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
 {% endblock %}
 
 {% block header %}
     <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
     <!-- Zero intern console warning -->
 
-    <!-- Navbar in views/base_back.html.twig -->
+    <!-- Navbar in views/base.html.twig -->
     {{ parent() }}
 {% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="row boxing-canvas mt-50">
-            <div class="col-md-12 col-sm-12 col-xs-12 center">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+
+                <!-- Display different color regarding if a company or structure is logged in -->
                 <i class="fas fa-briefcase text-center degradeblue" style="font-size: 50px"></i>
-                <h5 class="degradeblue text-center">Contractualisation</h5>
+                <h5 class="degradeblue">Contractualisation</h5>
 
                 <!-- Creating a responsive table -->
                 <div class="table-responsive">
-                    <table id="table-manager">
+                    <table id="table-manager" class="table table-striped text-center">
                         <!-- Table head -->
-                        <thead class="table table-striped degradeblue text-center">
+                        <thead>
                         <tr>
-                            <th>Nom de la structure</th>
+                            <th>Nom de votre structure</th>
                             <th>Nom de l'offre</th>
                             <th>Montant demandé</th>
                             <th>Avant le</th>
                             <th>Nom du partenaire</th>
                             <th>Statut</th>
-                            <th>Mail à envoyé</th>
-
                         </tr>
                         </thead>
                         <!-- End of table head -->
@@ -60,28 +59,18 @@
                                 <!-- Buttons changing contracts' status start -->
                                 <td>
                                     {% if offer.status == 0 %}
-                                        <a href="{{ path('manager_contract_status', { 'id': offer.id, 'status': 1 }) }}"
-                                           class="button button text-center">Aucun partenaire</a>
+                                        <button class="button button text-center">Aucun partenaire</button>
                                     {% elseif offer.status == 1 %}
-                                        <a href="{{ path('manager_contract_status', { 'id': offer.id, 'status': 2 }) }}"
-                                           class="button button-yellow text-center">Négociation</a>
+                                        <button class="button button-yellow text-center">Négociation</button>
                                     {% elseif offer.status == 2 %}
-                                        <a href="{{ path('manager_contract_status', { 'id': offer.id, 'status': 3 }) }}"
-                                           class="button button-green text-center">Validation</a>
+                                        <button class="button button-green text-center">Validation</button>
                                     {% elseif offer.status == 3 %}
-                                        <a href="{{ path('manager_contract_status', { 'id': offer.id, 'status': 4 }) }}"
-                                           class="button button-blue text-center">Paiement</a>
+                                        <button class="button button-blue text-center">Paiement</button>
                                     {% elseif offer.status == 4 %}
-                                        <a href="{{ path('manager_contract_status', { 'id': offer.id, 'status': 5 }) }}"
-                                           class="button button-purple text-center">Expiré</a>
+                                        <button class="button button-purple text-center">Expiré</button>
                                     {% elseif offer.status == 5 %}
-                                        <a href="{{ path('manager_contract_status', { 'id': offer.id, 'status': 0 }) }}"
-                                           class="button button-red text-center">Refusé</a>
+                                        <button class="button button-red text-center">Refusé</button>
                                     {% endif %}
-                                </td>
-                                <td>
-                                    {#<a href="{{ path('manager_contract_status_mail', { 'id': offer.id, 'status': 0 }) }}"></a>#}
-                                    <a href="#" class="backblue-btn text-center">Envoyer</a>
                                 </td>
                                 <!-- Ending buttons changing contracts' status -->
                             </tr>
@@ -99,6 +88,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('build/menu_toggle.js') }}"></script>
     <script src="{{ asset('build/table-manager.js') }}"></script>
 {% endblock %}

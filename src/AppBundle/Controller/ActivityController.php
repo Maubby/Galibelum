@@ -163,10 +163,11 @@ class ActivityController extends Controller
             $file = $activity->getUploadPdf();
 
             // Check if the file exist and set the new or old value
-            if ($file !== null) {
-                $filePdf = $fileUploaderService->upload(
-                    $file, $activity->getId(), $organizationId);
-            }
+
+                $filePdf = $file != null ? $fileUploaderService->upload(
+                    $file, $activity->getId(), $organizationId
+                ) : $fileName;
+
 
             $activity->setUploadPdf($filePdf);
 

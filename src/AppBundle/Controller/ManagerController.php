@@ -17,6 +17,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Service\Mailer;
+
 
 /**
  * Manager controller.
@@ -156,5 +158,37 @@ class ManagerController extends Controller
         return $this->redirectToRoute(
             'manager_contract_list'
         );
+    }
+
+    /**
+     * Send a mail when the offers' status change.
+     *
+     * @param Offer  $offer  The offer entity
+     * @param Int    $status Status value
+     * @param Mailer $mailer Mailer service
+     *
+     * @return                           Response A Response Instance
+     * @throws                           \Twig_Error_Loader
+     * @throws                           \Twig_Error_Runtime
+     * @throws                           \Twig_Error_Syntax
+     * @route("/contract/{id}/{status}", name="manager_contract_status_mail")
+     * @Method("GET")
+     */
+    public function sendAction(Offer $offer, int $status, Mailer $mailer)
+    {
+        if ($status === 1) {
+
+            $mailer->sendEmail(
+                'William@gallibelum.fr', $offer->getActivity(),
+                $offer->getActivity()->getOrganizationActivities()->getEmail(), 'Négociation',
+                'Une marque s\'est positionnée sur votre offre'
+            );
+            $mailer->sendEmail(
+                'William@gallibelum.fr', $offer->getOrganization(),
+                $offer->getOrganization()->getEmail(), 'Négociation',
+                'Vous vous êtes positionnés sur une offre'
+            );
+        }
+        return $this->redirectToRoute('manager_contract_list');
     }
 }
