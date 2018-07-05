@@ -147,46 +147,51 @@ class ActivityController extends Controller
      * @Method({"GET",      "POST"})
      */
     public function editAction(Request $request, Activity $activity,
-        FileUploaderService $fileUploaderService
+                               FileUploaderService $fileUploaderService
     ) {
-        $fileName = $activity->getUploadPdf();
-  
-        $deleteForm = $this->_createDeleteForm($activity);
-        $editForm = $this->createForm(ActivityType::class, $activity);
-        $editForm->handleRequest($request);
-
         $user = $this->getUser();
-        $organizationId = $user->getOrganization()->getId();
 
-        // Var for the file name
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $file = $activity->getUploadPdf();
+        if ($user->getOrganization()->getOrganizationActivity()->contains($activity)) {
 
-            // Check if the file exist and set the new or old value
-            if ($file !== null) {
-                $filePdf = $fileUploaderService->upload(
-                    $file, $activity->getId(), $organizationId);
+            $fileName = $activity->getUploadPdf();
+
+            $deleteForm = $this->_createDeleteForm($activity);
+            $editForm = $this->createForm(ActivityType::class, $activity);
+            $editForm->handleRequest($request);
+
+            $organizationId = $user->getOrganization()->getId();
+
+            // Var for the file name
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $file = $activity->getUploadPdf();
+
+                // Check if the file exist and set the new or old value
+                if ($file !== null) {
+                    $filePdf = $fileUploaderService->upload(
+                        $file, $activity->getId(), $organizationId);
+                }
+
+                $activity->setUploadPdf($filePdf);
+
+                $this->getDoctrine()->getManager()->flush();
+
+                $request->getSession()
+                    ->getFlashBag()
+                    ->add('success', 'Vos modifications ont bien été prises en compte.');
+
+                return $this->redirectToRoute('dashboard_index');
             }
 
-            $activity->setUploadPdf($filePdf);
-
-            $this->getDoctrine()->getManager()->flush();
-
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'Vos modifications ont bien été prises en compte.');
-
-            return $this->redirectToRoute('dashboard_index');
+            return $this->render(
+                'activity/edit.html.twig', array(
+                    'activity' => $activity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                )
+            );
         }
 
-
-        return $this->render(
-            'activity/edit.html.twig', array(
-                'activity' => $activity,
-                'edit_form' => $editForm->createView(),
-                'delete_form' => $deleteForm->createView(),
-            )
-        );
+        return $this->redirectToRoute('redirect');
     }
 
     /**
@@ -202,16 +207,24 @@ class ActivityController extends Controller
      */
     public function deleteAction(Request $request, Activity $activity)
     {
-        $form = $this->_createDeleteForm($activity);
-        $form->handleRequest($request);
+        $user = $this->getUser();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($activity);
-            $em->flush();
+        if ($user->getOrganization()->getOrganizationActivity()->contains($activity)) {
+
+            $form = $this->_createDeleteForm($activity);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($activity);
+                $em->flush();
+            }
+
+            return $this->redirectToRoute('activity_index');
         }
 
-        return $this->redirectToRoute('activity_index');
+        return $this->redirectToRoute('redirect');
+
     }
 
     /**
