@@ -2,7 +2,7 @@
 /**
  * ActivityRepository File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category ActivityRepository
  * @package  Repository
