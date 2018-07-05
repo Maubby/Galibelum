@@ -1,0 +1,10 @@
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^galibelum.fr
+RewriteRule (.*) http://www.galibelum.fr/$1 [R=301,L]
+
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301] 
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ web/$1 [QSA,L]

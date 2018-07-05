@@ -1,0 +1,253 @@
+//
+// Page Title
+// --------------------------------------------------
+
+// Base class
+.page-title {
+  position: relative;
+  padding: {
+    top: floor($grid-vertical-step * 3); //~72px 0
+    bottom: floor($grid-vertical-step * 3); //~72px 0
+  }
+  background: {
+    position: center;
+    repeat: no-repeat;
+    size: cover;
+  }
+  > .inner {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 15px;
+    text-align: center;
+    z-index: 5;
+  }
+  h1 {
+    margin-bottom: 0;
+    font-size: floor($font-size-h1 * 1.39); // ~50px
+    @media #{$tablet-land} {
+      font-size: floor($font-size-h1 * 1.2); // ~50px
+    }
+    @media #{$tablet-port} {
+      font-size: $font-size-h1; //~36px
+    }
+  }
+
+  // Overlay
+  > .overlay { @include overlay-block(1, $black-color, .6); }
+  &[data-jarallax] { background-color: $gray-darker; }
+
+  @media #{$tablet-port} {
+    padding: {
+      top: floor($grid-vertical-step * 2); //~48px 0
+      bottom: floor($grid-vertical-step * 2); //~48px 0
+    }
+  }
+}
+
+// Sizes
+.page-title-lg {
+  padding: {
+    top: floor($grid-vertical-step * 5); //~120px 0
+    bottom: floor($grid-vertical-step * 5); //~120px 0
+  }
+  @media #{$tablet-port} {
+    padding: {
+      top: floor($grid-vertical-step * 3.5); //~84px 0
+      bottom: floor($grid-vertical-step * 3.5); //~84px 0
+    }
+  }
+}
+.page-title-xl {
+  padding: {
+    top: floor($grid-vertical-step * 8); //~192px 0
+    bottom: floor($grid-vertical-step * 8); //~192px 0
+  }
+  @media #{$tablet-port} {
+    padding: {
+      top: floor($grid-vertical-step * 6); //~144px 0
+      bottom: floor($grid-vertical-step * 6); //~144px 0
+    }
+  }
+}
+
+// Breadcrumbs
+.breadcrumbs {
+  padding-bottom: floor($grid-vertical-step / 1.5); //~16px
+  color: lighten($gray, 15);
+  font: {
+    family: $font-family-navs;
+    size: floor($font-size-base * .93); //~13px
+  }
+  cursor: default;
+  > span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  a {
+    transition: color .25s;
+    color: $gray;
+    text-decoration: none;
+    &:hover { color: $navi-link-hover-color; }
+  }
+  .separator {
+    width: 3px;
+    height: 3px;
+    margin: 0 6px;
+    border-radius: 50%;
+  }
+}
+
+// Meta Info
+.page-title-meta {
+  margin-top: floor($grid-vertical-step * 1.8); //~43px
+  padding-top: floor($grid-vertical-step * 1.8); //~43px
+  .post-meta a {
+    margin: 0 5px;
+    font-size: floor($font-size-base * .93); //~13px
+  }
+  .post-categories {
+    padding-top: floor($grid-vertical-step / 1.5); //~16px
+    > a { margin: 6px; }
+  }
+  @media #{$tablet-land} {
+    margin-top: floor($grid-vertical-step * 1.5); //~36px
+    padding-top: floor($grid-vertical-step * 1.5); //~36px
+  }
+}
+
+// Light Skin
+.page-title-light {
+  h1 { color: $white-color; }
+  .breadcrumbs {
+    color: rgba($white-color, .5);
+    a {
+      color: rgba($white-color, .75);
+      &:hover { color: $white-color; }
+    }
+  }
+  .page-title-meta {
+    border-top-color: $border-light-color;
+    a {
+      color: rgba($white-color, .7);
+      &:hover { color: $white-color;  }
+    }
+  }
+}
+
+// Fix padding in Page Without Content Editing
+.single-post,
+.single-product,
+.bbpress,
+.woocommerce-page,
+.blog:not(.home),
+.single-silicon_portfolio {
+  .page-title[style*='background'] + .container,
+  .page-title[style*='background'] + article,
+  .page-title.background-gradient + .container,
+  .page-title.background-gradient + article { 
+    @extend .padding-top-3x;
+   }
+}
+
+// Intro Section Overrides
+.intro-section {
+  background-color: $gray-lighter;
+  .intro-description { color: $gray; }
+  &.intro-personal {
+    .person-name {
+      font: {
+        size: $font-size-h5;
+        weight: bold;
+      }
+      line-height: $line-height-base;
+    }
+    .person-position {
+      margin-bottom: 0;
+      color: $gray;
+    }
+  }
+  &.intro-comparison {
+    .compar-slider-wrap { @include user-select(none); }
+    .cs-label {
+      font: {
+        family: $font-family-headings;
+        size: $font-size-md;
+        weight: 500;
+      }
+      letter-spacing: .075em;
+      text-transform: uppercase;
+    }
+    .cd-handle {
+      background-color: $brand-primary;
+      box-shadow: 0 0 0 6px rgba($black-color, .2), 0 0 10px rgba($black-color, .6), inset 0 1px 0 rgba($white-color, .3);
+      @media #{$tablet-port} { display: none !important; }
+    }
+    @media #{$menu-collapse} { padding-top: 80px; }
+  }
+  &.intro-app-showcase {
+    .intro-app-tagline { font-size: $font-size-lg; }
+    .platform-swith > a {
+      transition: all .3s;
+      background-color: darken($gray-lighter, 3%);
+      color: $gray-darker;
+      &:hover,
+      &.active {
+        color: $white-color;
+        &.platform-ios { background-color: $gray-darker; }
+        &.platform-android { background-color: #a4c639; }
+        &.platform-windows { background-color: #00bcf2; }
+      }
+    }
+    .intro-app-features .feature p {
+      margin-bottom: 0;
+      color: $gray;
+    }
+    & + * { background-color: $body-bg; }
+  }
+  &.intro-light {
+    .intro-title { color: $white-color; }
+    &.intro-app-showcase .intro-app-tagline,
+    .intro-description { color: rgba($white-color, .55); }
+    &.intro-comparison .cs-label { color: rgba($white-color, .75); }
+    &.intro-app-showcase .platform-swith > a {
+      background-color: rgba($white-color, .15);
+      color: $white-color;
+      &:hover,
+      &.active {
+        background-color: $white-color;
+        &.platform-ios { color: $gray-darker; }
+        &.platform-android { color: #a4c639; }
+        &.platform-windows { color: #00bcf2; }
+      }
+    }
+    &.intro-app-showcase .intro-app-features .feature {
+      h4, p { color: $white-color; }
+      p { opacity: .55; }
+    }
+  }
+  &.intro-featured-posts {
+    .post-title {
+      font-size: ceil($font-size-base * 3.42);
+      line-height: $line-height-h1;
+      > a {
+        transition: opacity .3s;
+        color: $white-color !important;
+        &:hover { opacity: .6; }
+      }
+      @media #{$tablet-port} { font-size: ceil($font-size-base * 2.7); }
+    }
+    .post-footer .post-author .post-author-name,
+    .post-meta a {
+      transition: opacity .25s;
+      color: $white-color !important;
+      opacity: .6;
+    }
+    .post-footer .post-author:hover .post-author-name,
+    .post-meta a:hover { opacity: 1; }
+  }
+}
+
+// No Title
+.without-title .content-wrapper { padding-top: floor($grid-vertical-step * 2.5); }

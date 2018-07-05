@@ -12,7 +12,6 @@ Encore
     .enableSassLoader()
     .enableSourceMaps(!Encore.isProduction())
     .autoProvidejQuery()
-    .enableVersioning()
     .createSharedEntry('vendor', ['jquery', 'bootstrap-sass', 'bootstrap-sass/assets/stylesheets/_bootstrap.scss',
         'datatables.net-dt/css/jquery.dataTables.min.css', 'datatables.net-dt/js/dataTables.dataTables.min.js'])
     .addStyleEntry('style', './assets/scss/style.scss')
@@ -36,6 +35,7 @@ Encore
     .addEntry('input_display', './assets/js/input_display.js')
     .addEntry('menu-toggle', './assets/js/menu-toggle.js')
     .addEntry('table-manager', './assets/js/table-manager.js')
+    .addEntry('autocomplete', './assets/js/autocomplete.js')
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
         { from: './assets/images', to: 'images'}

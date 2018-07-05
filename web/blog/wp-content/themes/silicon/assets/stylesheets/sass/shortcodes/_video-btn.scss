@@ -1,0 +1,33 @@
+//
+// Video Button
+// --------------------------------------------------
+
+// Button trigger style
+.video-popup-btn {
+  display: inline-block;
+  width: 72px;
+  height: 72px;
+  transition: .4s;
+  border-width: 5px;
+  border-radius: 50%;
+  font-size: 48px;
+  text-align: center !important;
+  text-decoration: none;
+  i {
+    display: inline-block;
+    transition: .4s;
+  }
+  &:hover {
+    transform: scale(1.15);
+    i { transform: scale(.85); }
+  }
+}
+
+.admin-bar .mfp-container {
+  padding-top: 32px;
+}
+@media screen and (max-width: 782px) {
+  .admin-bar .mfp-container {
+    padding-top: 46px;
+  }
+}

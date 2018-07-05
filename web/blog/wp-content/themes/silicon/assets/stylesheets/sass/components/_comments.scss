@@ -1,0 +1,145 @@
+//
+// Comments
+// --------------------------------------------------
+.comments-area {
+  @media #{$tablet-port} {
+    margin-top: $grid-vertical-step;
+  }
+  .comments-main-title > span {
+    color: $gray;
+    font-weight: 400;
+  }
+  .reply-title {
+    margin-bottom: floor($grid-vertical-step / 2); //~12px
+    h4 { display: none; }
+    a { text-decoration: none; }
+  }
+  .logged-in-as {
+    margin-bottom: floor($grid-vertical-step / 1.5); //~16px
+    > a {
+      color: $text-color;
+      font-size: $font-size-sm;
+      font-weight: normal;
+      text-decoration: none;
+      &:hover { color: $link-color; }
+    }
+  }
+}
+.comment {
+  margin-top: $grid-vertical-step;
+  padding: $grid-vertical-step 0 0;
+  .comment {
+    padding-top: 0;
+    padding-left: ($grid-vertical-step * 3);
+    @media #{$menu-collapse} {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+  // Replies
+  &.depth-2 { margin-bottom: 0; }
+
+  // Inner structure
+  .inner {
+    display: table;
+    width: 100%;
+  }
+  .comment-body {
+    position: relative;
+    padding-left: 30px;
+    @media only screen and (max-width: 570px) {
+      padding-left: 0;
+    }
+  }
+  .author-ava,
+  .comment-body {
+    display: table-cell;
+    vertical-align: top;
+  }
+  .author-ava {
+    width: 70px;
+    > img {
+      display: block;
+      width: 100%;
+      border-radius: 50%;
+    }
+  }
+  .author-name {
+    margin-bottom: ($grid-vertical-step / 2);
+    font: {
+      size: $font-size-h6;
+      weight: bold;
+    }
+  }
+  .comment-body p {
+    margin-bottom: floor($grid-vertical-step / 2);
+    &:last-child { margin-bottom: 0; }
+  }
+  .comment-date {
+    display: inline-block;
+    margin-bottom: floor($grid-vertical-step / 2); //~12px
+    color: $gray;
+    font-size: $font-size-sm;
+    &::before {
+      display: inline-block;
+      position: relative;
+      margin-right: 3px;
+      font-family: 'silicon-icons';
+      content: '\e945';
+    }
+  }
+  .reply-link {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    > a {
+      margin: 0;
+      transform: translateY(-55%) !important;
+      &::before {
+        display: inline-block;
+        position: relative;
+        top: -1px;
+        margin-right: 5px;
+        font-family: 'silicon-icons';
+        content: '\e93b';
+
+      }
+    }
+  }
+  @media screen and (max-width: 570px) {
+    .author-ava,
+    .comment-body { display: block; }
+    .author-ava {
+      width: 70px;
+      margin-bottom: 15px;
+      padding-right: 0;
+    }
+    .comment-body { width: 100%; }
+  }
+}
+.comment-respond { margin-top: $grid-vertical-step; }
+.comment-respond + .comment { margin-top: $grid-vertical-step; }
+.page .comments-area {
+  padding-bottom: floor($grid-vertical-step * 3);
+  @media #{$tablet-port} {
+    padding-bottom: floor($grid-vertical-step * 2);
+  }
+}
+
+.no-comments {
+  margin-top: $grid-vertical-step;
+}
+
+.post-navigation {
+  margin-top: ceil($grid-vertical-step * 1.5);
+  .post-nav-prev:empty,
+  .post-nav-next:empty {
+    display: none;
+  }
+  .post-nav-prev:empty + .post-nav-next {
+    border: 0;
+  }
+}
