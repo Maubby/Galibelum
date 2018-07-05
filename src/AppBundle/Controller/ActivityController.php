@@ -69,9 +69,9 @@ class ActivityController extends Controller
      *
      * @param Request $request Delete posted info
      *
+     * @Route("/new", methods={"GET", "POST"}, name="activity_new")
+     *
      * @return         Response A Response instance
-     * @Route("/new",  name="activity_new")
-     * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
@@ -116,8 +116,7 @@ class ActivityController extends Controller
      *
      * @param Activity $activity The activity entity
      *
-     * @Route("/{id}", name="activity_show")
-     * @Method("GET")
+     * @Route("/{id}", methods={"GET", "POST"}, name="activity_show")
      *
      * @return Response A Response instance
      */
@@ -141,9 +140,8 @@ class ActivityController extends Controller
      * @param Activity            $activity            The activity entity
      * @param FileUploaderService $fileUploaderService Uploader Service
      *
+     * @Route("/{id}/edit", methods={"GET", "POST"}, name="activity_edit")
      * @return              Response A Response instance
-     * @Route("/{id}/edit", name="activity_edit")
-     * @Method({"GET",      "POST"})
      */
     public function editAction(Request $request, Activity $activity,
         FileUploaderService $fileUploaderService
@@ -195,8 +193,7 @@ class ActivityController extends Controller
      * @param Request  $request  Delete posted info
      * @param Activity $activity The activity entity
      *
-     * @Route("/{id}",   name="activity_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", methods={"DELETE"}, name="activity_delete")
      *
      * @return Response A Response instance
      */
