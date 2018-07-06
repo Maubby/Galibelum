@@ -60,3 +60,9 @@ input:-webkit-autofill {
   }
 }
 
+// Boxing-canvas size for admin_edit and admin_new
+#admin-edit, #admin-new {
+  .boxing-canvas {
+    max-width: 700px;
+  }
+}

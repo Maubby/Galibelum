@@ -2,7 +2,7 @@
 /**
  * RegistrationType File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category RegistrationType
  * @package  Type
@@ -14,6 +14,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+
 /**
  * Registration type.
  *
