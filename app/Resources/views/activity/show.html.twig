@@ -18,19 +18,18 @@
 
 {% block body %}
     <div class="container">
-        <div class="boxing-title">
-            <div class="row">
-                <div class="col-md-3 organization-info">
-                    <h5>{{ activity.organizationActivities.name }}</h5>
-                    <p>{{ activity.organizationActivities.status }}</p>
-                    <p>{{ activity.organizationActivities.relationNumber }} salariés</p>
-                    <p>{{ activity.organizationActivities.address }}</p>
-                </div>
-                <div class="col-md-8 description-text">
-                    <p>{{ activity.organizationActivities.description }}</p>
-                </div>
+        <div class="row boxing-canvas mt-40 mb-20">
+            <div class="col-md-3">
+                <h5>{{ activity.organizationActivities.name }}</h5>
+                <p>{{ activity.organizationActivities.status }}</p>
+                <p>{{ activity.organizationActivities.relationNumber }} salariés</p>
+                <p>{{ activity.organizationActivities.address }}</p>
+            </div>
+            <div class="col-md-8 description-text">
+                <p>{{ activity.organizationActivities.description }}</p>
             </div>
         </div>
+
 
         <div class="row">
             <div class="col-md-9">
@@ -84,7 +83,7 @@
                                     <p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.partnershipNumber }}</p>
                                     <p class="panel-item"><strong>Date d'expiration : </strong>{{ offer.date|date("d M Y") }}</p>
                                     <p class="panel-item">{{ offer.description }}</p>
-                                    <a href="{{ path('offer_relation', { 'id': offer.id }) }}" class="btn btn-primary btn-sm">Se mettre en relation</a>
+                                    <a href="#" class="btn btn-primary btn-sm">Se mettre en relation</a>
                                 </div>
                             </div>
                         </div>
