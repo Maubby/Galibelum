@@ -64,6 +64,8 @@ class SearchController extends Controller
 
         if ($request->get('name')) {
             $session->set('name', $request->get('name'));
+        }else {
+            $session->set('name', "0");
         }
 
         if ($request->get('type')) {
@@ -80,12 +82,15 @@ class SearchController extends Controller
 
         // Faire amount ici et factoriser les if par la suite
 
+
         $em = $this->getDoctrine()->getManager();
         $activityList = $em->getRepository(Activity::class)
             ->search(
                 $session->get('name'),
-                $session->get('type'), $session->get('date')
+                $session->get('type'),
+                $session->get('date')
             );
+
 
         return $this->render(
             'search/index.html.twig', array(
