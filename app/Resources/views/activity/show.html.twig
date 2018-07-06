@@ -62,8 +62,8 @@
                         <h6 class="title"><strong>Sociaux : </strong></h6>
                         <ul class="list-group">
                             <li class="list-group-item">twitch :
-                                <a href="{% if activity.socialLink %}{{ activity.socialLink|join(', ') }}{% endif %}">
-                                    {% if activity.socialLink %}{{ activity.socialLink|join(', ') }}{% endif %}
+                                <a href="{% if activity.socialLink %}{{ activity.socialLink|join('<br>') }}{% endif %}">
+                                    {% if activity.socialLink %}{{ activity.socialLink| join('<br>') }}{% endif %}
                                 </a>
                             </li>
                         </ul>
@@ -80,10 +80,10 @@
                                 <h5 class="panel-title pt-10">{{ offer.name }}</h5>
                                 <div class="panel-body">
                                     <p class="panel-item"><strong>Montant : </strong>{{ offer.amount }} €</p>
-                                    <p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.partnershipNumber }}</p>
+                                    {#<p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.partnershipNumber }}</p>#}
                                     <p class="panel-item"><strong>Date d'expiration : </strong>{{ offer.date|date("d M Y") }}</p>
                                     <p class="panel-item">{{ offer.description }}</p>
-                                    <a href="#" class="btn btn-primary btn-sm">Se mettre en relation</a>
+                                    <a href="{{ path('offer_relation', { 'id': offer.id }) }}" class="btn btn-primary btn-sm">Se mettre en relation</a>
                                 </div>
                             </div>
                         </div>

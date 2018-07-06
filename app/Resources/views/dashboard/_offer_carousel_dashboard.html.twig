@@ -2,7 +2,7 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         <!-- Loop for show information offers in item carousel -->
-        {% for offer in organization.offers %}
+        {% for offer in offers %}
             <div class="{% if loop.first %}active{% endif %} item">
                 <div class="panel panel-default text-center">
                     <h5 class="panel-title pt-10">{{ offer.name }}</h5>

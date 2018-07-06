@@ -74,10 +74,10 @@
                     <h5><a href="{{ path('offer_index') }}">Ensemble de mes offres</a></h5>
                     <div class="boxing-body">
                         <!-- to show message if offer is empty -->
-                        {% if organization.offers is empty %}
+                        {% if offers is empty %}
                             <p class="text-center text-muted">Créer une offre</p>
                         {% else %}
-                            {% if organization.offers|length < 3 %}
+                            {% if offers|length < 3 %}
                                 {% include "dashboard/_offer_dashboard.html.twig" %}
                             {% else %}
                                 {% include "dashboard/_offer_carousel_dashboard.html.twig" %}

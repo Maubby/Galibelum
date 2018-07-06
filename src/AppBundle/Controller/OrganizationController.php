@@ -44,28 +44,29 @@ class OrganizationController extends Controller
             return $this->redirectToRoute('manager_contract_list');
 
         } elseif ($user->hasRole('ROLE_STRUCTURE')
-            && $user->getOrganization()->getIsActive() === 1
-            || $user->hasRole('ROLE_COMPANY')
-            && $user->getOrganization()->getIsActive() === 1
-        ) {
+            && $user->getOrganization()->getIsActive() === 1)
+        {
             $organization = $user->getOrganization();
+            
+            $em = $this->getDoctrine()->getManager();
+            $offers = $em
+                ->getRepository('AppBundle:Offer')
+                ->findBy(
+                    array(
+                        'id' => $this->getUser()->getOrganization()->getOrganizationActivity()->getValues()
+                    )
+                );
 
             return $this->render(
                 'dashboard/index.html.twig', array(
                     'user' => $user,
                     'organization' => $organization,
+                    'offers' => $offers,
                 )
             );
-        } elseif ($user->hasRole('ROLE_STRUCTURE')
-            && $user->getOrganization()->getIsActive() === 0
-            || $user->hasRole('ROLE_COMPANY')
-            && $user->getOrganization()->getIsActive() === 0
-        ) {
-            return $this->redirectToRoute('waiting_index');
-
         }
 
-        return $this->redirectToRoute('inscription_index');
+        return $this->redirectToRoute('redirect');
     }
 
     /**
@@ -87,7 +88,7 @@ class OrganizationController extends Controller
         ) {
             return $this->redirectToRoute('manager_contract_list');
 
-        } elseif ($user->getOrganization()->getId() === null) {
+        } elseif ($user->getOrganization() === null ) {
             $organization = new Organization();
             if ($choose === 1) {
                 $form = $this

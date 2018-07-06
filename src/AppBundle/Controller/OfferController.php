@@ -50,7 +50,7 @@ class OfferController extends Controller
             ->getRepository('AppBundle:Offer')
             ->findBy(
                 array(
-                    'organization' => $this->getUser()->getOrganization()
+                    'id' => $this->getUser()->getOrganization()->getOrganizationActivity()->getValues()
                 )
             );
 
@@ -197,8 +197,16 @@ class OfferController extends Controller
      */
     public function relationAction(Offer $offer)
     {
+        if ($this->getUser()->hasRole('ROLE_MANAGER')
+            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
 
         $user = $this->getUser();
+        if ($user->hasRole('ROLE_COMPANY')) {
+
+            $user = $this->getUser();
 
             $em = $this->getDoctrine()->getManager();
             $offer->setStatus(1)
@@ -206,14 +214,14 @@ class OfferController extends Controller
             $em->persist($offer);
             $em->flush();
 
-
-
             return $this->render(
                 'activity/show.html.twig', array(
                     'activity' => $offer->getActivity(),
                 )
             );
+        }
 
+        return $this->redirectToRoute('redirect');
     }
 
     /**
@@ -230,19 +238,17 @@ class OfferController extends Controller
 
         $user = $this->getUser();
 
-            $em = $this->getDoctrine()->getManager();
-            $offer->setStatus(1)
-                ->addContract($user->getOrganization());
-            $em->persist($offer);
-            $em->flush();
+        $em = $this->getDoctrine()->getManager();
+        $offer->setStatus(1)
+            ->addContract($user->getOrganization());
+        $em->persist($offer);
+        $em->flush();
 
-
-
-            return $this->render(
-                'activity/show.html.twig', array(
-                    'activity' => $offer->getActivity(),
-                )
-            );
+        return $this->render(
+            'activity/show.html.twig', array(
+                'activity' => $offer->getActivity(),
+            )
+        );
 
     }
 

@@ -122,8 +122,7 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
                 ->setName($faker->firstName)
                 ->setDescription($faker->text)
                 ->setDate($faker->dateTimeAD($max = 'now', $timezone = null))
-                ->setAmount($faker->randomNumber($nbDigits = null, $strict = false))
-                ->setPartnershipNumber($faker->randomDigitNotNull);
+                ->setAmount($faker->randomNumber($nbDigits = null, $strict = false));
 
             $em->persist($structure);
             $organization->setUser($structure);
@@ -174,6 +173,22 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
 
             $em->persist($company);
 
+            $em->flush();
+        }
+
+        for ($p = 0; $p < 5; $p++) {
+            $manager = new User();
+            $manager
+                ->setEmail($faker->email)
+                ->setPlainPassword('galibelum1')
+                ->setFirstName($faker->firstName)
+                ->setLastName($faker->lastName)
+                ->setPhoneNumber($faker->phoneNumber)
+                ->setCgu(true)
+                ->setEnabled(1)
+                ->setRoles(array('ROLE_MANAGER'));
+
+            $em->persist($manager);
             $em->flush();
         }
 
