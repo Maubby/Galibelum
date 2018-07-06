@@ -22,40 +22,5 @@ namespace AppBundle\Repository;
  */
 class OfferRepository extends \Doctrine\ORM\EntityRepository
 {
-    /**
-     * @param $date
-     * @param $amount_min
-     * @param $amount_max
-     * @return mixed
-     */
-    public function search($name,$type,$date)
-    {
-        $query = $this->createQueryBuilder('off')
-            ->INNERJOIN('off.activity', 'act')
-            ->INNERJOIN('act.organizationActivities', 'org')
-            ->SELECT('act,org,off')
-            ->ORDERBY('act.creationDate');
-
-        if ($name != '') {
-            $query
-                ->WHERE('act.name LIKE :name')
-                ->ORWHERE('org.name LIKE :name')
-                ->setParameter('name', '%' . $name . '%');
-        }
-
-        if ($type === 'Activité de streaming' OR $type === 'Equipe eSport' OR $type === 'Évènement eSport') {
-            $query
-                ->ANDWHERE('act.type LIKE :type')
-                ->setParameter('type', '%' . $type . '%');
-        }
-
-        if ($date != '00-00-0000')  {
-            $query
-                ->ANDWHERE('off.date <= 12-07-1217');
-
-        }
-
-        return $query->getQuery()->getResult();
-    }
 
 }

@@ -56,8 +56,8 @@
                     </div>
                     <div class="col-md-3 box-border-search pt-10">
                         <label for="amount">Budget :
-                            <input id="amount-start" type="number" name="amount-start" class="input-field form-control mt-30" value="{{ amountStart }}">
-                            <input id="amount-end" type="number" name="amount-end" class="input-field form-control mt-30" value="{{ amountEnd }}">
+                            <input id="amount-start" type="number" name="amount-start" class="input-field form-control mt-20" value="{{ amountStart }}">
+                            <input id="amount-end" type="number" name="amount-end" class="input-field form-control mt-20" value="{{ amountEnd }}">
                         </label>
                     </div>
                     <div class="col-md-3 box-border-search pt-10">
@@ -120,26 +120,8 @@
 {% endblock %}
 
 {% block javascripts %}
-    <!-- VIRER TOUT CA -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="{{ asset('build/table-manager.js') }}"></script>
-    <script>
-        $( function() {
-            $( "#slider-range" ).slider({
-                range: true,
-                min: 200,
-                max: 100000,
-                values: [ 200, 100000 ],
-                slide: function( event, ui ) {
-                    $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-                }
-            });
-            $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) + "€" +
-                " - " + $( "#slider-range" ).slider( "values", 1 ) + '€' );
-        } );
-    </script>
+
+    <script src="{{ asset('build/table_manager.js') }}"></script>
+
 {% endblock %}
 

@@ -31,12 +31,17 @@ class SearchController extends Controller
      *
      * @param Request $request Search form
      *
-     * @Route("/search")
+     * @Route("/search", name="search_index")
      * @return           string
      */
     public function indexAction(Request $request)
     {
         $session = $request->getSession();
+        $user = $this->getUser();
+        if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
 
         return $this->render(
             'search/index.html.twig', array(
@@ -61,8 +66,18 @@ class SearchController extends Controller
     {
         $session = $request->getSession();
 
+        $user = $this->getUser();
+
+        if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
+
         if ($request->get('name'))
             $session->set('name', $request->get('name'));
+        else
+            $session->set('name', "");
+
 
         $request->get('type')
             ? $session->set('type', $request->get('type'))
@@ -88,7 +103,6 @@ class SearchController extends Controller
                 $session->get('amount-start'),
                 $session->get('amount-end')
             );
-
 
         return $this->render(
             'search/index.html.twig', array(

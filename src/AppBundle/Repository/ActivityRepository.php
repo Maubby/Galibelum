@@ -38,10 +38,10 @@ class ActivityRepository extends EntityRepository
     public function search(string $name, string $type, \DateTime $date, int $amountStart, int $amountEnd)
     {
         if (!$name && $type == "0") {
-            return $this->_searchAll($date);
+            return $this->_searchAll($date,  $amountStart, $amountEnd);
         }
 
-        return $this->_searchByName($name, $type, $date);
+        return $this->_searchByName($name, $type, $date,$amountStart,$amountEnd);
     }
 
     /**
@@ -49,9 +49,11 @@ class ActivityRepository extends EntityRepository
      *
      * @param \DateTime $date Ending date
      *
+     * @param int $amountStart Amount searching range
+     * @param int $amountEnd Amount searching range
      * @return mixed
      */
-    private function _searchAll(\DateTime $date)
+    private function _searchAll(\DateTime $date, int $amountStart, int $amountEnd)
     {
         // If user is searching without selected input,
         // just search all activites with offers > date now
@@ -60,6 +62,9 @@ class ActivityRepository extends EntityRepository
             ->INNERJOIN('act.activities', 'off')
             ->SELECT('act, org, off')
             ->WHERE('off.date >= :date')
+            ->ANDWHERE('off.amount BETWEEN :amountStart AND :amountEnd')
+            ->setParameter(':amountStart', $amountStart)
+            ->setParameter(':amountEnd', $amountEnd)
             ->setParameter('date', $date)
             ->GROUPBY('off')
             ->ORDERBY('act.creationDate');
@@ -70,21 +75,23 @@ class ActivityRepository extends EntityRepository
     /**
      * Search activities according to user's search with a name
      *
-     * @param String    $name Activity name
-     * @param String    $type Activity Type
+     * @param String $name Activity name
+     * @param String $type Activity Type
      * @param \DateTime $date Ending date
-     *
+     * @param int $amountStart Amount searching range
+     * @param int $amountEnd Amount searching range
      * @return mixed
      */
-    private function _searchByName(string $name, string $type, \DateTime $date)
+    private function _searchByName(string $name, string $type, \DateTime $date, int $amountStart, int $amountEnd)
     {
         // If user is searching with a name and a valid type,
         // just search all activites or organization with the selected name/type
         // and with offers > date now
+        //and between startAmount and endAmount
         $query = $this->createQueryBuilder('act')
             ->INNERJOIN('act.organizationActivities', 'org')
             ->INNERJOIN('act.activities', 'off')
-            ->SELECT('act, org, off')
+            ->SELECT('act, org')
             ->WHERE('act.name LIKE :name')
             ->ORWHERE('org.name LIKE :name')
             ->setParameter('name', '%' . $name . '%');
@@ -96,8 +103,12 @@ class ActivityRepository extends EntityRepository
                 ->ANDWHERE('act.type LIKE :type')
                 ->setParameter('type', '%' . $type . '%');
         }
-        $query->ANDWHERE('off.date >= :date')
+        $query
+            ->ANDWHERE('off.date >= :date')
+            ->ANDWHERE('off.amount BETWEEN :amountStart AND :amountEnd')
             ->setParameter('date', $date)
+            ->setParameter(':amountStart', $amountStart)
+            ->setParameter(':amountEnd', $amountEnd)
             ->GROUPBY('off')
             ->ORDERBY('act.creationDate');
 
