@@ -19,13 +19,6 @@ class Offer
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organization", inversedBy="offers")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $organization;
-
-    /**
-     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Activity", inversedBy="activities")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -172,14 +165,6 @@ class Offer
      * @ORM\Column(name="status", type="integer")
      */
     private $status;
-
-    /**
-     *
-     * @var bool
-     *
-     * @ORM\Column(name="signature", type="boolean", nullable=true)
-     */
-    private $signature;
 
     /*
      * Add Personal Method
@@ -425,30 +410,6 @@ class Offer
     }
 
     /**
-     * Set signature
-     *
-     * @param boolean $signature
-     *
-     * @return Offer
-     */
-    public function setSignature($signature)
-    {
-        $this->signature = $signature;
-
-        return $this;
-    }
-
-    /**
-     * Get signature
-     *
-     * @return bool
-     */
-    public function getSignature()
-    {
-        return $this->signature;
-    }
-
-    /**
      * Set activity
      *
      * @param \AppBundle\Entity\Activity $activity
@@ -494,29 +455,5 @@ class Offer
     public function getCreationDate()
     {
         return $this->creationDate;
-    }
-
-    /**
-     * Set organization.
-     *
-     * @param Organization $organization
-     *
-     * @return Offer
-     */
-    public function setOrganization(Organization $organization)
-    {
-        $this->organization = $organization;
-
-        return $this;
-    }
-
-    /**
-     * Get organization.
-     *
-     * @return Organization
-     */
-    public function getOrganization()
-    {
-        return $this->organization;
     }
 }

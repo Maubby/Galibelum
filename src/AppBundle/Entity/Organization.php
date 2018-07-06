@@ -19,17 +19,17 @@ class Organization
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Offer", mappedBy="organization")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $offers;
-
-    /**
-     *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", mappedBy="organization")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="manager")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $managers;
 
     /**
      *
@@ -532,38 +532,62 @@ class Organization
     }
 
     /**
-     * Add offer.
+     * Add manager.
      *
-     * @param \AppBundle\Entity\Offer $offer
+     * @param \AppBundle\Entity\User $manager
      *
      * @return Organization
      */
-    public function addOffer(Offer $offer)
+    public function addManager(\AppBundle\Entity\User $manager)
     {
-        $this->offers[] = $offer;
+        $this->manager[] = $manager;
 
         return $this;
     }
 
     /**
-     * Remove offer.
+     * Remove manager.
      *
-     * @param \AppBundle\Entity\Offer $offer
+     * @param \AppBundle\Entity\User $manager
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeOffer(Offer $offer)
+    public function removeManager(\AppBundle\Entity\User $manager)
     {
-        return $this->offers->removeElement($offer);
+        return $this->manager->removeElement($manager);
     }
 
     /**
-     * Get offers.
+     * Get manager.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getOffers()
+    public function getManager()
     {
-        return $this->offers;
+        return $this->manager;
+    }
+
+    /**
+     * Set managers.
+     *
+     * @param \AppBundle\Entity\User|null $managers
+     *
+     * @return Organization
+     */
+    public function setManagers(\AppBundle\Entity\User $managers = null)
+    {
+        $this->managers = $managers;
+
+        return $this;
+    }
+
+    /**
+     * Get managers.
+     *
+     * @return \AppBundle\Entity\User|null
+     */
+    public function getManagers()
+    {
+        return $this->managers;
     }
 }

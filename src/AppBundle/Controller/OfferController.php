@@ -119,7 +119,6 @@ class OfferController extends Controller
                 ->setActivity($activity)
                 ->setNameCanonical(strtolower($activity->getName()))
                 ->setHandlingFee($fees)
-                ->setOrganization($this->getUser()->getOrganization())
                 ->setDate($offer->getDate()->sub($interval));
 
             $em->persist($offer);

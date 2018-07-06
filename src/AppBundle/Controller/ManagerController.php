@@ -83,6 +83,7 @@ class ManagerController extends Controller
         $em = $this->getDoctrine()->getManager();
         $organization->setIsActive(1);
         $em->persist($organization);
+        $organization->setManagers($this->getUser());
         $em->flush();
 
         return $this->redirectToRoute('manager_organization_list');
