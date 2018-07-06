@@ -79,8 +79,8 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
          */
 
         for ($p = 0; $p < 10; $p++) {
-            $populator = new User();
-            $populator
+            $structure = new User();
+            $structure
                 ->setEmail($faker->email)
                 ->setPlainPassword('galibelum1')
                 ->setFirstName($faker->firstName)
@@ -100,8 +100,7 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
                 ->setEmail($faker->email)
                 ->setRelationNumber($faker->randomDigitNotNull)
                 ->setUserRole($faker->jobTitle)
-                ->setDescription($faker->text)
-                ->setIsActive(1);
+                ->setDescription($faker->text);
 
             // Activity creation
             $activity = new Activity();
@@ -115,7 +114,7 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
                 ->setMainGame($faker->word)
                 ->setUrlVideo($faker->url)
                 ->setAchievement($faker->word)
-                ->setSocialLink($faker->url);
+                ->setSocialLink(array($faker->url, $faker->url, $faker->url));
 
             // Offer creation
             $offer = new Offer();
@@ -126,15 +125,14 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
                 ->setAmount($faker->randomNumber($nbDigits = null, $strict = false))
                 ->setPartnershipNumber($faker->randomDigitNotNull);
 
-            $em->persist($populator);
-
-            $organization->setUser($populator);
+            $em->persist($structure);
+            $organization->setUser($structure);
             $em->persist($organization);
 
-            $populator
-                ->setOrganization($organization)
-                ->setUsername($populator->getEmail());
-            $em->persist($populator);
+            $structure->setUsername($structure->getEmail())
+                ->setOrganization($organization);
+            $em->persist($structure);
+
 
             $activity->setOrganizationActivities($organization);
             $em->persist($activity);
@@ -143,9 +141,61 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
                 ->setActivity($activity)
                 ->setOrganization($organization);
             $em->persist($offer);
+        }
+        
+        for ($p = 0; $p < 5; $p++) {
+            $company = new User();
+            $company
+                ->setEmail($faker->email)
+                ->setPlainPassword('galibelum1')
+                ->setFirstName($faker->firstName)
+                ->setLastName($faker->lastName)
+                ->setPhoneNumber($faker->phoneNumber)
+                ->setCgu(true)
+                ->setEnabled(1)
+                ->setRoles(array('ROLE_COMPANY'));
+
+            // Organization creation
+            $organization = new Organization();
+            $organization
+                ->setName($faker->name)
+                ->setStatus($faker->company)
+                ->setAddress($faker->streetAddress)
+                ->setPhoneNumber($faker->phoneNumber)
+                ->setEmail($faker->email)
+                ->setRelationNumber($faker->randomDigitNotNull)
+                ->setUserRole($faker->jobTitle)
+                ->setDescription($faker->text);
+
+            $em->persist($company);
+            $organization->setUser($company);
+            $em->persist($organization);
+
+            $company->setUsername($company->getEmail())
+                ->setOrganization($organization);
+
+            $em->persist($company);
 
             $em->flush();
         }
+
+        $admin = new User();
+        $admin
+            ->setEmail('admin@galibelum.fr')
+            ->setPlainPassword('galibelum1')
+            ->setFirstName('admin')
+            ->setLastName('admin')
+            ->setPhoneNumber($faker->phoneNumber)
+            ->setCgu(true)
+            ->setEnabled(1)
+            ->setRoles(array('ROLE_SUPER_ADMIN'));
+
+        $em->persist($admin);
+
+        $admin->setUsername($admin->getEmail());
+        $em->persist($admin);
+
+        $em->flush();
     }
 
     /**
