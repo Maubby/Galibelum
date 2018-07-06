@@ -1,76 +1,110 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Détail de l'activité{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/activity_show.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
-    <h1>Activity</h1>
+    <div class="container">
+        <div class="boxing-title">
+            <div class="row">
+                <div class="col-md-3 organization-info">
+                    <h5>{{ activity.organizationActivities.name }}</h5>
+                    <p>{{ activity.organizationActivities.status }}</p>
+                    <p>{{ activity.organizationActivities.relationNumber }} salariés</p>
+                    <p>{{ activity.organizationActivities.address }}</p>
+                </div>
+                <div class="col-md-8 description-text">
+                    <p>{{ activity.organizationActivities.description }}</p>
+                </div>
+            </div>
+        </div>
 
-    <table>
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ activity.id }}</td>
-        </tr>
-        <tr>
-            <th>Name</th>
-            <td>{{ activity.name }}</td>
-        </tr>
-        <tr>
-            <th>Namecanonical</th>
-            <td>{{ activity.nameCanonical }}</td>
-        </tr>
-        <tr>
-            <th>Type</th>
-            <td>{{ activity.type }}</td>
-        </tr>
-        <tr>
-            <th>Description</th>
-            <td>{{ activity.description }}</td>
-        </tr>
-        <tr>
-            <th>Date Start</th>
-            <td>{% if activity.dateStart %}{{ activity.dateStart|date('d-m-Y') }}{% endif %}</td>
-        </tr>
-        <tr>
-            <th>Date End</th>
-            <td>{% if activity.dateEnd %}{{ activity.dateEnd|date('d-m-Y') }}{% endif %}</td>
-        </tr>
-        <tr>
-            <th>Address</th>
-            <td>{{ activity.address }}</td>
-        </tr>
-        <tr>
-            <th>Maingame</th>
-            <td>{{ activity.mainGame }}</td>
-        </tr>
-        <tr>
-            <th>Urlvideo</th>
-            <td>{{ activity.urlVideo }}</td>
-        </tr>
-        <tr>
-            <th>Achievement</th>
-            <td>{% if activity.achievement %}{{ activity.achievement|join(', ') }}{% endif %}</td>
-        </tr>
-        <tr>
-            <th>Sociallink</th>
-            <td>{% if activity.socialLink %}{{ activity.socialLink|join(', ') }}{% endif %}</td>
-        </tr>
-        <tr>
-            <th>Télécharger un fichier PDF</th>
-            <td><a href="{{ asset('/uploads/pdf/organization_' ~ activity.organizationActivities.id ~ '/activity_' ~ activity.id ~ '/' ~ activity.uploadPdf) }}">Voir le PDF</a></td>
-        </tr>
-        </tbody>
-    </table>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="boxing-canvas">
+                    <h5 class="text-center mb-30">{{ activity.name }} - {{ activity.type }}</h5>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe id="myIframe" src=""></iframe>
+                    </div>
+                    <p class="boxing-text">{{ activity.description }}</p>
 
-    <ul>
-        <li>
-            <a href="{{ path('dashboard_index') }}">Revenir au tableau de bord</a>
-        </li>
-        <li>
-            <a href="{{ path('activity_edit', { 'id': activity.id }) }}">Modifier</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-            <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+                    <div class="boxing-body">
+                        <h6 class="title"><strong>Accomplissements :</strong></h6>
+                        <ul class="list-unstyled">
+                            <li>{% if activity.achievement %}{{ activity.achievement|join(', ') }}{% endif %}</li>
+                        </ul>
+                    </div>
+
+                    {#
+                    <th>Date Start</th>
+                    <td>{% if activity.dateStart %}{{ activity.dateStart|date('d-m-Y') }}{% endif %}</td>
+                    <th>Date End</th>
+                    <td>{% if activity.dateEnd %}{{ activity.dateEnd|date('d-m-Y') }}{% endif %}</td>
+                    <th>Address</th>
+                    <td>{{ activity.address }}</td>
+                    #}
+
+                    <a href="{{ asset('/uploads/pdf/organization_' ~ activity.OrganizationActivities.id ~'/activity/' ~ activity.uploadPdf) }}">Pdf de présentation</a>
+
+                    <div class="boxing-body">
+                        <h6 class="title"><strong>Sociaux : </strong></h6>
+                        <ul class="list-group">
+                            <li class="list-group-item">twitch :
+                                <a href="{% if activity.socialLink %}{{ activity.socialLink|join(', ') }}{% endif %}">
+                                    {% if activity.socialLink %}{{ activity.socialLink|join(', ') }}{% endif %}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="">
+                    <!-- Loop for show information offers -->
+                    {% for offer in activity.activities %}
+                        <div class="item">
+                            <div class="panel panel-default text-center">
+                                <h5 class="panel-title pt-10">{{ offer.name }}</h5>
+                                <div class="panel-body">
+                                    <p class="panel-item"><strong>Montant : </strong>{{ offer.amount }} €</p>
+                                    <p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.partnershipNumber }}</p>
+                                    <p class="panel-item"><strong>Date d'expiration : </strong>{{ offer.date|date("d M Y") }}</p>
+                                    <p class="panel-item">{{ offer.description }}</p>
+                                    <a href="{{ path('offer_relation', { 'id': offer.id }) }}" class="btn btn-primary btn-sm">Se mettre en relation</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+
+        var url ="{{ activity.urlVideo }}";
+        var id = new URL(url).search.substr(3);
+        var embedlink = "http://www.youtube.com/embed/" + id;
+
+        document.getElementById("myIframe").src = embedlink;
+
+    </script>
+
 {% endblock %}

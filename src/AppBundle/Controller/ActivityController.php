@@ -137,12 +137,9 @@ class ActivityController extends Controller
             return $this->redirectToRoute('manager_contract_list');
         }
 
-        $deleteForm = $this->_createDeleteForm($activity);
-
         return $this->render(
             'activity/show.html.twig', array(
                 'activity' => $activity,
-                'delete_form' => $deleteForm->createView(),
             )
         );
     }
