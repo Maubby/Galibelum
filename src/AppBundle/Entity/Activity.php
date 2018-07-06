@@ -99,7 +99,7 @@ class Activity
      *
      * @Assert\NotBlank()
      * @Assert\Length(
-     *      min = 2,
+     *      min = 32,
      *      max = 255,
      * )
      */
