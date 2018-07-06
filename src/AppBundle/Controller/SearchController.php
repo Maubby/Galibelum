@@ -37,15 +37,14 @@ class SearchController extends Controller
     public function indexAction(Request $request)
     {
         $session = $request->getSession();
-        $name = $session->get('name');
-        $date = $session->get('date');
-        $type = $session->get('type');
 
         return $this->render(
             'search/index.html.twig', array(
-            'name' => $name,
-            'date' => $date,
-            'type' => $type,
+                'name' => $session->get('name'),
+                'date' => $session->get('date'),
+                'type' => $session->get('type'),
+                'amountStart' => $session->get('amount-start'),
+                'amountEnd' => $session->get('amount-end')
             )
         );
     }
@@ -62,33 +61,32 @@ class SearchController extends Controller
     {
         $session = $request->getSession();
 
-        if ($request->get('name')) {
+        if ($request->get('name'))
             $session->set('name', $request->get('name'));
-        }else {
-            $session->set('name', "0");
-        }
 
-        if ($request->get('type')) {
-            $session->set('type', $request->get('type'));
-        } else {
-            $session->set('type', "0");
-        }
+        $request->get('type')
+            ? $session->set('type', $request->get('type'))
+            : $session->set('type', "0");
 
-        if ($request->get('date')) {
-            $session->set('date', new \DateTime($request->get('date')));
-        } else {
-            $session->set('date', new \DateTime('now'));
-        }
+        $request->get('amount-start')
+            ? $session->set('amount-start', $request->get('amount-start'))
+            : $session->set('amount-start', 0);
+        $request->get('amount-end')
+            ? $session->set('amount-end', $request->get('amount-end'))
+            : $session->set('amount-end', 100000);
 
-        // Faire amount ici et factoriser les if par la suite
-
+        $request->get('date')
+            ? $session->set('date', new \DateTime($request->get('date')))
+            : $session->set('date', new \DateTime('now'));
 
         $em = $this->getDoctrine()->getManager();
         $activityList = $em->getRepository(Activity::class)
             ->search(
                 $session->get('name'),
                 $session->get('type'),
-                $session->get('date')
+                $session->get('date'),
+                $session->get('amount-start'),
+                $session->get('amount-end')
             );
 
 
@@ -98,6 +96,8 @@ class SearchController extends Controller
                 'date' => $session->get('date'),
                 'name' => $session->get('name'),
                 'type' => $session->get('type'),
+                'amountStart' => $session->get('amount-start'),
+                'amountEnd' => $session->get('amount-end')
             )
         );
     }

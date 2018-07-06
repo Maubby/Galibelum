@@ -30,10 +30,12 @@ class ActivityRepository extends EntityRepository
      * @param String    $name Activity name
      * @param String    $type Activity Type
      * @param \DateTime $date Ending date
+     * @param Int       $amountStart Amount searching range
+     * @param Int       $amountEnd Amount searching range
      *
      * @return mixed
      */
-    public function search(string $name, string $type, \DateTime $date)
+    public function search(string $name, string $type, \DateTime $date, int $amountStart, int $amountEnd)
     {
         if (!$name && $type == "0") {
             return $this->_searchAll($date);

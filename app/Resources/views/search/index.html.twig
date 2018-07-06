@@ -39,8 +39,10 @@
             </div>
             <div class="col-md-12 mt-30">
                 <form class="text-center col-md-12" action="{{ path('search_action') }}">
-                    <div class="col-md-3 box-border-search">
-                        <input id="search" title="search" name="name" class="input-field form-control mt-20" value="{{ name }}">
+                    <div class="col-md-3 box-border-search pt-10">
+                        <label>Nom :
+                            <input id="search" title="search" name="name" class="input-field form-control mt-30" value="{{ name }}">
+                        </label>
                     </div>
                     <div class="col-md-3 box-border-search pt-10">
                         <label>Types d'activités :
@@ -53,9 +55,10 @@
                         </label>
                     </div>
                     <div class="col-md-3 box-border-search pt-10">
-                        <label for="amount">Budget:</label>
-                        <input type="text" id="amount" class="amount mt-20" readonly>
-                        <div id="slider-range"></div>
+                        <label for="amount">Budget :
+                            <input id="amount-start" type="number" name="amount-start" class="input-field form-control mt-30" value="{{ amountStart }}">
+                            <input id="amount-end" type="number" name="amount-end" class="input-field form-control mt-30" value="{{ amountEnd }}">
+                        </label>
                     </div>
                     <div class="col-md-3 box-border-search pt-10">
                         <label>Recherche par date :
