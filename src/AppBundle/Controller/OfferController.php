@@ -44,45 +44,52 @@ class OfferController extends Controller
             return $this->redirectToRoute('manager_contract_list');
         }
 
-        $em = $this->getDoctrine()->getManager();
+        if ($this->getUser()->hasRole('ROLE_STRUCTURE')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+            || $this->getUser()->hasRole('ROLE_COMPANY')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+        ) {
+            $em = $this->getDoctrine()->getManager();
 
-        $offers = $em
-            ->getRepository('AppBundle:Offer')
-            ->findBy(
+            $offers = $em
+                ->getRepository('AppBundle:Offer')
+                ->findBy(
+                    array(
+                        'id' => $this->getUser()->getOrganization()->getOrganizationActivity()->getValues()
+                    )
+                );
+
+            $event_activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
-                    'id' => $this->getUser()->getOrganization()->getOrganizationActivity()->getValues()
+                    'organizationActivities' => $this->getUser()->getOrganization(),
+                    'type' => 'Évènement eSport'
                 )
             );
 
-        $event_activities = $em->getRepository('AppBundle:Activity')->findBy(
-            array(
-                'organizationActivities' => $this->getUser()->getOrganization(),
-                'type' => 'Évènement eSport'
-            )
-        );
+            $stream_activities = $em->getRepository('AppBundle:Activity')->findBy(
+                array(
+                    'organizationActivities' => $this->getUser()->getOrganization(),
+                    'type' => 'Activité de streaming'
+                )
+            );
 
-        $stream_activities = $em->getRepository('AppBundle:Activity')->findBy(
-            array(
-                'organizationActivities' => $this->getUser()->getOrganization(),
-                'type' => 'Activité de streaming'
-            )
-        );
+            $team_activities = $em->getRepository('AppBundle:Activity')->findBy(
+                array(
+                    'organizationActivities' => $this->getUser()->getOrganization(),
+                    'type' => 'Equipe eSport'
+                )
+            );
 
-        $team_activities = $em->getRepository('AppBundle:Activity')->findBy(
-            array(
-                'organizationActivities' => $this->getUser()->getOrganization(),
-                'type' => 'Equipe eSport'
-            )
-        );
-
-        return $this->render(
-            'offer/index.html.twig', array(
-                'offers' => $offers,
-                'event_activities' => $event_activities,
-                'stream_activities' => $stream_activities,
-                'team_activities' => $team_activities,
-            )
-        );
+            return $this->render(
+                'offer/index.html.twig', array(
+                    'offers' => $offers,
+                    'event_activities' => $event_activities,
+                    'stream_activities' => $stream_activities,
+                    'team_activities' => $team_activities,
+                )
+            );
+        }
+        return $this->redirectToRoute('redirect');
     }
 
     /**
@@ -105,39 +112,46 @@ class OfferController extends Controller
         ) {
             return $this->redirectToRoute('manager_contract_list');
         }
+        if ($this->getUser()->hasRole('ROLE_STRUCTURE')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+            || $this->getUser()->hasRole('ROLE_COMPANY')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+        ) {
 
-        $offer = new Offer();
-        $form = $this->createForm('AppBundle\Form\OfferType', $offer);
-        $form->handleRequest($request);
-        $interval = new \DateInterval($this->getParameter('periode'));
+            $offer = new Offer();
+            $form = $this->createForm('AppBundle\Form\OfferType', $offer);
+            $form->handleRequest($request);
+            $interval = new \DateInterval($this->getParameter('periode'));
 
-        $fees = $feesService->getFees($offer->getAmount(), $offer->getFinalDeal());
+            $fees = $feesService->getFees($offer->getAmount(), $offer->getFinalDeal());
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $offer = $offer
-                ->setActivity($activity)
-                ->setNameCanonical(strtolower($activity->getName()))
-                ->setHandlingFee($fees)
-                ->setDate($offer->getDate()->sub($interval));
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $offer = $offer
+                    ->setActivity($activity)
+                    ->setNameCanonical(strtolower($activity->getName()))
+                    ->setHandlingFee($fees)
+                    ->setDate($offer->getDate()->sub($interval));
 
-            $em->persist($offer);
-            $em->flush();
+                $em->persist($offer);
+                $em->flush();
 
-            return $this->redirectToRoute(
-                'offer_show', array(
-                    'id' => $offer->getId(),
+                return $this->redirectToRoute(
+                    'offer_edit', array(
+                        'id' => $offer->getId(),
+                    )
+                );
+            }
+
+            return $this->render(
+                'offer/new.html.twig', array(
+                    'offer' => $offer,
+                    'activity' => $activity,
+                    'form' => $form->createView(),
                 )
             );
         }
-
-        return $this->render(
-            'offer/new.html.twig', array(
-                'offer' => $offer,
-                'activity' => $activity,
-                'form' => $form->createView(),
-            )
-        );
+        return $this->redirectToRoute('redirect');
     }
 
     /**
@@ -168,8 +182,14 @@ class OfferController extends Controller
             if ($editForm->isSubmitted() && $editForm->isValid()) {
                 $this->getDoctrine()->getManager()->flush();
 
+                $this
+                    ->addFlash(
+                        'success',
+                        "Vos modifications ont bien été prises en compte."
+                    );
+
                 return $this->redirectToRoute(
-                    'offer_edit', array(
+                    'dashboard_index', array(
                         'id' => $offer->getId())
                 );
             }

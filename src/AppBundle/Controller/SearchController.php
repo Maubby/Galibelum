@@ -36,22 +36,29 @@ class SearchController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $session = $request->getSession();
-        $user = $this->getUser();
-        if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')
+        if ($this->getUser()->hasRole('ROLE_STRUCTURE')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+            || $this->getUser()->hasRole('ROLE_COMPANY')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
-            return $this->redirectToRoute('manager_contract_list');
-        }
+            $session = $request->getSession();
+            $user = $this->getUser();
+            if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')
+            ) {
+                return $this->redirectToRoute('manager_contract_list');
+            }
 
-        return $this->render(
-            'search/index.html.twig', array(
-                'name' => $session->get('name'),
-                'date' => $session->get('date'),
-                'type' => $session->get('type'),
-                'amountStart' => $session->get('amount-start'),
-                'amountEnd' => $session->get('amount-end')
-            )
-        );
+            return $this->render(
+                'search/index.html.twig', array(
+                    'name' => $session->get('name'),
+                    'date' => $session->get('date'),
+                    'type' => $session->get('type'),
+                    'amountStart' => $session->get('amount-start'),
+                    'amountEnd' => $session->get('amount-end')
+                )
+            );
+        }
+        return $this->redirectToRoute('redirect');
     }
 
     /**

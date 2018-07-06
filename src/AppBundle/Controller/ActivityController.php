@@ -48,20 +48,28 @@ class ActivityController extends Controller
 
             return $this->redirectToRoute('activity_new');
         }
+        if ($this->getUser()->hasRole('ROLE_STRUCTURE')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+            || $this->getUser()->hasRole('ROLE_COMPANY')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+        ) {
 
-        $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getManager();
 
-        $activities = $em->getRepository('AppBundle:Activity')->findBy(
-            array(
-                'organizationActivities' => $this->getUser()->getOrganization()
-            )
-        );
+            $activities = $em->getRepository('AppBundle:Activity')->findBy(
+                array(
+                    'organizationActivities' => $this->getUser()->getOrganization()
+                )
+            );
 
-        return $this->render(
-            'activity/index.html.twig', array(
-                'activities' => $activities,
-            )
-        );
+            return $this->render(
+                'activity/index.html.twig', array(
+                    'activities' => $activities,
+                )
+            );
+        }
+        return $this->redirectToRoute('redirect');
+
 
 
     }
@@ -82,42 +90,49 @@ class ActivityController extends Controller
         ) {
             return $this->redirectToRoute('manager_contract_list');
         }
+        if ($this->getUser()->hasRole('ROLE_STRUCTURE')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+            || $this->getUser()->hasRole('ROLE_COMPANY')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+        ) {
 
-        $activity = new Activity();
-        $form = $this->createForm(ActivityType::class, $activity);
-        $form->remove('uploadPdf');
-        $organization = $this->getUser()->getOrganization();
-        $form->handleRequest($request);
+            $activity = new Activity();
+            $form = $this->createForm(ActivityType::class, $activity);
+            $form->remove('uploadPdf');
+            $organization = $this->getUser()->getOrganization();
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
 
-            $activity
-                ->setOrganizationActivities($organization)
-                ->setNameCanonical(strtolower($activity->getName()));
+                $activity
+                    ->setOrganizationActivities($organization)
+                    ->setNameCanonical(strtolower($activity->getName()));
 
-            $this
-                ->addFlash(
-                    'pdf',
-                    "Vous pouvez ajouter un PDF pour décrire votre activité"
+                $this
+                    ->addFlash(
+                        'pdf',
+                        "Vous pouvez ajouter un PDF pour décrire votre activité"
+                    );
+
+                $em->persist($activity);
+                $em->flush();
+
+                return $this->redirectToRoute(
+                    'activity_edit', array(
+                        'id' => $activity->getId(),
+                    )
                 );
+            }
 
-            $em->persist($activity);
-            $em->flush();
-
-            return $this->redirectToRoute(
-                'activity_edit', array(
-                    'id' => $activity->getId(),
+            return $this->render(
+                'activity/new.html.twig', array(
+                    'activity' => $activity,
+                    'form' => $form->createView(),
                 )
             );
         }
-
-        return $this->render(
-            'activity/new.html.twig', array(
-                'activity' => $activity,
-                'form' => $form->createView(),
-            )
-        );
+        return $this->redirectToRoute('redirect');
     }
 
     /**

@@ -47,7 +47,7 @@ class OrganizationController extends Controller
             && $user->getOrganization()->getIsActive() === 1)
         {
             $organization = $user->getOrganization();
-            
+
             $em = $this->getDoctrine()->getManager();
             $offers = $em
                 ->getRepository('AppBundle:Offer')
