@@ -137,9 +137,7 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
             $activity->setOrganizationActivities($organization);
             $em->persist($activity);
 
-            $offer
-                ->setActivity($activity)
-                ->setOrganization($organization);
+            $offer->setActivity($activity);
             $em->persist($offer);
         }
         
