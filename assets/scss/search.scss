@@ -1,7 +1,6 @@
-@import "style";
+@import "_variables";
 
 .boxing-canvas {
-  background-color: #fff;
   width: auto;
   max-width: 1100px;
   margin-left: auto;
@@ -31,11 +30,12 @@
   border: 1px solid $border-color;
 }
 
-
 /* Style the input */
-.backblue-btn{
+
+.backblue-btn {
   height: 40px;
 }
+
 .amount {
   border: 0;
   color: $five-color;
