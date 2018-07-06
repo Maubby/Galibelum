@@ -1,0 +1,17 @@
+/* Logo Galibelum white */
+.logo-galibelum {
+  width: 400px;
+  padding-top: 100px;
+}
+
+@media (min-width: 768px) and (max-width: 843px) {
+  .logo-galibelum {
+    width: 360px;
+  }
+}
+
+/* Form register */
+.backblue-btn {
+  background-image: linear-gradient( to right, #86ccc2 , #137faf);
+  font-weight: bold;
+}

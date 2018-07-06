@@ -28,6 +28,7 @@ Encore
     .addStyleEntry('offer', './assets/scss/offer.scss')
     .addStyleEntry('admin', './assets/scss/admin.scss')
     .addStyleEntry('manager', './assets/scss/manager.scss')
+    .addStyleEntry('search', './assets/scss/search.scss')
     .addStyleEntry('page_404', './assets/scss/page_404.scss')
     .addStyleEntry('_variables', './assets/scss/_variables.scss')
     .addEntry('login_script', './assets/js/login_script.js')

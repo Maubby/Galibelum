@@ -1,0 +1,127 @@
+{# app/Resources/views/offer/new.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Rechercher une activité{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/search.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Return to the dashboard -->
+                <ol class="breadcrumb breadcrumb-boxing-canvas">
+                    <li>
+                        <a href="{{ path('dashboard_index') }}">Tableau de bord</a></li>
+                    <li>Recherche d'activités et d'offres</li>
+                </ol>
+            </div>
+        </div>
+        <div class="row boxing-canvas">
+            <div class="col-md-12 text-center">
+                <i class="fas fa-search degradeblue" style="font-size: 50px"></i>
+                <h5 class="degradeblue">Rechercher</h5>
+                <br>
+                <p class="normal-subtitle-text text-center">Recherchez des activités et des offres suivant le nom de la structure ou de l'activité ciblée.
+                    <br>N'hésitez pas à regarder les détails des activités pour vous positionner rapidement sur une offre.</p>
+            </div>
+            <div class="col-md-12 mt-30">
+                <form class="text-center col-md-12" action="{{ path('search_action') }}">
+                    <div class="col-md-3 box-border-search pt-10">
+                        <label>Nom :
+                            <input id="search" title="search" name="name" class="input-field form-control mt-30" value="{{ name }}">
+                        </label>
+                    </div>
+                    <div class="col-md-3 box-border-search pt-10">
+                        <label>Types d'activités :
+                            <select id="type" name='type' class="input-field form-control mt-30">
+                                <option value="0" {% if type == "0" %}selected{% endif %}>Types d'activités</option>
+                                <option value="Activité de streaming" {% if type == "Activité de streaming" %}selected{% endif %}>Activité de streaming</option>
+                                <option value="Equipe eSport" {% if type == "Equipe eSport" %}selected{% endif %}>Equipe eSport</option>
+                                <option value="Évènement eSport" {% if type == "Évènement eSport" %}selected{% endif %}>Évènement eSport</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="col-md-3 box-border-search pt-10">
+                        <label for="amount">Budget :
+                            <input id="amount-start" type="number" name="amount-start" class="input-field form-control mt-20" value="{{ amountStart }}">
+                            <input id="amount-end" type="number" name="amount-end" class="input-field form-control mt-20" value="{{ amountEnd }}">
+                        </label>
+                    </div>
+                    <div class="col-md-3 box-border-search pt-10">
+                        <label>Recherche par date :
+                            <input type="date" name="date" class="input-field form-control mt-30" value="{{ date|date('Y-m-d') }}" />
+                        </label>
+                    </div>
+                    <div class="col-md-12 mt-30">
+                        <button id="btn_search" class="btn btn-primary backblue-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row boxing-canvas mt-50">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <!-- Creating a responsive table -->
+                <div class="table-responsive table-striped">
+                    {% if activitylist is not defined %}
+                        <div class="col-md-12 text-center">Aucun résultat pour votre recherche</div>
+                    {% else %}
+                        <table id="table-manager">
+                            <!-- Table head -->
+                            <thead class="table text-center">
+                            <tr>
+                                <th>Nom de l'activité</th>
+                                <th>Type de l'activité</th>
+                                <th>Montant de l'offre minimal</th>
+                                <th>Montant de l'offre maximal</th>
+                                <th>L'offre la plus proche</th>
+                                <th>L'offre la plus loin</th>
+                                <th>Voir les détails</th>
+                            </tr>
+                            </thead>
+                            <!-- End of table head -->
+
+                            <!-- Starting listing the account managers -->
+                            <tbody>
+                            {% for activity in activitylist %}
+                                <tr>
+                                    <td>
+                                        {{ activity.name }} | {{ activity.organizationActivities.name }}
+                                        <br>
+                                        {{ activity.description }}
+                                    </td>
+                                    <td class="text-center">{{ activity.type }}</td>
+                                    <td class="text-center">{{ activity.minamountoffer }}</td>
+                                    <td class="text-center">{{ activity.maxamountoffer }}</td>
+                                    <td class="text-center">{{ activity.mindateoffer|date('d-m-Y') }}</td>
+                                    <td class="text-center">{{ activity.maxdateoffer|date('d-m-Y') }}</td>
+                                    <td class="text-center"><a href="{{ path('activity_show', { 'id': activity.id }) }}">Détails</a></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="{{ asset('build/table_manager.js') }}"></script>
+
+{% endblock %}
+
