@@ -38,10 +38,10 @@ class ActivityRepository extends EntityRepository
     public function search(string $name, string $type, \DateTime $date, int $amountStart, int $amountEnd)
     {
         if (!$name && $type == "0") {
-            return $this->_searchAll($date,  $amountStart, $amountEnd);
+            return $this->_searchAll($date, $amountStart, $amountEnd);
         }
 
-        return $this->_searchByName($name, $type, $date,$amountStart,$amountEnd);
+        return $this->_searchByName($name, $type, $date, $amountStart, $amountEnd);
     }
 
     /**
