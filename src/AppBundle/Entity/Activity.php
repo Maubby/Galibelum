@@ -97,7 +97,9 @@ class Activity
      *
      * @ORM\Column(name="description", type="text")
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(
+     *     message="Veuillez détailler votre activité"
+     * )
      * @Assert\Length(
      *      min = 32,
      *      max = 255,
@@ -200,6 +202,7 @@ class Activity
      * @Assert\File(
      *     maxSize = "1024k",
      *     mimeTypes = {"application/pdf", "application/x-pdf"},
+     *     mimeTypesMessage="Le type du fichier est invalide ({{ type }}). Le type accepté est PDF"
      * )
      */
     private $uploadPdf;
