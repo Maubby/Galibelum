@@ -19,8 +19,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\UserBundle\Form\Factory\FactoryInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Overriding controller managing the user profile.
@@ -93,7 +92,7 @@ class ProfileController extends BaseController
 
         if ($form->isSubmitted() && $form->isValid()) {
             /**
-             * If profile submitted & valide
+             * If profile submitted & valid
              *
              * @var $userManager UserManagerInterface
              */
@@ -111,7 +110,7 @@ class ProfileController extends BaseController
         }
         if ($formPassword->isSubmitted() && $formPassword->isValid()) {
             /**
-             * If submitted & valide new password edited
+             * If submitted & valid new password edited
              *
              * @var $userManager UserManagerInterface
              */
@@ -137,12 +136,13 @@ class ProfileController extends BaseController
             )
         );
     }
+
     /**
      * Deletes a user entity.
      *
-     * @Route("/profile/delete/", name="profile_delete")
-     * @Method("GET")
-     * @return                    Response A Response instance
+     * @Route("/profile/delete/", methods={"GET"}, name="profile_delete")
+     *
+     * @return Response A Response instance
      */
     public function deleteUser()
     {

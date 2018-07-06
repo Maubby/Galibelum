@@ -1,9 +1,0 @@
-.silicon-vc-icon {
-  background: url(../img/silicon-vc-icon.png) no-repeat center !important;
-}
-.vc_add-element-container .wpb-content-layouts li[data-element^=silicon] {
-  background-color: rgba(61,89,249, .09);
-}
-.vc_add-element-container .wpb-content-layouts a[id^=silicon] {
-  color: #404040;
-}
