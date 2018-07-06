@@ -87,7 +87,7 @@ class OrganizationController extends Controller
         ) {
             return $this->redirectToRoute('manager_contract_list');
 
-        } elseif ($user->getOrganization()->getId() === null) {
+        } elseif ($user->getOrganization() === null) {
             $organization = new Organization();
             if ($choose === 1) {
                 $form = $this

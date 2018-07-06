@@ -16,7 +16,6 @@ Encore
         'datatables.net-dt/css/jquery.dataTables.min.css', 'datatables.net-dt/js/dataTables.dataTables.min.js'])
     .addStyleEntry('style', './assets/scss/style.scss')
     .addStyleEntry('register', './assets/scss/register.scss')
-    .addStyleEntry('check_confirmed_email', './assets/scss/check_confirmed_email.scss')
     .addStyleEntry('login', './assets/scss/login.scss')
     .addStyleEntry('profile', './assets/scss/profile.scss')
     .addStyleEntry('organization_inscription', './assets/scss/organization_inscription.scss')

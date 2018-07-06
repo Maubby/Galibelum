@@ -126,7 +126,7 @@ class OfferController extends Controller
             $em->flush();
 
             return $this->redirectToRoute(
-                'offer_show', array(
+                'offer_edit', array(
                     'id' => $offer->getId(),
                 )
             );
@@ -169,8 +169,14 @@ class OfferController extends Controller
             if ($editForm->isSubmitted() && $editForm->isValid()) {
                 $this->getDoctrine()->getManager()->flush();
 
+                $this
+                    ->addFlash(
+                        'success',
+                        "Vos modifications ont bien été prises en compte."
+                    );
+
                 return $this->redirectToRoute(
-                    'offer_edit', array(
+                    'dashboard_index', array(
                         'id' => $offer->getId())
                 );
             }
