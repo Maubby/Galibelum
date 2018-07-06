@@ -141,33 +141,6 @@ class OfferController extends Controller
     }
 
     /**
-     * Finds and displays all offer's from search result.
-     *
-     * @param Offer $offer The offer entity
-     *
-     * @Route("/{id}", methods={"GET"}, name="offer_show")
-     *
-     * @return Response A Response instance
-     */
-    public function showAction(Offer $offer)
-    {
-        if ($this->getUser()->hasRole('ROLE_MANAGER')
-            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
-        ) {
-            return $this->redirectToRoute('manager_contract_list');
-        }
-
-        $deleteForm = $this->_createDeleteForm($offer);
-
-        return $this->render(
-            'offer/show.html.twig', array(
-                'offer' => $offer,
-                'delete_form' => $deleteForm->createView(),
-            )
-        );
-    }
-
-    /**
      * Displays a form to edit an existing offer entity.
      *
      * @param Request $request Edit posted info
