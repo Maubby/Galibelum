@@ -1,15 +1,25 @@
-.waiting_title {
-  margin: 20px;
-}
+@import "style";
 
-.waiting_text {
-  padding: 20px;
-  border: 1px solid #fff;
-  background-color: #fff;
+  .boxing-canvas {
+    background-color: #fff;
+    width: auto;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    height: 680px;
+    padding: 30px;
+    border-radius: 4px;
+    border: 1px solid $border-color;
+  }
+
+.breadcrumb-boxing-canvas {
+  width: auto;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 30px;
-  position: relative;
-  left: 30px;
-  z-index: 1;
+  border-radius: 4px;
+  border: 1px solid $border-color;
 }
 
 .separator {
@@ -24,3 +34,42 @@
   max-width: 100%;
   height: auto;
 }
+
+.backblue-btn{
+  width: 20%;
+  margin-bottom: 20px;
+}
+
+.breadcrumb-boxing-canvas {
+  width: auto;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  border-radius: 4px;
+  border: 1px solid $border-color;
+}
+.waiting_contact{
+  position: relative;
+  bottom: 100%;
+  transform: translateY(100%);
+}
+
+.waiting_name{
+  float: right;
+}
+
+h2{
+  font-size: 40px;
+  margin-top: 20px;
+}
+
+@media (min-width: 768px) and (max-width: 1200px){
+  .waiting_contact{
+    margin-bottom: 30px;
+  }
+  .boxing-canvas{
+    height: 550px;
+  }
+}
+
