@@ -15,8 +15,10 @@ use FOS\UserBundle\Model\User as BaseUser;
 class User extends BaseUser
 {
     /*
-     * Relationship Mapping Metadata
+     * Personal variables and Methods
      */
+    private $managers;
+
     public function __toString()
     {
         return  $this->firstName . ' - ' . $this->lastName . ' - ' . $this->phoneNumber;
@@ -278,7 +280,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function setManagers(\AppBundle\Entity\Organization $managers = null)
+    public function setManagers(Organization $managers = null)
     {
         $this->managers = $managers;
 
@@ -302,7 +304,7 @@ class User extends BaseUser
      *
      * @return User
      */
-    public function addManager(\AppBundle\Entity\Organization $manager)
+    public function addManager(Organization $manager)
     {
         $this->manager[] = $manager;
 
@@ -316,7 +318,7 @@ class User extends BaseUser
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeManager(\AppBundle\Entity\Organization $manager)
+    public function removeManager(Organization $manager)
     {
         return $this->manager->removeElement($manager);
     }

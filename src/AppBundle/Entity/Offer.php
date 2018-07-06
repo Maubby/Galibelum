@@ -24,6 +24,13 @@ class Offer
      */
     private $activity;
 
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Organization")
+     * @ORM\JoinTable(name="organization_contracts")
+     */
+    private $contracts;
+
     /*
      * Personal variables
      */
@@ -132,23 +139,6 @@ class Offer
      * @ORM\Column(name="handlingFee", type="integer", nullable=true)
      */
     private $handlingFee;
-
-    /**
-     *
-     * @var int
-     *
-     * @ORM\Column(name="partnershipNumber", type="integer")
-     *
-     * @Assert\Type(
-     *     type="integer",
-     *     message="The value {{ value }} is not a valid {{ type }}."
-     * )
-     * @Assert\Range(
-     *      min = 1,
-     *      minMessage = "Le nombre de partenaire(s) ne peut être inférieur à {{ limit }}"
-     * )
-     */
-    private $partnershipNumber;
 
     /**
      *
@@ -338,30 +328,6 @@ class Offer
     }
 
     /**
-     * Set partnershipNumber
-     *
-     * @param integer $partnershipNumber
-     *
-     * @return Offer
-     */
-    public function setPartnershipNumber($partnershipNumber)
-    {
-        $this->partnershipNumber = $partnershipNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get partnershipNumber
-     *
-     * @return int
-     */
-    public function getPartnershipNumber()
-    {
-        return $this->partnershipNumber;
-    }
-
-    /**
      * Set finalDeal
      *
      * @param integer $finalDeal
@@ -455,5 +421,41 @@ class Offer
     public function getCreationDate()
     {
         return $this->creationDate;
+    }
+
+    /**
+     * Add contract.
+     *
+     * @param \AppBundle\Entity\Organization $contract
+     *
+     * @return Offer
+     */
+    public function addContract(Organization $contract)
+    {
+        $this->contracts[] = $contract;
+
+        return $this;
+    }
+
+    /**
+     * Remove contract.
+     *
+     * @param \AppBundle\Entity\Organization $contract
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeContract(Organization $contract)
+    {
+        return $this->contracts->removeElement($contract);
+    }
+
+    /**
+     * Get contracts.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContracts()
+    {
+        return $this->contracts;
     }
 }

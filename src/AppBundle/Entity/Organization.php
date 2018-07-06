@@ -541,9 +541,9 @@ class Organization
      *
      * @return Organization
      */
-    public function addManager(\AppBundle\Entity\User $manager)
+    public function addManager(User $manager)
     {
-        $this->manager[] = $manager;
+        $this->managers[] = $manager;
 
         return $this;
     }
@@ -555,9 +555,9 @@ class Organization
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeManager(\AppBundle\Entity\User $manager)
+    public function removeManager(User $manager)
     {
-        return $this->manager->removeElement($manager);
+        return $this->managers->removeElement($manager);
     }
 
     /**
@@ -565,9 +565,9 @@ class Organization
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getManager()
+    public function getManagers()
     {
-        return $this->manager;
+        return $this->managers;
     }
 
     /**
@@ -577,7 +577,7 @@ class Organization
      *
      * @return Organization
      */
-    public function setManagers(\AppBundle\Entity\User $managers = null)
+    public function setManagers(User $managers = null)
     {
         $this->managers = $managers;
 
@@ -589,7 +589,7 @@ class Organization
      *
      * @return \AppBundle\Entity\User|null
      */
-    public function getManagers()
+    public function getManager()
     {
         return $this->managers;
     }

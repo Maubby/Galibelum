@@ -187,6 +187,66 @@ class OfferController extends Controller
     }
 
     /**
+     * Displays a form to edit an existing offer entity.
+     *
+     * @param Offer   $offer   The offer entity
+     *
+     * @Route("/{id}/relation", methods={"GET", "POST"}, name="offer_relation")
+     *
+     * @return Response A Response instance
+     */
+    public function relationAction(Offer $offer)
+    {
+
+        $user = $this->getUser();
+
+            $em = $this->getDoctrine()->getManager();
+            $offer->setStatus(1)
+                ->addContract($user->getOrganization());
+            $em->persist($offer);
+            $em->flush();
+
+
+
+            return $this->render(
+                'activity/show.html.twig', array(
+                    'activity' => $offer->getActivity(),
+                )
+            );
+
+    }
+
+    /**
+     * Displays a form to edit an existing offer entity.
+     *
+     * @param Offer   $offer   The offer entity
+     *
+     * @Route("/{id}/partners", methods={"GET", "POST"}, name="offer_relation")
+     *
+     * @return Response A Response instance
+     */
+    public function partnersAction(Offer $offer)
+    {
+
+        $user = $this->getUser();
+
+            $em = $this->getDoctrine()->getManager();
+            $offer->setStatus(1)
+                ->addContract($user->getOrganization());
+            $em->persist($offer);
+            $em->flush();
+
+
+
+            return $this->render(
+                'activity/show.html.twig', array(
+                    'activity' => $offer->getActivity(),
+                )
+            );
+
+    }
+
+    /**
      * Deletes an offer entity.
      *
      * @param Request $request Delete posted info

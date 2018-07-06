@@ -119,9 +119,10 @@ class ManagerController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $offers = $em
-            ->getRepository('AppBundle:Offer')
-            ->findAll();
+        $offers = $em->getRepository(Offer::class)->findBy(array(
+            'id' => $this->getUser()->getManager()->getValues()
+        ));
+
 
         return $this->render(
             'manager/contract.html.twig', array(

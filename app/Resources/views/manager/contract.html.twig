@@ -49,10 +49,12 @@
                                 <td>{{ offer.name }}</td>
                                 <td>{{ offer.amount }}</td>
                                 <td>{{ offer.date|date('d M Y') }}</td>
-                                {% if offer.organization %}
-                                    <td>{{  offer.organization.name }}</td>
-                                {% else %}
+                                {% if offer.Contracts is empty %}
                                     <td>Aucune marque liée</td>
+                                {% else %}
+                                    {% for organization in offer.Contracts %}
+                                        <td>{{  organization.name }}</td>
+                                    {% endfor %}
                                 {% endif %}
 
                                 <!-- Buttons changing contracts' status start -->
