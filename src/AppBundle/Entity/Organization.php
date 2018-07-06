@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -425,8 +426,9 @@ class Organization
      */
     public function setIsActive($isActive)
     {
-        if ($isActive >= 0 && $isActive <= 2)
+        if ($isActive >= 0 && $isActive <= 2) {
             $this->isActive = $isActive;
+        }
 
         return $this;
     }
@@ -445,8 +447,9 @@ class Organization
      */
     public function __construct()
     {
-        $this->organizationActivity = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->organizationActivity = new ArrayCollection();
         $this->setIsActive(0);
+        $this->offers = new ArrayCollection();
     }
 
     /**

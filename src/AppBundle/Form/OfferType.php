@@ -40,25 +40,30 @@ class OfferType extends AbstractType
         $builder
             ->add(
                 'name', TextType::class, array(
+                    'required' => true,
                     'attr' => array(
                         'minlength' => 2, 'maxlength' => 32))
             )
             ->add(
                 'amount', IntegerType::class, array(
+                    'required' => true,
                     'attr' => array(
                         'min' => 200))
             )
             ->add(
                 'partnershipNumber', IntegerType::class, array(
+                    'required' => true,
                     'attr' => array(
                         'min' => 1))
             )
             ->add(
                 'date', DateType::class, array(
+                    'required' => true,
                     'widget' => 'single_text')
             )
             ->add(
                 'description', TextareaType::class, array(
+                    'required' => true,
                     'attr' => array(
                         'minlength' => 16,
                         'maxlength' => 250))

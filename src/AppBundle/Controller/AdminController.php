@@ -28,25 +28,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends Controller
 {
     /**
-     * Landing page for admin manager.
-     *
-     * @Route("/", methods={"GET"}, name="manager_contract")
-     *
-     * @return Response A Response instance
-     */
-    public function dashboardAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('AppBundle:User')
-            ->findByRole('ROLE_SUPER_ADMIN');
-        return $this->render(
-            'manager/contract.html.twig', array(
-                'user' => $this->getUser(),
-            )
-        );
-    }
-
-    /**
      * Creates a new account manager.
      *
      * @param Request $request New posted info
