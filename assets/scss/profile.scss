@@ -1,15 +1,20 @@
-/* Form profile & form password*/
+@import "style.scss";
 
-.profile-boxing-canvas {
-  background-color: #fff;
-  height: 350px;
-  padding: 30px 5px 20px 5px;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+/* Form profile & form password */
+
+.boxing-canvas-maxing-width {
+  max-width: 1000px;
 }
 
-.profile-boxing-canvas-content-height {
-  height: 350px;
+.modal-galibelum {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+input::placeholder, select, textarea::placeholder {
+  font-weight: 200;
+  opacity: 0.7;
+  color: $red-placeholder-color !important;
 }
 
 @media screen and (min-width: 300px) {

@@ -1,7 +1,6 @@
-@import "style";
+@import "_variables";
 
 /* Basics */
-
 label {
   display: inline-block;
   max-width: 100%;
@@ -23,33 +22,12 @@ input:-webkit-autofill {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
-  width: auto;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 40px 5px 20px 5px;
   text-align: center;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  border-top: 1px solid $border-color;
-  border-left: 1px solid $border-color;
-  border-right: 1px solid $border-color;
 }
 
 .subtitle-boxing-canvas {
-  background-color: $lighter-grey-bg-color;
-  width: auto;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 30px 5px 20px 5px;
-  text-align: left;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  border-bottom: 1px solid $border-color;
-  border-left: 1px solid $border-color;
-  border-right: 1px solid $border-color;
 }
 
 .logo-galibelum {
@@ -57,6 +35,16 @@ input:-webkit-autofill {
   vertical-align: middle;
   height: auto;
 }
+
+.forgotten-password {
+  padding-top: 5px;
+}
+
+.orange-color {
+  color: #ffaf7e;
+}
+
+/* Media Queries */
 
 @media (min-width: 768px) and (max-width: 843px) {
   .logo-galibelum {
@@ -72,10 +60,9 @@ input:-webkit-autofill {
   }
 }
 
-.forgotten-password {
-  padding-top: 5px;
-}
-
-.orange-color {
-  color: #ffaf7e;
+// Boxing-canvas size for admin_edit and admin_new
+#admin-edit, #admin-new {
+  .boxing-canvas {
+    max-width: 700px;
+  }
 }

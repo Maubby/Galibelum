@@ -2,7 +2,6 @@
 {% for activity in organization.OrganizationActivity %}
     <div class="item">
         <div class="panel panel-default">
-
             <h5 class="panel-title">
                 {% if activity.type is same as('Activité de streaming') %}
                     <i class="fas fa-video"></i>
@@ -12,7 +11,6 @@
                     <i class="fas fa-gamepad"></i>
                 {% endif %}
                 {{ activity.name }}</h5>
-                
             <div class="panel-body">
                 {% if activity.address is same as('n/a') %}
                     <p class="panel-item"><strong>chaîne : </strong><a href="{{ activity.urlVideo }}">{{ activity.urlVideo }}</a></p>
@@ -25,7 +23,6 @@
                 {% endif %}
                 <a href="{{ path('activity_show', { 'id': activity.id }) }}" class="btn btn-primary btn-sm">Plus de détails</a>
             </div>
-            
         </div>
     </div>
 {% endfor %}

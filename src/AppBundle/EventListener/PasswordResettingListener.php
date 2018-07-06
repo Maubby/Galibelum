@@ -11,7 +11,7 @@
  */
 namespace AppBundle\EventListener;
 
-use FOS\UserBundle\Event\GetResponseUserEvent;
+use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,19 +19,19 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * RegistrationConfirmedListener class.
+ * PasswordResettingListener class.
  *
  * @category Listener
  * @package  Listener
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
-class RegistrationConfirmedListener implements EventSubscriberInterface
+class PasswordResettingListener implements EventSubscriberInterface
 {
     private $_router;
     private $_session;
 
     /**
-     * EmailConfirmationListener constructor.
+     * PasswordResettingListener constructor.
      *
      * @param UrlGeneratorInterface $router  Router to redirect to route
      * @param SessionInterface      $session Using session for flash
@@ -44,34 +44,45 @@ class RegistrationConfirmedListener implements EventSubscriberInterface
     }
 
     /**
-     * Check registration success event from FOSUser
+     * Check password resetting success event from FOSUser
      *
      * @return array
      */
     public static function getSubscribedEvents()
     {
         return [
-            FOSUserEvents::REGISTRATION_CONFIRM => [
-                ['onRegistrationConfirm', -10],
+            FOSUserEvents::RESETTING_RESET_SUCCESS => [
+                ['onPasswordResettingSuccess', -10],
             ],
         ];
     }
 
     /**
-     * Redirect on inscription index after registration
+     * Redirect to profile route with a flashbag
      *
-     * @param GetResponseUserEvent $event catching event
+     * @param FormEvent $event catching event
      *
      * @return void
      */
-    public function onRegistrationConfirm(GetResponseUserEvent $event)
+    public function onPasswordResettingSuccess(FormEvent $event)
     {
+        /**
+         * Getting current user
+         *
+         * @var $user \FOS\UserBundle\Model\UserInterface
+         */
+        $user = $event->getForm()->getData();
+
+        $user->setConfirmationToken(null);
+        $user->setPasswordRequestedAt(null);
+        $user->setEnabled(true);
+
         $this->_session->getFlashBag()->add(
-            'registrationconfirmed',
-            'Votre compte est validé. Vous pouvez désormais créer votre structure 
-            eSport ou sponsoriser des offres sur Galibelum.'
+            'resettingsuccess',
+            'Votre mot de passe a bien été réinitialisé.'
         );
-        $url = $this->_router->generate('inscription_index');
+
+        $url = $this->_router->generate('fos_user_profile_edit');
         $event->setResponse(new RedirectResponse($url));
     }
 }

@@ -2,20 +2,20 @@
 /**
  * ActivityController File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category ActivityController
  * @package  Controller
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
+
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Activity;
 use AppBundle\Form\ActivityType;
 use AppBundle\Service\FileUploaderService;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -33,15 +33,22 @@ class ActivityController extends Controller
     /**
      * Lists all activity entities.
      *
-     * @param Request $request Edit posted info
-     *
-     * @Route("/",    name="activity_index")
-     * @Method("GET")
+     * @Route("/", methods={"GET"}, name="activity_index")
      *
      * @return Response A Response instance
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
+        if ($this->getUser()->hasRole('ROLE_MANAGER')
+            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
+        if ($this->getUser()->getOrganization()->getOrganizationActivity()->isEmpty()) {
+
+            return $this->redirectToRoute('activity_new');
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $activities = $em->getRepository('AppBundle:Activity')->findBy(
@@ -50,32 +57,32 @@ class ActivityController extends Controller
             )
         );
 
-        $request->getSession()
-            ->getFlashBag()
-            ->add(
-                "warning", "Pour faire une offre, faites votre choix parmi la liste
-                 des activités présentées ci-dessous puis cliquez sur le bouton 
-                 Créer une offre."
-            );
-
         return $this->render(
             'activity/index.html.twig', array(
                 'activities' => $activities,
             )
         );
+
+
     }
 
     /**
      * Creates a new activity entity.
      *
-     * @param Request $request Delete posted info
+     * @param Request $request New posted info
      *
-     * @return         Response A Response instance
-     * @Route("/new",  name="activity_new")
-     * @Method({"GET", "POST"})
+     * @Route("/new", methods={"GET", "POST"}, name="activity_new")
+     *
+     * @return Response A Response instance
      */
     public function newAction(Request $request)
     {
+        if ($this->getUser()->hasRole('ROLE_MANAGER')
+            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
+
         $activity = new Activity();
         $form = $this->createForm(ActivityType::class, $activity);
         $form->remove('uploadPdf');
@@ -89,18 +96,19 @@ class ActivityController extends Controller
                 ->setOrganizationActivities($organization)
                 ->setNameCanonical(strtolower($activity->getName()));
 
-            $request->getSession()
-                ->getFlashBag()
-                ->add(
-                    'pdf', "Vous pouvez ajouter un PDF pour décrire votre activité"
+            $this
+                ->addFlash(
+                    'pdf',
+                    "Vous pouvez ajouter un PDF pour décrire votre activité"
                 );
 
             $em->persist($activity);
             $em->flush();
 
             return $this->redirectToRoute(
-                'activity_edit',
-                array('id' => $activity->getId())
+                'activity_edit', array(
+                    'id' => $activity->getId(),
+                )
             );
         }
 
@@ -117,13 +125,18 @@ class ActivityController extends Controller
      *
      * @param Activity $activity The activity entity
      *
-     * @Route("/{id}", name="activity_show")
-     * @Method("GET")
+     * @Route("/{id}", methods={"GET", "POST"}, name="activity_show")
      *
      * @return Response A Response instance
      */
     public function showAction(Activity $activity)
     {
+        if ($this->getUser()->hasRole('ROLE_MANAGER')
+            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
+
         return $this->render(
             'activity/show.html.twig', array(
                 'activity' => $activity,
@@ -134,55 +147,65 @@ class ActivityController extends Controller
     /**
      * Displays a form to edit an existing activity entity.
      *
-     * @param Request             $request             Delete posted info
+     * @param Request             $request             Edit posted info
      * @param Activity            $activity            The activity entity
      * @param FileUploaderService $fileUploaderService Uploader Service
      *
+     * @Route("/{id}/edit", methods={"GET", "POST"}, name="activity_edit")
      * @return              Response A Response instance
-     * @Route("/{id}/edit", name="activity_edit")
-     * @Method({"GET",      "POST"})
      */
     public function editAction(Request $request, Activity $activity,
-        FileUploaderService $fileUploaderService
+                               FileUploaderService $fileUploaderService
     ) {
-        $fileName = $activity->getUploadPdf();
-  
-        $deleteForm = $this->_createDeleteForm($activity);
-        $editForm = $this->createForm(ActivityType::class, $activity);
-        $editForm->handleRequest($request);
-
         $user = $this->getUser();
-        $organizationId = $user->getOrganization()->getId();
 
-        // Var for the file name
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $file = $activity->getUploadPdf();
-
-            // Check if the file exist and set the new or old value
-            if ($file !== null) {
-                $filePdf = $fileUploaderService->upload(
-                    $file, $activity->getId(), $organizationId);
-            }
-
-            $activity->setUploadPdf($filePdf);
-
-            $this->getDoctrine()->getManager()->flush();
-
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', 'Vos modifications ont bien été prises en compte.');
-
-            return $this->redirectToRoute('dashboard_index');
+        if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')) {
+            return $this->redirectToRoute('manager_contract_list');
         }
 
+        if ($user->getOrganization()->getOrganizationActivity()->contains($activity)
+        ) {
 
-        return $this->render(
-            'activity/edit.html.twig', array(
-                'activity' => $activity,
-                'edit_form' => $editForm->createView(),
-                'delete_form' => $deleteForm->createView(),
-            )
-        );
+            $fileName = $activity->getUploadPdf();
+
+            $deleteForm = $this->_createDeleteForm($activity);
+            $editForm = $this->createForm(ActivityType::class, $activity);
+            $editForm->handleRequest($request);
+
+            $organizationId = $this->getUser()->getOrganization()->getId();
+
+            // Var for the file name
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $file = $activity->getUploadPdf();
+
+                // Check if the file exist and set the new or old value
+                $filePdf = $file!=null ? $filePdf = $fileUploaderService->upload(
+                    $file, $organizationId, $activity->getId()
+                ) : $fileName;
+
+                $this
+                    ->addFlash(
+                        'success',
+                        "Vos modifications ont bien été prises en compte."
+                    );
+
+                $activity->setUploadPdf($filePdf);
+
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('dashboard_index');
+            }
+
+            return $this->render(
+                'activity/edit.html.twig', array(
+                    'activity' => $activity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                )
+            );
+        }
+
+        return $this->redirectToRoute('redirect');
     }
 
     /**
@@ -191,23 +214,35 @@ class ActivityController extends Controller
      * @param Request  $request  Delete posted info
      * @param Activity $activity The activity entity
      *
-     * @Route("/{id}",   name="activity_delete")
-     * @Method("DELETE")
+     * @Route("/{id}", methods={"DELETE"}, name="activity_delete")
      *
      * @return Response A Response instance
      */
     public function deleteAction(Request $request, Activity $activity)
     {
-        $form = $this->_createDeleteForm($activity);
-        $form->handleRequest($request);
+        if ($this->getUser()->hasRole('ROLE_MANAGER')
+            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+        ) {
+            return $this->redirectToRoute('manager_contract_list');
+        }
+        $user = $this->getUser();
+        if ($user->getOrganization()->getOrganizationActivity()->contains($activity)
+        ) {
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($activity);
-            $em->flush();
+            $form = $this->_createDeleteForm($activity);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($activity);
+                $em->flush();
+            }
+
+            return $this->redirectToRoute('activity_index');
         }
 
-        return $this->redirectToRoute('activity_index');
+        return $this->redirectToRoute('redirect');
+
     }
 
     /**
@@ -222,8 +257,9 @@ class ActivityController extends Controller
         return $this->createFormBuilder()
             ->setAction(
                 $this->generateUrl(
-                    'activity_delete',
-                    array('id' => $activity->getId())
+                    'activity_delete', array(
+                        'id' => $activity->getId(),
+                    )
                 )
             )
             ->setMethod('DELETE')
