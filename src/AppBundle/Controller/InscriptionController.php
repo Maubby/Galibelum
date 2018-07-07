@@ -34,24 +34,22 @@ class InscriptionController extends Controller
      */
     public function indexAction()
     {
-        $user = $this->getUser();
-        if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')
+        if ($this->getUser()->hasRole('ROLE_STRUCTURE')
+            || $this->getUser()->hasRole('ROLE_COMPANY')
+        ) {
+            if ($this->getUser()->getOrganization->getIsActive() === 0
+            ) {
+                return $this->redirectToRoute('waiting_index');
+            } elseif ($this->getUser()->hasRole('ROLE_STRUCTURE')
+            ) {
+                return $this->redirectToRoute('dashboard_index');
+            } else {
+                return $this->redirectToRoute('search_index');
+            }
+        } elseif ($this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+            || $this->getUser()->hasRole('ROLE_MANAGER')
         ) {
             return $this->redirectToRoute('manager_contract_list');
-        } elseif ($user->hasRole('ROLE_STRUCTURE')
-            && $user->getOrganization()->getIsActive() === 1
-            || $user->hasRole('ROLE_COMPANY')
-            && $user->getOrganization()->getIsActive() === 1
-        ) {
-            return $this->redirectToRoute('dashboard_index');
-
-        } elseif ($user->hasRole('ROLE_STRUCTURE')
-            && $user->getOrganization()->getIsActive() === 0
-            || $user->hasRole('ROLE_COMPANY')
-            && $user->getOrganization()->getIsActive() === 0
-        ) {
-            return $this->redirectToRoute('waiting_index');
-
         } else {
             return $this->render('inscription/index.html.twig');
         }

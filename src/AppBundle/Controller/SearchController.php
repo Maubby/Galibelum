@@ -13,7 +13,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Activity;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -42,12 +42,6 @@ class SearchController extends Controller
             && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
             $session = $request->getSession();
-            $user = $this->getUser();
-            if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')
-            ) {
-                return $this->redirectToRoute('manager_contract_list');
-            }
-
             return $this->render(
                 'search/index.html.twig', array(
                     'name' => $session->get('name'),
@@ -71,55 +65,56 @@ class SearchController extends Controller
      */
     public function searchAction(Request $request)
     {
-        $session = $request->getSession();
-
-        $user = $this->getUser();
-
-        if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')
+        if ($this->getUser()->hasRole('ROLE_STRUCTURE')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+            || $this->getUser()->hasRole('ROLE_COMPANY')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
-            return $this->redirectToRoute('manager_contract_list');
-        }
+            $session = $request->getSession();
 
-        if ($request->get('name'))
-            $session->set('name', $request->get('name'));
-        else
-            $session->set('name', "");
+            if ($request->get('name')) {
+                $session->set('name', $request->get('name'));
+            } else {
+                $session->set('name', "");
+            }
 
 
-        $request->get('type')
-            ? $session->set('type', $request->get('type'))
-            : $session->set('type', "0");
+            $request->get('type')
+                ? $session->set('type', $request->get('type'))
+                : $session->set('type', "0");
 
-        $request->get('amount-start')
-            ? $session->set('amount-start', $request->get('amount-start'))
-            : $session->set('amount-start', 0);
-        $request->get('amount-end')
-            ? $session->set('amount-end', $request->get('amount-end'))
-            : $session->set('amount-end', 100000);
+            $request->get('amount-start')
+                ? $session->set('amount-start', $request->get('amount-start'))
+                : $session->set('amount-start', 0);
+            $request->get('amount-end')
+                ? $session->set('amount-end', $request->get('amount-end'))
+                : $session->set('amount-end', 100000);
 
-        $request->get('date')
-            ? $session->set('date', new \DateTime($request->get('date')))
-            : $session->set('date', new \DateTime('now'));
+            $request->get('date')
+                ? $session->set('date', new \DateTime($request->get('date')))
+                : $session->set('date', new \DateTime('now'));
 
-        $em = $this->getDoctrine()->getManager();
-        $activityList = $em->getRepository(Activity::class)
-            ->search(
-                $session->get('name'),
-                $session->get('type'),
-                $session->get('date'),
-                $session->get('amount-start'),
-                $session->get('amount-end')
+            $em = $this->getDoctrine()->getManager();
+            $activityList = $em->getRepository(Activity::class)
+                ->search(
+                    $session->get('name'),
+                    $session->get('type'),
+                    $session->get('date'),
+                    $session->get('amount-start'),
+                    $session->get('amount-end')
+                );
+
+            return $this->render(
+                'search/index.html.twig', array(
+                    'activitylist' => $activityList,
+                    'date' => $session->get('date'),
+                    'name' => $session->get('name'),
+                    'type' => $session->get('type'),
+                    'amountStart' => $session->get('amount-start'),
+                    'amountEnd' => $session->get('amount-end')
+                )
             );
-
-        return $this->render(
-            'search/index.html.twig', array(
-                'activitylist' => $activityList,
-                'date' => $session->get('date'),
-                'name' => $session->get('name'),
-                'type' => $session->get('type'),
-                'amountStart' => $session->get('amount-start'),
-                'amountEnd' => $session->get('amount-end')
-            )
-        );
+        }
+        return $this->redirectToRoute('redirect');
     }
 }

@@ -68,6 +68,9 @@
                             </li>
                         </ul>
                     </div>
+                    {% if is_granted('ROLE_STRUCTURE') %}
+                        <a href="{{ path('activity_edit', { 'id': activity.id }) }}">Modifier l'activité</a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -83,7 +86,11 @@
                                     {#<p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.partnershipNumber }}</p>#}
                                     <p class="panel-item"><strong>Date d'expiration : </strong>{{ offer.date|date("d M Y") }}</p>
                                     <p class="panel-item">{{ offer.description }}</p>
-                                    <a href="{{ path('offer_relation', { 'id': offer.id }) }}" class="btn btn-primary btn-sm">Se mettre en relation</a>
+                                    {% if is_granted('ROLE_STRUCTURE') %}
+                                        <a href="{{ path('offer_edit', { 'id': offer.id }) }}">Modifier l'offre</a>
+                                    {% else %}
+                                        <a href="{{ path('offer_relation', { 'id': offer.id }) }}" class="btn btn-primary btn-sm">Se mettre en relation</a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

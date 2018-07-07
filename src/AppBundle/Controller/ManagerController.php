@@ -29,24 +29,6 @@ use Symfony\Component\HttpFoundation\Response;
 class ManagerController extends Controller
 {
     /**
-     * Landing page for account managers.
-     *
-     * @Route("/", methods={"GET"}, name="manager_contract")
-     *
-     * @return Response A Response instance
-     */
-    public function dashboardAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
-        return $this->render(
-            'manager/contract.html.twig', array(
-                'users' => $this->getUser(),
-            )
-        );
-    }
-
-    /**
      * Lists all organization entities.
      *
      * @Route("/organization", methods={"GET"}, name="manager_organization_list")
@@ -56,14 +38,13 @@ class ManagerController extends Controller
     public function organizationListAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $organizations = $em
             ->getRepository('AppBundle:Organization')
             ->findAll();
 
         return $this->render(
             'manager/index.html.twig', array(
-                'organizations' => $organizations,
+                'organizations' => $organizations
             )
         );
     }
@@ -80,11 +61,10 @@ class ManagerController extends Controller
      */
     public function activateAction(Organization $organization)
     {
-        $em = $this->getDoctrine()->getManager();
         $organization->setIsActive(1);
-        $em->persist($organization);
         $organization->setManagers($this->getUser());
-        $em->flush();
+        $this->getDoctrine()->getManager()->persist($organization);
+        $this->getDoctrine()->getManager()->flush();
 
         return $this->redirectToRoute('manager_organization_list');
     }
@@ -100,10 +80,9 @@ class ManagerController extends Controller
      */
     public function disableAction(Organization $organization)
     {
-        $em = $this->getDoctrine()->getManager();
         $organization->setIsActive(2);
-        $em->persist($organization);
-        $em->flush();
+        $this->getDoctrine()->getManager()->persist($organization);
+        $this->getDoctrine()->getManager()->flush();
 
         return $this->redirectToRoute('manager_organization_list');
     }
@@ -118,15 +97,15 @@ class ManagerController extends Controller
     public function contractAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $offers = $em->getRepository(Offer::class)->findBy(array(
+        $offers = $em->getRepository(Offer::class)->findBy(
+            array(
             'id' => $this->getUser()->getManager()->getValues()
-        ));
-
+            )
+        );
 
         return $this->render(
             'manager/contract.html.twig', array(
-                'offers' => $offers,
+                'offers' => $offers
             )
         );
     }
@@ -145,10 +124,9 @@ class ManagerController extends Controller
     public function statusAction(Offer $offer, int $status)
     {
         if ($status >= 0 && $status <= 5) {
-            $em = $this->getDoctrine()->getManager();
             $offer->setStatus($status);
-            $em->persist($offer);
-            $em->flush();
+            $this->getDoctrine()->getManager()->persist($offer);
+            $this->getDoctrine()->getManager()->flush();
         }
 
         return $this->redirectToRoute(

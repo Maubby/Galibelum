@@ -39,23 +39,10 @@ class ActivityController extends Controller
      */
     public function indexAction()
     {
-        if ($this->getUser()->hasRole('ROLE_MANAGER')
-            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
-        ) {
-            return $this->redirectToRoute('manager_contract_list');
-        }
-        if ($this->getUser()->getOrganization()->getOrganizationActivity()->isEmpty()) {
-
-            return $this->redirectToRoute('activity_new');
-        }
         if ($this->getUser()->hasRole('ROLE_STRUCTURE')
             && $this->getUser()->getOrganization()->getIsActive() === 1
-            || $this->getUser()->hasRole('ROLE_COMPANY')
-            && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
-
             $em = $this->getDoctrine()->getManager();
-
             $activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization()
@@ -64,14 +51,11 @@ class ActivityController extends Controller
 
             return $this->render(
                 'activity/index.html.twig', array(
-                    'activities' => $activities,
+                    'activities' => $activities
                 )
             );
         }
         return $this->redirectToRoute('redirect');
-
-
-
     }
 
     /**
@@ -85,17 +69,9 @@ class ActivityController extends Controller
      */
     public function newAction(Request $request)
     {
-        if ($this->getUser()->hasRole('ROLE_MANAGER')
-            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
-        ) {
-            return $this->redirectToRoute('manager_contract_list');
-        }
         if ($this->getUser()->hasRole('ROLE_STRUCTURE')
             && $this->getUser()->getOrganization()->getIsActive() === 1
-            || $this->getUser()->hasRole('ROLE_COMPANY')
-            && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
-
             $activity = new Activity();
             $form = $this->createForm(ActivityType::class, $activity);
             $form->remove('uploadPdf');
@@ -104,23 +80,20 @@ class ActivityController extends Controller
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-
                 $activity
                     ->setOrganizationActivities($organization)
                     ->setNameCanonical(strtolower($activity->getName()));
 
-                $this
-                    ->addFlash(
-                        'pdf',
-                        "Vous pouvez ajouter un PDF pour décrire votre activité"
-                    );
-
+                $this->addFlash(
+                    'pdf',
+                    "Vous pouvez ajouter un PDF pour décrire votre activité"
+                );
                 $em->persist($activity);
                 $em->flush();
 
                 return $this->redirectToRoute(
                     'activity_edit', array(
-                        'id' => $activity->getId(),
+                        'id' => $activity->getId()
                     )
                 );
             }
@@ -128,7 +101,7 @@ class ActivityController extends Controller
             return $this->render(
                 'activity/new.html.twig', array(
                     'activity' => $activity,
-                    'form' => $form->createView(),
+                    'form' => $form->createView()
                 )
             );
         }
@@ -146,17 +119,18 @@ class ActivityController extends Controller
      */
     public function showAction(Activity $activity)
     {
-        if ($this->getUser()->hasRole('ROLE_MANAGER')
-            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+        if ($this->getUser()->hasRole('ROLE_STRUCTURE')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+            || $this->getUser()->hasRole('ROLE_COMPANY')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
-            return $this->redirectToRoute('manager_contract_list');
+            return $this->render(
+                'activity/show.html.twig', array(
+                    'activity' => $activity
+                )
+            );
         }
-
-        return $this->render(
-            'activity/show.html.twig', array(
-                'activity' => $activity,
-            )
-        );
+        return $this->redirectToRoute('redirect');
     }
 
     /**
@@ -170,17 +144,11 @@ class ActivityController extends Controller
      * @return              Response A Response instance
      */
     public function editAction(Request $request, Activity $activity,
-                               FileUploaderService $fileUploaderService
+        FileUploaderService $fileUploaderService
     ) {
         $user = $this->getUser();
-
-        if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')) {
-            return $this->redirectToRoute('manager_contract_list');
-        }
-
         if ($user->getOrganization()->getOrganizationActivity()->contains($activity)
         ) {
-
             $fileName = $activity->getUploadPdf();
 
             $deleteForm = $this->_createDeleteForm($activity);
@@ -198,14 +166,11 @@ class ActivityController extends Controller
                     $file, $organizationId, $activity->getId()
                 ) : $fileName;
 
-                $this
-                    ->addFlash(
-                        'success',
-                        "Vos modifications ont bien été prises en compte."
-                    );
-
+                $this->addFlash(
+                    'success',
+                    "Vos modifications ont bien été prises en compte."
+                );
                 $activity->setUploadPdf($filePdf);
-
                 $this->getDoctrine()->getManager()->flush();
 
                 return $this->redirectToRoute('dashboard_index');
@@ -215,11 +180,10 @@ class ActivityController extends Controller
                 'activity/edit.html.twig', array(
                     'activity' => $activity,
                     'edit_form' => $editForm->createView(),
-                    'delete_form' => $deleteForm->createView(),
+                    'delete_form' => $deleteForm->createView()
                 )
             );
         }
-
         return $this->redirectToRoute('redirect');
     }
 
@@ -235,15 +199,9 @@ class ActivityController extends Controller
      */
     public function deleteAction(Request $request, Activity $activity)
     {
-        if ($this->getUser()->hasRole('ROLE_MANAGER')
-            || $this->getUser()->hasRole('ROLE_SUPER_ADMIN')
-        ) {
-            return $this->redirectToRoute('manager_contract_list');
-        }
         $user = $this->getUser();
         if ($user->getOrganization()->getOrganizationActivity()->contains($activity)
         ) {
-
             $form = $this->_createDeleteForm($activity);
             $form->handleRequest($request);
 
@@ -252,12 +210,9 @@ class ActivityController extends Controller
                 $em->remove($activity);
                 $em->flush();
             }
-
             return $this->redirectToRoute('activity_index');
         }
-
         return $this->redirectToRoute('redirect');
-
     }
 
     /**
@@ -273,7 +228,7 @@ class ActivityController extends Controller
             ->setAction(
                 $this->generateUrl(
                     'activity_delete', array(
-                        'id' => $activity->getId(),
+                        'id' => $activity->getId()
                     )
                 )
             )

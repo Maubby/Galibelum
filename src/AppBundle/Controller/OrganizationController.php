@@ -11,7 +11,6 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Organization;
-use AppBundle\Entity\User;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,34 +37,27 @@ class OrganizationController extends Controller
      */
     public function dashboardAction()
     {
-        $user = $this->getUser();
-        if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')
+        if ($this->getUser()->hasRole('ROLE_STRUCTURE')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
-            return $this->redirectToRoute('manager_contract_list');
-
-        } elseif ($user->hasRole('ROLE_STRUCTURE')
-            && $user->getOrganization()->getIsActive() === 1)
-        {
-            $organization = $user->getOrganization();
-
+            $organization = $this->getUser()->getOrganization();
             $em = $this->getDoctrine()->getManager();
             $offers = $em
                 ->getRepository('AppBundle:Offer')
                 ->findBy(
                     array(
-                        'id' => $this->getUser()->getOrganization()->getOrganizationActivity()->getValues()
+                        'id' => $this->getUser()->getOrganization()
+                            ->getOrganizationActivity()->getValues()
                     )
                 );
 
             return $this->render(
                 'dashboard/index.html.twig', array(
-                    'user' => $user,
                     'organization' => $organization,
-                    'offers' => $offers,
+                    'offers' => $offers
                 )
             );
         }
-
         return $this->redirectToRoute('redirect');
     }
 
@@ -82,13 +74,9 @@ class OrganizationController extends Controller
      */
     public function newAction(Request $request, int $choose = 0)
     {
-
-        $user = $this->getUser();
-        if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')
+        if ($this->getUser()->getOrganization() === null
+            && $this->getUser()->hasRole('ROLE_USER')
         ) {
-            return $this->redirectToRoute('manager_contract_list');
-
-        } elseif ($user->getOrganization() === null ) {
             $organization = new Organization();
             if ($choose === 1) {
                 $form = $this
@@ -107,7 +95,7 @@ class OrganizationController extends Controller
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $organization->setUser($user);
+                $organization->setUser($this->getUser());
                 $organization->setNameCanonical(
                     strtolower(
                         str_replace(
@@ -115,18 +103,18 @@ class OrganizationController extends Controller
                         )
                     )
                 );
-                $user->setOrganization($organization);
-                $choose === 0 ? $user->setRoles(array('ROLE_STRUCTURE'))
-                    : $user->setRoles(array('ROLE_COMPANY'));
+                $this->getUser()->setOrganization($organization);
+                $choose === 0 ? $this->getUser()->setRoles(array('ROLE_STRUCTURE'))
+                    : $this->getUser()->setRoles(array('ROLE_COMPANY'));
 
                 // Persisting user according to its new organization
                 $em->persist($organization);
-                $em->persist($user);
+                $em->persist($this->getUser());
                 $em->flush();
 
                 return $this->redirectToRoute(
                     'dashboard_index',
-                    array('id' => $organization->getId(),
+                    array('id' => $organization->getId()
                     )
                 );
             }
@@ -135,7 +123,7 @@ class OrganizationController extends Controller
                 'organization/new.html.twig', array(
                     'organization' => $organization,
                     'form' => $form->createView(),
-                    'choose' => $choose,
+                    'choose' => $choose
                 )
             );
         }
@@ -154,14 +142,10 @@ class OrganizationController extends Controller
      */
     public function editAction(Request $request, Organization $organization)
     {
-        $user = $this->getUser();
-        if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')
+        if ($this->getUser()->getOrganization()->getId() === $organization->getId()
         ) {
-            return $this->redirectToRoute('manager_contract_list');
-
-        } elseif ($user->getOrganization()->getId() === $organization->getId()) {
             $deleteForm = $this->_createDeleteForm($organization);
-            if ($user->hasRole('ROLE_COMPANY')) {
+            if ($this->getUser()->hasRole('ROLE_COMPANY')) {
                 $editForm = $this
                     ->createForm(
                         'AppBundle\Form\OrganizationType', $organization
@@ -177,12 +161,10 @@ class OrganizationController extends Controller
 
             if ($editForm->isSubmitted() && $editForm->isValid()) {
                 $this->getDoctrine()->getManager()->flush();
-
-                $this
-                    ->addFlash(
-                        'success',
-                        "Vos modifications ont bien été prises en compte."
-                    );
+                $this->addFlash(
+                    'success',
+                    "Vos modifications ont bien été prises en compte."
+                );
 
                 return $this->redirectToRoute(
                     'dashboard_index',
@@ -194,11 +176,10 @@ class OrganizationController extends Controller
                 'organization/edit.html.twig', array(
                     'organization' => $organization,
                     'edit_form' => $editForm->createView(),
-                    'delete_form' => $deleteForm->createView(),
+                    'delete_form' => $deleteForm->createView()
                 )
             );
         }
-
         return $this->redirectToRoute('redirect');
     }
 
@@ -214,33 +195,27 @@ class OrganizationController extends Controller
      */
     public function deleteAction(Request $request, Organization $organization)
     {
-
-        $user = $this->getUser();
-        if ($user->hasRole('ROLE_MANAGER') || $user->hasRole('ROLE_SUPER_ADMIN')
+        if ($this->getUser()->getOrganization()->getId() === $organization->getId()
         ) {
-            return $this->redirectToRoute('manager_contract_list');
-
-        } elseif ($user->getOrganization()->getId() === $organization->getId()) {
             $form = $this->_createDeleteForm($organization);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $organization->setIsActive(2);
-                $user->setEnabled(false);
+                $this->getUser()->setEnabled(false);
                 $em->persist($organization);
-                $em->persist($user);
+                $em->persist($this->getUser());
                 $em->flush();
             }
-            $this
-                ->addFlash(
-                    'success',
-                    "Votre compte a bien été désactivé. 
+            $this->addFlash(
+                'success',
+                "Votre compte a bien été désactivé. 
             Si vous souhaitez nous rejoindre à nouveau, contactez Galibelum."
-                );
-
-            return $this->redirectToRoute('redirect');
+            );
+            $this->redirectToRoute('fos_user_security_login');
         }
+        return $this->redirectToRoute('redirect');
     }
 
     /**

@@ -33,31 +33,22 @@ class DefaultController extends Controller
      */
     public function redirectAction()
     {
-        $user = $this->getUser();
-
-        if ($user->hasRole('ROLE_STRUCTURE')
-            && $user->getOrganization()->getIsActive() === 1)
-        {
-            return $this->redirectToRoute('dashboard_index');
-
-        } elseif ($user->hasRole('ROLE_STRUCTURE')
-            && $user->getOrganization()->getIsActive() === 0
-            || $user->hasRole('ROLE_COMPANY')
-            && $user->getOrganization()->getIsActive() === 0
+        if ($this->getUser()->hasRole('ROLE_STRUCTURE')
+            || $this->getUser()->hasRole('ROLE_COMPANY')
         ) {
-            return $this->redirectToRoute('waiting_index');
-
-        } elseif ($user->hasRole('ROLE_COMPANY')
-            && $user->getOrganization()->getIsActive() === 1
+            if ($this->getUser()->getOrganization()->getIsActive() === 0
+            ) {
+                return $this->redirectToRoute('waiting_index');
+            } elseif ($this->getUser()->hasRole('ROLE_STRUCTURE')
+            ) {
+                return $this->redirectToRoute('dashboard_index');
+            } else {
+                return $this->redirectToRoute('search_index');
+            }
+        } elseif ($this->getUser()->hasRole('ROLE_SUPER_ADMIN')
+            || $this->getUser()->hasRole('ROLE_MANAGER')
         ) {
-            return $this->redirectToRoute('search_index');
-
-        } elseif ($user->hasRole('ROLE_MANAGER')) {
-            return $this->redirectToRoute('manager_index');
-
-        } elseif ($user->hasRole('ROLE_SUPER_ADMIN')) {
-            return $this->redirectToRoute('admin_index');
-
+            return $this->redirectToRoute('manager_contract_list');
         } else {
             return $this->redirectToRoute('inscription_index');
         }

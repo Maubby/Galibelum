@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\UserBundle\Form\Factory\FactoryInterface;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Overriding controller managing the user profile.
@@ -44,8 +43,9 @@ class ProfileController extends BaseController
      */
     public function showAction()
     {
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
+        if (!is_object($this->getUser())
+            || !$this->getUser() instanceof UserInterface
+        ) {
             throw new AccessDeniedException(
                 'This user does not have access to this section.'
             );
@@ -53,7 +53,7 @@ class ProfileController extends BaseController
 
         return $this->render(
             '@FOSUser/Profile/show.html.twig', array(
-                'user' => $user,
+                'user' => $this->getUser(),
             )
         );
     }
@@ -67,8 +67,9 @@ class ProfileController extends BaseController
      */
     public function editAction(Request $request)
     {
-        $user = $this->getUser();
-        if (!is_object($user) || !$user instanceof UserInterface) {
+        if (!is_object($this->getUser())
+            || !$this->getUser() instanceof UserInterface
+        ) {
             throw new AccessDeniedException(
                 'This user does not have access to this section.'
             );
@@ -81,11 +82,11 @@ class ProfileController extends BaseController
          */
         $formFactory = $this->get('fos_user.profile.form.factory');
         $form = $formFactory->createForm();
-        $form->setData($user);
+        $form->setData($this->getUser());
 
         $formFactoryPassword = $this->get('fos_user.change_password.form.factory');
         $formPassword = $formFactoryPassword->createForm();
-        $formPassword->setData($user);
+        $formPassword->setData($this->getUser());
 
         $form->handleRequest($request);
         $formPassword->handleRequest($request);
@@ -97,7 +98,7 @@ class ProfileController extends BaseController
              * @var $userManager UserManagerInterface
              */
             $userManager = $this->get('fos_user.user_manager');
-            $userManager->updateUser($user);
+            $userManager->updateUser($this->getUser());
 
             $url = $this->generateUrl('fos_user_profile_show');
             $response = new RedirectResponse($url);
@@ -115,7 +116,7 @@ class ProfileController extends BaseController
              * @var $userManager UserManagerInterface
              */
             $userManager = $this->get('fos_user.user_manager');
-            $userManager->updateUser($user);
+            $userManager->updateUser($this->getUser());
 
             $url = $this->generateUrl('fos_user_profile_show');
             $response = new RedirectResponse($url);
@@ -124,7 +125,6 @@ class ProfileController extends BaseController
                 "edited",
                 "Votre nouveau mot de passe a bien été pris en compte."
             );
-
             return $response;
         }
 
@@ -132,29 +132,8 @@ class ProfileController extends BaseController
             '@FOSUser/Profile/edit.html.twig', array(
                 'form' => $form->createView(),
                 'formPassword' => $formPassword->createView(),
-                'user' => $user,
+                'user' => $this->getUser()
             )
         );
-    }
-
-    /**
-     * Deletes a user entity.
-     *
-     * @Route("/profile/delete/", methods={"GET"}, name="profile_delete")
-     *
-     * @return Response A Response instance
-     */
-    public function deleteUser()
-    {
-        $user = $this->getUser();
-        if ($user->hasRole('ROLE_USER')) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($user);
-            $em->flush();
-            $this->addFlash('danger', 'Votre compte a bien été supprimé.');
-            return $this->redirectToRoute('homepage');
-        } else {
-            return $this->redirectToRoute('fos_user_profile_show');
-        }
     }
 }
