@@ -125,6 +125,19 @@ class ManagerController extends Controller
     {
         if ($status >= 0 && $status <= 5) {
             $offer->setStatus($status);
+
+            if ($offer->getStatus() === 2) {
+                $partnersNn = $offer->getPartnershipNumber();
+                array_pop($partnersNn);
+                $offer->setPartnershipNumber($partnersNn);
+            }
+            if ($offer->getStatus() === 5) {
+                $partnersNn = $offer->getPartnershipNumber();
+                array_push($partnersNn, 'null');
+                $offer->setPartnershipNumber($partnersNn);
+
+            }
+
             $this->getDoctrine()->getManager()->persist($offer);
             $this->getDoctrine()->getManager()->flush();
         }

@@ -37,6 +37,17 @@ class Offer
 
     /**
      *
+     * @var array
+     *
+     * @ORM\Column(name="partnershipNumber", type="array")
+     *
+     * @Assert\NotBlank()
+     */
+    private $partnershipNumber;
+
+
+    /**
+     *
      * @var /date
      *
      * @ORM\Column(name="creationDate", type="date", nullable=false)
@@ -457,5 +468,29 @@ class Offer
     public function getContracts()
     {
         return $this->contracts;
+    }
+
+    /**
+     * Set partnershipNumber.
+     *
+     * @param array|int $partnershipNumber
+     *
+     * @return Offer
+     */
+    public function setPartnershipNumber($partnershipNumber)
+    {
+        $this->partnershipNumber = $partnershipNumber;
+
+        return $this;
+    }
+
+    /**
+     * Get partnershipNumber.
+     *
+     * @return array
+     */
+    public function getPartnershipNumber()
+    {
+        return $this->partnershipNumber;
     }
 }

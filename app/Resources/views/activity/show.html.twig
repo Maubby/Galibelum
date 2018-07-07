@@ -85,6 +85,7 @@
                                     <p class="panel-item"><strong>Montant : </strong>{{ offer.amount }} €</p>
                                     {#<p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.partnershipNumber }}</p>#}
                                     <p class="panel-item"><strong>Date d'expiration : </strong>{{ offer.date|date("d M Y") }}</p>
+                                    <p class="panel-item"><strong>Nombre de participant(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
                                     <p class="panel-item">{{ offer.description }}</p>
                                     {% if is_granted('ROLE_STRUCTURE') %}
                                         <a href="{{ path('offer_edit', { 'id': offer.id }) }}">Modifier l'offre</a>

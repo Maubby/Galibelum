@@ -120,10 +120,10 @@ class OfferController extends Controller
             );
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $nbPartners = [];
+                $partnershipNumber = [];
 
-                for($i=0; $i < $form['partnershipNumber']->getData();$i++) {
-                    $nbPartners[$i] = 0;
+                for($i=0; $i < $form['partnershipNumber']->getData(); $i++) {
+                    array_push($partnershipNumber, 'null');
                 }
 
                 $em = $this->getDoctrine()->getManager();
@@ -131,7 +131,8 @@ class OfferController extends Controller
                     ->setActivity($activity)
                     ->setNameCanonical(strtolower($activity->getName()))
                     ->setHandlingFee($fees)
-                    ->setDate($offer->getDate()->sub($interval));
+                    ->setDate($offer->getDate()->sub($interval))
+                    ->setPartnershipNumber($partnershipNumber);
                 $em->persist($offer);
                 $em->flush();
 
@@ -170,11 +171,22 @@ class OfferController extends Controller
         $user = $this->getUser();
         if ($user->getOrganization()->getOrganizationActivity()->contains($offer->getActivity())
         ) {
+            $partnershipNb = count($offer->getPartnershipNumber());
+            $offer->setPartnershipNumber($partnershipNb);
+
             $deleteForm = $this->_createDeleteForm($offer);
             $editForm = $this->createForm('AppBundle\Form\OfferType', $offer);
             $editForm->handleRequest($request);
 
             if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $partnershipNumber = [];
+
+                for($i=0; $i < $editForm['partnershipNumber']->getData(); $i++) {
+                    array_push($partnershipNumber, 'null');
+                }
+
+                $offer->setPartnershipNumber($partnershipNumber);
+                $this->getDoctrine()->getManager()->persist($offer);
                 $this->getDoctrine()->getManager()->flush();
 
                 $this->addFlash(
@@ -225,7 +237,7 @@ class OfferController extends Controller
                 )
             );
         }
-        return $this->redirectToRoute('redirect');
+        //return $this->redirectToRoute('redirect');
     }
 
     /**
