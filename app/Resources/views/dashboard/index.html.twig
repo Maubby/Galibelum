@@ -74,15 +74,17 @@
                     <h5><a href="{{ path('offer_index') }}">Ensemble de mes offres</a></h5>
                     <div class="boxing-body">
                         <!-- to show message if offer is empty -->
-                        {% if offers is empty %}
+                        {% for activity in activities %}
+                        {% if activity.Activities is empty %}
                             <p class="text-center text-muted">Créer une offre</p>
                         {% else %}
-                            {% if offers|length < 3 %}
+                            {% if activity.Activities|length < 3 %}
                                 {% include "dashboard/_offer_dashboard.html.twig" %}
                             {% else %}
                                 {% include "dashboard/_offer_carousel_dashboard.html.twig" %}
                             {% endif %}
                         {% endif %}
+                        {% endfor %}
                         <a href="#" class="btn btn-primary backblue-btn mt-10" data-toggle="modal" data-target="#pop-up-offer">Ajouter une offre</a>
                     </div>
                     <!-- Modal introducing the redirection to the activity_index -->

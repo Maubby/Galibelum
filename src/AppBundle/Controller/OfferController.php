@@ -43,15 +43,6 @@ class OfferController extends Controller
         ) {
             $em = $this->getDoctrine()->getManager();
 
-            $offers = $em
-                ->getRepository('AppBundle:Offer')
-                ->findBy(
-                    array(
-                        'id' => $this->getUser()->getOrganization()
-                            ->getOrganizationActivity()->getValues()
-                    )
-                );
-
             $event_activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization(),
@@ -75,7 +66,6 @@ class OfferController extends Controller
 
             return $this->render(
                 'offer/index.html.twig', array(
-                    'offers' => $offers,
                     'event_activities' => $event_activities,
                     'stream_activities' => $stream_activities,
                     'team_activities' => $team_activities
@@ -237,7 +227,7 @@ class OfferController extends Controller
                 )
             );
         }
-        //return $this->redirectToRoute('redirect');
+        return $this->redirectToRoute('redirect');
     }
 
     /**

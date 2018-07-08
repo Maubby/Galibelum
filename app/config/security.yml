@@ -39,6 +39,6 @@ security:
         - { path: ^/search, role: [ROLE_COMPANY, ROLE_STRUCTURE] }
         - { path: ^/activity/[0-9]+, role: [ROLE_COMPANY, ROLE_STRUCTURE] }
         - { path: ^/activity, role: ROLE_STRUCTURE }
-        - { path: ^/offer/[0-9]+/relation, role: ROLE_COMPANY }
+        - { path: ^/offer/[0-9]+/partners, role: ROLE_COMPANY }
         - { path: ^/offer, role: ROLE_STRUCTURE }
         - { path: ^/contract, role: [ROLE_COMPANY, ROLE_STRUCTURE] }

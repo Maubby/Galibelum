@@ -42,19 +42,16 @@ class OrganizationController extends Controller
         ) {
             $organization = $this->getUser()->getOrganization();
             $em = $this->getDoctrine()->getManager();
-            $offers = $em
-                ->getRepository('AppBundle:Offer')
-                ->findBy(
-                    array(
-                        'id' => $this->getUser()->getOrganization()
-                            ->getOrganizationActivity()->getValues()
-                    )
-                );
+            $activities = $em->getRepository('AppBundle:Activity')->findBy(
+                array(
+                    'organizationActivities' => $this->getUser()->getOrganization()
+                )
+            );
 
             return $this->render(
                 'dashboard/index.html.twig', array(
                     'organization' => $organization,
-                    'offers' => $offers
+                    'activities' => $activities
                 )
             );
         }
