@@ -97,15 +97,22 @@ class ManagerController extends Controller
     public function contractAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $offers = $em->getRepository(Offer::class)->findBy(
+
+        $organization = $em->getRepository('AppBundle:Organization')->findBy(
             array(
-            'id' => $this->getUser()->getManager()->getValues()
+                'managers' => $this->getUser()
+            )
+        );
+
+        $offers = $em->getRepository('AppBundle:Offer')->findBy(
+            array(
+                'id' => $organization
             )
         );
 
         return $this->render(
             'manager/contract.html.twig', array(
-                'offers' => $offers
+                'offers' => $offers,
             )
         );
     }
@@ -127,14 +134,10 @@ class ManagerController extends Controller
             $offer->setStatus($status);
 
             if ($offer->getStatus() === 2) {
-                $partnersNn = $offer->getPartnershipNumber();
-                array_pop($partnersNn);
-                $offer->setPartnershipNumber($partnersNn);
+                $offer->removePartnershipNumber();
             }
             if ($offer->getStatus() === 5) {
-                $partnersNn = $offer->getPartnershipNumber();
-                array_push($partnersNn, 'null');
-                $offer->setPartnershipNumber($partnersNn);
+                $offer->addPartnershipNumber();
 
             }
 

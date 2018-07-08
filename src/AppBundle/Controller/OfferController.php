@@ -110,19 +110,13 @@ class OfferController extends Controller
             );
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $partnershipNumber = [];
-
-                for($i=0; $i < $form['partnershipNumber']->getData(); $i++) {
-                    array_push($partnershipNumber, 'null');
-                }
-
                 $em = $this->getDoctrine()->getManager();
                 $offer = $offer
                     ->setActivity($activity)
                     ->setNameCanonical(strtolower($activity->getName()))
                     ->setHandlingFee($fees)
                     ->setDate($offer->getDate()->sub($interval))
-                    ->setPartnershipNumber($partnershipNumber);
+                    ->setPartnershipNb($form['partnershipNumber']->getData());
                 $em->persist($offer);
                 $em->flush();
 
@@ -161,7 +155,7 @@ class OfferController extends Controller
         $user = $this->getUser();
         if ($user->getOrganization()->getOrganizationActivity()->contains($offer->getActivity())
         ) {
-            $partnershipNb = count($offer->getPartnershipNumber());
+            $partnershipNb = $offer->countPartnershipNumber();
             $offer->setPartnershipNumber($partnershipNb);
 
             $deleteForm = $this->_createDeleteForm($offer);
@@ -169,13 +163,7 @@ class OfferController extends Controller
             $editForm->handleRequest($request);
 
             if ($editForm->isSubmitted() && $editForm->isValid()) {
-                $partnershipNumber = [];
-
-                for($i=0; $i < $editForm['partnershipNumber']->getData(); $i++) {
-                    array_push($partnershipNumber, 'null');
-                }
-
-                $offer->setPartnershipNumber($partnershipNumber);
+                $offer->setPartnershipNb($editForm['partnershipNumber']->getData());
                 $this->getDoctrine()->getManager()->persist($offer);
                 $this->getDoctrine()->getManager()->flush();
 

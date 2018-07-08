@@ -1,7 +1,7 @@
 <div id="myCarousel" class="carousel vertical" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
         <!-- Loop for show information activities in item carousel -->
-        {% for activity in organization.OrganizationActivity %}
+        {% for activity in activities %}
             <div class="{% if loop.first %}active{% endif %} item">
                 <div class="panel panel-default">
                     <h5 class="panel-title">

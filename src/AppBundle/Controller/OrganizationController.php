@@ -45,13 +45,28 @@ class OrganizationController extends Controller
             $activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization()
-                )
+                ),
+                array(
+                    'creationDate' => 'ASC'
+                ),
+                6
+            );
+
+            $offers = $em->getRepository('AppBundle:Offer')->findBy(
+                array(
+                    'activity' => $this->getUser()->getOrganization()->getOrganizationActivity()->getValues()
+                ),
+                array(
+                    'creationDate' => 'ASC'
+                ),
+                6
             );
 
             return $this->render(
                 'dashboard/index.html.twig', array(
                     'organization' => $organization,
-                    'activities' => $activities
+                    'activities' => $activities,
+                    'offers' => $offers
                 )
             );
         }
@@ -93,13 +108,7 @@ class OrganizationController extends Controller
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $organization->setUser($this->getUser());
-                $organization->setNameCanonical(
-                    strtolower(
-                        str_replace(
-                            ' ', '_', $organization->getName()
-                        )
-                    )
-                );
+                $organization->setNameCanonical($organization->getName());
                 $this->getUser()->setOrganization($organization);
                 $choose === 0 ? $this->getUser()->setRoles(array('ROLE_STRUCTURE'))
                     : $this->getUser()->setRoles(array('ROLE_COMPANY'));

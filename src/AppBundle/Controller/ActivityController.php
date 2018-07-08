@@ -42,6 +42,9 @@ class ActivityController extends Controller
         if ($this->getUser()->hasRole('ROLE_STRUCTURE')
             && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
+            if ($this->getUser()->getOrganization()->getOrganizationActivity()->isEmpty()) {
+                return $this->redirectToRoute('activity_new');
+            }
             $em = $this->getDoctrine()->getManager();
             $activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
@@ -82,7 +85,7 @@ class ActivityController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $activity
                     ->setOrganizationActivities($organization)
-                    ->setNameCanonical(strtolower($activity->getName()));
+                    ->setNameCanonical($activity->getName());
 
                 $this->addFlash(
                     'pdf',

@@ -63,7 +63,7 @@
                                 {% else %}
                                     <td>{{ offer.finalDeal }}</td>
                                 {% endif %}
-                                <td>{{ offer.partnershipNumber }}</td>
+                                <td>{{ offer.partnershipNumber|length }}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
