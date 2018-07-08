@@ -37,52 +37,62 @@
                             <th>Avant le</th>
                             <th>Nom du partenaire</th>
                             <th>Statut</th>
+                            <th>Mail à envoyer</th>
                         </tr>
                         </thead>
                         <!-- End of table head -->
 
                         <!-- Starting listing the offers -->
                         <tbody>
-                        {% for offer in offers %}
-                            {% if offer.activity.organizationActivities.user is same as('ROLE_COMPAGNY') %}
+                        {% for organization in organizations %}
+                            {% for contract in organization.contracts %}
+                                <tr>
+                                    <td>{{ contract.activity.name }}</td>
+                                    <td>{{ contract.name }}</td>
+                                    <td>{{ contract.amount }}</td>
+                                    <td>{{ contract.date|date('d M Y') }}</td>
+                                    <td>{{ organization.name }}</td>
 
-                            <tr>
-                                <td>{{ offer.activity.organizationActivities.name }}</td>
-                                <td>{{ offer.name }}</td>
-                                <td>{{ offer.amount }}</td>
-                                <td>{{ offer.date|date('d M Y') }}</td>
-                                {% if offer.Contracts is empty %}
-                                    <td>Aucune marque liée</td>
-                                {% else %}
-                                    {% for organization in offer.Contracts %}
-                                        <td>{{  organization.name }}</td>
-                                    {% endfor %}
-                                {% endif %}
-
-                                <!-- Buttons changing contracts' status start -->
-                                <td>
-                                    {% if offer.status == 0 %}
-                                        <a href="{{ path('manager_contract_status', { 'id': offer.id, 'status': 1 }) }}"
-                                           class="button button text-center">Aucun partenaire</a>
-                                    {% elseif offer.status == 1 %}
-                                        <a href="{{ path('manager_contract_status', { 'id': offer.id, 'status': 2 }) }}"
-                                           class="button button-yellow text-center">Négociation</a>
-                                    {% elseif offer.status == 2 %}
-                                        <a href="{{ path('manager_contract_status', { 'id': offer.id, 'status': 3 }) }}"
-                                           class="button button-green text-center">Validation</a>
-                                    {% elseif offer.status == 3 %}
-                                        <a href="{{ path('manager_contract_status', { 'id': offer.id, 'status': 4 }) }}"
-                                           class="button button-blue text-center">Paiement</a>
-                                    {% elseif offer.status == 4 %}
-                                        <a href="{{ path('manager_contract_status', { 'id': offer.id, 'status': 5 }) }}"
-                                           class="button button-purple text-center">Expiré</a>
-                                    {% elseif offer.status == 5 %}
-                                        <a href="{{ path('manager_contract_status', { 'id': offer.id, 'status': 0 }) }}"
-                                           class="button button-red text-center">Refusé</a>
-                                    {% endif %}
-                                </td>
-                                <!-- Ending buttons changing contracts' status -->
-                            </tr>
+                                    <!-- Buttons changing contracts' status start -->
+                                    <td>
+                                        {% if contract.status == 0 %}
+                                            <a href="{{ path('manager_contract_status', { 'id': contract.id, 'status': 1 }) }}"
+                                               class="button button text-center">Aucun partenaire</a>
+                                        {% elseif contract.status == 1 %}
+                                            <a href="{{ path('manager_contract_status', { 'id': contract.id, 'status': 2 }) }}"
+                                               class="button button-yellow text-center">Négociation</a>
+                                        {% elseif contract.status == 2 %}
+                                            <a href="{{ path('manager_contract_status', { 'id': contract.id, 'status': 3 }) }}"
+                                               class="button button-green text-center">Validation</a>
+                                        {% elseif contract.status == 3 %}
+                                            <a href="{{ path('manager_contract_status', { 'id': contract.id, 'status': 4 }) }}"
+                                               class="button button-blue text-center">Paiement</a>
+                                        {% elseif contract.status == 4 %}
+                                            <a href="{{ path('manager_contract_status', { 'id': contract.id, 'status': 5 }) }}"
+                                               class="button button-purple text-center">Expiré</a>
+                                        {% elseif contract.status == 5 %}
+                                            <a href="{{ path('manager_contract_status', { 'id': contract.id, 'status': 0 }) }}"
+                                               class="button button-red text-center">Refusé</a>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {% if contract.status == 2 %}
+                                            <a href="{{ path('manager_contract_status_mail', { 'id': contract.id, 'status': 2 }) }}"
+                                               class="button button-green text-center">Envoyer</a>
+                                        {% elseif contract.status == 3 %}
+                                            <a href="{{ path('manager_contract_status_mail', { 'id': contract.id, 'status': 3 }) }}"
+                                               class="button button-blue text-center">Envoyer</a>
+                                        {% elseif contract.status == 4 %}
+                                            <a href="{{ path('manager_contract_status_mail', { 'id': contract.id, 'status': 4 }) }}"
+                                               class="button button-purple text-center">Envoyer</a>
+                                        {% elseif contract.status == 5 %}
+                                            <a href="{{ path('manager_contract_status_mail', { 'id': contract.id, 'status': 5 }) }}"
+                                               class="button button-red text-center">Envoyer</a>
+                                        {% endif %}
+                                    </td>
+                                    <!-- Ending buttons changing contracts' status -->
+                                </tr>
+                            {% endfor %}
                         {% endfor %}
                         </tbody>
                     </table>

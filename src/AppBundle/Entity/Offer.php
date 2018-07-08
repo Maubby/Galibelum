@@ -24,13 +24,6 @@ class Offer
      */
     private $activity;
 
-    /**
-     *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Organization")
-     * @ORM\JoinTable(name="organization_contracts")
-     */
-    private $contracts;
-
     /*
      * Personal variables
      */
@@ -178,19 +171,6 @@ class Offer
     {
         $this->setStatus(0);
         $this->setCreationDate(new \DateTime());
-    }
-
-    /**
-     * Return min date from all selected offers
-     *
-     * @return Organization $organization
-     */
-    public function getContractOrganization()
-    {
-        foreach ($this->contracts as $contract ) {
-            $organization = $contract->getName();
-        }
-        return $organization;
     }
 
     /*
@@ -450,42 +430,6 @@ class Offer
     }
 
     /**
-     * Add contract.
-     *
-     * @param \AppBundle\Entity\Organization $contract
-     *
-     * @return Offer
-     */
-    public function addContract(Organization $contract)
-    {
-        $this->contracts[] = $contract;
-
-        return $this;
-    }
-
-    /**
-     * Remove contract.
-     *
-     * @param \AppBundle\Entity\Organization $contract
-     *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
-     */
-    public function removeContract(Organization $contract)
-    {
-        return $this->contracts->removeElement($contract);
-    }
-
-    /**
-     * Get contracts.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getContracts()
-    {
-        return $this->contracts;
-    }
-
-    /**
      * Set partnershipNumber.
      *
      * @param array|int $partnershipNumber
@@ -536,9 +480,7 @@ class Offer
      */
     public function addPartnershipNumber()
     {
-        $partnershipNumber = array_push($partnershipNumber, 'null');
-
-        return $this->setPartnershipNumber($partnershipNumber);
+        return $this->setPartnershipNb($this->countPartnershipNumber() + 1);
     }
 
     /**
@@ -548,15 +490,13 @@ class Offer
      */
     public function removePartnershipNumber()
     {
-        $partnershipNumber = array_pop($partnershipNumber);
-
-        return $this->setPartnershipNumber($partnershipNumber);
+        return $this->setPartnershipNb($this->countPartnershipNumber() - 1);
     }
 
     /**
      * Count partnershipNumber.
      *
-     * @return array
+     * @return int
      */
     public function countPartnershipNumber()
     {

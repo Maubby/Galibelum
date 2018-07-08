@@ -20,6 +20,13 @@ class Organization
 
     /**
      *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Offer")
+     * @ORM\JoinTable(name="organization_contracts")
+     */
+    private $contracts;
+
+    /**
+     *
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", mappedBy="organization")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -451,7 +458,6 @@ class Organization
     {
         $this->organizationActivity = new ArrayCollection();
         $this->setIsActive(0);
-        $this->offers = new ArrayCollection();
     }
 
     /**
@@ -594,5 +600,42 @@ class Organization
     public function getManager()
     {
         return $this->managers;
+    }
+    
+
+    /**
+     * Add contract.
+     *
+     * @param \AppBundle\Entity\Offer $contract
+     *
+     * @return Organization
+     */
+    public function addContract(Offer $contract)
+    {
+        $this->contracts[] = $contract;
+
+        return $this;
+    }
+
+    /**
+     * Remove contract.
+     *
+     * @param \AppBundle\Entity\Offer $contract
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeContract(Offer $contract)
+    {
+        return $this->contracts->removeElement($contract);
+    }
+
+    /**
+     * Get contracts.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContracts()
+    {
+        return $this->contracts;
     }
 }

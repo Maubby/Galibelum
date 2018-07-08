@@ -23,8 +23,9 @@
             <div class="col-md-12">
                 <!-- Return to the dashboard -->
                 <ol class="breadcrumb breadcrumb-boxing-canvas">
-                    <li>
-                        <a href="{{ path('dashboard_index') }}">Tableau de bord</a></li>
+                    {% if is_granted('ROLE_STRUCTURE') %}
+                    <li><a href="{{ path('dashboard_index') }}">Tableau de bord</a></li>
+                    {% endif %}
                     <li>Recherche d'activités et d'offres</li>
                 </ol>
             </div>
