@@ -92,9 +92,18 @@ class ActivityController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
+            $lenght1 = strlen($activity->getSocialLink());
+            $lenght2 = strlen($activity->getSelectSocialLink());
+
+            $arr1 = str_split($activity->getSocialLink(), $lenght1);
+            $arr2 =str_split($activity->getSelectSocialLink(), $lenght2);
+
+            $socialLinks = array_combine($arr2,$arr1);
+
             $activity
                 ->setOrganizationActivities($organization)
-                ->setNameCanonical(strtolower($activity->getName()));
+                ->setNameCanonical(strtolower($activity->getName()))
+                ->setSocialLink($socialLinks);
 
             $this
                 ->addFlash(
@@ -110,6 +119,7 @@ class ActivityController extends Controller
                     'id' => $activity->getId(),
                 )
             );
+
         }
 
         return $this->render(

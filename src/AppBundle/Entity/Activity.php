@@ -214,6 +214,11 @@ class Activity
     private $uploadPdf;
 
     /**
+     * @var array
+     */
+    private $selectSocialLink;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -662,4 +667,29 @@ class Activity
 
         return $this;
     }
+
+    /**
+     * Get select SocialLink
+     *
+     * @return array
+     */
+    public function getSelectSocialLink()
+    {
+        return $this->selectSocialLink;
+    }
+
+    /**
+     * Set select SocialLink
+     *
+     * @param array $selectSocialLink
+     *
+     * @return Activity
+     */
+    public function setSelectSocialLink($selectSocialLink)
+    {
+        $this->selectSocialLink = $selectSocialLink;
+
+        return $this;
+    }
 }
+

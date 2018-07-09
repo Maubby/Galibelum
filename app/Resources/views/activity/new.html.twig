@@ -117,14 +117,19 @@
                         <!--End Activity's Achievement-->
 
                         <!--Activity's Social Link-->
-                        <div class="row">
-                            <div class="col-sm-12 mt-20">
-                                <div class="form-group form-error">
-                                    <i class="fas fa-user-friends"></i>{{ form_label(form.socialLink, 'Réseaux sociaux et chaînes de streaming') }}
-                                    {{ form_widget(form.socialLink, {'attr': {'class': "form-control input-field", 'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}}) }}
-                                    {{ form_errors(form.socialLink) }}
-                                </div>
+                        <div class="row form-group form-error multiple-form-group input-group">
+                            <div class="col-sm-6 mt-20">
+                                <i class="fas fa-user-friends"></i>{{ form_label(form.selectSocialLink, 'Réseaux sociaux et chaînes de streaming') }}
+                                {{ form_widget(form.selectSocialLink, {'attr': {'class': "form-control input-field", 'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}}) }}
+                                {{ form_errors(form.selectSocialLink) }}
                             </div>
+
+                            <div class="col-sm-6 mt-20">
+                                <i class="fas fa-user-friends"></i>{{ form_label(form.socialLink, 'Réseaux sociaux et chaînes de streaming') }}
+                                {{ form_widget(form.socialLink, {'attr': {'class': "form-control input-field", 'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}}) }}
+                                {{ form_errors(form.socialLink) }}
+                            </div>
+                            <span class="input-group-btn"><button type="button" class="btn btn-default btn-add">+</button></span>
                         </div>
                         <!--End Activity's Social Link-->
 
@@ -139,6 +144,33 @@
                             </div>
                         </div>
                         <!--End Activity's Description-->
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group multiple-form-group" data-max=3>
+                                    <label>Multiple inputs (with data-max=3)</label>
+
+                                    <div class="form-group input-group">
+                                        <input type="text" name="multiple[]" class="form-control">
+                                        <span class="input-group-btn"><button type="button" class="btn btn-default btn-add">+
+						</button></span>
+                                    </div>
+                                </div>
+                                <div class="form-group multiple-form-group">
+                                    <label>Multiple selects</label>
+
+                                    <div class="form-group input-group">
+                                        <select name="multiple[]" class="form-control">
+                                            <option value="">Default select</option>
+                                            <option value="">Option 1</option>
+                                            <option value="">Option 2</option>
+                                        </select>
+                                        <span class="input-group-btn"><button type="button" class="btn btn-default btn-add">+
+						</button></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row mt-10">
                             <div class="col-sm-12 text-center">
@@ -166,5 +198,6 @@
     </script>
     <!-- Custom JS code to bind to Autocomplete API -->
     <script src="{{ asset('build/autocomplete.js') }}"></script>
+    <script src="{{ asset('build/multiple-fields.js') }}"></script>
 {% endblock %}
 
