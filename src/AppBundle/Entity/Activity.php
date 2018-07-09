@@ -279,7 +279,7 @@ class Activity
         $minDate = new \DateTime('9999-12-29');
 
         foreach ($this->activities as $offer ) {
-            if ($minDate > $offer->getDate()and $offer->getStatus() != 4)
+            if ($minDate > $offer->getDate() and $offer->getStatus() != 4)
                 $minDate = $offer->getDate();
         }
         return $minDate;

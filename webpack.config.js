@@ -37,6 +37,7 @@ Encore
     .addEntry('autocomplete', './assets/js/autocomplete.js')
     .addEntry('menu-toggle', './assets/js/menu-toggle.js')
     .addEntry('table-manager', './assets/js/table-manager.js')
+    .addEntry('add-collection-widget', './assets/js/add-collection-widget.js')
     .addEntry('multiple-fields', './assets/js/multiple-fields.js')
 
     // Targeting images repository

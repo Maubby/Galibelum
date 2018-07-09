@@ -61,11 +61,21 @@
                     <div class="boxing-body">
                         <h6 class="title"><strong>Sociaux : </strong></h6>
                         <ul class="list-group">
-                            <li class="list-group-item">twitch :
-                                <a href="{% if activity.socialLink %}{{ activity.socialLink|join(', ') }}{% endif %}">
-                                    {% if activity.socialLink %}{{ activity.socialLink|join(', ') }}{% endif %}
-                                </a>
-                            </li>
+                            {% for link in activity.socialLink %}
+                                {% if 'facebook' in link %}
+                                    <li class="list-group-item">Facebook :
+                                        <a href="{{ link }}">
+                                            {{ link }}
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="list-group-item">Autres :
+                                        <a href="{{ link }}">
+                                            {{ link }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
