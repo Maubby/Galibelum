@@ -6,7 +6,7 @@ $('.carousel').carousel({
 // for every slide in carousel, copy the next slide's item in the slide.
 // Do the same for the next, next item.
 $('.carousel .carousel-inner .item').each(function () {
-    var next = $(this).next();
+    let next = $(this).next();
     if (!next.length) {
         next = $(this).siblings(':first');
     }
