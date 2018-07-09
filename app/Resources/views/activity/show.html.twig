@@ -25,55 +25,74 @@
                 <p>{{ activity.organizationActivities.relationNumber }} salariés</p>
                 <p>{{ activity.organizationActivities.address }}</p>
             </div>
-            <div class="col-md-8 description-text">
-                <p>{{ activity.organizationActivities.description }}</p>
+            <div class="col-md-8 description-text text-center">
+                {{ activity.organizationActivities.description }}
             </div>
         </div>
-
 
         <div class="row">
             <div class="col-md-9">
                 <div class="boxing-canvas">
-                    <h5 class="text-center mb-30">{{ activity.name }} - {{ activity.type }}</h5>
+                    <h5 class="text-center degradeblue mb-30">{{ activity.name }} - {{ activity.type }}</h5>
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe id="myIframe" src=""></iframe>
                     </div>
-                    <p class="boxing-text">{{ activity.description }}</p>
+                    <p class="boxing-text pb-20">{{ activity.description }}</p>
 
+                    {% if activity.achievement is not empty %}
                     <div class="boxing-body">
                         <h6 class="title"><strong>Accomplissements :</strong></h6>
-                        <ul class="list-unstyled">
-                            <li>{% if activity.achievement %}{{ activity.achievement|join(', ') }}{% endif %}</li>
+                        <ul class="list-unstyled ">
+                            {% for achievement in activity.achievement %}
+                                <li>{{ achievement }}</li>
+                            {% endfor %}
                         </ul>
                     </div>
+                    {% endif %}
 
-                    {#
-                    <th>Date Start</th>
-                    <td>{% if activity.dateStart %}{{ activity.dateStart|date('d-m-Y') }}{% endif %}</td>
-                    <th>Date End</th>
-                    <td>{% if activity.dateEnd %}{{ activity.dateEnd|date('d-m-Y') }}{% endif %}</td>
-                    <th>Address</th>
-                    <td>{{ activity.address }}</td>
-                    #}
-
-                    <a href="{{ asset('/uploads/pdf/organization_' ~ activity.OrganizationActivities.id ~'/activity/' ~ activity.uploadPdf) }}">Pdf de présentation</a>
+                    {% if activity.uploadPdf is not empty %}
+                    <div class="boxing-body">
+                        <h6 class="title"><strong>Documents Joints :</strong></h6>
+                        <ul class="list-unstyled text-center mt-10 mb-20">
+                            <li><a href="{{ asset('/uploads/pdf/organization_' ~ activity.OrganizationActivities.id ~'/activity/' ~ activity.uploadPdf) }}">Pdf de présentation</a></li>
+                        </ul>
+                    </div>
+                    {% endif %}
 
                     <div class="boxing-body">
                         <h6 class="title"><strong>Sociaux : </strong></h6>
                         <ul class="list-group">
                             {% for link in activity.socialLink %}
-                                {% if 'facebook' in link %}
-                                    <li class="list-group-item">Facebook :
+                                {% if 'youtube' in link %}
+                                <li class="list-group-item"><i class="fab fa-youtube"></i> Youtube :
+                                    <a href="{{ link }}">
+                                        {{ link }}
+                                    </a>
+                                </li>
+                                {% elseif 'twitch' in link %}
+                                    <li class="list-group-item"><i class="fab fa-twitter"></i> Twitch :
                                         <a href="{{ link }}">
                                             {{ link }}
                                         </a>
                                     </li>
+                                {% elseif 'facebook' in link %}
+                                    <li class="list-group-item"><i class="fab fa-facebook-square"></i> Facebook :
+                                        <a href="{{ link }}">
+                                            {{ link }}
+                                        </a>
+                                    </li>
+                                {% elseif 'instagram' in link %}
+                                        <li class="list-group-item"><i class="fab fa-instagram"></i> Instagram :
+                                            <a href="{{ link }}">
+                                                {{ link }}
+                                            </a>
+                                        </li>
                                 {% else %}
-                                    <li class="list-group-item">Autres :
-                                        <a href="{{ link }}">
-                                            {{ link }}
-                                        </a>
-                                    </li>
+                                        <li class="list-group-item"><i class="fas fa-globe"></i> Autres :
+                                            <a href="{{ link }}">
+                                                {{ link }}
+                                            </a>
+                                        </li>
                                 {% endif %}
                             {% endfor %}
                         </ul>
@@ -92,8 +111,8 @@
                                     <p class="panel-item"><strong>Montant : </strong>{{ offer.amount }} €</p>
                                     <p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.partnershipNumber }}</p>
                                     <p class="panel-item"><strong>Date d'expiration : </strong>{{ offer.date|date("d M Y") }}</p>
-                                    <p class="panel-item">{{ offer.description }}</p>
-                                    <a href="#" class="btn btn-primary btn-sm">Se mettre en relation</a>
+                                    <p class="panel-item">{{ offer.description|slice(0,50) }}...</p>
+                                    <a href="#" class="btn btn-primary backblue-btn-sm">Se mettre en relation</a>
                                 </div>
                             </div>
                         </div>
@@ -108,9 +127,9 @@
 
     <script type="text/javascript">
 
-        var url ="{{ activity.urlVideo }}";
-        var id = new URL(url).search.substr(3);
-        var embedlink = "http://www.youtube.com/embed/" + id;
+        let url ="{{ activity.urlVideo }}";
+        let id = new URL(url).search.substr(3);
+        let embedlink = "http://www.youtube.com/embed/" + id;
 
         document.getElementById("myIframe").src = embedlink;
 

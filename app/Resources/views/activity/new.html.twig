@@ -125,26 +125,17 @@
                             <div class="row">
                                 {# store the prototype on the data-prototype attribute #}
 
-                                <div id="selectSocialLink-fields-list" data-prototype="{{
-                                form_widget(form.selectSocialLink.vars.prototype,{'attr': {'class': "form-control input-field"}})|e }}" data-widget-tags="{{
-                                '<div class="col-sm-6"></div>'|e }}">
-                                    {% for selectSocialLinkField in form.selectSocialLink %}
-                                        {{ form_errors(selectSocialLinkField) }}
-                                        {{ form_widget(selectSocialLinkField) }}
-                                    {% endfor %}
-                                </div>
-
-                                <div id="SocialLink-fields-list" data-prototype="{{
-                                form_widget(form.socialLink.vars.prototype,{'attr': {'class': "form-control input-field",
+                                <div id="SocialLink-fields-list"
+                                     data-prototype=
+                                     "{{ form_widget(form.socialLink.vars.prototype,{'attr': {'class': "form-control input-field",
                                     'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}})|e }}"
-                                     data-widget-tags="{{ '<div class="col-sm-6"></div>'|e }}">
+                                     data-widget-tags="{{ '<div class="col-sm-12"></div>'|e }}">
                                     {% for socialLinkField in form.socialLink %}
                                         {{ form_errors(socialLinkField) }}
                                         {{ form_widget(socialLinkField) }}
                                     {% endfor %}
                                 </div>
-
-                                <button type="button" class="add-another-collection-widget" data-list-1="#selectSocialLink-fields-list" data-list-2="#SocialLink-fields-list">Plus</button>
+                                <button type="button" class="add-another-collection-widget" data-list="#SocialLink-fields-list">Plus</button>
                             </div>
                         </div>
                         <!--End Activity's Social Link-->
@@ -182,16 +173,12 @@
     {{ parent() }}
     <script  src="{{ asset('build/add-collection-widget.js') }}" ></script>
     <script src="{{ asset('build/input_display.js') }}"></script>
-<<<<<<< HEAD
-    <!-- Include Google Maps JS API -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB3N8qr-skNcWJ-ctPpwDgAW7xvGguA8-M">
+   <!-- Include Google Maps JS API -->
+   <!-- Include Google Maps JS API -->
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyB3N8qr-skNcWJ-ctPpwDgAW7xvGguA8-M">
     </script>
     <!-- Custom JS code to bind to Autocomplete API -->
     <script src="{{ asset('build/autocomplete.js') }}"></script>
-    <script src="{{ asset('build/multiple-fields.js') }}"></script>
-=======
 
-    {#<script src="{{ asset('build/multiple-fields.js') }}"></script>#}
->>>>>>> 94c4a40c21d435df966cb6a3010677d8c5ffe86a
 {% endblock %}
 

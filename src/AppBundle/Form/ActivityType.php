@@ -114,19 +114,7 @@ class ActivityType extends AbstractType
                 'prototype' => true,
                 'label' => false,
             ))
-            -> add ( 'selectSocialLink', CollectionType::class, array(
-                'entry_type' => ChoiceType::class,
-                'allow_add' => true,
-                'prototype' => true,
-                'label' => false,
-                'entry_options' => array(
-                    'choices' => array(
-                        'Facebook' => 'facebook',
-                        'Instagram' => 'Instagram',
-                        'Twitter' => 'Twitter'
-                    )
-                )
-            ))
+
             ->add(
                 'uploadPdf', FileType::class, array(
                     'required' => false,

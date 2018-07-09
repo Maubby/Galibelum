@@ -129,17 +129,10 @@
 
                         <!--Activity's Social Link-->
                         <div class="row">
-                            {#<div class="col-sm-12 mt-20">
-                                <div class="form-group form-error">
-                                    <i class="fas fa-user-friends"></i>{{ form_label(edit_form.selectSocialLink, 'Réseaux sociaux et chaînes de streaming') }}
-                                    {{ form_widget(edit_form.selectSocialLink, {'attr': {'class': "form-control input-field", 'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}}) }}
-                                    {{ form_errors(edit_form.selectSocialLink) }}
-                                </div>
-                            </div>#}
                             <div class="col-sm-12 mt-20">
                                 <div class="form-group form-error">
                                     <i class="fas fa-user-friends"></i>{{ form_label(edit_form.socialLink, 'Réseaux sociaux et chaînes de streaming') }}
-                                    {{ form_widget(edit_form.socialLink, {'attr': {'class': "form-control input-field", 'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}}) }}
+                                    {{ form_widget(edit_form.socialLink, {'attr': {'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}}) }}
                                     {{ form_errors(edit_form.socialLink) }}
                                 </div>
                             </div>
@@ -234,3 +227,4 @@
     <!-- Custom JS code to bind to Autocomplete API -->
     <script src="{{ asset('build/autocomplete.js') }}"></script>
 {% endblock %}
+

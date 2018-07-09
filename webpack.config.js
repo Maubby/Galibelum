@@ -35,8 +35,8 @@ Encore
     .addEntry('carousel', './assets/js/carousel.js')
     .addEntry('input_display', './assets/js/input_display.js')
     .addEntry('autocomplete', './assets/js/autocomplete.js')
-    .addEntry('menu-toggle', './assets/js/menu-toggle.js')
-    .addEntry('table-manager', './assets/js/table-manager.js')
+    .addEntry('menu-toggle', './assets/js/menu_toggle.js')
+    .addEntry('table-manager', './assets/js/table_manager.js')
     .addEntry('add-collection-widget', './assets/js/add-collection-widget.js')
     .addEntry('multiple-fields', './assets/js/multiple-fields.js')
 

@@ -1,12 +1,12 @@
 (function ($) {
     $(function () {
 
-        var addFormGroup = function (event) {
+        let addFormGroup = function (event) {
             event.preventDefault();
 
-            var $formGroup = $(this).closest('.form-group');
-            var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
-            var $formGroupClone = $formGroup.clone();
+            let $formGroup = $(this).closest('.form-group');
+            let $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+            let $formGroupClone = $formGroup.clone();
 
             $(this)
                 .toggleClass('btn-default btn-add btn-danger btn-remove')
@@ -15,19 +15,19 @@
             $formGroupClone.find('input').val('');
             $formGroupClone.insertAfter($formGroup);
 
-            var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
+            let $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
             if ($multipleFormGroup.data('max') <= countFormGroup($multipleFormGroup)) {
                 $lastFormGroupLast.find('.btn-add').attr('disabled', true);
             }
         };
 
-        var removeFormGroup = function (event) {
+        let removeFormGroup = function (event) {
             event.preventDefault();
 
-            var $formGroup = $(this).closest('.form-group');
-            var $multipleFormGroup = $formGroup.closest('.multiple-form-group');
+            let $formGroup = $(this).closest('.form-group');
+            let $multipleFormGroup = $formGroup.closest('.multiple-form-group');
 
-            var $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
+            let $lastFormGroupLast = $multipleFormGroup.find('.form-group:last');
             if ($multipleFormGroup.data('max') >= countFormGroup($multipleFormGroup)) {
                 $lastFormGroupLast.find('.btn-add').attr('disabled', false);
             }
@@ -35,7 +35,7 @@
             $formGroup.remove();
         };
 
-        var countFormGroup = function ($form) {
+        let countFormGroup = function ($form) {
             return $form.find('.form-group').length;
         };
 
