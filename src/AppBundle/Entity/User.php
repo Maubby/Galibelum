@@ -248,6 +248,16 @@ class User extends BaseUser
         return $this;
     }
 
+    /**
+     * Get email.
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
 
     /**
      * Set cgu.

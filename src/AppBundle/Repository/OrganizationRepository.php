@@ -25,18 +25,19 @@ use Doctrine\ORM\EntityRepository;
 class OrganizationRepository extends EntityRepository
 {
     /**
-     * @param $data
+     *
+     * @param  $data
      * @return mixed
      */
     public function search($data)
     {
-       $query = $this->createQueryBuilder('org')
-           ->select('org')
-           ->where('org.name LIKE :data')
-           ->orWhere('org.description LIKE :data')
-           ->setParameter('data', '%'.$data.'%')
-           ->getQuery();
+        $query = $this->createQueryBuilder('org')
+            ->select('org')
+            ->where('org.name LIKE :data')
+            ->orWhere('org.description LIKE :data')
+            ->setParameter('data', '%'.$data.'%')
+            ->getQuery();
 
-       return $query->getResult();
+        return $query->getResult();
     }
 }

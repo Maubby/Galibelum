@@ -27,11 +27,11 @@ class ActivityRepository extends EntityRepository
     /**
      * Search activities according to user's search
      *
-     * @param String    $name Activity name
-     * @param String    $type Activity Type
-     * @param \DateTime $date Ending date
+     * @param String    $name        Activity name
+     * @param String    $type        Activity Type
+     * @param \DateTime $date        Ending date
      * @param Int       $amountStart Amount searching range
-     * @param Int       $amountEnd Amount searching range
+     * @param Int       $amountEnd   Amount searching range
      *
      * @return mixed
      */
@@ -47,10 +47,10 @@ class ActivityRepository extends EntityRepository
     /**
      * Search activities according to user's search without name
      *
-     * @param \DateTime $date Ending date
+     * @param \DateTime $date        Ending date
      *
-     * @param int $amountStart Amount searching range
-     * @param int $amountEnd Amount searching range
+     * @param  int       $amountStart Amount searching range
+     * @param  int       $amountEnd   Amount searching range
      * @return mixed
      */
     private function _searchAll(\DateTime $date, int $amountStart, int $amountEnd)
@@ -75,11 +75,11 @@ class ActivityRepository extends EntityRepository
     /**
      * Search activities according to user's search with a name
      *
-     * @param String $name Activity name
-     * @param String $type Activity Type
-     * @param \DateTime $date Ending date
-     * @param int $amountStart Amount searching range
-     * @param int $amountEnd Amount searching range
+     * @param  String    $name        Activity name
+     * @param  String    $type        Activity Type
+     * @param  \DateTime $date        Ending date
+     * @param  int       $amountStart Amount searching range
+     * @param  int       $amountEnd   Amount searching range
      * @return mixed
      */
     private function _searchByName(string $name, string $type, \DateTime $date, int $amountStart, int $amountEnd)

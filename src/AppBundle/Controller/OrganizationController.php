@@ -16,7 +16,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-
 /**
  * Organization controller.
  *
@@ -54,7 +53,8 @@ class OrganizationController extends Controller
 
             $offers = $em->getRepository('AppBundle:Offer')->findBy(
                 array(
-                    'activity' => $this->getUser()->getOrganization()->getOrganizationActivity()->getValues()
+                    'activity' => $this->getUser()->getOrganization()
+                        ->getOrganizationActivity()->getValues()
                 ),
                 array(
                     'creationDate' => 'ASC'

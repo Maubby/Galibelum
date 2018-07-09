@@ -77,18 +77,9 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        {% if contract.status == 2 %}
-                                            <a href="{{ path('manager_contract_status_mail', { 'id': contract.id, 'status': 2 }) }}"
+                                        {% if contract.status >= 2 %}
+                                            <a href="{{ path('contract_status_mail', { 'id': contract.id, 'status': contract.status }) }}"
                                                class="button button-green text-center">Envoyer</a>
-                                        {% elseif contract.status == 3 %}
-                                            <a href="{{ path('manager_contract_status_mail', { 'id': contract.id, 'status': 3 }) }}"
-                                               class="button button-blue text-center">Envoyer</a>
-                                        {% elseif contract.status == 4 %}
-                                            <a href="{{ path('manager_contract_status_mail', { 'id': contract.id, 'status': 4 }) }}"
-                                               class="button button-purple text-center">Envoyer</a>
-                                        {% elseif contract.status == 5 %}
-                                            <a href="{{ path('manager_contract_status_mail', { 'id': contract.id, 'status': 5 }) }}"
-                                               class="button button-red text-center">Envoyer</a>
                                         {% endif %}
                                     </td>
                                     <!-- Ending buttons changing contracts' status -->

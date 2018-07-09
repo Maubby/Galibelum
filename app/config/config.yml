@@ -12,6 +12,7 @@ parameters:
     fee10: 0.10
     fee7: 0.07
     pdf_directory: '%kernel.project_dir%/web/uploads/pdf'
+    no_reply: 'noreply@galibelum.fr'
 
 framework:
     templating:

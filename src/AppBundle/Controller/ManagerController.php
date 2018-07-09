@@ -8,17 +8,12 @@
  * @package  Controller
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
-
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Contracts;
-use AppBundle\Entity\Offer;
 use AppBundle\Entity\Organization;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use AppBundle\Service\MailerService;
-
 
 /**
  * Manager controller.
@@ -105,7 +100,8 @@ class ManagerController extends Controller
             array(
                 'managers' => $this->getUser(),
                 'user' => $em->getRepository(
-                    'AppBundle:User')->findByRole('ROLE_COMPANY'),
+                    'AppBundle:User'
+                )->findByRole('ROLE_COMPANY'),
             )
         );
 

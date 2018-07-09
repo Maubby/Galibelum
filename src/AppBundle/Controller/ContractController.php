@@ -16,7 +16,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Entity\Offer;
-use AppBundle\Entity\Organization;
 use AppBundle\Service\MailerService;
 
 /**
@@ -42,29 +41,53 @@ class ContractController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $organization = $em->getRepository('AppBundle:Contracts')->findBy(
-            array(
-                'id' => $this->getUser()
-            )
-        );
+        if ($this->getUser()->hasRole('ROLE_COMPANY')) {
+            $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
+                array(
+                    'organization' => $this->getUser()
+                )
+            );
+        } else {
+            $activities = $em->getRepository('AppBundle:Activity')->findby(
+                array(
+                    'organizationActivities' => $this->getUser()->getOrganization(),
+                )
+            );
+
+            $offers = $em->getRepository('AppBundle:Offer')->findby(
+                array(
+                    'activity' => $activities,
+                )
+            );
+            $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
+                array(
+                    'offer' => $offers,
+                )
+            );
+        }
 
         return $this->render(
             'contractualisation/index.html.twig', array(
-                'organization' => $organization,
+                'contracts' => $contracts,
             )
         );
     }
 
     /**
-     * Displays a form to edit an existing offer entity.
+     * Set contract when company click to relation button.
      *
-     * @param Offer $offer The offer entity
+     * @param Offer         $offer      The offer entity
+     * @param MailerService $mailerUser The mailer service
      *
      * @Route("/{id}/partners", methods={"GET", "POST"}, name="contract_relation")
      *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     *
      * @return Response A Response instance
      */
-    public function partnersAction(Offer $offer)
+    public function partnersAction(Offer $offer, MailerService $mailerUser)
     {
         if ($this->getUser()->hasRole('ROLE_COMPANY')
             && $this->getUser()->getOrganization()->getIsActive() === 1
@@ -76,6 +99,29 @@ class ContractController extends Controller
                 ->setOrganization($this->getUser()->getOrganization());
             $this->getDoctrine()->getManager()->persist($contract);
             $this->getDoctrine()->getManager()->flush();
+
+            //      Mail for the structure
+            $mailerUser->sendEmail(
+                $this->getParameter('no_reply'),
+                $contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getUser()->getEmail(),
+                'Validation',
+                'Une marque s\'est positionnée sur votre offre'
+            );
+            //      Mail for the company
+            $mailerUser->sendEmail(
+                $this->getParameter('no_reply'),
+                $contract->getOrganization()->getUser()->getEmail(),
+                'Validation',
+                'Vous vous êtes positionnés sur une offre'
+            );
+            //      Mail for the account manager
+            $mailerUser->sendEmail(
+                $this->getParameter('no_reply'),
+                $contract->getOrganization()->getUser()->getManagers()->getEmail(),
+                'Validation',
+                'Vous vous êtes positionnés sur une offre'
+            );
 
             return $this->render(
                 'activity/show.html.twig', array(
@@ -89,13 +135,13 @@ class ContractController extends Controller
     /**
      * Changes contracts' status.
      *
-     * @param Contracts $contract
-     * @param Int $status Status value
+     * @param Contracts $contract The contract entity
+     * @param Int       $status   Status value
      *
-     * @return Response A Response Instance
      * @route("/{id}/{status}", methods={"GET"},
      *     name="contract_status")
      *
+     * @return Response A Response Instance
      */
     public function statusAction(Contracts $contract, int $status)
     {
@@ -120,79 +166,71 @@ class ContractController extends Controller
     /**
      * Send a mail when the offers' status change.
      *
-     * @param Offer         $offer      The offer entity
+     * @param Contracts     $contract   The contract entity
      * @param Int           $status     Received status
      * @param MailerService $mailerUser Mailer service
+     *
+     * @route("/{id}/status/{status}", methods={"GET"},
+     *     name="contract_status_mail")
      *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      *
-     * @route("/{id}/status/{status}", methods={"GET"},
-     *     name="manager_contract_status_mail")
-     *
-     * @return                                  Response A Response Instance
+     * @return Response A Response Instance
      */
-    public function sendAction(Offer $offer, int $status, MailerService $mailerUser)
-    {
+    public function sendAction(Contracts $contract, int $status,
+        MailerService $mailerUser
+    ) {
         if ($status === 2) {
+            //status 2 validation
             //      Mail for the structure
             $mailerUser->sendEmail(
-                'William@gallibelum.fr',
-                $offer->getActivity()->getOrganizationActivities()->getEmail(),
+                $this->getUser()->getEmail(),
+                $contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getUser()->getEmail(),
                 'Validation',
                 'Une marque s\'est positionnée sur votre offre'
             );
             //      Mail for the company
             $mailerUser->sendEmail(
-                'William@gallibelum.fr',
-                $offer->getOrganization()->getEmail(),
+                $this->getUser()->getEmail(),
+                $contract->getOrganization()->getUser()->getEmail(),
                 'Validation',
                 'Vous vous êtes positionnés sur une offre'
             );
         } elseif ($status === 3) {
+            //status 3 payment
             //      Mail for the structure
             $mailerUser->sendEmail(
-                'William@gallibelum.fr',
-                $offer->getActivity()->getOrganizationActivities()->getEmail(),
+                $this->getUser()->getEmail(),
+                $contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getUser()->getEmail(),
                 'Paiement',
                 'Une marque s\'est positionnée sur votre offre'
             );
             //      Mail for the company
             $mailerUser->sendEmail(
-                'William@gallibelum.fr',
-                $offer->getOrganization()->getEmail(),
+                $this->getUser()->getEmail(),
+                $contract->getOrganization()->getUser()->getEmail(),
                 'Paiement',
                 'Vous vous êtes positionnés sur une offre'
             );
         } elseif ($status === 4) {
+            //status 4 expired
             //      Mail for the structure
             $mailerUser->sendEmail(
-                'William@gallibelum.fr',
-                $offer->getActivity()->getOrganizationActivities()->getEmail(),
+                $this->getUser()->getEmail(),
+                $contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getUser()->getEmail(),
                 'Offre expirée',
                 'Une marque s\'est positionnée sur votre offre'
             );
             //      Mail for the company
             $mailerUser->sendEmail(
-                'William@gallibelum.fr',
-                $offer->getOrganization()->getEmail(),
+                $this->getUser()->getEmail(),
+                $contract->getOrganization()->getUser()->getEmail(),
                 'Offre expirée',
-                'Vous vous êtes positionnés sur une offre'
-            );
-        } elseif ($status === 5) {
-            //      Mail for the structure
-            $mailerUser->sendEmail(
-                'William@gallibelum.fr',
-                $offer->getActivity()->getOrganizationActivities()->getEmail(),
-                'Offre refusée',
-                'Une marque s\'est positionnée sur votre offre'
-            );
-            //      Mail for the company
-            $mailerUser->sendEmail(
-                'William@gallibelum.fr',
-                $offer->getOrganization()->getEmail(),
-                'Offre refusée',
                 'Vous vous êtes positionnés sur une offre'
             );
         }

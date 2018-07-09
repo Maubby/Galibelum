@@ -54,15 +54,14 @@
 
                         <!-- Starting listing the offers -->
                         <tbody>
-                        {% for organization in organization %}
-                            {% for contract in organization.contracts %}
-                                <tr>
-                                    <td>{{ contract.activity.organizationActivities.name }}</td>
-                                    <td>{{ contract.activity.name }}</td>
-                                    <td>{{ contract.name }}</td>
-                                    <td>{{ contract.amount }}</td>
-                                    <td>{{ contract.date|date('d M Y') }}</td>
-                                    <td>{{ organization.name }}</td>
+                        {% for contract in contracts %}
+                            <tr>
+                                <td>{{ contract.offer.activity.organizationActivities.name }}</td>
+                                <td>{{ contract.offer.activity.name }}</td>
+                                <td>{{ contract.offer.name }}</td>
+                                <td>{{ contract.offer.amount }}</td>
+                                <td>{{ contract.offer.date|date('d M Y') }}</td>
+                                <td>{{ contract.organization.name }}</td>
 
                                 <!-- Buttons changing contracts' status start -->
                                 <td>
@@ -82,7 +81,6 @@
                                 </td>
                                 <!-- Ending buttons changing contracts' status -->
                             </tr>
-                        {% endfor %}
                         {% endfor %}
                         </tbody>
                     </table>
