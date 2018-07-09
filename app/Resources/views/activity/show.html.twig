@@ -54,7 +54,7 @@
                     <div class="boxing-body">
                         <h6 class="title"><strong>Documents joints :</strong></h6>
                         <ul class="list-unstyled text-center mt-10 mb-20">
-                            <li><a href="{{ asset('/uploads/pdf/organization_' ~ activity.OrganizationActivities.id ~'/activity/' ~ activity.uploadPdf) }}">PDF de présentation</a></li>
+                            <li><a href="{{ asset('/uploads/pdf/organization_' ~ activity.OrganizationActivities.id ~ '/activity_' ~ activity.id  ~ '/' ~ activity.uploadPdf) }}">PDF de présentation</a></li>
                         </ul>
                     </div>
                     {% endif %}

@@ -64,7 +64,6 @@ class Activity
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=32)
-     * @Assert\Regex(pattern="/^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i", message="Votre prénom ne doit être composé que de lettres.")
      * @Assert\Type("string")
      * @Assert\NotBlank(
      *     message = "Veuillez saisir un nom"
