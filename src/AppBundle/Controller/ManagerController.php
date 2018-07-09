@@ -143,7 +143,7 @@ class ManagerController extends Controller
      * @route("/contract/{id}/{status}", methods={"GET"},
      *     name="manager_contract_status")
      *
-     * @return                           Response A Response Instance
+     * @return Response A Response Instance
      */
     public function statusAction(Offer $offer, int $status)
     {
@@ -172,7 +172,7 @@ class ManagerController extends Controller
      * @route("/contract/{id}/status/{status}", methods={"GET"}, 
             name="manager_contract_status_mail")
      * 
-     * @return                                  Response A Response Instance
+     * @return Response A Response Instance
      */
     public function sendAction(Offer $offer, int $status, MailerService $mailerUser)
     {
