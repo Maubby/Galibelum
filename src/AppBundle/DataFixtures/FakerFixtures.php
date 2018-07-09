@@ -65,6 +65,7 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
      * @Method("GET")
      *
      * @return void A Response instance
+     * @throws \Exception
      */
     public function load(ObjectManager $em)
     {
@@ -78,9 +79,36 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
          * Creating the User, Organization, Activity and Offer
          */
 
+        $relationNumber = [
+            'Aucun autre membre',
+            '2-10 membres',
+            '11-50 membres',
+            '51-250 membres',
+            'Plus de 251 membres'
+        ];
+        $activities = [
+            'Activité de streaming',
+            'Equipe eSport',
+            'Évènement eSport'
+        ];
+        $interval = [
+            'P10Y',
+            'P3M',
+            'P20D',
+            'P1Y'
+        ];
+        $video = [
+            'https://www.youtube.com/watch?v=s5K1GSRY1GY',
+            'https://www.youtube.com/watch?v=vDxG72QNRGA',
+            'https://www.youtube.com/watch?v=tbfWnFxnvxc',
+            'https://www.youtube.com/watch?v=cD3tWJyNiMw',
+            'https://www.youtube.com/watch?v=k8JzDSanprY'
+        ];
+        $date = new \DateTime();
+
         for ($p = 0; $p < 10; $p++) {
-            $structure = new User();
-            $structure
+            $user = new User();
+            $user
                 ->setEmail($faker->email)
                 ->setPlainPassword('galibelum1')
                 ->setFirstName($faker->firstName)
@@ -98,45 +126,54 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
                 ->setAddress($faker->streetAddress)
                 ->setPhoneNumber($faker->phoneNumber)
                 ->setEmail($faker->email)
-                ->setRelationNumber($faker->randomDigitNotNull)
-                ->setUserRole($faker->jobTitle)
+                ->setRelationNumber($relationNumber[array_rand($relationNumber, 1)])
+                ->setUserRole('manager')
                 ->setDescription($faker->text);
 
             // Activity creation
+            $activityType = array_rand($activities, 1);
+            $intervalDate = new \DateInterval($interval[array_rand($interval)]);
+
             $activity = new Activity();
             $activity
                 ->setName($faker->name)
-                ->setType($faker->jobTitle)
+                ->setType($activities[$activityType])
                 ->setDescription($faker->text)
-                ->setDateStart($faker->dateTimeAD($max = 'now', $timezone = null))
-                ->setDateEnd($faker->dateTimeAD($max = 'now', $timezone = null))
-                ->setAddress($faker->streetAddress)
-                ->setMainGame($faker->word)
-                ->setUrlVideo($faker->url)
-                ->setAchievement($faker->word)
-                ->setSocialLink(array($faker->url, $faker->url, $faker->url));
+                ->setUrlVideo($video[array_rand($video, 1)])
+                ->setSocialLink(array($faker->url, $faker->url, $faker->url))
+                ->setAchievement('1ère place PUBG berlin, 2ème tournois LOL Corée')
+                ->setDateStart($date)
+                ->setDateEnd($date->add($intervalDate))
+                ->setAddress($faker->streetAddress);
 
             // Offer creation
             $offer = new Offer();
             $offer
                 ->setName($faker->firstName)
                 ->setDescription($faker->text)
-                ->setDate($faker->dateTimeAD($max = 'now', $timezone = null))
-                ->setAmount($faker->randomNumber($nbDigits = null, $strict = false));
+                ->setDate($date->add($intervalDate))
+                ->setAmount($faker->randomNumber($nbDigits = null, $strict = false))
+                ->setPartnershipNb(random_int(1, 10));
 
-            $em->persist($structure);
-            $organization->setUser($structure);
+            $em->persist($user);
+            $organization
+                ->setNameCanonical($organization->getName())
+                ->setUser($user);
             $em->persist($organization);
 
-            $structure->setUsername($structure->getEmail())
+            $user->setUsername($user->getEmail())
                 ->setOrganization($organization);
-            $em->persist($structure);
+            $em->persist($user);
 
-
-            $activity->setOrganizationActivities($organization);
+            $activity
+                ->setNameCanonical($activity->getName())
+                ->setOrganizationActivities($organization);
             $em->persist($activity);
 
-            $offer->setActivity($activity);
+            $offer
+                ->setNameCanonical($offer->getName())
+                ->setHandlingFee($offer->getAmount())
+                ->setActivity($activity);
             $em->persist($offer);
         }
         
@@ -160,7 +197,7 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
                 ->setAddress($faker->streetAddress)
                 ->setPhoneNumber($faker->phoneNumber)
                 ->setEmail($faker->email)
-                ->setRelationNumber($faker->randomDigitNotNull)
+                ->setRelationNumber($relationNumber[array_rand($relationNumber, 1)])
                 ->setUserRole($faker->jobTitle)
                 ->setDescription($faker->text);
 
@@ -172,7 +209,6 @@ class FakerFixtures extends AbstractFixture implements ContainerAwareInterface,
                 ->setOrganization($organization);
 
             $em->persist($company);
-
             $em->flush();
         }
 

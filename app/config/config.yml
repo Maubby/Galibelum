@@ -12,7 +12,7 @@ parameters:
     fee10: 0.10
     fee7: 0.07
     pdf_directory: '%kernel.project_dir%/web/uploads/pdf'
-
+    
 framework:
     templating:
         engines:
@@ -46,6 +46,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        google_api_key: '%google_api_key%'
 
 # Doctrine Configuration
 doctrine:

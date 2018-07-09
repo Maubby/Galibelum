@@ -153,19 +153,6 @@ class Activity
      *
      * @var string
      *
-     * @ORM\Column(name="mainGame", type="string", length=32, nullable=true)
-     *
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 32,
-     * )
-     */
-    private $mainGame;
-
-    /**
-     *
-     * @var string
-     *
      * @ORM\Column(name="urlVideo", type="string", length=128, nullable=true)
      *
      * @Assert\Length(
@@ -426,30 +413,6 @@ class Activity
     public function getAddress()
     {
         return $this->address;
-    }
-
-    /**
-     * Set mainGame
-     *
-     * @param string $mainGame
-     *
-     * @return Activity
-     */
-    public function setMainGame($mainGame)
-    {
-        $this->mainGame = $mainGame;
-
-        return $this;
-    }
-
-    /**
-     * Get mainGame
-     *
-     * @return string
-     */
-    public function getMainGame()
-    {
-        return $this->mainGame;
     }
 
     /**
