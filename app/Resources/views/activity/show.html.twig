@@ -42,7 +42,7 @@
                     {% if activity.achievement is not empty %}
                     <div class="boxing-body">
                         <h6 class="title"><strong>Accomplissements :</strong></h6>
-                        <ul class="list-unstyled ">
+                        <ul class="list-unstyled">
                             {% for achievement in activity.achievement %}
                                 <li>{{ achievement }}</li>
                             {% endfor %}
@@ -52,9 +52,9 @@
 
                     {% if activity.uploadPdf is not empty %}
                     <div class="boxing-body">
-                        <h6 class="title"><strong>Documents Joints :</strong></h6>
+                        <h6 class="title"><strong>Documents joints :</strong></h6>
                         <ul class="list-unstyled text-center mt-10 mb-20">
-                            <li><a href="{{ asset('/uploads/pdf/organization_' ~ activity.OrganizationActivities.id ~'/activity/' ~ activity.uploadPdf) }}">Pdf de présentation</a></li>
+                            <li><a href="{{ asset('/uploads/pdf/organization_' ~ activity.OrganizationActivities.id ~'/activity/' ~ activity.uploadPdf) }}">PDF de présentation</a></li>
                         </ul>
                     </div>
                     {% endif %}
