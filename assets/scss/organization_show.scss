@@ -52,7 +52,6 @@ th, td {
 }
 
 @mixin buttonize($h, $s, $b, $light: 0) {
-
   $color: hsb($h, $s, $b);
   $color-dark: hsb($h, hsb-saturate($s, 10), $b);
   $inset-top: inset 0 1px 0 hsb($h, $s - 20, $b + 10);
@@ -62,7 +61,6 @@ th, td {
   background-color: $color;
   background-image: linear-gradient(to bottom, $color, $color-dark);
   border: 1px solid hsb($h, hsb-saturate($s, 20), $b - 20);
-
 
   @if $light == 1 {
     color: hsb($h, hsb-saturate($s, 40), $b - 40);
@@ -76,12 +74,10 @@ th, td {
   &:focus {
     background: $color-dark;
     border-color: hsb($h, hsb-saturate($s, 40), $b - 40);
-
   }
 
   &:active {
     background: $color-dark;
-    
   }
 }
 
