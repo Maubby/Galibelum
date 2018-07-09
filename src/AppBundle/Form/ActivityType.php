@@ -108,13 +108,14 @@ class ActivityType extends AbstractType
                     )
                 )
             )
-            -> add ( 'socialLink', CollectionType::class, array(
-                'entry_type' => UrlType::class,
-                'allow_add' => true,
-                'prototype' => true,
-                'label' => false,
-            ))
-
+            -> add (
+                'socialLink', CollectionType::class, array(
+                    'entry_type' => UrlType::class,
+                    'allow_add' => true,
+                    'prototype' => true,
+                    'label' => false,
+                )
+            )
             ->add(
                 'uploadPdf', FileType::class, array(
                     'required' => false,
