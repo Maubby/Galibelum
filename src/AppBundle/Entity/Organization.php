@@ -20,8 +20,8 @@ class Organization
 
     /**
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Offer")
-     * @ORM\JoinTable(name="organization_contracts")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Contracts", mappedBy="organization")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $contracts;
 
@@ -451,6 +451,7 @@ class Organization
     {
         return $this->isActive;
     }
+
     /**
      * Constructor
      */
@@ -593,24 +594,13 @@ class Organization
     }
 
     /**
-     * Get managers.
-     *
-     * @return \AppBundle\Entity\User|null
-     */
-    public function getManager()
-    {
-        return $this->managers;
-    }
-    
-
-    /**
      * Add contract.
      *
-     * @param \AppBundle\Entity\Offer $contract
+     * @param \AppBundle\Entity\Contracts $contract
      *
      * @return Organization
      */
-    public function addContract(Offer $contract)
+    public function addContract(Contracts $contract)
     {
         $this->contracts[] = $contract;
 
@@ -620,11 +610,11 @@ class Organization
     /**
      * Remove contract.
      *
-     * @param \AppBundle\Entity\Offer $contract
+     * @param \AppBundle\Entity\Contracts $contract
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeContract(Offer $contract)
+    public function removeContract(Contracts $contract)
     {
         return $this->contracts->removeElement($contract);
     }

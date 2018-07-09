@@ -19,6 +19,13 @@ class Offer
 
     /**
      *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Contracts", mappedBy="offer")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $contracts;
+
+    /**
+     *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Activity", inversedBy="activities")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -502,5 +509,41 @@ class Offer
     {
         $partnershipNb = count($this->partnershipNumber);
         return $partnershipNb;
+    }
+
+    /**
+     * Add contract.
+     *
+     * @param \AppBundle\Entity\Contracts $contract
+     *
+     * @return Offer
+     */
+    public function addContract(Contracts $contract)
+    {
+        $this->contracts[] = $contract;
+
+        return $this;
+    }
+
+    /**
+     * Remove contract.
+     *
+     * @param \AppBundle\Entity\Contracts $contract
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeContract(Contracts $contract)
+    {
+        return $this->contracts->removeElement($contract);
+    }
+
+    /**
+     * Get contracts.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContracts()
+    {
+        return $this->contracts;
     }
 }

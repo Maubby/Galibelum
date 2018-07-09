@@ -90,7 +90,7 @@
                                     {% if is_granted('ROLE_STRUCTURE') %}
                                         <a href="{{ path('offer_edit', { 'id': offer.id }) }}">Modifier l'offre</a>
                                     {% else %}
-                                        <a href="{{ path('offer_relation', { 'id': offer.id }) }}" class="btn btn-primary btn-sm">Se mettre en relation</a>
+                                        <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-primary btn-sm">Se mettre en relation</a>
                                     {% endif %}
                                 </div>
                             </div>

@@ -190,67 +190,6 @@ class OfferController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing offer entity.
-     *
-     * @param Offer $offer The offer entity
-     *
-     * @Route("/{id}/relation", methods={"GET", "POST"}, name="offer_relation")
-     *
-     * @return Response A Response instance
-     */
-    public function relationAction(Offer $offer)
-    {
-        if ($this->getUser()->hasRole('ROLE_COMPANY')
-            && $this->getUser()->getOrganization()->getIsActive() === 1
-        ) {
-            $em = $this->getDoctrine()->getManager();
-            $offer->setStatus(1)
-                ->addContract($this->getUser()->getOrganization());
-            $em->persist($offer);
-            $em->flush();
-
-            return $this->render(
-                'activity/show.html.twig', array(
-                    'activity' => $offer->getActivity()
-                )
-            );
-        }
-        return $this->redirectToRoute('redirect');
-    }
-
-    /**
-     * Displays a form to edit an existing offer entity.
-     *
-     * @param Offer $offer The offer entity
-     *
-     * @Route("/{id}/partners", methods={"GET", "POST"}, name="offer_relation")
-     *
-     * @return Response A Response instance
-     */
-    public function partnersAction(Offer $offer)
-    {
-        if ($this->getUser()->hasRole('ROLE_COMPANY')
-            && $this->getUser()->getOrganization()->getIsActive() === 1
-        ) {
-            $user = $this->getUser();
-
-            $em = $this->getDoctrine()->getManager();
-            $offer->setStatus(1);
-            $user->getOrganization()->addContract($offer);
-            $em->persist($offer);
-            $em->persist($user);
-            $em->flush();
-
-            return $this->render(
-                'activity/show.html.twig', array(
-                    'activity' => $offer->getActivity()
-                )
-            );
-        }
-        return $this->redirectToRoute('redirect');
-    }
-
-    /**
      * Deletes an offer entity.
      *
      * @param Request $request Delete posted info
