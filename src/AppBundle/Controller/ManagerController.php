@@ -13,8 +13,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Offer;
 use AppBundle\Entity\Organization;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Service\MailerService;
@@ -34,8 +33,7 @@ class ManagerController extends Controller
     /**
      * Lists all managers.
      *
-     * @Route("/",    name="manager_dashboard")
-     * @Method("GET")
+     * @Route("/", methods={"GET"},    name="manager_dashboard")
      *
      * @return Response A Response instance
      */
@@ -52,8 +50,7 @@ class ManagerController extends Controller
     /**
      * Lists all organization entities.
      *
-     * @Route("/organization", name="manager_organization_list")
-     * @Method("GET")
+     * @Route("/organization", methods={"GET"}, name="manager_organization_list")
      *
      * @return Response A Response instance
      */
@@ -77,8 +74,7 @@ class ManagerController extends Controller
      *
      * @param Organization $organization The organization entity
      *
-     * @Route("/activate/{id}", name="manager_organization_activate")
-     * @Method("GET")
+     * @Route("/activate/{id}", methods={"GET"}, name="manager_organization_activate")
      *
      * @return Response A Response Instance
      */
@@ -97,8 +93,7 @@ class ManagerController extends Controller
      *
      * @param Organization $organization The organization entity
      *
-     * @route("/disable/{id}", name="manager_organization_disable")
-     * @method("GET")
+     * @route("/disable/{id}", methods={"GET"}, name="manager_organization_disable")
      *
      * @return Response A Response Instance
      */
@@ -115,8 +110,7 @@ class ManagerController extends Controller
     /**
      * Lists all contracts.
      *
-     * @Route("/contract", name="manager_contract_list")
-     * @Method("GET")
+     * @Route("/contract", methods={"GET"}, name="manager_contract_list")
      *
      * @return Response A Response instance
      */
@@ -141,8 +135,8 @@ class ManagerController extends Controller
      * @param Offer $offer  The offer entity
      * @param Int   $status Status value
      *
-     * @route("/contract/{id}/{status}", name="manager_contract_status")
-     * @Method("GET")
+     * @route("/contract/{id}/{status}", methods={"GET"}, name="manager_contract_status")
+     *
      * @return                           Response A Response Instance
      */
     public function statusAction(Offer $offer, int $status)
@@ -169,8 +163,8 @@ class ManagerController extends Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      *
-     * @route("/contract/{id}/status/{status}", name="manager_contract_status_mail")
-     * @Method("GET")
+     * @route("/contract/{id}/status/{status}", methods={"GET"}, name="manager_contract_status_mail")
+     * 
      * @return                                  Response A Response Instance
      */
     public function sendAction(Offer $offer, int $status, MailerService $mailerUser)
