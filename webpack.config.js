@@ -34,9 +34,12 @@ Encore
     .addEntry('login_script', './assets/js/login_script.js')
     .addEntry('carousel', './assets/js/carousel.js')
     .addEntry('input_display', './assets/js/input_display.js')
+    .addEntry('autocomplete', './assets/js/autocomplete.js')
     .addEntry('menu_toggle', './assets/js/menu_toggle.js')
     .addEntry('table_manager', './assets/js/table_manager.js')
-    .addEntry('autocomplete', './assets/js/autocomplete.js')
+    .addEntry('add-collection-widget', './assets/js/add-collection-widget.js')
+    .addEntry('multiple-fields', './assets/js/multiple-fields.js')
+
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
         { from: './assets/images', to: 'images'}
