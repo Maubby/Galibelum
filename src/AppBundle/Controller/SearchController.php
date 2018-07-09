@@ -2,7 +2,7 @@
 /**
  * SearchController File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category SearchController
  * @package  Controller
@@ -72,11 +72,11 @@ class SearchController extends Controller
         ) {
             $session = $request->getSession();
 
-            if ($request->get('name')) {
-                $session->set('name', $request->get('name'));
-            } else {
-                $session->set('name', "");
-            }
+        if ($request->get('name')) {
+            $session->set('name', $request->get('name'));
+        } else {
+            $session->set('name', "");
+        }
 
 
             $request->get('type')

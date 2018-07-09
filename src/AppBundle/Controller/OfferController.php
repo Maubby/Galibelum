@@ -113,7 +113,7 @@ class OfferController extends Controller
                 $em = $this->getDoctrine()->getManager();
                 $offer = $offer
                     ->setActivity($activity)
-                    ->setNameCanonical(strtolower($activity->getName()))
+                    ->setNameCanonical($offer->getName())
                     ->setHandlingFee($fees)
                     ->setDate($offer->getDate()->sub($interval))
                     ->setPartnershipNb($form['partnershipNumber']->getData());

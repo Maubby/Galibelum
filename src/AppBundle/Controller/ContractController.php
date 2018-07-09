@@ -180,7 +180,7 @@ class ContractController extends Controller
      * @return Response A Response Instance
      */
     public function sendAction(Contracts $contract, int $status,
-        MailerService $mailerUser
+                               MailerService $mailerUser
     ) {
         if ($status === 2) {
             //status 2 validation

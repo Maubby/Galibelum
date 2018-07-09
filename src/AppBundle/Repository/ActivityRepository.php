@@ -35,8 +35,10 @@ class ActivityRepository extends EntityRepository
      *
      * @return mixed
      */
-    public function search(string $name, string $type, \DateTime $date, int $amountStart, int $amountEnd)
-    {
+    public function search(string $name, string $type, \DateTime $date,
+        int $amountStart, int $amountEnd
+    ) {
+    
         if (!$name && $type == "0") {
             return $this->_searchAll($date, $amountStart, $amountEnd);
         }
@@ -51,6 +53,7 @@ class ActivityRepository extends EntityRepository
      *
      * @param  int       $amountStart Amount searching range
      * @param  int       $amountEnd   Amount searching range
+     *
      * @return mixed
      */
     private function _searchAll(\DateTime $date, int $amountStart, int $amountEnd)
@@ -80,10 +83,13 @@ class ActivityRepository extends EntityRepository
      * @param  \DateTime $date        Ending date
      * @param  int       $amountStart Amount searching range
      * @param  int       $amountEnd   Amount searching range
+     *
      * @return mixed
      */
-    private function _searchByName(string $name, string $type, \DateTime $date, int $amountStart, int $amountEnd)
-    {
+    private function _searchByName(string $name, string $type, \DateTime $date,
+        int $amountStart, int $amountEnd
+    ) {
+    
         // If user is searching with a name and a valid type,
         // just search all activites or organization with the selected name/type
         // and with offers > date now

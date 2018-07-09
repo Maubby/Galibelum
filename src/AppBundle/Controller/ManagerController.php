@@ -29,7 +29,8 @@ class ManagerController extends Controller
     /**
      * Lists all organization entities.
      *
-     * @Route("/organization", methods={"GET"}, name="manager_organization_list")
+     * @Route("/organization", methods={"GET"},
+            name="manager_organization_list")
      *
      * @return Response A Response instance
      */
@@ -72,7 +73,8 @@ class ManagerController extends Controller
      *
      * @param Organization $organization The organization entity
      *
-     * @route("/disable/{id}", methods={"GET"}, name="manager_organization_disable")
+     * @route("/disable/{id}", methods={"GET"},
+     *     name="manager_organization_disable")
      *
      * @return Response A Response Instance
      */
@@ -88,7 +90,8 @@ class ManagerController extends Controller
     /**
      * Lists all contracts.
      *
-     * @Route("/contract", methods={"GET"}, name="manager_contract_list")
+     * @Route("/contract", methods={"GET"},
+            name="manager_contract_list")
      *
      * @return Response A Response instance
      */

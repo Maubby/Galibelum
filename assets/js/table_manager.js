@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $("#table-manager").DataTable({
+    $("#table_manager").DataTable({
         "language": {
             "emptyTable": "Aucun résultat pour votre recherche",
             "info": "_START_ à _END_ sur _TOTAL_ résultats",
@@ -7,7 +7,8 @@ $(document).ready(function() {
             "lengthMenu": "_MENU_ résultats par page",
             "loadingRecords": "Chargement...",
             "processing": "En cours...",
-            "search": "Recherche:",
+            search: "_INPUT_",
+            searchPlaceholder: "Recherche...",
             "zeroRecords": "Aucun résultat pour votre recherche",
             "paginate": {
                 "next": "Suivant",
@@ -20,4 +21,3 @@ $(document).ready(function() {
         }
     })
 });
-
