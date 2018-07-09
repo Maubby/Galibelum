@@ -9,9 +9,9 @@
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 /**
  * Contract controller.
@@ -27,8 +27,7 @@ class ContractController extends Controller
     /**
      * Lists all contracts.
      *
-     * @Route("/",    name="contract_index")
-     * @Method("GET")
+     * @Route("/", methods={"GET"},    name="contract_index")
      *
      * @return Response A Response instance
      */
