@@ -13,6 +13,7 @@ namespace AppBundle\Form;
 use AppBundle\Entity\Activity;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -91,11 +92,6 @@ class ActivityType extends AbstractType
                 )
             )
             ->add(
-                'mainGame', TextareaType::class, array(
-                    'required' => false,
-                )
-            )
-            ->add(
                 'urlVideo', UrlType::class, array(
                     'required' => false,
                     'attr' => array(
@@ -112,9 +108,12 @@ class ActivityType extends AbstractType
                     )
                 )
             )
-            ->add(
-                'socialLink', UrlType::class, array(
-                    'required' => true,
+            -> add (
+                'socialLink', CollectionType::class, array(
+                    'entry_type' => UrlType::class,
+                    'allow_add' => true,
+                    'prototype' => true,
+                    'label' => false,
                 )
             )
             ->add(
@@ -122,9 +121,7 @@ class ActivityType extends AbstractType
                     'required' => false,
                     'data_class' => null,
                 )
-            )
-
-            ->remove('mainGame');
+            );
     }
 
     /**

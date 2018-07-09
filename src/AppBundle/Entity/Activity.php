@@ -153,19 +153,6 @@ class Activity
      *
      * @var string
      *
-     * @ORM\Column(name="mainGame", type="string", length=32, nullable=true)
-     *
-     * @Assert\Length(
-     *      min = 2,
-     *      max = 32,
-     * )
-     */
-    private $mainGame;
-
-    /**
-     *
-     * @var string
-     *
      * @ORM\Column(name="urlVideo", type="string", length=128, nullable=true)
      *
      * @Assert\Length(
@@ -212,6 +199,7 @@ class Activity
      * )
      */
     private $uploadPdf;
+
 
     /**
      * Constructor
@@ -274,7 +262,7 @@ class Activity
         $minDate = new \DateTime('9999-12-29');
 
         foreach ($this->activities as $offer ) {
-            if ($minDate > $offer->getDate()and $offer->getStatus() != 4)
+            if ($minDate > $offer->getDate() and $offer->getStatus() != 4)
                 $minDate = $offer->getDate();
         }
         return $minDate;
@@ -425,30 +413,6 @@ class Activity
     public function getAddress()
     {
         return $this->address;
-    }
-
-    /**
-     * Set mainGame
-     *
-     * @param string $mainGame
-     *
-     * @return Activity
-     */
-    public function setMainGame($mainGame)
-    {
-        $this->mainGame = $mainGame;
-
-        return $this;
-    }
-
-    /**
-     * Get mainGame
-     *
-     * @return string
-     */
-    public function getMainGame()
-    {
-        return $this->mainGame;
     }
 
     /**

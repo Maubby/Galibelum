@@ -59,6 +59,7 @@ class ActivityController extends Controller
             );
         }
         return $this->redirectToRoute('redirect');
+
     }
 
     /**
@@ -107,6 +108,7 @@ class ActivityController extends Controller
                     'form' => $form->createView()
                 )
             );
+
         }
         return $this->redirectToRoute('redirect');
     }
