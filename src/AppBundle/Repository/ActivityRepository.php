@@ -27,16 +27,18 @@ class ActivityRepository extends EntityRepository
     /**
      * Search activities according to user's search
      *
-     * @param String    $name Activity name
-     * @param String    $type Activity Type
-     * @param \DateTime $date Ending date
+     * @param String    $name        Activity name
+     * @param String    $type        Activity Type
+     * @param \DateTime $date        Ending date
      * @param Int       $amountStart Amount searching range
-     * @param Int       $amountEnd Amount searching range
+     * @param Int       $amountEnd   Amount searching range
      *
      * @return mixed
      */
-    public function search(string $name, string $type, \DateTime $date, int $amountStart, int $amountEnd)
-    {
+    public function search(string $name, string $type, \DateTime $date,
+        int $amountStart, int $amountEnd
+    ) {
+    
         if (!$name && $type == "0") {
             return $this->_searchAll($date, $amountStart, $amountEnd);
         }
@@ -47,10 +49,10 @@ class ActivityRepository extends EntityRepository
     /**
      * Search activities according to user's search without name
      *
-     * @param \DateTime $date Ending date
+     * @param \DateTime $date        Ending date
+     * @param int       $amountStart Amount searching range
+     * @param int       $amountEnd   Amount searching range
      *
-     * @param int $amountStart Amount searching range
-     * @param int $amountEnd Amount searching range
      * @return mixed
      */
     private function _searchAll(\DateTime $date, int $amountStart, int $amountEnd)
@@ -75,15 +77,18 @@ class ActivityRepository extends EntityRepository
     /**
      * Search activities according to user's search with a name
      *
-     * @param String $name Activity name
-     * @param String $type Activity Type
-     * @param \DateTime $date Ending date
-     * @param int $amountStart Amount searching range
-     * @param int $amountEnd Amount searching range
+     * @param String    $name        Activity name
+     * @param String    $type        Activity Type
+     * @param \DateTime $date        Ending date
+     * @param int       $amountStart Amount searching range
+     * @param int       $amountEnd   Amount searching range
+     * 
      * @return mixed
      */
-    private function _searchByName(string $name, string $type, \DateTime $date, int $amountStart, int $amountEnd)
-    {
+    private function _searchByName(string $name, string $type, \DateTime $date,
+        int $amountStart, int $amountEnd
+    ) {
+    
         // If user is searching with a name and a valid type,
         // just search all activites or organization with the selected name/type
         // and with offers > date now

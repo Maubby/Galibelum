@@ -37,6 +37,7 @@
                             <th>Avant le</th>
                             <th>Nom du partenaire</th>
                             <th>Statut</th>
+                            <th>Mail à envoyer</th>
                         </tr>
                         </thead>
                         <!-- End of table head -->
@@ -75,6 +76,21 @@
                                     {% elseif offer.status == 5 %}
                                         <a href="{{ path('manager_contract_status', { 'id': offer.id, 'status': 0 }) }}"
                                            class="button button-red text-center">Refusé</a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if offer.status == 2 %}
+                                        <a href="{{ path('manager_contract_status_mail', { 'id': offer.id, 'status': 2 }) }}"
+                                           class="button button-green text-center">Envoyer</a>
+                                    {% elseif offer.status == 3 %}
+                                        <a href="{{ path('manager_contract_status_mail', { 'id': offer.id, 'status': 3 }) }}"
+                                           class="button button-blue text-center">Envoyer</a>
+                                    {% elseif offer.status == 4 %}
+                                        <a href="{{ path('manager_contract_status_mail', { 'id': offer.id, 'status': 4 }) }}"
+                                           class="button button-purple text-center">Envoyer</a>
+                                    {% elseif offer.status == 5 %}
+                                        <a href="{{ path('manager_contract_status_mail', { 'id': offer.id, 'status': 5 }) }}"
+                                           class="button button-red text-center">Envoyer</a>
                                     {% endif %}
                                 </td>
                                 <!-- Ending buttons changing contracts' status -->

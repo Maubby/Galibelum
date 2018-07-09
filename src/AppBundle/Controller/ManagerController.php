@@ -16,6 +16,8 @@ use AppBundle\Entity\Organization;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Service\MailerService;
+
 
 /**
  * Manager controller.
@@ -49,7 +51,8 @@ class ManagerController extends Controller
     /**
      * Lists all organization entities.
      *
-     * @Route("/organization", methods={"GET"}, name="manager_organization_list")
+     * @Route("/organization", methods={"GET"}, 
+            name="manager_organization_list")
      *
      * @return Response A Response instance
      */
@@ -93,7 +96,8 @@ class ManagerController extends Controller
      *
      * @param Organization $organization The organization entity
      *
-     * @route("/disable/{id}", methods={"GET"}, name="manager_organization_disable")
+     * @route("/disable/{id}", methods={"GET"}, 
+            name="manager_organization_disable")
      *
      * @return Response A Response Instance
      */
@@ -110,7 +114,8 @@ class ManagerController extends Controller
     /**
      * Lists all contracts.
      *
-     * @Route("/contract", methods={"GET"}, name="manager_contract_list")
+     * @Route("/contract", methods={"GET"}, 
+            name="manager_contract_list")
      *
      * @return Response A Response instance
      */
@@ -148,9 +153,90 @@ class ManagerController extends Controller
             $em->persist($offer);
             $em->flush();
         }
-
         return $this->redirectToRoute(
             'manager_contract_list'
         );
+    }
+
+    /**
+     * Send a mail when the offers' status change.
+     *
+     * @param Offer         $offer      The offer entity
+     * @param Int           $status     Received status
+     * @param MailerService $mailerUser Mailer service
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     *
+     * @route("/contract/{id}/status/{status}", methods={"GET"}, 
+            name="manager_contract_status_mail")
+     * 
+     * @return Response A Response Instance
+     */
+    public function sendAction(Offer $offer, int $status, MailerService $mailerUser)
+    {
+        if ($status === 2) {
+            //      Mail for the structure
+            $mailerUser->sendEmail(
+                'William@gallibelum.fr',
+                $offer->getActivity()->getOrganizationActivities()->getEmail(),
+                'Validation',
+                'Une marque s\'est positionnée sur votre offre'
+            );
+            //      Mail for the company
+            $mailerUser->sendEmail(
+                'William@gallibelum.fr',
+                $offer->getOrganization()->getEmail(),
+                'Validation',
+                'Vous vous êtes positionnés sur une offre'
+            );
+        } elseif ($status === 3) {
+            //      Mail for the structure
+            $mailerUser->sendEmail(
+                'William@gallibelum.fr',
+                $offer->getActivity()->getOrganizationActivities()->getEmail(),
+                'Paiement',
+                'Une marque s\'est positionnée sur votre offre'
+            );
+            //      Mail for the company
+            $mailerUser->sendEmail(
+                'William@gallibelum.fr',
+                $offer->getOrganization()->getEmail(),
+                'Paiement',
+                'Vous vous êtes positionnés sur une offre'
+            );
+        } elseif ($status === 4) {
+            //      Mail for the structure
+            $mailerUser->sendEmail(
+                'William@gallibelum.fr',
+                $offer->getActivity()->getOrganizationActivities()->getEmail(),
+                'Offre expirée',
+                'Une marque s\'est positionnée sur votre offre'
+            );
+            //      Mail for the company
+            $mailerUser->sendEmail(
+                'William@gallibelum.fr',
+                $offer->getOrganization()->getEmail(),
+                'Offre expirée',
+                'Vous vous êtes positionnés sur une offre'
+            );
+        } elseif ($status === 5) {
+            //      Mail for the structure
+            $mailerUser->sendEmail(
+                'William@gallibelum.fr',
+                $offer->getActivity()->getOrganizationActivities()->getEmail(),
+                'Offre refusée',
+                'Une marque s\'est positionnée sur votre offre'
+            );
+            //      Mail for the company
+            $mailerUser->sendEmail(
+                'William@gallibelum.fr',
+                $offer->getOrganization()->getEmail(),
+                'Offre refusée',
+                'Vous vous êtes positionnés sur une offre'
+            );
+        }
+        return $this->redirectToRoute('manager_contract_list');
     }
 }
