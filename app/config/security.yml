@@ -23,6 +23,9 @@ security:
             logout:       true
             anonymous:    true
             access_denied_url: /redirect
+            remember_me:
+                secret:   '%secret%'
+                lifetime: 86400 # 1 day in seconds
 
 
     access_control:
