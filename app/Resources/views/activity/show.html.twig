@@ -56,7 +56,7 @@
                     <td>{{ activity.address }}</td>
                     #}
 
-                    <a href="{{ asset('/uploads/pdf/organization_' ~ activity.OrganizationActivities.id ~'/activity/' ~ activity.uploadPdf) }}">Pdf de présentation</a>
+                    <a href="{{ asset('/uploads/pdf/organization_' ~ activity.OrganizationActivities.id ~ '/activity_' ~ activity.id  ~ '/' ~ activity.uploadPdf) }}">Pdf de présentation</a>
 
                     <div class="boxing-body">
                         <h6 class="title"><strong>Sociaux : </strong></h6>
