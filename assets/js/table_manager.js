@@ -23,7 +23,7 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    $("#table-manager").DataTable({
+    $("#table_manager").DataTable({
         "searching": false,
         "language": {
             "emptyTable": "Aucun résultat pour votre recherche",
