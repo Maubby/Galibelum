@@ -31,7 +31,7 @@
 
 {% block javascripts %}
     <!-- Include Google Maps JS API -->
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{ api_key }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{ google_api_key }}"></script>
     <!-- Custom JS code to bind to Autocomplete API -->
     <script src="{{ asset('build/autocomplete.js') }}"></script>
 {% endblock %}
