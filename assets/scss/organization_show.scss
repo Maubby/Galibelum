@@ -1,5 +1,10 @@
 @import "_variables";
 
+table.dataTable tbody td {
+  padding: 8px 10px;
+  vertical-align: middle;
+}
+
 // Table
 
 .boxing-canvas {

@@ -11,9 +11,9 @@ parameters:
     #database_path: '%kernel.project_dir%/var/data/data.sqlite'
 
     mailer_host: smtp.gmail.com
-    mailer_transport: mail
-    mailer_user: email@gmail.com
-    mailer_password: your_password
+    mailer_transport: gmail
+    mailer_user: ~
+    mailer_password: ~
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
