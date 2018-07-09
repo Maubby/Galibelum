@@ -1,5 +1,6 @@
 $(document).ready(function() {
-    $("#table-manager").DataTable({
+    $("#table_manager").DataTable({
+        "searching": false,
         "language": {
             "emptyTable": "Aucun résultat pour votre recherche",
             "info": "_START_ à _END_ sur _TOTAL_ résultats",
@@ -20,4 +21,3 @@ $(document).ready(function() {
         }
     })
 });
-
