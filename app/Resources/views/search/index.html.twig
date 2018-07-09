@@ -84,10 +84,8 @@
                             <tr>
                                 <th>Nom de l'activité</th>
                                 <th>Type de l'activité</th>
-                                <th>Montant de l'offre minimal</th>
-                                <th>Montant de l'offre maximal</th>
-                                <th>L'offre la plus proche</th>
-                                <th>L'offre la plus loin</th>
+                                <th>Montant limite des offres</th>
+                                <th>Date limite des offres</th>
                                 <th>Voir les détails</th>
                             </tr>
                             </thead>
@@ -98,15 +96,20 @@
                             {% for activity in activitylist %}
                                 <tr>
                                     <td>
-                                        {{ activity.name }} | {{ activity.organizationActivities.name }}
-                                        <br>
-                                        {{ activity.description }}
+                                        <p class="">{{ activity.name }} | {{ activity.organizationActivities.name }}</p>
+                                        <p class="hidden-sm hidden-xs hidden">{{ activity.description }}</p>
                                     </td>
                                     <td class="text-center">{{ activity.type }}</td>
-                                    <td class="text-center">{{ activity.minamountoffer }}</td>
-                                    <td class="text-center">{{ activity.maxamountoffer }}</td>
-                                    <td class="text-center">{{ activity.mindateoffer|date('d-m-Y') }}</td>
-                                    <td class="text-center">{{ activity.maxdateoffer|date('d-m-Y') }}</td>
+                                    {% if activity.minamountoffer is same as (activity.maxamountoffer)%}
+                                        <td class="text-center"> {{ activity.minamountoffer }} €</td>
+                                    {% else %}
+                                        <td class="text-center"> {{ activity.minamountoffer }} € - {{ activity.maxamountoffer }} €</td>
+                                    {% endif %}
+                                    {% if (activity.mindateoffer|date('d-m-Y')) is same as (activity.maxdateoffer|date('d-m-Y')) %}
+                                        <td class="text-center">{{ activity.mindateoffer|date('d-m-Y') }}</td>
+                                    {% else %}
+                                        <td class="text-center">{{ activity.mindateoffer|date('d-m-Y') }} - {{ activity.maxdateoffer|date('d-m-Y') }}</td>
+                                    {% endif %}
                                     <td class="text-center"><a href="{{ path('activity_show', { 'id': activity.id }) }}">Détails</a></td>
                                 </tr>
                             {% endfor %}
