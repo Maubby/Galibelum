@@ -2,7 +2,7 @@
 /**
  * SearchController File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category SearchController
  * @package  Controller
@@ -13,7 +13,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Activity;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -73,10 +73,11 @@ class SearchController extends Controller
             return $this->redirectToRoute('manager_contract_list');
         }
 
-        if ($request->get('name'))
+        if ($request->get('name')) {
             $session->set('name', $request->get('name'));
-        else
+        } else {
             $session->set('name', "");
+        }
 
 
         $request->get('type')
