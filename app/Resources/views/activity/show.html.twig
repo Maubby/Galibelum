@@ -97,6 +97,9 @@
                             {% endfor %}
                         </ul>
                     </div>
+                    {% if is_granted('ROLE_STRUCTURE') %}
+                        <a href="{{ path('activity_edit', { 'id': activity.id }) }}">Modifier l'activité</a>
+                    {% endif %}
                 </div>
             </div>
 
@@ -109,10 +112,17 @@
                                 <h5 class="panel-title pt-10">{{ offer.name }}</h5>
                                 <div class="panel-body">
                                     <p class="panel-item"><strong>Montant : </strong>{{ offer.amount }} €</p>
-                                    <p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.partnershipNumber }}</p>
+                                    {#<p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.partnershipNumber }}</p>#}
                                     <p class="panel-item"><strong>Date d'expiration : </strong>{{ offer.date|date("d M Y") }}</p>
                                     <p class="panel-item">{{ offer.description|slice(0,50) }}...</p>
                                     <a href="#" class="btn btn-primary backblue-btn-sm">Se mettre en relation</a>
+                                    <p class="panel-item"><strong>Nombre de participant(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
+                                    <p class="panel-item">{{ offer.description }}</p>
+                                    {% if is_granted('ROLE_STRUCTURE') %}
+                                        <a href="{{ path('offer_edit', { 'id': offer.id }) }}">Modifier l'offre</a>
+                                    {% else %}
+                                        <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-primary btn-sm">Se mettre en relation</a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -126,13 +136,11 @@
 {% block javascripts %}
 
     <script type="text/javascript">
-
         let url ="{{ activity.urlVideo }}";
         let id = new URL(url).search.substr(3);
         let embedlink = "http://www.youtube.com/embed/" + id;
 
         document.getElementById("myIframe").src = embedlink;
-
     </script>
 
 {% endblock %}

@@ -87,8 +87,13 @@ class FileUploadListener
         $activityId = $entity->getId();
 
         // only upload new files
-        if ($file instanceof UploadedFile && $organizationId instanceof Organization && $activityId instanceof Activity) {
-            $fileName = $this->_uploader->upload($file, $organizationId, $activityId);
+        if ($file instanceof UploadedFile
+            && $organizationId instanceof Organization
+            && $activityId instanceof Activity
+        ) {
+            $fileName = $this->_uploader->upload(
+                $file, $organizationId, $activityId
+            );
             $entity->setUploadPdf($fileName);
         }
     }

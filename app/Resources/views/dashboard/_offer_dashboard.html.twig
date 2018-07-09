@@ -1,11 +1,12 @@
 <!-- Loop for show information offers -->
-{% for offer in organization.offers %}
+{% for offer in offers %}
     <div class="item">
         <div class="panel panel-default text-center">
             <h5 class="panel-title pt-10">{{ offer.name }}</h5>
             <div class="panel-body">
                 <p class="panel-item"><strong>Montant : </strong>{{ offer.amount }} €</p>
                 <p class="panel-item"><strong>Date d'expiration : </strong>{{ offer.date|date("d M Y") }}</p>
+                <p class="panel-item"><strong>Nombre de participant(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
                 <a href="{{ path('activity_show', { 'id': offer.activity.id }) }}" class="btn btn-primary btn-sm">Plus de détails</a>
             </div>
         </div>

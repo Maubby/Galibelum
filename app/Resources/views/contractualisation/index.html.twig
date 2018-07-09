@@ -19,6 +19,15 @@
 
 {% block body %}
     <div class="container">
+        <div>
+            <!-- Return to the dashboard -->
+            <ol class="breadcrumb breadcrumb-boxing-canvas">
+                {% if is_granted('ROLE_STRUCTURE') %}
+                    <li><a href="{{ path('dashboard_index') }}">Tableau de bord</a></li>
+                {% endif %}
+                <li>Contractualisation</li>
+            </ol>
+        </div>
         <div class="row boxing-canvas mt-50">
             <div class="col-md-12 col-sm-12 col-xs-12 text-center">
 
@@ -33,6 +42,7 @@
                         <thead>
                         <tr>
                             <th>Nom de votre structure</th>
+                            <th>Nom de l' activité</th>
                             <th>Nom de l'offre</th>
                             <th>Montant demandé</th>
                             <th>Avant le</th>
@@ -44,32 +54,29 @@
 
                         <!-- Starting listing the offers -->
                         <tbody>
-                        {% for offer in offers %}
+                        {% for contract in contracts %}
                             <tr>
-                                <td>{{ offer.activity.organizationActivities.name }}</td>
-                                <td>{{ offer.name }}</td>
-                                <td>{{ offer.amount }}</td>
-                                <td>{{ offer.date|date('d M Y') }}</td>
-                                {% if offer.organization %}
-                                    <td>{{  offer.organization.name }}</td>
-                                {% else %}
-                                    <td>Aucune marque liée</td>
-                                {% endif %}
+                                <td>{{ contract.offer.activity.organizationActivities.name }}</td>
+                                <td>{{ contract.offer.activity.name }}</td>
+                                <td>{{ contract.offer.name }}</td>
+                                <td>{{ contract.offer.amount }}</td>
+                                <td>{{ contract.offer.date|date('d M Y') }}</td>
+                                <td>{{ contract.organization.name }}</td>
 
                                 <!-- Buttons changing contracts' status start -->
                                 <td>
-                                    {% if offer.status == 0 %}
-                                        <button class="button button text-center">Aucun partenaire</button>
-                                    {% elseif offer.status == 1 %}
-                                        <button class="button button-yellow text-center">Négociation</button>
-                                    {% elseif offer.status == 2 %}
-                                        <button class="button button-green text-center">Validation</button>
-                                    {% elseif offer.status == 3 %}
-                                        <button class="button button-blue text-center">Paiement</button>
-                                    {% elseif offer.status == 4 %}
-                                        <button class="button button-purple text-center">Expiré</button>
-                                    {% elseif offer.status == 5 %}
-                                        <button class="button button-red text-center">Refusé</button>
+                                    {% if contract.status == 0 %}
+                                        <button class="button button text-center" disabled>Aucun partenaire</button>
+                                    {% elseif contract.status == 1 %}
+                                        <button class="button button-yellow text-center" disabled>Négociation</button>
+                                    {% elseif contract.status == 2 %}
+                                        <button class="button button-green text-center" disabled>Validation</button>
+                                    {% elseif contract.status == 3 %}
+                                        <button class="button button-blue text-center" disabled>Paiement</button>
+                                    {% elseif contract.status == 4 %}
+                                        <button class="button button-purple text-center" disabled>Expiré</button>
+                                    {% elseif contract.status == 5 %}
+                                        <button class="button button-red text-center" disabled>Refusé</button>
                                     {% endif %}
                                 </td>
                                 <!-- Ending buttons changing contracts' status -->
@@ -88,5 +95,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('build/table-manager.js') }}"></script>
+    <script src="{{ asset('build/table_manager.js') }}"></script>
 {% endblock %}

@@ -339,7 +339,9 @@ class Activity
      */
     public function setNameCanonical($nameCanonical)
     {
-        $this->nameCanonical = $nameCanonical;
+        $this->nameCanonical = strtolower(
+            str_replace(' ', '_', $nameCanonical)
+        );
 
         return $this;
     }
@@ -664,4 +666,3 @@ class Activity
         return $this;
     }
 }
-

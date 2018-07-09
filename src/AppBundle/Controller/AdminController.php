@@ -59,7 +59,7 @@ class AdminController extends Controller
         return $this->render(
             'admin/new.html.twig', array(
                 'manager' => $manager,
-                'form' => $form->createView(),
+                'form' => $form->createView()
             )
         );
     }
@@ -88,11 +88,10 @@ class AdminController extends Controller
             if ($editForm->isSubmitted() && $editForm->isValid()) {
                 $this->getDoctrine()->getManager()->flush();
 
-                $this
-                    ->addFlash(
-                        'success',
-                        "Vos modifications ont bien été prises en compte."
-                    );
+                $this->addFlash(
+                    'success',
+                    "Vos modifications ont bien été prises en compte."
+                );
 
                 return $this->redirectToRoute(
                     'admin_manager_list',
@@ -103,7 +102,7 @@ class AdminController extends Controller
             return $this->render(
                 'admin/edit.html.twig', array(
                     'manager' => $manager,
-                    'edit_form' => $editForm->createView(),
+                    'edit_form' => $editForm->createView()
 
                 )
             );
@@ -124,7 +123,7 @@ class AdminController extends Controller
         $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
         return $this->render(
             'admin/manager.html.twig', array(
-                'users' => $users,
+                'users' => $users
             )
         );
     }

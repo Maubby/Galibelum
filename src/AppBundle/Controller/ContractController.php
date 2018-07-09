@@ -8,11 +8,16 @@
  * @package  Controller
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
+
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Contracts;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use AppBundle\Entity\Offer;
+use AppBundle\Service\MailerService;
+
 /**
  * Contract controller.
  *
@@ -27,20 +32,208 @@ class ContractController extends Controller
     /**
      * Lists all contracts.
      *
-     * @Route("/", methods={"GET"},    name="contract_index")
+     * @route("/", methods={"GET"},
+     *     name="contract_index")
      *
      * @return Response A Response instance
      */
     public function contractAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $offers = $em
-            ->getRepository('AppBundle:Offer')
-            ->findAll();
+
+        if ($this->getUser()->hasRole('ROLE_COMPANY')) {
+            $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
+                array(
+                    'organization' => $this->getUser()
+                )
+            );
+        } else {
+            $activities = $em->getRepository('AppBundle:Activity')->findby(
+                array(
+                    'organizationActivities' => $this->getUser()->getOrganization(),
+                )
+            );
+
+            $offers = $em->getRepository('AppBundle:Offer')->findby(
+                array(
+                    'activity' => $activities,
+                )
+            );
+            $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
+                array(
+                    'offer' => $offers,
+                )
+            );
+        }
+
         return $this->render(
             'contractualisation/index.html.twig', array(
-                'offers' => $offers,
+                'contracts' => $contracts,
             )
         );
+    }
+
+    /**
+     * Set contract when company click to relation button.
+     *
+     * @param Offer         $offer      The offer entity
+     * @param MailerService $mailerUser The mailer service
+     *
+     * @Route("/{id}/partners", methods={"GET", "POST"}, name="contract_relation")
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     *
+     * @return Response A Response instance
+     */
+    public function partnersAction(Offer $offer, MailerService $mailerUser)
+    {
+        if ($this->getUser()->hasRole('ROLE_COMPANY')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+        ) {
+            $contract = new Contracts();
+            $contract
+                ->setStatus(1)
+                ->setOffer($offer)
+                ->setOrganization($this->getUser()->getOrganization());
+            $this->getDoctrine()->getManager()->persist($contract);
+            $this->getDoctrine()->getManager()->flush();
+
+            //      Mail for the structure
+            $mailerUser->sendEmail(
+                $this->getParameter('no_reply'),
+                $contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getUser()->getEmail(),
+                'Validation',
+                'Une marque s\'est positionnée sur votre offre'
+            );
+            //      Mail for the company
+            $mailerUser->sendEmail(
+                $this->getParameter('no_reply'),
+                $contract->getOrganization()->getUser()->getEmail(),
+                'Validation',
+                'Vous vous êtes positionnés sur une offre'
+            );
+            //      Mail for the account manager
+            $mailerUser->sendEmail(
+                $this->getParameter('no_reply'),
+                $contract->getOrganization()->getUser()->getManagers()->getEmail(),
+                'Validation',
+                'Vous vous êtes positionnés sur une offre'
+            );
+
+            return $this->render(
+                'activity/show.html.twig', array(
+                    'activity' => $offer->getActivity()
+                )
+            );
+        }
+        return $this->redirectToRoute('redirect');
+    }
+
+    /**
+     * Changes contracts' status.
+     *
+     * @param Contracts $contract The contract entity
+     * @param Int       $status   Status value
+     *
+     * @route("/{id}/{status}", methods={"GET"},
+     *     name="contract_status")
+     *
+     * @return Response A Response Instance
+     */
+    public function statusAction(Contracts $contract, int $status)
+    {
+        if ($status >= 0 && $status <= 5) {
+            $contract->setStatus($status);
+
+            if ($contract->getStatus() === 2) {
+                $contract->getOffer()->removePartnershipNumber();
+            }
+            if ($contract->getStatus() === 5) {
+                $contract->getOffer()->addPartnershipNumber();
+            }
+
+            $this->getDoctrine()->getManager()->persist($contract);
+            $this->getDoctrine()->getManager()->flush();
+        }
+        return $this->redirectToRoute(
+            'manager_contract_list'
+        );
+    }
+
+    /**
+     * Send a mail when the offers' status change.
+     *
+     * @param Contracts     $contract   The contract entity
+     * @param Int           $status     Received status
+     * @param MailerService $mailerUser Mailer service
+     *
+     * @route("/{id}/status/{status}", methods={"GET"},
+     *     name="contract_status_mail")
+     *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     *
+     * @return Response A Response Instance
+     */
+    public function sendAction(Contracts $contract, int $status,
+                               MailerService $mailerUser
+    ) {
+        if ($status === 2) {
+            //status 2 validation
+            //      Mail for the structure
+            $mailerUser->sendEmail(
+                $this->getUser()->getEmail(),
+                $contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getUser()->getEmail(),
+                'Validation',
+                'Une marque s\'est positionnée sur votre offre'
+            );
+            //      Mail for the company
+            $mailerUser->sendEmail(
+                $this->getUser()->getEmail(),
+                $contract->getOrganization()->getUser()->getEmail(),
+                'Validation',
+                'Vous vous êtes positionnés sur une offre'
+            );
+        } elseif ($status === 3) {
+            //status 3 payment
+            //      Mail for the structure
+            $mailerUser->sendEmail(
+                $this->getUser()->getEmail(),
+                $contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getUser()->getEmail(),
+                'Paiement',
+                'Une marque s\'est positionnée sur votre offre'
+            );
+            //      Mail for the company
+            $mailerUser->sendEmail(
+                $this->getUser()->getEmail(),
+                $contract->getOrganization()->getUser()->getEmail(),
+                'Paiement',
+                'Vous vous êtes positionnés sur une offre'
+            );
+        } elseif ($status === 4) {
+            //status 4 expired
+            //      Mail for the structure
+            $mailerUser->sendEmail(
+                $this->getUser()->getEmail(),
+                $contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getUser()->getEmail(),
+                'Offre expirée',
+                'Une marque s\'est positionnée sur votre offre'
+            );
+            //      Mail for the company
+            $mailerUser->sendEmail(
+                $this->getUser()->getEmail(),
+                $contract->getOrganization()->getUser()->getEmail(),
+                'Offre expirée',
+                'Vous vous êtes positionnés sur une offre'
+            );
+        }
+        return $this->redirectToRoute('manager_contract_list');
     }
 }

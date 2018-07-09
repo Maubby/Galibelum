@@ -19,10 +19,10 @@ class Offer
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Organization", inversedBy="offers")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Contracts", mappedBy="offer")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $organization;
+    private $contracts;
 
     /**
      *
@@ -34,6 +34,17 @@ class Offer
     /*
      * Personal variables
      */
+
+    /**
+     *
+     * @var array
+     *
+     * @ORM\Column(name="partnershipNumber", type="array")
+     *
+     * @Assert\NotBlank()
+     */
+    private $partnershipNumber;
+
 
     /**
      *
@@ -144,23 +155,6 @@ class Offer
      *
      * @var int
      *
-     * @ORM\Column(name="partnershipNumber", type="integer")
-     *
-     * @Assert\Type(
-     *     type="integer",
-     *     message="The value {{ value }} is not a valid {{ type }}."
-     * )
-     * @Assert\Range(
-     *      min = 1,
-     *      minMessage = "Le nombre de partenaire(s) ne peut être inférieur à {{ limit }}"
-     * )
-     */
-    private $partnershipNumber;
-
-    /**
-     *
-     * @var int
-     *
      * @ORM\Column(name="finalDeal", type="integer", nullable=true)
      */
     private $finalDeal;
@@ -172,14 +166,6 @@ class Offer
      * @ORM\Column(name="status", type="integer")
      */
     private $status;
-
-    /**
-     *
-     * @var bool
-     *
-     * @ORM\Column(name="signature", type="boolean", nullable=true)
-     */
-    private $signature;
 
     /*
      * Add Personal Method
@@ -241,7 +227,9 @@ class Offer
      */
     public function setNameCanonical($nameCanonical)
     {
-        $this->nameCanonical = $nameCanonical;
+        $this->nameCanonical = strtolower(
+            str_replace(' ', '_', $nameCanonical)
+        );
 
         return $this;
     }
@@ -353,30 +341,6 @@ class Offer
     }
 
     /**
-     * Set partnershipNumber
-     *
-     * @param integer $partnershipNumber
-     *
-     * @return Offer
-     */
-    public function setPartnershipNumber($partnershipNumber)
-    {
-        $this->partnershipNumber = $partnershipNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get partnershipNumber
-     *
-     * @return int
-     */
-    public function getPartnershipNumber()
-    {
-        return $this->partnershipNumber;
-    }
-
-    /**
      * Set finalDeal
      *
      * @param integer $finalDeal
@@ -422,30 +386,6 @@ class Offer
     public function getStatus()
     {
         return $this->status;
-    }
-
-    /**
-     * Set signature
-     *
-     * @param boolean $signature
-     *
-     * @return Offer
-     */
-    public function setSignature($signature)
-    {
-        $this->signature = $signature;
-
-        return $this;
-    }
-
-    /**
-     * Get signature
-     *
-     * @return bool
-     */
-    public function getSignature()
-    {
-        return $this->signature;
     }
 
     /**
@@ -497,26 +437,113 @@ class Offer
     }
 
     /**
-     * Set organization.
+     * Set partnershipNumber.
      *
-     * @param Organization $organization
+     * @param array|int $partnershipNumber
      *
      * @return Offer
      */
-    public function setOrganization(Organization $organization)
+    public function setPartnershipNumber($partnershipNumber)
     {
-        $this->organization = $organization;
+        $this->partnershipNumber = $partnershipNumber;
 
         return $this;
     }
 
     /**
-     * Get organization.
+     * Get partnershipNumber.
      *
-     * @return Organization
+     * @return array
      */
-    public function getOrganization()
+    public function getPartnershipNumber()
     {
-        return $this->organization;
+        return $this->partnershipNumber;
+    }
+
+
+
+    /**
+     * Set partnershipNumber.
+     *
+     * @param int $partnershipNb
+     *
+     * @return Offer
+     */
+    public function setPartnershipNb($partnershipNb)
+    {
+        $partnershipNumber = [];
+
+        for($i=0; $i < $partnershipNb; $i++) {
+            array_push($partnershipNumber, 'null');
+        }
+
+        return $this->setPartnershipNumber($partnershipNumber);
+    }
+
+    /**
+     * Add partnershipNumber.
+     *
+     * @return Offer
+     */
+    public function addPartnershipNumber()
+    {
+        return $this->setPartnershipNb($this->countPartnershipNumber() + 1);
+    }
+
+    /**
+     * Remove partnershipNumber.
+     *
+     * @return Offer
+     */
+    public function removePartnershipNumber()
+    {
+        return $this->setPartnershipNb($this->countPartnershipNumber() - 1);
+    }
+
+    /**
+     * Count partnershipNumber.
+     *
+     * @return int
+     */
+    public function countPartnershipNumber()
+    {
+        $partnershipNb = count($this->partnershipNumber);
+        return $partnershipNb;
+    }
+
+    /**
+     * Add contract.
+     *
+     * @param \AppBundle\Entity\Contracts $contract
+     *
+     * @return Offer
+     */
+    public function addContract(Contracts $contract)
+    {
+        $this->contracts[] = $contract;
+
+        return $this;
+    }
+
+    /**
+     * Remove contract.
+     *
+     * @param \AppBundle\Entity\Contracts $contract
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeContract(Contracts $contract)
+    {
+        return $this->contracts->removeElement($contract);
+    }
+
+    /**
+     * Get contracts.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContracts()
+    {
+        return $this->contracts;
     }
 }

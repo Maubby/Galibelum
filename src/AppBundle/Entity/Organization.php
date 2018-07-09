@@ -20,10 +20,10 @@ class Organization
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Offer", mappedBy="organization")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Contracts", mappedBy="organization")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $offers;
+    private $contracts;
 
     /**
      *
@@ -31,6 +31,13 @@ class Organization
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="manager")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $managers;
 
     /**
      *
@@ -258,7 +265,9 @@ class Organization
      */
     public function setNameCanonical($nameCanonical)
     {
-        $this->nameCanonical = $nameCanonical;
+        $this->nameCanonical = strtolower(
+            str_replace(' ', '_', $nameCanonical)
+        );
 
         return $this;
     }
@@ -442,6 +451,7 @@ class Organization
     {
         return $this->isActive;
     }
+
     /**
      * Constructor
      */
@@ -449,7 +459,6 @@ class Organization
     {
         $this->organizationActivity = new ArrayCollection();
         $this->setIsActive(0);
-        $this->offers = new ArrayCollection();
     }
 
     /**
@@ -535,38 +544,88 @@ class Organization
     }
 
     /**
-     * Add offer.
+     * Add manager.
      *
-     * @param \AppBundle\Entity\Offer $offer
+     * @param \AppBundle\Entity\User $manager
      *
      * @return Organization
      */
-    public function addOffer(Offer $offer)
+    public function addManager(User $manager)
     {
-        $this->offers[] = $offer;
+        $this->managers[] = $manager;
 
         return $this;
     }
 
     /**
-     * Remove offer.
+     * Remove manager.
      *
-     * @param \AppBundle\Entity\Offer $offer
+     * @param \AppBundle\Entity\User $manager
      *
      * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
-    public function removeOffer(Offer $offer)
+    public function removeManager(User $manager)
     {
-        return $this->offers->removeElement($offer);
+        return $this->managers->removeElement($manager);
     }
 
     /**
-     * Get offers.
+     * Get manager.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getOffers()
+    public function getManagers()
     {
-        return $this->offers;
+        return $this->managers;
+    }
+
+    /**
+     * Set managers.
+     *
+     * @param \AppBundle\Entity\User|null $managers
+     *
+     * @return Organization
+     */
+    public function setManagers(User $managers = null)
+    {
+        $this->managers = $managers;
+
+        return $this;
+    }
+
+    /**
+     * Add contract.
+     *
+     * @param \AppBundle\Entity\Contracts $contract
+     *
+     * @return Organization
+     */
+    public function addContract(Contracts $contract)
+    {
+        $this->contracts[] = $contract;
+
+        return $this;
+    }
+
+    /**
+     * Remove contract.
+     *
+     * @param \AppBundle\Entity\Contracts $contract
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeContract(Contracts $contract)
+    {
+        return $this->contracts->removeElement($contract);
+    }
+
+    /**
+     * Get contracts.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getContracts()
+    {
+        return $this->contracts;
     }
 }
