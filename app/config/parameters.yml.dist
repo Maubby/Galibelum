@@ -18,5 +18,5 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
 
-    # Adding Google API Key
-    api_key: AIzaSyB3N8qr-skNcWJ-ctPpwDgAW7xvGguA8-M
+    # Adding API Key
+    google_api_key: AIzaSyB3N8qr-skNcWJ-ctPpwDgAW7xvGguA8-M
