@@ -42,6 +42,7 @@
                         <thead>
                         <tr>
                             <th>Nom de votre structure</th>
+                            <th>Nom de l' activité</th>
                             <th>Nom de l'offre</th>
                             <th>Montant demandé</th>
                             <th>Avant le</th>
@@ -56,6 +57,7 @@
                         {% for organization in organization %}
                             {% for contract in organization.contracts %}
                                 <tr>
+                                    <td>{{ contract.activity.organizationActivities.name }}</td>
                                     <td>{{ contract.activity.name }}</td>
                                     <td>{{ contract.name }}</td>
                                     <td>{{ contract.amount }}</td>

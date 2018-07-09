@@ -235,9 +235,10 @@ class OfferController extends Controller
             $user = $this->getUser();
 
             $em = $this->getDoctrine()->getManager();
-            $offer->setStatus(1)
-                ->addContract($user->getOrganization());
+            $offer->setStatus(1);
+            $user->getOrganization()->addContract($offer);
             $em->persist($offer);
+            $em->persist($user);
             $em->flush();
 
             return $this->render(
