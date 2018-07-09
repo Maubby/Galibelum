@@ -48,8 +48,8 @@
                         <!-- Link for the ROLE_SUPER_ADMIN to go back to his dashboard -->
                         {#{% if app.user.hasRole('ROLE_SUPER_ADMIN') %}#}
                         {#<li>#}
-                            {#<a href="{{ path('admin/manager.html.twig') }}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>#}
-                                {#Retourner sur votre tableau de bord</a>#}
+                        {#<a href="{{ path('admin/manager.html.twig') }}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>#}
+                        {#Retourner sur votre tableau de bord</a>#}
                         {#</li>#}
                         {#{% endif %}#}
                         <!-- End link -->
@@ -73,7 +73,9 @@
         </nav>
     {% endblock %}
 </header>
+
 {% block body %}{% endblock %}
+
 <footer>
     {% block footer %}
         <!-- Footer Bar with links -->
@@ -110,7 +112,7 @@
                     </div>
                     <div class="col-sm-5 text-center center-block mb-40">
                         <div class="mb-20">
-                            <a href="{{ path('homepage') }}">
+                            <a href="/">
                                 <img class="img_footer" src="{{ asset('build/images/logo_galibelum_horizontal.png') }}" alt="Logo Galibelum horizontal" title="Accueil">
                             </a>
                         </div>
@@ -126,6 +128,7 @@
         <!-- End Footer Bar -->
     {% endblock %}
 </footer>
+
 <!-- JS Webpack's vendor including Bootstrap.js and JQuery.js shared entry -->
 <script src="{{ asset('build/manifest.js') }}"></script>
 <script src="{{ asset('build/vendor.js') }}"></script>

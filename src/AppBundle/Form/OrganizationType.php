@@ -2,7 +2,7 @@
 /**
  * OrganizationType File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category OrganizationType
  * @package  Type
@@ -85,7 +85,7 @@ class OrganizationType extends AbstractType
             ->add(
                 'address', TextType::class, array(
                     'attr'=>array(
-                        'minlength' => 2, 'maxlength' => 64
+                        'minlength' => 5, 'maxlength' => 64
                     )
                 )
             )

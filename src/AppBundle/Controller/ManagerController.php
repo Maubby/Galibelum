@@ -2,7 +2,7 @@
 /**
  * ManagerController File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category ManagerController
  * @package  Controller
@@ -31,26 +31,28 @@ use AppBundle\Service\MailerService;
 class ManagerController extends Controller
 {
     /**
-     * Lists all managers.
+     * Landing page for account managers.
      *
-     * @Route("/", methods={"GET"},    name="manager_dashboard")
+     * @Route("/", methods={"GET"}, name="manager_contract")
      *
      * @return Response A Response instance
      */
     public function dashboardAction()
     {
-        $this->getDoctrine()->getManager();
-
+        $em = $this->getDoctrine()->getManager();
+        $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
         return $this->render(
-            'manager/dashboard.html.twig',
-            array('user' => $this->getUser())
+            'manager/contract.html.twig', array(
+                'users' => $this->getUser(),
+            )
         );
     }
 
     /**
      * Lists all organization entities.
      *
-     * @Route("/organization", methods={"GET"}, name="manager_organization_list")
+     * @Route("/organization", methods={"GET"}, 
+            name="manager_organization_list")
      *
      * @return Response A Response instance
      */
@@ -70,11 +72,12 @@ class ManagerController extends Controller
     }
 
     /**
-     * Activates a organization entity.
+     * Activates an organization entity.
      *
      * @param Organization $organization The organization entity
      *
-     * @Route("/activate/{id}", methods={"GET"}, name="manager_organization_activate")
+     * @Route("/activate/{id}", methods={"GET"},
+     *     name="manager_organization_activate")
      *
      * @return Response A Response Instance
      */
@@ -93,7 +96,8 @@ class ManagerController extends Controller
      *
      * @param Organization $organization The organization entity
      *
-     * @route("/disable/{id}", methods={"GET"}, name="manager_organization_disable")
+     * @route("/disable/{id}", methods={"GET"}, 
+            name="manager_organization_disable")
      *
      * @return Response A Response Instance
      */
@@ -110,7 +114,8 @@ class ManagerController extends Controller
     /**
      * Lists all contracts.
      *
-     * @Route("/contract", methods={"GET"}, name="manager_contract_list")
+     * @Route("/contract", methods={"GET"}, 
+            name="manager_contract_list")
      *
      * @return Response A Response instance
      */
@@ -135,7 +140,8 @@ class ManagerController extends Controller
      * @param Offer $offer  The offer entity
      * @param Int   $status Status value
      *
-     * @route("/contract/{id}/{status}", methods={"GET"}, name="manager_contract_status")
+     * @route("/contract/{id}/{status}", methods={"GET"},
+     *     name="manager_contract_status")
      *
      * @return                           Response A Response Instance
      */
@@ -163,7 +169,8 @@ class ManagerController extends Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      *
-     * @route("/contract/{id}/status/{status}", methods={"GET"}, name="manager_contract_status_mail")
+     * @route("/contract/{id}/status/{status}", methods={"GET"}, 
+            name="manager_contract_status_mail")
      * 
      * @return                                  Response A Response Instance
      */
