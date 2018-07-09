@@ -117,7 +117,7 @@
                         <!--End Activity's Achievement-->
 
                         <!--Activity's Social Link-->
-                        <div class="mt-20 p-0">
+                        <div class="mt-20">
                             <div class="form-group form-error">
                                 <i class="fas fa-user-friends"></i>{{ form_label(form.socialLink, 'Réseaux sociaux et chaînes de streaming') }}
                             </div>
@@ -134,7 +134,9 @@
                                         {{ form_widget(socialLinkField) }}
                                     {% endfor %}
                                 </div>
-                                <button type="button" class="add-another-collection-widget" data-list="#SocialLink-fields-list">Plus</button>
+                                <div class="col-md-12 text-center mt-10">
+                                    <button type="button" class="add-another-collection-widget button" data-list="#SocialLink-fields-list">Ajouter un Lien</button>
+                                </div>
                             </div>
                         </div>
                         <!--End Activity's Social Link-->
