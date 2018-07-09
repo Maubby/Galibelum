@@ -20,12 +20,10 @@
 }
 
 /* Media queries */
-@media (min-width: 521px) and (max-width: 900px){
-
-  .boxing-canvas{
+@media (min-width: 521px) and (max-width: 900px) {
+  .boxing-canvas {
     margin-bottom: 20px;
   }
-
 }
 
 @media screen and (max-width: 520px) {
@@ -44,7 +42,7 @@
   .boxing-canvas-content-height {
     height: 355px;
   }
-  .boxing-canvas{
+  .boxing-canvas {
     margin-bottom: 20px;
   }
 }
