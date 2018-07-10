@@ -52,6 +52,5 @@ class DefaultController extends Controller
         } else {
             return $this->redirectToRoute('inscription_index');
         }
-
     }
 }
