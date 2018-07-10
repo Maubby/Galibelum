@@ -35,22 +35,25 @@ class Contracts
      */
 
     /**
+     *
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id",               type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="uploadPdf", type="string", length=255, nullable=true)
+     * @var array
+     *
+     * @ORM\Column(name="uploadPdf", type="array", nullable=true)
      */
     private $uploadPdf;
 
     /**
+     *
      * @var int
      *
      * @ORM\Column(name="status", type="integer")
@@ -85,7 +88,7 @@ class Contracts
     /**
      * Get uploadPdf.
      *
-     * @return string
+     * @return array
      */
     public function getUploadPdf()
     {

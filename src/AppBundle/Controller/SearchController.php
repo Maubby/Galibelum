@@ -72,12 +72,11 @@ class SearchController extends Controller
         ) {
             $session = $request->getSession();
 
-        if ($request->get('name')) {
-            $session->set('name', $request->get('name'));
-        } else {
-            $session->set('name', "");
-        }
-
+            if ($request->get('name')) {
+                $session->set('name', $request->get('name'));
+            } else {
+                $session->set('name', "");
+            }
 
             $request->get('type')
                 ? $session->set('type', $request->get('type'))
