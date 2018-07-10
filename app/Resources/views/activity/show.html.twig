@@ -78,7 +78,13 @@
                                     </a>
                                 </li>
                                 {% elseif 'twitch' in link %}
-                                    <li class="list-group-item"><i class="fab fa-twitter"></i> Twitch :
+                                    <li class="list-group-item"><i class="fab fa-twitch"></i> Twitch :
+                                        <a href="{{ link }}">
+                                            {{ link }}
+                                        </a>
+                                    </li>
+                                {% elseif 'twitter' in link %}
+                                    <li class="list-group-item"><i class="fab fa-twitter"></i> Twitter :
                                         <a href="{{ link }}">
                                             {{ link }}
                                         </a>
