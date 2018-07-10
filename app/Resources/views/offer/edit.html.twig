@@ -18,6 +18,16 @@
 {% endblock %}
 
 {% block body %}
+    <!-- Message flash -->
+    {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('success') %}
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <!-- End flash message -->
     <section>
         <div class="container-fluid light-blue-subtitle-text">
             <div class="row">

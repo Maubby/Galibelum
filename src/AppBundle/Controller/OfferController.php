@@ -120,6 +120,11 @@ class OfferController extends Controller
                 $em->persist($offer);
                 $em->flush();
 
+                $this->addFlash(
+                    'success',
+                    "Votre offre a bien été créée."
+                );
+
                 return $this->redirectToRoute(
                     'offer_edit', array(
                         'id' => $offer->getId()
