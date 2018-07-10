@@ -100,7 +100,6 @@ class ContractController extends Controller
             $this->getDoctrine()->getManager()->persist($contract);
             $this->getDoctrine()->getManager()->flush();
 
-            //      Mail for the structure
             $mailerUser->sendEmail(
                 'noreply@galibelum.fr',
                 $contract->getOffer()->getActivity()
@@ -108,14 +107,14 @@ class ContractController extends Controller
                 'Validation',
                 'Une marque s\'est positionnée sur votre offre'
             );
-            //      Mail for the company
+
             $mailerUser->sendEmail(
                 'noreply@galibelum.fr',
                 $contract->getOrganization()->getUser()->getEmail(),
                 'Validation',
                 'Vous vous êtes positionnés sur une offre'
             );
-            //      Mail for the account manager
+
             $mailerUser->sendEmail(
                 'noreply@galibelum.fr',
                 $contract->getOrganization()->getManagers()->getEmail(),
@@ -191,8 +190,7 @@ class ContractController extends Controller
                                MailerService $mailerUser)
     {
         switch ($status) {
-            //status 2 = validation
-            //Mail for the structure
+
             case 2:
                 $mailerUser->sendEmail(
                     $this->getUser()->getEmail(),
@@ -209,8 +207,6 @@ class ContractController extends Controller
                 );
                 break;
 
-            //status 3 = payment
-            //Mail for the structure
             case 3:
                 $mailerUser->sendEmail(
                     $this->getUser()->getEmail(),
@@ -227,8 +223,6 @@ class ContractController extends Controller
                 );
                 break;
 
-            //status 4 = expired
-            //Mail for the structure
             case 4:
                 $mailerUser->sendEmail(
                     $this->getUser()->getEmail(),

@@ -57,8 +57,6 @@ class ActivityRepository extends EntityRepository
      */
     private function _searchAll(\DateTime $date, int $amountStart, int $amountEnd)
     {
-        // If user is searching without selected input,
-        // just search all activites with offers > date now
         $query = $this->createQueryBuilder('act')
             ->INNERJOIN('act.organizationActivities', 'org')
             ->INNERJOIN('act.activities', 'off')
@@ -88,11 +86,6 @@ class ActivityRepository extends EntityRepository
     private function _searchByName(string $name, string $type, \DateTime $date,
         int $amountStart, int $amountEnd
     ) {
-    
-        // If user is searching with a name and a valid type,
-        // just search all activites or organization with the selected name/type
-        // and with offers > date now
-        //and between startAmount and endAmount
         $query = $this->createQueryBuilder('act')
             ->INNERJOIN('act.organizationActivities', 'org')
             ->INNERJOIN('act.activities', 'off')

@@ -77,7 +77,6 @@ class FileUploadListener
      */
     private function _uploadFile($entity)
     {
-        // upload only works for Activity entities
         if (!$entity instanceof Activity) {
             return;
         }
@@ -86,7 +85,6 @@ class FileUploadListener
         $organizationId = $entity->getOrganizationActivities()->getId();
         $activityId = $entity->getId();
 
-        // only upload new files
         if ($file instanceof UploadedFile
             && $organizationId instanceof Organization
             && $activityId instanceof Activity
