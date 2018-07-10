@@ -44,9 +44,9 @@ class Contracts
     private $id;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="uploadPdf", type="string", length=255)
+     * @ORM\Column(name="uploadPdf", type="array", nullable=true)
      */
     private $uploadPdf;
 
@@ -85,7 +85,7 @@ class Contracts
     /**
      * Get uploadPdf.
      *
-     * @return string
+     * @return array
      */
     public function getUploadPdf()
     {

@@ -10,7 +10,11 @@
  */
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Contracts;
 use AppBundle\Entity\Organization;
+use AppBundle\Form\ContractType;
+use AppBundle\Service\FileUploaderService;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,7 +34,7 @@ class ManagerController extends Controller
      * Lists all organization entities.
      *
      * @Route("/organization", methods={"GET"},
-            name="manager_organization_list")
+    name="manager_organization_list")
      *
      * @return Response A Response instance
      */
@@ -91,7 +95,7 @@ class ManagerController extends Controller
      * Lists all contracts.
      *
      * @Route("/contract", methods={"GET"},
-            name="manager_contract_list")
+    name="manager_contract_list")
      *
      * @return Response A Response instance
      */
@@ -117,6 +121,56 @@ class ManagerController extends Controller
         return $this->render(
             'manager/contract.html.twig', array(
                 'contracts' => $contracts
+            )
+        );
+    }
+
+    /**
+     * Lists all contracts.
+     *
+     * @Route("/{contract}/upload", methods={"POST"}, name="contract_upload")
+     *
+     * @param Request $request
+     *
+     * @param Contracts $contract
+     * @param FileUploaderService $fileUploaderService
+     * @return Response
+     */
+    public function uploadAction(Request $request, Contracts $contract, FileUploaderService $fileUploaderService)
+    {
+        $form = $this->createForm(ContractType::class);
+        $form->handleRequest($request);
+
+
+
+        // Var for the file name
+        if ($form->isSubmitted() && $form->isValid()) {
+            $filePdf = [];
+            foreach ($request->files->get("appbundle_contract")['uploadPdf'] as $file) {
+                $offer = $contract->getOffer();
+                $activity = $offer->getActivity();
+                $organization = $activity->getOrganizationActivities();
+
+                // Check if the file exist and set the new or old value
+                $filePdf[] = $fileUploaderService->upload(
+                    $file, $organization->getId(), $activity->getId(), $offer->getId()
+                );
+
+                $this->addFlash(
+                    'success',
+                    "Vos modifications ont bien été prises en compte."
+                );
+
+                $contract->setUploadPdf($filePdf);
+            }
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('manager_contract_list');
+        }
+
+        return $this->render(
+            'manager/_uploadContract.html.twig', array(
+                'form' => $form->createView(),
+                'contract' => $contract
             )
         );
     }

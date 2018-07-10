@@ -102,7 +102,7 @@ class ContractController extends Controller
 
             //      Mail for the structure
             $mailerUser->sendEmail(
-                $this->getParameter('no_reply'),
+                'noreply@galibelum.fr',
                 $contract->getOffer()->getActivity()
                     ->getOrganizationActivities()->getUser()->getEmail(),
                 'Validation',
@@ -110,15 +110,15 @@ class ContractController extends Controller
             );
             //      Mail for the company
             $mailerUser->sendEmail(
-                $this->getParameter('no_reply'),
+                'noreply@galibelum.fr',
                 $contract->getOrganization()->getUser()->getEmail(),
                 'Validation',
                 'Vous vous êtes positionnés sur une offre'
             );
             //      Mail for the account manager
             $mailerUser->sendEmail(
-                $this->getParameter('no_reply'),
-                $contract->getOrganization()->getUser()->getManagers()->getEmail(),
+                'noreply@galibelum.fr',
+                $contract->getOrganization()->getManagers()->getEmail(),
                 'Validation',
                 'Vous vous êtes positionnés sur une offre'
             );
