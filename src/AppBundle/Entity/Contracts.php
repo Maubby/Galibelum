@@ -46,7 +46,7 @@ class Contracts
     /**
      * @var string
      *
-     * @ORM\Column(name="uploadPdf", type="string", length=255)
+     * @ORM\Column(name="uploadPdf", type="string", length=255, nullable=true)
      */
     private $uploadPdf;
 
