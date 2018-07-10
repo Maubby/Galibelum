@@ -35,7 +35,7 @@
                 <p>{{ activity.organizationActivities.relationNumber }} salariés</p>
                 <p>{{ activity.organizationActivities.address }}</p>
             </div>
-            <div class="col-md-8 description-text text-center">
+            <div class="col-md-8 description-text">
                 {{ activity.organizationActivities.description }}
             </div>
         </div>
@@ -47,7 +47,7 @@
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe id="myIframe" src=""></iframe>
                     </div>
-                    <p class="boxing-text pb-20">{{ activity.description }}</p>
+                    <p class="boxing-text description-text pb-20">{{ activity.description }}</p>
 
                     {% if activity.achievement is not empty %}
                     <div class="boxing-body">
