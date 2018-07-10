@@ -26,8 +26,9 @@ class OrganizationRepository extends EntityRepository
 {
     /**
      *
-     * @param  $data
-     * @return mixed
+     * @param $data /Search Parameters
+     *
+     * @return mixed Return result of the query
      */
     public function search($data)
     {
