@@ -78,7 +78,6 @@ class SearchController extends Controller
                 $session->set('name', "");
             }
 
-
             $request->get('type')
                 ? $session->set('type', $request->get('type'))
                 : $session->set('type', "0");
