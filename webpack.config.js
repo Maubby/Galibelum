@@ -37,8 +37,7 @@ Encore
     .addEntry('autocomplete', './assets/js/autocomplete.js')
     .addEntry('menu_toggle', './assets/js/menu_toggle.js')
     .addEntry('table_manager', './assets/js/table_manager.js')
-    .addEntry('add-collection-widget', './assets/js/add-collection-widget.js')
-    .addEntry('multiple-fields', './assets/js/multiple-fields.js')
+    .addEntry('add_collection_widget', './assets/js/add_collection_widget.js')
 
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
