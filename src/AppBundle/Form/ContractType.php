@@ -8,6 +8,7 @@
  * @package  Type
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
+
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Contracts;
