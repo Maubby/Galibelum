@@ -50,9 +50,8 @@ class ActivityRepository extends EntityRepository
      * Search activities according to user's search without name
      *
      * @param \DateTime $date        Ending date
-     *
-     * @param  int       $amountStart Amount searching range
-     * @param  int       $amountEnd   Amount searching range
+     * @param int       $amountStart Amount searching range
+     * @param int       $amountEnd   Amount searching range
      *
      * @return mixed
      */
@@ -78,11 +77,11 @@ class ActivityRepository extends EntityRepository
     /**
      * Search activities according to user's search with a name
      *
-     * @param  String    $name        Activity name
-     * @param  String    $type        Activity Type
-     * @param  \DateTime $date        Ending date
-     * @param  int       $amountStart Amount searching range
-     * @param  int       $amountEnd   Amount searching range
+     * @param String    $name        Activity name
+     * @param String    $type        Activity Type
+     * @param \DateTime $date        Ending date
+     * @param int       $amountStart Amount searching range
+     * @param int       $amountEnd   Amount searching range
      *
      * @return mixed
      */

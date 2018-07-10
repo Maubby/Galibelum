@@ -230,8 +230,9 @@ class Activity
     {
         $minAmount = 999999999;
         foreach ($this->activities as $offer) {
-            if ($offer->getStatus() != 4)
-            $minAmount = min($offer->getAmount(), $minAmount);
+            if ($offer->getStatus() != 4) {
+                $minAmount = min($offer->getAmount(), $minAmount);
+            }
         }
         return $minAmount;
     }
@@ -245,8 +246,9 @@ class Activity
     {
         $maxAmount = 0;
         foreach ($this->activities as $offer) {
-            if ($offer->getStatus() != 4)
-            $maxAmount = max($offer->getAmount(), $maxAmount);
+            if ($offer->getStatus() != 4) {
+                $maxAmount = max($offer->getAmount(), $maxAmount);
+            }
         }
         return $maxAmount;
     }
@@ -261,8 +263,9 @@ class Activity
         $minDate = new \DateTime('9999-12-29');
 
         foreach ($this->activities as $offer ) {
-            if ($minDate > $offer->getDate() and $offer->getStatus() != 4)
+            if ($minDate > $offer->getDate() and $offer->getStatus() != 4) {
                 $minDate = $offer->getDate();
+            }
         }
         return $minDate;
     }
@@ -276,8 +279,9 @@ class Activity
     {
         $maxDate = new \DateTime('0000-00-00');
         foreach ($this->activities as $offer) {
-            if ($maxDate < $offer->getDate() and $offer->getStatus() != 4)
+            if ($maxDate < $offer->getDate() and $offer->getStatus() != 4) {
                 $maxDate = $offer->getDate();
+            }
         }
         return $maxDate;
     }

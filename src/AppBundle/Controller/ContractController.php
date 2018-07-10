@@ -123,6 +123,13 @@ class ContractController extends Controller
                 'Vous vous êtes positionnés sur une offre'
             );
 
+            $this->addFlash(
+                'success',
+                "Votre offre a bien été prise en compte.
+                Vous pouvez retrouver le détail de vos contrats
+                    en cours dans l'onglet Contractualisation."
+            );
+
             return $this->render(
                 'activity/show.html.twig', array(
                     'activity' => $offer->getActivity()
@@ -240,4 +247,3 @@ class ContractController extends Controller
         return $this->redirectToRoute('manager_contract_list');
     }
 }
-

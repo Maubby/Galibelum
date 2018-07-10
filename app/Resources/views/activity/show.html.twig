@@ -17,6 +17,16 @@
 {% endblock %}
 
 {% block body %}
+    <!-- Message flash -->
+    {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('success') %}
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <!-- End flash message -->
     <div class="container">
         <div class="row boxing-canvas mt-40 mb-20">
             <div class="col-md-3">
@@ -68,7 +78,13 @@
                                     </a>
                                 </li>
                                 {% elseif 'twitch' in link %}
-                                    <li class="list-group-item"><i class="fab fa-twitter"></i> Twitch :
+                                    <li class="list-group-item"><i class="fab fa-twitch"></i> Twitch :
+                                        <a href="{{ link }}">
+                                            {{ link }}
+                                        </a>
+                                    </li>
+                                {% elseif 'twitter' in link %}
+                                    <li class="list-group-item"><i class="fab fa-twitter"></i> Twitter :
                                         <a href="{{ link }}">
                                             {{ link }}
                                         </a>

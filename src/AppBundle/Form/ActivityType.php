@@ -108,7 +108,7 @@ class ActivityType extends AbstractType
                     )
                 )
             )
-            -> add (
+            -> add(
                 'socialLink', CollectionType::class, array(
                     'entry_type' => UrlType::class,
                     'allow_add' => true,
