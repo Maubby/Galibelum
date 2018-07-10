@@ -4,19 +4,19 @@
 parameters:
     database_host: 127.0.0.1
     database_port: ~
-    database_name: symfony
+    database_name: galibelum
     database_user: root
     database_password: ~
     # You should uncomment this if you want to use pdo_sqlite
     #database_path: '%kernel.project_dir%/var/data/data.sqlite'
 
     mailer_host: smtp.gmail.com
-    mailer_transport: mail
-    mailer_user: email@gmail.com
-    mailer_password: your_password
+    mailer_transport: gmail
+    mailer_user: ~
+    mailer_password: ~
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
 
-    # Adding Google API Key
-    api_key: ~
+    # Adding API Key
+    google_api_key: AIzaSyB3N8qr-skNcWJ-ctPpwDgAW7xvGguA8-M

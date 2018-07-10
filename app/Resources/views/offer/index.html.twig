@@ -1,57 +1,152 @@
+{# app/Resources/views/offer/index.html.twig #}
 {% extends 'base.html.twig' %}
 
+{% block title %}Vos offres{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/offer.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
-    <h1>Offers list</h1>
+    <section>
+        <!-- Offer list for the current activity -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Return to the dashboard -->
+                    <ol class="breadcrumb breadcrumb-boxing-canvas">
+                        <li><a href="{{ path('dashboard_index') }}" class="degradeblue">Tableau de bord</a></li>
+                        <li>Ensemble de vos offres</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- Offer list Title-->
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center mt-20">
+                <h4 class="degradeblue">Liste de vos offres :</h4>
+            </div>
+            <!-- End Offer list Title-->
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Namecanonical</th>
-                <th>Description</th>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Handlingfee</th>
-                <th>Partnershipnumber</th>
-                <th>Finaldeal</th>
-                <th>Status</th>
-                <th>Signature</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for offer in offers %}
-            <tr>
-                <td><a href="{{ path('offer_show', { 'id': offer.id }) }}">{{ offer.id }}</a></td>
-                <td>{{ offer.name }}</td>
-                <td>{{ offer.nameCanonical }}</td>
-                <td>{{ offer.description }}</td>
-                <td>{% if offer.date %}{{ offer.date|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ offer.amount }}</td>
-                <td>{{ offer.handlingFee }}</td>
-                <td>{{ offer.partnershipNumber }}</td>
-                <td>{{ offer.finalDeal }}</td>
-                <td>{{ offer.status }}</td>
-                <td>{% if offer.signature %}Yes{% else %}No{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('offer_show', { 'id': offer.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('offer_edit', { 'id': offer.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <div class="row boxing-canvas">
+                <!-- eSport Event list -->
+                {% for activity in event_activities %}
+                    <div class="col-md-12 text-center mt-30 pt-30">
+                        <i class="fas fa-video degradeblue" style="font-size: 50px"></i>&nbsp;
+                        <h4>Evènement eSport</h4>
+                        <div class="col-md-12 col-sm-12 col-xs-12 text-center mt-20">
+                            <div class="panel panel-default">
+                                <div class="panel-heading text-center backblue">
+                                    <h2 class="panel-title" style="color: white;">{{ activity.name }}</h2>
+                                </div>
+                                <div class="panel-body">
+                                    {% for row in activity.activities|batch(3) %}
+                                        <div class="row">
+                                            {% for offer in row %}
+                                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                                    <div class="thumbnail text-center">
+                                                        <div class="caption">
+                                                            <h5 class="degradeblue"> {{ offer.name }}</h5>
+                                                            <p><strong>Montant :</strong> {{ offer.amount }} €</p>
+                                                            <p><strong>Date d'expiration :</strong> {% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
+                                                            <p><strong>Nombre de partenaires :</strong> {{ offer.partnershipNumber|length }}</p>
+                                                            <p><strong>Adresse :</strong> {{ offer.activity.address }}</p>
+                                                            <div>
+                                                                <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!-- End eSport Event list -->
 
-    <ul>
-        <li>
-            <a href="{{ path('offer_new') }}">Create a new offer</a>
-        </li>
-    </ul>
+                <!-- Streaming Activity list -->
+                {% for activity in stream_activities %}
+                    <div class="col-md-12 text-center mt-30 pt-30">
+                        <i class="fas fa-gamepad degradeblue" style="font-size: 50px"></i>&nbsp;
+                        <h4>Activité de streaming</h4>
+                        <div class="col-md-12 col-sm-12 col-xs-12 text-center mt-20">
+                            <div class="panel panel-default">
+                                <div class="panel-heading text-center backblue">
+                                    <h2 class="panel-title" style="color: white;">{{ activity.name }}</h2>
+                                </div>
+                                <div class="panel-body">
+                                    {% for row in activity.activities|batch(3) %}
+                                        <div class="row">
+                                            {% for offer in row %}
+                                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                                    <div class="thumbnail text-center">
+                                                        <div class="caption">
+                                                            <h5 class="degradeblue"> {{ offer.name }}</h5>
+                                                            <p><strong>Montant :</strong> {{ offer.amount }} €</p>
+                                                            <p><strong>Date d'expiration :</strong> {% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
+                                                            <div>
+                                                                <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!-- End Streaming Activity list -->
+
+                <!-- eSport Team list -->
+                {% for activity in team_activities %}
+                    <div class="col-md-12 text-center mt-30 pt-30">
+                        <i class="fas fa-users degradeblue" style="font-size: 50px"></i>&nbsp;
+                        <h4>Equipe eSport</h4>
+                        <div class="col-md-12 col-sm-12 col-xs-12 text-center mt-20">
+                            <div class="panel panel-default">
+                                <div class="panel-heading text-center backblue">
+                                    <h2 class="panel-title" style="color: white;">{{ activity.name }}</h2>
+                                </div>
+                                <div class="panel-body">
+                                    {% for row in activity.activities|batch(3) %}
+                                        <div class="row">
+                                            {% for offer in row %}
+                                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                                    <div class="thumbnail text-center">
+                                                        <div class="caption">
+                                                            <h5 class="degradeblue"> {{ offer.name }}</h5>
+                                                            <p><strong>Montant : </strong> {{ offer.amount }} €</p>
+                                                            <p><strong>Date d'expiration : </strong> {% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
+                                                            <div>
+                                                                <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <!-- End eSport Team list -->
+            </div>
+        </div>
+    </section>
 {% endblock %}

@@ -3,32 +3,45 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_MANAGER:    [ROLE_USER, ROLE_COMPANY, ROLE_STRUCTURE]
+        ROLE_ADMIN:       ROLE_MANAGER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     providers:
         fos_userbundle:
-            id: fos_user.user_provider.username
+            id: fos_user.user_provider.username_email
 
     firewalls:
         main:
+            logout_on_user_change: true
             pattern: ^/
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
-                login_path: /login
-                check_path: /login_check
-                always_use_default_target_path: false
-                default_target_path:   /organization/
-                # if you are using Symfony < 2.8, use the following config instead:
-                # csrf_provider: form.csrf_provider
+                success_handler: authentication.handler.login_success_handler
 
             logout:       true
             anonymous:    true
+            access_denied_url: /redirect
+            remember_me:
+                secret:   '%secret%'
+                lifetime: 86400 # 1 day in seconds
+
 
     access_control:
-        - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, role: ROLE_USER }
+        - { path: ^/admin, role: ROLE_SUPER_ADMIN }
+        - { path: ^/manager, role: ROLE_MANAGER }
+        - { path: ^/inscription, role: ROLE_USER }
+        - { path: ^/organization/new, role: ROLE_USER }
+        - { path: ^/waiting, role: ROLE_USER }
+        - { path: ^/organization, role: [ROLE_COMPANY, ROLE_STRUCTURE] }
+        - { path: ^/organization$, role: ROLE_STRUCTURE}
+        - { path: ^/search, role: [ROLE_COMPANY, ROLE_STRUCTURE] }
+        - { path: ^/activity/[0-9]+, role: [ROLE_COMPANY, ROLE_STRUCTURE] }
+        - { path: ^/activity, role: ROLE_STRUCTURE }
+        - { path: ^/offer/[0-9]+/partners, role: ROLE_COMPANY }
+        - { path: ^/offer, role: ROLE_STRUCTURE }
+        - { path: ^/contract, role: [ROLE_COMPANY, ROLE_STRUCTURE] }

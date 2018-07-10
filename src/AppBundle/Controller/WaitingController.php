@@ -11,10 +11,8 @@
 
 namespace AppBundle\Controller;
 
-use User;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -32,12 +30,29 @@ class WaitingController extends Controller
      * Company & Organization wait until their application is approved
      * by the Account Manager
      *
-     * @Route("/",    name="waiting_index")
-     * @Method("GET")
-     * @return        Response A Response instance
+     * @Route("/", methods={"GET"}, name="waiting_index")
+     *
+     * @return Response A Response instance
      */
     public function indexAction()
     {
-        return $this->render('waiting/index.html.twig');
+        $user = $this->getUser();
+        if ($user->hasRole('ROLE_STRUCTURE')
+            && $user->getOrganization()->getIsActive() === 1
+            || $user->hasRole('ROLE_COMPANY')
+            && $user->getOrganization()->getIsActive() === 1
+        ) {
+            return $this->redirectToRoute('dashboard_index');
+
+        } elseif ($user->hasRole('ROLE_STRUCTURE')
+            && $user->getOrganization()->getIsActive() === 0
+            || $user->hasRole('ROLE_COMPANY')
+            && $user->getOrganization()->getIsActive() === 0
+        ) {
+            return $this->render('waiting/index.html.twig');
+
+        } else {
+            return $this->redirectToRoute('inscription_index');
+        }
     }
 }

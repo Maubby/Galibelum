@@ -13,6 +13,10 @@ services:
         # this means you cannot fetch services directly from the container via $container->get()
         # if you need to do this, you can override this setting on individual services
         public: false
+        bind:
+            # pass this service to any $requestLogger argument for any
+            # service that's defined in this file
+            $mailer: '@fos_user.mailer.twig_swift'
 
     # makes classes in src/AppBundle available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -38,15 +42,24 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
     app.form.registration:
-            class: AppBundle\Form\RegistrationType
-            tags:
-                - { name: form.type, alias: app_user_registration }
+        class: AppBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }
+
     app.form.profile:
-            class: AppBundle\Form\ProfileType
-            tags:
-                - { name: form.type, alias: app_user_profile }
-    app.redirect_after_registration_subscriber:
-            class: AppBundle\EventListener\RedirectAfterRegistrationSubscriber
-            autowire: true
-            tags:
-                - { name: kernel.event_subscriber }
+        class: AppBundle\Form\ProfileType
+        tags:
+            - { name: form.type, alias: app_user_profile }
+
+    authentication.handler.login_success_handler:
+        class:  AppBundle\Controller\LoginController
+        arguments:  ['@router', '@security.authorization_checker']
+
+    AppBundle\Service\FileUploaderService:
+        arguments:
+            $targetDirectory: '%pdf_directory%'
+
+    AppBundle\EventListener\FileUploadListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: preUpdate }

@@ -1,0 +1,92 @@
+{% block title %}{{ subject }}{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block body_html %}
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <title>Email de Notification - Galibelum</title>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            /* CLIENT-SPECIFIC STYLES */
+            #outlook a{padding:0;} /* Force Outlook to provide a "view in browser" message */
+            .ReadMsgBody{width:100%;} .ExternalClass{width:100%;} /* Force Hotmail to display emails at full width */
+            .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass font, .ExternalClass td, .ExternalClass div {line-height: 100%;} /* Force Hotmail to display normal line spacing */
+            body, table, td, a{-webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;} /* Prevent WebKit and Windows mobile changing default text sizes */
+            table, td{mso-table-lspace:0pt; mso-table-rspace:0pt;} /* Remove spacing between tables in Outlook 2007 and up */
+            /* RESET STYLES */
+            body{margin:0; padding:0;}
+            table{border-collapse:collapse !important;}
+            body{height:100% !important; margin:0; padding:0; width:100% !important;}
+            /* iOS BLUE LINKS */
+            .appleBody a {color:#68440a; text-decoration: none;}
+            .appleFooter a {color:#999999; text-decoration: none;}
+            /* MOBILE STYLES */
+            @media screen and (max-width: 525px) {
+                /* FULL-WIDTH TABLES */
+                table[class="responsive-table"]{
+                    width:100%!important;
+                }
+                /* UTILITY CLASSES FOR ADJUSTING PADDING ON MOBILE */
+                td[class="padding-copy"]{
+                    text-align: center;
+                }
+                td[class="section-padding"]{
+                    padding: 0px 15px 50px 15px !important;
+                }
+                /* ADJUST BUTTONS ON MOBILE */
+                table[class="mobile-button-container"]{
+                    margin:0 auto;
+                    width:100% !important;
+                }
+                a[class="mobile-button"]{
+                    width:80% !important;
+                    padding: 15px !important;
+                    border: 0 !important;
+                    font-size: 15px !important;
+                }
+            }
+        </style>
+    </head>
+
+    <body style="margin: 0; padding: 0; border-top: solid rgb(13, 188, 208); border-bottom: solid rgb(13, 188, 208);">
+    <!-- ONE COLUMN SECTION -->
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;">
+        <tr>
+            <td bgcolor="#ffffff" align="text-center" style="padding: 0px 15px 70px 15px;" class="section-padding">
+                <table border="0" cellpadding="0" cellspacing="0" width="500" class="responsive-table">
+                    <tr>
+                        <td>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td>
+                                        <!-- COPY -->
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tr>
+                                                <td align="center" style="font-size: 20px; font-family: Helvetica, Arial, sans-serif; color: #000000; padding-top: 30px;" class="padding-copy">Bonjour<br>
+                                                    {{ message }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="font-size: 13px; font-family: Helvetica, Arial, sans-serif; color: #000000; padding-top: 30px; line-height: 1.5;" class="padding-copy">
+                                                    Afin de suivre l'avancement votre négociation, l'équipe de Galibelum vous invite à vous rendre sur l'onglet contractualisation de votre compte.
+                                                </td>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    </body>
+    </html>
+{% endblock %}

@@ -1,0 +1,47 @@
+@import "_variables";
+
+.boxing-title {
+  .organization-info {
+    h5 {
+    }
+    p {
+      margin: 0;
+      &:last-child {
+        padding-bottom: 5px;
+      }
+    }
+  }
+}
+
+.description-text {
+  margin-top: 5%;
+  word-wrap: break-word;
+}
+
+.backblue-btn-sm {
+  width: 180px;
+}
+
+.boxing-canvas {
+  max-width: 1200px;
+  border: 1px solid $border-color;
+  margin-bottom: 30px;
+  padding: 30px 30px 15px;
+  h6 {
+    font-size: 15px;
+  }
+  .boxing-text {
+    text-align: justify;
+    margin-top: 20px;
+    padding: 0 20px 10px;
+    border-bottom: 1px solid #000;
+  }
+  .boxing-body {
+    margin: 20px 0;
+    padding: 0 20px;
+    border-bottom: 1px solid #000;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}

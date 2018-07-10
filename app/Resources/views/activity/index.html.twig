@@ -1,57 +1,84 @@
+{# app/Resources/views/activity/index.html.twig #}
 {% extends 'base.html.twig' %}
 
+{% block title %}Vos activités{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/activity.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
 {% block body %}
-    <h1>Activities list</h1>
+    <main id="index-activity">
+        <section>
+            <div class="container-fluid">
+                <!--breadcrumb to go to the dashboard -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <ol class="breadcrumb breadcrumb-boxing-canvas">
+                            <li>
+                                <a href="{{ path('dashboard_index') }}" class="degradeblue">Tableau de bord</a></li>
+                            <li>Ensemble de vos activités</li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- End part breadcrumb -->
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Namecanonical</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Date</th>
-                <th>Address</th>
-                <th>Maingame</th>
-                <th>Urlvideo</th>
-                <th>Achievement</th>
-                <th>Sociallink</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for activity in activities %}
-            <tr>
-                <td><a href="{{ path('activity_show', { 'id': activity.id }) }}">{{ activity.id }}</a></td>
-                <td>{{ activity.name }}</td>
-                <td>{{ activity.nameCanonical }}</td>
-                <td>{{ activity.type }}</td>
-                <td>{{ activity.description }}</td>
-                <td>{{ activity.date }}</td>
-                <td>{{ activity.address }}</td>
-                <td>{{ activity.mainGame }}</td>
-                <td>{{ activity.urlVideo }}</td>
-                <td>{% if activity.achievement %}{{ activity.achievement|join(', ') }}{% endif %}</td>
-                <td>{% if activity.socialLink %}{{ activity.socialLink|join(', ') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('activity_show', { 'id': activity.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('activity_edit', { 'id': activity.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('activity_new') }}">Create a new activity</a>
-        </li>
-    </ul>
+                <!-- Starting listing all activities -->
+                <div class="row boxing-canvas">
+                    <div class="col-md-12 text-center">
+                        <i class="fas fa-desktop degradeblue mb-20" style="font-size: 50px"></i>
+                        <h5 class="degradeblue">Ensemble de vos activités</h5>
+                    </div>
+                    <!-- Loop for each activity -->
+                    <div class="col-md-12 text-center">
+                        {% for activity in activities %}
+                            <div class="col-md-3 col-sm-4 col-xs-12 pb-20 mt-20">
+                                <!-- activity'box creation-->
+                                <div class="activity-box">
+                                    <div class="activity-name-height">
+                                        <h5>{{ activity.name }}</h5>
+                                    </div>
+                                    <div>
+                                        {% if activity.type is same as("Évènement eSport") %}
+                                            <i class="fas fa-gamepad degradeblue" style="font-size: 50px"></i><br>
+                                            <p><strong>Type :</strong> {{ activity.type }}</p>
+                                        {% elseif activity.type is same as ("Equipe eSport") %}
+                                            <i class="fas fa-users degradeblue" style="font-size: 50px"></i><br>
+                                            <p><strong>Type :</strong> {{ activity.type }}</p>
+                                        {% else %}
+                                            <i class="fas fa-video degradeblue" style="font-size: 50px"></i><br>
+                                            <p><strong>Type :</strong> {{ activity.type }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="activity-date-height">
+                                        {% if activity.type is same as("Évènement eSport") %}
+                                            <p><strong>Date de l'évènement :</strong> <br>
+                                                {{ activity.dateStart|date('d-m-Y') }} <strong>/</strong> {{ activity.dateEnd|date('d-m-Y') }} </p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="activity-btn-height">
+                                        <a href="{{ path('activity_show', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn mt-20">Plus de détails</a>
+                                        <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backred-btn mt-10">Créer une offre</a>
+                                    </div>
+                                </div>
+                                <!--Activity's box end-->
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!--Loop's end-->
+                </div>
+                <!-- Listing's end -->
+            </div>
+        </section>
+    </main>
 {% endblock %}

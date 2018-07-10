@@ -1,0 +1,48 @@
+@import "_variables";
+
+/* Boxing Canvas height fixing */
+
+.boxing-canvas-content-height {
+  height: 260px;
+}
+
+.boxing-canvas-button-height {
+  height: 155px;
+}
+
+.white-color {
+  color: white;
+}
+
+.modal-galibelum {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+/* Media queries */
+@media (min-width: 521px) and (max-width: 900px) {
+  .boxing-canvas {
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .boxing-canvas-content-height {
+    height: 340px;
+  }
+  .boxing-canvas-button-height {
+    height: 200px;
+  }
+  .boxing-canvas {
+    height: 700px;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .boxing-canvas-content-height {
+    height: 355px;
+  }
+  .boxing-canvas {
+    margin-bottom: 20px;
+  }
+}

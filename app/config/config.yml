@@ -7,8 +7,16 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
-
+    periode: P21D
+    fee15: 0.15
+    fee10: 0.10
+    fee7: 0.07
+    pdf_directory: '%kernel.project_dir%/web/uploads/pdf'
+    
 framework:
+    templating:
+        engines:
+            twig
     #esi: ~
     translator: { fallbacks: fr }
     secret: '%secret%'
@@ -38,6 +46,8 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    globals:
+        google_api_key: '%google_api_key%'
 
 # Doctrine Configuration
 doctrine:
@@ -70,24 +80,22 @@ swiftmailer:
     spool: { type: memory }
 
 fos_user:
-        db_driver: orm #other valid values are 'mongodb', 'couchdb' and 'propel'
-        firewall_name: main
-        user_class: AppBundle\Entity\User
-        service: #since Symfony 3.4
-            mailer: fos_user.mailer.twig_swift # since Symfony 3.4
-        from_email:
-            address: "%mailer_user%"
-            sender_name: "%mailer_user%"
-        # ...
-        registration:
-            form:
-                type: AppBundle\Form\RegistrationType
-            confirmation:
-                enabled: true
-                template:    '@FOSUser/Registration/email.txt.twig'
-                from_email:
-                    address:        "%mailer_user%"
-                    sender_name:    Registration
-        profile:
-            form:
-                type: AppBundle\Form\ProfileType
+    db_driver: orm #other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    service: #since Symfony 3.4
+        mailer: fos_user.mailer.twig_swift # since Symfony 3.4
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
+    registration:
+        form:
+            type: AppBundle\Form\RegistrationType
+        confirmation:
+            template:    '@FOSUser/Registration/email.txt.twig'
+            from_email:
+                address:        "%mailer_user%"
+                sender_name:    Registration
+    profile:
+        form:
+            type: AppBundle\Form\ProfileType

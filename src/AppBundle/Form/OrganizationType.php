@@ -2,7 +2,7 @@
 /**
  * OrganizationType File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category OrganizationType
  * @package  Type
@@ -13,7 +13,6 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,68 +40,65 @@ class OrganizationType extends AbstractType
         $builder
             ->add(
                 'name', TextType::class, array(
-                'attr' => array(
-                    'minlength' => 2, 'maxlength' => 32,
-                    'label' => '',
-                    'class' => 'form-control',
-                'placeholder' =>'Exemple : GBM eSport'))
+                    'attr' => array(
+                        'minlength' => 2, 'maxlength' => 32
+                    )
+                )
             )
             ->add(
                 'phoneNumber', TextType::class, array(
                     'attr' => array(
-                        'minlength'=> 8, 'maxlength' => 32,
-                        'label' =>'',
-                        'class' => 'form-control' ))
+                        'minlength' => 9, 'maxlength' => 32
+                    )
+                )
             )
             ->add(
-                'email', TextType::class, array(
-                'attr' => array(
-                    'minlength'=>2, 'maxlength' => 64,
-                    'label'=>'',
-                    'class'=> 'form-control' ))
+                'email', EmailType::class, array(
+                    'attr' => array(
+                        'minlength' => 2, 'maxlength' => 64
+                    )
+                )
             )
             ->add(
                 'description', TextareaType::class, array(
-                'attr'=> array(
-                    'minlength'=>32, 'maxlength' => 250,
-                    'label'=>'',
-                    'class'=> 'form-control'))
+                    'attr'=> array(
+                        'minlength' => 32, 'maxlength' => 250
+                    )
+                )
             )
             ->add(
                 'userRole', TextType::class, array(
-                'attr'=> array(
-                    'minlength'=>2, 'maxlength' => 32,
-                    'label'=>'',
-                    'class'=>'form-control' )
+                    'attr'=> array(
+                        'minlength' => 2, 'maxlength' => 32
+                    )
                 )
             )
             ->add(
                 'status', TextType::class, array(
-                'attr'=>array(
-                    'minlength'=>2,'maxlength' => 32,
-                    'label'=>'',
-                    'class'=>'form-control'))
+                    'attr'=>array(
+                        'data-label' => null,
+                        'required' => false,
+                        'minlength' => 2,'maxlength' => 32
+                    )
+                )
             )
             ->add(
                 'address', TextType::class, array(
-                'attr'=>array(
-                    'minlength'=>2, 'maxlength' => 64,
-                    'label'=>'',
-                    'class'=>'form-control'))
+                    'attr'=>array(
+                        'minlength' => 5, 'maxlength' => 64
+                    )
+                )
             )
             ->add(
                 'relationNumber', ChoiceType::class, array(
-                    'attr'=> array(
-                        'class'=> 'form-control'),
                     'choices'  => array(
                         'Aucun autre membre' => 'Aucun autre membre',
                         '2-10 membres' => '2-10 membres',
                         '11-50 membres' => '11-50 membres',
                         '51-250 membres' => '51-250 membres',
                         'Plus de 251 membres'=> 'Plus de 251 membres',
-                        ))
+                    ))
             );
-
     }
 
     /**
@@ -116,7 +112,7 @@ class OrganizationType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-            'data_class' => 'AppBundle\Entity\Organization'
+                'data_class' => 'AppBundle\Entity\Organization'
             )
         );
     }
@@ -130,6 +126,4 @@ class OrganizationType extends AbstractType
     {
         return 'appbundle_organization';
     }
-
-
 }

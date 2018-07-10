@@ -1,0 +1,82 @@
+{# app/Resources/views/admin/manager.html.twig #}
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Gestion des accounts managers{% endblock %}
+
+{% block stylesheets %}
+
+    <!-- Additional CSS links-->
+    <link rel="stylesheet" href="{{ asset('build/manager.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
+{% endblock %}
+
+{% block header %}
+    <!-- PASSED W3C VALIDATOR https://validator.w3.org/ -->
+    <!-- Zero intern console warning -->
+
+    <!-- Navbar in views/base_back.html.twig -->
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <!-- Message flash -->
+    {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('success') %}
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="container">
+        <div class="row boxing-canvas mt-50">
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                <i class="far fa-user-circle text-center degradeblue" style="font-size: 50px"></i>
+                <h5 class="degradeblue text-center">Gérer les accounts managers</h5>
+
+                <!-- Creating a responsive table -->
+                <div class="table-responsive">
+                    <table class="table table-striped text-center">
+                        <!-- Table head -->
+                        <thead class="degradeblue">
+                        <tr>
+                            <th scope="col"><span>
+                                <i class="fas fa-portrait degradeblue"></i> Nom</span></th>
+                            <th scope="col"><span>
+                                <i class="fas fa-portrait degradeblue"></i> Prénom</span></th>
+                            <th scope="col"><span>
+                                <i class="far fa-envelope-open degradeblue"></i> Email</span></th>
+                            <th scope="col"><span>
+                                <i class="far fa-edit degradeblue"></i> Mettre à jour</span></th>
+                        </tr>
+                        </thead>
+                        <!-- End of table head -->
+
+                        <!-- Starting listing the account managers -->
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.lastName }}</td>
+                                <td>{{ user.firstName }}</td>
+                                <td>{{ user.email }}</td>
+                                <td class="normal-subtitle-text"><a href="{{ path('admin_manager_edit', { 'id': user.id }) }}" class="five-color">
+                                        Modifier le profil</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <!-- End listing the account managers -->
+                    </table>
+                </div>
+            </div>
+            <!-- End responsive table -->
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('build/menu_toggle.js') }}"></script>
+{% endblock %}

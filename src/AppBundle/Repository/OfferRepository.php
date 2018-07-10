@@ -2,7 +2,7 @@
 /**
  * OfferRepository File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category OfferRepository
  * @package  Repository
@@ -22,4 +22,5 @@ namespace AppBundle\Repository;
  */
 class OfferRepository extends \Doctrine\ORM\EntityRepository
 {
+
 }

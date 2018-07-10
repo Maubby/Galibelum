@@ -1,0 +1,28 @@
+<!-- Loop for show information activities -->
+{% for activity in activities %}
+    <div class="item">
+        <div class="panel panel-default">
+            <h5 class="panel-title">
+                {% if activity.type is same as('Activité de streaming') %}
+                    <i class="fas fa-video"></i>
+                {% elseif activity.type is same as('Equipe eSport') %}
+                    <i class="fas fa-users"></i>
+                {% else %}
+                    <i class="fas fa-gamepad"></i>
+                {% endif %}
+                {{ activity.name }}</h5>
+            <div class="panel-body">
+                {% if activity.address is same as('n/a') %}
+                    <p class="panel-item"><strong>chaîne : </strong><a href="{{ activity.urlVideo }}">{{ activity.urlVideo }}</a></p>
+                {% else %}
+                    <p class="panel-item"><strong>Adresse : </strong>{{ activity.address }}</p>
+                    <p class="panel-item"><strong>Date de l'évènement : </strong>
+                        {% if activity.dateStart %}{{ activity.dateStart|date('d-m-Y') }}{% endif %}
+                        {% if activity.dateEnd %}{{ activity.dateEnd|date('d-m-Y') }}{% endif %}
+                    </p>
+                {% endif %}
+                <a href="{{ path('activity_show', { 'id': activity.id }) }}" class="btn btn-primary btn-sm">Plus de détails</a>
+            </div>
+        </div>
+    </div>
+{% endfor %}

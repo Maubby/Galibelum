@@ -1,0 +1,77 @@
+{# app/Resources/views/organization/_new_company_content.html.twig #}
+{% block body %}
+    <main id="company">
+        <section>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ol class="breadcrumb breadcrumb-boxing-canvas">
+                            <li><a href="{{ path('inscription_index') }}">Choix de création</a></li>
+                            <li>Création de la marque</li>
+                        </ol>
+                        <div class="boxing-canvas">
+                            <div class="col-md-12 text-center">
+                                <i class="fas fa-building degradered" style="font-size: 50px"></i>
+                                <h5 class="degradered">Création de votre marque</h5>
+                                <p class="normal-subtitle-text text-justify text-center">Merci de remplir le formulaire ci-dessous afin d'enregistrer votre marque/entreprise auprès de Galibelum.
+                                    <br>Une fois votre inscription validée par l'un de nos managers, vous pourrez rechercher des structures eSport et sponsoriser leurs offres.</p>
+                            </div>
+                            {{ form_start(form) }}
+                            <!-- First section contact form -->
+                            <div class="col-md-6 mt-20 light-red-subtitle-text">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-university"></i> {{ form_label(form.name, 'Nom de votre marque') }}
+                                    {{ form_widget(form.name, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : BeIN Sport' }} ) }}
+                                    {{ form_errors(form.name) }}
+                                </div>
+                                <div class="form-group form-error">
+                                    <i class="fas fa-address-card"></i> {{ form_label(form.address, 'Adresse du siège social') }}
+                                    {{ form_widget(form.address, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : 4 avenue des Saules, bâtiment Le Doge' }} ) }}
+                                    {{ form_errors(form.address) }}
+                                </div>
+                                <div class="form-group form-error">
+                                    <i class="fas fa-users"></i> {{ form_label(form.relationNumber, 'Nombre de collaborateurs dans votre entreprise') }}
+                                    {{ form_widget(form.relationNumber, {'attr': {'class':'form-control input-field'}} ) }}
+                                    {{ form_errors(form.relationNumber) }}
+                                </div>
+                            </div>
+                            <!-- End first section contact form -->
+                            <!-- Second section contact form-->
+                            <div class="col-md-6 mt-20 light-red-subtitle-text">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-user"></i>  {{ form_label(form.userRole, 'Votre poste au sein de la marque') }}
+                                    {{ form_widget(form.userRole, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : Manager' }} ) }}
+                                    {{ form_errors(form.userRole) }}
+                                </div>
+                                <div class="form-group form-error">
+                                    <i class="fas fa-at"></i>  {{ form_label(form.email, 'Email de la société') }}
+                                    {{ form_widget(form.email, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : test@galibelum.com' }} ) }}
+                                    {{ form_errors(form.email) }}
+                                </div>
+                                <div class="form-group form-error">
+                                    <i class="fas fa-phone"></i> {{ form_label(form.phoneNumber, 'Téléphone de la société')}}
+                                    {{ form_widget(form.phoneNumber, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : 0601020304' }} ) }}
+                                    {{ form_errors(form.phoneNumber) }}
+                                </div>
+                            </div>
+                            <!-- End second section contact form-->
+                            <!-- Final section contact form-->
+                            <div class="col-md-12 light-red-subtitle-text">
+                                <div class="form-group form-error">
+                                    <i class="fas fa-edit"></i> {{ form_label(form.description, 'Décrivez votre marque en quelques mots') }}
+                                    {{ form_widget(form.description, {'attr': {'class':'form-control input-field', 'placeholder' : 'Exemple : Maximum 250 caractères' }} ) }}
+                                    {{ form_errors(form.description) }}
+                                </div>
+                            </div>
+                            <!-- End final section contact form-->
+                            <div class="col-sm-12 col-xs-12 text-center">
+                                <input type="submit" value="Enregistrer votre marque" class="btn btn-danger backred-btn-sm">
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

@@ -2,7 +2,7 @@
 /**
  * OfferType File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category OfferType
  * @package  Type
@@ -11,6 +11,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -38,33 +39,35 @@ class OfferType extends AbstractType
     {
         $builder
             ->add(
-                'name', TextareaType::class, array(
+                'name', TextType::class, array(
+                    'required' => true,
                     'attr' => array(
-                        'minlength' => 2, 'maxlength' => 32,
-                        'label' => 'name',
-                        'class' => 'form-control'))
+                        'minlength' => 2, 'maxlength' => 32))
             )
             ->add(
-                'amount', IntegerType::class,
-                array('attr' => array('min' => 1,
-                    'label' => 'amount',
-                    'class' => 'form-control'))
+                'amount', IntegerType::class, array(
+                    'required' => true,
+                    'attr' => array(
+                        'min' => 200))
             )
             ->add(
-                'partnershipNumber', IntegerType::class,
-                array('attr' => array(
-                    'min' => 0,
-                    'label' => 'partnershipNumber',
-                    'class' => 'form-control'))
+                'partnershipNumber', IntegerType::class, array(
+                    'required' => true,
+                    'attr' => array(
+                        'min' => 1))
             )
-            ->add('date', DateType::class, array('data' => new \DateTime('now')))
+            ->add(
+                'date', DateType::class, array(
+                    'required' => true,
+                    'widget' => 'single_text')
+            )
             ->add(
                 'description', TextareaType::class, array(
-                    'attr' => array('maxlength' => 250,
-                        'label' => 'description',
-                        'class' => 'form-control'))
+                    'required' => true,
+                    'attr' => array(
+                        'minlength' => 16,
+                        'maxlength' => 250))
             );
-
     }
 
     /**

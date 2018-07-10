@@ -2,13 +2,15 @@
 /**
  * OrganizationRepository File Doc Comment
  *
- * PHP version 7.1
+ * PHP version 7.2
  *
  * @category OrganizationRepository
  * @package  Controller
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Repository;
+
+use Doctrine\ORM\EntityRepository;
 
 /**
  * OrganizationRepository
@@ -20,6 +22,23 @@ namespace AppBundle\Repository;
  * @package  Controller
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
-class OrganizationRepository extends \Doctrine\ORM\EntityRepository
+class OrganizationRepository extends EntityRepository
 {
+    /**
+     *
+     * @param $data /Search Parameters
+     *
+     * @return mixed Return result of the query
+     */
+    public function search($data)
+    {
+        $query = $this->createQueryBuilder('org')
+            ->select('org')
+            ->where('org.name LIKE :data')
+            ->orWhere('org.description LIKE :data')
+            ->setParameter('data', '%'.$data.'%')
+            ->getQuery();
+
+        return $query->getResult();
+    }
 }
