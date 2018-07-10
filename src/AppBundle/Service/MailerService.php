@@ -49,9 +49,6 @@ class MailerService
      */
     public function sendEmail($fromEmail, $toEmail, $subject, $message)
     {
-        //If your service is another, then read the following article
-        //to know which smpt code to use and which port
-        //http:ourcodeworld.com/articles/read/14/swiftmailer-send-mails-from-php-easily-and-effortlessly
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
             ->setFrom($fromEmail)
