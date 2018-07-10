@@ -144,8 +144,6 @@ class ManagerController extends Controller
         $form = $this->createForm(ContractType::class);
         $form->handleRequest($request);
 
-
-
         // Var for the file name
         if ($form->isSubmitted() && $form->isValid()) {
             $filePdf = [];
