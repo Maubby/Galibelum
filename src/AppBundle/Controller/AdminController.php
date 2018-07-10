@@ -40,7 +40,7 @@ class AdminController extends Controller
     {
         $manager = new User();
         $form = $this->createForm('AppBundle\Form\RegistrationType', $manager);
-        $form->remove('cgs');
+        $form->remove('cgu');
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -80,7 +80,7 @@ class AdminController extends Controller
             $editForm = $this->createForm(
                 'AppBundle\Form\RegistrationType', $manager
             );
-            $editForm->remove('cgs');
+            $editForm->remove('cgu');
             $editForm->remove('phoneNumber');
             $editForm->handleRequest($request);
 

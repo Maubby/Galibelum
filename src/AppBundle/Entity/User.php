@@ -260,7 +260,7 @@ class User extends BaseUser
 
 
     /**
-     * Set cgu
+     * Set cgu.
      *
      * @param bool $cgu
      *
