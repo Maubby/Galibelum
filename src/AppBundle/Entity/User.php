@@ -61,9 +61,9 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="firstName",                                   type="string", length=32)
-     * @Assert\Regex(pattern="/^[a-zàâçéèêëîïôûùüÿñæœ -]*$/i", message="Votre prénom ne doit être composé que de lettres")
-     * @Assert\Length(min=2,                                           minMessage="Le prénom doit contenir au minimum 2 caractères")
-     * @Assert\Length(max=32,                                          maxMessage="Le prénom doit être en dessous de 32 caractères")
+     * @Assert\Regex(pattern="/^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i", message="Votre prénom ne doit être composé que de lettres.")
+     * @Assert\Length(min=2,                                           minMessage="Le prénom doit contenir au minimum 2 caractères.")
+     * @Assert\Length(max=32,                                          maxMessage="Le prénom doit être en dessous de 32 caractères.")
      */
     private $firstName;
 
@@ -73,9 +73,9 @@ class User extends BaseUser
      *
      * @ORM\Column(name="lastName", type="string", length=32)
 
-     * @Assert\Regex(pattern="/^[a-zàâçéèêëîïôûùüÿñæœ -]*$/i", message="Votre nom ne doit être composé que de lettres")
-     * @Assert\Length(min=2,                                           minMessage="Le nom doit contenir au minimum 2 caractères")
-     * @Assert\Length(max=32,                                          maxMessage="Le nom doit être en dessous de 32 caractères")
+     * @Assert\Regex(pattern="/^[a-zàâçéèêëîïôûùüÿñæœ .-]*$/i", message="Votre nom ne doit être composé que de lettres.")
+     * @Assert\Length(min=2,                                           minMessage="Le nom doit contenir au minimum 2 caractères.")
+     * @Assert\Length(max=32,                                          maxMessage="Le nom doit être en dessous de 32 caractères.")
      */
     private $lastName;
 
@@ -83,8 +83,8 @@ class User extends BaseUser
      *
      * @var string
      *
-     * @Assert\Regex(pattern="/^(?:(?:\+|00)33[\s-]{0,3}(?:\(0\)[\s-]{0,3})?|0)[1-9](?:(?:[\s-]?\d{2}){4}|\d{2}(?:[\s-]?\d{3}){2})$/",
-     *     message="Veuillez saisir un numéro de téléphone valide, exemple : 06 00 00 00 00 ou +33 6")
+     * @Assert\Regex(pattern="/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/",
+     *     message="Veuillez saisir un numéro de téléphone valide, exemple : 06 00 00 00 00 ou +33 6.")
      * @ORM\Column(name="phoneNumber",                                                                                                     type="string", length=32)
      *
      * * @Assert\Type("string")
@@ -97,7 +97,7 @@ class User extends BaseUser
      *     exactMessage = "Veuillez saisir un numéro de téléphone valide"
      * )
      * @Assert\Regex(
-     *     pattern = "/^(0|\+33)[1-9]([- ]?[0-9]{2}){4}$/",
+     *     pattern = "/^(0|\+33)[1-9]([-. ]?[0-9]{2}){4}$/",
      *     message = "Veuillez saisir un numéro de téléphone valide"
      * )
      */
@@ -115,8 +115,8 @@ class User extends BaseUser
      *
      * @var string
      *
-     * @Assert\Regex(pattern="/^(?=*[A-Za-z])(?=*\d)[A-Za-z\d]{8,}$/",
-     *     message="Le mot de passe doit contenir au moins 8 caractères alphanumériques et au moins un chiffre")
+     * @Assert\Regex(pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/",
+     *     message="Le mot de passe doit contenir au moins 8 caractères alphanumériques et au moins un chiffre.")
      */
     protected $plainPassword;
 
@@ -161,7 +161,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set firstName
+     * Set firstName.
      *
      * @param string $firstName
      *
@@ -175,7 +175,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get firstName
+     * Get firstName.
      *
      * @return string
      */
@@ -185,7 +185,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set lastName
+     * Set lastName.
      *
      * @param string $lastName
      *
@@ -199,7 +199,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get lastName
+     * Get lastName.
      *
      * @return string
      */
@@ -209,7 +209,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set phoneNumber
+     * Set phoneNumber.
      *
      * @param string $phoneNumber
      *
@@ -223,7 +223,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get phoneNumber
+     * Get phoneNumber.
      *
      * @return string
      */
@@ -233,7 +233,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set email
+     * Set email.
      *
      * @param string $email
      *
@@ -249,7 +249,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get email
+     * Get email.
      *
      * @return string
      */
@@ -284,7 +284,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set managers
+     * Set managers.
      *
      * @param \AppBundle\Entity\Organization|null $managers
      *
@@ -298,7 +298,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get managers
+     * Get managers.
      *
      * @return \AppBundle\Entity\Organization|null
      */
@@ -308,7 +308,7 @@ class User extends BaseUser
     }
 
     /**
-     * Add manager
+     * Add manager.
      *
      * @param \AppBundle\Entity\Organization $manager
      *
@@ -322,11 +322,11 @@ class User extends BaseUser
     }
 
     /**
-     * Remove manager
+     * Remove manager.
      *
      * @param \AppBundle\Entity\Organization $manager
      *
-     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
      */
     public function removeManager(Organization $manager)
     {
@@ -334,7 +334,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get manager
+     * Get manager.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
