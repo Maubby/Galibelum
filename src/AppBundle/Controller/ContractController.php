@@ -125,7 +125,8 @@ class ContractController extends Controller
 
             $this->addFlash(
                 'success',
-                "Votre offre a bien été prise en compte. Vous pouvez retrouver le détail de vos contrats
+                "Votre offre a bien été prise en compte.
+                Vous pouvez retrouver le détail de vos contrats
                     en cours dans l'onglet Contractualisation."
             );
 
@@ -186,7 +187,7 @@ class ContractController extends Controller
      * @return Response A Response Instance
      */
     public function sendAction(Contracts $contract, int $status,
-                               MailerService $mailerUser
+        MailerService $mailerUser
     ) {
         if ($status === 2) {
             //status 2 validation

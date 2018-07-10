@@ -35,10 +35,12 @@ class ContractType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('uploadPdf', FileType::class,
+        $builder->add(
+            'uploadPdf', FileType::class,
             array(
                 'multiple' => true
-            ));
+            )
+        );
     }
 
     /**

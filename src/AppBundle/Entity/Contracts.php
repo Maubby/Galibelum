@@ -35,15 +35,17 @@ class Contracts
      */
 
     /**
+     *
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id",               type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
+     *
      * @var array
      *
      * @ORM\Column(name="uploadPdf", type="array", nullable=true)
@@ -51,6 +53,7 @@ class Contracts
     private $uploadPdf;
 
     /**
+     *
      * @var int
      *
      * @ORM\Column(name="status", type="integer")

@@ -128,16 +128,19 @@ class ManagerController extends Controller
     /**
      * Lists all contracts.
      *
-     * @Route("/{contract}/upload", methods={"POST"}, name="contract_upload")
+     * @param Request             $request             New posted info
+     * @param Contracts           $contract            The contract entity
+     * @param FileUploaderService $fileUploaderService The upload service
      *
-     * @param Request $request
+     * @Route("/{contract}/upload",
+     *     methods={"POST"}, name="contract_upload
+     * ")
      *
-     * @param Contracts $contract
-     * @param FileUploaderService $fileUploaderService
      * @return Response
      */
-    public function uploadAction(Request $request, Contracts $contract, FileUploaderService $fileUploaderService)
-    {
+    public function uploadAction(Request $request, Contracts $contract,
+        FileUploaderService $fileUploaderService
+    ) {
         $form = $this->createForm(ContractType::class);
         $form->handleRequest($request);
 
@@ -153,7 +156,8 @@ class ManagerController extends Controller
 
                 // Check if the file exist and set the new or old value
                 $filePdf[] = $fileUploaderService->upload(
-                    $file, $organization->getId(), $activity->getId(), $offer->getId()
+                    $file, $organization->getId(),
+                    $activity->getId(), $offer->getId()
                 );
 
                 $this->addFlash(

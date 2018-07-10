@@ -27,7 +27,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
      *
      * @param string $role constant role
      *
-     * @return array
+     * @return array Return result of the query
      */
     public function findByRole($role)
     {
