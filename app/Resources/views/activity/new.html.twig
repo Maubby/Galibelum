@@ -117,24 +117,27 @@
                         <!--End Activity's Achievement-->
 
                         <!--Activity's Social Link-->
-                        <div class="mt-20 p-0">
-                            <div class="form-group form-error">
-                                <i class="fas fa-user-friends"></i>{{ form_label(form.socialLink, 'Réseaux sociaux et chaînes de streaming') }}
-                            </div>
-
-                            <div class="row">
-                                {# store the prototype on the data-prototype attribute #}
-                                <div id="SocialLink-fields-list"
-                                     data-prototype=
-                                     "{{ form_widget(form.socialLink.vars.prototype,{'attr': {'class': "form-control input-field",
-                                    'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}})|e }}"
-                                     data-widget-tags="{{ '<div class="col-sm-12"></div>'|e }}">
+                        <div class="row">
+                            <div class="mt-20">
+                                <div class="col-sm-12 form-error">
+                                    <i class="fas fa-user-friends"></i>{{ form_label(form.socialLink, 'Réseaux sociaux et chaînes de streaming') }}
+                                </div>
+                                <div class="col-sm-11">
+                                    {# store the prototype on the data-prototype attribute #}
+                                    <input type="url" id="appbundle_activity_socialLink_0" name="appbundle_activity[socialLink][0]" class="form-control input-field" placeholder="Exemple : https://www.twitch.tv/gallibellum">
+                                </div>
+                                <div id="socialLink-fields-list" data-prototype=
+                                "{{ form_widget(form.socialLink.vars.prototype,{'attr': {'class': "form-control input-field",'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}})|e }}"
+                                     data-widget-tags="{{ '<div class="col-sm-11"></div>'|e }}">
                                     {% for socialLinkField in form.socialLink %}
                                         {{ form_errors(socialLinkField) }}
                                         {{ form_widget(socialLinkField) }}
                                     {% endfor %}
                                 </div>
-                                <button type="button" class="add-another-collection-widget" data-list="#SocialLink-fields-list">Plus</button>
+
+                                <div class="col-sm-1 mt-10">
+                                    <span class="add-socialLink"><i class="fas fa-plus-circle degradeblue" style="font-size: 30px"></i></span>
+                                </div>
                             </div>
                         </div>
                         <!--End Activity's Social Link-->
@@ -170,7 +173,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script  src="{{ asset('build/add-collection-widget.js') }}" ></script>
+    <script  src="{{ asset('build/add_collection_widget.js') }}" ></script>
     <script src="{{ asset('build/input_display.js') }}"></script>
     <!-- Include Google Maps JS API -->
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{ google_api_key }}"></script>

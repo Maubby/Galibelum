@@ -86,7 +86,9 @@
 
 .sidebar-nav li a:hover {
   background: rgba(255, 255, 255, 0.2);
-  color: darken(#428bca, 20%);
+  background: linear-gradient(to right,#86ccc2 , #137faf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-decoration: none;
 }
 
@@ -98,7 +100,11 @@
 .sidebar-nav > .sidebar-brand {
   margin-top: 90px;
   font-size: 15px;
-  line-height: 60px;
+  line-height: 85px;
+}
+
+.sidebar-nav, .tata {
+  margin-left: 0;
 }
 
 .sidebar-nav > .sidebar-brand a {
@@ -112,6 +118,23 @@
 
 .open > .dropdown-menu{
   width: 246px;
+}
+
+.sidenav-divider {
+  width: 100%;
+  border-top: 1px solid;
+  border-color: rgba(255,255,255, 0.1);
+}
+
+.icon-off {
+  padding-right: 20px !important;
+}
+
+.sidebar-nav a:hover i {
+  background: linear-gradient(to right,#86ccc2 , #137faf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
 }
 
 // Changing size for smaller screens

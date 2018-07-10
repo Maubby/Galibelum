@@ -76,7 +76,7 @@ class ContractController extends Controller
     /**
      * Set contract when company click to relation button.
      *
-     * @param Offer         $offer      The offer entity
+     * @param Offer $offer The offer entity
      * @param MailerService $mailerUser The mailer service
      *
      * @Route("/{id}/partners", methods={"GET", "POST"}, name="contract_relation")
@@ -102,7 +102,7 @@ class ContractController extends Controller
 
             //      Mail for the structure
             $mailerUser->sendEmail(
-                $this->getParameter('no_reply'),
+                'noreply@galibelum.fr',
                 $contract->getOffer()->getActivity()
                     ->getOrganizationActivities()->getUser()->getEmail(),
                 'Validation',
@@ -110,17 +110,24 @@ class ContractController extends Controller
             );
             //      Mail for the company
             $mailerUser->sendEmail(
-                $this->getParameter('no_reply'),
+                'noreply@galibelum.fr',
                 $contract->getOrganization()->getUser()->getEmail(),
                 'Validation',
                 'Vous vous êtes positionnés sur une offre'
             );
             //      Mail for the account manager
             $mailerUser->sendEmail(
-                $this->getParameter('no_reply'),
-                $contract->getOrganization()->getUser()->getManagers()->getEmail(),
+                'noreply@galibelum.fr',
+                $contract->getOrganization()->getManagers()->getEmail(),
                 'Validation',
                 'Vous vous êtes positionnés sur une offre'
+            );
+
+            $this->addFlash(
+                'success',
+                "Votre offre a bien été prise en compte.
+                Vous pouvez retrouver le détail de vos contrats
+                    en cours dans l'onglet Contractualisation."
             );
 
             return $this->render(
@@ -136,7 +143,7 @@ class ContractController extends Controller
      * Changes contracts' status.
      *
      * @param Contracts $contract The contract entity
-     * @param Int       $status   Status value
+     * @param Int $status Status value
      *
      * @route("/{id}/{status}", methods={"GET"},
      *     name="contract_status")
@@ -166,8 +173,8 @@ class ContractController extends Controller
     /**
      * Send a mail when the offers' status change.
      *
-     * @param Contracts     $contract   The contract entity
-     * @param Int           $status     Received status
+     * @param Contracts $contract The contract entity
+     * @param Int $status Received status
      * @param MailerService $mailerUser Mailer service
      *
      * @route("/{id}/status/{status}", methods={"GET"},
@@ -179,60 +186,63 @@ class ContractController extends Controller
      *
      * @return Response A Response Instance
      */
+
     public function sendAction(Contracts $contract, int $status,
-                               MailerService $mailerUser
-    ) {
-        if ($status === 2) {
-            //status 2 validation
-            //      Mail for the structure
-            $mailerUser->sendEmail(
-                $this->getUser()->getEmail(),
-                $contract->getOffer()->getActivity()
-                    ->getOrganizationActivities()->getUser()->getEmail(),
-                'Validation',
-                'Une marque s\'est positionnée sur votre offre'
-            );
-            //      Mail for the company
-            $mailerUser->sendEmail(
-                $this->getUser()->getEmail(),
-                $contract->getOrganization()->getUser()->getEmail(),
-                'Validation',
-                'Vous vous êtes positionnés sur une offre'
-            );
-        } elseif ($status === 3) {
-            //status 3 payment
-            //      Mail for the structure
-            $mailerUser->sendEmail(
-                $this->getUser()->getEmail(),
-                $contract->getOffer()->getActivity()
-                    ->getOrganizationActivities()->getUser()->getEmail(),
-                'Paiement',
-                'Une marque s\'est positionnée sur votre offre'
-            );
-            //      Mail for the company
-            $mailerUser->sendEmail(
-                $this->getUser()->getEmail(),
-                $contract->getOrganization()->getUser()->getEmail(),
-                'Paiement',
-                'Vous vous êtes positionnés sur une offre'
-            );
-        } elseif ($status === 4) {
-            //status 4 expired
-            //      Mail for the structure
-            $mailerUser->sendEmail(
-                $this->getUser()->getEmail(),
-                $contract->getOffer()->getActivity()
-                    ->getOrganizationActivities()->getUser()->getEmail(),
-                'Offre expirée',
-                'Une marque s\'est positionnée sur votre offre'
-            );
-            //      Mail for the company
-            $mailerUser->sendEmail(
-                $this->getUser()->getEmail(),
-                $contract->getOrganization()->getUser()->getEmail(),
-                'Offre expirée',
-                'Vous vous êtes positionnés sur une offre'
-            );
+                               MailerService $mailerUser)
+    {
+        switch ($status) {
+            //status 2 = validation
+            //Mail for the structure
+            case 2:
+                $mailerUser->sendEmail(
+                    $this->getUser()->getEmail(),
+                    $contract->getOffer()->getActivity()->getOrganizationActivities()->getUser()->getEmail(),
+                    'Validation',
+                    'Une marque s\'est positionnée sur votre offre.'
+                );
+                //      Mail for the company
+                $mailerUser->sendEmail(
+                    $this->getUser()->getEmail(),
+                    $contract->getOrganization()->getUser()->getEmail(),
+                    'Validation',
+                    'Une marque s\'est positionnée sur votre offre.'
+                );
+                break;
+
+            //status 3 = payment
+            //Mail for the structure
+            case 3:
+                $mailerUser->sendEmail(
+                    $this->getUser()->getEmail(),
+                    $contract->getOffer()->getActivity()->getOrganizationActivities()->getUser()->getEmail(),
+                    'Payment',
+                    'Une marque s\'est positionnée sur votre offre'
+                );
+                //      Mail for the company
+                $mailerUser->sendEmail(
+                    $this->getUser()->getEmail(),
+                    $contract->getOrganization()->getUser()->getEmail(),
+                    'Payment',
+                    'Une marque s\'est positionnée sur votre offre'
+                );
+                break;
+
+            //status 4 = expired
+            //Mail for the structure
+            case 4:
+                $mailerUser->sendEmail(
+                    $this->getUser()->getEmail(),
+                    $contract->getOffer()->getActivity()->getOrganizationActivities()->getUser()->getEmail(),
+                    'Offre expirée',
+                    'Votre offre est expirée.'
+                );
+                //      Mail for the company
+                $mailerUser->sendEmail(
+                    $this->getUser()->getEmail(),
+                    $contract->getOrganization()->getUser()->getEmail(),
+                    'Payment',
+                    'L\'offre sur laquelle vous vous êtes positionnées est malheureusement expirée.'
+                );
         }
         return $this->redirectToRoute('manager_contract_list');
     }

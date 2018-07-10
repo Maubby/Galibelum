@@ -63,16 +63,18 @@
                                 <br>
                             </li>
                             <li>
-                                <a href="{{ path('manager_organization_list') }}">VOIR LES ORGANISATIONS</a>
+                                <a href="{{ path('manager_organization_list') }}" class="pb-10">VOIR LES ORGANISATIONS</a>
                             </li>
+                            <li class="sidenav-divider"></li>
                             <li>
-                                <a href="{{ path('manager_contract_list') }}">GÉRER LES CONTRATS</a>
+                                <a href="{{ path('manager_contract_list') }}" class="pt-10 pb-10">GÉRER LES CONTRATS</a>
                             </li>
+                            <li class="sidenav-divider"></li>
 
                             <!--Only display the dropdown menu if logged in as ROLE_SUPER_ADMIN -->
                             {% if app.user.hasRole('ROLE_SUPER_ADMIN') %}
                                 <!-- Dropdown menu starts -->
-                                <li class="dropdown">
+                                <li class="dropdown pt-10 pb-10">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-haspopup="true" aria-expanded="false"> ACCOUNTS MANAGERS <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
@@ -83,12 +85,13 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li class="sidenav-divider"></li>
                                 <!-- End condition -->
                             {% endif %}
                             <!-- End dropdown menu -->
 
                             <li>
-                                <a href="{{ path('fos_user_security_logout') }}">SE DÉCONNECTER</a>
+                                <a href="{{ path('fos_user_security_logout') }}" class="pt-10 pb-10"><i class="fas fa-power-off icon-off"></i>SE DÉCONNECTER</a>
                             </li>
                         </ul>
                     </div>
