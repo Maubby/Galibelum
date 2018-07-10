@@ -58,7 +58,7 @@
                                                                 <h5 class="degradeblue"> {{ offer.name }}</h5>
                                                                 <p><strong>Montant :</strong> {{ offer.amount }} €</p>
                                                                 <p><strong>Date d'expiration :</strong> {% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
-                                                                <p><strong>Nombre de partenaires :</strong> {{ offer.partnershipNumber }}</p>
+                                                                <p><strong>Nombre de partenaires :</strong> {{ offer.partnershipNumber|length }}</p>
                                                                 <p><strong>Adresse :</strong> {{ offer.activity.address }}</p>
                                                                 <div>
                                                                     <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
