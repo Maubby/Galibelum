@@ -57,7 +57,7 @@ class RegistrationType extends AbstractType
                 )
             )
             ->add(
-                'cgu', CheckboxType::class, array(
+                'cgs', CheckboxType::class, array(
                     'label' => "J'ai lu et j'accepte les
                      conditions générales d'utilisation.",
                     'required' => true

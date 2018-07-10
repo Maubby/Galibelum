@@ -107,7 +107,7 @@ class User extends BaseUser
      *
      * @var bool
      *
-     * @ORM\Column(name="cgu", type="boolean")
+     * @ORM\Column(name="cgs", type="boolean")
      */
     private $cgu;
 
@@ -260,7 +260,7 @@ class User extends BaseUser
 
 
     /**
-     * Set cgu.
+     * Set cgs.
      *
      * @param bool $cgu
      *
@@ -274,7 +274,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get cgu.
+     * Get cgs.
      *
      * @return bool
      */

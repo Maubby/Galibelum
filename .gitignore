@@ -16,7 +16,6 @@
 /node_modules/
 /web/build/
 /web/uploads/
-/web/build/
 /web/blog/
 .idea
 *.php~
