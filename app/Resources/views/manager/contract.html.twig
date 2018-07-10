@@ -32,7 +32,7 @@
                         <thead>
                         <tr>
                             <th>Nom de la structure</th>
-                            <th>Nom de l' activité</th>
+                            <th>Nom de l'activité</th>
                             <th>Nom de l'offre</th>
                             <th>Montant demandé</th>
                             <th>Avant le</th>
@@ -85,13 +85,13 @@
                                 <!-- Ending buttons changing contracts' status -->
 
                                     {% if contract.status is same as(2) %}
-                                        <a href="#" class="fas fa-upload " style="font-size: 20px" data-toggle="modal" data-target="#pop-up-offer"></a>
+                                        <a href="#" class="fas fa-upload" style="font-size: 20px" data-toggle="modal" data-target="#pop-up-offer"></a>
                                         {{ render(controller("AppBundle:Manager:upload", {'contract': contract})) }}
                                     {% endif %}
                                 </td>
                                 {% for uploadPdf in contract.uploadPdf if contract.uploadPdf is not null %}
                                 <td>
-                                    <a class="fas fa-file-pdf " style="font-size: 20px" href="{{ asset('/uploads/pdf/organization_' ~
+                                    <a class="fas fa-file-pdf" style="font-size: 20px" href="{{ asset('/uploads/pdf/organization_' ~
                                         contract.offer.activity.organizationActivities.id ~ '/activity_' ~ contract.offer.activity.id
                                         ~ '/offer_' ~ contract.offer.id ~ '/' ~uploadPdf) }}"></a>
                                 </td>
