@@ -9,7 +9,6 @@
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Service;
-
 /**
  * Mailer class service.
  *
@@ -33,7 +32,6 @@ class MailerService
         $this->mailerUser     = $mailerUser;
         $this->templating = $templating;
     }
-
     /**
      * Send an email with recipients
      *
@@ -51,9 +49,9 @@ class MailerService
      */
     public function sendEmail($fromEmail, $toEmail, $subject, $message)
     {
-         //If your service is another, then read the following article
-         //to know which smpt code to use and which port
-         //http:ourcodeworld.com/articles/read/14/swiftmailer-send-mails-from-php-easily-and-effortlessly
+        //If your service is another, then read the following article
+        //to know which smpt code to use and which port
+        //http:ourcodeworld.com/articles/read/14/swiftmailer-send-mails-from-php-easily-and-effortlessly
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
             ->setFrom($fromEmail)
@@ -65,10 +63,10 @@ class MailerService
                     array(
                         'message' => $message,
                         'subject' => $subject
-                        )
-                )
+                    )
+                ),
+                'text/html'
             );
-
         return $this->mailerUser->send($message);
     }
 }
