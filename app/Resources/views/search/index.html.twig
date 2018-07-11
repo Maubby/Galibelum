@@ -100,7 +100,7 @@
                                         <p><strong>{{ activity.name }}</strong> | <span class="light-blue-subtitle-text bold-text">{{ activity.organizationActivities.name }}</span></p>
                                         <p class="hidden-sm hidden-xs normal-subtitle-text">{{ activity.description }}</p>
                                     </td>
-                                    <td class="text-center lig">{{ activity.type }}</td>
+                                    <td class="text-center">{{ activity.type }}</td>
                                     {% if activity.minamountoffer is same as (activity.maxamountoffer)%}
                                         <td class="text-center"> {{ activity.minamountoffer }} €</td>
                                     {% else %}
