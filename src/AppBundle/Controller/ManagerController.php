@@ -82,16 +82,7 @@ class ManagerController extends Controller
             'Activation',
             'Votre organisation vient d\'être validé par l\'un
             de nos account manager.
-            Vous pouvez dès à présent vous rendre sur le site.
-            <br>
-            <br>
-            À bientôt,
-            L\'équipe Galibelum
-            <br>
-            <br>
-            ---
-            <br>
-            Un doute, une question ? - Tel: 03.74.09.50.88'
+            Vous pouvez dès à présent vous rendre sur le site.'
         );
 
         return $this->redirectToRoute('manager_organization_list');
@@ -125,16 +116,7 @@ class ManagerController extends Controller
             'Activation',
             'Votre organisation vient d\'être désactiver par l\'un
             de nos account manager.
-            Pour plus d\'information veuillez contacter l\'équipe Galibelum.
-            <br>
-            <br>
-            À bientôt,
-            L\'équipe Galibelum
-            <br>
-            <br>
-            ---
-            <br>
-            Un doute, une question ? - Tel: 03.74.09.50.88'
+            Pour plus d\'information veuillez contacter l\'équipe Galibelum.'
         );
 
         return $this->redirectToRoute('manager_organization_list');
