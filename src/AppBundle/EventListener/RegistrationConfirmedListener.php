@@ -69,7 +69,8 @@ class RegistrationConfirmedListener implements EventSubscriberInterface
         $this->_session->getFlashBag()->add(
             'registrationconfirmed',
             'Votre compte est validé. Vous pouvez désormais créer votre structure 
-            eSport ou sponsoriser des offres sur Galibelum.'
+            eSport ou sponsoriser des offres sur Galibelum.
+            contacter Galibelum via l\'adresse : hello@galibelum.fr'
         );
         $url = $this->_router->generate('inscription_index');
         $event->setResponse(new RedirectResponse($url));
