@@ -31,6 +31,7 @@ Encore
     .addStyleEntry('search', './assets/scss/search.scss')
     .addStyleEntry('page_404', './assets/scss/page_404.scss')
     .addStyleEntry('_variables', './assets/scss/_variables.scss')
+    .addStyleEntry('check_confirmed_email', './assets/scss/check_confirmed_email.scss')
     .addEntry('login_script', './assets/js/login_script.js')
     .addEntry('carousel', './assets/js/carousel.js')
     .addEntry('input_display', './assets/js/input_display.js')

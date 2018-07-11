@@ -51,7 +51,7 @@
                                     {% for row in activity.activities|batch(3) %}
                                         <div class="row">
                                             {% for offer in row %}
-                                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                                <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
                                                     <div class="thumbnail text-center">
                                                         <div class="caption">
                                                             <h5 class="degradeblue"> {{ offer.name }}</h5>
@@ -89,7 +89,7 @@
                                     {% for row in activity.activities|batch(3) %}
                                         <div class="row">
                                             {% for offer in row %}
-                                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                                <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
                                                     <div class="thumbnail text-center">
                                                         <div class="caption">
                                                             <h5 class="degradeblue"> {{ offer.name }}</h5>
@@ -125,7 +125,7 @@
                                     {% for row in activity.activities|batch(3) %}
                                         <div class="row">
                                             {% for offer in row %}
-                                                <div class="col-md-4 col-sm-12 col-xs-12">
+                                                <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
                                                     <div class="thumbnail text-center">
                                                         <div class="caption">
                                                             <h5 class="degradeblue"> {{ offer.name }}</h5>
@@ -146,6 +146,13 @@
                     </div>
                 {% endfor %}
                 <!-- End eSport Team list -->
+
+                <!-- Link to create an offer -->
+                <div class="col-sm-12 col-xs-12">
+                    <a href="{{ path('activity_index') }}" class="btn btn-primary backblue-btn">Créer une offre</a>
+                </div>
+                <!-- End link -->
+
             </div>
         </div>
     </section>
