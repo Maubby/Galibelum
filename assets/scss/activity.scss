@@ -12,6 +12,11 @@
   }
 }
 
+.backblue-btn-activity {
+  width: 145px;
+  margin-left: 30px;
+}
+
 // Control height of each tuple for activity
 
 .activity-box {
@@ -103,5 +108,13 @@ li {
     border: 1px solid #e4e4e4;
     box-shadow: none;
     border-radius: 4px !important;
+  }
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 812px) {
+  .backblue-btn-activity {
+    margin-left: 0;
   }
 }
