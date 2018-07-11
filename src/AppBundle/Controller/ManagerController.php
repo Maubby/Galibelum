@@ -152,7 +152,7 @@ class ManagerController extends Controller
                 $organization = $activity->getOrganizationActivities();
 
                 // Check if the file exist and set the new or old value
-                $filePdf[] = $fileUploaderService->upload(
+                $filePdf = $fileUploaderService->upload(
                     $file, $organization->getId(),
                     $activity->getId(), $offer->getId()
                 );
@@ -162,7 +162,7 @@ class ManagerController extends Controller
                     "Vos modifications ont bien été prises en compte."
                 );
 
-                $contract->setUploadPdf($filePdf[]);
+                $contract->setUploadPdf($filePdf);
             }
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('manager_contract_list');
