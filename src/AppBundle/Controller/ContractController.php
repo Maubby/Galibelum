@@ -101,25 +101,63 @@ class ContractController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             $mailerUser->sendEmail(
-                'noreply@galibelum.fr',
-                $contract->getOffer()->getActivity()
-                    ->getOrganizationActivities()->getUser()->getEmail(),
-                'Validation',
-                'Une marque s\'est positionnée sur votre offre'
+                $this->getParameter('mailer_user'),
+                $offer->getActivity()->getOrganizationActivities()
+                    ->getUser()->getEmail(),
+                'Mise en relation',
+                'La marque '.$this->getUser()->getOrganization()->getName().' s\'intéresse à l\'offre '.$offer->getName().
+                ' liée à votre activité '.$offer->getActivity()->getName().'.
+                <br>
+                <br>
+                Vous venez d\'entrer dans la phase de négociation. Vous pourrez ainsi échanger
+                avec la structure eSport afin de trouver un accord.
+                <br>
+                <br>
+                Votre account manager reviendra vers vous dans les meilleurs délais afin de vous accompagner 
+                durant cette phase de négociation puis dans les phases suivantes.
+                <br>
+                <br>
+                À bientôt,
+                L\'équipe Galibelum
+                <br>
+                <br>
+                ---
+                <br>
+                Un doute, une question ? - Tel: 03.74.09.50.88'
             );
 
             $mailerUser->sendEmail(
-                'noreply@galibelum.fr',
+                $this->getParameter('mailer_user'),
                 $contract->getOrganization()->getUser()->getEmail(),
-                'Validation',
-                'Vous vous êtes positionnés sur une offre'
+                'Mise en Relation',
+                'Vous avez souhaité être mis en relation avec '.$offer->getActivity()->getOrganizationActivities()->getName().
+                ' au sujet de l\'offre '.$offer->getName().' liée à l\'activité '.$offer->getActivity()->getName().'.
+                <br>
+                <br>
+                Vous venez d\'entrer dans la phase de négociation. Vous pourrez ainsi échanger
+                avec la structure eSport afin de trouver un accord.
+                <br>
+                <br>
+                Votre account manager reviendra vers vous dans les meilleurs délais afin de vous accompagner 
+                durant cette phase de négociation puis dans les phases suivantes.
+                <br>
+                <br>
+                À bientôt,
+                L\'équipe Galibelum
+                <br>
+                <br>
+                ---
+                <br>
+                Un doute, une question ? - Tel: 03.74.09.50.88'
             );
 
             $mailerUser->sendEmail(
-                'noreply@galibelum.fr',
+                $this->getParameter('mailer_user'),
                 $contract->getOrganization()->getManagers()->getEmail(),
-                'Validation',
-                'Vous vous êtes positionnés sur une offre'
+                'Mise en relation',
+                'La marque '.$this->getUser()->getOrganization()->getName(). ' souhaite se mettre en relation
+                avec la strucure '.$offer->getActivity()->getOrganizationActivities()->getName().' au sujet de l\'offre '.
+                $offer->getName().' liée à l\'activité '.$offer->getActivity()->getName().'.'
             );
 
             $this->addFlash(

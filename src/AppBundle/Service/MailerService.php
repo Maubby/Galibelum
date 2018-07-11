@@ -50,16 +50,16 @@ class MailerService
     public function sendEmail($fromEmail, $toEmail, $subject, $message)
     {
         $message = \Swift_Message::newInstance()
-            ->setSubject($subject)
             ->setFrom($fromEmail)
-            ->setCharset('UTF-8')
             ->setTo($toEmail)
+            ->setCharset('UTF-8')
+            ->setSubject($subject)
             ->setBody(
                 $this->templating->render(
                     'email/notification.html.twig',
                     array(
+                        'subject' => $subject,
                         'message' => $message,
-                        'subject' => $subject
                     )
                 ),
                 'text/html'
