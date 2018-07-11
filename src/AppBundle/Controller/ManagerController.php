@@ -152,7 +152,7 @@ class ManagerController extends Controller
                 $organization = $activity->getOrganizationActivities();
 
                 // Check if the file exist and set the new or old value
-                $filePdf[] = $fileUploaderService->upload(
+                $filePdf = $fileUploaderService->upload(
                     $file, $organization->getId(),
                     $activity->getId(), $offer->getId()
                 );
