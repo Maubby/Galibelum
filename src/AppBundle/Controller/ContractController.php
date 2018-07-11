@@ -76,10 +76,11 @@ class ContractController extends Controller
     /**
      * Set contract when company click to relation button.
      *
-     * @param Offer $offer The offer entity
+     * @param Offer         $offer      The offer entity
      * @param MailerService $mailerUser The mailer service
      *
-     * @Route("/{id}/partners", methods={"GET", "POST"}, name="contract_relation")
+     * @Route("/{id}/partners", methods={"GET", "POST"},
+     *     name="contract_relation")
      *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
@@ -101,25 +102,54 @@ class ContractController extends Controller
             $this->getDoctrine()->getManager()->flush();
 
             $mailerUser->sendEmail(
-                'noreply@galibelum.fr',
-                $contract->getOffer()->getActivity()
-                    ->getOrganizationActivities()->getUser()->getEmail(),
-                'Validation',
-                'Une marque s\'est positionnée sur votre offre'
+                $this->getParameter('mailer_user'),
+                $offer->getActivity()->getOrganizationActivities()
+                    ->getUser()->getEmail(),
+                'Mise en relation',
+                'La marque '.$this->getUser()->getOrganization()->getName().
+                ' s\'intéresse à l\'offre '.$offer->getName().
+                ' liée à votre activité '.$offer->getActivity()->getName().'.
+                <br>
+                <br>
+                Vous venez d\'entrer dans la phase de négociation.
+                Vous pourrez ainsi échanger avec la structure eSport
+                afin de trouver un accord.
+                <br>
+                <br>
+                Votre account manager reviendra vers vous dans
+                les meilleurs délais afin de vous accompagner 
+                durant cette phase de négociation puis dans les phases suivantes.'
             );
 
             $mailerUser->sendEmail(
-                'noreply@galibelum.fr',
+                $this->getParameter('mailer_user'),
                 $contract->getOrganization()->getUser()->getEmail(),
-                'Validation',
-                'Vous vous êtes positionnés sur une offre'
+                'Mise en Relation',
+                'Vous avez souhaité être mis en relation avec '
+                .$offer->getActivity()->getOrganizationActivities()->getName().
+                ' au sujet de l\'offre '.$offer->getName().' liée à l\'activité '
+                .$offer->getActivity()->getName().'.
+                <br>
+                <br>
+                Vous venez d\'entrer dans la phase de négociation.
+                Vous pourrez ainsi échanger avec la structure eSport
+                afin de trouver un accord.
+                <br>
+                <br>
+                Votre account manager reviendra vers vous dans les
+                meilleurs délais afin de vous accompagner 
+                durant cette phase de négociation puis dans les phases suivantes.'
             );
 
             $mailerUser->sendEmail(
-                'noreply@galibelum.fr',
+                $this->getParameter('mailer_user'),
                 $contract->getOrganization()->getManagers()->getEmail(),
-                'Validation',
-                'Vous vous êtes positionnés sur une offre'
+                'Mise en relation',
+                'La marque '.$this->getUser()->getOrganization()->getName().
+                ' souhaite se mettre en relation avec la strucure '
+                .$offer->getActivity()->getOrganizationActivities()->getName().
+                ' au sujet de l\'offre '.$offer->getName().' liée à l\'activité '
+                .$offer->getActivity()->getName().'.'
             );
 
             $this->addFlash(
@@ -142,7 +172,7 @@ class ContractController extends Controller
      * Changes contracts' status.
      *
      * @param Contracts $contract The contract entity
-     * @param Int $status Status value
+     * @param Int       $status   Status value
      *
      * @route("/{id}/{status}", methods={"GET"},
      *     name="contract_status")
@@ -172,8 +202,8 @@ class ContractController extends Controller
     /**
      * Send a mail when the offers' status change.
      *
-     * @param Contracts $contract The contract entity
-     * @param Int $status Received status
+     * @param Contracts     $contract   The contract entity
+     * @param Int           $status     Received status
      * @param MailerService $mailerUser Mailer service
      *
      * @route("/{id}/status/{status}", methods={"GET"},
@@ -185,58 +215,97 @@ class ContractController extends Controller
      *
      * @return Response A Response Instance
      */
-
     public function sendAction(Contracts $contract, int $status,
-                               MailerService $mailerUser)
-    {
+        MailerService $mailerUser
+    ) {
         switch ($status) {
+        case 2:
+            $mailerUser->sendEmail(
+                $this->getUser()->getEmail(),
+                $contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getUser()->getEmail(),
+                'Validation',
+                'Nous vous informons que votre account manager dédié vient
+                    de faire passer votre dossier (Offre : {'
+                .$contract->getOffer()->getName().'}, Activité : {'
+                .$contract->getOffer()->getActivity()->getName().'},
+                    Marque : {'.$contract->getOrganization()->getName().') à la
+                    phase de validation, celle-ci a pour but de vous donner accès
+                    aux différents documents justificatifs que vous nous avez
+                    transmis et que vous avez signés, et que nous avons mis en
+                    ligne afin que vous puissiez en avoir [un aperçu via la
+                    plateforme].
+                    <br>
+                    <br>
+                    Votre account manager dédié va revenir vers vous dans les
+                    plus brefs délais afin de vous accompagner durant cette
+                    phase de validation et dans les phases ultérieures.'
+            );
+            //      Mail for the company
+            $mailerUser->sendEmail(
+                $this->getUser()->getEmail(),
+                $contract->getOrganization()->getUser()->getEmail(),
+                'Validation',
+                'Nous vous informons que votre account manager dédié vient
+                    de faire passer votre dossier (Offre : {'
+                .$contract->getOffer()->getName().'}, Activité : {'
+                .$contract->getOffer()->getActivity()->getName().'},
+                    Structure : {'.$contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getName().') à la phase de
+                        validation, celle-ci a pour but de vous donner accès aux
+                        différents documents justificatifs que vous nous avez
+                        transmis et que vous avez signés, et que nous avons mis en
+                        ligne afin que vous puissiez en avoir [un aperçu via la
+                        plateforme].
+                        <br>
+                        <br>
+                        Votre account manager dédié va revenir vers vous dans les
+                        plus brefs délais afin de vous accompagner durant cette
+                        phase de validation et dans les phases ultérieures.'
+            );
+            break;
 
-            case 2:
-                $mailerUser->sendEmail(
-                    $this->getUser()->getEmail(),
-                    $contract->getOffer()->getActivity()->getOrganizationActivities()->getUser()->getEmail(),
-                    'Validation',
-                    'Une marque s\'est positionnée sur votre offre.'
-                );
-                //      Mail for the company
-                $mailerUser->sendEmail(
-                    $this->getUser()->getEmail(),
-                    $contract->getOrganization()->getUser()->getEmail(),
-                    'Validation',
-                    'Une marque s\'est positionnée sur votre offre.'
-                );
-                break;
-
-            case 3:
-                $mailerUser->sendEmail(
-                    $this->getUser()->getEmail(),
-                    $contract->getOffer()->getActivity()->getOrganizationActivities()->getUser()->getEmail(),
-                    'Payment',
-                    'Une marque s\'est positionnée sur votre offre'
-                );
-                //      Mail for the company
-                $mailerUser->sendEmail(
-                    $this->getUser()->getEmail(),
-                    $contract->getOrganization()->getUser()->getEmail(),
-                    'Payment',
-                    'Une marque s\'est positionnée sur votre offre'
-                );
-                break;
-
-            case 4:
-                $mailerUser->sendEmail(
-                    $this->getUser()->getEmail(),
-                    $contract->getOffer()->getActivity()->getOrganizationActivities()->getUser()->getEmail(),
-                    'Offre expirée',
-                    'Votre offre est expirée.'
-                );
-                //      Mail for the company
-                $mailerUser->sendEmail(
-                    $this->getUser()->getEmail(),
-                    $contract->getOrganization()->getUser()->getEmail(),
-                    'Payment',
-                    'L\'offre sur laquelle vous vous êtes positionnées est malheureusement expirée.'
-                );
+        case 3:
+            $mailerUser->sendEmail(
+                $this->getUser()->getEmail(),
+                $contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getUser()->getEmail(),
+                'Paiement',
+                'Nous vous informons que votre account manager dédié vient
+                    de faire passer votre dossier (Offre : {'
+                .$contract->getOffer()->getName().'}, Activité : {'
+                .$contract->getOffer()->getActivity()->getName().'},
+                    Marque : {'.$contract->getOrganization()->getName().') à la
+                    phase de paiement, celle-ci a pour but de vous permettre
+                    d\'effectuer les différents versements selon les modalités
+                    prévus dans les différents contrats et documents attachés.
+                    <br>
+                    <br>
+                    Votre account manager dédié va revenir vers vous dans les
+                    plus brefs délais afin de vous accompagner durant cette
+                    phase de validation et dans les phases ultérieures.'
+            );
+            //      Mail for the company
+            $mailerUser->sendEmail(
+                $this->getUser()->getEmail(),
+                $contract->getOrganization()->getUser()->getEmail(),
+                'Payment',
+                'Nous vous informons que votre account manager dédié vient
+                    de faire passer votre dossier (Offre : {'
+                .$contract->getOffer()->getName().'}, Activité : {'
+                .$contract->getOffer()->getActivity()->getName().'},
+                    Structure : {'.$contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getName().') à la phase
+                    de paiement, celle-ci a pour but de vous permettre de
+                    recevoir les différents versements selon les modalités
+                    prévus dans les différents contrats et documents attachés.
+                    <br>
+                    <br>
+                    Votre account manager dédié va revenir vers vous dans les
+                    plus brefs délais afin de vous accompagner durant cette
+                    phase de validation et dans les phases ultérieures.'
+            );
+            break;
         }
         return $this->redirectToRoute('manager_contract_list');
     }
