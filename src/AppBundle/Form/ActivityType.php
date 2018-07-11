@@ -87,7 +87,7 @@ class ActivityType extends AbstractType
                     'required' => true,
                     'attr' => array(
                         'minlength' => 2,
-                        'maxlength' => 64,
+                        'maxlength' => 128,
                     )
                 )
             )
