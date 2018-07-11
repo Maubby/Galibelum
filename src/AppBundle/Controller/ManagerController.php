@@ -80,7 +80,7 @@ class ManagerController extends Controller
             $this->getParameter('mailer_user'),
             $organization->getUser()->getEmail(),
             'Activation',
-            'Votre organisation vient d\'être validé pour l\'un
+            'Votre organisation vient d\'être validé par l\'un
             de nos account manager.
             Vous pouvez dès à présent vous rendre sur le site.
             <br>
@@ -101,17 +101,41 @@ class ManagerController extends Controller
      * Disable one organization.
      *
      * @param Organization $organization The organization entity
-     *
+     * @param MailerService $mailerUser
      * @route("/disable/{id}", methods={"GET"},
      *     name="manager_organization_disable")
      *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     *
      * @return Response A Response Instance
+     *
      */
-    public function disableAction(Organization $organization)
+    public function disableAction(Organization $organization,
+                                  MailerService $mailerUser)
     {
         $organization->setIsActive(2);
         $this->getDoctrine()->getManager()->persist($organization);
         $this->getDoctrine()->getManager()->flush();
+
+        $mailerUser->sendEmail(
+            $this->getParameter('mailer_user'),
+            $organization->getUser()->getEmail(),
+            'Activation',
+            'Votre organisation vient d\'être désactiver par l\'un
+            de nos account manager.
+            Pour plus d\'information veuillez contacter l\'équipe Galibelum.
+            <br>
+            <br>
+            À bientôt,
+            L\'équipe Galibelum
+            <br>
+            <br>
+            ---
+            <br>
+            Un doute, une question ? - Tel: 03.74.09.50.88'
+        );
 
         return $this->redirectToRoute('manager_organization_list');
     }
