@@ -56,8 +56,8 @@ class ManagerController extends Controller
     /**
      * Activates an organization entity.
      *
-     * @param Organization $organization The organization entity
-     * @param MailerService $mailerUser The mailer service
+     * @param Organization  $organization The organization entity
+     * @param MailerService $mailerUser   The mailer service
      *
      * @Route("/activate/{id}", methods={"GET"},
      *     name="manager_organization_activate")
@@ -69,8 +69,8 @@ class ManagerController extends Controller
      * @return Response A Response Instance
      */
     public function activateAction(Organization $organization,
-                                   MailerService $mailerUser)
-    {
+        MailerService $mailerUser
+    ) {
         $organization->setIsActive(1);
         $organization->setManagers($this->getUser());
         $this->getDoctrine()->getManager()->persist($organization);
@@ -91,8 +91,9 @@ class ManagerController extends Controller
     /**
      * Disable one organization.
      *
-     * @param Organization $organization The organization entity
-     * @param MailerService $mailerUser
+     * @param Organization  $organization The organization entity
+     * @param MailerService $mailerUser   The mailer service
+     *
      * @route("/disable/{id}", methods={"GET"},
      *     name="manager_organization_disable")
      *
@@ -101,11 +102,10 @@ class ManagerController extends Controller
      * @throws \Twig_Error_Syntax
      *
      * @return Response A Response Instance
-     *
      */
     public function disableAction(Organization $organization,
-                                  MailerService $mailerUser)
-    {
+        MailerService $mailerUser
+    ) {
         $organization->setIsActive(2);
         $this->getDoctrine()->getManager()->persist($organization);
         $this->getDoctrine()->getManager()->flush();

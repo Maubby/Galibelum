@@ -76,7 +76,7 @@ class ContractController extends Controller
     /**
      * Set contract when company click to relation button.
      *
-     * @param Offer $offer The offer entity
+     * @param Offer         $offer      The offer entity
      * @param MailerService $mailerUser The mailer service
      *
      * @Route("/{id}/partners", methods={"GET", "POST"},
@@ -172,7 +172,7 @@ class ContractController extends Controller
      * Changes contracts' status.
      *
      * @param Contracts $contract The contract entity
-     * @param Int $status Status value
+     * @param Int       $status   Status value
      *
      * @route("/{id}/{status}", methods={"GET"},
      *     name="contract_status")
@@ -202,8 +202,8 @@ class ContractController extends Controller
     /**
      * Send a mail when the offers' status change.
      *
-     * @param Contracts $contract The contract entity
-     * @param Int $status Received status
+     * @param Contracts     $contract   The contract entity
+     * @param Int           $status     Received status
      * @param MailerService $mailerUser Mailer service
      *
      * @route("/{id}/status/{status}", methods={"GET"},
@@ -215,21 +215,20 @@ class ContractController extends Controller
      *
      * @return Response A Response Instance
      */
-
     public function sendAction(Contracts $contract, int $status,
-                               MailerService $mailerUser)
-    {
+        MailerService $mailerUser
+    ) {
         switch ($status) {
-            case 2:
-                $mailerUser->sendEmail(
-                    $this->getUser()->getEmail(),
-                    $contract->getOffer()->getActivity()
-                        ->getOrganizationActivities()->getUser()->getEmail(),
-                    'Validation',
-                    'Nous vous informons que votre account manager dédié vient
+        case 2:
+            $mailerUser->sendEmail(
+                $this->getUser()->getEmail(),
+                $contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getUser()->getEmail(),
+                'Validation',
+                'Nous vous informons que votre account manager dédié vient
                     de faire passer votre dossier (Offre : {'
-                    .$contract->getOffer()->getName().'}, Activité : {'
-                    .$contract->getOffer()->getActivity()->getName().'},
+                .$contract->getOffer()->getName().'}, Activité : {'
+                .$contract->getOffer()->getActivity()->getName().'},
                     Marque : {'.$contract->getOrganization()->getName().') à la
                     phase de validation, celle-ci a pour but de vous donner accès
                     aux différents documents justificatifs que vous nous avez
@@ -241,18 +240,18 @@ class ContractController extends Controller
                     Votre account manager dédié va revenir vers vous dans les
                     plus brefs délais afin de vous accompagner durant cette
                     phase de validation et dans les phases ultérieures.'
-                );
-                //      Mail for the company
-                $mailerUser->sendEmail(
-                    $this->getUser()->getEmail(),
-                    $contract->getOrganization()->getUser()->getEmail(),
-                    'Validation',
-                    'Nous vous informons que votre account manager dédié vient
+            );
+            //      Mail for the company
+            $mailerUser->sendEmail(
+                $this->getUser()->getEmail(),
+                $contract->getOrganization()->getUser()->getEmail(),
+                'Validation',
+                'Nous vous informons que votre account manager dédié vient
                     de faire passer votre dossier (Offre : {'
-                    .$contract->getOffer()->getName().'}, Activité : {'
-                    .$contract->getOffer()->getActivity()->getName().'},
+                .$contract->getOffer()->getName().'}, Activité : {'
+                .$contract->getOffer()->getActivity()->getName().'},
                     Structure : {'.$contract->getOffer()->getActivity()
-                        ->getOrganizationActivities()->getName().') à la phase de
+                    ->getOrganizationActivities()->getName().') à la phase de
                         validation, celle-ci a pour but de vous donner accès aux
                         différents documents justificatifs que vous nous avez
                         transmis et que vous avez signés, et que nous avons mis en
@@ -263,19 +262,19 @@ class ContractController extends Controller
                         Votre account manager dédié va revenir vers vous dans les
                         plus brefs délais afin de vous accompagner durant cette
                         phase de validation et dans les phases ultérieures.'
-                );
-                break;
+            );
+            break;
 
-            case 3:
-                $mailerUser->sendEmail(
-                    $this->getUser()->getEmail(),
-                    $contract->getOffer()->getActivity()
-                        ->getOrganizationActivities()->getUser()->getEmail(),
-                    'Paiement',
-                    'Nous vous informons que votre account manager dédié vient
+        case 3:
+            $mailerUser->sendEmail(
+                $this->getUser()->getEmail(),
+                $contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getUser()->getEmail(),
+                'Paiement',
+                'Nous vous informons que votre account manager dédié vient
                     de faire passer votre dossier (Offre : {'
-                    .$contract->getOffer()->getName().'}, Activité : {'
-                    .$contract->getOffer()->getActivity()->getName().'},
+                .$contract->getOffer()->getName().'}, Activité : {'
+                .$contract->getOffer()->getActivity()->getName().'},
                     Marque : {'.$contract->getOrganization()->getName().') à la
                     phase de paiement, celle-ci a pour but de vous permettre
                     d\'effectuer les différents versements selon les modalités
@@ -285,18 +284,18 @@ class ContractController extends Controller
                     Votre account manager dédié va revenir vers vous dans les
                     plus brefs délais afin de vous accompagner durant cette
                     phase de validation et dans les phases ultérieures.'
-                );
-                //      Mail for the company
-                $mailerUser->sendEmail(
-                    $this->getUser()->getEmail(),
-                    $contract->getOrganization()->getUser()->getEmail(),
-                    'Payment',
-                    'Nous vous informons que votre account manager dédié vient
+            );
+            //      Mail for the company
+            $mailerUser->sendEmail(
+                $this->getUser()->getEmail(),
+                $contract->getOrganization()->getUser()->getEmail(),
+                'Payment',
+                'Nous vous informons que votre account manager dédié vient
                     de faire passer votre dossier (Offre : {'
-                    .$contract->getOffer()->getName().'}, Activité : {'
-                    .$contract->getOffer()->getActivity()->getName().'},
+                .$contract->getOffer()->getName().'}, Activité : {'
+                .$contract->getOffer()->getActivity()->getName().'},
                     Structure : {'.$contract->getOffer()->getActivity()
-                        ->getOrganizationActivities()->getName().') à la phase
+                    ->getOrganizationActivities()->getName().') à la phase
                     de paiement, celle-ci a pour but de vous permettre de
                     recevoir les différents versements selon les modalités
                     prévus dans les différents contrats et documents attachés.
@@ -305,8 +304,8 @@ class ContractController extends Controller
                     Votre account manager dédié va revenir vers vous dans les
                     plus brefs délais afin de vous accompagner durant cette
                     phase de validation et dans les phases ultérieures.'
-                );
-                break;
+            );
+            break;
         }
         return $this->redirectToRoute('manager_contract_list');
     }
