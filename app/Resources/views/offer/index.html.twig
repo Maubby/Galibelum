@@ -39,6 +39,9 @@
             <div class="row boxing-canvas">
                 <!-- eSport Event list -->
                 {% for activity in event_activities %}
+                    {% if activity.activities is null %}
+                        <p>Vous n'avez pas encore d'offres pour cette activité</p>
+                    {% endif %}
                     <div class="col-md-12 text-center mt-30 pt-30">
                         <i class="fas fa-video degradeblue" style="font-size: 50px"></i>&nbsp;
                         <h4>Evènement eSport</h4>
@@ -77,6 +80,9 @@
 
                 <!-- Streaming Activity list -->
                 {% for activity in stream_activities %}
+                    {% if activity.activities is null %}
+                    <p>Vous n'avez pas encore d'offres pour cette activité</p>
+                {% endif %}
                     <div class="col-md-12 text-center mt-30 pt-30">
                         <i class="fas fa-gamepad degradeblue" style="font-size: 50px"></i>&nbsp;
                         <h4>Activité de streaming</h4>
@@ -89,6 +95,9 @@
                                     {% for row in activity.activities|batch(3) %}
                                         <div class="row">
                                             {% for offer in row %}
+                                                {% if activity.activities is not defined %}
+                                                    <p>Vous n'avez pas encore d'offres pour cette activité</p>
+                                                {% else %}
                                                 <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
                                                     <div class="thumbnail text-center">
                                                         <div class="caption">
@@ -101,6 +110,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {% endif %}
                                             {% endfor %}
                                         </div>
                                     {% endfor %}
@@ -113,6 +123,9 @@
 
                 <!-- eSport Team list -->
                 {% for activity in team_activities %}
+                    {% if activity.activities is null %}
+                        <p>Vous n'avez pas encore d'offres pour cette activité</p>
+                    {% endif %}
                     <div class="col-md-12 text-center mt-30 pt-30">
                         <i class="fas fa-users degradeblue" style="font-size: 50px"></i>&nbsp;
                         <h4>Equipe eSport</h4>
