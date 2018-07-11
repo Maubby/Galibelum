@@ -78,10 +78,10 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-haspopup="true" aria-expanded="false"> ACCOUNTS MANAGERS <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{ path('admin_manager_new') }}">CRÉER UN COMPTE</a>
+                                        <li><a href="{{ path('admin_manager_new') }}" class="pb-10 pt-10">CRÉER UN COMPTE</a>
                                         </li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="{{ path('admin_manager_list') }}">GESTION DES COMPTES</a>
+                                        <li><a href="{{ path('admin_manager_list') }}" class="pt-10 pb-10">GESTION DES COMPTES</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -91,7 +91,7 @@
                             <!-- End dropdown menu -->
 
                             <li>
-                                <a href="{{ path('fos_user_security_logout') }}" class="pt-10 pb-10"><i class="fas fa-power-off icon-off"></i>SE DÉCONNECTER</a>
+                                <a href="{{ path('fos_user_security_logout') }}" class="pt-10 pb-10">SE DÉCONNECTER<i class="fas fa-power-off icon-off"></i></a>
                             </li>
                         </ul>
                     </div>
