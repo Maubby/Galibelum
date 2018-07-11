@@ -67,7 +67,7 @@
                         </label>
                     </div>
                     <div class="col-md-12 mt-30">
-                        <button id="btn_search" class="btn btn-primary backblue-btn"><i class="fas fa-search"></i></button>
+                        <button id="btn_search" class="btn btn-primary backblue-btn search"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
             </div>
@@ -97,10 +97,10 @@
                             {% for activity in activitylist %}
                                 <tr>
                                     <td>
-                                        <p class="">{{ activity.name }} | {{ activity.organizationActivities.name }}</p>
-                                        <p class="hidden-sm hidden-xs hidden">{{ activity.description }}</p>
+                                        <p><strong>{{ activity.name }}</strong> | <span class="light-blue-subtitle-text bold-text">{{ activity.organizationActivities.name }}</span></p>
+                                        <p class="hidden-sm hidden-xs normal-subtitle-text">{{ activity.description }}</p>
                                     </td>
-                                    <td class="text-center">{{ activity.type }}</td>
+                                    <td class="text-center lig">{{ activity.type }}</td>
                                     {% if activity.minamountoffer is same as (activity.maxamountoffer)%}
                                         <td class="text-center"> {{ activity.minamountoffer }} €</td>
                                     {% else %}
