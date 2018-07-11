@@ -1,7 +1,6 @@
-{# app/Resources/TwigBundle/views/Exception/error404.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Page erreur 404{% endblock %}
+{% block title %}Détail de l'activité{% endblock %}
 
 {% block stylesheets %}
 
@@ -18,29 +17,14 @@
 {% endblock %}
 
 {% block body %}
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-sm-12 text-center align">
+                <img class="logo-galibelum" src="{{ asset('build/images/galibelum-error404.png') }}" alt="Logo Galibelum">
+            </div>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3">
-                <h1 class="first-four">4</h1>
-            </div>
-            <div class="col-md-4">
-                <img class="logo-galibelum" src="{{ asset('build/images/logo_galibelum.png') }}" alt="Logo Galibelum">
-            </div>
-            <div class="col-md-3">
-                <h1 class="second-four">4</h1>
-            </div>
-        </div>
-        
-        <div class="row">
-            <div class="col-md-12">
-                <h5 class="text-center phrase">Ooops la page n'existe pas.</h5>
-            </div>
         </div>
     </div>
 {% endblock %}
-
 {% block footer %}
-    <footer>
-    </footer>
 {% endblock %}
