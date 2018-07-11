@@ -14,6 +14,7 @@ use AppBundle\Entity\Contracts;
 use AppBundle\Entity\Organization;
 use AppBundle\Form\ContractType;
 use AppBundle\Service\FileUploaderService;
+use AppBundle\Service\MailerService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -56,18 +57,42 @@ class ManagerController extends Controller
      * Activates an organization entity.
      *
      * @param Organization $organization The organization entity
+     * @param MailerService $mailerUser The mailer service
      *
      * @Route("/activate/{id}", methods={"GET"},
      *     name="manager_organization_activate")
      *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     *
      * @return Response A Response Instance
      */
-    public function activateAction(Organization $organization)
+    public function activateAction(Organization $organization,
+                                   MailerService $mailerUser)
     {
         $organization->setIsActive(1);
         $organization->setManagers($this->getUser());
         $this->getDoctrine()->getManager()->persist($organization);
         $this->getDoctrine()->getManager()->flush();
+
+        $mailerUser->sendEmail(
+            $this->getParameter('mailer_user'),
+            $organization->getUser()->getEmail(),
+            'Activation',
+            'Votre organisation vient d\'être validé pour l\'un
+            de nos account manager.
+            Vous pouvez dès à présent vous rendre sur le site.
+            <br>
+            <br>
+            À bientôt,
+            L\'équipe Galibelum
+            <br>
+            <br>
+            ---
+            <br>
+            Un doute, une question ? - Tel: 03.74.09.50.88'
+        );
 
         return $this->redirectToRoute('manager_organization_list');
     }
@@ -145,7 +170,6 @@ class ManagerController extends Controller
 
         // Var for the file name
         if ($form->isSubmitted() && $form->isValid()) {
-            $filePdf = [];
             foreach ($request->files->get("appbundle_contract")['uploadPdf'] as $file) {
                 $offer = $contract->getOffer();
                 $activity = $offer->getActivity();
