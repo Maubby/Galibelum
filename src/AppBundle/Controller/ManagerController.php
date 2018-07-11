@@ -162,7 +162,7 @@ class ManagerController extends Controller
                     "Vos modifications ont bien été prises en compte."
                 );
 
-                $contract->setUploadPdf($filePdf[]);
+                $contract->setUploadPdf($filePdf);
             }
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('manager_contract_list');
