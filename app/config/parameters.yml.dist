@@ -11,7 +11,7 @@ parameters:
     #database_path: '%kernel.project_dir%/var/data/data.sqlite'
 
     mailer_transport: smtp
-    mailer_host: smtp.gmail.com
+    mailer_host: ssl0.ovh.net
     mailer_user: ~
     mailer_password: ~
 
