@@ -92,11 +92,10 @@
                         <!--End Activity's Date-->
 
                         <!--Activity's Url Video-->
-
                         <div class="row">
                             <div class="col-sm-12 mt-20">
                                 <div class="form-group form-error">
-                                    <i class="fas fa-link"></i>{{ form_label(form.urlVideo, 'Url') }}
+                                    <i class="fas fa-link"></i>{{ form_label(form.urlVideo, 'Vidéo de présentation') }}
                                     {{ form_widget(form.urlVideo, {'attr': {'class': "form-control input-field",'id': "user_input_autocomplete_address", 'placeholder': "Partager une vidéo de présentation de votre activité"}}) }}
                                     {{ form_errors(form.urlVideo) }}
                                 </div>
@@ -124,7 +123,7 @@
                                 </div>
                                 <div class="col-sm-11">
                                     {# store the prototype on the data-prototype attribute #}
-                                    <input type="url" id="appbundle_activity_socialLink_0" name="appbundle_activity[socialLink][0]" class="form-control input-field" placeholder="Exemple : https://www.twitch.tv/gallibellum">
+                                    <input type="url" id="appbundle_activity_socialLink_20" name="appbundle_activity[socialLink][20]" class="form-control input-field" placeholder="Exemple : https://www.twitch.tv/gallibellum">
                                 </div>
                                 <div id="socialLink-fields-list" data-prototype=
                                 "{{ form_widget(form.socialLink.vars.prototype,{'attr': {'class': "form-control input-field",'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}})|e }}"
@@ -136,7 +135,7 @@
                                 </div>
 
                                 <div class="col-sm-1 mt-10">
-                                    <span class="add-socialLink"><i class="fas fa-plus-circle degradeblue" style="font-size: 30px"></i></span>
+                                    <span data-list="#socialLink-fields-list" class="add-socialLink"><i class="fas fa-plus-circle degradeblue" style="font-size: 30px"></i></span>
                                 </div>
                             </div>
                         </div>
