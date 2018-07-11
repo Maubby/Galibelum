@@ -12,6 +12,11 @@
   }
 }
 
+.backblue-btn-activity {
+  width: 145px;
+  margin-left: 30px;
+}
+
 // Control height of each tuple for activity
 
 .activity-box {
@@ -266,4 +271,12 @@ label[for=appbundle_activity_socialLink_9] {
 
 label[for=appbundle_activity_socialLink_10] {
   display:none
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 812px) {
+  .backblue-btn-activity {
+    margin-left: 0;
+  }
 }
