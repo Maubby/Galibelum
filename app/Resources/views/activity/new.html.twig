@@ -124,7 +124,7 @@
                                 </div>
                                 <div class="col-sm-11">
                                     {# store the prototype on the data-prototype attribute #}
-                                    <input type="url" id="appbundle_activity_socialLink_0" name="appbundle_activity[socialLink][0]" class="form-control input-field" placeholder="Exemple : https://www.twitch.tv/gallibellum">
+                                    <input type="url" id="appbundle_activity_socialLink_20" name="appbundle_activity[socialLink][20]" class="form-control input-field" placeholder="Exemple : https://www.twitch.tv/gallibellum">
                                 </div>
                                 <div id="socialLink-fields-list" data-prototype=
                                 "{{ form_widget(form.socialLink.vars.prototype,{'attr': {'class': "form-control input-field",'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}})|e }}"
@@ -136,7 +136,7 @@
                                 </div>
 
                                 <div class="col-sm-1 mt-10">
-                                    <span class="add-socialLink"><i class="fas fa-plus-circle degradeblue" style="font-size: 30px"></i></span>
+                                    <span data-list="#socialLink-fields-list" class="add-socialLink"><i class="fas fa-plus-circle degradeblue" style="font-size: 30px"></i></span>
                                 </div>
                             </div>
                         </div>
