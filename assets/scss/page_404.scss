@@ -1,6 +1,7 @@
+@import "_variables";
+
 .logo-galibelum {
   max-width: 100%;
-
 }
 
 @media screen and (max-width: 500px) {
@@ -8,19 +9,18 @@
     max-width: 100%;
     margin-top: 40%;
   }
-
 }
+
 @media screen and (max-width: 800px) {
   .logo-galibelum {
     max-width: 100%;
     margin-top: 50%;
   }
-
 }
+
 @media screen and (max-width: 1050px) {
   .logo-galibelum {
     max-width: 100%;
     margin-top: 50%;
   }
-
 }
