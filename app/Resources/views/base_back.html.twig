@@ -78,12 +78,18 @@
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                        aria-haspopup="true" aria-expanded="false"> ACCOUNTS MANAGERS <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="{{ path('admin_manager_new') }}">CRÉER UN COMPTE</a>
+                                        <li>
+                                            <a href="{{ path('admin_manager_new') }}">CRÉER UN COMPTE</a>
                                         </li>
                                         <li role="separator" class="divider"></li>
-                                        <li><a href="{{ path('admin_manager_list') }}">GESTION DES COMPTES</a>
+                                        <li>
+                                            <a href="{{ path('admin_manager_list') }}">GESTION DES COMPTES</a>
                                         </li>
                                     </ul>
+                                </li>
+                                <li class="sidenav-divider"></li>
+                                <li>
+                                    <a href="{{ path('fos_user_profile_edit') }}" class="pt-10 pb-10">MON PROFIL</a>
                                 </li>
                                 <li class="sidenav-divider"></li>
                                 <!-- End condition -->
