@@ -42,7 +42,7 @@
                 <form class="text-center col-md-12" action="{{ path('search_action') }}">
                     <div class="col-md-3 box-border-search pt-10">
                         <label>Nom :
-                            <input id="search" title="search" name="name" class="input-field form-control mt-30" value="{{ name }}">
+                            <input id="search" title="search" name="name" class="input-field form-control mt-30" placeholder="Recherche par nom" value="{{ name }}">
                         </label>
                     </div>
                     <div class="col-md-3 box-border-search pt-10">
@@ -79,7 +79,7 @@
                     {% if activitylist is not defined %}
                         <div class="col-md-12 text-center">Aucun résultat pour votre recherche</div>
                     {% else %}
-                        <table id="table-manager">
+                        <table id="table-manager" class="table-striped">
                             <!-- Table head -->
                             <thead class="table text-center">
                             <tr>
@@ -111,7 +111,7 @@
                                     {% else %}
                                         <td class="text-center">{{ activity.mindateoffer|date('d-m-Y') }} - {{ activity.maxdateoffer|date('d-m-Y') }}</td>
                                     {% endif %}
-                                    <td class="text-center"><a href="{{ path('activity_show', { 'id': activity.id }) }}">Détails</a></td>
+                                    <td class="text-center"><a class="btn btn-primary backblue-btn" href="{{ path('activity_show', { 'id': activity.id }) }}">Détails</a></td>
                                 </tr>
                             {% endfor %}
                             </tbody>
