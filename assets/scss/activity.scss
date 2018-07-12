@@ -17,6 +17,10 @@
   margin-left: 30px;
 }
 
+.form-group {
+  word-break: break-word;
+}
+
 // Control height of each tuple for activity
 
 .activity-box {
@@ -125,7 +129,19 @@ input[type=file]::-webkit-file-upload-button {
   margin-right: 20px;
 }
 
-/* Media Queries */
+/* Modal */
+
+.delete-backred-btn {
+  width: 100%;
+  background-image: linear-gradient(to right, #fad27b, #f9867d);
+  border-color: #FFFFFF;
+}
+
+.modal-body {
+  height: 80px;
+}
+
+/* Media queries */
 
 @media screen and (max-width: 812px) {
   .backblue-btn-activity {

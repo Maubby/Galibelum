@@ -80,7 +80,7 @@ class ManagerController extends Controller
             $this->getParameter('mailer_user'),
             $organization->getUser()->getEmail(),
             'Activation',
-            'Votre organisation vient d\'être validéé par l\'un
+            'Votre organisation vient d\'être validée par l\'un
             de nos accounts managers.
             Vous pouvez dès à présent vous rendre sur le site.'
         );
