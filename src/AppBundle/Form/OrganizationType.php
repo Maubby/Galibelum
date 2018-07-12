@@ -85,7 +85,7 @@ class OrganizationType extends AbstractType
             ->add(
                 'address', TextType::class, array(
                     'attr'=>array(
-                        'minlength' => 5, 'maxlength' => 64
+                        'minlength' => 5, 'maxlength' => 128
                     )
                 )
             )

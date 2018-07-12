@@ -60,9 +60,7 @@ class EmailConfirmationListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            FOSUserEvents::REGISTRATION_SUCCESS => [
-                ['onRegistrationSuccess', -10],
-            ],
+            FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess',
         ];
     }
 
@@ -100,7 +98,8 @@ class EmailConfirmationListener implements EventSubscriberInterface
         $this->_session->getFlashBag()->add(
             'emailconfirmed',
             'Un email de validation a été envoyé à l\'adresse renseignée.
-             Si vous ne l\'avez pas reçu, vérifiez vos spams ou contactez Galibelum.'
+             Si vous ne l\'avez pas reçu, vérifiez vos spams ou contactez Galibelum
+              via l\'adresse : hello@galibelum.fr.'
         );
         $url = $this->_router->generate('fos_user_security_login');
         $event->setResponse(new RedirectResponse($url));

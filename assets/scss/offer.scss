@@ -2,13 +2,14 @@
 
 /* Background */
 
-.caption {
+.caption, .thumbnail {
   background-color: $lighter-grey-bg-color;
+  min-height: 210px;
 }
 
-.thumbnail {
-  background-color: $lighter-grey-bg-color;
-  min-height: 170px;
+.backblue-btn {
+  width: 145px;
+  margin-left: 30px;
 }
 
 /* Box */
@@ -67,3 +68,17 @@ th {
   padding-left: 0;
 }
 
+/* Media Queries */
+
+@media screen and (max-width: 1366px) {
+  .activity-thumbnail {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  h4 {
+    font-size: 23px;
+  }
+}

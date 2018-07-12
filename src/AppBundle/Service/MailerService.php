@@ -9,6 +9,7 @@
  * @author   WildCodeSchool <contact@wildcodeschool.fr>
  */
 namespace AppBundle\Service;
+
 /**
  * Mailer class service.
  *
@@ -32,34 +33,42 @@ class MailerService
         $this->mailerUser     = $mailerUser;
         $this->templating = $templating;
     }
+
     /**
      * Send an email with recipients
      *
      * @param string $fromEmail Sender's email
-     * @param string $toEmail   Receiver's email
-     * @param string $subject   Email's subject
-     * @param string $message   Email's body
+     * @param string $toEmail Receiver's email
+     * @param string $subject Email's subject
+     * @param string $message Email's body
+     * @param null $managerTel
+     * @param null $managerEmail
+     *
+     * @return int The number of successful recipients.
+     * Can be 0 which indicates failure
      *
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
-     *
-     * @return int The number of successful recipients.
-     * Can be 0 which indicates failure
      */
-    public function sendEmail($fromEmail, $toEmail, $subject, $message)
-    {
+    public function sendEmail($fromEmail, $toEmail,
+                              $subject, $message, $managerTel = null,
+                              $managerEmail = null
+    ) {
         $message = \Swift_Message::newInstance()
-            ->setSubject($subject)
             ->setFrom($fromEmail)
-            ->setCharset('UTF-8')
             ->setTo($toEmail)
+            ->setCharset('UTF-8')
+            ->setSubject($subject)
             ->setBody(
                 $this->templating->render(
                     'email/notification.html.twig',
                     array(
+                        'subject' => $subject,
                         'message' => $message,
-                        'subject' => $subject
+                        'managerTel' => $managerTel,
+                        'managerEmail' => $managerEmail,
+                        'url' => 'https://www.galibelum.fr/login'
                     )
                 ),
                 'text/html'
