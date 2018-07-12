@@ -14,6 +14,7 @@ use AppBundle\Entity\Contracts;
 use AppBundle\Entity\Organization;
 use AppBundle\Form\ContractType;
 use AppBundle\Service\FileUploaderService;
+use AppBundle\Service\MailerService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -55,19 +56,34 @@ class ManagerController extends Controller
     /**
      * Activates an organization entity.
      *
-     * @param Organization $organization The organization entity
+     * @param Organization  $organization The organization entity
+     * @param MailerService $mailerUser   The mailer service
      *
      * @Route("/activate/{id}", methods={"GET"},
      *     name="manager_organization_activate")
      *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     *
      * @return Response A Response Instance
      */
-    public function activateAction(Organization $organization)
-    {
+    public function activateAction(Organization $organization,
+        MailerService $mailerUser
+    ) {
         $organization->setIsActive(1);
         $organization->setManagers($this->getUser());
         $this->getDoctrine()->getManager()->persist($organization);
         $this->getDoctrine()->getManager()->flush();
+
+        $mailerUser->sendEmail(
+            $this->getParameter('mailer_user'),
+            $organization->getUser()->getEmail(),
+            'Activation',
+            'Votre organisation vient d\'être validéé par l\'un
+            de nos accounts managers.
+            Vous pouvez dès à présent vous rendre sur le site.'
+        );
 
         return $this->redirectToRoute('manager_organization_list');
     }
@@ -75,18 +91,33 @@ class ManagerController extends Controller
     /**
      * Disable one organization.
      *
-     * @param Organization $organization The organization entity
+     * @param Organization  $organization The organization entity
+     * @param MailerService $mailerUser   The mailer service
      *
      * @route("/disable/{id}", methods={"GET"},
      *     name="manager_organization_disable")
      *
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     *
      * @return Response A Response Instance
      */
-    public function disableAction(Organization $organization)
-    {
+    public function disableAction(Organization $organization,
+        MailerService $mailerUser
+    ) {
         $organization->setIsActive(2);
         $this->getDoctrine()->getManager()->persist($organization);
         $this->getDoctrine()->getManager()->flush();
+
+        $mailerUser->sendEmail(
+            $this->getParameter('mailer_user'),
+            $organization->getUser()->getEmail(),
+            'Désactivation',
+            'Votre organisation vient d\'être désactivée par l\'un
+            de nos accounts managers.
+            Pour plus d\'information veuillez contacter l\'équipe Galibelum.'
+        );
 
         return $this->redirectToRoute('manager_organization_list');
     }
@@ -145,14 +176,13 @@ class ManagerController extends Controller
 
         // Var for the file name
         if ($form->isSubmitted() && $form->isValid()) {
-            $filePdf = [];
             foreach ($request->files->get("appbundle_contract")['uploadPdf'] as $file) {
                 $offer = $contract->getOffer();
                 $activity = $offer->getActivity();
                 $organization = $activity->getOrganizationActivities();
 
                 // Check if the file exist and set the new or old value
-                $filePdf[] = $fileUploaderService->upload(
+                $filePdf = $fileUploaderService->upload(
                     $file, $organization->getId(),
                     $activity->getId(), $offer->getId()
                 );
@@ -162,7 +192,7 @@ class ManagerController extends Controller
                     "Vos modifications ont bien été prises en compte."
                 );
 
-                $contract->setUploadPdf($filePdf[]);
+                $contract->setUploadPdf($filePdf);
             }
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('manager_contract_list');

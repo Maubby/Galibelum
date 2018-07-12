@@ -138,12 +138,12 @@ class Activity
      *
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=64, nullable=true)
+     * @ORM\Column(name="address", type="string", length=128, nullable=true)
      *
      * @Assert\NotBlank()
      * @Assert\Length(
      *      min = 2,
-     *      max = 64,
+     *      max = 128,
      * )
      */
     private $address;

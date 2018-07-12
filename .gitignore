@@ -15,8 +15,7 @@
 /vendor/
 /node_modules/
 /web/build/
-/web/uploads/
-/web/build/
+/web/uploads/pdf/
 /web/blog/
 .idea
 *.php~

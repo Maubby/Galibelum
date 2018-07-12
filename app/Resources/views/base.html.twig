@@ -19,7 +19,23 @@
     {% endblock %}
 
     <!-- Favicons -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('build/images/favicon/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('build/images/favicon/apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('build/images/favicon/apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('build/images/favicon/apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('build/images/favicon/favicon/apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('build/images/favicon/apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('build/images/favicon/apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('build/images/favicon/apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('build/images/favicon/apple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{{ asset('build/favicon/images/android-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('build/images/favicon/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('build/images/favicon/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('build/images/favicon/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('build/images/favicon/manifest.json') }}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
 </head>
 <body>
 <header>
@@ -37,7 +53,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="{{ path('dashboard_index') }}">
-                        <img src="https://i0.wp.com/gallibellum.fr/wp-content/uploads/2018/04/cropped-cropped-cropped-Logo-Fond-carré-transparent-e1523974513774.png?resize=140,50&ssl=1" alt="logo Galibelum"/>
+                        <img src="{{ asset('build/images/logo_galibelum_horizontal.png') }}" alt="logo Galibelum"/>
                     </a>
                 </div>
 
@@ -58,17 +74,17 @@
                         <li><a href="{{ path('contract_index') }}">Contractualisation</a></li>
                         {#<li><a href="#">Paiements</a></li>#}
                         {% if is_granted('ROLE_STRUCTURE') %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ma Structure <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ path('activity_index') }}">Mes Activités</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="{{ path('offer_index') }}">Mes Offres</a></li>
-                            </ul>
-                        </li>
-                            {% elseif is_granted('ROLE_COMPANY') %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ma Structure <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('activity_index') }}">Mes Activités</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ path('offer_index') }}">Mes Offres</a></li>
+                                </ul>
+                            </li>
+                        {% elseif is_granted('ROLE_COMPANY') %}
 
-                                <li><a href="{{ path('organization_edit', { 'id': app.user.organization.id }) }}">Ma Marque</a></li>
+                            <li><a href="{{ path('organization_edit', { 'id': app.user.organization.id }) }}">Ma Marque</a></li>
                         {% endif %}
                         <li><a href="{{ path('fos_user_profile_edit') }}">Mon compte</a></li>
                         <li><a href="{{ path('fos_user_security_logout') }}"><i class="fas fa-power-off"></i></a></li>
@@ -90,8 +106,8 @@
                     <div class="col-sm-2">
                         <p class="bold-text">Legal</p>
                         <ul>
-                            <li><a href="#">Conditions générales</a></li>
-                            <li><a href="#">Politique de confidentialité</a></li>
+                            <li><a href="{{ asset('uploads/cgs_galibelum.pdf') }}" target="_blank">Conditions générales de services</a></li>
+                            <li><a href="{{ asset('uploads/charte_vie_privee_galibelum.pdf') }}" target="_blank">Charte de vie privée</a></li>
                             <li><a href="#">Utilisation des cookies</a></li>
                         </ul>
                     </div>
@@ -108,11 +124,15 @@
                     <div class="col-sm-3">
                         <p class="bold-text">Navigation</p>
                         <ul>
-                            <li><a href="">Rechercher</a></li>
-                            <li><a href="">Contractualisation</a></li>
-                            <li><a href="">Paiements</a></li>
-                            <li><a href="">Ma structure</a></li>
-                            <li><a href="">Mon compte</a></li>
+                            <li><a href="{{ path('search_index') }}">Rechercher</a></li>
+                            <li><a href="{{ path('contract_index') }}">Contractualisation</a></li>
+                            {#<li><a href="">Paiements</a></li>#}
+                            {% if is_granted('ROLE_STRUCTURE') %}
+                                <li><a href="{{ path('organization_edit', { 'id': app.user.organization.id }) }}">Ma structure</a></li>
+                            {% elseif is_granted('ROLE_COMPANY') %}
+                                <li><a href="{{ path('organization_edit', { 'id': app.user.organization.id }) }}">Ma Marque</a></li>
+                            {% endif %}
+                            <li><a href="{{ path('fos_user_profile_edit') }}">Mon compte</a></li>
                         </ul>
                     </div>
                     <div class="col-sm-5 text-center center-block mb-40">
