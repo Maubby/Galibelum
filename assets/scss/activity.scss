@@ -224,6 +224,18 @@ li {
   border-radius: 4px !important;
 }
 
+.filebrowse {
+  margin-top: 15px;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  border: 1px solid gray;
+  background:  linear-gradient(to right, white, lightgray);
+  border-radius: 20px;
+  padding: 10px;
+  margin-right: 20px;
+}
+
 label[for=appbundle_activity_socialLink_0] {
   display:none
 }
