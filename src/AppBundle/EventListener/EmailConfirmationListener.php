@@ -60,7 +60,9 @@ class EmailConfirmationListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            FOSUserEvents::REGISTRATION_SUCCESS => 'onRegistrationSuccess',
+            FOSUserEvents::REGISTRATION_SUCCESS => [
+                ['onRegistrationSuccess', -10],
+            ],
         ];
     }
 
