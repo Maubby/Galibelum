@@ -225,43 +225,35 @@ class ContractController extends Controller
                 $contract->getOffer()->getActivity()
                     ->getOrganizationActivities()->getUser()->getEmail(),
                 'Validation',
-                'Nous vous informons que votre account manager dédié vient
-                    de faire passer votre dossier (Offre : {'
-                .$contract->getOffer()->getName().'}, Activité : {'
-                .$contract->getOffer()->getActivity()->getName().'},
-                    Marque : {'.$contract->getOrganization()->getName().') à la
-                    phase de validation, celle-ci a pour but de vous donner accès
-                    aux différents documents justificatifs que vous nous avez
-                    transmis et que vous avez signés, et que nous avons mis en
-                    ligne afin que vous puissiez en avoir [un aperçu via la
-                    plateforme].
-                    <br>
-                    <br>
-                    Votre account manager dédié va revenir vers vous dans les
-                    plus brefs délais afin de vous accompagner durant cette
-                    phase de validation et dans les phases ultérieures.'
+                'Félicitations, un accord avec <strong>'.$contract->getOrganization()->getName().
+                '</strong> pour votre offre <strong>'.$contract->getOffer()->getName().
+                '</strong> reliée à l\'activité '
+                .$contract->getOffer()->getActivity()->getName().' a été trouvé.
+                <br>
+                <br>
+                Vous entrez ainsi en phase de validation.
+                Vous retrouverez prochainement les contrats
+                signés et téléchargeables depuis la plateforme Galibelum.',
+                $contract->getOrganization()->getManagers()->getPhoneNumber(),
+                $contract->getOrganization()->getManagers()->getEmail()
             );
             //      Mail for the company
             $mailerUser->sendEmail(
                 $this->getUser()->getEmail(),
                 $contract->getOrganization()->getUser()->getEmail(),
                 'Validation',
-                'Nous vous informons que votre account manager dédié vient
-                    de faire passer votre dossier (Offre : {'
-                .$contract->getOffer()->getName().'}, Activité : {'
-                .$contract->getOffer()->getActivity()->getName().'},
-                    Structure : {'.$contract->getOffer()->getActivity()
-                    ->getOrganizationActivities()->getName().') à la phase de
-                        validation, celle-ci a pour but de vous donner accès aux
-                        différents documents justificatifs que vous nous avez
-                        transmis et que vous avez signés, et que nous avons mis en
-                        ligne afin que vous puissiez en avoir [un aperçu via la
-                        plateforme].
-                        <br>
-                        <br>
-                        Votre account manager dédié va revenir vers vous dans les
-                        plus brefs délais afin de vous accompagner durant cette
-                        phase de validation et dans les phases ultérieures.'
+                'Félicitations, un accord avec <strong>'.
+                $contract->getOffer()->getActivity()->getOrganizationActivities()->getName().
+                '</strong> pour l\'offre <strong>'.$contract->getOffer()->getName().
+                '</strong> reliée à l\'activité '
+                .$contract->getOffer()->getActivity()->getName().' a été trouvé.
+                <br>
+                <br>
+                Vous entrez ainsi en phase de validation.
+                Vous retrouverez prochainement les contrats
+                signés et téléchargeables depuis la plateforme Galibelum.',
+                $contract->getOrganization()->getManagers()->getPhoneNumber(),
+                $contract->getOrganization()->getManagers()->getEmail()
             );
             break;
 
@@ -271,39 +263,29 @@ class ContractController extends Controller
                 $contract->getOffer()->getActivity()
                     ->getOrganizationActivities()->getUser()->getEmail(),
                 'Paiement',
-                'Nous vous informons que votre account manager dédié vient
-                    de faire passer votre dossier (Offre : {'
-                .$contract->getOffer()->getName().'}, Activité : {'
-                .$contract->getOffer()->getActivity()->getName().'},
-                    Marque : {'.$contract->getOrganization()->getName().') à la
-                    phase de paiement, celle-ci a pour but de vous permettre
-                    d\'effectuer les différents versements selon les modalités
-                    prévus dans les différents contrats et documents attachés.
-                    <br>
-                    <br>
-                    Votre account manager dédié va revenir vers vous dans les
-                    plus brefs délais afin de vous accompagner durant cette
-                    phase de validation et dans les phases ultérieures.'
+                'Félicitations, le paiement pour l\'offre 
+                <strong>'.$contract->getOffer()->getName(). '</strong>
+                est en cours.
+                <br>
+                <br>
+                Nous vous remercions d\'avoir choisi Galibelum pour
+                réaliser votre projet.',
+                $contract->getOrganization()->getManagers()->getPhoneNumber(),
+                $contract->getOrganization()->getManagers()->getEmail()
             );
             //      Mail for the company
             $mailerUser->sendEmail(
                 $this->getUser()->getEmail(),
                 $contract->getOrganization()->getUser()->getEmail(),
                 'Payment',
-                'Nous vous informons que votre account manager dédié vient
-                    de faire passer votre dossier (Offre : {'
-                .$contract->getOffer()->getName().'}, Activité : {'
-                .$contract->getOffer()->getActivity()->getName().'},
-                    Structure : {'.$contract->getOffer()->getActivity()
-                    ->getOrganizationActivities()->getName().') à la phase
-                    de paiement, celle-ci a pour but de vous permettre de
-                    recevoir les différents versements selon les modalités
-                    prévus dans les différents contrats et documents attachés.
-                    <br>
-                    <br>
-                    Votre account manager dédié va revenir vers vous dans les
-                    plus brefs délais afin de vous accompagner durant cette
-                    phase de validation et dans les phases ultérieures.'
+                'Vous pouvez désormais effectuer le paiement pour l\'offre 
+                <strong>'.$contract->getOffer()->getName(). '</strong>.
+                <br>
+                <br>
+                Nous vous remercions d\'avoir choisi Galibelum pour
+                réaliser votre projet.',
+                $contract->getOrganization()->getManagers()->getPhoneNumber(),
+                $contract->getOrganization()->getManagers()->getEmail()
             );
             break;
         }
