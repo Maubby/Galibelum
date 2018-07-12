@@ -108,9 +108,9 @@ class ContractController extends Controller
                 $offer->getActivity()->getOrganizationActivities()
                     ->getUser()->getEmail(),
                 'Mise en relation',
-                'La marque '.$this->getUser()->getOrganization()->getName().
-                ' s\'intéresse à l\'offre '.$offer->getName().
-                ' liée à votre activité '.$offer->getActivity()->getName().'.
+                'La marque <strong>'.$this->getUser()->getOrganization()->getName().
+                '</strong> s\'intéresse à l\'offre <strong>'.$offer->getName().
+                '</strong> liée à votre activité <strong>'.$offer->getActivity()->getName().'</strong>
                 <br>
                 <br>
                 Vous venez d\'entrer dans la phase de négociation.
@@ -127,10 +127,10 @@ class ContractController extends Controller
                 $this->getParameter('mailer_user'),
                 $contract->getOrganization()->getUser()->getEmail(),
                 'Mise en Relation',
-                'Vous avez souhaité être mis en relation avec '
+                'Vous avez souhaité être mis en relation avec <strong>'
                 .$offer->getActivity()->getOrganizationActivities()->getName().
-                ' au sujet de l\'offre '.$offer->getName().' liée à l\'activité '
-                .$offer->getActivity()->getName().'.
+                '</strong> au sujet de l\'offre <strong>'.$offer->getName().'</strong> liée à l\'activité <strong>'
+                .$offer->getActivity()->getName().'</strong>
                 <br>
                 <br>
                 Vous venez d\'entrer dans la phase de négociation.
@@ -147,11 +147,11 @@ class ContractController extends Controller
                 $this->getParameter('mailer_user'),
                 $contract->getOrganization()->getManagers()->getEmail(),
                 'Mise en relation',
-                'La marque '.$this->getUser()->getOrganization()->getName().
-                ' souhaite se mettre en relation avec la strucure '
+                'La marque <strong>'.$this->getUser()->getOrganization()->getName().
+                '</strong> souhaite se mettre en relation avec la structure <strong>'
                 .$offer->getActivity()->getOrganizationActivities()->getName().
-                ' au sujet de l\'offre '.$offer->getName().' liée à l\'activité '
-                .$offer->getActivity()->getName().'.'
+                '</strong> au sujet de l\'offre <strong>'.$offer->getName().'</strong> liée à l\'activité <strong>'
+                .$offer->getActivity()->getName().'</strong>'
             );
 
             $this->addFlash(

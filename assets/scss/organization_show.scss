@@ -127,9 +127,10 @@ strong {
 
 .button-yellow {
   @include buttonize(49, 54, 99, 1);
+
 }
 
 .no-button-effect a:hover {
   text-decoration: none;
-  color: white;
+  color: rgba(255, 255, 255, 1);
 }
