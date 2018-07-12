@@ -20,10 +20,12 @@
 
 {% block body %}
     <div class="container">
-        <div class="row boxing-canvas mt-30 mb-50">
+        <div class="row boxing-canvas mt-30 mb-30">
             <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                 <i class="fas fa-briefcase text-center degradeblue" style="font-size: 50px"></i>
                 <h5 class="degradeblue text-center">Contractualisation</h5>
+                <p class="normal-subtitle-text text-center mt-20 mb-20">Le tableau ci-dessous vous permet de voir si une marque s'est liée à l'offre d'une structure.
+                <br>Un fois la mise en relation effectuée, vous pourrez suivre et gérer l'évolution de la négociation.</p>
 
                 <!-- Creating a responsive table -->
                 <div class="table-responsive">
@@ -48,15 +50,15 @@
                         <tbody>
                         {% for contract in contracts %}
                             <tr>
-                                <td>{{ contract.offer.activity.organizationActivities.name }}</td>
+                                <td class="degradeblue"><strong>{{ contract.offer.activity.organizationActivities.name }}</strong></td>
                                 <td>{{ contract.offer.activity.name }}</td>
                                 <td>{{ contract.offer.name }}</td>
                                 <td>{{ contract.offer.amount }}</td>
                                 <td>{{ contract.offer.date|date('d M Y') }}</td>
-                                <td>{{ contract.organization.name }}</td>
+                                <td class="degradered"><strong>{{ contract.organization.name }}</strong></td>
 
                                 <!-- Buttons changing contracts' status start -->
-                                <td>
+                                <td class="no-button-effect">
                                     {% if contract.status == 0 %}
                                         <a href="{{ path('contract_status', {'id': contract.id, 'status': 1}) }}"
                                            class="button button text-center">Aucun partenaire</a>
@@ -80,22 +82,22 @@
                                 <td>
                                     {% if contract.status >= 2 %}
                                         <a href="{{ path('contract_status_mail', {'id': contract.id, 'status': contract.status}) }}"
-                                           class="text-center"><i class="fas fa-envelope" style="font-size: 20px"></i></a>
+                                           class="text-center"><i class="fas fa-envelope" style="font-size: 20px; color: #999999"></i></a><br>
                                     {% endif %}
-                                <!-- Ending buttons changing contracts' status -->
+                                    <!-- Ending buttons changing contracts' status -->
 
                                     {% if contract.status is same as(2) %}
-                                        <a href="#" class="fas fa-upload" style="font-size: 20px" data-toggle="modal" data-target="#pop-up-offer"></a>
+                                        <a href="#" class="fas fa-upload" style="font-size: 20px; color: #999999" data-toggle="modal" data-target="#pop-up-offer"></a>
                                         {{ render(controller("AppBundle:Manager:upload", {'contract': contract})) }}
                                     {% endif %}
                                 </td>
-                                {% for uploadPdf in contract.uploadPdf if contract.uploadPdf is not null %}
                                 <td>
-                                    <a class="fas fa-file-pdf" style="font-size: 20px" href="{{ asset('/uploads/pdf/organization_' ~
-                                        contract.offer.activity.organizationActivities.id ~ '/activity_' ~ contract.offer.activity.id
-                                        ~ '/offer_' ~ contract.offer.id ~ '/' ~uploadPdf) }}"></a>
+                                    {% for uploadPdf in contract.uploadPdf if contract.uploadPdf is not null %}
+                                        <a class="fas fa-file-pdf degradeblue" style="font-size: 20px" href="{{ asset('/uploads/pdf/organization_' ~
+                                            contract.offer.activity.organizationActivities.id ~ '/activity_' ~ contract.offer.activity.id
+                                            ~ '/offer_' ~ contract.offer.id ~ '/' ~uploadPdf) }}"></a>
+                                    {% endfor %}
                                 </td>
-                                {% endfor %}
                             </tr>
                         {% endfor %}
                         </tbody>
