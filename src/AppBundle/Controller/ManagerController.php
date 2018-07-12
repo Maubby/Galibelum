@@ -80,8 +80,8 @@ class ManagerController extends Controller
             $this->getParameter('mailer_user'),
             $organization->getUser()->getEmail(),
             'Activation',
-            'Votre organisation vient d\'être validé par l\'un
-            de nos account manager.
+            'Votre organisation vient d\'être validéé par l\'un
+            de nos accounts managers.
             Vous pouvez dès à présent vous rendre sur le site.'
         );
 
@@ -113,9 +113,9 @@ class ManagerController extends Controller
         $mailerUser->sendEmail(
             $this->getParameter('mailer_user'),
             $organization->getUser()->getEmail(),
-            'Activation',
-            'Votre organisation vient d\'être désactiver par l\'un
-            de nos account manager.
+            'Désactivation',
+            'Votre organisation vient d\'être désactivée par l\'un
+            de nos accounts managers.
             Pour plus d\'information veuillez contacter l\'équipe Galibelum.'
         );
 
