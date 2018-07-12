@@ -20,10 +20,11 @@
 
 {% block body %}
     <div class="container">
-        <div class="row boxing-canvas mt-30 mb-50">
+        <div class="row boxing-canvas mt-30 mb-30">
             <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                 <i class="far fa-user-circle text-center degradeblue" style="font-size: 50px"></i>
                 <h5 class="degradeblue text-center">Liste des structures eSport et marques</h5>
+                <p class="normal-subtitle-text text-center mt-20 mb-20">Le tableau ci-dessous vous permet d'activer ou de désactiver un compte.</p>
                 <!-- Creating a responsive table -->
                 <div class="table-responsive">
                     <table id="table_manager" class="table table-striped text-center">
@@ -45,7 +46,13 @@
                         <tbody>
                         {% for organization in organizations %}
                             <tr>
-                                <td>{{ organization.name }}</td>
+                                {% if organization.status != null %}
+                                    <td class="degradered">
+                                    <strong>{{ organization.name }}</strong></td>
+                                {% else %}
+                                    <td class="degradeblue">
+                                   <strong>{{ organization.name }}</strong></td>
+                                {% endif %}
                                 <td>{{ organization.phoneNumber }}</td>
                                 <td>{{ organization.email }}</td>
                                 <td>

@@ -120,11 +120,11 @@ class ActivityController extends Controller
      *
      * @param Activity $activity The activity entity
      *
-     * @Route("/{id}/", methods={"GET", "POST"}, name="activity_show")
+     * @Route("/{id}", methods={"GET", "POST"}, name="activity_show")
      *
      * @return Response A Response instance
      */
-    public function showAction(Activity $activity, $contract=null)
+    public function showAction(Activity $activity)
     {
         if ($this->getUser()->hasRole('ROLE_STRUCTURE')
             && $this->getUser()->getOrganization()->getIsActive() === 1

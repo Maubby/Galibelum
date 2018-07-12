@@ -179,7 +179,6 @@ class OfferController extends Controller
                 return $this->redirectToRoute(
                     'dashboard_index', array(
                         'id' => $offer->getId())
-
                 );
             }
 

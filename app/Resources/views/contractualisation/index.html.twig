@@ -43,7 +43,6 @@
                     <!-- Table head -->
                     <thead>
                     <tr>
-                        <th>Nom de votre structure</th>
                         <th>Nom de l' activité</th>
                         <th>Nom de l'offre</th>
                         <th>Montant demandé</th>
@@ -58,13 +57,15 @@
                     <tbody>
                     {% for contract in contracts %}
                         <tr>
-                            <td>{{ contract.offer.activity.organizationActivities.name }}</td>
                             <td>{{ contract.offer.activity.name }}</td>
                             <td>{{ contract.offer.name }}</td>
                             <td>{{ contract.offer.amount }}</td>
                             <td>{{ contract.offer.date|date('d M Y') }}</td>
-                            <td>{{ contract.organization.name }}</td>
-
+                            {% if is_granted('ROLE_STRUCTURE') %}
+                                <td>{{ contract.organization.name }}</td>
+                            {% else %}
+                                <td>{{ contract.offer.activity.organizationActivities.name }}</td>
+                            {% endif %}
                             <!-- Buttons changing contracts' status start -->
                             <td>
                                 {% if contract.status == 0 %}
