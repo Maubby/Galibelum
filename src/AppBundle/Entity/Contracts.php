@@ -60,6 +60,14 @@ class Contracts
      */
     private $status;
 
+    /**
+     *
+     * @var int
+     *
+     * @ORM\Column(name="finalDeal", type="integer")
+     */
+    private $finalDeal;
+
 
     /**
      * Get id.
@@ -165,5 +173,29 @@ class Contracts
     public function getOffer()
     {
         return $this->offer;
+    }
+
+    /**
+     * Set finalDeal.
+     *
+     * @param int $finalDeal
+     *
+     * @return Contracts
+     */
+    public function setFinalDeal($finalDeal)
+    {
+        $this->finalDeal = $finalDeal;
+
+        return $this;
+    }
+
+    /**
+     * Get finalDeal.
+     *
+     * @return int
+     */
+    public function getFinalDeal()
+    {
+        return $this->finalDeal;
     }
 }

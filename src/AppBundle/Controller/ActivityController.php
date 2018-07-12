@@ -45,7 +45,13 @@ class ActivityController extends Controller
             if ($this->getUser()->getOrganization()->getOrganizationActivity()->isEmpty()) {
                 return $this->redirectToRoute('activity_new');
             }
-            $activities = $this->getUser()->getOrganization()->getOrganizationActivity();
+            $em = $this->getDoctrine()->getManager();
+            $activities = $em->getRepository('AppBundle:Activity')->findBy(
+                array(
+                    'organizationActivities' => $this->getUser()->getOrganization(),
+                    'isActive' => true
+                )
+            );
 
             return $this->render(
                 'activity/index.html.twig', array(
@@ -147,6 +153,7 @@ class ActivityController extends Controller
     ) {
         $user = $this->getUser();
         if ($user->getOrganization()->getOrganizationActivity()->contains($activity)
+            && $activity->getIsActive() === true
         ) {
             $fileName = $activity->getUploadPdf();
 
@@ -204,10 +211,21 @@ class ActivityController extends Controller
             $form = $this->_createDeleteForm($activity);
             $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid() && $activity->getActivities()->isEmpty()) {
                 $em = $this->getDoctrine()->getManager();
-                $em->remove($activity);
+                $activity->setIsActive(false);
+                $em->persist($activity);
                 $em->flush();
+
+                $this->addFlash(
+                    'success',
+                    "L'activité a bien étè supprimée."
+                );
+            } else {
+                $this->addFlash(
+                    'danger',
+                    "Vous ne pouvez pas supprimer cette activité car des offres sont liées a l'activité."
+                );
             }
             return $this->redirectToRoute('activity_index');
         }

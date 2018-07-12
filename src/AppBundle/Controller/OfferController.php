@@ -46,19 +46,22 @@ class OfferController extends Controller
             $event_activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization(),
-                    'type' => 'Évènement eSport'
+                    'type' => 'Évènement eSport',
+                    'isActive' => true
                 )
             );
             $stream_activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization(),
-                    'type' => 'Activité de streaming'
+                    'type' => 'Activité de streaming',
+                    'isActive' => true
                 )
             );
             $team_activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization(),
-                    'type' => 'Equipe eSport'
+                    'type' => 'Equipe eSport',
+                    'isActive' => true
                 )
             );
 
@@ -152,6 +155,7 @@ class OfferController extends Controller
     {
         $user = $this->getUser();
         if ($user->getOrganization()->getOrganizationActivity()->contains($offer->getActivity())
+            && $offer->getIsActive() === true
         ) {
             $partnershipNb = $offer->countPartnershipNumber();
             $offer->setPartnershipNumber($partnershipNb);
@@ -207,13 +211,13 @@ class OfferController extends Controller
 
             if ($form->isSubmitted() && $form->isValid() && $offer->getContracts()->isEmpty()) {
                 $em = $this->getDoctrine()->getManager();
-                $offer->setStatus(0);
+                $offer->setIsActive(false);
                 $em->persist($offer);
                 $em->flush();
 
                 $this->addFlash(
                     'success',
-                    "L'offre a bien étè supprimé."
+                    "L'offre a bien étè supprimée."
                 );
             } else {
                 $this->addFlash(

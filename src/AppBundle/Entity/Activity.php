@@ -61,6 +61,14 @@ class Activity
 
     /**
      *
+     * @var boolean
+     *
+     * @ORM\Column(name="isActive", type="boolean")
+     */
+    private $isActive;
+
+    /**
+     *
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=32)
@@ -207,6 +215,7 @@ class Activity
     {
         $this->activities = new ArrayCollection();
         $this->setCreationDate(new \DateTime());
+        $this->setIsActive(true);
     }
 
     // Adding personal methods
@@ -620,15 +629,51 @@ class Activity
         return $this->dateEnd;
     }
 
+    /**
+     * Get pdf activity
+     *
+     * @return mixed
+     */
     public function getUploadPdf()
     {
         return $this->uploadPdf;
     }
 
+    /**
+     * Set pdf activity
+     *
+     * @param $uploadPdf
+     *
+     * @return $this
+     */
     public function setUploadPdf($uploadPdf)
     {
         $this->uploadPdf = $uploadPdf;
 
         return $this;
+    }
+
+    /**
+     * Set isActive.
+     *
+     * @param bool $isActive
+     *
+     * @return Activity
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive.
+     *
+     * @return bool
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 }
