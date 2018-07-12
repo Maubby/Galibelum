@@ -43,7 +43,7 @@
                             <!--Activity's Type-->
                             <div class="col-sm-6 mt-20">
                                 <div class="form-group form-error">
-                                    <i class="fas fa-gamepad"></i>{{ form_label(form.type, 'Type de votre activité') }}
+                                    <i class="fas fa-gamepad"></i>{{ form_label(form.type, 'Type de votre activité *') }}
                                     {{ form_widget(form.type, {'attr': {'class': "form-control input-field activity"}}) }}
                                     {{ form_errors(form.type) }}
                                 </div>
@@ -53,7 +53,7 @@
                             <!--Activity's Name-->
                             <div class="col-sm-6 mt-20">
                                 <div class="form-group form-error">
-                                    <i class="fas fa-university"></i>{{ form_label(form.name, 'Nom de votre activité') }}
+                                    <i class="fas fa-university"></i>{{ form_label(form.name, 'Nom de votre activité *') }}
                                     {{ form_widget(form.name, {'attr': {'class': "form-control input-field",
                                         'placeholder': "Exemple : Lyon eSport"}}) }}
                                     {{ form_errors(form.name) }}
@@ -65,7 +65,7 @@
                         <!--Activity's Address-->
                         <div class="mt-20 p-0 activityAddress activityHide">
                             <div class="form-group form-error">
-                                <i class="fas fa-map-marker"></i>{{ form_label(form.address, 'Adresse de votre évènement') }}
+                                <i class="fas fa-map-marker"></i>{{ form_label(form.address, 'Adresse de votre évènement *') }}
                                 {{ form_widget(form.address, {'attr': {'class': "form-control input-field activityAddress"}}) }}
                                 {{ form_errors(form.address) }}
                             </div>
@@ -76,14 +76,14 @@
                         <div class="row">
                             <div class="col-sm-6 mt-20 activityDate activityHide">
                                 <div class="form-group form-error">
-                                    <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateStart, "Début de l'évènement eSport") }}
+                                    <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateStart, "Début de l'évènement eSport *") }}
                                     {{ form_widget(form.dateStart, {'attr': {'class': "form-control input-field activityDate"}}) }}
                                     {{ form_errors(form.dateStart) }}
                                 </div>
                             </div>
                             <div class="col-sm-6 mt-20 activityDate activityHide">
                                 <div class="form-group form-error">
-                                    <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateEnd, "Fin de l'évènement eSport") }}
+                                    <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateEnd, "Fin de l'évènement eSport *") }}
                                     {{ form_widget(form.dateEnd, {'attr': {'class': "form-control input-field activityDate"}}) }}
                                     {{ form_errors(form.dateEnd) }}
                                 </div>
@@ -95,7 +95,7 @@
                         <div class="row">
                             <div class="col-sm-12 mt-20">
                                 <div class="form-group form-error">
-                                    <i class="fas fa-link"></i>{{ form_label(form.urlVideo, 'Vidéo de présentation') }}
+                                    <i class="fas fa-link"></i>{{ form_label(form.urlVideo, 'Vidéo de présentation *') }}
                                     {{ form_widget(form.urlVideo, {'attr': {'class': "form-control input-field",'id': "user_input_autocomplete_address", 'placeholder': "Partager une vidéo de présentation de votre activité"}}) }}
                                     {{ form_errors(form.urlVideo) }}
                                 </div>
@@ -107,7 +107,7 @@
                         <!--Activity's Achievement-->
                         <div class="mt-20 p-0 activityAchievement activityHide">
                             <div class="form-group form-error">
-                                <i class="fas fa-trophy"></i>{{ form_label(form.achievement, 'Accomplissements') }}
+                                <i class="fas fa-trophy"></i>{{ form_label(form.achievement, 'Accomplissements *') }}
                                 {{ form_widget(form.achievement, {'attr': {'class': "form-control input-field activityAchievement",
                                     'placeholder': "Exemple : 1ère place aux IEM Katowice de CS:GO 2018"}}) }}
                                 {{ form_errors(form.achievement) }}
@@ -119,7 +119,7 @@
                         <div class="row">
                             <div class="mt-20">
                                 <div class="col-sm-12 form-error">
-                                    <i class="fas fa-user-friends"></i>{{ form_label(form.socialLink, 'Réseaux sociaux et chaînes de streaming') }}
+                                    <i class="fas fa-user-friends"></i>{{ form_label(form.socialLink, 'Réseaux sociaux et chaînes de streaming *') }}
                                 </div>
                                 <div class="col-sm-11">
                                     {# store the prototype on the data-prototype attribute #}
@@ -144,7 +144,7 @@
                         <!--Activity's Description-->
                         <div class="mt-20 p-0">
                             <div class="form-group form-error">
-                                <i class="fas fa-edit"></i>{{ form_label(form.description, 'Description') }}
+                                <i class="fas fa-edit"></i>{{ form_label(form.description, 'Description *') }}
                                 {{ form_widget(form.description,{'attr': {'class': "form-control input-field",
                                     'placeholder': "Décrivez votre activité aux différentes marques (255 caractères maximum)"}}) }}
                                 {{ form_errors(form.description) }}
@@ -159,6 +159,12 @@
                         </div>
                     </div>
                     {{ form_end(form) }}
+
+                    <!-- Necessary fields -->
+                    <div class="col-md-4 col-sm-12 col-xs-12 text-left mt-10">
+                        <p class="normal-subtitle-text">* Champs obligatoires</p>
+                    </div>
+                    <!-- End necessary fields -->
                 </div>
             </div>
         </section>
