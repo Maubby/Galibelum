@@ -45,12 +45,7 @@ class ActivityController extends Controller
             if ($this->getUser()->getOrganization()->getOrganizationActivity()->isEmpty()) {
                 return $this->redirectToRoute('activity_new');
             }
-            $em = $this->getDoctrine()->getManager();
-            $activities = $em->getRepository('AppBundle:Activity')->findBy(
-                array(
-                    'organizationActivities' => $this->getUser()->getOrganization()
-                )
-            );
+            $activities = $this->getUser()->getOrganization()->getOrganizationActivity();
 
             return $this->render(
                 'activity/index.html.twig', array(
@@ -108,7 +103,6 @@ class ActivityController extends Controller
                     'form' => $form->createView()
                 )
             );
-
         }
         return $this->redirectToRoute('redirect');
     }
@@ -149,7 +143,7 @@ class ActivityController extends Controller
      * @return              Response A Response instance
      */
     public function editAction(Request $request, Activity $activity,
-        FileUploaderService $fileUploaderService
+                               FileUploaderService $fileUploaderService
     ) {
         $user = $this->getUser();
         if ($user->getOrganization()->getOrganizationActivity()->contains($activity)

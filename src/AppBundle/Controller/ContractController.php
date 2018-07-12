@@ -53,7 +53,6 @@ class ContractController extends Controller
                     'organizationActivities' => $this->getUser()->getOrganization(),
                 )
             );
-
             $offers = $em->getRepository('AppBundle:Offer')->findby(
                 array(
                     'activity' => $activities,

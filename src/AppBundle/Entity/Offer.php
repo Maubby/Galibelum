@@ -176,7 +176,7 @@ class Offer
      */
     public function __construct()
     {
-        $this->setStatus(0);
+        $this->setStatus(1);
         $this->setCreationDate(new \DateTime());
     }
 

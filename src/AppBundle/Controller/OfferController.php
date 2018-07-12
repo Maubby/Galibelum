@@ -49,14 +49,12 @@ class OfferController extends Controller
                     'type' => 'Évènement eSport'
                 )
             );
-
             $stream_activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization(),
                     'type' => 'Activité de streaming'
                 )
             );
-
             $team_activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization(),
@@ -88,7 +86,7 @@ class OfferController extends Controller
      * @throws \Exception
      */
     public function newAction(Request $request, Activity $activity,
-        ManagementFeesService $feesService
+                              ManagementFeesService $feesService
     ) {
         if ($this->getUser()->hasRole('ROLE_STRUCTURE')
             && $this->getUser()->getOrganization()->getIsActive() === 1
@@ -124,7 +122,6 @@ class OfferController extends Controller
                     'success',
                     "Votre offre a bien été créée."
                 );
-
                 return $this->redirectToRoute('offer_index');
             }
 
@@ -208,10 +205,21 @@ class OfferController extends Controller
             $form = $this->_createDeleteForm($offer);
             $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid() && $offer->getContracts()->isEmpty()) {
                 $em = $this->getDoctrine()->getManager();
-                $em->remove($offer);
+                $offer->setStatus(0);
+                $em->persist($offer);
                 $em->flush();
+
+                $this->addFlash(
+                    'success',
+                    "L'offre a bien étè supprimé."
+                );
+            } else {
+                $this->addFlash(
+                    'danger',
+                    "Vous ne pouvez pas supprimer cette offre car une marque c'est déjà positionnée sur celle-ci."
+                );
             }
             return $this->redirectToRoute('offer_index');
         }
