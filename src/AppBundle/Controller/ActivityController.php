@@ -54,12 +54,12 @@ class ActivityController extends Controller
 
             return $this->render(
                 'activity/index.html.twig', array(
-                    'activities' => $activities
+                    'activities' => $activities,
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
                 )
             );
         }
         return $this->redirectToRoute('redirect');
-
     }
 
     /**
@@ -105,7 +105,9 @@ class ActivityController extends Controller
             return $this->render(
                 'activity/new.html.twig', array(
                     'activity' => $activity,
-                    'form' => $form->createView()
+                    'form' => $form->createView(),
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
+
                 )
             );
 
@@ -131,7 +133,9 @@ class ActivityController extends Controller
         ) {
             return $this->render(
                 'activity/show.html.twig', array(
-                    'activity' => $activity
+                    'activity' => $activity,
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
+
                 )
             );
         }
@@ -184,6 +188,7 @@ class ActivityController extends Controller
             return $this->render(
                 'activity/edit.html.twig', array(
                     'activity' => $activity,
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView()
                 )

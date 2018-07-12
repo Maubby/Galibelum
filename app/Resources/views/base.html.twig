@@ -95,6 +95,49 @@
     {% endblock %}
 </header>
 
+<!--Modal introducing the delete activity-->
+{% if manager is defined and manager is not null %}
+    <div class="modal fade" id="account_manager" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-notify modal-info" role="document">
+            <div class="modal-content">
+                <!--Modal's header-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fas fa-times" style="color: #ff6f73;" aria-hidden="true"></i></span>
+                    </button>
+                    <h5 class="degradered"></h5>
+                </div>
+                <!--Modal's body-->
+                <div class="modal-body">
+
+                    <div class="item">
+                        <div class="panel panel-default text-center">
+                            <div class="panel-body">
+                                <h5> Votre Account Manager Galibelum :</h5>
+                                <i class="fas fa-user-circle degradeblue manager" style="font-size: 100px"></i>
+                                <p class="bold-text-dark mt-20">{{ manager.firstName }} {{ manager.lastName }}</p>
+                                <p>{{ manager.phoneNumber }}</p>
+                                <p>{{ manager.email }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--End of modal-->
+
+    <!--Add the button for account manager Modal-->
+    <div id="fixedbutton" class="manager-box">
+        <a data-toggle="modal" data-target="#account_manager">
+            <i class="fas fa-user-circle degradered manager"></i>
+            <span class="center hidden-xs"> Votre account Manager</span>
+        </a>
+    </div>
+{% endif %}
+<!--End-->
+
 {% block body %}{% endblock %}
 
 <footer>
