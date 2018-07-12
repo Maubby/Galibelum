@@ -70,7 +70,6 @@ class OfferController extends Controller
                     'stream_activities' => $stream_activities,
                     'team_activities' => $team_activities,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
-
                 )
             );
         }
