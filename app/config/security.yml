@@ -27,6 +27,7 @@ security:
                 secret:   '%secret%'
                 lifetime: 86400 # 1 day in seconds
 
+    always_authenticate_before_granting: true
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }

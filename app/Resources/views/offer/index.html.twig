@@ -18,6 +18,16 @@
 {% endblock %}
 
 {% block body %}
+    <!-- Message flash -->
+    {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('success') %}
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <!-- End flash message -->
     <section>
         <!-- Offer list for the current activity -->
         <div class="container-fluid">
@@ -39,142 +49,150 @@
             <div class="row boxing-canvas">
                 <!-- eSport Event list -->
                 {% if event_activities is not empty %}
-                <div class="col-md-12 text-center mt-30 pt-30">
-                    <i class="fas fa-video degradeblue" style="font-size: 50px"></i>&nbsp;
-                    <h4>Evènement eSport</h4>
-                    {% for activity in event_activities %}
-                    <div class="col-md-12 col-sm-12 col-xs-12 text-center mt-20">
-                        <div class="panel panel-default">
-                            <div class="panel-heading text-center backblue">
-                                <h2 class="panel-title" style="color: white;">{{ activity.name }}</h2>
-                            </div>
-                            {% if activity.activities is empty %}
-                                <div class="panel-body">
-                                    <p class="text-center normal-subtitle-text">Vous n'avez pas encore d'offre pour cette Activité </p>
-                                    <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn-sm mt-10">Créer une offre</a>
-                                </div>
-                            {% else %}
-                                <div class="panel-body">
-                                    {% for row in activity.activities|batch(3) %}
-                                        <div class="row">
-                                            {% for offer in row %}
-                                                <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
-                                                    <div class="thumbnail text-center">
-                                                        <div class="caption">
-                                                            <h5 class="degradeblue"> {{ offer.name }}</h5>
-                                                            <p><strong>Montant :</strong> {{ offer.amount }} €</p>
-                                                            <p><strong>Date d'expiration :</strong> {% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
-                                                            <p><strong>Nombre de partenaires :</strong> {{ offer.partnershipNumber|length }}</p>
-                                                            <p><strong>Adresse :</strong> {{ offer.activity.address }}</p>
-                                                            <div>
-                                                                <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
+                    <div class="col-md-12 text-center mt-30 pt-30">
+                        <i class="fas fa-video degradeblue" style="font-size: 50px"></i>&nbsp;
+                        <h4>Evènement eSport</h4>
+                        {% for activity in event_activities %}
+                            <div class="col-md-12 col-sm-12 col-xs-12 text-center mt-20">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading text-center backblue">
+                                        <h2 class="panel-title" style="color: white;">{{ activity.name }}</h2>
+                                    </div>
+                                    {% if activity.activities is empty %}
+                                        <div class="panel-body">
+                                            <p class="text-center normal-subtitle-text">Vous n'avez pas encore d'offre pour cette activité</p>
+                                            <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn-sm mt-10">Créer une offre</a>
+                                        </div>
+                                    {% else %}
+                                        <div class="panel-body">
+                                            {% for row in activity.activities|batch(3) %}
+                                                <div class="row">
+                                                    {% for offer in row %}
+                                                        <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
+                                                            <div class="thumbnail text-center">
+                                                                <div class="caption">
+                                                                    <h5 class="degradeblue"> {{ offer.name }}</h5>
+                                                                    <p><strong>Montant :</strong> {{ offer.amount }} €</p>
+                                                                    <p><strong>Date d'expiration :</strong> {% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
+                                                                    <p><strong>Nombre de partenaires :</strong> {{ offer.partnershipNumber|length }}</p>
+                                                                    <p><strong>Adresse :</strong> {{ offer.activity.address }}</p>
+                                                                    <div>
+                                                                        <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    {% endfor %}
                                                 </div>
+                                                <p>Ajouter une offre :</p>
+                                                <a href="{{ path('offer_new', { 'id': activity.id }) }}"><i class="fas fa-plus-circle degradeblue" style="font-size: 30px"></i></a>
                                             {% endfor %}
                                         </div>
-                                    {% endfor %}
+                                    {% endif %}
                                 </div>
-                            {% endif %}
-                        </div>
+                            </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
-                </div>
                 {% endif %}
                 <!-- End eSport Event list -->
 
                 <!-- Streaming Activity list -->
                 {% if stream_activities is not empty %}
-                <div class="col-md-12 text-center mt-30 pt-30">
-                    <i class="fas fa-gamepad degradeblue" style="font-size: 50px"></i>&nbsp;
-                    <h4>Activité de streaming</h4>
-                    {% for activity in stream_activities %}
-                    <div class="col-md-12 col-sm-12 col-xs-12 text-center mt-20">
-                        <div class="panel panel-default">
-                            <div class="panel-heading text-center backblue">
-                                <h2 class="panel-title" style="color: white;">{{ activity.name }}</h2>
-                            </div>
-                            {% if activity.activities is empty %}
-                                <div class="panel-body">
-                                    <p class="text-center normal-subtitle-text">Vous n'avez pas encore d'offre pour cette Activité </p>
-                                    <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn-sm mt-10">Créer une offre</a>
-                                </div>
-                            {% else %}
-                                <div class="panel-body">
-                                    {% for row in activity.activities|batch(3) %}
-                                        <div class="row">
-                                            {% for offer in row %}
-                                                {% if offer is empty %}
-                                                    <p>Vous n'avez pas encore d'offres pour cette activité</p>
-                                                {% else %}
-                                                    <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
-                                                        <div class="thumbnail text-center">
-                                                            <div class="caption">
-                                                                <h5 class="degradeblue"> {{ offer.name }}</h5>
-                                                                <p><strong>Montant :</strong> {{ offer.amount }} €</p>
-                                                                <p><strong>Date d'expiration :</strong> {% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
-                                                                <div>
-                                                                    <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
+                    <div class="col-md-12 text-center mt-30 pt-30">
+                        <i class="fas fa-gamepad degradeblue" style="font-size: 50px"></i>&nbsp;
+                        <h4>Activité de streaming</h4>
+                        {% for activity in stream_activities %}
+                            <div class="col-md-12 col-sm-12 col-xs-12 text-center mt-20">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading text-center backblue">
+                                        <h2 class="panel-title" style="color: white;">{{ activity.name }}</h2>
+                                    </div>
+                                    {% if activity.activities is empty %}
+                                        <div class="panel-body">
+                                            <p class="text-center normal-subtitle-text">Vous n'avez pas encore d'offre pour cette activité</p>
+                                            <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn-sm mt-10">Créer une offre</a>
+                                        </div>
+                                    {% else %}
+                                        <div class="panel-body">
+                                            {% for row in activity.activities|batch(3) %}
+                                                <div class="row">
+                                                    {% for offer in row %}
+                                                        {% if offer is empty %}
+                                                            <p>Vous n'avez pas encore d'offre pour cette activité</p>
+                                                        {% else %}
+                                                            <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
+                                                                <div class="thumbnail text-center">
+                                                                    <div class="caption">
+                                                                        <h5 class="degradeblue"> {{ offer.name }}</h5>
+                                                                        <p><strong>Montant :</strong> {{ offer.amount }} €</p>
+                                                                        <p><strong>Nombre de partenaires :</strong> {{ offer.partnershipNumber|length }}</p>
+                                                                        <p><strong>Date d'expiration :</strong> {% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
+                                                                        <div>
+                                                                            <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                                <p>Ajouter une offre :</p>
+                                                <a href="{{ path('offer_new', { 'id': activity.id }) }}"><i class="fas fa-plus-circle degradeblue" style="font-size: 30px"></i></a></a>
                                             {% endfor %}
                                         </div>
-                                    {% endfor %}
+                                    {% endif %}
                                 </div>
-                            {% endif %}
-                        </div>
+                            </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
-                </div>
                 {% endif %}
                 <!-- End Streaming Activity list -->
 
                 <!-- eSport Team list -->
                 {% if team_activities is not empty %}
-                <div class="col-md-12 text-center mt-30 pt-30">
-                    <i class="fas fa-users degradeblue" style="font-size: 50px"></i>&nbsp;
-                    <h4>Equipe eSport</h4>
-                    {% for activity in team_activities %}
-                    <div class="col-md-12 col-sm-12 col-xs-12 text-center mt-20">
-                        <div class="panel panel-default">
-                            <div class="panel-heading text-center backblue">
-                                <h2 class="panel-title" style="color: white;">{{ activity.name }}</h2>
-                            </div>
-                            {% if activity.activities is empty %}
-                                <div class="panel-body">
-                                    <p class="text-center normal-subtitle-text">Vous n'avez pas encore d'offre pour cette Activité </p>
-                                    <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn-sm mt-10">Créer une offre</a>
-                                </div>
-                            {% else %}
-                                <div class="panel-body">
-                                    {% for row in activity.activities|batch(3) %}
-                                        <div class="row">
-                                            {% for offer in row %}
-                                                <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
-                                                    <div class="thumbnail text-center">
-                                                        <div class="caption">
-                                                            <h5 class="degradeblue"> {{ offer.name }}</h5>
-                                                            <p><strong>Montant : </strong> {{ offer.amount }} €</p>
-                                                            <p><strong>Date d'expiration : </strong> {% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
-                                                            <div>
-                                                                <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
+                    <div class="col-md-12 text-center mt-30 pt-30">
+                        <i class="fas fa-users degradeblue" style="font-size: 50px"></i>&nbsp;
+                        <h4>Equipe eSport</h4>
+                        {% for activity in team_activities %}
+                            <div class="col-md-12 col-sm-12 col-xs-12 text-center mt-20">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading text-center backblue">
+                                        <h2 class="panel-title" style="color: white;">{{ activity.name }}</h2>
+                                    </div>
+                                    {% if activity.activities is empty %}
+                                        <div class="panel-body">
+                                            <p class="text-center normal-subtitle-text">Vous n'avez pas encore d'offre pour cette activité</p>
+                                            <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn-sm mt-10">Créer une offre</a>
+                                        </div>
+                                    {% else %}
+                                        <div class="panel-body">
+                                            {% for row in activity.activities|batch(3) %}
+                                                <div class="row">
+                                                    {% for offer in row %}
+                                                        <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
+                                                            <div class="thumbnail text-center">
+                                                                <div class="caption">
+                                                                    <h5 class="degradeblue"> {{ offer.name }}</h5>
+                                                                    <p><strong>Montant : </strong> {{ offer.amount }} €</p>
+                                                                    <p><strong>Nombre de partenaires :</strong> {{ offer.partnershipNumber|length }}</p>
+                                                                    <p><strong>Date d'expiration : </strong> {% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
+                                                                    <div>
+                                                                        <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    {% endfor %}
                                                 </div>
+                                                <p>Ajouter une offre :</p>
+                                                <a href="{{ path('offer_new', { 'id': activity.id }) }}"><i class="fas fa-plus-circle degradeblue" style="font-size: 30px"></i></a>
                                             {% endfor %}
                                         </div>
-                                    {% endfor %}
+                                    {% endif %}
                                 </div>
-                            {% endif %}
-                        </div>
+                            </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
-                </div>
                 {% endif %}
                 <!-- End eSport Team list -->
             </div>
