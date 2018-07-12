@@ -22,6 +22,7 @@ $(document).ready(function() {
     })
 });
 
+
 $(document).ready(function() {
     $("#table-manager").DataTable({
         'searching': false,

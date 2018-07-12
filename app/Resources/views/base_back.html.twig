@@ -108,6 +108,26 @@
 
 <footer>
     {% block footer %}
+        <!-- Footer Bar with links -->
+        <div id="galibelum-footer">
+            <div class="container-fluid">
+                <div class="row pt-20 pb-20 text-center">
+                    <div class="col-sm-6">
+                        <ul>
+                            <li><a href="{{ asset('uploads/cgs_galibelum.pdf') }}" target="_blank" style="margin-right: 10px">Conditions générales</a>
+                                <a href="{{ asset('uploads/charte_vie_privee_galibelum.pdf') }}" target="_blank">Charte de vie privée</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6">
+                        <ul>
+                            <li><a href="https://galibelum.fr/web/blog/" target="_blank">www.galibelum.fr</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Footer Bar -->
     {% endblock %}
 </footer>
 <!-- JS Webpack's vendor including Bootstrap.js and JQuery.js shared entry -->

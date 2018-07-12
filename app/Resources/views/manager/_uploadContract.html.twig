@@ -1,4 +1,5 @@
 <!-- Modal introducing the redirection to the activity_index -->
+{{ form_start(form, {'action': path('contract_upload', {'contract': contract.id })}) }}
 <div class="modal fade" id="pop-up-offer" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-notify modal-info" role="document">
         <div class="modal-content">
@@ -7,29 +8,26 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"><i class="fas fa-times" style="color: #999999;" aria-hidden="true"></i></span>
                 </button>
-                {{ form_start(form, {'action': path('contract_upload', {'contract': contract.id })}) }}
+
                 <div class="col-sm-10 col-sm-offset-1">
                     <!--Activity's PDF Upload-->
                     <div class="row">
-                        <div class="col-sm-12 mt-20">
-                            <div class="form-group form-error">
-                                <i class="fas fa-upload"></i>{{ form_label(form.uploadPdf, 'Vous pouvez ajouter un PDF pour décrire votre activité') }}
-                                {{ form_widget(form.uploadPdf, {'attr': {'class': "filebrowse"} }) }}
+                        <div class="col-sm-12">
+                            <div class="form-group form-error text-center">
+                                <p class="mb-20">{{ form_label(form.uploadPdf, 'Sélectionner les contrats à ajouter au format PDF') }}</p>
+                                <p class="light-blue-subtitle-text">{{ form_widget(form.uploadPdf, {'attr': {'class': "filebrowse"} }) }}</p>
                                 {{ form_errors(form.uploadPdf) }}
                             </div>
                         </div>
                     </div>
-                    <!--End Activity's PDF Upload-->
-
-                    <div class="row mt-10">
-                        <div class="col-sm-12 text-center">
-                            <input type="submit" value="Enregistrer" class="btn btn-primary backblue-btn">
-                        </div>
-                    </div>
                 </div>
-                {{ form_end(form) }}
+            </div>
+            <!--End Activity's PDF Upload-->
+            <div class="modal-body">
+                <input type="submit" value="Enregistrer" class="btn btn-primary backblue-btn">
             </div>
         </div>
     </div>
 </div>
+{{ form_end(form) }}
 <!-- End of modal -->
