@@ -63,7 +63,7 @@ label {
   margin-left: 10px;
 }
 
-.backblue-btn {
+.backblue-btn, .backred-btn {
   max-width: 400px;
 }
 
@@ -130,5 +130,8 @@ input[type=file]::-webkit-file-upload-button {
 @media screen and (max-width: 812px) {
   .backblue-btn-activity {
     margin-left: 0;
+  }
+  h5 {
+    font-size: 19px;
   }
 }
