@@ -46,22 +46,19 @@ class OfferController extends Controller
             $event_activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization(),
-                    'type' => 'Évènement eSport',
-                    'isActive' => true
+                    'type' => 'Évènement eSport'
                 )
             );
             $stream_activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization(),
-                    'type' => 'Activité de streaming',
-                    'isActive' => true
+                    'type' => 'Activité de streaming'
                 )
             );
             $team_activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization(),
-                    'type' => 'Equipe eSport',
-                    'isActive' => true
+                    'type' => 'Equipe eSport'
                 )
             );
 

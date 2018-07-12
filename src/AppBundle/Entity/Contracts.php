@@ -64,7 +64,7 @@ class Contracts
      *
      * @var int
      *
-     * @ORM\Column(name="finalDeal", type="integer")
+     * @ORM\Column(name="finalDeal", type="integer", nullable=true)
      */
     private $finalDeal;
 
