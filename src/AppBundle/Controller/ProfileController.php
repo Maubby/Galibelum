@@ -100,7 +100,7 @@ class ProfileController extends BaseController
             $userManager = $this->get('fos_user.user_manager');
             $userManager->updateUser($this->getUser());
 
-            $url = $this->generateUrl('fos_user_profile_show');
+            $url = $this->generateUrl('redirect');
             $response = new RedirectResponse($url);
 
             $this->addFlash(
