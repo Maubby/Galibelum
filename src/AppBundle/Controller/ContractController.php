@@ -148,7 +148,7 @@ class ContractController extends Controller
                 $contract->getOrganization()->getManagers()->getEmail(),
                 'Mise en relation',
                 'La marque <strong>'.$this->getUser()->getOrganization()->getName().
-                '</strong> souhaite se mettre en relation avec la strucure <strong>'
+                '</strong> souhaite se mettre en relation avec la structure <strong>'
                 .$offer->getActivity()->getOrganizationActivities()->getName().
                 '</strong> au sujet de l\'offre <strong>'.$offer->getName().'</strong> liée à l\'activité <strong>'
                 .$offer->getActivity()->getName().'</strong>'
