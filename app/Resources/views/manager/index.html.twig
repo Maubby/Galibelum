@@ -79,7 +79,7 @@
                                 <!-- End displaying organizations' status -->
 
                                 <!-- Activate / disable buttons start -->
-                                <td>
+                                <td class="no-button-effect">
                                     {% if organization.isActive == 1 %}
                                         <a href="{{ path('manager_organization_disable', { 'id': organization.id }) }}"
                                            class="button button-red btn-organization text-center">Désactiver

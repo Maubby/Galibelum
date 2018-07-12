@@ -118,11 +118,12 @@ li {
 }
 
 input[type=file]::-webkit-file-upload-button {
-  border: 1px solid gray;
-  background: linear-gradient(to right, white, lightgray);
-  border-radius: 20px;
-  padding: 5px;
-  margin-right: 20px;
+  border: 1px solid #FFFFFF;
+  background: linear-gradient(to right, #86ccc2 , #137faf);
+  padding:  5px 20px 5px 20px;
+  border-radius: 4px;
+  color: white;
+
 }
 
 /* Media Queries */

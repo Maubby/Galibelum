@@ -150,11 +150,12 @@
 }
 
 input[type=file]::-webkit-file-upload-button {
-  border: 1px solid gray;
-  background-image: linear-gradient(to left, lightgray, white);
-  border-radius: 20px;
-  padding: 5px;
-  margin-right: 20px;
+  border: 1px solid #FFFFFF;
+  background: linear-gradient(to right, #86ccc2 , #137faf);
+  padding:  5px 20px 5px 20px;
+  border-radius: 4px;
+  color: white;
+
 }
 
 // Footer
@@ -193,10 +194,6 @@ input[type=file]::-webkit-file-upload-button {
     width: 250px;
   }
 
-  #wrapper.toggled #sidebar-wrapper {
-    width: 0;
-  }
-
   #page-content-wrapper {
     padding-top: 25px;
   }
@@ -229,10 +226,6 @@ input[type=file]::-webkit-file-upload-button {
     width: 250px;
   }
 
-  #wrapper.toggled #sidebar-wrapper {
-    width: 0;
-  }
-
   #page-content-wrapper {
     padding-top: 25px;
     width: calc(100% - 250px);
@@ -243,4 +236,26 @@ input[type=file]::-webkit-file-upload-button {
     position: relative;
     margin-right: 0;
   }
+}
+
+input {
+  width: 140px;
+  padding: 7px 16px 7px;
+  margin: 8px 0;
+  border: none;
+  background: rgba(245, 248, 250, 0.79);
+  color: #999999;
+  border-radius: 4px;
+}
+
+label {
+  margin-top: 20px;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  border: 1px solid #FFFFFF;
+  background: linear-gradient(to right, #86ccc2 , #137faf);
+  padding:  5px 20px 5px 20px;
+  border-radius: 4px;
+  color: white;
 }
