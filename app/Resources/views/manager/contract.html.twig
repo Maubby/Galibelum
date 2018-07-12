@@ -58,7 +58,7 @@
                                 <td class="degradered"><strong>{{ contract.organization.name }}</strong></td>
 
                                 <!-- Buttons changing contracts' status start -->
-                                <td class="toto">
+                                <td class="no-button-effect">
                                     {% if contract.status == 0 %}
                                         <a href="{{ path('contract_status', {'id': contract.id, 'status': 1}) }}"
                                            class="button button text-center">Aucun partenaire</a>
