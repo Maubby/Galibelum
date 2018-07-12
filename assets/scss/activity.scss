@@ -111,6 +111,20 @@ li {
   }
 }
 
+/* Stylizing PDF button */
+
+.filebrowse {
+  margin-top: 15px;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  border: 1px solid gray;
+  background: linear-gradient(to right, white, lightgray);
+  border-radius: 20px;
+  padding: 5px;
+  margin-right: 20px;
+}
+
 /* Media Queries */
 
 @media screen and (max-width: 812px) {
