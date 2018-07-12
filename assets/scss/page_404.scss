@@ -1,28 +1,26 @@
 @import "_variables";
 
 .logo-galibelum {
-  width: 70%;
-  margin-top: 160px;
-  margin-left: 230px;
+  max-width: 100%;
 }
 
-.first-four {
-  padding-left: 530px;
-  margin-top: 120px;
-  color: #2375b5;
-  font-size: 290px;
+@media screen and (max-width: 500px) {
+  .logo-galibelum {
+    max-width: 100%;
+    margin-top: 40%;
+  }
 }
 
-.second-four {
-  color: #38c4cb;
-  font-size: 290px;
-  margin-top: 120px;
-  margin-right: 300px;
+@media screen and (max-width: 800px) {
+  .logo-galibelum {
+    max-width: 100%;
+    margin-top: 50%;
+  }
 }
 
-.phrase {
-  color: #999999;
-  font-size: 60px;
-  font-weight: bold;
-  margin-top: 80px;
+@media screen and (max-width: 1050px) {
+  .logo-galibelum {
+    max-width: 100%;
+    margin-top: 50%;
+  }
 }

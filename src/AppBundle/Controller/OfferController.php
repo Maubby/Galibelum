@@ -125,11 +125,7 @@ class OfferController extends Controller
                     "Votre offre a bien été créée."
                 );
 
-                return $this->redirectToRoute(
-                    'offer_edit', array(
-                        'id' => $offer->getId()
-                    )
-                );
+                return $this->redirectToRoute('offer_index');
             }
 
             return $this->render(

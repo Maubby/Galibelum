@@ -18,6 +18,16 @@
 {% endblock %}
 
 {% block body %}
+    <!-- Message flash -->
+    {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('success') %}
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <!-- End flash message -->
     <section>
         <!-- Offer list for the current activity -->
         <div class="container-fluid">
@@ -50,7 +60,7 @@
                                     </div>
                                     {% if activity.activities is empty %}
                                         <div class="panel-body">
-                                            <p class="text-center normal-subtitle-text">Vous n'avez pas encore d'offre pour cette Activité </p>
+                                            <p class="text-center normal-subtitle-text">Vous n'avez pas encore d'offre pour cette activité</p>
                                             <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn-sm mt-10">Créer une offre</a>
                                         </div>
                                     {% else %}
@@ -105,7 +115,7 @@
                                     </div>
                                     {% if activity.activities is empty %}
                                         <div class="panel-body">
-                                            <p class="text-center normal-subtitle-text">Vous n'avez pas encore d'offre pour cette Activité </p>
+                                            <p class="text-center normal-subtitle-text">Vous n'avez pas encore d'offre pour cette activité</p>
                                             <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn-sm mt-10">Créer une offre</a>
                                         </div>
                                     {% else %}
@@ -114,7 +124,7 @@
                                                 <div class="row">
                                                     {% for offer in row %}
                                                         {% if offer is empty %}
-                                                            <p>Vous n'avez pas encore d'offres pour cette activité</p>
+                                                            <p>Vous n'avez pas encore d'offre pour cette activité</p>
                                                         {% else %}
                                                             <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
                                                                 <div class="thumbnail text-center">
@@ -163,7 +173,7 @@
                                     </div>
                                     {% if activity.activities is empty %}
                                         <div class="panel-body">
-                                            <p class="text-center normal-subtitle-text">Vous n'avez pas encore d'offre pour cette Activité </p>
+                                            <p class="text-center normal-subtitle-text">Vous n'avez pas encore d'offre pour cette activité</p>
                                             <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn-sm mt-10">Créer une offre</a>
                                         </div>
                                     {% else %}
