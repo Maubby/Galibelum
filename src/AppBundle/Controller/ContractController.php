@@ -163,7 +163,9 @@ class ContractController extends Controller
 
             return $this->render(
                 'activity/show.html.twig', array(
-                    'activity' => $offer->getActivity()
+                    'activity' => $offer->getActivity(),
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
+
                 )
             );
         }
