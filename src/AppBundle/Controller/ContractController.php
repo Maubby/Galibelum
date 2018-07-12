@@ -48,6 +48,7 @@ class ContractController extends Controller
                 )
             );
         } else {
+
             $activities = $em->getRepository('AppBundle:Activity')->findby(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization(),
@@ -69,6 +70,7 @@ class ContractController extends Controller
         return $this->render(
             'contractualisation/index.html.twig', array(
                 'contracts' => $contracts,
+                'manager' => $this->getUser()->getOrganization()->getManagers(),
             )
         );
     }
