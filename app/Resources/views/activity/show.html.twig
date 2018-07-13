@@ -45,7 +45,7 @@
                 <div class="boxing-canvas">
                     <h5 class="text-center degradeblue mb-30">{{ activity.name }} - {{ activity.type }}</h5>
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe id="myIframe" src=""></iframe>
+                        <iframe id="myIframe" src="{{ embedLink }}"></iframe>
                     </div>
                     <p class="boxing-text description-text pb-20">{{ activity.description }}</p>
 
@@ -183,13 +183,5 @@
 {% endblock %}
 
 {% block javascripts %}
-
-    <script>
-        let url ="{{ activity.urlVideo }}";
-        let id = new URL(url).search.substr(3);
-        let embedlink = "https://www.youtube.com/embed/" + id;
-
-        document.getElementById("myIframe").src = embedlink;
-    </script>
-
+    {{ parent() }}
 {% endblock %}
