@@ -154,6 +154,9 @@ class ActivityController extends Controller
         $user = $this->getUser();
         if ($user->getOrganization()->getOrganizationActivity()->contains($activity)
         ) {
+            if (in_array(null, $activity->getSocialLink())) {
+                $activity->setSocialLink(array_filter($activity->getSocialLink()));
+            }
             $fileName = $activity->getUploadPdf();
 
             $deleteForm = $this->_createDeleteForm($activity);
