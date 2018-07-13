@@ -80,9 +80,10 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    {% if contract.status >= 2 %}
+                                    {% if contract.status == 2 or contract.status == 3 %}
                                         <a href="{{ path('contract_status_mail', {'id': contract.id, 'status': contract.status}) }}"
-                                           class="text-center"><i class="fas fa-envelope" style="font-size: 20px; color: #999999"></i></a><br>
+                                           class="text-center"><i class="fas fa-envelope" style="font-size: 20px; color: #999999"></i>
+                                        </a><br>
                                     {% endif %}
                                     <!-- Ending buttons changing contracts' status -->
 

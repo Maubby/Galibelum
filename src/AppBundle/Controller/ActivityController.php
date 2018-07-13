@@ -42,7 +42,8 @@ class ActivityController extends Controller
         if ($this->getUser()->hasRole('ROLE_STRUCTURE')
             && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
-            if ($this->getUser()->getOrganization()->getOrganizationActivity()->isEmpty()) {
+            if ($this->getUser()->getOrganization()->getOrganizationActivity()->isEmpty()
+            ) {
                 return $this->redirectToRoute('activity_new');
             }
             $em = $this->getDoctrine()->getManager();
@@ -88,15 +89,21 @@ class ActivityController extends Controller
                     ->setOrganizationActivities($organization)
                     ->setNameCanonical($activity->getName());
 
-                $this->addFlash(
-                    'pdf',
-                    "Vous pouvez ajouter un PDF pour décrire votre activité"
-                );
                 $em->persist($activity);
                 $em->flush();
 
+                $this->addFlash(
+                    'pdf',
+                    "Vous pouvez désormais télécharger un 
+                    PDF lorsque vous<a href=\"".
+                    $this->generateUrl(
+                        'activity_edit', array('id' => $activity
+                            ->getId())
+                    )."\"> modifiez votre activité</a>."
+                );
+
                 return $this->redirectToRoute(
-                    'activity_edit', array(
+                    'dashboard_index', array(
                         'id' => $activity->getId()
                     )
                 );
@@ -107,7 +114,6 @@ class ActivityController extends Controller
                     'activity' => $activity,
                     'form' => $form->createView(),
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
-
                 )
             );
 
@@ -131,11 +137,36 @@ class ActivityController extends Controller
             || $this->getUser()->hasRole('ROLE_COMPANY')
             && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
+            $parseUrl = parse_url($activity->getUrlVideo());
+
+            $embedUrl = [
+                'www.youtube.com' => '//www.youtube.com/embed/',
+                'www.dailymotion.com' => '//www.dailymotion.com/embed/',
+                'www.twitch.tv' => '//player.twitch.tv/?video=v',
+                'vimeo.com' => '//player.vimeo.com/video/'
+            ];
+
+            if (array_key_exists($parseUrl['host'], $embedUrl)) {
+                if ($parseUrl['host'] === 'www.youtube.com') {
+                    $path = str_replace('v=', '', $parseUrl['query']);
+                }elseif ($parseUrl['host'] === 'vimeo.com') {
+                    $path = str_replace('/channels/staffpicks/', '', $parseUrl['path']);
+                }elseif ($parseUrl['host'] === 'www.twitch.tv') {
+                    $path = str_replace('/videos/', '', $parseUrl['path']);
+                } else {
+                    $path = $parseUrl['path'];
+                }
+                $embedLink =  $embedUrl[$parseUrl['host']] . $path;
+            }
+            if (!isset($embedLink)) {
+                $embedLink = null;
+            }
+
             return $this->render(
                 'activity/show.html.twig', array(
                     'activity' => $activity,
+                    'embedLink' => $embedLink,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
-
                 )
             );
         }

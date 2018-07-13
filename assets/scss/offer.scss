@@ -72,6 +72,13 @@ th {
   padding-left: 0;
 }
 
+/* Modal */
+
+.modal-body {
+  height: 80px;
+  padding: 25px 15px 15px 15px;
+}
+
 /* Media Queries */
 
 @media screen and (max-width: 1366px) {
