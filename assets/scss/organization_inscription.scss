@@ -2,7 +2,7 @@
 
 #organization {
   .boxing-canvas {
-    max-width: 1200px;
+    max-width: 1100px;
     height: 770px;
     padding: 30px;
     border-radius: 4px;
@@ -21,7 +21,7 @@
 
   .boxing-canvas {
     max-width: 1100px;
-    height: 650px;
+    height: 680px;
     padding: 30px;
     border-radius: 4px;
     border: 1px solid $border-color;
@@ -52,7 +52,7 @@
   }
   #organization {
     .boxing-canvas {
-      height: 1090px;
+      height: 1030px;
     }
   }
 }
@@ -65,7 +65,7 @@
   }
   #organization {
     .boxing-canvas {
-      height: 1250px;
+      height: 1150px;
     }
   }
 }
@@ -73,12 +73,12 @@
 @media screen and (max-width: 360px) {
   #company {
     .boxing-canvas {
-      height: 1190px;
+      height: 1160px;
     }
   }
   #organization {
     .boxing-canvas {
-      height: 1330px;
+      height: 1290px;
     }
   }
 }
