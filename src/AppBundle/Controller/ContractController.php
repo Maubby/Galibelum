@@ -107,10 +107,11 @@ class ContractController extends Controller
                 $this->getParameter('mailer_user'),
                 $offer->getActivity()->getOrganizationActivities()
                     ->getUser()->getEmail(),
-                'Mise en relation',
+                'Galibelum - Mise en relation',
                 'La marque <strong>'.$this->getUser()->getOrganization()->getName().
                 '</strong> s\'intéresse à l\'offre <strong>'.$offer->getName().
-                '</strong> liée à votre activité <strong>'.$offer->getActivity()->getName().'</strong>
+                '</strong> liée à votre activité 
+                <strong>'.$offer->getActivity()->getName().'</strong>.
                 <br>
                 <br>
                 Vous venez d\'entrer dans la phase de négociation.
@@ -120,17 +121,18 @@ class ContractController extends Controller
                 <br>
                 Votre account manager reviendra vers vous dans
                 les meilleurs délais afin de vous accompagner 
-                durant cette phase de négociation puis dans les phases suivantes.'
+                durant cette phase de négociation puis dans les étapes suivantes.'
             );
 
             $mailerUser->sendEmail(
                 $this->getParameter('mailer_user'),
                 $contract->getOrganization()->getUser()->getEmail(),
-                'Mise en Relation',
+                'Galibelum - Mise en Relation',
                 'Vous avez souhaité être mis en relation avec <strong>'
                 .$offer->getActivity()->getOrganizationActivities()->getName().
-                '</strong> au sujet de l\'offre <strong>'.$offer->getName().'</strong> liée à l\'activité <strong>'
-                .$offer->getActivity()->getName().'</strong>
+                '</strong> au sujet de l\'offre <strong>'.$offer->getName().
+                '</strong> liée à l\'activité <strong>'
+                .$offer->getActivity()->getName().'</strong>.
                 <br>
                 <br>
                 Vous venez d\'entrer dans la phase de négociation.
@@ -140,18 +142,19 @@ class ContractController extends Controller
                 <br>
                 Votre account manager reviendra vers vous dans les
                 meilleurs délais afin de vous accompagner 
-                durant cette phase de négociation puis dans les phases suivantes.'
+                durant cette phase de négociation puis dans les étapes suivantes.'
             );
 
             $mailerUser->sendEmail(
                 $this->getParameter('mailer_user'),
                 $contract->getOrganization()->getManagers()->getEmail(),
-                'Mise en relation',
+                'Galibelum - Mise en relation',
                 'La marque <strong>'.$this->getUser()->getOrganization()->getName().
                 '</strong> souhaite se mettre en relation avec la structure <strong>'
                 .$offer->getActivity()->getOrganizationActivities()->getName().
-                '</strong> au sujet de l\'offre <strong>'.$offer->getName().'</strong> liée à l\'activité <strong>'
-                .$offer->getActivity()->getName().'</strong>'
+                '</strong> au sujet de l\'offre 
+                <strong>'.$offer->getName().'</strong> liée à l\'activité <strong>'
+                .$offer->getActivity()->getName().'</strong>.'
             );
 
             $this->addFlash(
@@ -228,11 +231,14 @@ class ContractController extends Controller
                 $this->getUser()->getEmail(),
                 $contract->getOffer()->getActivity()
                     ->getOrganizationActivities()->getUser()->getEmail(),
-                'Validation',
-                'Félicitations, un accord avec <strong>'.$contract->getOrganization()->getName().
-                '</strong> pour votre offre <strong>'.$contract->getOffer()->getName().
-                '</strong> reliée à l\'activité '
-                .$contract->getOffer()->getActivity()->getName().' a été trouvé.
+                'Galibelum - Validation',
+                'Félicitations, un accord avec 
+                <strong>'.$contract->getOrganization()->getName().
+                '</strong> pour votre offre <strong>'
+                .$contract->getOffer()->getName().
+                '</strong> reliée à l\'activité <strong>'
+                .$contract->getOffer()->getActivity()->getName().
+                '</strong> a été trouvé.
                 <br>
                 <br>
                 Vous entrez ainsi en phase de validation.
@@ -241,16 +247,20 @@ class ContractController extends Controller
                 $contract->getOrganization()->getManagers()->getPhoneNumber(),
                 $contract->getOrganization()->getManagers()->getEmail()
             );
-            //      Mail for the company
+
             $mailerUser->sendEmail(
                 $this->getUser()->getEmail(),
                 $contract->getOrganization()->getUser()->getEmail(),
-                'Validation',
+                'Galibelum - Validation',
                 'Félicitations, un accord avec <strong>'.
-                $contract->getOffer()->getActivity()->getOrganizationActivities()->getName().
+                $contract->getOffer()
+                    ->getActivity()
+                    ->getOrganizationActivities()
+                    ->getName().
                 '</strong> pour l\'offre <strong>'.$contract->getOffer()->getName().
-                '</strong> reliée à l\'activité '
-                .$contract->getOffer()->getActivity()->getName().' a été trouvé.
+                '</strong> reliée à l\'activité <strong>'
+                .$contract->getOffer()->getActivity()->getName().
+                '</strong> a été trouvé.
                 <br>
                 <br>
                 Vous entrez ainsi en phase de validation.
@@ -266,7 +276,7 @@ class ContractController extends Controller
                 $this->getUser()->getEmail(),
                 $contract->getOffer()->getActivity()
                     ->getOrganizationActivities()->getUser()->getEmail(),
-                'Paiement',
+                'Galibelum - Paiement',
                 'Félicitations, le paiement pour l\'offre 
                 <strong>'.$contract->getOffer()->getName(). '</strong>
                 est en cours.
@@ -281,7 +291,7 @@ class ContractController extends Controller
             $mailerUser->sendEmail(
                 $this->getUser()->getEmail(),
                 $contract->getOrganization()->getUser()->getEmail(),
-                'Payment',
+                'Galibelum - Paiement',
                 'Vous pouvez désormais effectuer le paiement pour l\'offre 
                 <strong>'.$contract->getOffer()->getName(). '</strong>.
                 <br>

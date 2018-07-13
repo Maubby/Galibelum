@@ -107,7 +107,6 @@ class ActivityController extends Controller
                     'activity' => $activity,
                     'form' => $form->createView(),
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
-
                 )
             );
 
@@ -135,7 +134,6 @@ class ActivityController extends Controller
                 'activity/show.html.twig', array(
                     'activity' => $activity,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
-
                 )
             );
         }

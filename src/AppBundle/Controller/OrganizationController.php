@@ -219,7 +219,7 @@ class OrganizationController extends Controller
             $this->addFlash(
                 'success',
                 "Votre compte a bien été désactivé. 
-            Si vous souhaitez nous rejoindre à nouveau, contactez Galibelum."
+            Si vous souhaitez nous rejoindre de nouveau, contactez Galibelum."
             );
             $this->redirectToRoute('fos_user_security_login');
         }
