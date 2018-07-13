@@ -94,12 +94,12 @@ class ActivityController extends Controller
 
                 $this->addFlash(
                     'pdf',
-                    "Dès à présent vous pouvez télécharger un 
-                    PDF en vous rendant sur la<a href=\"".
+                    "Vous pouvez désormais télécharger un 
+                    PDF lorsque vous<a href=\"".
                     $this->generateUrl(
                         'activity_edit', array('id' => $activity
                             ->getId())
-                    )."\"> modification de votre activité</a>"
+                    )."\"> modifiez votre activité</a>."
                 );
 
                 return $this->redirectToRoute(

@@ -155,7 +155,6 @@ input[type=file]::-webkit-file-upload-button {
   padding:  5px 20px 5px 20px;
   border-radius: 4px;
   color: white;
-
 }
 
 // Footer
@@ -164,7 +163,6 @@ input[type=file]::-webkit-file-upload-button {
 }
 
 // Changing size for smaller screens
-
 
 @media (min-width: 320px) and (max-width: 1199px) {
   #galibelum-footer {
@@ -202,6 +200,10 @@ input[type=file]::-webkit-file-upload-button {
     position: relative;
     margin-right: 0;
   }
+
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -236,9 +238,12 @@ input[type=file]::-webkit-file-upload-button {
     position: relative;
     margin-right: 0;
   }
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
 }
 
-input {
+.dataTables_filter input {
   width: 140px;
   padding: 7px 16px 7px;
   margin: 8px 0;
@@ -248,8 +253,16 @@ input {
   border-radius: 4px;
 }
 
-label {
+.dataTables_filter label {
   margin-top: 20px;
+}
+.dataTables_info {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.dataTables_paginate {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 input[type=file]::-webkit-file-upload-button {
