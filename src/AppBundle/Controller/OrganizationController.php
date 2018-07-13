@@ -66,7 +66,8 @@ class OrganizationController extends Controller
                 'dashboard/index.html.twig', array(
                     'organization' => $organization,
                     'activities' => $activities,
-                    'offers' => $offers
+                    'offers' => $offers,
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
                 )
             );
         }
@@ -181,6 +182,7 @@ class OrganizationController extends Controller
             return $this->render(
                 'organization/edit.html.twig', array(
                     'organization' => $organization,
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView()
                 )

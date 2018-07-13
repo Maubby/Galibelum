@@ -44,6 +44,7 @@ class SearchController extends Controller
             $session = $request->getSession();
             return $this->render(
                 'search/index.html.twig', array(
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
                     'name' => $session->get('name'),
                     'date' => $session->get('date'),
                     'type' => $session->get('type'),
@@ -105,6 +106,7 @@ class SearchController extends Controller
 
             return $this->render(
                 'search/index.html.twig', array(
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
                     'activitylist' => $activityList,
                     'date' => $session->get('date'),
                     'name' => $session->get('name'),
