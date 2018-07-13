@@ -157,13 +157,15 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true"><i class="fas fa-times" style="color: #ff6f73;" aria-hidden="true"></i></span>
                                     </button>
-                                    <h6><i class="fas fa-exclamation-triangle degradered"></i>  Êtes-vous sûr de vouloir supprimer cette offre ?</h6>
+                                    <p class="normal-subtitle-text text-center"><i class="fas fa-exclamation-triangle degradered"></i> Êtes-vous sûr de vouloir supprimer votre offre ?</p>
                                 </div>
                                 <!--Modal's body-->
                                 <div class="modal-body">
+                                    <div class="text-center">
                                         {{ form_start(delete_form) }}
-                                        <input type="submit" value="Supprimer" class="btn btn-danger backred-btn">
+                                        <input type="submit" value="Supprimer" class="text-center btn btn-danger backred-btn-sm">
                                         {{ form_end(delete_form) }}
+                                    </div>
                                 </div>
                             </div>
                         </div>

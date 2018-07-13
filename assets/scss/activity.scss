@@ -132,14 +132,9 @@ input[type=file]::-webkit-file-upload-button {
 
 /* Modal */
 
-.delete-backred-btn {
-  width: 100%;
-  background-image: linear-gradient(to right, #fad27b, #f9867d);
-  border-color: #FFFFFF;
-}
-
 .modal-body {
   height: 80px;
+  padding: 25px 15px 15px 15px;
 }
 
 /* Media queries */
