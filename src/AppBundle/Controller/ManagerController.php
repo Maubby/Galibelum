@@ -177,6 +177,8 @@ class ManagerController extends Controller
 
         // Var for the file name
         if ($form->isSubmitted() && $form->isValid()) {
+            $filePdf = [];
+
             foreach ($request->files->get(
                 "appbundle_contract"
             )['uploadPdf'] as $file
@@ -186,7 +188,7 @@ class ManagerController extends Controller
                 $organization = $activity->getOrganizationActivities();
 
                 // Check if the file exist and set the new or old value
-                $filePdf = $fileUploaderService->upload(
+                $filePdf[] = $fileUploaderService->upload(
                     $file, $organization->getId(),
                     $activity->getId(), $offer->getId()
                 );
