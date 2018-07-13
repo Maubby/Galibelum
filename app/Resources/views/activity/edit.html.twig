@@ -18,17 +18,6 @@
 {% endblock %}
 
 {% block body %}
-    <!--Adding Flashbag-->
-    {% if app.session.flashBag.has('pdf') %}
-        <div class="alert alert-info">
-            {% for msg in app.session.flashBag.get('pdf') %}
-                {{ msg }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            {% endfor %}
-        </div>
-    {% endif %}
-    <!--End Flashbag-->
-
     <main id="activity" class="light-blue-subtitle-text">
         <section>
             <div class="container-fluid">

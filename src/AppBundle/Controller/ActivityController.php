@@ -42,7 +42,8 @@ class ActivityController extends Controller
         if ($this->getUser()->hasRole('ROLE_STRUCTURE')
             && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
-            if ($this->getUser()->getOrganization()->getOrganizationActivity()->isEmpty()) {
+            if ($this->getUser()->getOrganization()->getOrganizationActivity()->isEmpty()
+            ) {
                 return $this->redirectToRoute('activity_new');
             }
             $em = $this->getDoctrine()->getManager();
@@ -88,15 +89,21 @@ class ActivityController extends Controller
                     ->setOrganizationActivities($organization)
                     ->setNameCanonical($activity->getName());
 
-                $this->addFlash(
-                    'pdf',
-                    "Vous pouvez ajouter un PDF pour décrire votre activité"
-                );
                 $em->persist($activity);
                 $em->flush();
 
+                $this->addFlash(
+                    'pdf',
+                    "Vous pouvez désormais télécharger un 
+                    PDF lorsque vous<a href=\"".
+                    $this->generateUrl(
+                        'activity_edit', array('id' => $activity
+                            ->getId())
+                    )."\"> modifiez votre activité</a>."
+                );
+
                 return $this->redirectToRoute(
-                    'activity_edit', array(
+                    'dashboard_index', array(
                         'id' => $activity->getId()
                     )
                 );
