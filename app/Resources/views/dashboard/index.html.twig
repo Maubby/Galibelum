@@ -28,6 +28,16 @@
         </div>
     {% endif %}
     <!-- End flash message -->
+    <!--Adding Flashbag edit activity-->
+    {% if app.session.flashBag.has('pdf') %}
+        <div class="alert alert-info">
+            {% for msg in app.session.flashBag.get('pdf') %}
+                <div class="flash-notice alert alert-pdf"><i class="fa fa-check"></i> {{ msg|raw }}</div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <!--End Flashbag-->
     <!-- Start show information to organization, activities and offers -->
     <div class="container pb-60">
         <div class="boxing-title mt-60 mb-40">
