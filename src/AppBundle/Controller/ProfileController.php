@@ -49,7 +49,7 @@ class ProfileController extends BaseController
             || !$this->getUser() instanceof UserInterface
         ) {
             throw new AccessDeniedException(
-                'This user does not have access to this section.'
+                'Vous n\'avez pas accès à cette page.'
             );
         }
 
