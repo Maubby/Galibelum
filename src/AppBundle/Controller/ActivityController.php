@@ -99,7 +99,7 @@ class ActivityController extends Controller
                     $this->generateUrl(
                         'activity_edit', array('id' => $activity
                             ->getId())
-                    )."\">modification de votre activité</a>"
+                    )."\"> modification de votre activité</a>"
                 );
 
                 return $this->redirectToRoute(
