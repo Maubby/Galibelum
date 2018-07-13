@@ -110,7 +110,8 @@ class ContractController extends Controller
                 'Galibelum - Mise en relation',
                 'La marque <strong>'.$this->getUser()->getOrganization()->getName().
                 '</strong> s\'intéresse à l\'offre <strong>'.$offer->getName().
-                '</strong> liée à votre activité <strong>'.$offer->getActivity()->getName().'</strong>.
+                '</strong> liée à votre activité 
+                <strong>'.$offer->getActivity()->getName().'</strong>.
                 <br>
                 <br>
                 Vous venez d\'entrer dans la phase de négociation.
@@ -129,7 +130,8 @@ class ContractController extends Controller
                 'Galibelum - Mise en Relation',
                 'Vous avez souhaité être mis en relation avec <strong>'
                 .$offer->getActivity()->getOrganizationActivities()->getName().
-                '</strong> au sujet de l\'offre <strong>'.$offer->getName().'</strong> liée à l\'activité <strong>'
+                '</strong> au sujet de l\'offre <strong>'.$offer->getName().
+                '</strong> liée à l\'activité <strong>'
                 .$offer->getActivity()->getName().'</strong>.
                 <br>
                 <br>
@@ -150,7 +152,8 @@ class ContractController extends Controller
                 'La marque <strong>'.$this->getUser()->getOrganization()->getName().
                 '</strong> souhaite se mettre en relation avec la structure <strong>'
                 .$offer->getActivity()->getOrganizationActivities()->getName().
-                '</strong> au sujet de l\'offre <strong>'.$offer->getName().'</strong> liée à l\'activité <strong>'
+                '</strong> au sujet de l\'offre 
+                <strong>'.$offer->getName().'</strong> liée à l\'activité <strong>'
                 .$offer->getActivity()->getName().'</strong>.'
             );
 
@@ -229,10 +232,13 @@ class ContractController extends Controller
                 $contract->getOffer()->getActivity()
                     ->getOrganizationActivities()->getUser()->getEmail(),
                 'Galibelum - Validation',
-                'Félicitations, un accord avec <strong>'.$contract->getOrganization()->getName().
-                '</strong> pour votre offre <strong>'.$contract->getOffer()->getName().
+                'Félicitations, un accord avec 
+                <strong>'.$contract->getOrganization()->getName().
+                '</strong> pour votre offre <strong>'
+                .$contract->getOffer()->getName().
                 '</strong> reliée à l\'activité <strong>'
-                .$contract->getOffer()->getActivity()->getName().'</strong> a été trouvé.
+                .$contract->getOffer()->getActivity()->getName().
+                '</strong> a été trouvé.
                 <br>
                 <br>
                 Vous entrez ainsi en phase de validation.
@@ -247,10 +253,14 @@ class ContractController extends Controller
                 $contract->getOrganization()->getUser()->getEmail(),
                 'Galibelum - Validation',
                 'Félicitations, un accord avec <strong>'.
-                $contract->getOffer()->getActivity()->getOrganizationActivities()->getName().
+                $contract->getOffer()
+                    ->getActivity()
+                    ->getOrganizationActivities()
+                    ->getName().
                 '</strong> pour l\'offre <strong>'.$contract->getOffer()->getName().
                 '</strong> reliée à l\'activité <strong>'
-                .$contract->getOffer()->getActivity()->getName().'</strong> a été trouvé.
+                .$contract->getOffer()->getActivity()->getName().
+                '</strong> a été trouvé.
                 <br>
                 <br>
                 Vous entrez ainsi en phase de validation.

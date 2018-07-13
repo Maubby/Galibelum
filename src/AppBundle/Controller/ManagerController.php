@@ -177,7 +177,10 @@ class ManagerController extends Controller
 
         // Var for the file name
         if ($form->isSubmitted() && $form->isValid()) {
-            foreach ($request->files->get("appbundle_contract")['uploadPdf'] as $file) {
+            foreach ($request->files->get(
+                "appbundle_contract"
+            )['uploadPdf'] as $file
+            ) {
                 $offer = $contract->getOffer();
                 $activity = $offer->getActivity();
                 $organization = $activity->getOrganizationActivities();
