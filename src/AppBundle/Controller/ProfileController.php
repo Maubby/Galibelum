@@ -39,28 +39,6 @@ class ProfileController extends BaseController
     /**
      * {@inheritdoc}
      *
-     * @return Response A Response instance
-     */
-    public function showAction()
-    {
-        if (!is_object($this->getUser())
-            || !$this->getUser() instanceof UserInterface
-        ) {
-            throw new AccessDeniedException(
-                'This user does not have access to this section.'
-            );
-        }
-
-        return $this->render(
-            '@FOSUser/Profile/show.html.twig', array(
-                'user' => $this->getUser(),
-            )
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     *
      * @param Request $request New posted info
      *
      * @return Response A Response instance
@@ -71,7 +49,7 @@ class ProfileController extends BaseController
             || !$this->getUser() instanceof UserInterface
         ) {
             throw new AccessDeniedException(
-                'This user does not have access to this section.'
+                'Vous n\'avez pas accès à cette page.'
             );
         }
 
@@ -132,7 +110,8 @@ class ProfileController extends BaseController
             '@FOSUser/Profile/edit.html.twig', array(
                 'form' => $form->createView(),
                 'formPassword' => $formPassword->createView(),
-                'user' => $this->getUser()
+                'user' => $this->getUser(),
+                'manager' => $this->getUser()->getOrganization()->getManagers(),
             )
         );
     }

@@ -43,7 +43,8 @@ class OrganizationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
-                    'organizationActivities' => $this->getUser()->getOrganization()
+                    'organizationActivities' => $this->getUser()->getOrganization(),
+                    'isActive' => true
                 ),
                 array(
                     'creationDate' => 'ASC'
@@ -53,7 +54,8 @@ class OrganizationController extends Controller
             $offers = $em->getRepository('AppBundle:Offer')->findBy(
                 array(
                     'activity' => $this->getUser()->getOrganization()
-                        ->getOrganizationActivity()->getValues()
+                        ->getOrganizationActivity()->getValues(),
+                    'isActive' => true
                 ),
                 array(
                     'creationDate' => 'ASC'
@@ -65,7 +67,8 @@ class OrganizationController extends Controller
                 'dashboard/index.html.twig', array(
                     'organization' => $organization,
                     'activities' => $activities,
-                    'offers' => $offers
+                    'offers' => $offers,
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
                 )
             );
         }
@@ -180,6 +183,7 @@ class OrganizationController extends Controller
             return $this->render(
                 'organization/edit.html.twig', array(
                     'organization' => $organization,
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView()
                 )
@@ -215,7 +219,7 @@ class OrganizationController extends Controller
             $this->addFlash(
                 'success',
                 "Votre compte a bien été désactivé. 
-            Si vous souhaitez nous rejoindre à nouveau, contactez Galibelum."
+            Si vous souhaitez nous rejoindre de nouveau, contactez Galibelum."
             );
             $this->redirectToRoute('fos_user_security_login');
         }

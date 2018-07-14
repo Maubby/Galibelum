@@ -2,6 +2,10 @@
 
 // Table
 
+#table_manager_wrapper {
+  margin-top: 50px;
+}
+
 table.dataTable tbody td {
   padding: 8px 10px;
   vertical-align: middle;
@@ -123,4 +127,10 @@ strong {
 
 .button-yellow {
   @include buttonize(49, 54, 99, 1);
+
+}
+
+.no-button-effect a:hover {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 1);
 }

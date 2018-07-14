@@ -79,8 +79,8 @@ class ManagerController extends Controller
         $mailerUser->sendEmail(
             $this->getParameter('mailer_user'),
             $organization->getUser()->getEmail(),
-            'Activation',
-            'Votre organisation vient d\'être validéé par l\'un
+            'Galibelum - Activation de votre compte',
+            'Votre organisation vient d\'être validée par l\'un
             de nos accounts managers.
             Vous pouvez dès à présent vous rendre sur le site.'
         );
@@ -112,10 +112,11 @@ class ManagerController extends Controller
         $mailerUser->sendEmail(
             $this->getParameter('mailer_user'),
             $organization->getUser()->getEmail(),
-            'Désactivation',
+            'Galibelum - Désactivation de votre compte',
             'Votre organisation vient d\'être désactivée par l\'un
             de nos accounts managers.
-            Pour plus d\'information veuillez contacter l\'équipe Galibelum.'
+            Pour plus d\'information veuillez contacter l\'équipe Galibelum au 
+            03 74 09 50 88.'
         );
         return $this->redirectToRoute('manager_organization_list');
     }
@@ -173,13 +174,18 @@ class ManagerController extends Controller
 
         // Var for the file name
         if ($form->isSubmitted() && $form->isValid()) {
-            foreach ($request->files->get("appbundle_contract")['uploadPdf'] as $file) {
+            $filePdf = [];
+
+            foreach ($request->files->get(
+                "appbundle_contract"
+            )['uploadPdf'] as $file
+            ) {
                 $offer = $contract->getOffer();
                 $activity = $offer->getActivity();
                 $organization = $activity->getOrganizationActivities();
 
                 // Check if the file exist and set the new or old value
-                $filePdf = $fileUploaderService->upload(
+                $filePdf[] = $fileUploaderService->upload(
                     $file, $organization->getId(),
                     $activity->getId(), $offer->getId()
                 );

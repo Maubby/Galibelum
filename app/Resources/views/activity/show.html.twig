@@ -45,7 +45,7 @@
                 <div class="boxing-canvas">
                     <h5 class="text-center degradeblue mb-30">{{ activity.name }} - {{ activity.type }}</h5>
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe id="myIframe" src=""></iframe>
+                        <iframe id="myIframe" src="{{ embedLink }}"></iframe>
                     </div>
                     <p class="boxing-text description-text pb-20">{{ activity.description }}</p>
 
@@ -62,7 +62,8 @@
                         <div class="boxing-body">
                             <h6 class="title"><strong>Documents joints :</strong></h6>
                             <ul class="list-unstyled text-center mt-10 mb-20">
-                                <li><a href="{{ asset('/uploads/pdf/organization_' ~ activity.OrganizationActivities.id ~ '/activity_' ~ activity.id  ~ '/' ~ activity.uploadPdf) }}">PDF de présentation</a></li>
+                                <li><a href="{{ asset('/uploads/pdf/organization_' ~ activity.OrganizationActivities.id ~ '/activity_' ~ activity.id  ~ '/' ~ activity.uploadPdf) }}" target="_blank">
+                                        <i class="fas fa-file-pdf degradeblue" style="font-size: 40px"></i></a></li>
                             </ul>
                         </div>
                     {% endif %}
@@ -141,9 +142,34 @@
                                         <p class="panel-item"><strong>Nombre de participant(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
                                         <p class="panel-item">{{ offer.description|slice(0,50) }}...</p>
                                         {% if is_granted('ROLE_STRUCTURE') %}
-                                            <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backblue-btn-sm" >Modifier l'offre</a>
+                                            <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backblue-btn-sm">Modifier l'offre</a>
                                         {% else %}
-                                            <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-primary backblue-btn-sm">Se mettre en relation</a>
+                                            <button class="btn btn-primary backblue-btn-sm" data-toggle="modal"
+                                                    data-target="#showdescription">Plus de détails</button>
+                                            <!--Modal introducing the show description-->
+                                            <div class="modal fade" id="showdescription" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog modal-notify modal-info" role="document">
+                                                    <div class="modal-content">
+                                                        <!--Modal's header-->
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true"><i class="fas fa-times" style="color: #ff6f73;" aria-hidden="true"></i></span>
+                                                            </button>
+                                                            <h5 class="degradered">{{ offer.name }}</h5>
+                                                        </div>
+                                                        <!--Modal's body-->
+                                                        <div class="modal-body">
+                                                            <p><strong>Montant : </strong>{{ offer.amount }} €</p>
+                                                            <p><strong>Date d'expiration : <br></strong>{{ offer.date|date("d M Y") }}</p>
+                                                            <p><strong>Nombre de participant(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
+                                                            <p>{{ offer.description }}</p>
+                                                            <div>
+                                                                <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-primary backred-btn-sm">Se mettre en relation</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -157,13 +183,5 @@
 {% endblock %}
 
 {% block javascripts %}
-
-    <script type="text/javascript">
-        let url ="{{ activity.urlVideo }}";
-        let id = new URL(url).search.substr(3);
-        let embedlink = "http://www.youtube.com/embed/" + id;
-
-        document.getElementById("myIframe").src = embedlink;
-    </script>
-
+    {{ parent() }}
 {% endblock %}

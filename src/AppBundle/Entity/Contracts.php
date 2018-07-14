@@ -82,7 +82,7 @@ class Contracts
     /**
      * Set uploadPdf.
      *
-     * @param string $uploadPdf
+     * @param array $uploadPdf
      *
      * @return Contracts
      */

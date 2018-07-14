@@ -42,7 +42,6 @@ class OfferController extends Controller
             && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
             $em = $this->getDoctrine()->getManager();
-
             $event_activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization(),
@@ -62,11 +61,18 @@ class OfferController extends Controller
                 )
             );
 
+            if (empty($event_activities) && empty($stream_activities)
+                && empty($team_activities)
+            ) {
+                return $this->redirectToRoute('activity_new');
+            }
+
             return $this->render(
                 'offer/index.html.twig', array(
                     'event_activities' => $event_activities,
                     'stream_activities' => $stream_activities,
-                    'team_activities' => $team_activities
+                    'team_activities' => $team_activities,
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
                 )
             );
         }
@@ -129,6 +135,7 @@ class OfferController extends Controller
                 'offer/new.html.twig', array(
                     'offer' => $offer,
                     'activity' => $activity,
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
                     'form' => $form->createView()
                 )
             );
@@ -180,6 +187,7 @@ class OfferController extends Controller
             return $this->render(
                 'offer/edit.html.twig', array(
                     'offer' => $offer,
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView()
                 )
@@ -202,6 +210,7 @@ class OfferController extends Controller
     {
         $user = $this->getUser();
         if ($user->getOrganization()->getOrganizationActivity()->contains($offer->getActivity())
+            && $offer->getIsActive() === true
         ) {
             $form = $this->_createDeleteForm($offer);
             $form->handleRequest($request);

@@ -34,7 +34,7 @@ class Activity
     private $organizationActivities;
 
     /*
-     * Manually generated methods / variables
+     * Manually generated variables
      */
     /**
      *
@@ -189,9 +189,8 @@ class Activity
      *
      * @var array
      *
-     * @ORM\Column(name="socialLink", type="array")
+     * @ORM\Column(name="socialLink", type="array", nullable=true)
      *
-     * @Assert\NotBlank()
      */
     private $socialLink;
 

@@ -17,6 +17,10 @@
   margin-left: 30px;
 }
 
+.form-group {
+  word-break: break-word;
+}
+
 // Control height of each tuple for activity
 
 .activity-box {
@@ -63,7 +67,7 @@ label {
   margin-left: 10px;
 }
 
-.backblue-btn {
+.backblue-btn, .backred-btn {
   max-width: 400px;
 }
 
@@ -111,10 +115,34 @@ li {
   }
 }
 
-/* Media Queries */
+/* Stylizing PDF button */
+
+.filebrowse {
+  margin-top: 15px;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  border: 1px solid #FFFFFF;
+  background: linear-gradient(to right, #86ccc2 , #137faf);
+  padding:  5px 20px 5px 20px;
+  border-radius: 4px;
+  color: white;
+}
+
+/* Modal */
+
+.modal-body {
+  height: 80px;
+  padding: 25px 15px 15px 15px;
+}
+
+/* Media queries */
 
 @media screen and (max-width: 812px) {
   .backblue-btn-activity {
     margin-left: 0;
+  }
+  h5 {
+    font-size: 19px;
   }
 }

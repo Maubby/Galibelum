@@ -64,8 +64,8 @@
                     <!-- Loop for each activity -->
                     <div class="col-md-12 text-center">
                         {% for activity in activities %}
-                            <div class="col-md-3 col-sm-4 col-xs-12 pb-20 mt-20">
-                                <!-- activity'box creation-->
+                            <div class="col-md-4 col-sm-12 col-xs-12 pb-20 mt-20">
+                                <!-- activity box creation-->
                                 <div class="activity-box">
                                     <div class="activity-name-height">
                                         <h5>{{ activity.name }}</h5>
@@ -84,7 +84,7 @@
                                     </div>
                                     <div class="activity-date-height">
                                         {% if activity.type is same as("Évènement eSport") %}
-                                            <p><strong>Date de l'évènement :</strong> <br>
+                                            <p><strong>Date de l'évènement :</strong><br>
                                                 {{ activity.dateStart|date('d-m-Y') }} <strong>/</strong> {{ activity.dateEnd|date('d-m-Y') }} </p>
                                         {% endif %}
                                     </div>
@@ -96,7 +96,7 @@
                                 <!--Activity's box end-->
                             </div>
                         {% endfor %}
-                        <div class="col-md-3 col-sm-4 col-xs-12 pb-20 mt-20">
+                        <div class="col-md-4 col-sm-12 col-xs-12 pb-20 mt-20">
                             <!-- activity'box creation-->
                             <div class="activity-box ">
                                 <h5 class="mt-60">Ajouter une activité</h5>
