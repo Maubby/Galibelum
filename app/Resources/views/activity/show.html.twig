@@ -119,7 +119,7 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    {% if is_granted('ROLE_STRUCTURE') %}
+                    {% if activity.organizationActivities.user is same as(app.user) %}
                         <a href="{{ path('activity_edit', { 'id': activity.id }) }}">Modifier l'activité</a>
                     {% endif %}
                 </div>
@@ -148,7 +148,7 @@
                                         <p class="panel-item"><strong>Date d'expiration : <br></strong>{{ offer.date|date("d M Y") }}</p>
                                         <p class="panel-item"><strong>Nombre de participant(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
                                         <p class="panel-item">{{ offer.description|slice(0,50) }}...</p>
-                                        {% if is_granted('ROLE_STRUCTURE') %}
+                                        {% if activity.organizationActivities.user is same as(app.user) %}
                                             <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backblue-btn-sm">Modifier l'offre</a>
                                         {% else %}
                                             <button class="btn btn-primary backblue-btn-sm" data-toggle="modal"
