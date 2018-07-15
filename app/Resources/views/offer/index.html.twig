@@ -28,6 +28,18 @@
         </div>
     {% endif %}
     <!-- End flash message -->
+
+    <!-- Message flash -->
+    {% if app.session.flashBag.has('danger') %}
+        <div class="alert alert-danger">
+            {% for msg in app.session.flashBag.get('danger') %}
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <!-- End flash message -->
+
     <section>
         <!-- Offer list for the current activity -->
         <div class="container-fluid">
@@ -71,33 +83,33 @@
                                     {% else %}
                                         <div class="panel-body">
                                             {% for row in activity.activities|batch(3) %}
-                                            <div class="row">
-                                                {% for offer in row %}
-                                                    <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
-                                                        <div class="thumbnail text-center">
-                                                            <div class="caption">
-                                                                <h5 class="degradeblue">{{ offer.name }}</h5>
-                                                                <p><strong>Montant :</strong>{{ offer.amount }} €</p>
-                                                                <p><strong>Date d'expiration :</strong>{% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
-                                                                <p><strong>Nombre de partenaires :</strong>{{ offer.partnershipNumber|length }}</p>
-                                                                <p><strong>Adresse :</strong>{{ offer.activity.address }}</p>
-                                                                <div>
-                                                                    <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
+                                                <div class="row">
+                                                    {% for offer in row %}
+                                                        <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
+                                                            <div class="thumbnail text-center">
+                                                                <div class="caption">
+                                                                    <h5 class="degradeblue"> {{ offer.name }}</h5>
+                                                                    <p><strong>Montant :</strong> {{ offer.amount }} €</p>
+                                                                    <p><strong>Date d'expiration :</strong> {% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
+                                                                    <p><strong>Nombre de partenaires :</strong> {{ offer.partnershipNumber|length }}</p>
+                                                                    <p><strong>Adresse :</strong> {{ offer.activity.address }}</p>
+                                                                    <div>
+                                                                        <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                {% endfor %}
-                                                {% endfor %}
-                                                <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
-                                                    <div class="thumbnail text-center">
-                                                        <div class="caption">
-                                                            <h5 class="degradeblue mt-40">Ajouter une offre</h5>
-                                                            <a href="{{ path('offer_new', { 'id': activity.id }) }}"><i class="fas fa-plus-circle degradeblue mt-20" style="font-size: 50px"></i></a>
+                                                    {% endfor %}
+                                                    <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
+                                                        <div class="thumbnail text-center">
+                                                            <div class="caption">
+                                                                <h5 class="degradeblue mt-40"> Ajouter une offre</h5>
+                                                                <a href="{{ path('offer_new', { 'id': activity.id }) }}"><i class="fas fa-plus-circle degradeblue mt-20" style="font-size: 50px"></i></a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            {% endfor %}
                                         </div>
                                     {% endif %}
                                 </div>
@@ -126,36 +138,36 @@
                                     {% else %}
                                         <div class="panel-body">
                                             {% for row in activity.activities|batch(3) %}
-                                            <div class="row">
-                                                {% for offer in row %}
-                                                    {% if offer is empty %}
-                                                        <p>Vous n'avez pas encore d'offre pour cette activité</p>
-                                                    {% else %}
-                                                        <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
-                                                            <div class="thumbnail text-center">
-                                                                <div class="caption">
-                                                                    <h5 class="degradeblue">{{ offer.name }}</h5>
-                                                                    <p><strong>Montant :</strong>{{ offer.amount }} €</p>
-                                                                    <p><strong>Nombre de partenaires :</strong>{{ offer.partnershipNumber|length }}</p>
-                                                                    <p><strong>Date d'expiration :</strong>{% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
-                                                                    <div>
-                                                                        <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
+                                                <div class="row">
+                                                    {% for offer in row %}
+                                                        {% if offer is empty %}
+                                                            <p>Vous n'avez pas encore d'offre pour cette activité</p>
+                                                        {% else %}
+                                                            <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
+                                                                <div class="thumbnail text-center">
+                                                                    <div class="caption">
+                                                                        <h5 class="degradeblue"> {{ offer.name }}</h5>
+                                                                        <p><strong>Montant :</strong> {{ offer.amount }} €</p>
+                                                                        <p><strong>Nombre de partenaires :</strong> {{ offer.partnershipNumber|length }}</p>
+                                                                        <p><strong>Date d'expiration :</strong> {% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
+                                                                        <div>
+                                                                            <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    {% endif %}
-                                                {% endfor %}
-                                                {% endfor %}
-                                                <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
-                                                    <div class="thumbnail text-center">
-                                                        <div class="caption">
-                                                            <h5 class="degradeblue mt-40">Ajouter une offre</h5>
-                                                            <a href="{{ path('offer_new', { 'id': activity.id }) }}"><i class="fas fa-plus-circle degradeblue mt-20" style="font-size: 50px"></i></a>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
+                                                        <div class="thumbnail text-center">
+                                                            <div class="caption">
+                                                                <h5 class="degradeblue mt-40"> Ajouter une offre</h5>
+                                                                <a href="{{ path('offer_new', { 'id': activity.id }) }}"><i class="fas fa-plus-circle degradeblue mt-20" style="font-size: 50px"></i></a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            {% endfor %}
                                         </div>
                                     {% endif %}
                                 </div>
@@ -184,32 +196,32 @@
                                     {% else %}
                                         <div class="panel-body">
                                             {% for row in activity.activities|batch(3) %}
-                                            <div class="row">
-                                                {% for offer in row %}
-                                                    <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
-                                                        <div class="thumbnail text-center">
-                                                            <div class="caption">
-                                                                <h5 class="degradeblue">{{ offer.name }}</h5>
-                                                                <p><strong>Montant : </strong>{{ offer.amount }} €</p>
-                                                                <p><strong>Nombre de partenaires :</strong>{{ offer.partnershipNumber|length }}</p>
-                                                                <p><strong>Date d'expiration : </strong>{% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
-                                                                <div>
-                                                                    <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
+                                                <div class="row">
+                                                    {% for offer in row %}
+                                                        <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
+                                                            <div class="thumbnail text-center">
+                                                                <div class="caption">
+                                                                    <h5 class="degradeblue"> {{ offer.name }}</h5>
+                                                                    <p><strong>Montant : </strong> {{ offer.amount }} €</p>
+                                                                    <p><strong>Nombre de partenaires :</strong> {{ offer.partnershipNumber|length }}</p>
+                                                                    <p><strong>Date d'expiration : </strong> {% if offer.date %}{{ offer.date|date('d M Y') }}{% endif %}</p>
+                                                                    <div>
+                                                                        <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backred-btn mt-10">Modifier votre offre</a>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                {% endfor %}
-                                                {% endfor %}
-                                                <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
-                                                    <div class="thumbnail text-center">
-                                                        <div class="caption">
-                                                            <h5 class="degradeblue mt-40">Ajouter une offre</h5>
-                                                            <a href="{{ path('offer_new', { 'id': activity.id }) }}"><i class="fas fa-plus-circle degradeblue" style="font-size: 50px"></i></a>
+                                                    {% endfor %}
+                                                    <div class="activity-thumbnail col-md-4 col-sm-12 col-xs-12">
+                                                        <div class="thumbnail text-center">
+                                                            <div class="caption">
+                                                                <h5 class="degradeblue mt-40"> Ajouter une offre</h5>
+                                                                <a href="{{ path('offer_new', { 'id': activity.id }) }}"><i class="fas fa-plus-circle degradeblue" style="font-size: 50px"></i></a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            {% endfor %}
                                         </div>
                                     {% endif %}
                                 </div>

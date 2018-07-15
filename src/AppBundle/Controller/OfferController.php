@@ -42,27 +42,30 @@ class OfferController extends Controller
             && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
             $em = $this->getDoctrine()->getManager();
-
             $event_activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization(),
                     'type' => 'Évènement eSport'
                 )
             );
-
             $stream_activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization(),
                     'type' => 'Activité de streaming'
                 )
             );
-
             $team_activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
                     'organizationActivities' => $this->getUser()->getOrganization(),
                     'type' => 'Equipe eSport'
                 )
             );
+
+            if (empty($event_activities) && empty($stream_activities)
+                && empty($team_activities)
+            ) {
+                return $this->redirectToRoute('activity_new');
+            }
 
             return $this->render(
                 'offer/index.html.twig', array(
@@ -89,7 +92,7 @@ class OfferController extends Controller
      * @throws \Exception
      */
     public function newAction(Request $request, Activity $activity,
-        ManagementFeesService $feesService
+                              ManagementFeesService $feesService
     ) {
         if ($this->getUser()->hasRole('ROLE_STRUCTURE')
             && $this->getUser()->getOrganization()->getIsActive() === 1
@@ -125,7 +128,6 @@ class OfferController extends Controller
                     'success',
                     "Votre offre a bien été créée."
                 );
-
                 return $this->redirectToRoute('offer_index');
             }
 
@@ -157,6 +159,7 @@ class OfferController extends Controller
     {
         $user = $this->getUser();
         if ($user->getOrganization()->getOrganizationActivity()->contains($offer->getActivity())
+            && $offer->getIsActive() === true
         ) {
             $partnershipNb = $offer->countPartnershipNumber();
             $offer->setPartnershipNumber($partnershipNb);
@@ -207,14 +210,26 @@ class OfferController extends Controller
     {
         $user = $this->getUser();
         if ($user->getOrganization()->getOrganizationActivity()->contains($offer->getActivity())
+            && $offer->getIsActive() === true
         ) {
             $form = $this->_createDeleteForm($offer);
             $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid() && $offer->getContracts()->isEmpty()) {
                 $em = $this->getDoctrine()->getManager();
-                $em->remove($offer);
+                $offer->setIsActive(false);
+                $em->persist($offer);
                 $em->flush();
+
+                $this->addFlash(
+                    'success',
+                    "L'offre a bien étè supprimée."
+                );
+            } else {
+                $this->addFlash(
+                    'danger',
+                    "Vous ne pouvez pas supprimer cette offre car une marque c'est déjà positionnée sur celle-ci."
+                );
             }
             return $this->redirectToRoute('offer_index');
         }

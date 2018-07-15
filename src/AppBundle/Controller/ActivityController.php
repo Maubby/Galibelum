@@ -42,17 +42,17 @@ class ActivityController extends Controller
         if ($this->getUser()->hasRole('ROLE_STRUCTURE')
             && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
-            if ($this->getUser()->getOrganization()->getOrganizationActivity()->isEmpty()
-            ) {
-                return $this->redirectToRoute('activity_new');
-            }
             $em = $this->getDoctrine()->getManager();
             $activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
-                    'organizationActivities' => $this->getUser()->getOrganization()
+                    'organizationActivities' => $this->getUser()->getOrganization(),
+                    'isActive' => true
                 )
             );
 
+            if (empty($activities)) {
+                return $this->redirectToRoute('activity_new');
+            }
             return $this->render(
                 'activity/index.html.twig', array(
                     'activities' => $activities,
@@ -60,7 +60,7 @@ class ActivityController extends Controller
                 )
             );
         }
-        return $this->redirectToRoute('redirect');
+        //return $this->redirectToRoute('redirect');
     }
 
     /**
@@ -116,7 +116,6 @@ class ActivityController extends Controller
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
                 )
             );
-
         }
         return $this->redirectToRoute('redirect');
     }
@@ -177,10 +176,11 @@ class ActivityController extends Controller
      * @return              Response A Response instance
      */
     public function editAction(Request $request, Activity $activity,
-        FileUploaderService $fileUploaderService
+                               FileUploaderService $fileUploaderService
     ) {
         $user = $this->getUser();
         if ($user->getOrganization()->getOrganizationActivity()->contains($activity)
+            && $activity->getIsActive() === true
         ) {
             if (in_array(null, $activity->getSocialLink())) {
                 $activity->setSocialLink(array_filter($activity->getSocialLink()));
@@ -238,14 +238,26 @@ class ActivityController extends Controller
     {
         $user = $this->getUser();
         if ($user->getOrganization()->getOrganizationActivity()->contains($activity)
+            && $activity->getIsActive() === true
         ) {
             $form = $this->_createDeleteForm($activity);
             $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->isSubmitted() && $form->isValid() && $activity->getActivities()->isEmpty()) {
                 $em = $this->getDoctrine()->getManager();
-                $em->remove($activity);
+                $activity->setIsActive(false);
+                $em->persist($activity);
                 $em->flush();
+
+                $this->addFlash(
+                    'success',
+                    "L'activité a bien étè supprimée."
+                );
+            } else {
+                $this->addFlash(
+                    'danger',
+                    "Vous ne pouvez pas supprimer cette activité car des offres sont liées a l'activité."
+                );
             }
             return $this->redirectToRoute('activity_index');
         }

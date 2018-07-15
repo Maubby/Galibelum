@@ -150,6 +150,14 @@ class Offer
      * @ORM\Column(name="handlingFee", type="integer", nullable=true)
      */
     private $handlingFee;
+    
+    /**
+     *
+     * @var boolean
+     *
+     * @ORM\Column(name="isActive", type="boolean")
+     */
+    private $isActive;
 
     /*
      * Add Personal Method
@@ -161,6 +169,7 @@ class Offer
     public function __construct()
     {
         $this->setCreationDate(new \DateTime());
+        $this->setIsActive(true);
     }
 
     /*
@@ -480,5 +489,29 @@ class Offer
     public function getContracts()
     {
         return $this->contracts;
+    }
+
+    /**
+     * Set isActive.
+     *
+     * @param bool $isActive
+     *
+     * @return Offer
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive.
+     *
+     * @return bool
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 }

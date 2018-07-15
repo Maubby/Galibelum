@@ -35,7 +35,7 @@ class ManagerController extends Controller
      * Lists all organization entities.
      *
      * @Route("/organization", methods={"GET"},
-    name="manager_organization_list")
+     *     name="manager_organization_list")
      *
      * @return Response A Response instance
      */
@@ -85,7 +85,6 @@ class ManagerController extends Controller
             de nos accounts managers.
             Vous pouvez dès à présent vous rendre sur le site.'
         );
-
         return $this->redirectToRoute('manager_organization_list');
     }
 
@@ -144,7 +143,6 @@ class ManagerController extends Controller
                 )->findByRole('ROLE_COMPANY'),
             )
         );
-
         $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
             array(
                 'organization' => $organizations

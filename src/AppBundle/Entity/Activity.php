@@ -34,7 +34,7 @@ class Activity
     private $organizationActivities;
 
     /*
-     * Manually generated methods / variables
+     * Manually generated variables
      */
     /**
      *
@@ -58,6 +58,14 @@ class Activity
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     *
+     * @var boolean
+     *
+     * @ORM\Column(name="isActive", type="boolean")
+     */
+    private $isActive;
 
     /**
      *
@@ -206,6 +214,7 @@ class Activity
     {
         $this->activities = new ArrayCollection();
         $this->setCreationDate(new \DateTime());
+        $this->setIsActive(true);
     }
 
     // Adding personal methods
@@ -229,7 +238,7 @@ class Activity
     {
         $minAmount = 999999999;
         foreach ($this->activities as $offer) {
-            if ($offer->getStatus() != 4) {
+            if ($offer->getIsActive() != false) {
                 $minAmount = min($offer->getAmount(), $minAmount);
             }
         }
@@ -245,7 +254,7 @@ class Activity
     {
         $maxAmount = 0;
         foreach ($this->activities as $offer) {
-            if ($offer->getStatus() != 4) {
+            if ($offer->getIsActive() != false) {
                 $maxAmount = max($offer->getAmount(), $maxAmount);
             }
         }
@@ -262,7 +271,7 @@ class Activity
         $minDate = new \DateTime('9999-12-29');
 
         foreach ($this->activities as $offer ) {
-            if ($minDate > $offer->getDate() and $offer->getStatus() != 4) {
+            if ($minDate > $offer->getDate() and $offer->getIsActive() != false) {
                 $minDate = $offer->getDate();
             }
         }
@@ -278,7 +287,7 @@ class Activity
     {
         $maxDate = new \DateTime('0000-00-00');
         foreach ($this->activities as $offer) {
-            if ($maxDate < $offer->getDate() and $offer->getStatus() != 4) {
+            if ($maxDate < $offer->getDate() and $offer->getIsActive() != false) {
                 $maxDate = $offer->getDate();
             }
         }
@@ -619,15 +628,51 @@ class Activity
         return $this->dateEnd;
     }
 
+    /**
+     * Get pdf activity
+     *
+     * @return mixed
+     */
     public function getUploadPdf()
     {
         return $this->uploadPdf;
     }
 
+    /**
+     * Set pdf activity
+     *
+     * @param $uploadPdf
+     *
+     * @return $this
+     */
     public function setUploadPdf($uploadPdf)
     {
         $this->uploadPdf = $uploadPdf;
 
         return $this;
+    }
+
+    /**
+     * Set isActive.
+     *
+     * @param bool $isActive
+     *
+     * @return Activity
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive.
+     *
+     * @return bool
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 }
