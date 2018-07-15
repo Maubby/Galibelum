@@ -106,12 +106,16 @@ class ProfileController extends BaseController
             return $response;
         }
 
+        $manager = $this->getUser()->getOrganization() != null
+            ? $this->getUser()->getOrganization()->getManagers()
+            : null;
+
         return $this->render(
             '@FOSUser/Profile/edit.html.twig', array(
                 'form' => $form->createView(),
                 'formPassword' => $formPassword->createView(),
                 'user' => $this->getUser(),
-                'manager' => $this->getUser()->getOrganization()->getManagers(),
+                'manager' => $manager,
             )
         );
     }

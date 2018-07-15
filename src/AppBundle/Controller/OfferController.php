@@ -107,7 +107,7 @@ class OfferController extends Controller
                 $this->getParameter('periode')
             );
             $fees = $feesService->getFees(
-                $offer->getAmount(), $offer->getFinalDeal()
+                $offer->getAmount()
             );
 
             if ($form->isSubmitted() && $form->isValid()) {

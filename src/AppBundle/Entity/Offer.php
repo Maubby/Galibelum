@@ -151,22 +151,6 @@ class Offer
      */
     private $handlingFee;
 
-    /**
-     *
-     * @var int
-     *
-     * @ORM\Column(name="finalDeal", type="integer", nullable=true)
-     */
-    private $finalDeal;
-
-    /**
-     *
-     * @var int
-     *
-     * @ORM\Column(name="status", type="integer")
-     */
-    private $status;
-
     /*
      * Add Personal Method
      */
@@ -176,7 +160,6 @@ class Offer
      */
     public function __construct()
     {
-        $this->setStatus(0);
         $this->setCreationDate(new \DateTime());
     }
 
@@ -338,54 +321,6 @@ class Offer
     public function getHandlingFee()
     {
         return $this->handlingFee;
-    }
-
-    /**
-     * Set finalDeal
-     *
-     * @param integer $finalDeal
-     *
-     * @return Offer
-     */
-    public function setFinalDeal($finalDeal)
-    {
-        $this->finalDeal = $finalDeal;
-
-        return $this;
-    }
-
-    /**
-     * Get finalDeal
-     *
-     * @return int
-     */
-    public function getFinalDeal()
-    {
-        return $this->finalDeal;
-    }
-
-    /**
-     * Set status
-     *
-     * @param integer $status
-     *
-     * @return Offer
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return int
-     */
-    public function getStatus()
-    {
-        return $this->status;
     }
 
     /**

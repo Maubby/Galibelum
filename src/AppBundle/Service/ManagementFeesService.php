@@ -43,9 +43,8 @@ class ManagementFeesService
      *
      * @return int
      */
-    public function getFees($amount, $finalDeal)
+    public function getFees($amount, $finalDeal = null)
     {
-
         $fees = 0;
         if (empty($finalDeal)) {
             if ($amount >= 200 && $amount < 10000) {
