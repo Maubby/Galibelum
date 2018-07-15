@@ -150,7 +150,7 @@ class Offer
      * @ORM\Column(name="handlingFee", type="integer", nullable=true)
      */
     private $handlingFee;
-
+    
     /**
      *
      * @var boolean

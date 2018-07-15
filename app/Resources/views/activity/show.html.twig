@@ -45,7 +45,14 @@
                 <div class="boxing-canvas">
                     <h5 class="text-center degradeblue mb-30">{{ activity.name }} - {{ activity.type }}</h5>
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe id="myIframe" src="{{ embedLink }}"></iframe>
+                        {% if embedLink is same as(null) %}
+                            <img class="pl-40" src="{{ asset('build/images/video_player_overlay.png') }}">
+                            {% if is_granted('ROLE_STRUCTURE') and activity.organizationActivities.user is same as(app.user) %}
+                                <p class="text-center pt-20 bold-text-dark size">Veuillez ajouter une video de présentation</p>
+                            {% endif %}
+                        {% else %}
+                            <iframe src="{{ embedLink }}"></iframe>
+                        {% endif %}
                     </div>
                     <p class="boxing-text description-text pb-20">{{ activity.description }}</p>
 
