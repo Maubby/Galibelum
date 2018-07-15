@@ -48,6 +48,7 @@
                         <th>Montant demandé</th>
                         <th>Avant le</th>
                         <th>Nom du partenaire</th>
+                        <th>Contrat</th>
                         <th>Statut</th>
                     </tr>
                     </thead>
@@ -61,11 +62,20 @@
                             <td>{{ contract.offer.name }}</td>
                             <td>{{ contract.offer.amount }}</td>
                             <td>{{ contract.offer.date|date('d M Y') }}</td>
-                            {% if is_granted('ROLE_STRUCTURE') %}
-                                <td>{{ contract.organization.name }}</td>
-                            {% else %}
-                                <td>{{ contract.offer.activity.organizationActivities.name }}</td>
-                            {% endif %}
+                            <td>
+                                {% if is_granted('ROLE_STRUCTURE') %}
+                                    {{ contract.organization.name }}
+                                {% else %}
+                                    {{ contract.offer.activity.organizationActivities.name }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% for uploadPdf in contract.uploadPdf if contract.uploadPdf is not null %}
+                                    <a class="fas fa-file-pdf degradeblue" style="font-size: 20px" href="{{ asset('/uploads/pdf/organization_' ~
+                                        contract.offer.activity.organizationActivities.id ~ '/activity_' ~ contract.offer.activity.id
+                                        ~ '/offer_' ~ contract.offer.id ~ '/' ~uploadPdf) }}" target="_blank"></a>
+                                {% endfor %}
+                            </td>
                             <!-- Buttons changing contracts' status start -->
                             <td>
                                 {% if contract.status == 0 %}

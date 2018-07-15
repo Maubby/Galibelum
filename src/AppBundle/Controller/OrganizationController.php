@@ -221,7 +221,7 @@ class OrganizationController extends Controller
                 "Votre compte a bien été désactivé. 
             Si vous souhaitez nous rejoindre de nouveau, contactez Galibelum."
             );
-            $this->redirectToRoute('fos_user_security_login');
+            return $this->redirectToRoute('fos_user_security_logout');
         }
         return $this->redirectToRoute('redirect');
     }

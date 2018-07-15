@@ -71,7 +71,8 @@ class ManagerController extends Controller
     public function activateAction(Organization $organization,
         MailerService $mailerUser
     ) {
-        $organization->setIsActive(1);
+        $organization->setIsActive(1)
+            ->getUser()->setEnabled(true);
         $organization->setManagers($this->getUser());
         $this->getDoctrine()->getManager()->persist($organization);
         $this->getDoctrine()->getManager()->flush();
@@ -106,7 +107,8 @@ class ManagerController extends Controller
     public function disableAction(Organization $organization,
         MailerService $mailerUser
     ) {
-        $organization->setIsActive(2);
+        $organization->setIsActive(2)
+            ->getUser()->setEnabled(false);
         $this->getDoctrine()->getManager()->persist($organization);
         $this->getDoctrine()->getManager()->flush();
 
@@ -119,7 +121,6 @@ class ManagerController extends Controller
             Pour plus d\'information veuillez contacter l\'équipe Galibelum au 
             03 74 09 50 88.'
         );
-
         return $this->redirectToRoute('manager_organization_list');
     }
 

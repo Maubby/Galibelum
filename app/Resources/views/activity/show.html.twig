@@ -81,37 +81,37 @@
                             {% for link in activity.socialLink %}
                                 {% if 'youtube' in link %}
                                     <li class="list-group-item"><i class="fab fa-youtube"></i> Youtube :
-                                        <a href="{{ link }}">
+                                        <a href="{{ link }}" target="_blank">
                                             {{ link }}
                                         </a>
                                     </li>
                                 {% elseif 'twitch' in link %}
                                     <li class="list-group-item"><i class="fab fa-twitch"></i> Twitch :
-                                        <a href="{{ link }}">
+                                        <a href="{{ link }}" target="_blank">
                                             {{ link }}
                                         </a>
                                     </li>
                                 {% elseif 'twitter' in link %}
                                     <li class="list-group-item"><i class="fab fa-twitter"></i> Twitter :
-                                        <a href="{{ link }}">
+                                        <a href="{{ link }}" target="_blank">
                                             {{ link }}
                                         </a>
                                     </li>
                                 {% elseif 'facebook' in link %}
                                     <li class="list-group-item"><i class="fab fa-facebook-square"></i> Facebook :
-                                        <a href="{{ link }}">
+                                        <a href="{{ link }}" target="_blank">
                                             {{ link }}
                                         </a>
                                     </li>
                                 {% elseif 'instagram' in link %}
                                     <li class="list-group-item"><i class="fab fa-instagram"></i> Instagram :
-                                        <a href="{{ link }}">
+                                        <a href="{{ link }}" target="_blank">
                                             {{ link }}
                                         </a>
                                     </li>
                                 {% else %}
                                     <li class="list-group-item"><i class="fas fa-globe"></i> Autres :
-                                        <a href="{{ link }}">
+                                        <a href="{{ link }}" target="_blank">
                                             {{ link }}
                                         </a>
                                     </li>
