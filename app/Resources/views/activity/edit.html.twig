@@ -133,14 +133,15 @@
                                 "{{ form_widget(edit_form.socialLink.vars.prototype,{'attr': {'class': "form-control input-field",'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}})|e }}"
                                      data-widget-tags="{{ '<div class="col-sm-11"></div>'|e }}">
                                     {% for socialLinkField in edit_form.socialLink %}
-                                        <div class="col-sm-11">
+                                        <div class="col-sm-10">
                                             {{ form_errors(socialLinkField) }}
                                             {{ form_widget(socialLinkField) }}
                                         </div>
                                     {% endfor %}
                                 </div>
-                                <div class="col-sm-1 mt-10">
+                                <div class="col-sm-2 mt-10">
                                     <span data-list="#socialLink-fields-list" class="add-socialLink"><i class="fas fa-plus-circle degradeblue" style="font-size: 30px"></i></span>
+                                    <span id="remove_sociallink" data-list="#socialLink-fields-list"><i class="fas fa-minus-circle degradeblue" style="font-size: 30px"></i></span>
                                 </div>
                             </div>
                         </div>
