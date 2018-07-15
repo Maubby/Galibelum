@@ -115,7 +115,7 @@ class Activity
      * )
      * @Assert\Length(
      *      min = 32,
-     *      max = 255,
+     *      max = 768,
      * )
      */
     private $description;

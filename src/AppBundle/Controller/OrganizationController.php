@@ -211,7 +211,8 @@ class OrganizationController extends Controller
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $organization->setIsActive(2);
+                $organization->setIsActive(2)
+                    ->getUser()->setEnabled(false);
                 $em->persist($organization);
                 $em->persist($this->getUser()->setEnabled(false));
                 $em->flush();
