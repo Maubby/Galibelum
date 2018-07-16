@@ -29,7 +29,10 @@
     <!-- End flash message -->
     <div class="container">
         <div class="row boxing-canvas mt-40 mb-20">
-            <div class="col-md-3">
+            <div class="panel-heading text-center backblue">
+                <h2 class="panel-title" style="color: white;">Présentation de l'organisation</h2>
+            </div>
+            <div class="col-md-3 mt-10">
                 <h5>{{ activity.organizationActivities.name }}</h5>
                 <p>{{ activity.organizationActivities.status }}</p>
                 <p>{{ activity.organizationActivities.relationNumber }} salariés</p>
@@ -39,10 +42,12 @@
                 {{ activity.organizationActivities.description }}
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-9">
                 <div class="boxing-canvas">
+                    <div class="panel-heading text-center backblue">
+                        <h2 class="panel-title" style="color: white;">Présentation de l'activité</h2>
+                    </div>
                     <h5 class="text-center degradeblue mb-30">{{ activity.name }} - {{ activity.type }}</h5>
                     <div class="embed-responsive embed-responsive-16by9">
                         {% if embedLink is same as(null) %}
@@ -119,9 +124,11 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    {% if activity.organizationActivities.user is same as(app.user) %}
-                        <a href="{{ path('activity_edit', { 'id': activity.id }) }}">Modifier l'activité</a>
-                    {% endif %}
+                    <div class="edit-activity-button">
+                        {% if activity.organizationActivities.user is same as(app.user) %}
+                            <a href="{{ path('activity_edit', { 'id': activity.id }) }}">Modifier l'activité</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
 
@@ -141,6 +148,9 @@
                         {% for offer in activity.activities %}
                             <div class="item">
                                 <div class="panel panel-default text-center">
+                                    <div class="panel-heading text-center backblue">
+                                        <h2 class="panel-title" style="color: white;">Offre en cours</h2>
+                                    </div>
                                     <h5 class="panel-title pt-10">{{ offer.name }}</h5>
                                     <div class="panel-body">
                                         <p class="panel-item"><strong>Montant : </strong>{{ offer.amount }} €</p>

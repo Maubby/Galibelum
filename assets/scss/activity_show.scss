@@ -30,7 +30,7 @@
   max-width: 1200px;
   border: 1px solid $border-color;
   margin-bottom: 30px;
-  padding: 30px 30px 15px;
+  padding: 0 0 15px;
   h6 {
     font-size: 15px;
   }
@@ -48,4 +48,8 @@
       border-bottom: none;
     }
   }
+}
+
+.edit-activity-button {
+  padding-left: 15px;
 }
