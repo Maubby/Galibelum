@@ -39,40 +39,48 @@ class ContractController extends Controller
      */
     public function contractAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        if ($this->getUser()->hasRole('ROLE_STRUCTURE')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+            || $this->getUser()->hasRole('ROLE_COMPANY')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+        ) {
+            $em = $this->getDoctrine()->getManager();
 
-        if ($this->getUser()->hasRole('ROLE_COMPANY')) {
-            $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
-                array(
-                    'organization' => $this->getUser()
-                )
-            );
-        } else {
+            if ($this->getUser()->hasRole('ROLE_COMPANY')) {
+                $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
+                    array(
+                        'organization' => $this->getUser()->getOrganization()
+                    )
+                );
+            } elseif ($this->getUser()->hasRole('ROLE_STRUCTURE')) {
 
-            $activities = $em->getRepository('AppBundle:Activity')->findby(
-                array(
-                    'organizationActivities' => $this->getUser()->getOrganization(),
-                )
-            );
+                $activities = $em->getRepository('AppBundle:Activity')->findby(
+                    array(
+                        'organizationActivities' => $this->getUser()
+                            ->getOrganization(),
+                    )
+                );
 
-            $offers = $em->getRepository('AppBundle:Offer')->findby(
-                array(
-                    'activity' => $activities,
-                )
-            );
-            $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
-                array(
-                    'offer' => $offers,
+                $offers = $em->getRepository('AppBundle:Offer')->findby(
+                    array(
+                        'activity' => $activities,
+                    )
+                );
+                $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
+                    array(
+                        'offer' => $offers,
+                    )
+                );
+            }
+
+            return $this->render(
+                'contractualisation/index.html.twig', array(
+                    'contracts' => $contracts,
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
                 )
             );
         }
-
-        return $this->render(
-            'contractualisation/index.html.twig', array(
-                'contracts' => $contracts,
-                'manager' => $this->getUser()->getOrganization()->getManagers(),
-            )
-        );
+        return $this->redirectToRoute('redirect');
     }
 
     /**
@@ -164,12 +172,9 @@ class ContractController extends Controller
                     en cours dans l'onglet Contractualisation."
             );
 
-            return $this->render(
-                'activity/show.html.twig', array(
-                    'activity' => $offer->getActivity(),
-                    'manager' => $this->getUser()->getOrganization()->getManagers(),
-
-                )
+            return $this->redirectToRoute(
+                'activity_show',
+                array('id' => $offer->getActivity()->getId())
             );
         }
         return $this->redirectToRoute('redirect');
@@ -228,7 +233,7 @@ class ContractController extends Controller
         switch ($status) {
         case 2:
             $mailerUser->sendEmail(
-                $this->getUser()->getEmail(),
+                $this->getParameter('mailer_user'),
                 $contract->getOffer()->getActivity()
                     ->getOrganizationActivities()->getUser()->getEmail(),
                 'Galibelum - Validation',
@@ -249,7 +254,7 @@ class ContractController extends Controller
             );
 
             $mailerUser->sendEmail(
-                $this->getUser()->getEmail(),
+                $this->getParameter('mailer_user'),
                 $contract->getOrganization()->getUser()->getEmail(),
                 'Galibelum - Validation',
                 'Félicitations, un accord avec <strong>'.
@@ -273,7 +278,7 @@ class ContractController extends Controller
 
         case 3:
             $mailerUser->sendEmail(
-                $this->getUser()->getEmail(),
+                $this->getParameter('mailer_user'),
                 $contract->getOffer()->getActivity()
                     ->getOrganizationActivities()->getUser()->getEmail(),
                 'Galibelum - Paiement',
@@ -289,7 +294,7 @@ class ContractController extends Controller
             );
             //      Mail for the company
             $mailerUser->sendEmail(
-                $this->getUser()->getEmail(),
+                $this->getParameter('mailer_user'),
                 $contract->getOrganization()->getUser()->getEmail(),
                 'Galibelum - Paiement',
                 'Vous pouvez désormais effectuer le paiement pour l\'offre 

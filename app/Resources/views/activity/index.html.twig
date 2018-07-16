@@ -18,6 +18,28 @@
 {% endblock %}
 
 {% block body %}
+    <!-- Message flash -->
+    {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('success') %}
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <!-- End flash message -->
+
+    <!-- Message flash -->
+    {% if app.session.flashBag.has('danger') %}
+        <div class="alert alert-danger">
+            {% for msg in app.session.flashBag.get('danger') %}
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <!-- End flash message -->
+
     <main id="index-activity">
         <section>
             <div class="container-fluid">
@@ -38,6 +60,12 @@
                     <div class="col-md-12 text-center">
                         <i class="fas fa-desktop degradeblue mb-20" style="font-size: 50px"></i>
                         <h5 class="degradeblue">Ensemble de vos activités</h5>
+                        <br>
+                        <p class="normal-subtitle-text text-center">
+                            Vous retrouvez ci-dessous la liste de vos activités.
+                            <br> Vous pouvez ajouter une nouvelle activité, consulter ou modifier une activité en cours
+                            et créer une offre depuis cet espace.
+                        </p>
                     </div>
                     <!-- Loop for each activity -->
                     <div class="col-md-12 text-center">

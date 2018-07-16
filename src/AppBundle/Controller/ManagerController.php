@@ -35,7 +35,7 @@ class ManagerController extends Controller
      * Lists all organization entities.
      *
      * @Route("/organization", methods={"GET"},
-    name="manager_organization_list")
+     *     name="manager_organization_list")
      *
      * @return Response A Response instance
      */
@@ -71,7 +71,8 @@ class ManagerController extends Controller
     public function activateAction(Organization $organization,
         MailerService $mailerUser
     ) {
-        $organization->setIsActive(1);
+        $organization->setIsActive(1)
+            ->getUser()->setEnabled(true);
         $organization->setManagers($this->getUser());
         $this->getDoctrine()->getManager()->persist($organization);
         $this->getDoctrine()->getManager()->flush();
@@ -84,7 +85,6 @@ class ManagerController extends Controller
             de nos accounts managers.
             Vous pouvez dès à présent vous rendre sur le site.'
         );
-
         return $this->redirectToRoute('manager_organization_list');
     }
 
@@ -106,7 +106,8 @@ class ManagerController extends Controller
     public function disableAction(Organization $organization,
         MailerService $mailerUser
     ) {
-        $organization->setIsActive(2);
+        $organization->setIsActive(2)
+            ->getUser()->setEnabled(false);
         $this->getDoctrine()->getManager()->persist($organization);
         $this->getDoctrine()->getManager()->flush();
 
@@ -119,7 +120,6 @@ class ManagerController extends Controller
             Pour plus d\'information veuillez contacter l\'équipe Galibelum au 
             03 74 09 50 88.'
         );
-
         return $this->redirectToRoute('manager_organization_list');
     }
 
@@ -143,7 +143,6 @@ class ManagerController extends Controller
                 )->findByRole('ROLE_COMPANY'),
             )
         );
-
         $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
             array(
                 'organization' => $organizations

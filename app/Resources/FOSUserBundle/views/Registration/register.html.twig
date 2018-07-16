@@ -58,7 +58,9 @@
                         </div>
                         <div class="col-sm-12 normal-subtitle-text form-error">
                             {{ form_widget(form.cgu) }}
-                            {{ form_label(form.cgu) }}
+                            <label>J'ai lu et j'accepte
+                                <a href="{{ asset('uploads/cgs_galibelum.pdf') }}" target="_blank">les conditions générales d'utilisation</a> .
+                            </label>
                             {{ form_errors(form.cgu) }}
                         </div>
                         <div class="col-sm-12 col-xs-12 text-center">

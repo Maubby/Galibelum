@@ -43,18 +43,19 @@ class OrganizationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $activities = $em->getRepository('AppBundle:Activity')->findBy(
                 array(
-                    'organizationActivities' => $this->getUser()->getOrganization()
+                    'organizationActivities' => $this->getUser()->getOrganization(),
+                    'isActive' => true
                 ),
                 array(
                     'creationDate' => 'ASC'
                 ),
                 6
             );
-
             $offers = $em->getRepository('AppBundle:Offer')->findBy(
                 array(
                     'activity' => $this->getUser()->getOrganization()
-                        ->getOrganizationActivity()->getValues()
+                        ->getOrganizationActivity()->getValues(),
+                    'isActive' => true
                 ),
                 array(
                     'creationDate' => 'ASC'
@@ -210,10 +211,10 @@ class OrganizationController extends Controller
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
-                $organization->setIsActive(2);
-                $this->getUser()->setEnabled(false);
+                $organization->setIsActive(2)
+                    ->getUser()->setEnabled(false);
                 $em->persist($organization);
-                $em->persist($this->getUser());
+                $em->persist($this->getUser()->setEnabled(false));
                 $em->flush();
             }
             $this->addFlash(
@@ -221,7 +222,7 @@ class OrganizationController extends Controller
                 "Votre compte a bien été désactivé. 
             Si vous souhaitez nous rejoindre de nouveau, contactez Galibelum."
             );
-            $this->redirectToRoute('fos_user_security_login');
+            return $this->redirectToRoute('fos_user_security_logout');
         }
         return $this->redirectToRoute('redirect');
     }

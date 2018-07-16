@@ -62,7 +62,7 @@ class OrganizationType extends AbstractType
             ->add(
                 'description', TextareaType::class, array(
                     'attr'=> array(
-                        'minlength' => 32, 'maxlength' => 250
+                        'minlength' => 32, 'maxlength' => 768
                     )
                 )
             )

@@ -45,7 +45,14 @@
                 <div class="boxing-canvas">
                     <h5 class="text-center degradeblue mb-30">{{ activity.name }} - {{ activity.type }}</h5>
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe id="myIframe" src="{{ embedLink }}"></iframe>
+                        {% if embedLink is same as(null) %}
+                            <img class="pl-40" src="{{ asset('build/images/video_player_overlay.png') }}">
+                            {% if is_granted('ROLE_STRUCTURE') and activity.organizationActivities.user is same as(app.user) %}
+                                <p class="text-center pt-20 bold-text-dark size">Veuillez ajouter une video de présentation</p>
+                            {% endif %}
+                        {% else %}
+                            <iframe src="{{ embedLink }}"></iframe>
+                        {% endif %}
                     </div>
                     <p class="boxing-text description-text pb-20">{{ activity.description }}</p>
 
@@ -74,37 +81,37 @@
                             {% for link in activity.socialLink %}
                                 {% if 'youtube' in link %}
                                     <li class="list-group-item"><i class="fab fa-youtube"></i> Youtube :
-                                        <a href="{{ link }}">
+                                        <a href="{{ link }}" target="_blank">
                                             {{ link }}
                                         </a>
                                     </li>
                                 {% elseif 'twitch' in link %}
                                     <li class="list-group-item"><i class="fab fa-twitch"></i> Twitch :
-                                        <a href="{{ link }}">
+                                        <a href="{{ link }}" target="_blank">
                                             {{ link }}
                                         </a>
                                     </li>
                                 {% elseif 'twitter' in link %}
                                     <li class="list-group-item"><i class="fab fa-twitter"></i> Twitter :
-                                        <a href="{{ link }}">
+                                        <a href="{{ link }}" target="_blank">
                                             {{ link }}
                                         </a>
                                     </li>
                                 {% elseif 'facebook' in link %}
                                     <li class="list-group-item"><i class="fab fa-facebook-square"></i> Facebook :
-                                        <a href="{{ link }}">
+                                        <a href="{{ link }}" target="_blank">
                                             {{ link }}
                                         </a>
                                     </li>
                                 {% elseif 'instagram' in link %}
                                     <li class="list-group-item"><i class="fab fa-instagram"></i> Instagram :
-                                        <a href="{{ link }}">
+                                        <a href="{{ link }}" target="_blank">
                                             {{ link }}
                                         </a>
                                     </li>
-                                {% else %}
+                                {% elseif '' in link %}
                                     <li class="list-group-item"><i class="fas fa-globe"></i> Autres :
-                                        <a href="{{ link }}">
+                                        <a href="{{ link }}" target="_blank">
                                             {{ link }}
                                         </a>
                                     </li>
@@ -112,7 +119,7 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    {% if is_granted('ROLE_STRUCTURE') %}
+                    {% if activity.organizationActivities.user is same as(app.user) %}
                         <a href="{{ path('activity_edit', { 'id': activity.id }) }}">Modifier l'activité</a>
                     {% endif %}
                 </div>
@@ -141,7 +148,7 @@
                                         <p class="panel-item"><strong>Date d'expiration : <br></strong>{{ offer.date|date("d M Y") }}</p>
                                         <p class="panel-item"><strong>Nombre de participant(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
                                         <p class="panel-item">{{ offer.description|slice(0,50) }}...</p>
-                                        {% if is_granted('ROLE_STRUCTURE') %}
+                                        {% if activity.organizationActivities.user is same as(app.user) %}
                                             <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backblue-btn-sm">Modifier l'offre</a>
                                         {% else %}
                                             <button class="btn btn-primary backblue-btn-sm" data-toggle="modal"
