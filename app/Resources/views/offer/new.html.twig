@@ -58,11 +58,8 @@
                                 <td>{{ offer.date|date('d M Y') }}</td>
                                 <td>{{ offer.amount }}</td>
                                 <td>{{ offer.handlingFee }}</td>
-                                {% if offer.finalDeal is empty %}
+                                {# {% if offer.finalDeal is empty %} #}
                                     <td>{{ offer.amount - offer.handlingFee }}</td>
-                                {% else %}
-                                    <td>{{ offer.finalDeal }}</td>
-                                {% endif %}
                                 <td>{{ offer.partnershipNumber|length }}</td>
                             </tr>
                         {% endfor %}
