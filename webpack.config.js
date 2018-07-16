@@ -39,6 +39,7 @@ Encore
     .addEntry('menu_toggle', './assets/js/menu_toggle.js')
     .addEntry('table_manager', './assets/js/table_manager.js')
     .addEntry('add_collection_widget', './assets/js/add_collection_widget.js')
+    .addEntry('fees_calculator', './assets/js/fees_calculator.js')
 
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([
