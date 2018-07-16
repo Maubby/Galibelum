@@ -3,7 +3,7 @@ $(document).ready(function () {
         e.preventDefault();
         let linkList = $($(this).attr('data-list'));
 
-        let linkCounter = linkList.data('widget-counter') | linkList.children().length
+        let linkCounter = linkList.data('widget-counter') | linkList.children().length;
         linkCounter += 1;
         if (!linkCounter) { linkCounter = linkList.children().length; }
 
@@ -18,7 +18,7 @@ $(document).ready(function () {
         newDiv.appendTo(linkList);
     });
 
-    $('#remove_sociallink').click(function(e) {
+    $('.remove-socialLink').click(function(e) {
         e.preventDefault();
         let linkList = $($(this).attr('data-list'));
 

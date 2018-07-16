@@ -235,7 +235,7 @@ class ContractController extends Controller
         switch ($status) {
         case 2:
             $mailerUser->sendEmail(
-                $this->getUser()->getEmail(),
+                $this->getParameter('mailer_user'),
                 $contract->getOffer()->getActivity()
                     ->getOrganizationActivities()->getUser()->getEmail(),
                 'Galibelum - Validation',
@@ -256,7 +256,7 @@ class ContractController extends Controller
             );
 
             $mailerUser->sendEmail(
-                $this->getUser()->getEmail(),
+                $this->getParameter('mailer_user'),
                 $contract->getOrganization()->getUser()->getEmail(),
                 'Galibelum - Validation',
                 'Félicitations, un accord avec <strong>'.
@@ -280,7 +280,7 @@ class ContractController extends Controller
 
         case 3:
             $mailerUser->sendEmail(
-                $this->getUser()->getEmail(),
+                $this->getParameter('mailer_user'),
                 $contract->getOffer()->getActivity()
                     ->getOrganizationActivities()->getUser()->getEmail(),
                 'Galibelum - Paiement',
@@ -296,7 +296,7 @@ class ContractController extends Controller
             );
             //      Mail for the company
             $mailerUser->sendEmail(
-                $this->getUser()->getEmail(),
+                $this->getParameter('mailer_user'),
                 $contract->getOrganization()->getUser()->getEmail(),
                 'Galibelum - Paiement',
                 'Vous pouvez désormais effectuer le paiement pour l\'offre 
