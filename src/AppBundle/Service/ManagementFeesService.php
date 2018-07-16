@@ -48,13 +48,13 @@ class ManagementFeesService
         $fees = 0;
         if (empty($finalDeal)) {
             if ($amount >= 200 && $amount < 10000) {
-                $fees = $amount * $this->_container->getParameter('fee15');
+                $fees = round($amount * $this->_container->getParameter('fee15'));
             }
             if ($amount >= 10000 && $amount < 50000) {
-                $fees = $amount * $this->_container->getParameter('fee10');
+                $fees = round($amount * $this->_container->getParameter('fee10'));
             }
             if ($amount >= 50000) {
-                $fees = $amount * $this->_container->getParameter('fee7');
+                $fees = round($amount * $this->_container->getParameter('fee7'));
             }
         } else {
             $fees = $amount - $finalDeal;
