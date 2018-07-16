@@ -40,7 +40,7 @@
 <body>
 <header>
     {% block header %}
-        {% if is_granted('ROLE_USER') %}
+        {% if is_granted('ROLE_STRUCTURE') or is_granted('ROLE_COMPANY') %}
             {% include "_nav.html.twig" %}
         {% else %}
             {% include "_nav_wordpress.html.twig" %}
