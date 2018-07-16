@@ -32,13 +32,13 @@
             <div class="panel-heading text-center backblue">
                 <h2 class="panel-title" style="color: white;">Présentation de la structure</h2>
             </div>
-            <div class="col-md-3 mt-10">
+            <div class="boxing-canvas-organization col-md-3 mt-10">
                 <h5>{{ activity.organizationActivities.name }}</h5>
                 <p>{{ activity.organizationActivities.status }}</p>
                 <p>{{ activity.organizationActivities.relationNumber }} salariés</p>
                 <p>{{ activity.organizationActivities.address }}</p>
             </div>
-            <div class="col-md-8 description-text">
+            <div class="col-md-8 description-text mt-20">
                 {{ activity.organizationActivities.description }}
             </div>
         </div>
@@ -49,15 +49,17 @@
                         <h2 class="panel-title" style="color: white;">Présentation de l'activité</h2>
                     </div>
                     <h5 class="text-center degradeblue mb-30">{{ activity.name }} - {{ activity.type }}</h5>
-                    <div class="embed-responsive embed-responsive-16by9">
-                        {% if embedLink is same as(null) %}
-                            <img class="pl-40" src="{{ asset('build/images/video_player_overlay.png') }}">
-                            {% if is_granted('ROLE_STRUCTURE') and activity.organizationActivities.user is same as(app.user) %}
-                                <p class="text-center pt-20 bold-text-dark size">Veuillez ajouter une video de présentation</p>
+                    <div class="placing-video">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            {% if embedLink is same as(null) %}
+                                <img class="pl-40" src="{{ asset('build/images/video_player_overlay.png') }}">
+                                {% if is_granted('ROLE_STRUCTURE') and activity.organizationActivities.user is same as(app.user) %}
+                                    <p class="text-center pt-20 bold-text-dark size">Veuillez ajouter une video de présentation</p>
+                                {% endif %}
+                            {% else %}
+                                <iframe src="{{ embedLink }}"></iframe>
                             {% endif %}
-                        {% else %}
-                            <iframe src="{{ embedLink }}"></iframe>
-                        {% endif %}
+                        </div>
                     </div>
                     <p class="boxing-text description-text pb-20">{{ activity.description }}</p>
 
