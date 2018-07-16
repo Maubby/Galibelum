@@ -92,7 +92,7 @@
                     {% endif %}
 
                     <div class="boxing-body">
-                        <h6 class="title"><strong>Sociaux : </strong></h6>
+                        <h6 class="title"><strong>Réseaux sociaux : </strong></h6>
                         <ul class="list-group">
                             {% for link in activity.socialLink %}
                                 {% if 'youtube' in link %}
@@ -165,17 +165,16 @@
                                     <h5 class="panel-title pt-10">{{ offer.name }}</h5>
                                     <div class="panel-body">
                                         <p class="panel-item"><strong>Montant : </strong>{{ offer.amount }} €</p>
-                                        {#<p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.partnershipNumber }}</p>#}
                                         <p class="panel-item"><strong>Date d'expiration : <br></strong>{{ offer.date|date("d M Y") }}</p>
-                                        <p class="panel-item"><strong>Nombre de participant(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
+                                        <p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
                                         <p class="panel-item">{{ offer.description|slice(0,50) }}...</p>
                                         {% if activity.organizationActivities.user is same as(app.user) %}
                                             <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backblue-btn-sm">Modifier l'offre</a>
                                         {% else %}
                                             <button class="btn btn-primary backblue-btn-sm" data-toggle="modal"
-                                                    data-target="#showdescription">Plus de détails</button>
+                                                    data-target="#showdescription-{{ offer.id }}">Plus de détails</button>
                                             <!--Modal introducing the show description-->
-                                            <div class="modal fade" id="showdescription" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal fade" id="showdescription-{{ offer.id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog modal-notify modal-info" role="document">
                                                     <div class="modal-content">
                                                         <!--Modal's header-->
@@ -189,7 +188,7 @@
                                                         <div class="modal-body">
                                                             <p><strong>Montant : </strong>{{ offer.amount }} €</p>
                                                             <p><strong>Date d'expiration : <br></strong>{{ offer.date|date("d M Y") }}</p>
-                                                            <p><strong>Nombre de participant(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
+                                                            <p><strong>Nombre de partenaire(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
                                                             <p>{{ offer.description }}</p>
                                                             <div>
                                                                 <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-primary backred-btn-sm">Se mettre en relation</a>
@@ -198,6 +197,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-primary backred-btn-sm mt-10">Se mettre en relation</a>
                                         {% endif %}
                                     </div>
                                 </div>
