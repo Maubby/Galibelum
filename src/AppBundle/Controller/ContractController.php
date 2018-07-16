@@ -49,7 +49,7 @@ class ContractController extends Controller
             if ($this->getUser()->hasRole('ROLE_COMPANY')) {
                 $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
                     array(
-                        'organization' => $this->getUser()
+                        'organization' => $this->getUser()->getOrganization()
                     )
                 );
             } elseif ($this->getUser()->hasRole('ROLE_STRUCTURE')) {
@@ -171,13 +171,7 @@ class ContractController extends Controller
                     en cours dans l'onglet Contractualisation."
             );
 
-            return $this->render(
-                'activity/show.html.twig', array(
-                    'activity' => $offer->getActivity(),
-                    'manager' => $this->getUser()->getOrganization()->getManagers(),
-
-                )
-            );
+            return $this->redirectToRoute('activity_show', array('id' => $offer->getActivity()->getId()));
         }
         return $this->redirectToRoute('redirect');
     }

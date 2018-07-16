@@ -19,7 +19,7 @@
 
 {% block body %}
 
-    <div class="container">
+    <div class="container" id="{% if is_granted('ROLE_COMPANY') %}company{% else %}structure{% endif %}">
         <div>
             <!-- Return to the dashboard -->
             <ol class="breadcrumb breadcrumb-boxing-canvas">
@@ -67,7 +67,7 @@
                             <td>{{ contract.offer.name }}</td>
                             <td>{{ contract.offer.amount }}</td>
                             <td>{{ contract.offer.date|date('d M Y') }}</td>
-                            <td>
+                            <td class="degradered">
                                 {% if is_granted('ROLE_STRUCTURE') %}
                                     {{ contract.organization.name }}
                                 {% else %}
