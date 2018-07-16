@@ -95,11 +95,11 @@ class ActivityController extends Controller
                 $this->addFlash(
                     'pdf',
                     "Vous pouvez désormais télécharger un 
-                    PDF lorsque vous<a href=\"".
+                    PDF lorsque vous <a href=\"".
                     $this->generateUrl(
                         'activity_edit', array('id' => $activity
                             ->getId())
-                    )."\"> modifiez votre activité</a>."
+                    )."\">modifiez votre activité</a>."
                 );
 
                 return $this->redirectToRoute(
@@ -176,7 +176,7 @@ class ActivityController extends Controller
      * @return              Response A Response instance
      */
     public function editAction(Request $request, Activity $activity,
-                               FileUploaderService $fileUploaderService
+        FileUploaderService $fileUploaderService
     ) {
         $user = $this->getUser();
         if ($user->getOrganization()->getOrganizationActivity()->contains($activity)
@@ -243,7 +243,9 @@ class ActivityController extends Controller
             $form = $this->_createDeleteForm($activity);
             $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid() && $activity->getActivities()->isEmpty()) {
+            if ($form->isSubmitted() && $form->isValid()
+                && $activity->getActivities()->isEmpty()
+            ) {
                 $em = $this->getDoctrine()->getManager();
                 $activity->setIsActive(false);
                 $em->persist($activity);
@@ -256,7 +258,8 @@ class ActivityController extends Controller
             } else {
                 $this->addFlash(
                     'danger',
-                    "Vous ne pouvez pas supprimer cette activité car des offres sont liées a l'activité."
+                    "Vous ne pouvez pas supprimer cette activité
+                    car des offres sont liées a l'activité."
                 );
             }
             return $this->redirectToRoute('activity_index');

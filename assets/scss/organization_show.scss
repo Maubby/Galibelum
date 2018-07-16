@@ -1,5 +1,32 @@
 @import "_variables";
 
+/* Checking company or structure side */
+
+#company {
+  .boxing-canvas {
+    .degradeblue {
+      background: linear-gradient(to right, #fad27b, #f9867d) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+    .degradered {
+      background: linear-gradient(to right, #137faf, #86ccc2) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+    input::placeholder, select, textarea::placeholder {
+      font-weight: 200;
+      opacity: 0.7;
+      color: $red-placeholder-color !important;
+    }
+    .backblue-btn-sm {
+      background-image: linear-gradient(to right, #fad27b, #f9867d);
+      border-color: #FFFFFF;
+      width: 190px;
+    }
+  }
+}
+
 // Table
 
 #table_manager_wrapper {

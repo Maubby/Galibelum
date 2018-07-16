@@ -92,7 +92,7 @@ class OfferController extends Controller
      * @throws \Exception
      */
     public function newAction(Request $request, Activity $activity,
-                              ManagementFeesService $feesService
+        ManagementFeesService $feesService
     ) {
         if ($this->getUser()->hasRole('ROLE_STRUCTURE')
             && $this->getUser()->getOrganization()->getIsActive() === 1
@@ -228,7 +228,8 @@ class OfferController extends Controller
             } else {
                 $this->addFlash(
                     'danger',
-                    "Vous ne pouvez pas supprimer cette offre car une marque c'est déjà positionnée sur celle-ci."
+                    "Vous ne pouvez pas supprimer cette offre car une
+                    marque c'est déjà positionnée sur celle-ci."
                 );
             }
             return $this->redirectToRoute('offer_index');

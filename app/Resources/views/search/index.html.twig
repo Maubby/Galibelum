@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
+    <div class="container-fluid" id="{% if is_granted('ROLE_COMPANY') %}company{% else %}structure{% endif %}">
         <div class="row">
             <div class="col-md-12">
                 <!-- Return to the dashboard -->
