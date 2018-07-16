@@ -132,7 +132,7 @@ input[type=file]::-webkit-file-upload-button {
 /* Modal */
 
 .modal-body {
-  height: 80px;
+  min-height: 80px;
   padding: 25px 15px 15px 15px;
 }
 
