@@ -62,7 +62,8 @@ class LoginController implements AuthenticationSuccessHandlerInterface
 
         if ($this->authorizationChecker->isGranted(
             'ROLE_SUPER_ADMIN'
-            || 'ROLE_MANAGER')
+            || 'ROLE_MANAGER'
+        )
         ) {
             $response = new RedirectResponse(
                 $this->router->generate(

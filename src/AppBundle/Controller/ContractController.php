@@ -56,7 +56,8 @@ class ContractController extends Controller
 
                 $activities = $em->getRepository('AppBundle:Activity')->findby(
                     array(
-                        'organizationActivities' => $this->getUser()->getOrganization(),
+                        'organizationActivities' => $this->getUser()
+                            ->getOrganization(),
                     )
                 );
 
@@ -171,7 +172,10 @@ class ContractController extends Controller
                     en cours dans l'onglet Contractualisation."
             );
 
-            return $this->redirectToRoute('activity_show', array('id' => $offer->getActivity()->getId()));
+            return $this->redirectToRoute(
+                'activity_show',
+                array('id' => $offer->getActivity()->getId())
+            );
         }
         return $this->redirectToRoute('redirect');
     }

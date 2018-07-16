@@ -37,12 +37,12 @@ class MailerService
     /**
      * Send an email with recipients
      *
-     * @param string $fromEmail Sender's email
-     * @param string $toEmail Receiver's email
-     * @param string $subject Email's subject
-     * @param string $message Email's body
-     * @param null $managerTel
-     * @param null $managerEmail
+     * @param string $fromEmail    Sender's email
+     * @param string $toEmail      Receiver's email
+     * @param string $subject      Email's subject
+     * @param string $message      Email's body
+     * @param null   $managerTel   Variable manager phone number
+     * @param null   $managerEmail Variable manager email address
      *
      * @return int The number of successful recipients.
      * Can be 0 which indicates failure
@@ -52,8 +52,8 @@ class MailerService
      * @throws \Twig_Error_Syntax
      */
     public function sendEmail($fromEmail, $toEmail,
-                              $subject, $message, $managerTel = null,
-                              $managerEmail = null
+        $subject, $message, $managerTel = null,
+        $managerEmail = null
     ) {
         $message = \Swift_Message::newInstance()
             ->setFrom($fromEmail)
