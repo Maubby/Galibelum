@@ -190,7 +190,6 @@ class Activity
      * @var array
      *
      * @ORM\Column(name="socialLink", type="array", nullable=true)
-     *
      */
     private $socialLink;
 

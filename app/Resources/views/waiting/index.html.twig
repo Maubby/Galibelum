@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block body %}
-    <main id="company">
+    <main id="{% if is_granted('ROLE_COMPANY') %}company{% else %}structure{% endif %}">
         <section>
             <div class="container-fluid">
                 <div class="row">

@@ -1,16 +1,38 @@
-@import "style";
+@import "variables";
 
+.boxing-canvas {
+  background-color: #fff;
+  width: auto;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 580px;
+  padding: 30px;
+  border-radius: 4px;
+  border: 1px solid $border-color;
+}
+
+/* Checking company or structure side */
+
+#company {
   .boxing-canvas {
-    background-color: #fff;
-    width: auto;
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-    height: 580px;
-    padding: 30px;
-    border-radius: 4px;
-    border: 1px solid $border-color;
+    .waiting_title h2 {
+      background: linear-gradient(to right, #fad27b, #f9867d) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+    .light-blue-subtitle-text {
+      color: #e06e52;
+      font-weight: 300;
+      font-size: 1em;
+    }
+    .backblue-btn-sm {
+      background-image: linear-gradient(to right, #fad27b, #f9867d);
+      border-color: #FFFFFF;
+      width: 190px;
+    }
   }
+}
 
 .breadcrumb-boxing-canvas {
   width: auto;
