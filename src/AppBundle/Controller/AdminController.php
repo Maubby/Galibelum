@@ -87,7 +87,6 @@ class AdminController extends Controller
 
             if ($editForm->isSubmitted() && $editForm->isValid()) {
                 $this->getDoctrine()->getManager()->flush();
-
                 $this->addFlash(
                     'success',
                     "Vos modifications ont bien été prises en compte."
@@ -103,7 +102,6 @@ class AdminController extends Controller
                 'admin/edit.html.twig', array(
                     'manager' => $manager,
                     'edit_form' => $editForm->createView()
-
                 )
             );
         }

@@ -7,14 +7,18 @@
                     <div class="col-md-12">
                         <!-- Return to the dashboard -->
                         <ol class="breadcrumb breadcrumb-boxing-canvas">
-                                <a href="{{ path('dashboard_index') }}" class="degradeblue">Tableau de bord</a>
+                            <li><a href="{{ path('dashboard_index') }}" class="degradeblue">Tableau de bord</a></li>
                         </ol>
                         <!--1st part of the edit form-->
                         <div class="boxing-canvas">
                             <div class="col-md-12 text-center">
                                 <i class="fas fa-gamepad degradeblue" style="font-size: 50px"></i>
                                 <h5 class="degradeblue">Modification de votre structure eSport</h5>
-                                <p class="normal-subtitle-text text-justify text-center">Une fois le profil mis à jour, vous pourrez de nouveau rechercher des structures eSport et sponsoriser leurs offres.</p>
+                                <br>
+                                <p class="normal-subtitle-text text-center">
+                                    Une fois le profil de votre structure mis à jour, vous pourrez de nouveau
+                                    créer des activités et des offres afin d'entrer en relation avec des partenaires.
+                                </p>
                             </div>
                             {{ form_start(edit_form) }}
                             <!-- First section contact form -->

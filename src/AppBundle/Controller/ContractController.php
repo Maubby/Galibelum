@@ -39,40 +39,47 @@ class ContractController extends Controller
      */
     public function contractAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        if ($this->getUser()->hasRole('ROLE_STRUCTURE')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+            || $this->getUser()->hasRole('ROLE_COMPANY')
+            && $this->getUser()->getOrganization()->getIsActive() === 1
+        ) {
+            $em = $this->getDoctrine()->getManager();
 
-        if ($this->getUser()->hasRole('ROLE_COMPANY')) {
-            $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
-                array(
-                    'organization' => $this->getUser()
-                )
-            );
-        } else {
+            if ($this->getUser()->hasRole('ROLE_COMPANY')) {
+                $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
+                    array(
+                        'organization' => $this->getUser()
+                    )
+                );
+            } elseif ($this->getUser()->hasRole('ROLE_STRUCTURE')) {
 
-            $activities = $em->getRepository('AppBundle:Activity')->findby(
-                array(
-                    'organizationActivities' => $this->getUser()->getOrganization(),
-                )
-            );
+                $activities = $em->getRepository('AppBundle:Activity')->findby(
+                    array(
+                        'organizationActivities' => $this->getUser()->getOrganization(),
+                    )
+                );
 
-            $offers = $em->getRepository('AppBundle:Offer')->findby(
-                array(
-                    'activity' => $activities,
-                )
-            );
-            $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
-                array(
-                    'offer' => $offers,
+                $offers = $em->getRepository('AppBundle:Offer')->findby(
+                    array(
+                        'activity' => $activities,
+                    )
+                );
+                $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
+                    array(
+                        'offer' => $offers,
+                    )
+                );
+            }
+
+            return $this->render(
+                'contractualisation/index.html.twig', array(
+                    'contracts' => $contracts,
+                    'manager' => $this->getUser()->getOrganization()->getManagers(),
                 )
             );
         }
-
-        return $this->render(
-            'contractualisation/index.html.twig', array(
-                'contracts' => $contracts,
-                'manager' => $this->getUser()->getOrganization()->getManagers(),
-            )
-        );
+        return $this->redirectToRoute('redirect');
     }
 
     /**

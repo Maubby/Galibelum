@@ -96,7 +96,7 @@
                                     {% for uploadPdf in contract.uploadPdf if contract.uploadPdf is not null %}
                                         <a class="fas fa-file-pdf degradeblue" style="font-size: 20px" href="{{ asset('/uploads/pdf/organization_' ~
                                             contract.offer.activity.organizationActivities.id ~ '/activity_' ~ contract.offer.activity.id
-                                            ~ '/offer_' ~ contract.offer.id ~ '/' ~uploadPdf) }}"></a>
+                                            ~ '/offer_' ~ contract.offer.id ~ '/' ~uploadPdf) }}" target="_blank"></a>
                                     {% endfor %}
                                 </td>
                             </tr>

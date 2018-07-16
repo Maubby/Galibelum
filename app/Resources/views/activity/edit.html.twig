@@ -38,6 +38,13 @@
                         <div class="col-sm-12 text-center">
                             <i class="fas fa-desktop degradeblue" style="font-size: 50px"></i>
                             <h5 class="degradeblue text-center mt-10">Modifier votre activité</h5>
+                            <br>
+                            <p class="normal-subtitle-text text-center">
+                                Grâce à ce formulaire, vous pouvez mettre à jour les informations
+                                relatives à votre activité et renseigner les champs manquants. <br>
+                                Vous pouvez aussi télécharger un PDF détaillant davantage l'activité que vous
+                                souhaitez promouvoir.
+                            </p>
                         </div>
                         <div class="row">
                             <!--Activity's Type-->
@@ -97,7 +104,7 @@
                             <div class="col-sm-12 mt-20">
                                 <div class="form-group form-error">
                                     <i class="fas fa-link"></i>{{ form_label(edit_form.urlVideo, 'Vidéo de présentation') }}
-                                    {{ form_widget(edit_form.urlVideo, {'attr': {'class': "form-control input-field", 'placeholder': "Partager une vidéo de présentation de votre activité"}}) }}
+                                    {{ form_widget(edit_form.urlVideo, {'attr': {'class': "form-control input-field", 'placeholder': "Partager une vidéo de présentation de votre activité (Youtube, Dailymotion ou Vimeo)"}}) }}
                                     {{ form_errors(edit_form.urlVideo) }}
                                 </div>
                             </div>
@@ -126,14 +133,15 @@
                                 "{{ form_widget(edit_form.socialLink.vars.prototype,{'attr': {'class': "form-control input-field",'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}})|e }}"
                                      data-widget-tags="{{ '<div class="col-sm-11"></div>'|e }}">
                                     {% for socialLinkField in edit_form.socialLink %}
-                                        <div class="col-sm-11">
+                                        <div class="col-sm-10">
                                             {{ form_errors(socialLinkField) }}
                                             {{ form_widget(socialLinkField) }}
                                         </div>
                                     {% endfor %}
                                 </div>
-                                <div class="col-sm-1 mt-10">
+                                <div class="col-sm-2 mt-10">
                                     <span data-list="#socialLink-fields-list" class="add-socialLink"><i class="fas fa-plus-circle degradeblue" style="font-size: 30px"></i></span>
+                                    <span id="remove_sociallink" data-list="#socialLink-fields-list"><i class="fas fa-minus-circle degradeblue" style="font-size: 30px"></i></span>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +152,7 @@
                             <div class="col-sm-12 mt-20">
                                 <div class="form-group form-error">
                                     <i class="fas fa-edit"></i>{{ form_label(edit_form.description, 'Description') }}
-                                    {{ form_widget(edit_form.description, {'attr': {'class': "form-control input-field", 'placeholder': "Maximum 255 caractères"}}) }}
+                                    {{ form_widget(edit_form.description, {'attr': {'class': "form-control input-field", 'placeholder': "Maximum 768 caractères"}}) }}
                                     {{ form_errors(edit_form.description) }}
                                 </div>
                             </div>

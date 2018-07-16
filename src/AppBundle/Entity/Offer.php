@@ -150,22 +150,14 @@ class Offer
      * @ORM\Column(name="handlingFee", type="integer", nullable=true)
      */
     private $handlingFee;
-
+    
     /**
      *
-     * @var int
+     * @var boolean
      *
-     * @ORM\Column(name="finalDeal", type="integer", nullable=true)
+     * @ORM\Column(name="isActive", type="boolean")
      */
-    private $finalDeal;
-
-    /**
-     *
-     * @var int
-     *
-     * @ORM\Column(name="status", type="integer")
-     */
-    private $status;
+    private $isActive;
 
     /*
      * Add Personal Method
@@ -176,8 +168,8 @@ class Offer
      */
     public function __construct()
     {
-        $this->setStatus(0);
         $this->setCreationDate(new \DateTime());
+        $this->setIsActive(true);
     }
 
     /*
@@ -341,54 +333,6 @@ class Offer
     }
 
     /**
-     * Set finalDeal
-     *
-     * @param integer $finalDeal
-     *
-     * @return Offer
-     */
-    public function setFinalDeal($finalDeal)
-    {
-        $this->finalDeal = $finalDeal;
-
-        return $this;
-    }
-
-    /**
-     * Get finalDeal
-     *
-     * @return int
-     */
-    public function getFinalDeal()
-    {
-        return $this->finalDeal;
-    }
-
-    /**
-     * Set status
-     *
-     * @param integer $status
-     *
-     * @return Offer
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return int
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
      * Set activity
      *
      * @param \AppBundle\Entity\Activity $activity
@@ -545,5 +489,29 @@ class Offer
     public function getContracts()
     {
         return $this->contracts;
+    }
+
+    /**
+     * Set isActive.
+     *
+     * @param bool $isActive
+     *
+     * @return Offer
+     */
+    public function setIsActive($isActive)
+    {
+        $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get isActive.
+     *
+     * @return bool
+     */
+    public function getIsActive()
+    {
+        return $this->isActive;
     }
 }
