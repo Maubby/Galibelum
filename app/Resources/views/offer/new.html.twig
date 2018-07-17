@@ -4,9 +4,9 @@
 {% block title %}Créer une offre{% endblock %}
 
 {% block stylesheets %}
-
     <!-- Additional CSS links-->
     <link rel="stylesheet" href="{{ asset('build/offer.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/custom_datepicker.css') }}">
 {% endblock %}
 
 {% block header %}
@@ -99,7 +99,7 @@
                                 <i class="far fa-calendar-alt"></i>
                                 {{ form_label(form.date, "Date d'expiration *" )}} <i class="fas fa-question-circle"
                                   title="La phase de contractualisation est un processus long, il faut compter un minimum de trois semaines entre la date de création de l'offre et la réception des fonds. Vos éventuels partenaires ne pourront plus se positionner sur cette offre trois semaines avant la date d'expiration  que vous avez choisie."></i>
-                                {{ form_widget(form.date, {'attr': {'class':'form-control input-field' }}) }}
+                                {{ form_widget(form.date, {'attr': {'class':'form-control input-field js-datepicker' }}) }}
                                 {{ form_errors(form.date) }}
                             </div>
                             <div class="mt-20">
@@ -202,4 +202,5 @@
 {% block javascripts %}
     {{ parent () }}
     <script  src="{{ asset('build/fees_calculator.js') }}" ></script>
+    <script src="{{ asset('build/datepicker.js') }}"></script>
 {% endblock %}
