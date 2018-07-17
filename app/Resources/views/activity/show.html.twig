@@ -63,7 +63,7 @@
                     </div>
                     <p class="boxing-text description-text pb-20">{{ activity.description }}</p>
 
-                    {% if activity.dateStart is not empty %}
+                    {% if activity.type is same as("Évènement eSport") %}
                         <div class="boxing-body">
                             <h6 class="title"><strong>Date de l'évènement :</strong></h6>
                             <p>du {{ activity.dateStart|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y') }}
@@ -165,7 +165,7 @@
                                     <h5 class="panel-title pt-10">{{ offer.name }}</h5>
                                     <div class="panel-body">
                                         <p class="panel-item"><strong>Montant : </strong>{{ offer.amount }} €</p>
-                                        <p class="panel-item"><strong>Date d'expiration : <br></strong>{{ offer.date|date("d M Y") }}</p>
+                                        <p class="panel-item"><strong>Date d'expiration : <br></strong>{{ offer.date|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y') }}</p>
                                         <p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
                                         <p class="panel-item">{{ offer.description|slice(0,50) }}...</p>
                                         {% if activity.organizationActivities.user is same as(app.user) %}
