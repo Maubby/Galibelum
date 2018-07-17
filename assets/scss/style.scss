@@ -545,6 +545,7 @@ input::placeholder, select, textarea::placeholder {
   position: fixed;
   bottom: 30px;
   left: 30px;
+  cursor: pointer;
 }
 
 .manager {
@@ -553,18 +554,39 @@ input::placeholder, select, textarea::placeholder {
   margin-top: 5px;
 }
 
+a.manager-btn:hover{
+  text-decoration: none !important;
+}
+
+.modal-manager {
+  border: none;
+}
+
+.panel-body{
+  h5 {
+    font-size: 18px;
+  }
+}
+
+.bold-text-dark {
+  font-weight: bold;
+}
+
+.panel-manager {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  padding: 0;
+  margin-top: -20px;
+}
+
 .manager-box {
   background-color: #fff;
-  width: 16%;
   max-height: 50px;
   max-width: 215px;
   min-width: 210px;
   border-radius: 40px;
   z-index: 1;
-  border-top: 1px solid $border-color;
-  border-left: 1px solid $border-color;
-  border-right: 1px solid $border-color;
-  border-bottom: 1px solid $border-color;
 }
 
 .center {
@@ -572,3 +594,17 @@ input::placeholder, select, textarea::placeholder {
   vertical-align: middle;
   margin-bottom: 20px;
 }
+
+
+@media screen and (max-width: 770px) {
+  .manager-box {
+    max-width: 47px;
+    min-width: 47px;
+  }
+  .manager {
+    font-size: 40px;
+    margin-left: 4px;
+    margin-top: 2px;
+  }
+}
+
