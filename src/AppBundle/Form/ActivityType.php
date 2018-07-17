@@ -74,12 +74,14 @@ class ActivityType extends AbstractType
                 'dateStart', DateType::class, array(
                     'required' => true,
                     'widget' => 'single_text',
+                    'html5' => false,
                 )
             )
             ->add(
                 'dateEnd', DateType::class, array(
                     'required' => true,
                     'widget' => 'single_text',
+                    'html5' => false,
                 )
             )
             ->add(
