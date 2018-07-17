@@ -20,16 +20,18 @@
 {% block body %}
 
     <div class="container" id="{% if is_granted('ROLE_COMPANY') %}company{% else %}structure{% endif %}">
-        <div>
-            <!-- Return to the dashboard -->
-            <ol class="breadcrumb breadcrumb-boxing-canvas">
-                {% if is_granted('ROLE_STRUCTURE') %}
-                    <li><a href="{{ path('dashboard_index') }}">Tableau de bord</a></li>
-                {% endif %}
-                <li>Contractualisation</li>
-            </ol>
+        <div class="row">
+            <div class="col-sm-12">
+                <!--Return to the dashboar-->
+                <ol class="breadcrumb breadcrumb-boxing-canvas">
+                    {% if is_granted('ROLE_STRUCTURE') %}
+                        <li><a href="{{ path('dashboard_index') }}">Tableau de bord</a></li>
+                    {% endif %}
+                    <li>Modifier votre activité</li>
+                </ol>
+            </div>
         </div>
-        <div class="row boxing-canvas mt-50">
+        <div class="row boxing-canvas boxing-canvas-border-bottom">
             <div class="col-md-12 col-sm-12 col-xs-12 text-center">
 
                 <!-- Display different color regarding if a company or structure is logged in -->

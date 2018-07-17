@@ -149,6 +149,9 @@
                     {% if activity.activities is empty %}
                         <div class="item">
                             <div class="panel panel-default text-center">
+                                <div class="panel-heading text-center backblue">
+                                    <h2 class="panel-title" style="color: white;">Offre en cours</h2>
+                                </div>
                                 <div class="panel-body">
                                     <p class="bold-text-dark mt-20">Vous n'avez pas d'offre créée pour cette activité !</p>
                                     <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn-sm mt-10">Créer une offre</a>
@@ -168,42 +171,40 @@
                                         <p class="panel-item"><strong>Date d'expiration : <br></strong>{{ offer.date|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y') }}</p>
                                         <p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
                                         <p class="panel-item">{{ offer.description|slice(0,50) }}...</p>
-                                        {% if activity.organizationActivities.user is same as(app.user) %}
-                                            <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backblue-btn-sm">Modifier l'offre</a>
-                                        {% else %}
+                                        <button class="btn btn-primary backblue-btn-sm mb-10" data-toggle="modal"
+                                                data-target="#showdescription-{{ offer.id }}">Plus de détails</button>
+                                        {% if is_granted('ROLE_STRUCTURE') and  activity.organizationActivities.user is same as(app.user) %}
+                                            <a href="{{ path('offer_edit', { 'id': offer.id }) }}">Modifier l'offre</a>
+                                        {% elseif is_granted('ROLE_COMPANY') %}
                                             {% for pact in offer.pact if pact is same as(app.user.organization.id) %}
-                                                <button class="btn btn-primary backblue-btn-sm" data-toggle="modal"
+                                                <button class="btn darken-btn-sm" data-toggle="modal"
                                                         data-target="#showdescription-{{ offer.id }}" disabled>Déjà en relation</button>
                                             {% else %}
-                                                <button class="btn btn-primary backblue-btn-sm" data-toggle="modal"
-                                                        data-target="#showdescription-{{ offer.id }}">Plus de détails</button>
+                                                <a href="{{ path('contract_relation', { 'id': offer.id }) }}"
+                                                   class="btn btn-danger backred-btn-sm">Se mettre en relation</a>
                                             {% endfor %}
-                                            <!--Modal introducing the show description-->
-                                            <div class="modal fade" id="showdescription-{{ offer.id }}" tabindex="-1" role="dialog" aria-hidden="true">
-                                                <div class="modal-dialog modal-notify modal-info" role="document">
-                                                    <div class="modal-content">
-                                                        <!--Modal's header-->
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true"><i class="fas fa-times" style="color: #ff6f73;" aria-hidden="true"></i></span>
-                                                            </button>
-                                                            <h5 class="degradered">{{ offer.name }}</h5>
-                                                        </div>
-                                                        <!--Modal's body-->
-                                                        <div class="modal-body">
-                                                            <p><strong>Montant : </strong>{{ offer.amount }} €</p>
-                                                            <p><strong>Date d'expiration : <br></strong>{{ offer.date|date("d M Y") }}</p>
-                                                            <p><strong>Nombre de partenaire(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
-                                                            <p>{{ offer.description }}</p>
-                                                            <div>
-                                                                <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-primary backred-btn-sm">Se mettre en relation</a>
-                                                            </div>
-                                                        </div>
+                                        {% endif %}
+                                        <!--Modal introducing the show description-->
+                                        <div class="modal fade" id="showdescription-{{ offer.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-notify modal-info" role="document">
+                                                <div class="modal-content">
+                                                    <!--Modal's header-->
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true"><i class="fas fa-times" style="color: #ff6f73;" aria-hidden="true"></i></span>
+                                                        </button>
+                                                        <h5 class="degradered">{{ offer.name }}</h5>
+                                                    </div>
+                                                    <!--Modal's body-->
+                                                    <div class="modal-body">
+                                                        <p><strong>Montant : </strong>{{ offer.amount }} €</p>
+                                                        <p><strong>Date d'expiration : <br></strong>{{ offer.date|date("d M Y") }}</p>
+                                                        <p><strong>Nombre de partenaire(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
+                                                        <p>{{ offer.description }}</p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-primary backred-btn-sm mt-10">Se mettre en relation</a>
-                                        {% endif %}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
