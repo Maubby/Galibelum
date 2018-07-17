@@ -75,7 +75,6 @@ class ActivityType extends AbstractType
                     'required' => true,
                     'widget' => 'single_text',
                     'html5' => false,
-                    'format' => 'dd-MM-yyyy',
                 )
             )
             ->add(
@@ -83,7 +82,6 @@ class ActivityType extends AbstractType
                     'required' => true,
                     'widget' => 'single_text',
                     'html5' => false,
-                    'format' => 'dd-MM-yyyy',
                 )
             )
             ->add(
