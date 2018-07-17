@@ -7,6 +7,7 @@
 
     <!--Additional CSS links-->
     <link rel="stylesheet" href="{{ asset('build/activity.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/custom_datepicker.css') }}">
 {% endblock %}
 
 {% block header %}
@@ -84,14 +85,14 @@
                             <div class="col-sm-6 mt-20 activityDate activityHide">
                                 <div class="form-group form-error">
                                     <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateStart, "Début de l'évènement eSport *") }}
-                                    {{ form_widget(form.dateStart, {'attr': {'class': "form-control input-field activityDate"}}) }}
+                                    {{ form_widget(form.dateStart, {'attr': {'class': "form-control input-field activityDate js-datepicker"}}) }}
                                     {{ form_errors(form.dateStart) }}
                                 </div>
                             </div>
                             <div class="col-sm-6 mt-20 activityDate activityHide">
                                 <div class="form-group form-error">
                                     <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateEnd, "Fin de l'évènement eSport *") }}
-                                    {{ form_widget(form.dateEnd, {'attr': {'class': "form-control input-field activityDate"}}) }}
+                                    {{ form_widget(form.dateEnd, {'attr': {'class': "form-control input-field activityDate js-datepicker"}}) }}
                                     {{ form_errors(form.dateEnd) }}
                                 </div>
                             </div>
@@ -196,4 +197,5 @@
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{ google_api_key }}"></script>
     <!-- Custom JS code to bind to Autocomplete API -->
     <script src="{{ asset('build/autocomplete.js') }}"></script>
+    <script src="{{ asset('build/datepicker.js') }}"></script>
 {% endblock %}
