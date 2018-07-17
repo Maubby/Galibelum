@@ -78,19 +78,12 @@
                         <h5 class="degradeblue">Ajouter une offre :</h5>
                         <br>
                         <p class="normal-subtitle-text text-center">
-                            Voici le cœur de la plateforme Galibelum : c'est ici que vont débuter les prises
-                            de contact entre vous et de potentiels investisseurs.<br><br>
-                            Vous pouvez créer plusieurs offres pour un même type d'activité.<br><br>
-                            Vous pouvez nommer vos offres suivant le montant demandé, par exemple : Offre Premium,
-                            Offre Gold, Offre Silver, etc.<br><br>
-                            <strong>Pour que vous puissiez récolter les fonds nécéssaires à la mise en place de votre
+                            <strong>Pour que vous puissiez récolter les fonds nécessaires à la mise en place de votre
                             activité, un délai de 3 semaines est à observer pour signer les contrats et recevoir le
                             financement. Ainsi la date d'expiration que vous choisirez sera automatiquement réduite de
                             21 jours afin de finaliser sereinement les accords.</strong><br><br>
-                            Vous pouvez sélectionner jusqu'à 3 partenaires/investisseurs pouvant se positionner sur
-                            votre offre pour la financer.<br><br>
-                            Dans la partie Description, vous pourrez lister les avantages et les
-                            contre-parties que comportent votre offre afin d'inciter les investisseurs à la choisir.
+                            Vous êtes libre de choisir le nombre maximum de partenaires/investisseurs pouvant se positionner sur
+                            votre offre pour la financer.
                         </p>
                     </div>
                     {{ form_start(form) }}
@@ -154,7 +147,7 @@
                     <div class="col-sm-12 mt-20">
                         <i class="fas fa-edit"></i>
                         {{ form_label(form.description, "Description *" )}}
-                        {{ form_widget(form.description, {'attr': {'class':'form-control input-field', 'placeholder' : "Description de l'offre" }}) }}
+                        {{ form_widget(form.description, {'attr': {'class':'form-control input-field', 'placeholder' : "Vous pouvez lister les avantages et les contre-parties que comportent votre offre afin d'inciter les investisseurs à la choisir." }}) }}
                         {{ form_errors(form.description) }}
                     </div>
                     <div class="col-sm-12 col-xs-12 text-center">

@@ -29,32 +29,48 @@
     <!-- End flash message -->
     <div class="container">
         <div class="row boxing-canvas mt-40 mb-20">
-            <div class="col-md-3">
+            <div class="panel-heading text-center backblue">
+                <h2 class="panel-title" style="color: white;">Présentation de la structure</h2>
+            </div>
+            <div class="boxing-canvas-organization col-md-3 mt-10">
                 <h5>{{ activity.organizationActivities.name }}</h5>
                 <p>{{ activity.organizationActivities.status }}</p>
                 <p>{{ activity.organizationActivities.relationNumber }} salariés</p>
                 <p>{{ activity.organizationActivities.address }}</p>
             </div>
-            <div class="col-md-8 description-text">
+            <div class="col-md-8 description-text mt-20">
                 {{ activity.organizationActivities.description }}
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-9">
-                <div class="boxing-canvas">
+                <div class="boxing-canvas mt-20">
+                    <div class="panel-heading text-center backblue">
+                        <h2 class="panel-title" style="color: white;">Présentation de l'activité</h2>
+                    </div>
                     <h5 class="text-center degradeblue mb-30">{{ activity.name }} - {{ activity.type }}</h5>
-                    <div class="embed-responsive embed-responsive-16by9">
-                        {% if embedLink is same as(null) %}
-                            <img class="pl-40" src="{{ asset('build/images/video_player_overlay.png') }}">
-                            {% if is_granted('ROLE_STRUCTURE') and activity.organizationActivities.user is same as(app.user) %}
-                                <p class="text-center pt-20 bold-text-dark size">Veuillez ajouter une video de présentation</p>
+                    <div class="placing-video">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            {% if embedLink is same as(null) %}
+                                <img class="pl-40" src="{{ asset('build/images/video_player_overlay.png') }}">
+                                {% if is_granted('ROLE_STRUCTURE') and activity.organizationActivities.user is same as(app.user) %}
+                                    <p class="text-center pt-20 bold-text-dark size">Veuillez ajouter une video de présentation</p>
+                                {% endif %}
+                            {% else %}
+                                <iframe src="{{ embedLink }}"></iframe>
                             {% endif %}
-                        {% else %}
-                            <iframe src="{{ embedLink }}"></iframe>
-                        {% endif %}
+                        </div>
                     </div>
                     <p class="boxing-text description-text pb-20">{{ activity.description }}</p>
+
+                    {% if activity.dateStart is not empty %}
+                        <div class="boxing-body">
+                            <h6 class="title"><strong>Date de l'évènement :</strong></h6>
+                            <p>du {{ activity.dateStart|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y') }}
+                                au {{ activity.dateEnd|localizeddate('none', 'none', 'fr', null, 'EEEE d MMMM Y') }}
+                            </p>
+                        </div>
+                    {% endif %}
 
                     {% if activity.achievement is not empty %}
                         <div class="boxing-body">
@@ -76,7 +92,7 @@
                     {% endif %}
 
                     <div class="boxing-body">
-                        <h6 class="title"><strong>Sociaux : </strong></h6>
+                        <h6 class="title"><strong>Réseaux sociaux : </strong></h6>
                         <ul class="list-group">
                             {% for link in activity.socialLink %}
                                 {% if 'youtube' in link %}
@@ -119,13 +135,15 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    {% if activity.organizationActivities.user is same as(app.user) %}
-                        <a href="{{ path('activity_edit', { 'id': activity.id }) }}">Modifier l'activité</a>
-                    {% endif %}
+                    <div class="edit-activity-button">
+                        {% if activity.organizationActivities.user is same as(app.user) %}
+                            <a href="{{ path('activity_edit', { 'id': activity.id }) }}">Modifier l'activité</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 mt-20">
                 <div class="">
                     <!-- Loop for show information offers -->
                     {% if activity.activities is empty %}
@@ -141,20 +159,27 @@
                         {% for offer in activity.activities %}
                             <div class="item">
                                 <div class="panel panel-default text-center">
+                                    <div class="panel-heading text-center backblue">
+                                        <h2 class="panel-title" style="color: white;">Offre en cours</h2>
+                                    </div>
                                     <h5 class="panel-title pt-10">{{ offer.name }}</h5>
                                     <div class="panel-body">
                                         <p class="panel-item"><strong>Montant : </strong>{{ offer.amount }} €</p>
-                                        {#<p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.partnershipNumber }}</p>#}
                                         <p class="panel-item"><strong>Date d'expiration : <br></strong>{{ offer.date|date("d M Y") }}</p>
-                                        <p class="panel-item"><strong>Nombre de participant(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
+                                        <p class="panel-item"><strong>Nombre de partenaire(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
                                         <p class="panel-item">{{ offer.description|slice(0,50) }}...</p>
                                         {% if activity.organizationActivities.user is same as(app.user) %}
                                             <a href="{{ path('offer_edit', { 'id': offer.id }) }}" class="btn btn-primary backblue-btn-sm">Modifier l'offre</a>
                                         {% else %}
-                                            <button class="btn btn-primary backblue-btn-sm" data-toggle="modal"
-                                                    data-target="#showdescription">Plus de détails</button>
+                                            {% for pact in offer.pact if pact is same as(app.user.organization.id) %}
+                                                <button class="btn btn-primary backblue-btn-sm" data-toggle="modal"
+                                                        data-target="#showdescription-{{ offer.id }}" disabled>Déjà en relation</button>
+                                            {% else %}
+                                                <button class="btn btn-primary backblue-btn-sm" data-toggle="modal"
+                                                        data-target="#showdescription-{{ offer.id }}">Plus de détails</button>
+                                            {% endfor %}
                                             <!--Modal introducing the show description-->
-                                            <div class="modal fade" id="showdescription" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal fade" id="showdescription-{{ offer.id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog modal-notify modal-info" role="document">
                                                     <div class="modal-content">
                                                         <!--Modal's header-->
@@ -168,7 +193,7 @@
                                                         <div class="modal-body">
                                                             <p><strong>Montant : </strong>{{ offer.amount }} €</p>
                                                             <p><strong>Date d'expiration : <br></strong>{{ offer.date|date("d M Y") }}</p>
-                                                            <p><strong>Nombre de participant(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
+                                                            <p><strong>Nombre de partenaire(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
                                                             <p>{{ offer.description }}</p>
                                                             <div>
                                                                 <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-primary backred-btn-sm">Se mettre en relation</a>
@@ -177,6 +202,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-primary backred-btn-sm mt-10">Se mettre en relation</a>
                                         {% endif %}
                                     </div>
                                 </div>
