@@ -196,13 +196,13 @@
                                                             <p><strong>Nombre de partenaire(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
                                                             <p>{{ offer.description }}</p>
                                                             <div>
-                                                                <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-primary backred-btn-sm">Se mettre en relation</a>
+                                                                <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-danger backred-btn-sm">Se mettre en relation</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-primary backred-btn-sm mt-10">Se mettre en relation</a>
+                                            <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-danger backred-btn-sm mt-10">Se mettre en relation</a>
                                         {% endif %}
                                     </div>
                                 </div>
