@@ -18,8 +18,8 @@
                 {% else %}
                     <p class="panel-item"><strong>Adresse : </strong>{{ activity.address }}</p>
                     <p class="panel-item"><strong>Date de l'évènement : </strong><br>
-                        {% if activity.dateStart %}{{ activity.dateStart|date('d-m-Y') }}{% endif %}
-                        {% if activity.dateEnd %}{{ activity.dateEnd|date('d-m-Y') }}{% endif %}
+                        {% if activity.dateStart %}{{ activity.dateStart|localizeddate('none', 'none', 'fr', null, 'd MMMM Y') }} -{% endif %}
+                        {% if activity.dateEnd %}{{ activity.dateEnd|localizeddate('none', 'none', 'fr', null, 'd MMMM Y') }}{% endif %}
                     </p>
                 {% endif %}
                 <a href="{{ path('activity_show', { 'id': activity.id }) }}" class="btn btn-primary btn-sm">Plus de détails</a>
