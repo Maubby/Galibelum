@@ -330,13 +330,23 @@ p.size {
   box-shadow: none
 }
 
-.navbar-default .navbar-nav > li > a:hover {
+#structure .navbar-nav > li > a:hover {
   background-color: $background-a-color;
   color: white;
 }
 
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+#company .navbar-nav > li > a:hover {
+  background-color: $red-color;
+  color: white;
+}
+
+#structure .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
   background-color: #679ba7c2;
+  color: white;
+}
+
+#company .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background-color: rgba(192, 98, 81, 0.76);
   color: white;
 }
 

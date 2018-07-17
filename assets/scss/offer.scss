@@ -62,10 +62,6 @@ th {
   color: $placeholder-color;
 }
 
-.modal-body {
-  height: 80px;
-}
-
 /* Correct padding */
 
 .correct-pl {
@@ -75,7 +71,7 @@ th {
 /* Modal */
 
 .modal-body {
-  height: 80px;
+  min-height: 80px;
   padding: 25px 15px 15px 15px;
 }
 

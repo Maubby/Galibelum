@@ -18,19 +18,15 @@
 }
 
 .description-text {
-  margin-top: 5%;
   word-wrap: break-word;
-}
-
-.backblue-btn-sm {
-  width: 180px;
 }
 
 .boxing-canvas {
   max-width: 1200px;
   border: 1px solid $border-color;
+  border-radius: 4px;
   margin-bottom: 30px;
-  padding: 30px 30px 15px;
+  padding: 0 0 15px;
   h6 {
     font-size: 15px;
   }
@@ -48,4 +44,27 @@
       border-bottom: none;
     }
   }
+}
+
+.edit-activity-button {
+  padding-left: 15px;
+}
+
+.panel-item {
+  word-break: break-word;
+}
+
+.boxing-canvas-organization {
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 30px;
+  margin-left: 10px;
+  text-align: center;
+  background-color: rgba(129, 201, 193, 0.21);
+}
+
+.placing-video {
+  padding-left: 30px;
+  padding-right: 30px;
 }
