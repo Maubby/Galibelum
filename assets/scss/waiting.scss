@@ -47,32 +47,31 @@
   height: auto;
 }
 
-.backblue-btn{
+.backblue-btn {
   width: 20%;
   margin-bottom: 20px;
 }
 
-.waiting_contact{
+.waiting_contact {
   position: relative;
   bottom: 100%;
   transform: translateY(100%);
 }
 
-.waiting_name{
+.waiting_name {
   float: right;
 }
 
-h2{
+h2 {
   font-size: 40px;
   margin-top: 20px;
 }
 
-@media (min-width: 768px) and (max-width: 1200px){
-  .waiting_contact{
+@media (min-width: 768px) and (max-width: 1200px) {
+  .waiting_contact {
     margin-bottom: 30px;
   }
-  .boxing-canvas{
+  .boxing-canvas {
     height: 550px;
   }
 }
-
