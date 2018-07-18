@@ -192,7 +192,7 @@
                                                         <!--Modal's body-->
                                                         <div class="modal-body">
                                                             <p><strong>Montant : </strong>{{ offer.amount }} €</p>
-                                                            <p><strong>Date d'expiration : <br></strong>{{ offer.date|date("d M Y") }}</p>
+                                                            <p><strong>Date d'expiration : <br></strong>{{ offer.date|localizeddate('none', 'none', 'fr', null, 'd MMMM Y') }}</p>
                                                             <p><strong>Nombre de partenaire(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
                                                             <p>{{ offer.description }}</p>
                                                             <div>

@@ -20,6 +20,7 @@ Encore
     .addStyleEntry('profile', './assets/scss/profile.scss')
     .addStyleEntry('organization_inscription', './assets/scss/organization_inscription.scss')
     .addStyleEntry('organization_show', './assets/scss/organization_show.scss')
+    .addStyleEntry('contract_show', './assets/scss/contract_show.scss')
     .addStyleEntry('waiting', './assets/scss/waiting.scss')
     .addStyleEntry('dashboard', './assets/scss/dashboard.scss')
     .addStyleEntry('activity_show', './assets/scss/activity_show.scss')

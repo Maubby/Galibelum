@@ -6,7 +6,7 @@
 {% block stylesheets %}
 
     <!-- Additional CSS links-->
-    <link rel="stylesheet" href="{{ asset('build/organization_show.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/contract_show.css') }}">
 {% endblock %}
 
 {% block header %}
@@ -18,8 +18,8 @@
 {% endblock %}
 
 {% block body %}
-
     <div class="container" id="{% if is_granted('ROLE_COMPANY') %}company{% else %}structure{% endif %}">
+
         {% if is_granted('ROLE_STRUCTURE') %}
             <div>
                 <!-- Return to the dashboard -->
@@ -29,9 +29,9 @@
                 </ol>
             </div>
         {% endif %}
+
         <div class="row boxing-canvas mt-50">
             <div class="col-md-12 col-sm-12 col-xs-12 text-center">
-
                 <!-- Display different color regarding if a company or structure is logged in -->
                 <i class="fas fa-briefcase text-center degradeblue" style="font-size: 50px"></i>
                 <h5 class="degradeblue">Contractualisation</h5>
@@ -44,11 +44,10 @@
 
                 <!-- Creating a responsive table -->
                 <table id="table_manager" class="table table-responsive table-striped text-center mt-40">
-
                     <!-- Table head -->
                     <thead>
                     <tr>
-                        <th>Nom de l' activité</th>
+                        <th>Nom de l'activité</th>
                         <th>Nom de l'offre</th>
                         <th>Montant demandé</th>
                         <th>Avant le</th>
@@ -63,10 +62,10 @@
                     <tbody>
                     {% for contract in contracts %}
                         <tr>
-                            <td>{{ contract.offer.activity.name }}</td>
-                            <td>{{ contract.offer.name }}</td>
+                            <td><a href="{{ path('activity_show', {'id': contract.offer.activity.id }) }}">{{ contract.offer.activity.name }}</a></td>
+                            <td><a href="{{ path('activity_show', {'id': contract.offer.activity.id }) }}">{{ contract.offer.name }}</a></td>
                             <td>{{ contract.offer.amount }}</td>
-                            <td>{{ contract.offer.date|date('d M Y') }}</td>
+                            <td>{{ contract.offer.date|localizeddate('none', 'none', 'fr', null, 'd MMMM Y') }}</td>
                             <td class="degradered">
                                 {% if is_granted('ROLE_STRUCTURE') %}
                                     {{ contract.organization.name }}
