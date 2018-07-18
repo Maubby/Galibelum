@@ -39,7 +39,8 @@ table.dataTable tbody td {
 }
 
 .boxing-canvas {
-  max-width: 1500px;
+  max-width: 1250px;
+  border-radius: 4px;
 }
 
 .container {
@@ -69,64 +70,16 @@ th, td {
 
 // Buttons part for manager_contract
 
-@function hsb($h-hsb, $s-hsb, $b-hsb, $a: 1) {
-  @if $b-hsb == 0 {
-    @return hsla(0, 0, 0, $a);
-  } @else {
-    $l-hsl: ($b-hsb/2) * (2 - ($s-hsb/100));
-    $s-hsl: ($b-hsb * $s-hsb) / if($l-hsl < 50, $l-hsl * 2, 200 - $l-hsl * 2);
-    @return hsla($h-hsb, $s-hsl, $l-hsl, $a);
-  }
-}
-
-@function hsb-saturate($s, $a) {
-  @if $s == 0 {
-    @return 0;
-  } @else {
-    @return $s + $a;
-  }
-}
-
-@mixin buttonize($h, $s, $b, $light: 0) {
-  $color: hsb($h, $s, $b);
-  $color-dark: hsb($h, hsb-saturate($s, 10), $b);
-  $inset-top: inset 0 1px 0 hsb($h, $s - 20, $b + 10);
-  $inset-bottom: inset 0 -1px 0 hsb($h, hsb-saturate($s, 10), $b - 10);
-  $inset: inset 0 0 0 1px hsb($h, hsb-saturate($s, - 10), $b);
-
-  background-color: $color;
-  background-image: linear-gradient(to bottom, $color, $color-dark);
-  border: 1px solid hsb($h, hsb-saturate($s, 20), $b - 20);
-
-  @if $light == 1 {
-    color: hsb($h, hsb-saturate($s, 40), $b - 40);
-    text-shadow: 0 1px 0 rgba(white, 0.5);
-  } @else {
-    color: white;
-    text-shadow: 0 1px 2px rgba(black, 0.3);
-  }
-
-  &:hover,
-  &:focus {
-    background: $color-dark;
-    border-color: hsb($h, hsb-saturate($s, 40), $b - 40);
-  }
-
-  &:active {
-    background: $color-dark;
-  }
-}
-
 strong {
   font-weight: bold;
 }
 
 .button {
-  @include buttonize(0, 0, 95, 1);
+  border-image: initial;
   border-radius: 3px;
   cursor: pointer;
   display: inline-block;
-  font-family: $font-family-base, sans-serif;
+  font-family: sans-serif, sans-serif;
   font-size: 12px;
   line-height: 20px;
   width: 140px;
@@ -135,29 +88,65 @@ strong {
   vertical-align: top;
   font-weight: bold;
 }
-
-.button-blue {
-  @include buttonize(199, 71, 89);
-}
-
-.button-green {
-  @include buttonize(97, 42, 80);
-}
-
-.button-purple {
-  @include buttonize(249, 34, 73);
-}
-
-.button-red {
-  @include buttonize(4, 58, 93);
+.button-grey {
+  background-color: #f2f2f2;
+  background-image: linear-gradient(to bottom, #f2f2f2, #f2f2f2);
+  border: 1px solid #bfbfbf;
+  color: #8c8c8c;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .button-yellow {
-  @include buttonize(49, 54, 99, 1);
-
+  background-color: #fce374;
+  background-image: linear-gradient(to bottom, #fce374, #fcdf5b);
+  border: 1px solid #c9ae34;
+  color: #967d09;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
-.no-button-effect a:hover {
+.button-green {
+  background-color: rgb(151, 204, 118);
+  background-image: linear-gradient(rgb(151, 204, 118), rgb(139, 204, 98));
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) ;
+  border: 1px solid rgb(95, 153, 58);
+}
+
+.button-blue {
+  background-color: #42B0E3;
+  background-image: linear-gradient(to bottom, #42B0E3, #2BA9E3);
+  border: 1px solid #107DB0;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.button-purple {
+  background-color: #847BBA;
+  background-image: linear-gradient(to bottom, #847BBA, #7568BA);
+  border: 1px solid #493E87;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.button-red {
+  background-color: #ED6D64;
+  background-image: linear-gradient(to bottom, #ED6D64, #ED574C);
+  border: 1px solid #BA3329;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.button-yellow:hover {
+  color: #967d09;
   text-decoration: none;
-  color: rgba(255, 255, 255, 1);
+}
+
+.button-grey:hover {
+  color: #8c8c8c;
+  text-decoration: none;
+}
+
+.button-green:hover, .button-blue:hover, .button-purple:hover, .button-red:hover {
+  color: white;
+  text-decoration: none;
 }
