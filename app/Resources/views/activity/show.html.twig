@@ -183,35 +183,8 @@
                                                 <a href="{{ path('contract_relation', { 'id': offer.id }) }}"
                                                    class="btn btn-danger backred-btn-sm">Se mettre en relation</a>
                                             {% endfor %}
-<<<<<<< HEAD
-                                            <!--Modal introducing the show description-->
-                                            <div class="modal fade" id="showdescription-{{ offer.id }}" tabindex="-1" role="dialog" aria-hidden="true">
-                                                <div class="modal-dialog modal-notify modal-info" role="document">
-                                                    <div class="modal-content">
-                                                        <!--Modal's header-->
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true"><i class="fas fa-times" style="color: #ff6f73;" aria-hidden="true"></i></span>
-                                                            </button>
-                                                            <h5 class="degradered">{{ offer.name }}</h5>
-                                                        </div>
-                                                        <!--Modal's body-->
-                                                        <div class="modal-body">
-                                                            <p><strong>Montant : </strong>{{ offer.amount }} €</p>
-                                                            <p><strong>Date d'expiration : <br></strong>{{ offer.date|localizeddate('none', 'none', 'fr', null, 'd MMMM Y') }}</p>
-                                                            <p><strong>Nombre de partenaire(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
-                                                            <p>{{ offer.description }}</p>
-                                                            <div>
-                                                                <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-danger backred-btn-sm">Se mettre en relation</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-danger backred-btn-sm mt-10">Se mettre en relation</a>
                                         {% endif %}
-=======
-                                        {% endif %}
+
                                         <!--Modal introducing the show description-->
                                         <div class="modal fade" id="showdescription-{{ offer.id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-notify modal-info" role="document">
@@ -226,14 +199,17 @@
                                                     <!--Modal's body-->
                                                     <div class="modal-body">
                                                         <p><strong>Montant : </strong>{{ offer.amount }} €</p>
-                                                        <p><strong>Date d'expiration : <br></strong>{{ offer.date|date("d M Y") }}</p>
+                                                        <p><strong>Date d'expiration : <br></strong>{{ offer.date|localizeddate('none', 'none', 'fr', null, 'd MMMM Y') }}</p>
                                                         <p><strong>Nombre de partenaire(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
                                                         <p>{{ offer.description }}</p>
+                                                        <div>
+                                                            <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-danger backred-btn-sm">Se mettre en relation</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
->>>>>>> ca48fef0106eeba64f3768e4b2ca44e6be6a8a12
+                                        <!-- End modal -->
                                     </div>
                                 </div>
                             </div>
