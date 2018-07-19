@@ -4,9 +4,9 @@
 {% block title %}Rechercher une activité{% endblock %}
 
 {% block stylesheets %}
-
     <!-- Additional CSS links-->
     <link rel="stylesheet" href="{{ asset('build/search.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/custom_datepicker.css') }}">
 {% endblock %}
 
 {% block header %}
@@ -62,7 +62,7 @@
                     </div>
                     <div class="col-md-3 box-border-search pt-10">
                         <label>Recherche par date :
-                            <input type="date" name="date" class="input-field form-control mt-30" value="{{ date|date('Y-m-d') }}" />
+                            <input name="date" class="input-field form-control mt-30 js-datepicker" value="{{ date|date('d-m-Y') }}" />
                         </label>
                     </div>
                     <div class="col-md-12 mt-30">
@@ -71,7 +71,7 @@
                 </form>
             </div>
         </div>
-        <div class="row boxing-canvas mt-50">
+        <div class="row boxing-canvas boxing-canvas-border-bottom mt-50">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <!-- Creating a responsive table -->
                 <div class="table_responsive table-striped">
@@ -124,5 +124,6 @@
 
 {% block javascripts %}
     <script src="{{ asset('build/table_manager.js') }}"></script>
+    <script src="{{ asset('build/datepicker.js') }}"></script>
 {% endblock %}
 
