@@ -184,6 +184,7 @@
                                                    class="btn btn-danger backred-btn-sm">Se mettre en relation</a>
                                             {% endfor %}
                                         {% endif %}
+
                                         <!--Modal introducing the show description-->
                                         <div class="modal fade" id="showdescription-{{ offer.id }}" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-notify modal-info" role="document">
@@ -198,13 +199,17 @@
                                                     <!--Modal's body-->
                                                     <div class="modal-body">
                                                         <p><strong>Montant : </strong>{{ offer.amount }} €</p>
-                                                        <p><strong>Date d'expiration : <br></strong>{{ offer.date|date("d M Y") }}</p>
+                                                        <p><strong>Date d'expiration : <br></strong>{{ offer.date|localizeddate('none', 'none', 'fr', null, 'd MMMM Y') }}</p>
                                                         <p><strong>Nombre de partenaire(s) : </strong>{{ offer.PartnershipNumber|length }}</p>
                                                         <p>{{ offer.description }}</p>
+                                                        <div>
+                                                            <a href="{{ path('contract_relation', { 'id': offer.id }) }}" class="btn btn-danger backred-btn-sm">Se mettre en relation</a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- End modal -->
                                     </div>
                                 </div>
                             </div>

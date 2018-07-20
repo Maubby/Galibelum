@@ -1,0 +1,136 @@
+@import "_variables";
+
+/* Checking company or structure side */
+
+#company {
+  .boxing-canvas {
+    .degradered {
+      background: linear-gradient(to right, #fad27b, #f9867d) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+    .degradeblue {
+      background: linear-gradient(to right, #137faf, #86ccc2) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+    input::placeholder, select, textarea::placeholder {
+      font-weight: 200;
+      opacity: 0.7;
+      color: $red-placeholder-color !important;
+    }
+    .backred-btn-sm {
+      background-image: linear-gradient(to right, #fad27b, #f9867d);
+      border-color: #FFFFFF;
+      width: 190px;
+    }
+  }
+}
+
+// Table
+
+#table_manager_wrapper {
+  margin-top: 50px;
+}
+
+.dataTables_filter input {
+  width: 140px;
+  padding: 7px 16px 7px;
+  margin: 8px 0;
+  border: none;
+  background: rgba(245, 248, 250, 0.79);
+  color: #999999;
+  border-radius: 4px;
+}
+
+table.dataTable tbody td {
+  padding: 8px 10px;
+  vertical-align: middle;
+}
+
+table.dataTable.no-footer {
+  border-bottom: none;
+}
+
+.boxing-canvas {
+  max-width: 1500px;
+}
+
+th, td {
+  text-align: center;
+}
+
+// Buttons part for manager_contract
+
+@function hsb($h-hsb, $s-hsb, $b-hsb, $a: 1) {
+  @if $b-hsb == 0 {
+    @return hsla(0, 0, 0, $a);
+  } @else {
+    $l-hsl: ($b-hsb/2) * (2 - ($s-hsb/100));
+    $s-hsl: ($b-hsb * $s-hsb) / if($l-hsl < 50, $l-hsl * 2, 200 - $l-hsl * 2);
+    @return hsla($h-hsb, $s-hsl, $l-hsl, $a);
+  }
+}
+
+@function hsb-saturate($s, $a) {
+  @if $s == 0 {
+    @return 0;
+  } @else {
+    @return $s + $a;
+  }
+}
+
+@mixin buttonize($h, $s, $b, $light: 0) {
+  $color: hsb($h, $s, $b);
+  $color-dark: hsb($h, hsb-saturate($s, 10), $b);
+  $inset-top: inset 0 1px 0 hsb($h, $s - 20, $b + 10);
+  $inset-bottom: inset 0 -1px 0 hsb($h, hsb-saturate($s, 10), $b - 10);
+  $inset: inset 0 0 0 1px hsb($h, hsb-saturate($s, - 10), $b);
+
+  background-color: $color;
+  background-image: linear-gradient(to bottom, $color, $color-dark);
+  border: 1px solid hsb($h, hsb-saturate($s, 20), $b - 20);
+
+  @if $light == 1 {
+    color: hsb($h, hsb-saturate($s, 40), $b - 40);
+    text-shadow: 0 1px 0 rgba(white, 0.5);
+  } @else {
+    color: white;
+    text-shadow: 0 1px 2px rgba(black, 0.3);
+  }
+}
+
+.button {
+  @include buttonize(0, 0, 95, 1);
+  border-radius: 3px;
+  cursor: pointer;
+  display: inline-block;
+  font-family: $font-family-base, sans-serif;
+  font-size: 12px;
+  line-height: 20px;
+  width: 140px;
+  padding: 7px 16px 7px;
+  transition: all 20ms ease-out;
+  vertical-align: top;
+  font-weight: bold;
+}
+
+.button-blue {
+  @include buttonize(199, 71, 89);
+}
+
+.button-green {
+  @include buttonize(97, 42, 80);
+}
+
+.button-purple {
+  @include buttonize(249, 34, 73);
+}
+
+.button-red {
+  @include buttonize(4, 58, 93);
+}
+
+.button-yellow {
+  @include buttonize(49, 54, 99, 1);
+}
