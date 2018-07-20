@@ -4,15 +4,15 @@
 {% block title %}Créer votre activité{% endblock %}
 
 {% block stylesheets %}
-
     <!--Additional CSS links-->
     <link rel="stylesheet" href="{{ asset('build/activity.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/custom_datepicker.css') }}">
 {% endblock %}
 
 {% block header %}
     <!--PASSED W3C VALIDATOR https://validator.w3.org/-->
     <!--Zero intern console warning-->
-
+    
     <!--Navbar in views/base.html.twig-->
     {{ parent() }}
 {% endblock %}
@@ -25,12 +25,12 @@
                     <div class="col-sm-12">
                         <!-- Return to the dashboard -->
                         <ol class="breadcrumb breadcrumb-boxing-canvas">
-                            <li class="degradeblue"><a href="{{ path('dashboard_index') }}">Tableau de bord</a></li>
+                            <li><a href="{{ path('dashboard_index') }}">Tableau de bord</a></li>
                             <li>Créer votre activité</li>
                         </ol>
                     </div>
                 </div>
-                <div class="row boxing-canvas">
+                <div class="row boxing-canvas boxing-canvas-border-bottom">
                     <!--1st part of the new form-->
                     <!--New form-->
                     {{ form_start(form) }}
@@ -84,14 +84,14 @@
                             <div class="col-sm-6 mt-20 activityDate activityHide">
                                 <div class="form-group form-error">
                                     <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateStart, "Début de l'évènement eSport *") }}
-                                    {{ form_widget(form.dateStart, {'attr': {'class': "form-control input-field activityDate"}}) }}
+                                    {{ form_widget(form.dateStart, {'attr': {'class': "form-control input-field activityDate js-datepicker"}}) }}
                                     {{ form_errors(form.dateStart) }}
                                 </div>
                             </div>
                             <div class="col-sm-6 mt-20 activityDate activityHide">
                                 <div class="form-group form-error">
                                     <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateEnd, "Fin de l'évènement eSport *") }}
-                                    {{ form_widget(form.dateEnd, {'attr': {'class': "form-control input-field activityDate"}}) }}
+                                    {{ form_widget(form.dateEnd, {'attr': {'class': "form-control input-field activityDate js-datepicker"}}) }}
                                     {{ form_errors(form.dateEnd) }}
                                 </div>
                             </div>
@@ -127,7 +127,6 @@
                             <div class="mt-20">
                                 <div class="col-sm-12 form-error">
                                     <i class="fas fa-user-friends"></i>{{ form_label(form.socialLink, 'Réseaux sociaux et chaînes de streaming') }}
-
                                 </div>
 
                                 <div class="col-sm-10">
@@ -196,4 +195,5 @@
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{ google_api_key }}"></script>
     <!-- Custom JS code to bind to Autocomplete API -->
     <script src="{{ asset('build/autocomplete.js') }}"></script>
+    <script src="{{ asset('build/datepicker.js') }}"></script>
 {% endblock %}

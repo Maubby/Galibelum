@@ -4,9 +4,9 @@
 {% block title %}Modifier votre offre{% endblock %}
 
 {% block stylesheets %}
-
     <!-- Additional CSS links-->
     <link rel="stylesheet" href="{{ asset('build/offer.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/custom_datepicker.css') }}">
 {% endblock %}
 
 {% block header %}
@@ -34,7 +34,7 @@
                 <div class="col-md-12">
                     <!-- Return to the dashboard -->
                     <ol class="breadcrumb breadcrumb-boxing-canvas">
-                        <li><a href="{{ path('dashboard_index') }}" class="degradeblue">Tableau de bord</a></li>
+                        <li><a href="{{ path('dashboard_index') }}">Tableau de bord</a></li>
                         <li>Modifier votre offre</li>
                     </ol>
                 </div>
@@ -63,7 +63,7 @@
                             <div class="mt-20">
                                 <i class="far fa-calendar-alt"></i>
                                 {{ form_label(edit_form.date, "Date d'expiration" )}} <i class="fas fa-question-circle" title="La phase de contractualisation est un processus long, il faut compter un minimum de trois semaines entre la date de création de l'offre et la réception des fonds. Vos éventuels partenaires ne pourront plus se positionner sur cette offre trois semaines avant la date d'expiration que vous avez choisie."></i>
-                                {{ form_widget(edit_form.date, {'attr': {'class':'form-control input-field'}}) }}
+                                {{ form_widget(edit_form.date, {'attr': {'class':'form-control input-field js-datepicker'}}) }}
                                 {{ form_errors(edit_form.date) }}
                             </div>
                             <div class="mt-20">
@@ -192,4 +192,5 @@
 {% block javascripts %}
     {{ parent () }}
     <script  src="{{ asset('build/fees_calculator.js') }}" ></script>
+    <script src="{{ asset('build/datepicker.js') }}"></script>
 {% endblock %}

@@ -12,7 +12,7 @@ Encore
     .enableSassLoader()
     .enableSourceMaps(!Encore.isProduction())
     .autoProvidejQuery()
-    .createSharedEntry('vendor', ['jquery', 'bootstrap-sass', 'bootstrap-sass/assets/stylesheets/_bootstrap.scss',
+    .createSharedEntry('vendor', ['jquery', 'jquery-ui', 'bootstrap-sass', 'bootstrap-datepicker', 'bootstrap-sass/assets/stylesheets/_bootstrap.scss',
         'datatables.net-dt/css/jquery.dataTables.min.css', 'datatables.net-dt/js/dataTables.dataTables.min.js'])
     .addStyleEntry('style', './assets/scss/style.scss')
     .addStyleEntry('register', './assets/scss/register.scss')
@@ -20,6 +20,7 @@ Encore
     .addStyleEntry('profile', './assets/scss/profile.scss')
     .addStyleEntry('organization_inscription', './assets/scss/organization_inscription.scss')
     .addStyleEntry('organization_show', './assets/scss/organization_show.scss')
+    .addStyleEntry('contract_show', './assets/scss/contract_show.scss')
     .addStyleEntry('waiting', './assets/scss/waiting.scss')
     .addStyleEntry('dashboard', './assets/scss/dashboard.scss')
     .addStyleEntry('activity_show', './assets/scss/activity_show.scss')
@@ -32,6 +33,7 @@ Encore
     .addStyleEntry('page_404', './assets/scss/page_404.scss')
     .addStyleEntry('_variables', './assets/scss/_variables.scss')
     .addStyleEntry('check_confirmed_email', './assets/scss/check_confirmed_email.scss')
+    .addStyleEntry('custom_datepicker', './assets/scss/custom_datepicker.scss')
     .addEntry('login_script', './assets/js/login_script.js')
     .addEntry('carousel', './assets/js/carousel.js')
     .addEntry('input_display', './assets/js/input_display.js')
@@ -40,6 +42,7 @@ Encore
     .addEntry('table_manager', './assets/js/table_manager.js')
     .addEntry('add_collection_widget', './assets/js/add_collection_widget.js')
     .addEntry('fees_calculator', './assets/js/fees_calculator.js')
+    .addEntry('datepicker', './assets/js/datepicker.js')
 
     // Targeting images repository
     .addPlugin(new CopyWebpackPlugin([

@@ -47,7 +47,7 @@
                 <div class="col-md-12">
                     <!-- Return to the dashboard -->
                     <ol class="breadcrumb breadcrumb-boxing-canvas">
-                        <li><a href="{{ path('dashboard_index') }}" class="degradeblue">Tableau de bord</a></li>
+                        <li><a href="{{ path('dashboard_index') }}">Tableau de bord</a></li>
                         <li>Ensemble de vos offres</li>
                     </ol>
                 </div>
@@ -64,7 +64,7 @@
             </div>
             <!-- End Offer list Title-->
 
-            <div class="row boxing-canvas">
+            <div class="row boxing-canvas boxing-canvas-border-bottom">
                 <!-- eSport Event list -->
                 {% if event_activities is not empty %}
                     <div class="col-md-12 text-center mt-30 pt-30">

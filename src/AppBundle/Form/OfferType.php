@@ -59,14 +59,16 @@ class OfferType extends AbstractType
             ->add(
                 'date', DateType::class, array(
                     'required' => true,
-                    'widget' => 'single_text')
+                    'widget' => 'single_text',
+                    'html5' => false,
+                )
             )
             ->add(
                 'description', TextareaType::class, array(
                     'required' => true,
                     'attr' => array(
                         'minlength' => 16,
-                        'maxlength' => 250))
+                        'maxlength' => 768))
             );
     }
 

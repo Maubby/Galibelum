@@ -330,7 +330,7 @@ p.size {
   box-shadow: none
 }
 
-.navbar-default .navbar-nav > li > a:hover {
+#structure .navbar-nav > li > a:hover {
   background-color: $background-a-color;
   color: white;
 }
@@ -340,7 +340,7 @@ p.size {
   color: white;
 }
 
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+#structure .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
   background-color: #679ba7c2;
   color: white;
 }
@@ -401,6 +401,12 @@ p.size {
 
 .backred-btn-sm {
   background-image: linear-gradient(to right, #fad27b, #f9867d);
+  border-color: #FFFFFF;
+  width: 190px;
+}
+
+.darken-btn-sm {
+  background-image: linear-gradient(to right, #dddde3, #90888a);
   border-color: #FFFFFF;
   width: 190px;
 }
@@ -524,8 +530,15 @@ input::placeholder, select, textarea::placeholder {
   border-right: 1px solid $border-color;
 }
 
+.boxing-canvas-border-bottom {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom: 1px solid $border-color;
+}
+
 .breadcrumb-boxing-canvas {
   width: auto;
+  max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;
@@ -545,6 +558,7 @@ input::placeholder, select, textarea::placeholder {
   position: fixed;
   bottom: 30px;
   left: 30px;
+  cursor: pointer;
 }
 
 .manager {
@@ -553,18 +567,39 @@ input::placeholder, select, textarea::placeholder {
   margin-top: 5px;
 }
 
+a.manager-btn:hover {
+  text-decoration: none !important;
+}
+
+.modal-manager {
+  border: none;
+}
+
+.panel-body {
+  h5 {
+    font-size: 18px;
+  }
+}
+
+.bold-text-dark {
+  font-weight: bold;
+}
+
+.panel-manager {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  padding: 0;
+  margin-top: -20px;
+}
+
 .manager-box {
   background-color: #fff;
-  width: 16%;
   max-height: 50px;
   max-width: 215px;
   min-width: 210px;
   border-radius: 40px;
   z-index: 1;
-  border-top: 1px solid $border-color;
-  border-left: 1px solid $border-color;
-  border-right: 1px solid $border-color;
-  border-bottom: 1px solid $border-color;
 }
 
 .center {
@@ -573,7 +608,14 @@ input::placeholder, select, textarea::placeholder {
   margin-bottom: 20px;
 }
 
-.navbar-brand > .logo-galibelum {
-  margin-left: 60px;
-  padding-top: 50px;
+@media screen and (max-width: 770px) {
+  .manager-box {
+    max-width: 47px;
+    min-width: 47px;
+  }
+  .manager {
+    font-size: 40px;
+    margin-left: 4px;
+    margin-top: 2px;
+  }
 }
