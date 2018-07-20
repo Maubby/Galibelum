@@ -38,6 +38,10 @@ table.dataTable tbody td {
   vertical-align: middle;
 }
 
+table.dataTable tbody{
+  border: 1px solid;
+}
+
 .boxing-canvas {
   max-width: 1250px;
   border-radius: 4px;
@@ -149,4 +153,10 @@ strong {
 .button-green:hover, .button-blue:hover, .button-purple:hover, .button-red:hover {
   color: white;
   text-decoration: none;
+}
+
+@media screen and (max-width: 767px) {
+  table.dataTable.no-footer {
+    border-bottom: none;
+  }
 }
