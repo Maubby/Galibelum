@@ -95,14 +95,16 @@ class OfferController extends Controller
      * @throws \Exception
      */
     public function newAction(Request $request, Activity $activity,
-        ManagementFeesService $feesService
-    ) {
+                              ManagementFeesService $feesService
+    )
+    {
         if ($this->getUser()->hasRole('ROLE_STRUCTURE')
             && $this->getUser()->getOrganization()->getIsActive() === 1
-        ) {
+            && $activity->getIsActive() === 1)
+        {
             if ($this->getUser()->getOrganization()->getOrganizationActivity()->isEmpty()
             ) {
-                $this->redirectToRoute('activity_new');
+                return $this->redirectToRoute('activity_new');
             }
 
             $offer = new Offer();
