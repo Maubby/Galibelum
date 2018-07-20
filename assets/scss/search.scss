@@ -1,5 +1,20 @@
 @import "_variables";
 
+form {
+  .col-sm-2 {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+  .col-sm-3 {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+  .col-sm-6 {
+    padding-left: 5px;
+    padding-right: 0;
+  }
+}
+
 /* Checking company or structure side */
 
 #company {
@@ -37,17 +52,22 @@
 }
 
 .box-border-search {
-  min-height: 150px;
+  min-height: 110px;
   border-radius: 3px;
   border: 1px solid $border-color;
 }
 
-/* Style the input */
-
-.search {
-  height: 35px;
-  width: 50%;
+.breadcrumb-boxing-canvas {
+  width: auto;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  border-radius: 4px;
+  border: 1px solid $border-color;
 }
+
+/* Style the input */
 
 .bold-text-dark {
   font-weight: bold;
@@ -58,4 +78,11 @@
   color: $five-color;
   text-align: center;
   font-weight: bold;
+}
+
+
+@media screen and (max-width: 420px) {
+  .box-border-search {
+    min-height: 350px;
+  }
 }
