@@ -7,7 +7,6 @@
 
     <!-- Additional CSS links-->
     <link rel="stylesheet" href="{{ asset('build/organization_show.css') }}">
-    <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
 {% endblock %}
 
 {% block header %}
@@ -61,7 +60,7 @@
                                 <td class="no-button-effect">
                                     {% if contract.status == 0 %}
                                         <a href="{{ path('contract_status', {'id': contract.id, 'status': 1}) }}"
-                                           class="button button text-center">Aucun partenaire</a>
+                                           class="button button-grey text-center">Aucun partenaire</a>
                                     {% elseif contract.status == 1 %}
                                         <a href="{{ path('contract_status', {'id': contract.id, 'status': 2}) }}"
                                            class="button button-yellow text-center">Négociation</a>
