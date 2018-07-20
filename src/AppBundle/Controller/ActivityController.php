@@ -253,13 +253,13 @@ class ActivityController extends Controller
 
                 $this->addFlash(
                     'success',
-                    "L'activité a bien étè supprimée."
+                    "L'activité a bien été supprimée."
                 );
             } else {
                 $this->addFlash(
                     'danger',
                     "Vous ne pouvez pas supprimer cette activité
-                    car des offres sont liées a l'activité."
+                    car des offres sont liées à l'activité."
                 );
             }
             return $this->redirectToRoute('activity_index');
