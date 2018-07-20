@@ -92,6 +92,7 @@
                             <!-- Starting listing the account managers -->
                             <tbody id="result">
                             {% for activity in activitylist %}
+                                {% if activity.isActive is same as(true) %}
                                 <tr>
                                     <td>
                                         <p><strong>{{ activity.name }}</strong> | <span class="light-blue-subtitle-text bold-text">{{ activity.organizationActivities.name }}</span></p>
@@ -110,6 +111,7 @@
                                     {% endif %}
                                     <td class="text-center"><a class="btn btn-primary backblue-btn" href="{{ path('activity_show', { 'id': activity.id }) }}">Détails</a></td>
                                 </tr>
+                                {% endif %}
                             {% endfor %}
                             </tbody>
                         </table>

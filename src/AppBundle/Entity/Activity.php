@@ -228,6 +228,21 @@ class Activity
         return $this->id . '';
     }
 
+
+    /**
+     * Return if Offer is active
+     *
+     * @return boolean
+     */
+    public function getActiveOffer()
+    {
+        $offerActive = true;
+        foreach ($this->activities as $offer) {
+                $offerActive = $offer->getisActive();
+        }
+        return $offerActive;
+    }
+
     /**
      * Return min amount from all selected offers
      *
