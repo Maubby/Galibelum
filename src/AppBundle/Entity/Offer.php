@@ -105,7 +105,7 @@ class Offer
      * )
      * @Assert\Length(
      *      min = 16,
-     *      max = 250,
+     *      max = 768,
      *      minMessage = "Votre description doit contenir au minimum {{ limit }} caractères",
      *      maxMessage = "Votre description doit contenir au maximum {{ limit }} caractères"
      * )

@@ -19,18 +19,16 @@
 
 {% block body %}
     <div class="container-fluid" id="{% if is_granted('ROLE_COMPANY') %}company{% else %}structure{% endif %}">
-        <div class="row">
-            <div class="col-md-12">
+        {% if is_granted('ROLE_STRUCTURE') %}
+            <div>
                 <!-- Return to the dashboard -->
                 <ol class="breadcrumb breadcrumb-boxing-canvas">
-                    {% if is_granted('ROLE_STRUCTURE') %}
                     <li><a href="{{ path('dashboard_index') }}">Tableau de bord</a></li>
-                    {% endif %}
                     <li>Recherche d'activités et d'offres</li>
                 </ol>
             </div>
-        </div>
-        <div class="row boxing-canvas">
+        {% endif %}
+        <div class="row boxing-canvas mt-50">
             <div class="col-md-12 text-center">
                 <i class="fas fa-search degradeblue" style="font-size: 50px"></i>
                 <h5 class="degradeblue">Rechercher</h5>
