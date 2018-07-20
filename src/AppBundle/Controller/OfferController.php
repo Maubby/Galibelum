@@ -228,13 +228,13 @@ class OfferController extends Controller
 
                 $this->addFlash(
                     'success',
-                    "L'offre a bien étè supprimée."
+                    "L'offre a bien été supprimée."
                 );
             } else {
                 $this->addFlash(
                     'danger',
                     "Vous ne pouvez pas supprimer cette offre car une
-                    marque c'est déjà positionnée sur celle-ci."
+                    marque s'est déjà positionnée sur celle-ci."
                 );
             }
             return $this->redirectToRoute('offer_index');
