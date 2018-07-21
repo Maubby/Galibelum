@@ -44,23 +44,28 @@ class ActivityController extends Controller
         ) {
             $em = $this->getDoctrine()->getManager();
             $activities = $em->getRepository('AppBundle:Activity')->findBy(
-                array(
+                [
                     'organizationActivities' => $this->getUser()->getOrganization(),
                     'isActive' => true
-                )
+                ]
             );
 
             if (empty($activities)) {
                 return $this->redirectToRoute('activity_new');
             }
+
+            $this->getUser()->getOrganization()->getActivityPdf()
+                ? $this->addFlash('info', "ajouter pdf")
+                : null;
+
             return $this->render(
-                'activity/index.html.twig', array(
+                'activity/index.html.twig', [
                     'activities' => $activities,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
-                )
+                ]
             );
         }
-        //return $this->redirectToRoute('redirect');
+        return $this->redirectToRoute('redirect');
     }
 
     /**
@@ -93,28 +98,28 @@ class ActivityController extends Controller
                 $em->flush();
 
                 $this->addFlash(
-                    'pdf',
+                    'success',
                     "Vous pouvez désormais télécharger un 
                     PDF lorsque vous <a href=\"".
                     $this->generateUrl(
-                        'activity_edit', array('id' => $activity
-                            ->getId())
+                        'activity_edit',
+                        ['id' => $activity->getId()]
                     )."\">modifiez votre activité</a>."
                 );
 
                 return $this->redirectToRoute(
-                    'dashboard_index', array(
-                        'id' => $activity->getId()
-                    )
+                    'dashboard_index',
+                    ['id' => $activity->getId()]
                 );
             }
 
             return $this->render(
-                'activity/new.html.twig', array(
+                'activity/new.html.twig',
+                [
                     'activity' => $activity,
                     'form' => $form->createView(),
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
-                )
+                ]
             );
         }
         return $this->redirectToRoute('redirect');
@@ -154,12 +159,17 @@ class ActivityController extends Controller
                     null;
             }
 
+            $activity->getUploadPdf() === null
+                ? $this->addFlash('info', "ajouter pdf")
+                : null;
+
             return $this->render(
-                'activity/show.html.twig', array(
+                'activity/show.html.twig',
+                [
                     'activity' => $activity,
                     'embedLink' => $embedLink,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
-                )
+                ]
             );
         }
         return $this->redirectToRoute('redirect');
@@ -212,13 +222,18 @@ class ActivityController extends Controller
                 return $this->redirectToRoute('dashboard_index');
             }
 
+            $activity->getUploadPdf() === null
+                ? $this->addFlash('info', "ajouter pdf")
+                : null;
+
             return $this->render(
-                'activity/edit.html.twig', array(
+                'activity/edit.html.twig',
+                [
                     'activity' => $activity,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView()
-                )
+                ]
             );
         }
         return $this->redirectToRoute('redirect');
@@ -279,9 +294,8 @@ class ActivityController extends Controller
         return $this->createFormBuilder()
             ->setAction(
                 $this->generateUrl(
-                    'activity_delete', array(
-                        'id' => $activity->getId()
-                    )
+                    'activity_delete',
+                    ['id' => $activity->getId()]
                 )
             )
             ->setMethod('DELETE')

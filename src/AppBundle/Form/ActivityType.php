@@ -43,87 +43,103 @@ class ActivityType extends AbstractType
     {
         $builder
             ->add(
-                'name', TextType::class, array(
+                'name', TextType::class,
+                [
                     'required' => true,
-                    'attr' => array(
-                        'minlength' => 2,
-                        'maxlength' => 32,
-                    )
-                )
+                    'attr' =>
+                        [
+                            'minlength' => 2,
+                            'maxlength' => 32,
+                        ]
+                ]
             )
             ->add(
-                'type', ChoiceType::class, array(
-                    'choices' => array(
-                        "Choisissez un type d'activité" => '',
-                        'Activité de streaming' => 'Activité de streaming',
-                        'Equipe eSport' => 'Equipe eSport',
-                        'Évènement eSport' => 'Évènement eSport'
-                    )
-                )
+                'type', ChoiceType::class,
+                [
+                    'choices' =>
+                        [
+                            "Choisissez un type d'activité" => '',
+                            'Activité de streaming' => 'Activité de streaming',
+                            'Equipe eSport' => 'Equipe eSport',
+                            'Évènement eSport' => 'Évènement eSport'
+                        ]
+                ]
             )
             ->add(
-                'description', TextareaType::class, array(
+                'description', TextareaType::class,
+                [
                     'required' => true,
-                    'attr' => array(
-                        'minlength' => 32,
-                        'maxlength' => 768,
-                    )
-                )
+                    'attr' =>
+                        [
+                            'minlength' => 32,
+                            'maxlength' => 768,
+                        ]
+                ]
             )
             ->add(
-                'dateStart', DateType::class, array(
+                'dateStart', DateType::class,
+                [
                     'required' => true,
                     'widget' => 'single_text',
                     'html5' => false,
-                )
+                ]
             )
             ->add(
-                'dateEnd', DateType::class, array(
+                'dateEnd', DateType::class,
+                [
                     'required' => true,
                     'widget' => 'single_text',
                     'html5' => false,
-                )
+                ]
             )
             ->add(
-                'address', TextType::class, array(
+                'address', TextType::class,
+                [
                     'required' => true,
-                    'attr' => array(
-                        'minlength' => 2,
-                        'maxlength' => 128,
-                    )
-                )
+                    'attr' =>
+                        [
+                            'minlength' => 2,
+                            'maxlength' => 128,
+                        ]
+                ]
             )
             ->add(
-                'urlVideo', UrlType::class, array(
+                'urlVideo', UrlType::class,
+                [
                     'required' => false,
-                    'attr' => array(
-                        'maxlength' => 128,
-                    )
-                )
+                    'attr' =>
+                        [
+                            'maxlength' => 128,
+                        ]
+                ]
             )
             ->add(
-                'achievement', TextareaType::class, array(
+                'achievement', TextareaType::class,
+                [
                     'required' => false,
-                    'attr' => array(
-                        'minlength' => 2,
-                        'maxlength' => 128,
-                    )
-                )
+                    'attr' =>
+                        [
+                            'minlength' => 2,
+                            'maxlength' => 128,
+                        ]
+                ]
             )
             -> add(
-                'socialLink', CollectionType::class, array(
+                'socialLink', CollectionType::class,
+                [
                     'required' => false,
                     'entry_type' => UrlType::class,
                     'allow_add' => true,
                     'prototype' => true,
                     'label' => false,
-                )
+                ]
             )
             ->add(
-                'uploadPdf', FileType::class, array(
+                'uploadPdf', FileType::class,
+                [
                     'required' => false,
                     'data_class' => null,
-                )
+                ]
             );
     }
 
@@ -137,9 +153,7 @@ class ActivityType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
-                'data_class' => Activity::class,
-            )
+            ['data_class' => Activity::class,]
         );
     }
 
