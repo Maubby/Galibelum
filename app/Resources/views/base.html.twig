@@ -51,7 +51,7 @@
 <!-- Display all flash message -->
 {% for label, messages in app.flashes %}
     {% for message in messages %}
-        <div class="alert alert-{{ label }}">
+        <div class="alert alert-{{ label }} fade in">
             {{ message|raw }}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
