@@ -159,7 +159,7 @@ class ActivityController extends Controller
                     null;
             }
 
-            $this->getUser()->getOrganization()->getActivityPdf()
+            $activity->getUploadPdf() === null
                 ? $this->addFlash('info', "ajouter pdf")
                 : null;
 
@@ -221,6 +221,10 @@ class ActivityController extends Controller
 
                 return $this->redirectToRoute('dashboard_index');
             }
+
+            $activity->getUploadPdf() === null
+                ? $this->addFlash('info', "ajouter pdf")
+                : null;
 
             return $this->render(
                 'activity/edit.html.twig',
