@@ -186,7 +186,7 @@ class ActivityController extends Controller
      * @return              Response A Response instance
      */
     public function editAction(Request $request, Activity $activity,
-                               FileUploaderService $fileUploaderService
+        FileUploaderService $fileUploaderService
     ) {
         $user = $this->getUser();
         if ($user->getOrganization()->getOrganizationActivity()->contains($activity)
@@ -264,13 +264,13 @@ class ActivityController extends Controller
 
                 $this->addFlash(
                     'success',
-                    "L'activité a bien étè supprimée."
+                    "L'activité a bien été supprimée."
                 );
             } else {
                 $this->addFlash(
                     'danger',
                     "Vous ne pouvez pas supprimer cette activité
-                    car des offres sont liées a l'activité."
+                    car des offres sont liées à l'activité."
                 );
             }
             return $this->redirectToRoute('activity_index');
@@ -291,7 +291,7 @@ class ActivityController extends Controller
             ->setAction(
                 $this->generateUrl(
                     'activity_delete',
-                        ['id' => $activity->getId()]
+                    ['id' => $activity->getId()]
                 )
             )
             ->setMethod('DELETE')

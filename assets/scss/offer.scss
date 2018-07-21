@@ -2,6 +2,17 @@
 
 /* Background */
 
+.event {
+  background-color: $lighter-grey-bg-color;
+  height: 250px;
+}
+
+.caption-event, .thumbnail-event {
+  background-color: $lighter-grey-bg-color;
+  height: 210px;
+}
+
+
 .caption, .thumbnail {
   background-color: $lighter-grey-bg-color;
   min-height: 210px;

@@ -75,7 +75,7 @@ class OfferType extends AbstractType
                         [
                         'minlength' => 16,
                         'maxlength' => 768
-                    ]
+                        ]
                 ]
             );
     }

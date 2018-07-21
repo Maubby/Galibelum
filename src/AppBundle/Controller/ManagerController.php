@@ -68,7 +68,7 @@ class ManagerController extends Controller
      * @return Response A Response Instance
      */
     public function activateAction(Organization $organization,
-                                   MailerService $mailerUser
+        MailerService $mailerUser
     ) {
         $organization->setIsActive(1)
             ->getUser()->setEnabled(true);
@@ -103,7 +103,7 @@ class ManagerController extends Controller
      * @return Response A Response Instance
      */
     public function disableAction(Organization $organization,
-                                  MailerService $mailerUser
+        MailerService $mailerUser
     ) {
         $organization->setIsActive(2)
             ->getUser()->setEnabled(false);
@@ -165,7 +165,7 @@ class ManagerController extends Controller
      * @return Response
      */
     public function uploadAction(Request $request, Contracts $contract,
-                                 FileUploaderService $fileUploaderService
+        FileUploaderService $fileUploaderService
     ) {
         $form = $this->createForm(ContractType::class);
         $form->handleRequest($request);

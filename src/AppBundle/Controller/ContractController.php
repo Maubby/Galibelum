@@ -99,7 +99,11 @@ class ContractController extends Controller
             && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
 
-            if (in_array($this->getUser()->getOrganization()->getId(), $offer->getPact())) {
+            if (in_array(
+                $this->getUser()->getOrganization()->getId(),
+                $offer->getPact()
+            )
+            ) {
                 return $this->redirectToRoute(
                     'activity_show',
                     ['id' => $offer->getActivity()->getId()]
@@ -231,85 +235,85 @@ class ContractController extends Controller
      * @return Response A Response Instance
      */
     public function sendAction(Contracts $contract, int $status,
-                               MailerService $mailerUser
+        MailerService $mailerUser
     ) {
         switch ($status) {
-            case 2:
-                $mailerUser->sendEmail(
-                    $this->getParameter('mailer_user'),
-                    $contract->getOffer()->getActivity()
-                        ->getOrganizationActivities()->getUser()->getEmail(),
-                    'Galibelum - Validation',
-                    'Félicitations, un accord avec 
+        case 2:
+            $mailerUser->sendEmail(
+                $this->getParameter('mailer_user'),
+                $contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getUser()->getEmail(),
+                'Galibelum - Validation',
+                'Félicitations, un accord avec 
                 <strong>'.$contract->getOrganization()->getName().
-                    '</strong> pour votre offre <strong>'
-                    .$contract->getOffer()->getName().
-                    '</strong> reliée à l\'activité <strong>'
-                    .$contract->getOffer()->getActivity()->getName().
-                    '</strong> a été trouvé.
+                '</strong> pour votre offre <strong>'
+                .$contract->getOffer()->getName().
+                '</strong> reliée à l\'activité <strong>'
+                .$contract->getOffer()->getActivity()->getName().
+                '</strong> a été trouvé.
                 <br>
                 <br>
                 Vous entrez ainsi en phase de validation.
                 Vous retrouverez prochainement les contrats
                 signés et téléchargeables depuis la plateforme Galibelum.',
-                    $contract->getOrganization()->getManagers()->getPhoneNumber(),
-                    $contract->getOrganization()->getManagers()->getEmail()
-                );
+                $contract->getOrganization()->getManagers()->getPhoneNumber(),
+                $contract->getOrganization()->getManagers()->getEmail()
+            );
 
-                $mailerUser->sendEmail(
-                    $this->getParameter('mailer_user'),
-                    $contract->getOrganization()->getUser()->getEmail(),
-                    'Galibelum - Validation',
-                    'Félicitations, un accord avec <strong>'.
-                    $contract->getOffer()
-                        ->getActivity()
-                        ->getOrganizationActivities()
-                        ->getName().
-                    '</strong> pour l\'offre <strong>'.$contract->getOffer()->getName().
-                    '</strong> reliée à l\'activité <strong>'
-                    .$contract->getOffer()->getActivity()->getName().
-                    '</strong> a été trouvé.
+            $mailerUser->sendEmail(
+                $this->getParameter('mailer_user'),
+                $contract->getOrganization()->getUser()->getEmail(),
+                'Galibelum - Validation',
+                'Félicitations, un accord avec <strong>'.
+                $contract->getOffer()
+                    ->getActivity()
+                    ->getOrganizationActivities()
+                    ->getName().
+                '</strong> pour l\'offre <strong>'.$contract->getOffer()->getName().
+                '</strong> reliée à l\'activité <strong>'
+                .$contract->getOffer()->getActivity()->getName().
+                '</strong> a été trouvé.
                 <br>
                 <br>
                 Vous entrez ainsi en phase de validation.
                 Vous retrouverez prochainement les contrats
                 signés et téléchargeables depuis la plateforme Galibelum.',
-                    $contract->getOrganization()->getManagers()->getPhoneNumber(),
-                    $contract->getOrganization()->getManagers()->getEmail()
-                );
-                break;
+                $contract->getOrganization()->getManagers()->getPhoneNumber(),
+                $contract->getOrganization()->getManagers()->getEmail()
+            );
+            break;
 
-            case 3:
-                $mailerUser->sendEmail(
-                    $this->getParameter('mailer_user'),
-                    $contract->getOffer()->getActivity()
-                        ->getOrganizationActivities()->getUser()->getEmail(),
-                    'Galibelum - Paiement',
-                    'Félicitations, le paiement pour l\'offre 
+        case 3:
+            $mailerUser->sendEmail(
+                $this->getParameter('mailer_user'),
+                $contract->getOffer()->getActivity()
+                    ->getOrganizationActivities()->getUser()->getEmail(),
+                'Galibelum - Paiement',
+                'Félicitations, le paiement pour l\'offre 
                 <strong>'.$contract->getOffer()->getName(). '</strong>
                 est en cours.
                 <br>
                 <br>
                 Nous vous remercions d\'avoir choisi Galibelum pour
                 réaliser votre projet.',
-                    $contract->getOrganization()->getManagers()->getPhoneNumber(),
-                    $contract->getOrganization()->getManagers()->getEmail()
-                );
-                //      Mail for the company
-                $mailerUser->sendEmail(
-                    $this->getParameter('mailer_user'),
-                    $contract->getOrganization()->getUser()->getEmail(),
-                    'Galibelum - Paiement',
-                    'Vous pouvez désormais effectuer le paiement pour l\'offre 
+                $contract->getOrganization()->getManagers()->getPhoneNumber(),
+                $contract->getOrganization()->getManagers()->getEmail()
+            );
+            //      Mail for the company
+            $mailerUser->sendEmail(
+                $this->getParameter('mailer_user'),
+                $contract->getOrganization()->getUser()->getEmail(),
+                'Galibelum - Paiement',
+                'Vous pouvez désormais effectuer le paiement pour l\'offre 
                 <strong>'.$contract->getOffer()->getName(). '</strong>.
                 <br>
                 <br>
                 Nous vous remercions d\'avoir choisi Galibelum pour
                 réaliser votre projet.',
-                    $contract->getOrganization()->getManagers()->getPhoneNumber(),
-                    $contract->getOrganization()->getManagers()->getEmail()
-                );
-                break;
+                $contract->getOrganization()->getManagers()->getPhoneNumber(),
+                $contract->getOrganization()->getManagers()->getEmail()
+            );
+            break;
         }
         return $this->redirectToRoute('manager_contract_list');
     }

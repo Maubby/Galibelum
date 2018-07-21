@@ -183,8 +183,9 @@ class Offer
         $organization_id = [];
         $contracts = $this->getContracts();
         foreach ($contracts as $contract) {
-            if (($id = $contract->getOrganization()->getId()))
+            if (($id = $contract->getOrganization()->getId())) {
                 $organization_id[] = $id;
+            }
         }
 
         return $organization_id;
