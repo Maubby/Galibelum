@@ -45,6 +45,7 @@ class ContractController extends Controller
             && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
             $em = $this->getDoctrine()->getManager();
+            $contracts = null;
 
             if ($this->getUser()->hasRole('ROLE_COMPANY')) {
                 $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
@@ -101,9 +102,10 @@ class ContractController extends Controller
 
             if (in_array(
                 $this->getUser()->getOrganization()->getId(),
-                $offer->getPact()
-            )
+                $offer->getPact())
+            || $offer->countPartnershipNumber() === 0
             ) {
+                $this->addFlash('info', 'L\'offre '.$offer->getName().' n\'est plus disponibl' );
                 return $this->redirectToRoute(
                     'activity_show',
                     ['id' => $offer->getActivity()->getId()]

@@ -159,7 +159,8 @@ class ActivityController extends Controller
                     null;
             }
 
-            $activity->getUploadPdf() === null
+            $activity->getOrganizationActivities()->getUser() === $this->getUser()
+            && $activity->getUploadPdf() === null
                 ? $this->addFlash('info', "ajouter pdf")
                 : null;
 
