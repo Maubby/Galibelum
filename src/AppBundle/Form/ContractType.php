@@ -38,9 +38,7 @@ class ContractType extends AbstractType
     {
         $builder->add(
             'uploadPdf', FileType::class,
-            array(
-                'multiple' => true
-            )
+            ['multiple' => true]
         );
     }
 
@@ -54,9 +52,7 @@ class ContractType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
-                'error_bubbling' => true,
-            )
+            ['error_bubbling' => true]
         );
     }
 

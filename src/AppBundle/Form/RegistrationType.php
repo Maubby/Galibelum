@@ -36,30 +36,34 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add(
-                'firstName', TextType::class, array(
+                'firstName', TextType::class,
+                [
                     'label' => 'Prénom',
-                    'attr' => array(
-                        'minLength' => '2',
-                        'maxLength' => '32',)
-                )
+                    'attr' =>
+                        [
+                            'minLength' => '2',
+                            'maxLength' => '32',
+                        ]
+                ]
             )
             ->add(
-                'lastName', TextType::class, array(
+                'lastName', TextType::class,
+                [
                     'label' => 'Nom',
-                    'attr' => array(
-                        'minLength' => '2',
-                        'maxLength' => '32',)
-                )
+                    'attr' =>
+                        [
+                            'minLength' => '2',
+                            'maxLength' => '32',
+                        ]
+                ]
             )
             ->add(
-                'phoneNumber', TextType::class, array(
-                    'label' => 'Numéro de téléphone'
-                )
+                'phoneNumber', TextType::class,
+                ['label' => 'Numéro de téléphone']
             )
             ->add(
-                'cgu', CheckboxType::class, array(
-                    'required' => true
-                )
+                'cgu', CheckboxType::class,
+                ['required' => true]
             )
             ->remove('username');
     }

@@ -48,36 +48,31 @@ class ContractController extends Controller
 
             if ($this->getUser()->hasRole('ROLE_COMPANY')) {
                 $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
-                    array(
-                        'organization' => $this->getUser()->getOrganization()
-                    )
+                    ['organization' => $this->getUser()->getOrganization()]
                 );
             } elseif ($this->getUser()->hasRole('ROLE_STRUCTURE')) {
 
                 $activities = $em->getRepository('AppBundle:Activity')->findby(
-                    array(
+                    [
                         'organizationActivities' => $this->getUser()
                             ->getOrganization(),
-                    )
+                    ]
                 );
 
                 $offers = $em->getRepository('AppBundle:Offer')->findby(
-                    array(
-                        'activity' => $activities,
-                    )
+                    ['activity' => $activities,]
                 );
                 $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
-                    array(
-                        'offer' => $offers,
-                    )
+                    ['offer' => $offers,]
                 );
             }
 
             return $this->render(
-                'contractualisation/index.html.twig', array(
+                'contractualisation/index.html.twig',
+                [
                     'contracts' => $contracts,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
-                )
+                ]
             );
         }
         return $this->redirectToRoute('redirect');
@@ -107,7 +102,7 @@ class ContractController extends Controller
             if (in_array($this->getUser()->getOrganization()->getId(), $offer->getPact())) {
                 return $this->redirectToRoute(
                     'activity_show',
-                    array('id' => $offer->getActivity()->getId())
+                    ['id' => $offer->getActivity()->getId()]
                 );
             }
 
@@ -182,7 +177,7 @@ class ContractController extends Controller
 
             return $this->redirectToRoute(
                 'activity_show',
-                array('id' => $offer->getActivity()->getId())
+                ['id' => $offer->getActivity()->getId()]
             );
         }
         return $this->redirectToRoute('redirect');

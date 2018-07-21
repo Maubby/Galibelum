@@ -43,22 +43,22 @@ class OfferController extends Controller
         ) {
             $em = $this->getDoctrine()->getManager();
             $event_activities = $em->getRepository('AppBundle:Activity')->findBy(
-                array(
+                [
                     'organizationActivities' => $this->getUser()->getOrganization(),
                     'type' => 'Évènement eSport'
-                )
+                ]
             );
             $stream_activities = $em->getRepository('AppBundle:Activity')->findBy(
-                array(
+                [
                     'organizationActivities' => $this->getUser()->getOrganization(),
                     'type' => 'Activité de streaming'
-                )
+                ]
             );
             $team_activities = $em->getRepository('AppBundle:Activity')->findBy(
-                array(
+                [
                     'organizationActivities' => $this->getUser()->getOrganization(),
                     'type' => 'Equipe eSport'
-                )
+                ]
             );
 
             if (empty($event_activities) && empty($stream_activities)
@@ -68,12 +68,13 @@ class OfferController extends Controller
             }
 
             return $this->render(
-                'offer/index.html.twig', array(
+                'offer/index.html.twig',
+                [
                     'event_activities' => $event_activities,
                     'stream_activities' => $stream_activities,
                     'team_activities' => $team_activities,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
-                )
+                ]
             );
         }
         return $this->redirectToRoute('redirect');
@@ -92,7 +93,7 @@ class OfferController extends Controller
      * @throws \Exception
      */
     public function newAction(Request $request, Activity $activity,
-        ManagementFeesService $feesService
+                              ManagementFeesService $feesService
     ) {
         if ($this->getUser()->hasRole('ROLE_STRUCTURE')
             && $this->getUser()->getOrganization()->getIsActive() === 1
@@ -132,12 +133,13 @@ class OfferController extends Controller
             }
 
             return $this->render(
-                'offer/new.html.twig', array(
+                'offer/new.html.twig',
+                [
                     'offer' => $offer,
                     'activity' => $activity,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
                     'form' => $form->createView()
-                )
+                ]
             );
         }
         return $this->redirectToRoute('redirect');
@@ -179,18 +181,19 @@ class OfferController extends Controller
                 );
 
                 return $this->redirectToRoute(
-                    'dashboard_index', array(
-                        'id' => $offer->getId())
+                    'dashboard_index',
+                    ['id' => $offer->getId()]
                 );
             }
 
             return $this->render(
-                'offer/edit.html.twig', array(
+                'offer/edit.html.twig',
+                [
                     'offer' => $offer,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView()
-                )
+                ]
             );
         }
         return $this->redirectToRoute('redirect');
@@ -249,8 +252,8 @@ class OfferController extends Controller
         return $this->createFormBuilder()
             ->setAction(
                 $this->generateUrl(
-                    'offer_delete', array(
-                        'id' => $offer->getId())
+                    'offer_delete',
+                    ['id' => $offer->getId()]
                 )
             )
             ->setMethod('DELETE')

@@ -222,6 +222,25 @@ class Organization
     private $isActive;
 
 
+
+
+    /**
+     * Return min date from all selected offers
+     *
+     * @return bool
+     */
+    public function getActivityPdf()
+    {
+        $uploadPdf = false;
+
+        foreach ($this->organizationActivity as $activity ) {
+            if ($activity->getUploadPdf() === null) {
+                $uploadPdf = true;
+            }
+        }
+        return $uploadPdf;
+    }
+
     /**
      * Get id
      *
