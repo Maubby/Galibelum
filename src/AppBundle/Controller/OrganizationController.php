@@ -39,37 +39,37 @@ class OrganizationController extends Controller
         if ($this->getUser()->hasRole('ROLE_STRUCTURE')
             && $this->getUser()->getOrganization()->getIsActive() === 1
         ) {
-            $organization = $this->getUser()->getOrganization();
             $em = $this->getDoctrine()->getManager();
             $activities = $em->getRepository('AppBundle:Activity')->findBy(
-                array(
+                [
                     'organizationActivities' => $this->getUser()->getOrganization(),
                     'isActive' => true
-                ),
-                array(
-                    'creationDate' => 'ASC'
-                ),
+                ],
+                ['creationDate' => 'ASC'],
                 6
             );
             $offers = $em->getRepository('AppBundle:Offer')->findBy(
-                array(
+                [
                     'activity' => $this->getUser()->getOrganization()
                         ->getOrganizationActivity()->getValues(),
                     'isActive' => true
-                ),
-                array(
-                    'creationDate' => 'ASC'
-                ),
+                ],
+                ['creationDate' => 'ASC'],
                 6
             );
 
+            $this->getUser()->getOrganization()->getActivityPdf()
+                ? $this->addFlash('info', "ajouter pdf")
+                : null;
+
             return $this->render(
-                'dashboard/index.html.twig', array(
-                    'organization' => $organization,
+                'dashboard/index.html.twig',
+                [
+                    'organization' => $this->getUser()->getOrganization(),
                     'activities' => $activities,
                     'offers' => $offers,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
-                )
+                ]
             );
         }
         return $this->redirectToRoute('redirect');
@@ -112,8 +112,8 @@ class OrganizationController extends Controller
                 $organization->setUser($this->getUser());
                 $organization->setNameCanonical($organization->getName());
                 $this->getUser()->setOrganization($organization);
-                $choose === 0 ? $this->getUser()->setRoles(array('ROLE_STRUCTURE'))
-                    : $this->getUser()->setRoles(array('ROLE_COMPANY'));
+                $choose === 0 ? $this->getUser()->setRoles(['ROLE_STRUCTURE'])
+                    : $this->getUser()->setRoles(['ROLE_COMPANY']);
 
                 // Persisting user according to its new organization
                 $em->persist($organization);
@@ -122,17 +122,17 @@ class OrganizationController extends Controller
 
                 return $this->redirectToRoute(
                     'dashboard_index',
-                    array('id' => $organization->getId()
-                    )
+                    ['id' => $organization->getId()]
                 );
             }
 
             return $this->render(
-                'organization/new.html.twig', array(
+                'organization/new.html.twig',
+                [
                     'organization' => $organization,
                     'form' => $form->createView(),
                     'choose' => $choose
-                )
+                ]
             );
         }
         return $this->redirectToRoute('redirect');
@@ -176,17 +176,18 @@ class OrganizationController extends Controller
 
                 return $this->redirectToRoute(
                     'dashboard_index',
-                    array('id' => $organization->getId())
+                    ['id' => $organization->getId()]
                 );
             }
 
             return $this->render(
-                'organization/edit.html.twig', array(
+                'organization/edit.html.twig',
+                [
                     'organization' => $organization,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView()
-                )
+                ]
             );
         }
         return $this->redirectToRoute('redirect');
@@ -241,7 +242,7 @@ class OrganizationController extends Controller
             ->setAction(
                 $this->generateUrl(
                     'organization_delete',
-                    array('id' => $organization->getId())
+                    ['id' => $organization->getId()]
                 )
             )
             ->setMethod('DELETE')

@@ -37,32 +37,28 @@ class ProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
-        $constraintsOptions = array(
-            'message' => 'fos_user.current_password.invalid',
-        );
+        $constraintsOptions = ['message' => 'fos_user.current_password.invalid',];
 
         if (!empty($options['validation_groups'])) {
-            $constraintsOptions['groups'] = array(
-                reset($options['validation_groups']));
+            $constraintsOptions['groups'] = [reset($options['validation_groups'])];
         }
 
         $builder
             ->add(
-                'firstName', TextType::class, array(
-                    'attr' => array('class' => 'form-control'))
+                'firstName', TextType::class,
+                ['attr' => ['class' => 'form-control']]
             )
             ->add(
-                'lastName', TextType::class, array(
-                    'attr' => array('class' => 'form-control'))
+                'lastName', TextType::class,
+                ['attr' => ['class' => 'form-control']]
             )
             ->add(
-                'phoneNumber', TelType::class, array(
-                    'attr' => array('class' => 'form-control')
-                )
+                'phoneNumber', TelType::class,
+                ['attr' => ['class' => 'form-control']]
             )
             ->add(
-                'email', EmailType::class, array(
-                    'translation_domain' => 'FOSUserBundle')
+                'email', EmailType::class,
+                ['translation_domain' => 'FOSUserBundle']
             )
 
             ->remove('username')

@@ -10,6 +10,16 @@ body {
   margin: 0;
 }
 
+.alert {
+  position: fixed;
+  right: 0;
+  z-index: 5;
+  margin: 30px 40px 0 0;
+  min-width: 250px;
+  max-width: 450px;
+  max-height: 450px;
+}
+
 /* Colors */
 
 .grey {
@@ -405,6 +415,12 @@ p.size {
   width: 190px;
 }
 
+.darken-btn-sm {
+  background-image: linear-gradient(to right, #dddde3, #90888a);
+  border-color: #FFFFFF;
+  width: 190px;
+}
+
 /* Input fields / Form */
 
 .form-error ul {
@@ -524,8 +540,15 @@ input::placeholder, select, textarea::placeholder {
   border-right: 1px solid $border-color;
 }
 
+.boxing-canvas-border-bottom {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom: 1px solid $border-color;
+}
+
 .breadcrumb-boxing-canvas {
   width: auto;
+  max-width: 1100px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 30px;
@@ -545,6 +568,7 @@ input::placeholder, select, textarea::placeholder {
   position: fixed;
   bottom: 30px;
   left: 30px;
+  cursor: pointer;
 }
 
 .manager {
@@ -553,22 +577,55 @@ input::placeholder, select, textarea::placeholder {
   margin-top: 5px;
 }
 
+a.manager-btn:hover {
+  text-decoration: none !important;
+}
+
+.modal-manager {
+  border: none;
+}
+
+.panel-body {
+  h5 {
+    font-size: 18px;
+  }
+}
+
+.bold-text-dark {
+  font-weight: bold;
+}
+
+.panel-manager {
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  padding: 0;
+  margin-top: -20px;
+}
+
 .manager-box {
   background-color: #fff;
-  width: 16%;
   max-height: 50px;
   max-width: 215px;
   min-width: 210px;
   border-radius: 40px;
   z-index: 1;
-  border-top: 1px solid $border-color;
-  border-left: 1px solid $border-color;
-  border-right: 1px solid $border-color;
-  border-bottom: 1px solid $border-color;
 }
 
 .center {
   display: inline-block;
   vertical-align: middle;
   margin-bottom: 20px;
+}
+
+@media screen and (max-width: 770px) {
+  .manager-box {
+    max-width: 47px;
+    min-width: 47px;
+  }
+  .manager {
+    font-size: 40px;
+    margin-left: 4px;
+    margin-top: 2px;
+  }
 }

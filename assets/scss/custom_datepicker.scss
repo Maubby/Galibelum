@@ -1,0 +1,104 @@
+.datepicker {
+  border-radius: 10px;
+  font-family: sans-serif;
+}
+
+.datepicker td, .datepicker th {
+  text-align: center;
+  border-radius: 4px;
+}
+
+.datepicker table tr td.active.active {
+  background-image: none;
+}
+
+.datepicker table tr td.day.focused,
+.datepicker table tr td.day:hover {
+  background-color: #86ccc2;
+  color: white;
+  cursor: pointer;
+}
+
+.datepicker table tr td.new,
+.datepicker table tr td.old {
+  color: #86ccc2;
+}
+
+.datepicker table tr td.disabled {
+  color: #86ccc2;
+  background: 0 0;
+  cursor: default;
+}
+
+.datepicker table tr td.active.active,
+.datepicker table tr td.active:active,
+.datepicker table tr td.active:hover,
+.datepicker table tr td.active:hover.active,
+.datepicker table tr td.active:hover:active,
+.datepicker table tr td.active:hover:hover,
+.datepicker table tr td.selected,
+.datepicker table tr td.selected.active,
+.datepicker table tr td.selected:active,
+.datepicker table tr td.selected:hover,
+.datepicker table tr td.selected:hover.active,
+.datepicker table tr td.selected:hover:active,
+.datepicker table tr td.selected:hover:hover {
+  background-color: #86ccc2;
+  color: white;
+}
+
+.datepicker table tr td.active,
+.datepicker table tr td.active:hover {
+  border-color: transparent;
+  background-color: red;
+}
+
+.datepicker table tr td span {
+  display: block;
+  float: left;
+  width: 23%;
+  height: 54px;
+  margin: 1%;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  line-height: 54px;
+  cursor: pointer;
+}
+
+.datepicker-switch {
+  text-align: center;
+}
+
+.datepicker table tr td span.focused {
+  color: white;
+  background-color: #86ccc2;
+}
+.datepicker table tr td span:hover {
+  background-color: #86ccc2;
+}
+
+.datepicker table tr td span:hover {
+  background-color: #86ccc2;
+  color: white;
+}
+
+.datepicker .datepicker-switch:hover,
+.datepicker .next:hover,
+.datepicker .prev:hover,
+.datepicker tfoot tr th:hover {
+  background-color: #86ccc2;
+  color: white;
+}
+
+.datepicker table tr td.disabled, .datepicker table tr td.disabled:hover {
+  color: grey;
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
+.datepicker table tr td span.disabled, .datepicker table tr td span.disabled:hover {
+  color: grey;
+  background-color: transparent;
+  cursor: not-allowed;
+}

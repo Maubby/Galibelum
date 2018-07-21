@@ -39,34 +39,44 @@ class OfferType extends AbstractType
     {
         $builder
             ->add(
-                'name', TextType::class, array(
+                'name', TextType::class,
+                [
                     'required' => true,
-                    'attr' => array(
-                        'minlength' => 2, 'maxlength' => 32))
+                    'attr' => ['minlength' => 2, 'maxlength' => 32]
+                ]
             )
             ->add(
-                'amount', IntegerType::class, array(
+                'amount', IntegerType::class,
+                [
                     'required' => true,
-                    'attr' => array(
-                        'min' => 200))
+                    'attr' => ['min' => 200]
+                ]
             )
             ->add(
-                'partnershipNumber', IntegerType::class, array(
+                'partnershipNumber', IntegerType::class,
+                [
                     'required' => true,
-                    'attr' => array(
-                        'min' => 1))
+                    'attr' => ['min' => 1]
+                ]
             )
             ->add(
-                'date', DateType::class, array(
+                'date', DateType::class,
+                [
                     'required' => true,
-                    'widget' => 'single_text')
+                    'widget' => 'single_text',
+                    'html5' => false,
+                ]
             )
             ->add(
-                'description', TextareaType::class, array(
+                'description', TextareaType::class,
+                [
                     'required' => true,
-                    'attr' => array(
+                    'attr' =>
+                        [
                         'minlength' => 16,
-                        'maxlength' => 250))
+                        'maxlength' => 768
+                        ]
+                ]
             );
     }
 
@@ -80,9 +90,7 @@ class OfferType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
-                'data_class' => 'AppBundle\Entity\Offer'
-            )
+            ['data_class' => 'AppBundle\Entity\Offer']
         );
     }
 

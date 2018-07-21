@@ -88,7 +88,7 @@ class SearchController extends Controller
                 : $session->set('amount-start', 0);
             $request->get('amount-end')
                 ? $session->set('amount-end', $request->get('amount-end'))
-                : $session->set('amount-end', 100000);
+                : $session->set('amount-end', 100000000);
 
             $request->get('date')
                 ? $session->set('date', new \DateTime($request->get('date')))
@@ -105,7 +105,8 @@ class SearchController extends Controller
                 );
 
             return $this->render(
-                'search/index.html.twig', array(
+                'search/index.html.twig',
+                [
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
                     'activitylist' => $activityList,
                     'date' => $session->get('date'),
@@ -113,7 +114,7 @@ class SearchController extends Controller
                     'type' => $session->get('type'),
                     'amountStart' => $session->get('amount-start'),
                     'amountEnd' => $session->get('amount-end')
-                )
+                ]
             );
         }
         return $this->redirectToRoute('redirect');

@@ -20,18 +20,18 @@
 {% block body %}
     <div class="container-fluid" id="{% if is_granted('ROLE_COMPANY') %}company{% else %}structure{% endif %}">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-sm-12">
                 <!-- Return to the dashboard -->
                 <ol class="breadcrumb breadcrumb-boxing-canvas">
                     {% if is_granted('ROLE_STRUCTURE') %}
-                    <li><a href="{{ path('dashboard_index') }}">Tableau de bord</a></li>
+                        <li><a href="{{ path('dashboard_index') }}">Tableau de bord</a></li>
                     {% endif %}
                     <li>Recherche d'activités et d'offres</li>
                 </ol>
             </div>
         </div>
         <div class="row boxing-canvas">
-            <div class="col-md-12 text-center">
+            <div class="col-sm-12 text-center">
                 <i class="fas fa-search degradeblue" style="font-size: 50px"></i>
                 <h5 class="degradeblue">Rechercher</h5>
                 <br>
@@ -39,42 +39,38 @@
                     en fonction de leur nom, du type d'activité, du budget ou de la date souhaitée.
                     <br>Vous pourrez ensuite consulter le détail des différentes activités puis vous positionner sur une offre.</p>
             </div>
-            <div class="col-md-12 mt-30">
+            <div class="col-sm-12 box-border-search mt-30">
                 <form class="text-center col-md-12" action="{{ path('search_action') }}">
-                    <div class="col-md-3 box-border-search pt-10">
-                        <label>Nom :
-                            <input id="search" title="search" name="name" class="input-field form-control mt-30" placeholder="Recherche par nom" value="{{ name }}">
-                        </label>
+                    <div class="col-sm-3 col-xs-6 pt-10">
+                        <input id="name" title="name" name="name" class="input-field form-control mt-30" placeholder="Recherche par nom" value="{{ name }}">
                     </div>
-                    <div class="col-md-3 box-border-search pt-10">
-                        <label>Types d'activités :
-                            <select id="type" name='type' class="input-field form-control mt-30">
-                                <option value="0" {% if type == "0" %}selected{% endif %}>Tous types d'activités</option>
-                                <option value="Activité de streaming" {% if type == "Activité de streaming" %}selected{% endif %}>Activité de streaming</option>
-                                <option value="Equipe eSport" {% if type == "Equipe eSport" %}selected{% endif %}>Equipe eSport</option>
-                                <option value="Évènement eSport" {% if type == "Évènement eSport" %}selected{% endif %}>Évènement eSport</option>
-                            </select>
-                        </label>
+                    <div class="col-sm-2 col-xs-6 pt-10">
+                        <select id="type" name='type' class="input-field form-control mt-30">
+                            <option value="0" {% if type == "0" %}selected{% endif %}>Types d'activités</option>
+                            <option value="Activité de streaming" {% if type == "Activité de streaming" %}selected{% endif %}>Activité de streaming</option>
+                            <option value="Equipe eSport" {% if type == "Equipe eSport" %}selected{% endif %}>Equipe eSport</option>
+                            <option value="Évènement eSport" {% if type == "Évènement eSport" %}selected{% endif %}>Évènement eSport</option>
+                        </select>
                     </div>
-                    <div class="col-md-3 box-border-search pt-10">
-                        <label for="amount">Budget :
-                            <input id="amount-start" type="number" name="amount-start" class="input-field form-control mt-20" value="{{ amountStart }}">
-                            <input id="amount-end" type="number" name="amount-end" class="input-field form-control mt-20" value="{{ amountEnd }}">
-                        </label>
+                    <div class="col-sm-3 col-xs-12">
+                        <div class="col-sm-6 col-xs-6 pt-10">
+                            <input id="amount-start" type="number" name="amount-start" class="input-field form-control mt-30" placeholder="Montant min" value="{{ amountStart }}">
+                        </div>
+                        <div class="col-sm-6 col-xs-6 pt-10">
+                            <input id="amount-end" type="number" name="amount-end" class="input-field form-control mt-30" placeholder="Montant max" value="{{ amountEnd }}">
+                        </div>
                     </div>
-                    <div class="col-md-3 box-border-search pt-10">
-                        <label>Recherche par date :
-                            <input type="date" name="date" class="input-field form-control mt-30" value="{{ date|date('Y-m-d') }}" />
-                        </label>
+                    <div class="col-sm-2 col-xs-12 pt-10">
+                        <input id='date' type="date" name="date" class="input-field form-control mt-30" value="{{ date|date('Y-m-d') }}" />
                     </div>
-                    <div class="col-md-12 mt-30">
-                        <button id="btn_search" class="btn btn-primary backblue-btn search"><i class="fas fa-search"></i></button>
+                    <div class="col-sm-2 col-xs-12 pt-10">
+                        <button id="btn_search" class="btn btn-primary backblue-btn mt-30"><i class="fas fa-search"></i></button>
                     </div>
                 </form>
             </div>
         </div>
         <div class="row boxing-canvas mt-50">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-sm-12 col-sm-12 col-xs-12">
                 <!-- Creating a responsive table -->
                 <div class="table_responsive table-striped">
                     {% if activitylist is not defined %}
@@ -94,12 +90,13 @@
                             <!-- End of table head -->
 
                             <!-- Starting listing the account managers -->
-                            <tbody>
+                            <tbody id="result">
                             {% for activity in activitylist %}
+                                {% if activity.isActive is same as(true) %}
                                 <tr>
                                     <td>
                                         <p><strong>{{ activity.name }}</strong> | <span class="light-blue-subtitle-text bold-text">{{ activity.organizationActivities.name }}</span></p>
-                                        <p class="hidden-sm hidden-xs normal-subtitle-text">{{ activity.description }}</p>
+                                        <p class="hidden-sm hidden-xs normal-subtitle-text">{{ activity.description|slice(0,120) }}</p>
                                     </td>
                                     <td class="text-center">{{ activity.type }}</td>
                                     {% if activity.minamountoffer is same as (activity.maxamountoffer)%}
@@ -114,6 +111,7 @@
                                     {% endif %}
                                     <td class="text-center"><a class="btn btn-primary backblue-btn" href="{{ path('activity_show', { 'id': activity.id }) }}">Détails</a></td>
                                 </tr>
+                                {% endif %}
                             {% endfor %}
                             </tbody>
                         </table>
@@ -125,6 +123,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent () }}
     <script src="{{ asset('build/table_manager.js') }}"></script>
 {% endblock %}
 

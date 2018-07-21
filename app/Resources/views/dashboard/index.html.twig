@@ -18,26 +18,6 @@
 {% endblock %}
 
 {% block body %}
-    <!-- Flash message success edit organization profile -->
-    {% if app.session.flashBag.has('success') %}
-        <div class="alert alert-success">
-            {% for msg in app.session.flashBag.get('success') %}
-                {{ msg }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            {% endfor %}
-        </div>
-    {% endif %}
-    <!-- End flash message -->
-    <!--Adding Flashbag edit activity-->
-    {% if app.session.flashBag.has('pdf') %}
-        <div class="alert alert-info">
-            {% for msg in app.session.flashBag.get('pdf') %}
-                {{ msg|raw }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            {% endfor %}
-        </div>
-    {% endif %}
-    <!--End Flashbag-->
     <!-- Start show information to organization, activities and offers -->
     <div class="container pb-60">
         <div class="boxing-title mt-60 mb-40">
@@ -47,8 +27,11 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="card">
+                    <div class="panel-heading text-center backblue">
+                        <h2 class="panel-title" style="color: white;">Présentation de la structure</h2>
+                    </div>
                     <ul class="list-group">
-                        <li class="list-group-item text-center"><P class="degradeblue">Bienvenue {{ organization.User.firstName }}</P></li>
+                        <li class="list-group-item text-center"><p class="degradeblue">Bienvenue {{ organization.User.firstName }}</p></li>
                         <li class="list-group-item"><i class="fas fa-university"></i>{{ organization.name }}</li>
                         <li class="list-group-item"><i class="fas fa-phone"></i>{{ organization.phoneNumber }}</li>
                         <li class="list-group-item"><i class="fas fa-at"></i>{{ organization.email }}</li>
@@ -60,12 +43,14 @@
             <!-- end show information -->
             <!-- list last activities -->
             <div class="col-md-offset-1 col-md-4 mb-40">
-                <div class="boxing-canvas">
-                    <h5><a href="{{ path('activity_index') }}">Ensemble de mes activités</a></h5>
-                    <div class="boxing-body">
+                <div class="panel-heading text-center backblue">
+                    <h2 class="panel-title" style="color: white;">Présentation de l'activité</h2>
+                </div>
+                <div class="boxing-canvas boxing-canvas-border-bottom">
+                    <div class="boxing-body text-center">
                         <!-- to show message if activity is empty -->
                         {% if activities is empty %}
-                            <p class="text-center text-muted">Vous n'avez pas encore créé d'activité</p>
+                            <p class="text-muted">Vous n'avez pas encore créé d'activité</p>
                         {% else %}
                             {% if activities|length < 4 %}
                                 {% include "dashboard/_activity_dashboard.html.twig" %}
@@ -73,19 +58,21 @@
                                 {% include "dashboard/_activity_carousel_dashboard.html.twig" %}
                             {% endif %}
                         {% endif %}
-                        <a href="{{ path('activity_new') }}" class="btn btn-primary backblue-btn mt-10">Ajouter une activité</a>
+                        <a href="{{ path('activity_new') }}" class="btn btn-primary backblue-btn-sm mt-10">Ajouter une activité</a>
                     </div>
                 </div>
             </div>
             <!-- End list activities -->
             <!-- list last offers -->
             <div class="col-md-4 mb-40">
-                <div class="boxing-canvas">
-                    <h5><a href="{{ path('offer_index') }}">Mes offres partenaires</a></h5>
-                    <div class="boxing-body">
+                <div class="panel-heading text-center backblue">
+                    <h2 class="panel-title" style="color: white;">Offre en cours</h2>
+                </div>
+                <div class="boxing-canvas boxing-canvas-border-bottom">
+                    <div class="boxing-body text-center">
                         <!-- to show message if offer is empty -->
                         {% if offers is empty %}
-                            <p class="text-center text-muted">Vous n'avez pas encore créé d'offre</p>
+                            <p class="text-muted">Vous n'avez pas encore créé d'offre</p>
                         {% else %}
                             {% if offers|length < 4 %}
                                 {% include "dashboard/_offer_dashboard.html.twig" %}
@@ -93,7 +80,7 @@
                                 {% include "dashboard/_offer_carousel_dashboard.html.twig" %}
                             {% endif %}
                         {% endif %}
-                        <a href="#" class="btn btn-primary backblue-btn mt-10" data-toggle="modal" data-target="#pop-up-offer">Ajouter une offre</a>
+                        <a href="#" class="btn btn-primary backblue-btn-sm mt-10" data-toggle="modal" data-target="#pop-up-offer">Ajouter une offre</a>
                     </div>
                     <!-- Modal introducing the redirection to the activity_index -->
                     <div class="modal fade" id="pop-up-offer" tabindex="-1" role="dialog" aria-hidden="true">
@@ -109,10 +96,8 @@
                                         puis faire une offre.</p>
                                 </div>
                                 <!--Modal's body-->
-                                <div class="modal-body">
-                                    <div>
-                                        <a href="{{ path('activity_index') }}" class="btn btn-primary backblue-btn mt-20">Continuer</a>
-                                    </div>
+                                <div class="modal-body text-center">
+                                    <a href="{{ path('activity_index') }}" class="btn btn-primary backblue-btn-sm mt-20">Continuer</a>
                                 </div>
                             </div>
                         </div>
