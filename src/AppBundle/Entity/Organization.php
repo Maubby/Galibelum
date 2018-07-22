@@ -236,7 +236,8 @@ class Organization
 
         foreach ($this->organizationActivity as $activity ) {
             if ($activity->getUploadPdf() === null
-            && $activity->getIsActive() === true) {
+                && $activity->getIsActive() === true
+            ) {
                 $uploadPdf = true;
             }
         }

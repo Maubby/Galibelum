@@ -55,8 +55,10 @@ class ActivityController extends Controller
             }
 
             $this->getUser()->getOrganization()->getActivityPdf()
-                ? $this->addFlash('info',
-                "Veuillez ajouter un Pdf pour présenter vos activités")
+                ? $this->addFlash(
+                    'info',
+                    "Veuillez ajouter un Pdf pour présenter vos activités"
+                )
                 : null;
 
             return $this->render(
@@ -162,8 +164,10 @@ class ActivityController extends Controller
 
             $activity->getOrganizationActivities()->getUser() === $this->getUser()
             && $activity->getUploadPdf() === null
-                ? $this->addFlash('info',
-                "Veuillez ajouter un Pdf pour présenter votre activité")
+                ? $this->addFlash(
+                    'info',
+                    "Veuillez ajouter un Pdf pour présenter votre activité"
+                )
                 : null;
 
             return $this->render(
@@ -226,8 +230,10 @@ class ActivityController extends Controller
             }
 
             $activity->getUploadPdf() === null
-                ? $this->addFlash('info',
-                "Veuillez ajouter un Pdf pour présenter votre activité")
+                ? $this->addFlash(
+                    'info',
+                    "Veuillez ajouter un Pdf pour présenter votre activité"
+                )
                 : null;
 
             return $this->render(
