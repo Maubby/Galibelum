@@ -105,7 +105,7 @@ class ContractController extends Controller
                 $offer->getPact())
             || $offer->countPartnershipNumber() === 0
             ) {
-                $this->addFlash('info', 'L\'offre '.$offer->getName().' n\'est plus disponibl' );
+                $this->addFlash('info', 'L\'offre '.$offer->getName().' n\'est plus disponible' );
                 return $this->redirectToRoute(
                     'activity_show',
                     ['id' => $offer->getActivity()->getId()]

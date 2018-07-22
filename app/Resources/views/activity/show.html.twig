@@ -166,13 +166,18 @@
                                         {% if is_granted('ROLE_STRUCTURE') and  activity.organizationActivities.user is same as(app.user) %}
                                             <a href="{{ path('offer_edit', { 'id': offer.id }) }}">Modifier l'offre</a>
                                         {% elseif is_granted('ROLE_COMPANY') %}
-                                            {% for pact in offer.pact if pact is same as(app.user.organization.id) %}
+                                            {% if offer.countPartnershipNumber == 0 %}
                                                 <button class="btn darken-btn-sm" data-toggle="modal"
-                                                        data-target="#showdescription-{{ offer.id }}" disabled>Déjà en relation</button>
+                                                        data-target="#showdescription-{{ offer.id }}" disabled>Non disponible</button>
                                             {% else %}
-                                                <a href="{{ path('contract_relation', { 'id': offer.id }) }}"
-                                                   class="btn btn-danger backred-btn-sm">Se mettre en relation</a>
-                                            {% endfor %}
+                                                {% for pact in offer.pact if pact is same as(app.user.organization.id) %}
+                                                    <button class="btn darken-btn-sm" data-toggle="modal"
+                                                            data-target="#showdescription-{{ offer.id }}" disabled>Déjà en relation</button>
+                                                {% else %}
+                                                    <a href="{{ path('contract_relation', { 'id': offer.id }) }}"
+                                                       class="btn btn-danger backred-btn-sm">Se mettre en relation</a>
+                                                {% endfor %}
+                                            {% endif %}
                                         {% endif %}
 
                                         <!--Modal introducing the show description-->
