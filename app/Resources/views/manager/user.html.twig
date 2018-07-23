@@ -33,8 +33,8 @@
             <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                 <i class="far fa-user-circle text-center degradeblue" style="font-size: 50px"></i>
                 <h5 class="degradeblue text-center">Liste des utilisateurs</h5>
-                <p class="normal-subtitle-text text-center mt-20 mb-20">Le tableau ci-dessous vous permet de visualiser 
-                l'ensemble des utilisateurs inscrits sur Galibelum.</p>
+                <p class="normal-subtitle-text text-center mt-20 mb-20">Le tableau ci-dessous vous permet de visualiser
+                    l'ensemble des utilisateurs inscrits sur Galibelum.</p>
                 <!-- Creating a responsive table -->
                 <div class="table-responsive">
                     <table id="table_manager" class="table table-striped text-center">
@@ -53,23 +53,25 @@
                         <!-- Starting listing the account managers -->
                         <tbody>
                         {% for user in users %}
-                            <tr>
-                                <td class="degradeblue">
-                                    <strong>{{ user.lastname}}</strong></td>
-                                <td class="degradeblue">
-                                    <strong>{{ user.firstname }}</strong></td>
-                                <td>{{ user.email }}</td>
-                                <td>{{ user.phoneNumber }}</td>
-                                <td>
-                                    {% if user.confirmationToken is not empty %}
-                                        <a href="{{ path('manager_user_resend', { 'id': user.id }) }}"
-                                           class="button button-grey text-center text-center">Envoyer
-                                        </a>
-                                    {% else %}
-                                        <p class="degradeblue">Email validé</p>
-                                    {% endif %}
-                                </td>
-                            </tr>
+                            {% if not user.role('ROLE_SUPER_ADMIN') and not user.role('ROLE_MANAGER') %}
+                                <tr>
+                                    <td class="degradeblue">
+                                        <strong>{{ user.lastname}}</strong></td>
+                                    <td class="degradeblue">
+                                        <strong>{{ user.firstname }}</strong></td>
+                                    <td>{{ user.email }}</td>
+                                    <td>{{ user.phoneNumber }}</td>
+                                    <td>
+                                        {% if user.confirmationToken is not empty %}
+                                            <a href="{{ path('manager_user_resend', { 'id': user.id }) }}"
+                                               class="button button-grey text-center text-center">Envoyer
+                                            </a>
+                                        {% else %}
+                                            <p class="degradeblue">Email validé</p>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endif %}
                         {% endfor %}
                         </tbody>
                     </table>
