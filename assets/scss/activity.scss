@@ -5,9 +5,6 @@
 #index-activity {
   .boxing-canvas {
     max-width: 1100px;
-    height: 100%;
-    padding: 30px;
-    border-radius: 4px;
     border: 1px solid $border-color;
   }
 }
@@ -67,12 +64,12 @@ label {
   margin-left: 10px;
 }
 
-.backblue-btn, .backred-btn {
-  max-width: 400px;
-}
-
 li {
   color: black;
+}
+
+.backblue-btn, .backred-btn {
+  max-width: 400px;
 }
 
 // Back to the dashboard
