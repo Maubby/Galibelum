@@ -129,14 +129,18 @@
 </header>
 
 <!-- Display all flash message -->
-{% for label, messages in app.flashes %}
-    {% for message in messages %}
-        <div class="alert alert-{{ label }}">
-            {{ message|raw }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
-    {% endfor %}
-{% endfor %}
+{% if app.flashes is defined %}
+    <div class="position-fixed">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} fade in alert-custom">
+                    {{ message|raw }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endif %}
 
 <div id="page-content-wrapper">
     {% block body %}{% endblock %}
