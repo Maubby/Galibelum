@@ -209,6 +209,43 @@ class ManagerController extends Controller
     }
 
     /**
+     * Deletes pdf
+     *
+     * @param FileUploaderService $fileUploaderService The Upload Pdf Service.
+     * @param Contracts $contract The contract entity.
+     * @param string $fileName The pdf name.
+     *
+     * @Route("/{contract}/{fileName}/delete", methods={"GET"},
+     *      name="contract_pdf_delete")
+     *
+     * @return Response A Response instance
+     */
+    public function deletePdfAction(FileUploaderService $fileUploaderService,
+        Contracts $contract, string $fileName
+    ) {
+        $offer = $contract->getOffer();
+        $activity = $offer->getActivity();
+        $organization = $activity->getOrganizationActivities();
+        $fileUploaderService->deletePdf(
+            $fileName,
+            $organization->getId(),
+            $activity->getId(),
+            $offer->getId()
+        );
+
+        $contract->removePdf($fileName);
+        $this->getDoctrine()->getManager()->persist($contract);
+        $this->getDoctrine()->getManager()->flush();
+
+        $this->addFlash(
+            'success',
+            "Le PDF a bien été supprimé."
+        );
+
+        return $this->redirectToRoute('manager_contract_list');
+    }
+
+    /**
      * Lists all contracts.
      *
      * @param Request   $request  New posted info
