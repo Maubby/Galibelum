@@ -100,6 +100,7 @@
                                         <a class="fas fa-file-pdf degradeblue" style="font-size: 20px" href="{{ asset('/uploads/pdf/organization_' ~
                                             contract.offer.activity.organizationActivities.id ~ '/activity_' ~ contract.offer.activity.id
                                             ~ '/offer_' ~ contract.offer.id ~ '/' ~uploadPdf) }}" target="_blank"></a>
+                                        <a class="fas fa-trash-alt degradeblue" style="font-size: 20px" href="{{ path('contract_pdf_delete', {'contract' : contract.id, 'fileName' : uploadPdf }) }}"></a>
                                     {% endfor %}
                                 </td>
                             </tr>
