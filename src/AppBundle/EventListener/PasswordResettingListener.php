@@ -78,7 +78,7 @@ class PasswordResettingListener implements EventSubscriberInterface
         $user->setEnabled(true);
 
         $this->_session->getFlashBag()->add(
-            'resettingsuccess',
+            'success',
             'Votre mot de passe a bien été réinitialisé.'
         );
 
