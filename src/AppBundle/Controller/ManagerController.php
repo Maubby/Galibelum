@@ -47,9 +47,8 @@ class ManagerController extends Controller
             ->findAll();
 
         return $this->render(
-            'manager/index.html.twig', array(
-                'organizations' => $organizations
-            )
+            'manager/index.html.twig',
+            ['organizations' => $organizations]
         );
     }
 
@@ -136,23 +135,20 @@ class ManagerController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $organizations = $em->getRepository('AppBundle:Organization')->findby(
-            array(
+            [
                 'managers' => $this->getUser(),
-                'user' => $em->getRepository(
-                    'AppBundle:User'
-                )->findByRole('ROLE_COMPANY'),
-            )
+                'user' => $em
+                    ->getRepository('AppBundle:User')
+                    ->findByRole('ROLE_COMPANY'),
+            ]
         );
         $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
-            array(
-                'organization' => $organizations
-            )
+            ['organization' => $organizations]
         );
 
         return $this->render(
-            'manager/contract.html.twig', array(
-                'contracts' => $contracts
-            )
+            'manager/contract.html.twig',
+            ['contracts' => $contracts]
         );
     }
 
@@ -172,15 +168,15 @@ class ManagerController extends Controller
         FileUploaderService $fileUploaderService
     ) {
         $form = $this->createForm(ContractType::class);
+        $form->remove('finalDeal');
         $form->handleRequest($request);
 
         // Var for the file name
         if ($form->isSubmitted() && $form->isValid()) {
             $filePdf = [];
 
-            foreach ($request->files->get(
-                "appbundle_contract"
-            )['uploadPdf'] as $file
+            foreach ($request->files->get("appbundle_contract")['uploadPdf']
+                     as $file
             ) {
                 $offer = $contract->getOffer();
                 $activity = $offer->getActivity();
@@ -204,10 +200,47 @@ class ManagerController extends Controller
         }
 
         return $this->render(
-            'manager/_uploadContract.html.twig', array(
+            'manager/_uploadContract.html.twig',
+            [
                 'form' => $form->createView(),
                 'contract' => $contract
-            )
+            ]
+        );
+    }
+
+    /**
+     * Lists all contracts.
+     *
+     * @param Request   $request  New posted info
+     * @param Contracts $contract The contract entity
+     *
+     * @Route("/{contract}",
+     *     methods={"POST"}, name="contract_final_deal")
+     *
+     * @return Response
+     */
+    public function finalDealAction(Request $request, Contracts $contract)
+    {
+        $form = $this->createForm(ContractType::class);
+        $form->remove('uploadPdf');
+        $form->handleRequest($request);
+
+        // Var for the file name
+        if ($form->isSubmitted() && $form->isValid()) {
+            $contract->setFinalDeal(
+                $request->get("appbundle_contract")['finalDeal']
+            );
+            $this->getDoctrine()->getManager()->persist($contract);
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('manager_contract_list');
+        }
+
+        return $this->render(
+            'manager/_finalDealContract.html.twig',
+            [
+                'form' => $form->createView(),
+                'contract' => $contract
+            ]
         );
     }
 }

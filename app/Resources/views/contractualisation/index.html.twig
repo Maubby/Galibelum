@@ -29,7 +29,7 @@
             </div>
         {% endif %}
 
-        <div class="row boxing-canvas mt-50">
+        <div class="row boxing-canvas">
             <div class="col-md-12 col-sm-12 col-xs-12 text-center">
                 <!-- Display different color regarding if a company or structure is logged in -->
                 {% if is_granted('ROLE_STRUCTURE') %}
@@ -69,7 +69,7 @@
                             <tr>
                                 <td><a href="{{ path('activity_show', {'id': contract.offer.activity.id }) }}">{{ contract.offer.activity.name }}</a></td>
                                 <td><a href="{{ path('activity_show', {'id': contract.offer.activity.id }) }}">{{ contract.offer.name }}</a></td>
-                                <td>{{ contract.offer.amount }}</td>
+                                <td>{% if contract.finalDeal %}{{ contract.finalDeal }}{% else %}{{ contract.offer.amount }}{% endif %}</td>
                                 <td>{{ contract.offer.date|localizeddate('none', 'none', 'fr', null, 'd MMMM Y') }}</td>
                                 <td class="degradeblue">
                                     {% if is_granted('ROLE_STRUCTURE') %}

@@ -122,6 +122,16 @@
     {% endblock %}
 </header>
 
+<!-- Display all flash message -->
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+            {{ message|raw }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+    {% endfor %}
+{% endfor %}
+
 <div id="page-content-wrapper">
     {% block body %}{% endblock %}
 </div>
