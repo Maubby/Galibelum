@@ -52,7 +52,7 @@
                                 <td class="degradeblue"><strong>{{ contract.offer.activity.organizationActivities.name }}</strong></td>
                                 <td>{{ contract.offer.activity.name }}</td>
                                 <td>{{ contract.offer.name }}</td>
-                                <td>{{ contract.offer.amount }}</td>
+                                <td>{% if contract.finalDeal %}{{ contract.finalDeal }}{% else %}{{ contract.offer.amount }}{% endif %}</td>
                                 <td>{{ contract.offer.date|date('d M Y') }}</td>
                                 <td class="degradered"><strong>{{ contract.organization.name }}</strong></td>
 
@@ -84,11 +84,15 @@
                                            class="text-center"><i class="fas fa-envelope" style="font-size: 20px; color: #999999"></i>
                                         </a><br>
                                     {% endif %}
-                                    <!-- Ending buttons changing contracts' status -->
 
                                     {% if contract.status is same as(2) %}
-                                        <a href="#" class="fas fa-upload" style="font-size: 20px; color: #999999" data-toggle="modal" data-target="#pop-up-offer"></a>
+                                        <a href="#" class="fas fa-upload" style="font-size: 20px; color: #999999" data-toggle="modal" data-target="#pop-up-upload-contract-{{ contract.id }}"></a>
                                         {{ render(controller("AppBundle:Manager:upload", {'contract': contract})) }}
+                                    {% endif %}
+
+                                    {% if contract.status is same as(3) %}
+                                        <a href="#" class="fas fa-euro-sign" style="font-size: 20px; color: #999999" data-toggle="modal" data-target="#pop-up-final-deal-contract-{{ contract.id }}"></a>
+                                        {{ render(controller("AppBundle:Manager:finalDeal", {'contract': contract})) }}
                                     {% endif %}
                                 </td>
                                 <td>

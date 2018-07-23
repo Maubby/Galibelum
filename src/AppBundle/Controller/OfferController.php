@@ -100,7 +100,7 @@ class OfferController extends Controller
     ) {
         if ($this->getUser()->hasRole('ROLE_STRUCTURE')
             && $this->getUser()->getOrganization()->getIsActive() === 1
-            && $activity->getIsActive() === 1
+            && $activity->getIsActive() === true
         ) {
             if ($this->getUser()->getOrganization()->getOrganizationActivity()->isEmpty()
             ) {
