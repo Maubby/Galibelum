@@ -12,6 +12,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Contracts;
 use AppBundle\Entity\Organization;
+use AppBundle\Entity\User;
 use AppBundle\Form\ContractType;
 use AppBundle\Service\FileUploaderService;
 use AppBundle\Service\MailerService;
