@@ -57,7 +57,7 @@ class ActivityController extends Controller
             $this->getUser()->getOrganization()->getActivityPdf()
                 ? $this->addFlash(
                     'info',
-                    "Veuillez ajouter un Pdf pour présenter vos activités"
+                    "Veuillez ajouter un PDF pour présenter votre activité."
                 )
                 : null;
 
@@ -166,7 +166,7 @@ class ActivityController extends Controller
             && $activity->getUploadPdf() === null
                 ? $this->addFlash(
                     'info',
-                    "Veuillez ajouter un Pdf pour présenter votre activité"
+                    "Veuillez ajouter un PDF pour présenter votre activité."
                 )
                 : null;
 
@@ -232,7 +232,7 @@ class ActivityController extends Controller
             $activity->getUploadPdf() === null
                 ? $this->addFlash(
                     'info',
-                    "Veuillez ajouter un Pdf pour présenter votre activité"
+                    "Veuillez ajouter un PDF pour présenter votre activité."
                 )
                 : null;
 
@@ -284,7 +284,7 @@ class ActivityController extends Controller
                 $this->addFlash(
                     'danger',
                     "Vous ne pouvez pas supprimer cette activité
-                    car des offres sont liées à l'activité."
+                    car des offres sont déjà liées à cette activité."
                 );
             }
             return $this->redirectToRoute('activity_index');
