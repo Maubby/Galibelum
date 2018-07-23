@@ -48,11 +48,18 @@ table.dataTable tbody td {
   vertical-align: middle;
 }
 
-table.dataTable.no-footer {
-  border-bottom: none;
+@media screen and (max-width: 767px) {
+  table.dataTable.no-footer {
+    border-bottom: none;
+  }
 }
 
 .boxing-canvas {
+  max-width: 1500px;
+  border-radius: 4px;
+}
+
+.breadcrumb-boxing-canvas {
   max-width: 1500px;
 }
 

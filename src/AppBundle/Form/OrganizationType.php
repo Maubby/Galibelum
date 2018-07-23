@@ -39,65 +39,52 @@ class OrganizationType extends AbstractType
     {
         $builder
             ->add(
-                'name', TextType::class, array(
-                    'attr' => array(
-                        'minlength' => 2, 'maxlength' => 32
-                    )
-                )
+                'name', TextType::class,
+                ['attr' => ['minlength' => 2, 'maxlength' => 32]]
             )
             ->add(
-                'phoneNumber', TextType::class, array(
-                    'attr' => array(
-                        'minlength' => 9, 'maxlength' => 32
-                    )
-                )
+                'phoneNumber', TextType::class,
+                ['attr' => ['minlength' => 9, 'maxlength' => 32]]
             )
             ->add(
-                'email', EmailType::class, array(
-                    'attr' => array(
-                        'minlength' => 2, 'maxlength' => 64
-                    )
-                )
+                'email', EmailType::class,
+                ['attr' => ['minlength' => 2, 'maxlength' => 64]]
             )
             ->add(
-                'description', TextareaType::class, array(
-                    'attr'=> array(
-                        'minlength' => 32, 'maxlength' => 768
-                    )
-                )
+                'description', TextareaType::class,
+                ['attr'=> ['minlength' => 32, 'maxlength' => 768]]
             )
             ->add(
-                'userRole', TextType::class, array(
-                    'attr'=> array(
-                        'minlength' => 2, 'maxlength' => 32
-                    )
-                )
+                'userRole', TextType::class,
+                ['attr'=> ['minlength' => 2, 'maxlength' => 32]]
             )
             ->add(
-                'status', TextType::class, array(
-                    'attr'=>array(
+                'status', TextType::class,
+                [
+                    'attr'=>
+                        [
                         'data-label' => null,
                         'required' => false,
                         'minlength' => 2,'maxlength' => 32
-                    )
-                )
+                        ]
+                ]
             )
             ->add(
-                'address', TextType::class, array(
-                    'attr'=>array(
-                        'minlength' => 5, 'maxlength' => 128
-                    )
-                )
+                'address', TextType::class,
+                ['attr'=>['minlength' => 5, 'maxlength' => 128]]
             )
             ->add(
-                'relationNumber', ChoiceType::class, array(
-                    'choices'  => array(
-                        'Aucun autre membre' => 'Aucun autre membre',
-                        '2-10 membres' => '2-10 membres',
-                        '11-50 membres' => '11-50 membres',
-                        '51-250 membres' => '51-250 membres',
-                        'Plus de 251 membres'=> 'Plus de 251 membres',
-                    ))
+                'relationNumber', ChoiceType::class,
+                [
+                    'choices'  =>
+                        [
+                            'Aucun autre membre' => 'Aucun autre membre',
+                            '2-10 membres' => '2-10 membres',
+                            '11-50 membres' => '11-50 membres',
+                            '51-250 membres' => '51-250 membres',
+                            'Plus de 251 membres'=> 'Plus de 251 membres',
+                        ]
+                ]
             );
     }
 
@@ -111,9 +98,7 @@ class OrganizationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
-                'data_class' => 'AppBundle\Entity\Organization'
-            )
+            ['data_class' => 'AppBundle\Entity\Organization']
         );
     }
 

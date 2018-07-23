@@ -44,23 +44,31 @@ class ActivityController extends Controller
         ) {
             $em = $this->getDoctrine()->getManager();
             $activities = $em->getRepository('AppBundle:Activity')->findBy(
-                array(
+                [
                     'organizationActivities' => $this->getUser()->getOrganization(),
                     'isActive' => true
-                )
+                ]
             );
 
             if (empty($activities)) {
                 return $this->redirectToRoute('activity_new');
             }
+
+            $this->getUser()->getOrganization()->getActivityPdf()
+                ? $this->addFlash(
+                    'info',
+                    "Veuillez ajouter un Pdf pour présenter vos activités"
+                )
+                : null;
+
             return $this->render(
-                'activity/index.html.twig', array(
+                'activity/index.html.twig', [
                     'activities' => $activities,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
-                )
+                ]
             );
         }
-        //return $this->redirectToRoute('redirect');
+        return $this->redirectToRoute('redirect');
     }
 
     /**
@@ -93,28 +101,28 @@ class ActivityController extends Controller
                 $em->flush();
 
                 $this->addFlash(
-                    'pdf',
+                    'success',
                     "Vous pouvez désormais télécharger un 
                     PDF lorsque vous <a href=\"".
                     $this->generateUrl(
-                        'activity_edit', array('id' => $activity
-                            ->getId())
+                        'activity_edit',
+                        ['id' => $activity->getId()]
                     )."\">modifiez votre activité</a>."
                 );
 
                 return $this->redirectToRoute(
-                    'dashboard_index', array(
-                        'id' => $activity->getId()
-                    )
+                    'dashboard_index',
+                    ['id' => $activity->getId()]
                 );
             }
 
             return $this->render(
-                'activity/new.html.twig', array(
+                'activity/new.html.twig',
+                [
                     'activity' => $activity,
                     'form' => $form->createView(),
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
-                )
+                ]
             );
         }
         return $this->redirectToRoute('redirect');
@@ -154,12 +162,21 @@ class ActivityController extends Controller
                     null;
             }
 
+            $activity->getOrganizationActivities()->getUser() === $this->getUser()
+            && $activity->getUploadPdf() === null
+                ? $this->addFlash(
+                    'info',
+                    "Veuillez ajouter un Pdf pour présenter votre activité"
+                )
+                : null;
+
             return $this->render(
-                'activity/show.html.twig', array(
+                'activity/show.html.twig',
+                [
                     'activity' => $activity,
                     'embedLink' => $embedLink,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
-                )
+                ]
             );
         }
         return $this->redirectToRoute('redirect');
@@ -212,13 +229,21 @@ class ActivityController extends Controller
                 return $this->redirectToRoute('dashboard_index');
             }
 
+            $activity->getUploadPdf() === null
+                ? $this->addFlash(
+                    'info',
+                    "Veuillez ajouter un Pdf pour présenter votre activité"
+                )
+                : null;
+
             return $this->render(
-                'activity/edit.html.twig', array(
+                'activity/edit.html.twig',
+                [
                     'activity' => $activity,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView()
-                )
+                ]
             );
         }
         return $this->redirectToRoute('redirect');
@@ -253,13 +278,13 @@ class ActivityController extends Controller
 
                 $this->addFlash(
                     'success',
-                    "L'activité a bien étè supprimée."
+                    "L'activité a bien été supprimée."
                 );
             } else {
                 $this->addFlash(
                     'danger',
                     "Vous ne pouvez pas supprimer cette activité
-                    car des offres sont liées a l'activité."
+                    car des offres sont liées à l'activité."
                 );
             }
             return $this->redirectToRoute('activity_index');
@@ -279,9 +304,8 @@ class ActivityController extends Controller
         return $this->createFormBuilder()
             ->setAction(
                 $this->generateUrl(
-                    'activity_delete', array(
-                        'id' => $activity->getId()
-                    )
+                    'activity_delete',
+                    ['id' => $activity->getId()]
                 )
             )
             ->setMethod('DELETE')

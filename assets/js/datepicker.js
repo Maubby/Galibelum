@@ -7,7 +7,7 @@ $.fn.datepicker.dates['fr'] = {
     today: "Aujourd'hui",
     clear: "Effacer",
     weekStart: 1,
-    format: "dd-mm-yyyy"
+    format: "yyyy-mm-dd"
 };
 $(document).ready(function() {
     /* Set language to FR with dates["fr'] options */

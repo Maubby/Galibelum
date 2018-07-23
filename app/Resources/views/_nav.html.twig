@@ -16,6 +16,11 @@
                 </a>
             </div>
 
+            {% set myVal = 0 %}
+            {% for activity in app.user.organization.organizationActivity if activity.uploadPdf is null and activity.isActive == true %}
+                {% set myVal = myVal + 1 %}
+            {% endfor %}
+
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -24,9 +29,12 @@
                     {#<li><a href="#">Paiements</a></li>#}
                     {% if is_granted('ROLE_STRUCTURE') %}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ma Structure <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Ma Structure
+                                {% if myVal > 0 %}<span class="badge">{{ myVal }}</span>{% endif %}
+                                <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ path('activity_index') }}">Mes Activités</a></li>
+                                <li><a href="{{ path('activity_index') }}">Mes Activités
+                                        {% if myVal > 0 %}<span class="badge">{{ myVal }}</span>{% endif %}</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="{{ path('offer_index') }}">Mes Offres</a></li>
                             </ul>

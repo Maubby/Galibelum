@@ -25,8 +25,9 @@ use Doctrine\ORM\EntityRepository;
 class OrganizationRepository extends EntityRepository
 {
     /**
+     * Create a query to search organization per name
      *
-     * @param $data /Search Parameters
+     * @param string $data Parameters customers given
      *
      * @return mixed Return result of the query
      */

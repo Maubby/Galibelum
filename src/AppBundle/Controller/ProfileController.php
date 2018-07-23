@@ -111,12 +111,13 @@ class ProfileController extends BaseController
             : null;
 
         return $this->render(
-            '@FOSUser/Profile/edit.html.twig', array(
+            '@FOSUser/Profile/edit.html.twig',
+            [
                 'form' => $form->createView(),
                 'formPassword' => $formPassword->createView(),
                 'user' => $this->getUser(),
                 'manager' => $manager,
-            )
+            ]
         );
     }
 }

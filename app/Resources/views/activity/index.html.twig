@@ -18,28 +18,6 @@
 {% endblock %}
 
 {% block body %}
-    <!-- Message flash -->
-    {% if app.session.flashBag.has('success') %}
-        <div class="alert alert-success">
-            {% for msg in app.session.flashBag.get('success') %}
-                {{ msg }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            {% endfor %}
-        </div>
-    {% endif %}
-    <!-- End flash message -->
-
-    <!-- Message flash -->
-    {% if app.session.flashBag.has('danger') %}
-        <div class="alert alert-danger">
-            {% for msg in app.session.flashBag.get('danger') %}
-                {{ msg }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            {% endfor %}
-        </div>
-    {% endif %}
-    <!-- End flash message -->
-
     <main id="index-activity">
         <section>
             <div class="container-fluid">
@@ -94,7 +72,8 @@
                                         {% endif %}
                                     </div>
                                     <div class="activity-btn-height">
-                                        <a href="{{ path('activity_edit', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn mt-20">Modifier l'activité</a>
+                                        <a href="{{ path('activity_edit', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn mt-20">Modifier l'activité
+                                             {% if activity.uploadPdf is null  %}<span class="badge">1</span></a>{% endif %}
                                         <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-danger backred-btn mt-10">Créer une offre</a>
                                     </div>
                                 </div>

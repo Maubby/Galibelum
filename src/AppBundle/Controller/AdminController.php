@@ -46,7 +46,7 @@ class AdminController extends Controller
             $em = $this->getDoctrine()->getManager();
             $manager
                 ->setCgu(1)
-                ->setRoles(array('ROLE_MANAGER'))
+                ->setRoles(['ROLE_MANAGER'])
                 ->setEnabled(1);
             // Persisting user according to its new account Manager
             $em->persist($manager);
@@ -57,10 +57,11 @@ class AdminController extends Controller
         }
 
         return $this->render(
-            'admin/new.html.twig', array(
+            'admin/new.html.twig',
+            [
                 'manager' => $manager,
                 'form' => $form->createView()
-            )
+            ]
         );
     }
 
@@ -94,15 +95,16 @@ class AdminController extends Controller
 
                 return $this->redirectToRoute(
                     'admin_manager_list',
-                    array('id' => $manager->getId())
+                    ['id' => $manager->getId()]
                 );
             }
 
             return $this->render(
-                'admin/edit.html.twig', array(
+                'admin/edit.html.twig',
+                [
                     'manager' => $manager,
                     'edit_form' => $editForm->createView()
-                )
+                ]
             );
         }
         return $this->redirectToRoute('admin_manager_list');
@@ -120,9 +122,8 @@ class AdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('AppBundle:User')->findByRole('ROLE_MANAGER');
         return $this->render(
-            'admin/manager.html.twig', array(
-                'users' => $users
-            )
+            'admin/manager.html.twig',
+            ['users' => $users]
         );
     }
 
