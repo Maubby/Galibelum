@@ -55,10 +55,22 @@
                         {% for user in users %}
                             {% if not user.role('ROLE_SUPER_ADMIN') and not user.role('ROLE_MANAGER') %}
                                 <tr>
-                                    <td class="degradeblue">
-                                        <strong>{{ user.lastname}}</strong></td>
-                                    <td class="degradeblue">
-                                        <strong>{{ user.firstname }}</strong></td>
+                                    {% if user.role('ROLE_STRUCTURE') %}
+                                        <td class="degradeblue">
+                                            <strong>{{ user.lastname}}</strong></td>
+                                        <td class="degradeblue">
+                                            <strong>{{ user.firstname }}</strong></td>
+                                    {% elseif user.role('ROLE_COMPANY') %}
+                                        <td class="degradered">
+                                            <strong>{{ user.lastname}}</strong></td>
+                                        <td class="degradered">
+                                            <strong>{{ user.firstname }}</strong></td>
+                                    {% else %}
+                                        <td>
+                                            <strong>{{ user.lastname}}</strong></td>
+                                        <td>
+                                            <strong>{{ user.firstname }}</strong></td>
+                                    {% endif %}
                                     <td>{{ user.email }}</td>
                                     <td>{{ user.phoneNumber }}</td>
                                     <td>
