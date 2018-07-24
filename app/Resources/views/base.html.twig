@@ -49,17 +49,17 @@
 </header>
 
 <!-- Display all flash message -->
- {% if app.flashes is defined %}
-<div class="position-fixed">
-{% for label, messages in app.flashes %}
-    {% for message in messages %}
-        <div class="alert alert-{{ label }} fade in alert-custom">
-            {{ message|raw }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
-    {% endfor %}
-{% endfor %}
-</div>
+{% if app.flashes is defined %}
+    <div class="position-fixed">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} fade in alert-custom">
+                    {{ message|raw }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
 {% endif %}
 
 <!--Modal introducing the delete activity-->
@@ -144,9 +144,9 @@
                             <li><a href="{{ path('search_index') }}">Rechercher</a></li>
                             <li><a href="{{ path('contract_index') }}">Contractualisation</a></li>
                             {#<li><a href="">Paiements</a></li>#}
-                            {% if is_granted('ROLE_STRUCTURE') %}
+                            {% if is_granted('ROLE_STRUCTURE') and not is_granted ('ROLE_SUPER_ADMIN') and not is_granted('ROLE_MANAGER') %}
                                 <li><a href="{{ path('organization_edit', { 'id': app.user.organization.id }) }}">Ma structure</a></li>
-                            {% elseif is_granted('ROLE_COMPANY') %}
+                            {% elseif is_granted('ROLE_COMPANY') and not is_granted ('ROLE_SUPER_ADMIN') and not is_granted('ROLE_MANAGER') %}
                                 <li><a href="{{ path('organization_edit', { 'id': app.user.organization.id }) }}">Ma Marque</a></li>
                             {% endif %}
                             <li><a href="{{ path('fos_user_profile_edit') }}">Mon compte</a></li>
