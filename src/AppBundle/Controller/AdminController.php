@@ -126,44 +126,4 @@ class AdminController extends Controller
             ['users' => $users]
         );
     }
-
-    /**
-     * Lists all organization entities.
-     *
-     * @Route("/user", methods={"GET"},
-     *     name="manager_user_list")
-     *
-     * @return Response A Response instance
-     */
-    public function userListAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $users = $em
-            ->getRepository('AppBundle:User')
-            ->findAll();
-
-        return $this->render(
-            'manager/user.html.twig', array(
-                'users' => $users
-            )
-        );
-    }
-
-    /**
-     * Resend an email entity.
-     *
-     * @param User $user Entity User
-     *
-     * @return              Response A Response Instance
-     * @Route("/send/{id}", methods={"GET"},
-     *     name="manager_user_resend")
-     */
-    public function resendConfirmation(User $user)
-    {
-        $mailer = $this->get('fos_user.mailer');
-        $mailer->sendConfirmationEmailMessage($user);
-
-        $this->addFlash('success', 'Confirmation d\'email envoyée');
-        return $this->redirectToRoute('manager_user_list');
-    }
 }
