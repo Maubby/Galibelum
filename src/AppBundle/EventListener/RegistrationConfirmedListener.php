@@ -67,7 +67,7 @@ class RegistrationConfirmedListener implements EventSubscriberInterface
     public function onRegistrationConfirm(GetResponseUserEvent $event)
     {
         $this->_session->getFlashBag()->add(
-            'registrationconfirmed',
+            'success',
             'Votre compte a bien été validé. Vous pouvez désormais
             présenter votre structure 
             eSport ou rechercher les structures à sponsoriser les

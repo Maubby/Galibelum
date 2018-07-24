@@ -98,7 +98,7 @@ class EmailConfirmationListener implements EventSubscriberInterface
         );
 
         $this->_session->getFlashBag()->add(
-            'emailconfirmed',
+            'success',
             'Un email de validation a été envoyé à l\'adresse renseignée.
              Si vous ne l\'avez pas reçu, vérifiez vos spams ou contactez Galibelum
               via l\'adresse : hello@galibelum.fr.'

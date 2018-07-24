@@ -1,32 +1,5 @@
 @import "_variables";
 
-/* Checking company or structure side */
-
-#company {
-  .boxing-canvas {
-    .degradered {
-      background: linear-gradient(to right, #fad27b, #f9867d) !important;
-      -webkit-background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-    }
-    .degradeblue {
-      background: linear-gradient(to right, #137faf, #86ccc2) !important;
-      -webkit-background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-    }
-    input::placeholder, select, textarea::placeholder {
-      font-weight: 200;
-      opacity: 0.7;
-      color: $red-placeholder-color !important;
-    }
-    .backred-btn-sm-btn-sm {
-      background-image: linear-gradient(to right, #fad27b, #f9867d);
-      border-color: #FFFFFF;
-      width: 190px;
-    }
-  }
-}
-
 // Table
 
 #table_manager_wrapper {
@@ -47,18 +20,19 @@ table.dataTable tbody {
   border-radius: 4px;
 }
 
-.container {
-  padding: 0;
-}
-
 th, td {
   text-align: center;
 }
 
 .textarea-table {
   width: 220px;
+  height: 100px;
+  overflow: auto;
   word-wrap: break-word;
   text-align: justify;
+  p{
+    padding-right: 5px;
+  }
 }
 
 // Button width for manager_index
