@@ -34,7 +34,7 @@ registration:
     back: 'Retour à la page d''origine.'
     submit: 'Créer un compte'
     flash:
-        user_created: 'L''utilisateur a été créé avec succès.'
+        user_created: 'Votre compte a été créé avec succès.'
     email:
         subject: 'Bienvenue %username% !'
         message: |
