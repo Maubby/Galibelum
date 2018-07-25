@@ -115,6 +115,12 @@
                                             {{ link }}
                                         </a>
                                     </li>
+                                {% elseif 'plus.google' in link %}
+                                    <li class="list-group-item"><i class="fab fa-google-plus-square"></i></i> Google Plus :
+                                        <a href="{{ link }}" target="_blank">
+                                            {{ link }}
+                                        </a>
+                                    </li>
                                 {% elseif '' in link %}
                                     <li class="list-group-item"><i class="fas fa-globe"></i> Autres :
                                         <a href="{{ link }}" target="_blank">
