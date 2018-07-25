@@ -71,7 +71,7 @@
                         <!--End activity's Name-->
 
                         <!--Activity's Address-->
-                        <div class="activityAddress activityHide mt-20 p-0">
+                        <div class="{% if activity.type is same as ("Évènement eSport") %} activityAddress mt-20 p-0 {% else %}  activityAddress activityHide mt-20 p-0 {% endif %}">
                             <div class="form-group form-error">
                                 <i class="fas fa-map-marker"></i>{{ form_label(form.address, 'Adresse de votre évènement *') }}
                                 {{ form_widget(form.address, {'attr': {'class': "form-control input-field activityAddress"}}) }}
@@ -82,14 +82,14 @@
 
                         <!--Activity's Date-->
                         <div class="row">
-                            <div class="col-sm-6 activityDate activityHide mt-20">
+                            <div class="{% if activity.type is same as("Évènement eSport") %} col-sm-6 mt-20 activityDate {% else %} col-sm-6 mt-20 activityDate activityHide {% endif %}">
                                 <div class="form-group form-error">
                                     <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateStart, "Début de l'évènement eSport *") }}
                                     {{ form_widget(form.dateStart, {'attr': {'class': "form-control js-datepicker input-field activityDate"}}) }}
                                     {{ form_errors(form.dateStart) }}
                                 </div>
                             </div>
-                            <div class="col-sm-6 activityDate activityHide mt-20">
+                            <div class="{% if activity.type is same as("Évènement eSport") %} col-sm-6 mt-20 activityDate {% else %} col-sm-6 mt-20 activityDate activityHide {% endif %}">
                                 <div class="form-group form-error">
                                     <i class="fas fa-calendar-alt"></i>{{ form_label(form.dateEnd, "Fin de l'évènement eSport *") }}
                                     {{ form_widget(form.dateEnd, {'attr': {'class': "form-control js-datepicker input-field activityDate"}}) }}
@@ -112,7 +112,7 @@
                         <!--End Activity's Url Video-->
 
                         <!--Activity's Achievement-->
-                        <div class="mt-20 p-0 activityAchievement activityHide">
+                        <div class="{% if activity.type is same as("Equipe eSport") %} mt-20 p-0 activityAchievement {% else %} activityHide mt-20 p-0 activityAchievement {% endif %}">
                             <div class="form-group form-error">
                                 <i class="fas fa-trophy"></i>{{ form_label(form.achievement, 'Accomplissements') }}
                                 {{ form_widget(form.achievement, {'attr': {'class': "form-control input-field activityAchievement",
@@ -127,18 +127,23 @@
                             <div class="col-sm-12 form-error">
                                 <i class="fas fa-user-friends"></i>{{ form_label(form.socialLink, 'Réseaux sociaux et chaînes de streaming') }}
                             </div>
-                            <div class="col-sm-10">
-                                {# store the prototype on the data-prototype attribute #}
-                                <input type="url" id="appbundle_activity_socialLink_0" name="appbundle_activity[socialLink][0]" class="form-control input-field" placeholder="Exemple : https://www.twitch.tv/gallibellum">
-                            </div>
-                            <div id="socialLink-fields-list" data-prototype=
-                            "{{ form_widget(form.socialLink.vars.prototype,{'attr': {'class': "form-control input-field",'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}})|e }}"
-                                 data-widget-tags="{{ '<div class="col-sm-10"></div>'|e }}">
-                                {% for socialLinkField in form.socialLink %}
-                                    {{ form_errors(socialLinkField) }}
-                                    {{ form_widget(socialLinkField) }}
-                                {% endfor %}
-                            </div>
+                            {% if activity.socialLink is empty %}
+                                <div class="col-sm-10">
+                                    {# store the prototype on the data-prototype attribute #}
+                                    <input type="url" id="appbundle_activity_socialLink_0" name="appbundle_activity[socialLink][0]" class="form-control input-field" placeholder="Exemple : https://www.twitch.tv/gallibellum">
+                                </div>
+                            {% else %}
+                                <div id="socialLink-fields-list" data-prototype=
+                                "{{ form_widget(form.socialLink.vars.prototype,{'attr': {'class': "form-control input-field",'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}})|e }}"
+                                     data-widget-tags="{{ '<div class="col-sm-10"></div>'|e }}">
+                                    {% for socialLinkField in form.socialLink %}
+                                        <div class="col-sm-10">
+                                            {{ form_errors(socialLinkField) }}
+                                            {{ form_widget(socialLinkField) }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                             <div class="col-sm-2 mt-10">
                                 <span data-list="#socialLink-fields-list" class="add-socialLink"><i class="fas fa-plus-circle degradeblue" style="font-size: 30px"></i></span>
                                 <span data-list="#socialLink-fields-list" class="remove-socialLink"><i class="fas fa-minus-circle degradeblue" style="font-size: 30px"></i></span>

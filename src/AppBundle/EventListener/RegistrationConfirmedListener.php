@@ -68,10 +68,8 @@ class RegistrationConfirmedListener implements EventSubscriberInterface
     {
         $this->_session->getFlashBag()->add(
             'success',
-            'Votre compte a bien été validé. Vous pouvez désormais
-            présenter votre structure 
-            eSport ou rechercher les structures à sponsoriser les
-            plus cohérentes pour votre marque'
+            'Votre compte a bien été activé. Vous pouvez désormais
+            créer un compte pour votre structure eSport ou votre marque.'
         );
         $url = $this->_router->generate('inscription_index');
         $event->setResponse(new RedirectResponse($url));

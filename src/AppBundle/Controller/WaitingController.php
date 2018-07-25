@@ -42,6 +42,11 @@ class WaitingController extends Controller
             || $user->hasRole('ROLE_COMPANY')
             && $user->getOrganization()->getIsActive() === 1
         ) {
+            $this->addFlash('success', 'Votre compte a bien été validé. Vous pouvez désormais
+            présenter votre structure 
+            eSport ou rechercher les structures à sponsoriser les
+            plus cohérentes pour votre marque.');
+
             return $this->redirectToRoute('dashboard_index');
 
         } elseif ($user->hasRole('ROLE_STRUCTURE')
