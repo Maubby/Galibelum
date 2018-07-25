@@ -36,7 +36,7 @@ Go to your working folder
     * 'composer install' / 'composer update' (create parameters.yml with your default config based on parameters.yml.dist).
     * 'bin/console d:d:c' (will create "galibelum" database).
     * 'bin/console d:s:u --force' (in "galibelum" database).
-    * 'bin/console d:f:l'.
+    * 'bin/console d:f:l' (to load fixtures).
     * Run 'npm install' and then run 'npm run dev' to run the dev script.
     * 'bin/console c:c'.
     * 'bin/console s:r'.
