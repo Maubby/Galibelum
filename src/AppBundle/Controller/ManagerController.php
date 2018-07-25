@@ -11,6 +11,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Contracts;
+use AppBundle\Entity\User;
 use AppBundle\Entity\Organization;
 use AppBundle\Form\ContractType;
 use AppBundle\Service\FileUploaderService;
@@ -134,14 +135,24 @@ class ManagerController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $organizations = $em->getRepository('AppBundle:Organization')->findby(
-            [
-                'managers' => $this->getUser(),
-                'user' => $em
-                    ->getRepository('AppBundle:User')
-                    ->findByRole('ROLE_COMPANY'),
-            ]
-        );
+        if ($this->getUser()->hasRole('ROLE_MANAGER')) {
+            $organizations = $em->getRepository('AppBundle:Organization')->findby(
+                [
+                    'managers' => $this->getUser(),
+                    'user' => $em
+                        ->getRepository('AppBundle:User')
+                        ->findByRole('ROLE_COMPANY'),
+                ]
+            );
+        } else {
+            $organizations = $em->getRepository('AppBundle:Organization')->findby(
+                [
+                    'user' => $em
+                        ->getRepository('AppBundle:User')
+                        ->findByRole('ROLE_COMPANY'),
+                ]
+            );
+        }
         $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
             ['organization' => $organizations]
         );
@@ -167,13 +178,13 @@ class ManagerController extends Controller
     public function uploadAction(Request $request, Contracts $contract,
         FileUploaderService $fileUploaderService
     ) {
+        $filePdf = $contract->getUploadPdf();
         $form = $this->createForm(ContractType::class);
         $form->remove('finalDeal');
         $form->handleRequest($request);
 
         // Var for the file name
         if ($form->isSubmitted() && $form->isValid()) {
-            $filePdf = [];
 
             foreach ($request->files->get("appbundle_contract")['uploadPdf']
                      as $file
@@ -206,6 +217,43 @@ class ManagerController extends Controller
                 'contract' => $contract
             ]
         );
+    }
+
+    /**
+     * Deletes pdf
+     *
+     * @param FileUploaderService $fileUploaderService The Upload Pdf Service.
+     * @param Contracts $contract The contract entity.
+     * @param string $fileName The pdf name.
+     *
+     * @Route("/{contract}/{fileName}/delete", methods={"GET"},
+     *      name="contract_pdf_delete")
+     *
+     * @return Response A Response instance
+     */
+    public function deletePdfAction(FileUploaderService $fileUploaderService,
+        Contracts $contract, string $fileName
+    ) {
+        $offer = $contract->getOffer();
+        $activity = $offer->getActivity();
+        $organization = $activity->getOrganizationActivities();
+        $fileUploaderService->deletePdf(
+            $fileName,
+            $organization->getId(),
+            $activity->getId(),
+            $offer->getId()
+        );
+
+        $contract->removePdf($fileName);
+        $this->getDoctrine()->getManager()->persist($contract);
+        $this->getDoctrine()->getManager()->flush();
+
+        $this->addFlash(
+            'success',
+            "Le PDF a bien été supprimé."
+        );
+
+        return $this->redirectToRoute('manager_contract_list');
     }
 
     /**
@@ -242,5 +290,45 @@ class ManagerController extends Controller
                 'contract' => $contract
             ]
         );
+    }
+
+    /**
+     * Lists all organization entities.
+     *
+     * @Route("/user", methods={"GET"},
+     *     name="manager_user_list")
+     *
+     * @return Response A Response instance
+     */
+    public function userListAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $users = $em
+            ->getRepository('AppBundle:User')
+            ->findAll();
+
+        return $this->render(
+            'manager/user.html.twig', array(
+                'users' => $users
+            )
+        );
+    }
+
+    /**
+     * Resend an email entity.
+     *
+     * @param User $user Entity User
+     *
+     * @return              Response A Response Instance
+     * @Route("/send/{id}", methods={"GET"},
+     *     name="manager_user_resend")
+     */
+    public function resendConfirmation(User $user)
+    {
+        $mailer = $this->get('fos_user.mailer');
+        $mailer->sendConfirmationEmailMessage($user);
+
+        $this->addFlash('success', 'Confirmation d\'email envoyée');
+        return $this->redirectToRoute('manager_user_list');
     }
 }

@@ -24,7 +24,7 @@
                 <i class="fas fa-briefcase text-center degradeblue" style="font-size: 50px"></i>
                 <h5 class="degradeblue text-center">Contractualisation</h5>
                 <p class="normal-subtitle-text text-center mt-20 mb-20">Le tableau ci-dessous vous permet de voir si une marque s'est liée à l'offre d'une structure.
-                <br>Un fois la mise en relation effectuée, vous pourrez suivre et gérer l'évolution de la négociation.</p>
+                    <br>Une fois la mise en relation effectuée, vous pourrez suivre et gérer l'évolution de la négociation.</p>
 
                 <!-- Creating a responsive table -->
                 <div class="table-responsive">
@@ -81,17 +81,21 @@
                                 <td>
                                     {% if contract.status == 2 or contract.status == 3 %}
                                         <a href="{{ path('contract_status_mail', {'id': contract.id, 'status': contract.status}) }}"
-                                           class="text-center"><i class="fas fa-envelope" style="font-size: 20px; color: #999999"></i>
+                                           class="text-center"><i class="fas fa-envelope" style="font-size: 20px; color: #999999"
+                                                {% if contract.status == 2 %}
+                                                    title="Envoyer un mail de validation"
+                                                {% else %} title="Envoyer un mail de paiement"
+                                                {% endif %}></i>
                                         </a><br>
                                     {% endif %}
 
                                     {% if contract.status is same as(2) %}
-                                        <a href="#" class="fas fa-upload" style="font-size: 20px; color: #999999" data-toggle="modal" data-target="#pop-up-upload-contract-{{ contract.id }}"></a>
+                                        <a href="#" class="fas fa-upload" title="Ajouter un PDF" style="font-size: 20px; color: #999999" data-toggle="modal" data-target="#pop-up-upload-contract-{{ contract.id }}"></a>
                                         {{ render(controller("AppBundle:Manager:upload", {'contract': contract})) }}
                                     {% endif %}
 
                                     {% if contract.status is same as(3) %}
-                                        <a href="#" class="fas fa-euro-sign" style="font-size: 20px; color: #999999" data-toggle="modal" data-target="#pop-up-final-deal-contract-{{ contract.id }}"></a>
+                                        <a href="#" class="fas fa-euro-sign" style="font-size: 20px; color: #999999" data-toggle="modal" data-target="#pop-up-final-deal-contract-{{ contract.id }}" title="Modifier le montant demandé"></a>
                                         {{ render(controller("AppBundle:Manager:finalDeal", {'contract': contract})) }}
                                     {% endif %}
                                 </td>
@@ -100,6 +104,7 @@
                                         <a class="fas fa-file-pdf degradeblue" style="font-size: 20px" href="{{ asset('/uploads/pdf/organization_' ~
                                             contract.offer.activity.organizationActivities.id ~ '/activity_' ~ contract.offer.activity.id
                                             ~ '/offer_' ~ contract.offer.id ~ '/' ~uploadPdf) }}" target="_blank"></a>
+                                        <a class="fas fa-trash-alt degradeblue" style="font-size: 20px" href="{{ path('contract_pdf_delete', {'contract' : contract.id, 'fileName' : uploadPdf }) }}"></a>
                                     {% endfor %}
                                 </td>
                             </tr>

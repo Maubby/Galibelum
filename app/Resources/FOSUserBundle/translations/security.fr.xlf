@@ -60,7 +60,8 @@
             </trans-unit>
             <trans-unit id="15">
                 <source>Account is disabled.</source>
-                <target><![CDATA[Le compte est désactivé. <br> Veuillez contacter hello@galibelum.fr]]></target>
+                <target><![CDATA[Le compte est désactivé. <br> Veuillez vérifier vos spams afin d'activer le lien
+                 envoyé par mail ou contacter Galibelum : hello@galibelum.fr]]></target>
             </trans-unit>
             <trans-unit id="16">
                 <source>Account is locked.</source>

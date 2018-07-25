@@ -10,6 +10,7 @@
  */
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Contracts;
 use AppBundle\Entity\Organization;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -61,7 +62,7 @@ class OrganizationController extends Controller
             $this->getUser()->getOrganization()->getActivityPdf()
                 ? $this->addFlash(
                     'info',
-                    "Veuillez ajouter un Pdf pour présenter vos activités"
+                    "Veuillez ajouter un PDF pour présenter vos activités"
                 )
                 : null;
 
@@ -209,6 +210,8 @@ class OrganizationController extends Controller
     public function deleteAction(Request $request, Organization $organization)
     {
         if ($this->getUser()->getOrganization()->getId() === $organization->getId()
+            && $this->getUser()->getOrganization()->getContractOrganizationExpirate()
+            ||  $this->getUser()->getOrganization()->getActivityIsActive()
         ) {
             $form = $this->_createDeleteForm($organization);
             $form->handleRequest($request);
@@ -226,8 +229,13 @@ class OrganizationController extends Controller
                 "Votre compte a bien été désactivé. 
             Si vous souhaitez nous rejoindre de nouveau, contactez Galibelum."
             );
-            return $this->redirectToRoute('fos_user_security_logout');
+            return $this->redirectToRoute('fos_user_security_login');
         }
+        $this->addFlash(
+            'danger',
+            "Vous ne pouvez pas supprimer votre compte, Pour plus d'informations
+            vous pouvez contacter votre account manager."
+        );
         return $this->redirectToRoute('redirect');
     }
 

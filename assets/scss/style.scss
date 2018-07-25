@@ -4,9 +4,13 @@
 /* CSS */
 /*******/
 
+html {
+  height: 100%;
+}
+
 body {
   background-color: $grey-bg-color;
-  height: 100%;
+  min-height: 100%;
   margin: 0;
 }
 
@@ -474,7 +478,6 @@ input::placeholder, select, textarea::placeholder {
   color: #ff6f73;
 }
 
-
 #galibelum-footer ul li a {
   color: $five-color;
 }
@@ -632,3 +635,31 @@ a.manager-btn:hover {
     margin-top: 2px;
   }
 }
+
+@media screen and (min-width: 1600px) {
+  html {
+    height: 100%;
+  }
+
+  body {
+    background-color: $grey-bg-color;
+    position: relative;
+    min-height: 100%;
+    margin: 0;
+    padding-bottom: 17%;
+  }
+
+  #galibelum-footer {
+    background-color: $lighter-grey-bg-color;
+    color: $grey-color;
+    font-weight: 300;
+    margin-top: 50px;
+    text-align: center;
+    border-top: 1px solid $border-color;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+}
+

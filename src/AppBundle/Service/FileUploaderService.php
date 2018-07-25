@@ -11,7 +11,10 @@
 
 namespace AppBundle\Service;
 
+use AppBundle\Entity\Activity;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * FileUploader class service.
@@ -99,5 +102,23 @@ class FileUploaderService
             str_replace(' ', '_', $originalName)
         );
 
+    }
+
+    /**
+     * Delete uploaded file
+     *
+     * @param string $fileName
+     * @param int $organizationId
+     * @param int $activityId
+     * @param int|null $offerId
+     *
+     * @Route("/{id}", methods={"DELETE"}, name="pdf_delete")
+     */
+    public function deletePdf($fileName, $organizationId, $activityId, $offerId = null)
+    {
+        $file = $this->getTargetDirectory($organizationId, $activityId, $offerId) . '/' . $fileName;
+        if(file_exists($file)) {
+            unlink($file);
+        }
     }
 }

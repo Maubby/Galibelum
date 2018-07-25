@@ -8,6 +8,9 @@
 
     <!-- Additional CSS links-->
     <link rel="stylesheet" href="{{ asset('build/profile.css') }}">
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
+    {% endif %}
 {% endblock %}
 
 {% block header %}
@@ -148,5 +151,9 @@
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('build/login-script.js') }}"></script>
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <script src="{{ asset('build/menu_toggle.js') }}"></script>
+    {% else %}
+        <script src="{{ asset('build/login-script.js') }}"></script>
+    {% endif %}
 {% endblock %}
