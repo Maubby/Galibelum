@@ -12,7 +12,6 @@
   height: 210px;
 }
 
-
 .caption, .thumbnail {
   background-color: $lighter-grey-bg-color;
   min-height: 210px;
@@ -65,7 +64,12 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   /* display: none; <- Crashes Chrome on hover */
   -webkit-appearance: none;
+  -moz-appearance: none;
   margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 /* PlaceHolders  */
