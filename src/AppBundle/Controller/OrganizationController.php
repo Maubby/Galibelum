@@ -61,7 +61,7 @@ class OrganizationController extends Controller
             $this->getUser()->getOrganization()->getActivityPdf()
                 ? $this->addFlash(
                     'info',
-                    "Veuillez ajouter un Pdf pour présenter vos activités"
+                    "Veuillez ajouter un PDF pour présenter vos activités"
                 )
                 : null;
 
