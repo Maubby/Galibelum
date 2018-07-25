@@ -275,6 +275,7 @@ class ActivityController extends Controller
 
             if ($form->isSubmitted() && $form->isValid()
                 && $activity->getActivities()->isEmpty()
+                || $activity->getActiveOffer() === false
             ) {
                 $em = $this->getDoctrine()->getManager();
                 $activity->setIsActive(false);
