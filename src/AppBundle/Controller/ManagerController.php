@@ -135,14 +135,24 @@ class ManagerController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $organizations = $em->getRepository('AppBundle:Organization')->findby(
-            [
-                'managers' => $this->getUser(),
-                'user' => $em
-                    ->getRepository('AppBundle:User')
-                    ->findByRole('ROLE_COMPANY'),
-            ]
-        );
+        if ($this->getUser()->hasRole('ROLE_MANAGER')) {
+            $organizations = $em->getRepository('AppBundle:Organization')->findby(
+                [
+                    'managers' => $this->getUser(),
+                    'user' => $em
+                        ->getRepository('AppBundle:User')
+                        ->findByRole('ROLE_COMPANY'),
+                ]
+            );
+        } else {
+            $organizations = $em->getRepository('AppBundle:Organization')->findby(
+                [
+                    'user' => $em
+                        ->getRepository('AppBundle:User')
+                        ->findByRole('ROLE_COMPANY'),
+                ]
+            );
+        }
         $contracts = $em->getRepository('AppBundle:Contracts')->findBy(
             ['organization' => $organizations]
         );
@@ -168,13 +178,13 @@ class ManagerController extends Controller
     public function uploadAction(Request $request, Contracts $contract,
         FileUploaderService $fileUploaderService
     ) {
+        $filePdf = $contract->getUploadPdf();
         $form = $this->createForm(ContractType::class);
         $form->remove('finalDeal');
         $form->handleRequest($request);
 
         // Var for the file name
         if ($form->isSubmitted() && $form->isValid()) {
-            $filePdf = [];
 
             foreach ($request->files->get("appbundle_contract")['uploadPdf']
                      as $file

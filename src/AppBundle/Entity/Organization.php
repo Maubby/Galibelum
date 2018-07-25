@@ -121,10 +121,6 @@ class Organization
      *     minMessage = "Votre adresse mail doit contenir au mmoins {{ limit }} caractères",
      *     maxMessage = "Votre adresse mail ne peut pas contenir plus de {{ limit }} caractères"
      * )
-     * @Assert\Email(
-     *     message = "l'email '{{ value }}' n'est pas valide.",
-     *     checkMX = true
-     * )
      * @Assert\Regex(
      *     pattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/",
      *     message = "Veuillez saisir une adresse mail valide"
