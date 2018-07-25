@@ -54,7 +54,7 @@
                                     <div class="panel-heading text-center backblue">
                                         <h2 class="panel-title" style="color: white;">{{ activity.name }}</h2>
                                     </div>
-                                    {% if activity.activities is empty and activity.activeOffer|length is same as(0) %}
+                                    {% if activity.activities is empty or activity.activeOffer|length is same as(0) %}
                                         <div class="panel-body">
                                             <p class="text-center normal-subtitle-text">Vous n'avez pas encore d'offre pour cette activité</p>
                                             <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn-sm mt-10">Créer une offre</a>
@@ -114,7 +114,7 @@
                                     <div class="panel-heading text-center backblue">
                                         <h2 class="panel-title" style="color: white;">{{ activity.name }}</h2>
                                     </div>
-                                    {% if activity.activities is empty and activity.activeOffer|length is same as(0) %}
+                                    {% if activity.activities is empty or activity.activeOffer|length is same as(0) %}
                                         <div class="panel-body">
                                             <p class="text-center normal-subtitle-text">Vous n'avez pas encore d'offre pour cette activité</p>
                                             <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn-sm mt-10">Créer une offre</a>
@@ -171,7 +171,7 @@
                                         <div class="panel-heading text-center backblue">
                                             <h2 class="panel-title" style="color: white;">{{ activity.name }}</h2>
                                         </div>
-                                        {% if activity.activeOffer|length is same as(0) %}
+                                        {% if activity.activities is empty or activity.activeOffer|length is same as(0) %}
                                             <div class="panel-body">
                                                 <p class="text-center normal-subtitle-text">Vous n'avez pas encore d'offre pour cette activité</p>
                                                 <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn-sm mt-10">Créer une offre</a>

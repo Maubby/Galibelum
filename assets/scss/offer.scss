@@ -12,6 +12,12 @@
   height: 210px;
 }
 
+.thumbnail {
+  padding-bottom: 0;
+  padding-top: 0;
+  padding-right: 4px;
+  padding-left: 4px;
+}
 
 .caption, .thumbnail {
   background-color: $lighter-grey-bg-color;
@@ -59,6 +65,20 @@ th {
   text-align: center;
 }
 
+/* Remove arrow's input */
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 /* PlaceHolders  */
 
 #appbundle_offer_date {
@@ -79,7 +99,7 @@ th {
 
 .modal-body {
   min-height: 80px;
-  padding: 25px 15px 15px 15px;
+  padding: 15px;
 }
 
 /* Media Queries */

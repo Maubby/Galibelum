@@ -121,10 +121,6 @@ class Organization
      *     minMessage = "Votre adresse mail doit contenir au mmoins {{ limit }} caractères",
      *     maxMessage = "Votre adresse mail ne peut pas contenir plus de {{ limit }} caractères"
      * )
-     * @Assert\Email(
-     *     message = "l'email '{{ value }}' n'est pas valide.",
-     *     checkMX = true
-     * )
      * @Assert\Regex(
      *     pattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/",
      *     message = "Veuillez saisir une adresse mail valide"
@@ -226,7 +222,7 @@ class Organization
      */
 
     /**
-     * Return min date from all selected offers
+     * Return Pdf activity.
      *
      * @return bool
      */
@@ -242,6 +238,36 @@ class Organization
             }
         }
         return $uploadPdf;
+    }
+
+    /**
+     * Return true if status contract for compagny is expirate
+     *
+     * @return bool
+     */
+    public function getContractOrganizationExpirate()
+    {
+        $contractOrganizationExpirate = false;
+        foreach ($this->getContracts() as $contract ) {
+            if($contract->getStatus() === 4 || $contract->getStatus() === 5 )
+                $contractOrganizationExpirate = true;
+        }
+        return $contractOrganizationExpirate;
+    }
+
+    /**
+     * Return true if status contract for compagny is expirate
+     *
+     * @return bool
+     */
+    public function getActivityIsActive()
+    {
+        $activityIsActive = false;
+        foreach ($this->organizationActivity as $activity ) {
+            if($activity->getIsActive() === false)
+                $activityIsActive = true;
+        }
+        return $activityIsActive;
     }
 
     /*
@@ -455,7 +481,7 @@ class Organization
     /**
      * Set isActive
      *
-     * @param integer $isActive
+     * @param int $isActive
      *
      * @return organization
      */

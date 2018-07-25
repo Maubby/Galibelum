@@ -7,6 +7,9 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+
+    # P=Periode 21D= Day's number
+
     periode: P21D
     fee15: 0.15
     fee10: 0.10

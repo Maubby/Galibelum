@@ -56,9 +56,9 @@ class ActivityController extends Controller
 
             $this->getUser()->getOrganization()->getActivityPdf()
                 ? $this->addFlash(
-                    'info',
-                    "Veuillez ajouter un Pdf pour présenter vos activités"
-                )
+                'info',
+                "Veuillez ajouter un PDF pour présenter votre activité."
+            )
                 : null;
 
             return $this->render(
@@ -165,9 +165,9 @@ class ActivityController extends Controller
             $activity->getOrganizationActivities()->getUser() === $this->getUser()
             && $activity->getUploadPdf() === null
                 ? $this->addFlash(
-                    'info',
-                    "Veuillez ajouter un Pdf pour présenter votre activité"
-                )
+                'info',
+                "Veuillez ajouter un PDF pour présenter votre activité."
+            )
                 : null;
 
             return $this->render(
@@ -215,9 +215,14 @@ class ActivityController extends Controller
                 $file = $activity->getUploadPdf();
 
                 // Check if the file exist and set the new or old value
-                $filePdf = $file!=null ? $filePdf = $fileUploaderService->upload(
-                    $file, $organizationId, $activity->getId()
-                ) : $fileName;
+                $filePdf = $file!=null
+                    ? $filePdf = $fileUploaderService->upload(
+                        $file, $organizationId, $activity->getId())
+                    : $fileName;
+
+                if($file!=null && isset($fileName)) {
+                    $fileUploaderService->deletePdf($fileName, $organizationId, $activity->getId());
+                }
 
                 $this->addFlash(
                     'success',
@@ -231,9 +236,9 @@ class ActivityController extends Controller
 
             $activity->getUploadPdf() === null
                 ? $this->addFlash(
-                    'info',
-                    "Veuillez ajouter un Pdf pour présenter votre activité"
-                )
+                'info',
+                "Veuillez ajouter un PDF pour présenter votre activité."
+            )
                 : null;
 
             return $this->render(
@@ -270,6 +275,7 @@ class ActivityController extends Controller
 
             if ($form->isSubmitted() && $form->isValid()
                 && $activity->getActivities()->isEmpty()
+                || $activity->getActiveOffer() === false
             ) {
                 $em = $this->getDoctrine()->getManager();
                 $activity->setIsActive(false);
@@ -284,7 +290,7 @@ class ActivityController extends Controller
                 $this->addFlash(
                     'danger',
                     "Vous ne pouvez pas supprimer cette activité
-                    car des offres sont liées à l'activité."
+                    car des offres sont déjà liées à cette activité."
                 );
             }
             return $this->redirectToRoute('activity_index');

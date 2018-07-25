@@ -153,15 +153,16 @@ class OfferController extends Controller
      * Displays a form to edit an existing offer entity.
      *
      * @param Request $request Edit posted info
-     * @param Offer   $offer   The offer entity
+     * @param Offer $offer The offer entity
+     * @param ManagementFeesService $feesService Fees calculation service
      *
+     * @return Response A Response instance
      * @Route("/{id}/edit",
      *     methods={"GET", "POST"}, name="offer_edit"
      * )
      *
-     * @return Response A Response instance
      */
-    public function editAction(Request $request, Offer $offer)
+    public function editAction(Request $request, Offer $offer, ManagementFeesService $feesService)
     {
         $user = $this->getUser();
         if ($user->getOrganization()->getOrganizationActivity()->contains($offer->getActivity())
@@ -170,12 +171,16 @@ class OfferController extends Controller
             $partnershipNb = $offer->countPartnershipNumber();
             $offer->setPartnershipNumber($partnershipNb);
 
+            $fees = $feesService->getFees($offer->getAmount());
+            $offer->setHandlingFee($fees);
+
             $deleteForm = $this->_createDeleteForm($offer);
             $editForm = $this->createForm('AppBundle\Form\OfferType', $offer);
             $editForm->handleRequest($request);
 
             if ($editForm->isSubmitted() && $editForm->isValid()) {
                 $offer->setPartnershipNb($editForm['partnershipNumber']->getData());
+                $offer->setHandlingFee($fees);
                 $this->getDoctrine()->getManager()->persist($offer);
                 $this->getDoctrine()->getManager()->flush();
 
@@ -223,7 +228,7 @@ class OfferController extends Controller
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()
-                && $offer->getContracts()->isEmpty()
+                && $offer->getContractExpirate()
             ) {
                 $em = $this->getDoctrine()->getManager();
                 $offer->setIsActive(false);

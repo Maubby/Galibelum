@@ -15,6 +15,6 @@ $(document).ready(function() {
 
     /* Start datepicker at page loading */
     $('.js-datepicker').datepicker({
-        startDate: new Date()
+        startDate: '+21d'
     });
 });
