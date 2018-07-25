@@ -127,23 +127,20 @@
                             <div class="col-sm-12 form-error">
                                 <i class="fas fa-user-friends"></i>{{ form_label(form.socialLink, 'Réseaux sociaux et chaînes de streaming') }}
                             </div>
-                            {% if activity.socialLink is empty %}
-                                <div class="col-sm-10">
-                                    {# store the prototype on the data-prototype attribute #}
-                                    <input type="url" id="appbundle_activity_socialLink_0" name="appbundle_activity[socialLink][0]" class="form-control input-field" placeholder="Exemple : https://www.twitch.tv/gallibellum">
-                                </div>
-                            {% else %}
-                                <div id="socialLink-fields-list" data-prototype=
-                                "{{ form_widget(form.socialLink.vars.prototype,{'attr': {'class': "form-control input-field",'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}})|e }}"
-                                     data-widget-tags="{{ '<div class="col-sm-10"></div>'|e }}">
-                                    {% for socialLinkField in form.socialLink %}
-                                        <div class="col-sm-10">
-                                            {{ form_errors(socialLinkField) }}
-                                            {{ form_widget(socialLinkField) }}
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            {% endif %}
+                            <div class="col-sm-10">
+                                {# store the prototype on the data-prototype attribute #}
+                                <input type="url" id="appbundle_activity_socialLink_0" name="appbundle_activity[socialLink][0]" class="form-control input-field" placeholder="Exemple : https://www.twitch.tv/gallibellum">
+                            </div>
+                            <div id="socialLink-fields-list" data-prototype=
+                            "{{ form_widget(form.socialLink.vars.prototype,{'attr': {'class': "form-control input-field",'placeholder': "Exemple : https://www.twitch.tv/gallibellum"}})|e }}"
+                                 data-widget-tags="{{ '<div class="col-sm-10"></div>'|e }}">
+                                {% for socialLinkField in form.socialLink %}
+                                    <div class="col-sm-10">
+                                        {{ form_errors(socialLinkField) }}
+                                        {{ form_widget(socialLinkField) }}
+                                    </div>
+                                {% endfor %}
+                            </div>
                             <div class="col-sm-2 mt-10">
                                 <span data-list="#socialLink-fields-list" class="add-socialLink"><i class="fas fa-plus-circle degradeblue" style="font-size: 30px"></i></span>
                                 <span data-list="#socialLink-fields-list" class="remove-socialLink"><i class="fas fa-minus-circle degradeblue" style="font-size: 30px"></i></span>
@@ -190,7 +187,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script  src="{{ asset('build/add_collection_widget.js') }}" ></script>
+    <script src="{{ asset('build/add_collection_widget.js') }}"></script>
     <script src="{{ asset('build/input_display.js') }}"></script>
     <!-- Include Google Maps JS API -->
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key={{ google_api_key }}"></script>
