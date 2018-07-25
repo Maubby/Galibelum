@@ -20,8 +20,12 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/web/blog/investir-dans-lesports">Investir dans l'esport</a></li>
-                    <li><a href="{{ path('fos_user_security_login') }}">Se connecter</a></li>
-                    <li><a href="{{ path('fos_user_registration_register') }}">S'inscrire</a></li>
+                    {% if is_granted('ROLE_USER') %}
+                        <li><a href="{{ path('fos_user_security_logout') }}"><i class="fas fa-power-off"></i></a></li>
+                    {% else %}
+                        <li><a href="{{ path('fos_user_security_login') }}">Se connecter</a></li>
+                        <li><a href="{{ path('fos_user_registration_register') }}">S'inscrire</a></li>
+                    {% endif %}
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
