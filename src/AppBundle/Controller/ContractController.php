@@ -321,6 +321,9 @@ class ContractController extends Controller
             );
             break;
         }
+
+        $this->addFlash('info', 'Le mail a bien été envoyé.');
+
         return $this->redirectToRoute('manager_contract_list');
     }
 }
