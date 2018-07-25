@@ -82,7 +82,7 @@ class ProfileController extends BaseController
             $response = new RedirectResponse($url);
 
             $this->addFlash(
-                "edited",
+                "success",
                 "Votre profil a bien été modifié."
             );
             return $response;
@@ -100,7 +100,7 @@ class ProfileController extends BaseController
             $response = new RedirectResponse($url);
 
             $this->addFlash(
-                "edited",
+                "success",
                 "Votre nouveau mot de passe a bien été pris en compte."
             );
             return $response;
