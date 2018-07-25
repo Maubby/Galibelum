@@ -228,7 +228,7 @@ class OfferController extends Controller
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()
-                && $offer->getContracts()->isEmpty()
+                && $offer->getContractExpirate()
             ) {
                 $em = $this->getDoctrine()->getManager();
                 $offer->setIsActive(false);

@@ -222,7 +222,7 @@ class Organization
      */
 
     /**
-     * Return min date from all selected offers
+     * Return Pdf activity.
      *
      * @return bool
      */
@@ -238,6 +238,36 @@ class Organization
             }
         }
         return $uploadPdf;
+    }
+
+    /**
+     * Return true if status contract for compagny is expirate
+     *
+     * @return bool
+     */
+    public function getContractOrganizationExpirate()
+    {
+        $contractOrganizationExpirate = false;
+        foreach ($this->getContracts() as $contract ) {
+            if($contract->getStatus() === 4 || $contract->getStatus() === 5 )
+                $contractOrganizationExpirate = true;
+        }
+        return $contractOrganizationExpirate;
+    }
+
+    /**
+     * Return true if status contract for compagny is expirate
+     *
+     * @return bool
+     */
+    public function getActivityIsActive()
+    {
+        $activityIsActive = false;
+        foreach ($this->organizationActivity as $activity ) {
+            if($activity->getIsActive() === false)
+                $activityIsActive = true;
+        }
+        return $activityIsActive;
     }
 
     /*
@@ -451,7 +481,7 @@ class Organization
     /**
      * Set isActive
      *
-     * @param integer $isActive
+     * @param int $isActive
      *
      * @return organization
      */
