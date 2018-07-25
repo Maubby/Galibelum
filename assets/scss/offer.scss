@@ -12,6 +12,12 @@
   height: 210px;
 }
 
+.thumbnail {
+  padding-bottom: 0;
+  padding-top: 0;
+  padding-right: 4px;
+  padding-left: 4px;
+}
 
 .caption, .thumbnail {
   background-color: $lighter-grey-bg-color;
