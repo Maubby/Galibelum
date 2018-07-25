@@ -105,7 +105,7 @@
                             <div class="mt-20">
                                 <i class="fas fa-euro-sign"></i>
                                 {{ form_label(form.amount, "Montant brut demandé par partenaire *" )}}
-                                {{ form_widget(form.amount, {'attr': {'class':'form-control input-field amount', 'placeholder' : "Montant de l'offre" }}) }}
+                                {{ form_widget(form.amount, {'attr': {'class':'form-control input-field amount', 'placeholder' : "Montant de l'offre (minimum : 200 €)" }}) }}
                                 {{ form_errors(form.amount) }}
                             </div>
                            <p class="mt-10" id="result"></p>

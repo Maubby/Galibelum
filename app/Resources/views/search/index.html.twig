@@ -92,7 +92,7 @@
                             <!-- Starting listing the account managers -->
                             <tbody id="result">
                             {% for activity in activitylist %}
-                                {% if activity.isActive is same as(true) %}
+                                {% if activity.isActive is same as(true) and activity.organizationActivities.isActive is same as(1) %}
                                 <tr>
                                     <td>
                                         <p><strong>{{ activity.name }}</strong> | <span class="light-blue-subtitle-text bold-text">{{ activity.organizationActivities.name }}</span></p>
