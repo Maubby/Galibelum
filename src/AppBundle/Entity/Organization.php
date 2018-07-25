@@ -122,7 +122,7 @@ class Organization
      *     maxMessage = "Votre adresse mail ne peut pas contenir plus de {{ limit }} caractères"
      * )
      * @Assert\Email(
-     *     message = "l'email '{{ value }}' n'est pas valide.",
+     *     message = "l'email {{ value }} n'est pas valide.",
      *     checkMX = true
      * )
      * @Assert\Regex(
