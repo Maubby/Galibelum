@@ -17,6 +17,7 @@
 /web/build/
 /web/uploads/pdf/
 /web/blog/
+!/web/blog/.htaccess
 .idea
 *.php~
 .directory
