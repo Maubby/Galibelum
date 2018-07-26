@@ -73,7 +73,7 @@
                                     </div>
                                     <div class="activity-btn-height">
                                         <a href="{{ path('activity_edit', { 'id': activity.id }) }}" class="btn btn-primary backblue-btn mt-20">Modifier l'activité
-                                             {% if activity.uploadPdf is null  %}<span class="badge">1</span></a>{% endif %}
+                                            {% if activity.uploadPdf is null  %}<span class="badge">1</span>{% endif %}</a>
                                         <a href="{{ path('offer_new', { 'id': activity.id }) }}" class="btn btn-danger backred-btn mt-10">Créer une offre</a>
                                     </div>
                                 </div>
