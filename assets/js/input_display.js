@@ -20,7 +20,7 @@ $(document).ready(function() {
             $(".activityAchievement").show();
         }
 
-        if($(this).val() === "Activité de streaming" || $(this).val() === "Editeur de jeux") {
+        if($(this).val() === "Activité de streaming" || $(this).val() === "Editeur de jeux" || $(this).val() === "Formations gaming") {
             // Set default value date when you want to create an activity and Hide input
             $(".activityDate").attr("value","1993-07-07").hide();
             // Set n/a value when you want to create an activity and Hide input
