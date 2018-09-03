@@ -9,6 +9,8 @@
                             <i class="fas fa-video"></i>
                         {% elseif activity.type is same as('Equipe eSport') %}
                             <i class="fas fa-users"></i>
+                        {% elseif activity.type is same as('Editeur de jeux') %}
+                            <i class="fas fa-wrench"></i>
                         {% else %}
                             <i class="fas fa-gamepad"></i>
                         {% endif %}
