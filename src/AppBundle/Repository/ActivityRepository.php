@@ -96,6 +96,8 @@ class ActivityRepository extends EntityRepository
         if ($type == "Activité de streaming"
             || $type == "Equipe eSport"
             || $type == "Évènement eSport"
+            || $type == "Editeur de jeux"
+            || $type == "Formations gaming"
         ) {
             $query
                 ->ANDWHERE('act.type LIKE :type')

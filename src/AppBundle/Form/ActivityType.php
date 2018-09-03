@@ -61,7 +61,9 @@ class ActivityType extends AbstractType
                             "Choisissez un type d'activité" => '',
                             'Activité de streaming' => 'Activité de streaming',
                             'Equipe eSport' => 'Equipe eSport',
-                            'Évènement eSport' => 'Évènement eSport'
+                            'Évènement eSport' => 'Évènement eSport',
+                            'Editeur de jeux' => 'Editeur de jeux',
+                            'Formations gaming' => 'Formations gaming'
                         ]
                 ]
             )
