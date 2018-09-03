@@ -60,6 +60,9 @@
                                         {% elseif activity.type is same as ("Equipe eSport") %}
                                             <i class="fas fa-users degradeblue" style="font-size: 50px"></i><br>
                                             <p><strong>Type :</strong> {{ activity.type }}</p>
+                                        {% elseif activity.type is same as ("Editeur de jeux") %}
+                                            <i class="fas fa-wrench degradeblue" style="font-size: 50px"></i><br>
+                                            <p><strong>Type :</strong> {{ activity.type }}</p>
                                         {% else %}
                                             <i class="fas fa-video degradeblue" style="font-size: 50px"></i><br>
                                             <p><strong>Type :</strong> {{ activity.type }}</p>
