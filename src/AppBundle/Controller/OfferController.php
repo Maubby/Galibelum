@@ -70,6 +70,13 @@ class OfferController extends Controller
                     'isActive' => true
                 ]
             );
+            $learn_activities = $em->getRepository('AppBundle:Activity')->findBy(
+                [
+                    'organizationActivities' => $this->getUser()->getOrganization(),
+                    'type' => 'Formations gaming',
+                    'isActive' => true
+                ]
+            );
 
             if (empty($event_activities) && empty($stream_activities)
                 && empty($team_activities)
@@ -84,6 +91,7 @@ class OfferController extends Controller
                     'stream_activities' => $stream_activities,
                     'team_activities' => $team_activities,
                     'editor_activities' => $editor_activities,
+                    'learn_activities' => $learn_activities,
                     'manager' => $this->getUser()->getOrganization()->getManagers(),
                 ]
             );
