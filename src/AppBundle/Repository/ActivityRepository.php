@@ -61,7 +61,7 @@ class ActivityRepository extends EntityRepository
             ->INNERJOIN('act.organizationActivities', 'org')
             ->INNERJOIN('act.activities', 'off')
             ->SELECT('act, org, off')
-            ->WHERE('off.date >= :date')
+            ->WHERE('off.date <= :date')
             ->ANDWHERE('off.amount BETWEEN :amountStart AND :amountEnd')
             ->setParameter(':amountStart', $amountStart)
             ->setParameter(':amountEnd', $amountEnd)
@@ -96,6 +96,7 @@ class ActivityRepository extends EntityRepository
         if ($type == "Activité de streaming"
             || $type == "Equipe eSport"
             || $type == "Évènement eSport"
+            || $type == "Editeur de jeux"
         ) {
             $query
                 ->ANDWHERE('act.type LIKE :type')
